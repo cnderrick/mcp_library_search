@@ -4,8 +4,16 @@ version = "0.1.0"
 description = "MCP server for finding books in city library systems (Shanghai supported; more cities coming)"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Derrick Huang", email = "cnderrick.huang@gmail.com" }]
+keywords = ["mcp", "library", "shanghai", "books", "availability"]
 dependencies = ["fastmcp>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/cnderrick/mcp_library_search"
+Repository = "https://github.com/cnderrick/mcp_library_search"
+Issues = "https://github.com/cnderrick/mcp_library_search/issues"
 
 [project.scripts]
 mcp_library_search = "mcp_library_search.server:main"
