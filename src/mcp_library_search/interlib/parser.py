@@ -9,6 +9,8 @@ from html.parser import HTMLParser
 _PUB_YEAR_RE = re.compile(r"出版日期\s*[:：]?\s*((?:19|20)\d{2})")
 _TOTAL_RE = re.compile(r"检索到\s*[:：]?\s*([\d,]+)\s*条")
 _TOTAL_PAGES_RE = re.compile(r"共\s*(\d+)\s*页")
+_ISBN_RE = re.compile(r"[\d\-]{10,}")
+_YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
 
 def _clean(text):
@@ -111,3 +113,103 @@ def parse_search(html: str) -> dict:
         "total_pages": p.total_pages if p.total_pages is not None else 1,
         "has_next": p.has_next,
     }
+
+
+# 详情页标签 → 语义字段（值单元的归类在 _DetailParser 里按标签分派）
+_DETAIL_LABELS = {
+    "ISBN": "isbn",
+    "出版发行": "publish",
+    "内容提要": "summary",
+    "中图分类法": "call_number",
+    "主要责任者": "author",
+}
+
+
+class _DetailParser(HTMLParser):
+    """详情页 bookInfoTable：leftTD 是标签、rightTD 是值，标题在首个 h2。"""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.fields = {k: "" for k in
+                       ("title", "author", "publisher", "publish_year",
+                        "isbn", "call_number", "summary")}
+        self._cell = None        # None | "label" | "value"
+        self._label_parts = []
+        self._label = ""
+        self._value_parts = []
+        self._link_parts = None      # 非 None 表示正在抓 <a> 文本
+        self._first_link = ""        # 值单元格里第一个 <a> 的文本
+        self._title_parts = None
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        cls = (a.get("class") or "").split()
+        if tag == "td":
+            if "leftTD" in cls:
+                self._cell = "label"
+                self._label_parts = []
+            elif "rightTD" in cls:
+                self._cell = "value"
+                self._value_parts = []
+                self._first_link = ""
+            return
+        if tag == "h2" and not self.fields["title"]:
+            self._title_parts = []
+            return
+        if (tag == "a" and self._cell == "value"
+                and not self._first_link and self._link_parts is None):
+            self._link_parts = []
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._link_parts is not None:
+            self._first_link = _clean("".join(self._link_parts))
+            self._link_parts = None
+            return
+        if tag == "h2" and self._title_parts is not None:
+            self.fields["title"] = _clean("".join(self._title_parts))
+            self._title_parts = None
+            return
+        if tag == "td" and self._cell == "label":
+            self._label = _clean("".join(self._label_parts)).rstrip("：:").strip()
+            self._cell = None
+            return
+        if tag == "td" and self._cell == "value":
+            self._finish_value()
+            self._cell = None
+            return
+
+    def handle_data(self, data):
+        if self._title_parts is not None:
+            self._title_parts.append(data)
+        if self._link_parts is not None:
+            self._link_parts.append(data)
+        if self._cell == "label":
+            self._label_parts.append(data)
+        elif self._cell == "value":
+            self._value_parts.append(data)
+
+    def _finish_value(self):
+        label, value, link = self._label, _clean("".join(self._value_parts)), self._first_link
+        if label not in _DETAIL_LABELS or not value:
+            return
+        kind = _DETAIL_LABELS[label]
+        if kind == "isbn":
+            m = _ISBN_RE.search(value)
+            self.fields["isbn"] = m.group(0) if m else ""
+        elif kind == "publish":
+            self.fields["publisher"] = link
+            m = _YEAR_RE.search(value)
+            self.fields["publish_year"] = m.group(0) if m else ""
+        elif kind == "summary":
+            self.fields["summary"] = value
+        elif kind == "call_number":
+            self.fields["call_number"] = value.split("版次")[0].strip()
+        elif kind == "author":
+            self.fields["author"] = link or (value.split()[0] if value else "")
+
+
+def parse_detail(html: str) -> dict:
+    """解析 Interlib 详情页书目字段，缺失字段为空串。"""
+    p = _DetailParser()
+    p.feed(html)
+    return p.fields
