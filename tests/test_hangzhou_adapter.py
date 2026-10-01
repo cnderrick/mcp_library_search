@@ -14,13 +14,17 @@ def test_config_and_delegation(monkeypatch):
 
     def fake_search(cfg, keyword, page=1, limit=20):
         seen["cfg"] = cfg
-        return {"total_results": 0, "page": 1, "total_pages": 1,
-                "has_next": False, "books": []}
+        return {"total_results": 1, "page": 1, "total_pages": 1, "has_next": False,
+                "books": [{"book_id": "123456", "title": "三体", "author": "刘慈欣",
+                           "publisher": "重庆出版社", "publish_year": "2008",
+                           "availability_summary": ""}]}
 
     monkeypatch.setattr("mcp_library_search.interlib.search_books", fake_search)
-    assert hangzhou.search_books("三体", page=2, limit=5) == {
-        "total_results": 0, "page": 1, "total_pages": 1, "has_next": False, "books": [],
-    }
+    page = hangzhou.search_books("三体", page=2, limit=5)
+    assert page["total_results"] == 1
+    # 家族 book_id → 契约 record_id 的映射在 _Client.search 内完成（真网冒烟曾抓到此回归）
+    assert page["books"][0]["book_id"] == "123456"
+    assert page["books"][0]["title"] == "三体"
     assert seen["cfg"] == InterlibConfig(
         city="hangzhou", name_cn="杭州图书馆", base_url="https://my1.zjhzlib.cn"
     )

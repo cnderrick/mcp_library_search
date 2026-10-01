@@ -42,7 +42,12 @@ class _Client:
             success=True,
             error="",
             statistics={k: r[k] for k in ("total_results", "page", "total_pages", "has_next")},
-            books=[SimpleNamespace(**b) for b in r["books"]],
+            # 家族 TypedDict 用 book_id，契约形态用 record_id，此处显式映射
+            books=[SimpleNamespace(record_id=b["book_id"], title=b["title"],
+                                   author=b["author"], publisher=b["publisher"],
+                                   publish_year=b["publish_year"],
+                                   availability_summary=b["availability_summary"])
+                   for b in r["books"]],
         )
 
     def get_holdings(self, book_id):
