@@ -83,16 +83,16 @@ git add README.md AGENTS.md pyproject.toml
 git commit -m "三城适配器：广州、杭州、深圳 + 文档 + 0.2.0"
 ```
 
-- [ ] **7. 构建、发布、打 tag**
+- [ ] **7. 打 tag 触发 CI/CD 发布**
+
+前置（项目负责人，一次性）：PyPI 项目页配置 trusted publisher（Settings → Publishing → Add trusted publisher，Owner=cnderrick、Repository=mcp_library_search、Workflow=release.yml）。
 
 ```bash
-rm -rf dist && uv build
-UV_PUBLISH_TOKEN="$(cat ~/.config/pypi/mcp_library_search.token)" uv publish
 git tag -a v0.2.0 -m "三城适配器：广州、杭州、深圳"
-git push origin main v0.2.0
+git push origin main v0.2.0   # 推 tag 即触发 .github/workflows/release.yml：测试→构建→可信发布
 ```
 
-（发布流程细节见 AGENTS.md 发布节；PyPI 上传后镜像有同步延迟，本机按名验证要加清华镜像 index。）
+到 GitHub Actions 看 `release` run 变绿（`test` 与 `publish` 两个 job 都通过），再到 PyPI 项目页确认 `0.2.0` 出现。注意：发布后镜像有同步延迟，本机按名验证要加清华镜像 index。
 
 - [ ] **8. 清理与收尾**
 
