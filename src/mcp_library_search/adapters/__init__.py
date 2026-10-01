@@ -5,9 +5,11 @@ get_book_detail 三个原语（返回结构对齐 base.py 的 TypedDict，由契
 然后在本文件 _ADAPTERS 里注册一行。server 层与具体城市解耦。
 """
 from . import shanghai
+from . import shenzhen
 
 _ADAPTERS = {
     "shanghai": shanghai,
+    "shenzhen": shenzhen,
 }
 
 _SUPPORTED = "、".join(sorted(_ADAPTERS))
