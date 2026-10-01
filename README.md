@@ -56,8 +56,6 @@ claude mcp add mcp-library-search -- uvx mcp_library_search
 <a href="https://github.com/cnderrick/mcp_library_search/raw/main/assets/alipay.JPG"><img src="https://github.com/cnderrick/mcp_library_search/raw/main/assets/alipay.JPG" width="240" alt="支付宝收款码"></a>
 <a href="https://github.com/cnderrick/mcp_library_search/raw/main/assets/wxpay.JPG"><img src="https://github.com/cnderrick/mcp_library_search/raw/main/assets/wxpay.JPG" width="240" alt="微信收款码"></a>
 
-左：支付宝，右：微信。
-
 ## 致谢
 
 - [shanghai-library-book-search-python](https://github.com/ZedeX/shanghai-library-book-search-python)——上海图书馆检索能力的来源（Apache-2.0）。
