@@ -1,0 +1,21 @@
+name: 申请接入城市
+description: 申请让本项目支持新的城市图书馆
+title: "接入申请："
+labels: ["接入申请"]
+body:
+  - type: input
+    id: city
+    attributes:
+      label: 城市
+      description: 想接入的城市名称。
+      placeholder: 例：南京
+    validations:
+      required: true
+  - type: input
+    id: entry
+    attributes:
+      label: 线上图书馆入口
+      description: 该城市公共图书馆的线上检索网站地址。
+      placeholder: 例：https://www.njlib.cn
+    validations:
+      required: true
