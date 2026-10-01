@@ -3,6 +3,12 @@ import pytest
 from mcp_library_search import adapters, server
 
 
+def test_server_version_matches_package_metadata():
+    from importlib.metadata import version
+
+    assert server.mcp.version == version("mcp_library_search")
+
+
 def test_search_books_delegates_with_default_city(monkeypatch):
     calls = []
 

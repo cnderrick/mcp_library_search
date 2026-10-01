@@ -4,12 +4,19 @@
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
+from importlib.metadata import PackageNotFoundError, version as _pkg_version
+
 from fastmcp import FastMCP
 
 from mcp_library_search import adapters
 from mcp_library_search.adapters.base import BookDetail, Holding, SearchPage
 
-mcp = FastMCP("mcp-library-search")
+try:
+    _VERSION = _pkg_version("mcp_library_search")
+except PackageNotFoundError:
+    _VERSION = "0.0.0+local"  # 源码直跑（包未安装）时兜底
+
+mcp = FastMCP("mcp-library-search", version=_VERSION)
 
 
 @mcp.tool
