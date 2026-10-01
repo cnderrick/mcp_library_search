@@ -4,12 +4,17 @@
 城市差异只允许以带默认值的 InterlibConfig 字段（quirk）新增，默认值即广州行为；
 禁止改变本模块对外函数签名。
 """
+from __future__ import annotations
+
 import json
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from . import client  # HTTP 层（测试的 monkeypatch 注入点：client.get）
 from . import parser
-from ..adapters.base import BookDetail, Holding, SearchPage
+
+if TYPE_CHECKING:
+    from ..adapters.base import BookDetail, Holding, SearchPage
 
 
 @dataclass(frozen=True)
@@ -24,8 +29,7 @@ class InterlibConfig:
     base_url: str   # OPAC 站点根地址，不含末尾斜杠，如 "https://opac.gzlib.org.cn"
 
 
-def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
-    """按关键字检索馆藏，返回统一分页结构。失败抛 RuntimeError（消息含中文馆名）。"""
+def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
     html = client.get(cfg, "/opac/search", {
         "q": keyword,
         "searchType": "standard",
@@ -36,7 +40,20 @@ def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 
         "sortOrder": "desc",
         "page": page,
     })
-    r = parser.parse_search(html)
+    return parser.parse_search(html)
+
+
+def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
+    """按关键字检索馆藏，返回统一分页结构。失败抛 RuntimeError（消息含中文馆名）。
+
+    带连字符的 ISBN 在 marc 检索下命中不了（真网实测），首搜为空时
+    去连字符重试一次。
+    """
+    r = _search_once(cfg, keyword, page, limit)
+    if not r["books"] and "-" in keyword:
+        retry = _search_once(cfg, keyword.replace("-", ""), page, limit)
+        if retry["books"]:
+            r = retry
     return {
         "total_results": r["total_results"],
         "page": page,

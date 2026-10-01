@@ -18,6 +18,7 @@ _DETAIL = open("tests/fixtures/guangzhou/detail.html", encoding="utf-8").read()
 _HOLDING = open("tests/fixtures/guangzhou/holding.json", encoding="utf-8").read()
 
 _BOOK_ID = "3004742677"  # fixture 对应的书目 ID
+_EMPTY = open("tests/fixtures/guangzhou/search_empty.html", encoding="utf-8").read()
 
 
 def test_search_books_maps_to_contract(monkeypatch):
@@ -36,6 +37,20 @@ def test_search_books_wraps_errors(monkeypatch):
     monkeypatch.setattr(_client, "get", boom)
     with pytest.raises(RuntimeError, match="广州图书馆"):
         search_books(_CFG, "活着")
+
+
+def test_search_retries_isbn_without_hyphens(monkeypatch):
+    # 带连字符的 ISBN 在 marc 检索下命中不了，须去连字符重试（真网实测）
+    calls = []
+
+    def spy(cfg, path, params=None):
+        calls.append(params["q"])
+        return _EMPTY if len(calls) == 1 else _SEARCH
+
+    monkeypatch.setattr(_client, "get", spy)
+    page = search_books(_CFG, "978-7-5086-8719-3")
+    assert calls == ["978-7-5086-8719-3", "9787508687193"]
+    assert page["books"]
 
 
 def test_get_holdings_sorts_available_first(monkeypatch):
