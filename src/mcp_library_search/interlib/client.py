@@ -3,11 +3,15 @@
 家族所有城市的页面与 JSON 接口请求都走这一个入口，
 失败统一包装成含中文馆名的 RuntimeError，便于上层与 LLM 报错。
 """
+from __future__ import annotations
+
 import urllib.error
 import urllib.parse
 import urllib.request
+from typing import TYPE_CHECKING
 
-from . import InterlibConfig
+if TYPE_CHECKING:
+    from . import InterlibConfig
 
 _UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
