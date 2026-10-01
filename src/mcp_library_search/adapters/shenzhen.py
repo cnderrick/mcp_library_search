@@ -33,6 +33,16 @@ def _get(path, params):
         raise RuntimeError(f"深圳图书馆请求失败：{e}") from e
 
 
+def _looks_like_isbn(keyword):
+    """ISBN 形态判断：去连字符后 13 位（978/979 开头）或 10 位（末位可为 X）。"""
+    s = str(keyword or "").replace("-", "").strip()
+    if len(s) == 13 and s.isdigit():
+        return s[:3] in ("978", "979")
+    if len(s) == 10 and s[:9].isdigit():
+        return s[9].isdigit() or s[9] in "Xx"
+    return False
+
+
 def _year(text):
     """从文本里提取 4 位出版年份，找不到返回空串。"""
     m = re.search(r"(?:19|20)\d{2}", str(text or ""))
@@ -132,12 +142,31 @@ class _Client:
     """轻量 JSON API 客户端：把原始响应解析成与 vendor 对象同形的结构。"""
 
     def search(self, keyword, page=1, limit=20):
-        body = _get("/api/opacservice/getQueryResult", {
-            "v_value": keyword,
-            "v_index": "title",
-            "pageNum": str(limit),
-            "v_page": str(page),
-        })
+        if _looks_like_isbn(keyword):
+            # ISBN 必须走 isbn 索引；且该索引要求完整参数集，缺参会被静默忽略回退全库
+            params = {
+                "v_value": keyword,
+                "v_index": "isbn",
+                "library": "all",
+                "v_tablearray": "bibliosm,serbibm,apabibibm,mmbibm,",
+                "sortfield": "ptitle",
+                "sorttype": "desc",
+                "pageNum": str(limit),
+                "cirtype": "",
+                "v_secondquery": "",
+                "v_startpubyear": "",
+                "v_endpubyear": "",
+                "v_page": str(page),
+            }
+        else:
+            # 任意词索引（官网下拉第一项）：书名/作者/关键词混合
+            params = {
+                "v_value": keyword,
+                "v_index": "all",
+                "pageNum": str(limit),
+                "v_page": str(page),
+            }
+        body = _get("/api/opacservice/getQueryResult", params)
         data = body.get("data") or {}
         num_found = data.get("numFound") or 0
         total_pages = math.ceil(num_found / limit) if limit > 0 else 1

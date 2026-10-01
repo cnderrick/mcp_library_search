@@ -61,6 +61,13 @@
 - `libraryNotes`（**馆名**，仅借出单册有，如 `深圳大学城图书馆（深圳市科技图书馆）`）；可借/阅览组的馆名在 group 级 `serviceaddrnotes`（如 `罗湖区图书馆`、`深圳图书馆（北馆）`，个别是状态文本如 `物流转运中（暂不外借）`）；
 - `ReturnDate`（**仅借出单册有**，格式 `YYYYMMDD`，如 `20151222`，需归一化为 `YYYY-MM-DD`）。
 
+## ISBN 索引（v_index=isbn）实测
+
+- `v_index=isbn` 只在**完整参数集**下生效：`library=all`、`v_tablearray=bibliosm,serbibm,apabibibm,mmbibm,`、`sortfield=ptitle`、`sorttype=desc`、`cirtype=`、`v_secondquery=`、`v_startpubyear=`、`v_endpubyear=` 与分页参数 `v_page`、`pageNum` 同传。参数不全时 `v_index` 被静默忽略，返回全库命中（实测约 360 万条）。
+- 带连字符的 ISBN（如 `978-7-5086-6831-4`）与去连字符形态（`9787508686314`）均可命中。
+- 任意词索引（`v_index=all`）的字段集不含 ISBN，ISBN 形态关键词必须路由到 isbn 索引，代码层由 `_looks_like_isbn` 判断。
+- 真网验证（2026-10-02）：`978-7-5086-6831-4` → `numFound=1`（《上瘾》埃亚尔等译，中信 2017，`bibliosm:3832412`），馆藏 71 条解析正常。
+
 ## 与 spec/计划假设不符之处（实现已按实测调整）
 
 1. 分页：`v_page` 是页码、`pageNum` 是每页条数（计划猜反了）。
