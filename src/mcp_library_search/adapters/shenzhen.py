@@ -39,6 +39,47 @@ def _year(text):
     return m.group(0) if m else ""
 
 
+def _split_book_id(book_id):
+    """book_id 形如 "{tablename}:{recordid}"，拆成成对的 metaTable/metaId。"""
+    table, _, rid = str(book_id).partition(":")
+    if not table or not rid:
+        raise RuntimeError(f"深圳图书馆：book_id 格式应为 tablename:recordid：{book_id}")
+    return table, rid
+
+
+def _normalize_date(text):
+    """ReturnDate 为 YYYYMMDD（如 20151222），归一化为 YYYY-MM-DD。"""
+    s = str(text or "").strip()
+    if len(s) == 8 and s.isdigit():
+        return f"{s[:4]}-{s[4:6]}-{s[6:]}"
+    return s
+
+
+def _groups(bucket):
+    """三桶容器形态不一：list[group] / 单个 group dict / null，统一成 group 列表。"""
+    if isinstance(bucket, list):
+        return [g for g in bucket if isinstance(g, dict)]
+    if isinstance(bucket, dict):
+        return [bucket]
+    return []
+
+
+def _records(group):
+    """一个 group 里的单册列表。"""
+    rl = group.get("recordList") or []
+    if isinstance(rl, list):
+        return [r for r in rl if isinstance(r, dict)]
+    if isinstance(rl, dict):
+        return [rl]
+    return []
+
+
+def _library_name(item, group):
+    """馆名：借出单册在 libraryNotes，其余在 group 级 serviceaddrnotes，再退回单册 library 代码。"""
+    return (item.get("libraryNotes") or group.get("serviceaddrnotes")
+            or item.get("library") or "").strip()
+
+
 @dataclass
 class _Book:
     record_id: str = ""
@@ -58,6 +99,20 @@ class _SearchResult:
     error: str = ""
     statistics: dict = field(default_factory=dict)
     books: list = field(default_factory=list)
+
+
+@dataclass
+class _Holding:
+    library: str = ""
+    location: str = ""
+    call_number: str = ""
+    status: str = ""
+    available: bool = True
+    item_id: str = ""
+    due_date: str = ""
+
+    def is_available(self):
+        return self.available
 
 
 class _Client:
@@ -95,6 +150,29 @@ class _Client:
             books=books,
         )
 
+    def get_holdings(self, book_id):
+        table, rid = _split_book_id(book_id)
+        body = _get("/api/opacservice/getBookDetail", {
+            "metaTable": table, "metaId": rid, "library": "all",
+        })
+        data = body.get("data", body) if isinstance(body, dict) else {}
+        holdings = []
+        for bucket, available in (("CanLoanBook", True),
+                                  ("OnlyReadBook", False),
+                                  ("BorrowedBook", False)):
+            for group in _groups(data.get(bucket)):
+                for item in _records(group):
+                    holdings.append(_Holding(
+                        library=_library_name(item, group),
+                        location=(item.get("local") or item.get("location") or "").strip(),
+                        call_number=(item.get("callno") or "").strip(),
+                        status=(item.get("status") or "").strip(),
+                        available=available,
+                        item_id="",
+                        due_date=_normalize_date(item.get("ReturnDate") or "") if not available else "",
+                    ))
+        return holdings
+
 
 _client = _Client()
 
@@ -124,3 +202,26 @@ def search_books(keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
         "has_next": stats.get("has_next", False),
         "books": books,
     }
+
+
+def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
+    """指定图书在各分馆的馆藏与可借状态，可借的排前面。"""
+    holdings = _client.get_holdings(book_id) or []
+    kept = [h for h in holdings if (not only_available or h.is_available())]
+    items: list[Holding] = []
+    for h in kept:
+        available = h.is_available()
+        item: Holding = {
+            "library": h.library,
+            "location": h.location,
+            "call_number": h.call_number,
+            "status": h.status,
+            "available": available,
+            "due_date": getattr(h, "due_date", "") or "",
+        }
+        # 契约测试要求已借出且带单册 item_id 时查归还时间；深圳数据无 item_id，真网路径不会触发
+        if not available and getattr(h, "item_id", ""):
+            item["due_date"] = _client.get_return_date(h.item_id)
+        items.append(item)
+    items.sort(key=lambda h: (not h["available"], h["library"]))
+    return items
