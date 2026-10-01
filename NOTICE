@@ -1,0 +1,27 @@
+mcp_library_search
+Copyright 2026 mcp_library_search contributors
+
+本产品包含以下第三方项目的软件，以 vendored 方式收录于 src/mcp_library_search/vendor/。
+各组件仍沿用其原始许可证，许可证文本随代码一并包含在对应目录中。
+各组件的本地变更记录也一并列于下方。
+
+组件：shanghai-library-book-search-python
+  主页：https://github.com/ZedeX/shanghai-library-book-search-python
+  许可证：Apache License 2.0
+  位置：src/mcp_library_search/vendor/shanghai_library/
+  变更：
+    - 保留核心检索模块（client.py、library_client.py、parser.py、models.py），
+      未引入其 Flask Web 层与 CLI 层。
+    - library_client.py 的 3 行平铺 import 改为包内相对导入，使其可作为包导入。
+    - parser.py：新增 has_next（"下一页"链接）解析，随解析结果返回。
+    - library_client.py：statistics 增加 has_next 字段。
+    - parser.py：书目表新增"附注"字段提取（book_info["notes"]）。
+    - library_client.py：summary 为空时回退取"附注"字段（站点无独立简介区块，
+      内容简介通常以 MARC 500 附注形式给出）。
+    - 说明：检索总条数（total_results）恒为 0 系站点不再输出该信息，由 adapter
+      按"总数为 0 且当前页有结果视为未知"规则处理，非代码缺陷。
+    - parser.py：馆藏行新增单册 item_id 提取（item-return-date 锚点的
+      data-itemid 属性，仅"已借出"馆藏有）。
+    - models.py：Availability 新增 item_id、due_date 字段。
+    - library_client.py：get_holdings 透传 item_id；新增 get_return_date
+      方法，按单册调用 AJAX itemReturnDate 接口查预计归还时间。
