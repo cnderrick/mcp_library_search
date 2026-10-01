@@ -29,11 +29,17 @@ def test_config_and_delegation(monkeypatch):
 def test_holdings_and_detail_delegate(monkeypatch):
     monkeypatch.setattr(
         "mcp_library_search.interlib.get_holdings",
-        lambda cfg, book_id, only_available=True: [{"library": "x", "available": True}],
+        lambda cfg, book_id, only_available=True: [
+            {"library": "x", "location": "", "call_number": "", "status": "在馆",
+             "available": True, "due_date": ""},
+        ],
     )
     monkeypatch.setattr(
         "mcp_library_search.interlib.get_book_detail",
-        lambda cfg, book_id: {"book_id": book_id, "title": "三体"},
+        lambda cfg, book_id: {"book_id": book_id, "title": "三体", "author": "刘慈欣",
+                              "publisher": "重庆出版社", "publish_year": "2008",
+                              "isbn": "", "call_number": "", "summary": ""},
     )
-    assert hangzhou.get_holdings("123") == [{"library": "x", "available": True}]
+    hs = hangzhou.get_holdings("123", only_available=False)
+    assert hs[0]["library"] == "x" and hs[0]["available"] is True
     assert hangzhou.get_book_detail("123")["title"] == "三体"
