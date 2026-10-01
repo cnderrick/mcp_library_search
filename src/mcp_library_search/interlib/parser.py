@@ -3,7 +3,9 @@
 以广州 OPAC 实抓 fixture 为基准（见 tests/fixtures/guangzhou/NOTES.md）；
 同族城市页面同模板，解析按结构标记（class/属性）而非字面文案匹配。
 """
+import json
 import re
+from datetime import datetime, timedelta
 from html.parser import HTMLParser
 
 _PUB_YEAR_RE = re.compile(r"出版日期\s*[:：]?\s*((?:19|20)\d{2})")
@@ -213,3 +215,83 @@ def parse_detail(html: str) -> dict:
     p = _DetailParser()
     p.feed(html)
     return p.fields
+
+
+# 可借/不可借状态词：命中不可借词优先，都不中保守判不可借（计划 Review Focus）。
+# 词表覆盖 holdStateMap 已知 29 项中的流通语义（在馆/借出/闭架/丢失/剔除/编目……），
+# 未来新增状态未识别时一律不可借，避免读者白跑。
+_UNAVAILABLE_WORDS = ("借出", "预约", "预借", "阅览", "闭架", "丢失", "剔除",
+                      "编目", "运送", "维修", "赔偿", "加工", "挂失", "保留",
+                      "订购", "还回", "交换", "赠送", "注销")
+_AVAILABLE_WORDS = ("在馆", "可借", "在架")
+
+_EPOCH_BASE = datetime(1970, 1, 1)
+_DATE_ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}")
+
+
+def is_available_status(status: str) -> bool:
+    """按状态文本判可借：命中不可借词优先，命中可借词次之，都不中保守不可借。"""
+    s = status or ""
+    if any(w in s for w in _UNAVAILABLE_WORDS):
+        return False
+    if any(w in s for w in _AVAILABLE_WORDS):
+        return True
+    return False
+
+
+def _to_date(value) -> str:
+    """应还日期归一为 YYYY-MM-DD。支持 epoch 毫秒（Interlib 实测形态，按 UTC+8
+    解释，与馆方系统时区一致）、YYYY-MM-DD、YYYYMMDD；取不到返回空串。"""
+    s = str(value or "").strip()
+    if not s:
+        return ""
+    if s.isdigit() and len(s) >= 12:
+        return (_EPOCH_BASE + timedelta(milliseconds=int(s), hours=8)).strftime("%Y-%m-%d")
+    m = _DATE_ISO_RE.match(s)
+    if m:
+        return m.group(0)
+    if len(s) == 8 and s.isdigit():
+        return f"{s[:4]}-{s[4:6]}-{s[6:]}"
+    return ""
+
+
+def _holding_due_date(item: dict, loan_work: dict) -> str:
+    """借出单册的应还日期：优先 loanWorkMap[barcode].returnDate，退回单册 loan 字段。"""
+    barcode = str(item.get("barcode") or "")
+    work = loan_work.get(barcode)
+    if isinstance(work, dict):
+        due = _to_date(work.get("returnDate") or work.get("retudate") or "")
+        if due:
+            return due
+    loan = item.get("loan")
+    if isinstance(loan, dict):
+        return _to_date(loan.get("returnDate") or loan.get("retudate") or "")
+    return ""
+
+
+def parse_holdings(payload: dict) -> list[dict]:
+    """解析馆藏 JSON（/opac/api/holding/{bookrecno} 的响应体）。
+
+    返回 [{"library","location","call_number","status","due_date"}...]；
+    馆码/位置码/状态码分别经 libcodeMap/localMap/holdStateMap 翻译，查不到回退码本身。
+    可借与否不在此处判定（见 is_available_status，由接线层使用）。
+    """
+    payload = payload or {}
+    items = payload.get("holdingList") or []
+    state_map = payload.get("holdStateMap") or {}
+    lib_map = payload.get("libcodeMap") or {}
+    local_map = payload.get("localMap") or {}
+    loan_work = payload.get("loanWorkMap") or {}
+    holdings = []
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        state = state_map.get(str(it.get("state"))) or {}
+        holdings.append({
+            "library": str(lib_map.get(str(it.get("curlib")), it.get("curlib") or "")),
+            "location": str(local_map.get(str(it.get("curlocal")), it.get("curlocal") or "")),
+            "call_number": str(it.get("callno") or ""),
+            "status": str(state.get("stateName") or ""),
+            "due_date": _holding_due_date(it, loan_work),
+        })
+    return holdings
