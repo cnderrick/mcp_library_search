@@ -80,6 +80,19 @@ def _library_name(item, group):
             or item.get("library") or "").strip()
 
 
+def _clean_author(text):
+    """detail 的 author 带责任方式后缀（如「冯唐著」），去掉末尾的著/编著/著译。"""
+    return re.sub(r"(?:编著|著译|著)$", "", str(text or "").strip()).strip()
+
+
+def _clean_publisher(text):
+    """detail 的 publish/publishyear 是「城市:出版社,年份」全串，拆出纯出版社名。"""
+    s = re.sub(r",?\s*(?:19|20)\d{2}\S*$", "", str(text or "")).strip()
+    if re.search(r"[:：]", s):
+        s = re.split(r"[:：]", s, maxsplit=1)[1].strip()
+    return s
+
+
 @dataclass
 class _Book:
     record_id: str = ""
@@ -173,6 +186,27 @@ class _Client:
                     ))
         return holdings
 
+    def get_book_detail(self, book_id):
+        table, rid = _split_book_id(book_id)
+        body = _get("/api/opacservice/getBookDetail", {
+            "metaTable": table, "metaId": rid, "library": "all",
+        })
+        data = body.get("data", body) if isinstance(body, dict) else {}
+        title = (data.get("title") or "").strip()
+        if not title:
+            raise RuntimeError(f"深圳图书馆：未找到该书详情：{book_id}")
+        publish_raw = data.get("publish") or data.get("publishyear") or ""
+        return _Book(
+            record_id=book_id,
+            title=title,
+            author=_clean_author(data.get("author") or ""),
+            publisher=_clean_publisher(publish_raw),
+            publish_year=_year(publish_raw),
+            isbn=(data.get("isbn") or "").strip(),
+            call_number=(data.get("callno") or "").strip(),
+            summary=(data.get("abstract") or data.get("abstracts") or "").strip(),
+        )
+
 
 _client = _Client()
 
@@ -225,3 +259,18 @@ def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
         items.append(item)
     items.sort(key=lambda h: (not h["available"], h["library"]))
     return items
+
+
+def get_book_detail(book_id: str) -> BookDetail:
+    """指定图书的完整详情：书名、作者、出版社、出版年、ISBN、索书号、内容简介。"""
+    b = _client.get_book_detail(book_id)
+    return {
+        "book_id": book_id,
+        "title": b.title,
+        "author": b.author,
+        "publisher": b.publisher,
+        "publish_year": b.publish_year,
+        "isbn": b.isbn,
+        "call_number": b.call_number,
+        "summary": b.summary,
+    }
