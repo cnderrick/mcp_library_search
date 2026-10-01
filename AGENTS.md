@@ -16,4 +16,4 @@
 
 1. `server.py` 是薄层：业务逻辑只进 `adapters/`、`interlib/`、`vendor/`。
 2. 单测不打真实图书馆网站；契约测试的模块级 `_client` 是适配器形态的硬契约。
-3. 中文注释与中文提交信息用全角标点；提交信息结尾加 `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`。
+3. 中文注释与中文提交信息用全角标点。
