@@ -9,7 +9,9 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 城市 | 标识 | 状态 | 数据源 |
 |---|---|---|---|
 | 上海 | `shanghai` | ✅ 已接入 | 上海中心图书馆"一卡通"总分馆体系（900+ 网点，含地铁站 24 小时自助机） |
-| 深圳 | `shenzhen` | 🔜 待接入 | — |
+| 广州 | `guangzhou` | ✅ 已接入 | 广州图书馆（图创 Interlib） |
+| 杭州 | `hangzhou` | ✅ 已接入 | 杭州图书馆（图创 Interlib） |
+| 深圳 | `shenzhen` | ✅ 已接入 | 深圳图书馆之城统一平台（自研 JSON API，167 馆） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | — |
 
 ## 安装
@@ -46,6 +48,15 @@ claude mcp add mcp-library-search -- uvx mcp_library_search
 | `get_book_detail(book_id, city)` | 查这本书的完整介绍（ISBN、索书号、内容简介） |
 
 典型用法：对 Claude 说"帮我查《三体》在哪个馆能借到" → 搜书拿到 `book_id` → 查各馆可借状态 → 就近推荐。
+
+## 赞赏
+
+如果这个项目帮到了你，欢迎打赏支持：
+
+<a href="https://github.com/cnderrick/mcp_library_search/raw/main/assets/alipay.JPG"><img src="https://github.com/cnderrick/mcp_library_search/raw/main/assets/alipay.JPG" width="240" alt="支付宝收款码"></a>
+<a href="https://github.com/cnderrick/mcp_library_search/raw/main/assets/wxpay.JPG"><img src="https://github.com/cnderrick/mcp_library_search/raw/main/assets/wxpay.JPG" width="240" alt="微信收款码"></a>
+
+左：支付宝，右：微信。
 
 ## 致谢
 
