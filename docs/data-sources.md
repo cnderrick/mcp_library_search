@@ -8,10 +8,10 @@
 
 | 省份 | 城市 | 标识 | 线上图书馆入口 | 技术组件 | 适配层位置 |
 |---|---|---|---|---|---|
+| 上海市（直辖市） | 上海 | `shanghai` | https://vufind.library.sh.cn | VuFind（上海中心图书馆"一卡通"总分馆体系，900+ 网点） | `vendor/shanghai_library/` + `adapters/shanghai.py` |
 | 北京市（直辖市） | 北京 | — | 待调研 | Ex Libris Primo（初判） | 🔜 搁置：站点 WAF 拦截程序化访问 |
 | 广东省 | 广州 | `guangzhou` | https://opac.gzlib.org.cn | 图创 Interlib | `interlib/` 家族 + `adapters/guangzhou.py` |
 |  | 深圳 | `shenzhen` | https://www.szlib.org.cn/opac/ | 图书馆之城自研 JSON API（后端 ILAS，167 馆统一平台） | `adapters/shenzhen.py`（独立实现） |
-| 上海市（直辖市） | 上海 | `shanghai` | https://vufind.library.sh.cn | VuFind（上海中心图书馆"一卡通"总分馆体系，900+ 网点） | `vendor/shanghai_library/` + `adapters/shanghai.py` |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn | 图创 Interlib（与广州同模板） | `interlib/` 家族 + `adapters/hangzhou.py` |
 
 ## 上海（VuFind）
