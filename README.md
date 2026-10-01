@@ -1,5 +1,7 @@
 # mcp_library_search
 
+[![PyPI version](https://img.shields.io/pypi/v/mcp_library_search)](https://pypi.org/project/mcp-library-search/)
+
 MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书在哪些馆能借到"。
 
 ## 支持情况
