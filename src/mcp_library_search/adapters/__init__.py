@@ -7,11 +7,13 @@ get_book_detail 三个原语（返回结构对齐 base.py 的 TypedDict，由契
 from . import guangzhou
 from . import hangzhou
 from . import shanghai
+from . import shenzhen
 
 _ADAPTERS = {
     "guangzhou": guangzhou,
     "hangzhou": hangzhou,
     "shanghai": shanghai,
+    "shenzhen": shenzhen,
 }
 
 _SUPPORTED = "、".join(sorted(_ADAPTERS))
