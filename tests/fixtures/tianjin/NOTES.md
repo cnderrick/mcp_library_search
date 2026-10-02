@@ -122,3 +122,20 @@ find-b 表单的分馆下拉原值含：天津图书馆（复康路/海河园/�
 - fixture 佐证：find_tjl01.html 与 find_tjc01.html 的 ISBN 集合无交集、
   978-7-5366-9293-0 不在两份 WRD fixture 中——单测据此按源路由 fixture，
   保证跨源归并不会污染单源精确断言。
+
+## 检索统计与容错口径
+
+- `total_results`＝存活源合计；任一存活源不提供总数（ZXYH 无「检索到 N 条」）→
+  如实 None，不编造。`total_pages`＝各源最大值，`has_next`＝任一源仍有下页
+  （三源各自独立翻页，合并页只是并排展示）。
+- 源级容错：≥1 源成功即返回存活源结果（数据原样，不标注残缺）；
+  三源全失败 → RuntimeError 汇总各源错误（含「天津」）。
+- 验证码墙例外：`_CaptchaError` 穿透源级容错立即上抛——它是按 IP 的全局限速
+  信号，静默降级成「只有 ZXYH 的空结果」会误导调用方。
+- get_holdings：首成员（目标源）失败报错（ALEPH 错误带馆名前缀），附属源失败
+  跳过返回已查到部分；聚合序＝可借在前、馆名升序。
+- get_book_detail：复合 id 取优先级最高成员，record_id 保留查询原样；
+  ALEPH 详情走无会话直连 `F?func=full-set-set&doc_library=…&doc_number=…&format=999`
+  （页内 full-set-set 链接是 set_number 会话形态，直连形态待真网验证）。
+- 天津馆藏不带 item_id：模块级 get_holdings 的归还日期补查分支真网永不触发
+  （ALEPH 应还日期在单册页直取，ZXYH 在馆藏 JSON loanWorkMap）。

@@ -16,6 +16,7 @@ from dataclasses import dataclass, field, replace
 from http.cookiejar import CookieJar
 
 from ..interlib import InterlibConfig
+from ..interlib import get_book_detail as il_detail
 from ..interlib import get_holdings as il_holdings
 from ..interlib import search_raw as il_search
 from .base import BookDetail, BookSummary, Holding, SearchPage
@@ -80,10 +81,14 @@ def _open(req, timeout=20):
         raise RuntimeError(f"天津图书馆请求失败：{e}") from e
 
 
+class _CaptchaError(RuntimeError):
+    """验证码墙：按 IP 的全局限速信号，必须穿透源级容错直达调用方，不静默降级。"""
+
+
 def _check_captcha(text):
     """验证码墙：立即抛错，不重试硬闯（按 IP 封，硬闯只会延长封禁）。"""
     if "验证码" in text:
-        raise RuntimeError("天津图书馆：检索过于频繁触发验证码，请稍后再试")
+        raise _CaptchaError("天津图书馆：检索过于频繁触发验证码，请稍后再试")
 
 
 def _looks_like_isbn(keyword):
@@ -363,11 +368,8 @@ class _Client:
         return text
 
     def _search_zxyh(self, keyword, page, limit):
-        """中新友好源：家族 search_raw（带 isbn 内部字段）；失败返回 None（源级容错）。"""
-        try:
-            zr = il_search(_ZXYH, keyword, page=page, limit=limit)
-        except RuntimeError:
-            return None
+        """中新友好源：家族 search_raw（带 isbn 内部字段）；失败上抛，容错在 search。"""
+        zr = il_search(_ZXYH, keyword, page=page, limit=limit)
         return {
             "books": [
                 _Book(record_id=f"ZXYH:{b['book_id']}", title=b["title"], author=b["author"],
@@ -380,14 +382,25 @@ class _Client:
         }
 
     def search(self, keyword, page=1, limit=20):
+        # 源级容错：≥1 源成功即返回存活源结果（数据原样）；三源全失败才报错
         per_source = {}
+        errors = []
         for source in _SOURCES:
-            per_source[source] = _parse_find(self._fetch_find(source, keyword, page), source)
-        zxyh = self._search_zxyh(keyword, page, limit)
-        if zxyh is not None:
-            per_source["ZXYH"] = zxyh
+            try:
+                per_source[source] = _parse_find(
+                    self._fetch_find(source, keyword, page), source)
+            except _CaptchaError:
+                raise  # 验证码墙是全局限速信号，快速失败给可操作提示
+            except RuntimeError as e:
+                errors.append(f"{_SOURCES[source]['name']}：{e}")
+        try:
+            per_source["ZXYH"] = self._search_zxyh(keyword, page, limit)
+        except RuntimeError as e:
+            errors.append(f"{_ZXYH.name_cn}：{e}")
+        if not per_source:
+            raise RuntimeError("天津图书馆：三源检索均失败——" + "；".join(errors))
         books = _merge_books({s: r["books"] for s, r in per_source.items()})
-        # 合计口径：任一源不提供总数（ZXYH 检索页无「检索到 N 条」）→ 合计不可知，
+        # 合计口径：任一存活源不提供总数（ZXYH 检索页无「检索到 N 条」）→ 合计不可知，
         # 如实 None，不拿部分源的数编造全城总数
         totals = [r["total_results"] for r in per_source.values()]
         total = None if any(t is None for t in totals) else sum(totals)
@@ -406,11 +419,15 @@ class _Client:
     def get_holdings(self, book_id):
         """复合 book_id 拆成员逐个查询后聚合（可借在前、馆名升序）；单成员同一路径。
 
-        成员级容错（主源失败抛错、次源失败跳过）在三源容错任务实现，当前如实上抛。
+        容错口径：首成员（目标源）失败报错；附属源失败跳过，返回已查到部分。
         """
         holdings = []
-        for source, rid in _split_book_id(book_id):
-            holdings.extend(self._holdings_for(source, rid))
+        for i, (source, rid) in enumerate(_split_book_id(book_id)):
+            try:
+                holdings.extend(self._holdings_for(source, rid))
+            except RuntimeError:
+                if i == 0:
+                    raise
         holdings.sort(key=lambda h: (not h.available, h.library))
         return holdings
 
@@ -425,8 +442,105 @@ class _Client:
             ]
         url = (f"{_SOURCES[source]['host']}/F?func=item-global"
                f"&doc_library={source}&doc_number={rid}")
-        text = _open(urllib.request.Request(url, headers=_HEADERS))
-        return _parse_item_global(text)
+        try:
+            text = _open(urllib.request.Request(url, headers=_HEADERS))
+            return _parse_item_global(text)
+        except RuntimeError as e:
+            raise RuntimeError(f"{_SOURCES[source]['name']}馆藏查询失败：{e}") from e
+
+    def get_book_detail(self, book_id):
+        """复合 id 取优先级最高成员的详情；record_id 保留查询原样。目标源失败如实报错。"""
+        source, rid = _split_book_id(book_id)[0]
+        if source == "ZXYH":
+            d = il_detail(_ZXYH, rid)
+            return _Book(record_id=book_id, title=d["title"], author=d["author"],
+                         publisher=d["publisher"], publish_year=d["publish_year"],
+                         isbn=d["isbn"], call_number=d["call_number"],
+                         summary=d["summary"])
+        url = (f"{_SOURCES[source]['host']}/F?func=full-set-set"
+               f"&doc_library={source}&doc_number={rid}&format=999")
+        try:
+            text = _open(urllib.request.Request(url, headers=_HEADERS))
+        except RuntimeError as e:
+            raise RuntimeError(f"{_SOURCES[source]['name']}详情查询失败：{e}") from e
+        _check_captcha(text)
+        b = _parse_full_record(text, source)
+        if b is None:
+            raise RuntimeError(f"{_SOURCES[source]['name']}：未找到该书详情：{book_id}")
+        return replace(b, record_id=book_id)
+
+    def get_return_date(self, item_id):
+        """天津无按单册查归还日期的接口：ALEPH 应还日期在单册页直取、ZXYH 在馆藏 JSON。
+
+        天津馆藏不带 item_id，模块级 get_holdings 的补查分支真网永不触发；
+        定义仅为对齐契约形状。
+        """
+        raise RuntimeError(f"天津图书馆：无单册归还日期接口：{item_id}")
 
 
 _client = _Client()
+
+
+def search_books(keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
+    """按关键词搜索三源合并馆藏。上游报错抛 RuntimeError。"""
+    result = _client.search(keyword=keyword, page=page, limit=limit)
+    if not result.success:
+        raise RuntimeError(f"天津图书馆搜索失败：{result.error}")
+
+    books: list[BookSummary] = [
+        {
+            "book_id": b.record_id,
+            "title": b.title,
+            "author": b.author,
+            "publisher": b.publisher,
+            "publish_year": b.publish_year,
+            "availability_summary": b.availability_summary,
+        }
+        for b in (result.books or [])
+    ]
+    stats = result.statistics or {}
+    return {
+        "total_results": stats.get("total_results"),
+        "page": stats.get("page", page),
+        "total_pages": stats.get("total_pages", 1),
+        "has_next": stats.get("has_next", False),
+        "books": books,
+    }
+
+
+def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
+    """指定图书在各分馆的馆藏与可借状态，可借的排前面。"""
+    holdings = _client.get_holdings(book_id) or []
+    kept = [h for h in holdings if (not only_available or h.is_available())]
+    items: list[Holding] = []
+    for h in kept:
+        available = h.is_available()
+        item: Holding = {
+            "library": h.library,
+            "location": h.location,
+            "call_number": h.call_number,
+            "status": h.status,
+            "available": available,
+            "due_date": getattr(h, "due_date", "") or "",
+        }
+        # 契约测试要求已借出且带单册 item_id 时查归还时间；天津馆藏无 item_id，真网不触发
+        if not available and getattr(h, "item_id", ""):
+            item["due_date"] = _client.get_return_date(h.item_id)
+        items.append(item)
+    items.sort(key=lambda h: (not h["available"], h["library"]))
+    return items
+
+
+def get_book_detail(book_id: str) -> BookDetail:
+    """指定图书的完整详情：书名、作者、出版社、出版年、ISBN、索书号、内容简介。"""
+    b = _client.get_book_detail(book_id)
+    return {
+        "book_id": book_id,
+        "title": b.title,
+        "author": b.author,
+        "publisher": b.publisher,
+        "publish_year": b.publish_year,
+        "isbn": b.isbn,
+        "call_number": b.call_number,
+        "summary": b.summary,
+    }
