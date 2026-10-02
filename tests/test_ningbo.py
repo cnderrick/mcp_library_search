@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import ningbo
+from mcp_library_search.adapters.cn import ningbo
 from mcp_library_search.adapters.base import validate_book_detail, validate_search_page
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "ningbo"

@@ -27,12 +27,17 @@ _EXPECTED = [
 
 
 def test_registry_has_exactly_nineteen_identifiers():
-    assert sorted(adapters._ADAPTERS) == _EXPECTED
+    # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
+    assert sorted(adapters._ADAPTERS) == ["cn"]
+    assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED
+    assert adapters._REGIONS == {"cn": "中国"}
 
 
 def test_every_adapter_module_has_module_level_client():
     # AGENTS.md 铁律：契约测试的模块级 _client 是适配器形态的硬契约
-    missing = [name for name, mod in adapters._ADAPTERS.items()
+    missing = [f"{region}/{city}"
+               for region, by_city in adapters._ADAPTERS.items()
+               for city, mod in by_city.items()
                if not hasattr(mod, "_client")]
     assert missing == []
 

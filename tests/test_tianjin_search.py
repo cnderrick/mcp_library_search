@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import tianjin
+from mcp_library_search.adapters.cn import tianjin
 from mcp_library_search.aleph import CaptchaError
 from mcp_library_search.aleph import client as aleph_client
 

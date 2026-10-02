@@ -4,7 +4,7 @@
 """
 import pytest
 
-from mcp_library_search.adapters import hangzhou
+from mcp_library_search.adapters.cn import hangzhou
 
 
 def _b(source, rid, isbn="", title="三体"):
@@ -126,7 +126,7 @@ def _patch_zj_search(monkeypatch, result=None, error=None):
             raise RuntimeError(error)
         return result
 
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.search", fake)
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.search", fake)
 
 
 def test_search_merges_and_sums_totals(monkeypatch):
@@ -201,7 +201,7 @@ def test_get_holdings_composite_aggregates(monkeypatch):
         return [_zj_holding(available=True), _zj_holding("曙光路馆区", available=False)]
 
     monkeypatch.setattr("mcp_library_search.interlib.get_holdings", fake_hz)
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_holdings", fake_zj)
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_holdings", fake_zj)
     hs = hangzhou._Client().get_holdings("HZ:2006220724+ZJ:11000002313805")
     assert seen == ["hz:2006220724", "zj:11000002313805"]
     assert len(hs) == 3
@@ -216,7 +216,7 @@ def test_get_holdings_bare_id_routes_hz_only(monkeypatch):
     monkeypatch.setattr("mcp_library_search.interlib.get_holdings",
                         lambda cfg, book_id, only_available=True:
                         calls.append(book_id) or [_hz_holding()])
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_holdings",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_holdings",
                         lambda rid: calls.append(f"zj:{rid}") or [])
     hs = hangzhou._Client().get_holdings("2007002340")
     assert calls == ["2007002340"]  # 裸 id 只路由 HZ，不触浙图源
@@ -231,7 +231,7 @@ def test_get_holdings_secondary_failure_degrades(monkeypatch):
     def boom(rid):
         raise RuntimeError("浙江图书馆请求失败：连接被重置")
 
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_holdings", boom)
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_holdings", boom)
     hs = hangzhou._Client().get_holdings("HZ:1+ZJ:2")
     assert len(hs) == 1 and hs[0].library == "杭州图书馆"
 
@@ -241,7 +241,7 @@ def test_get_holdings_primary_failure_raises(monkeypatch):
         raise RuntimeError("杭州图书馆请求失败：HTTP 500")
 
     monkeypatch.setattr("mcp_library_search.interlib.get_holdings", boom)
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_holdings",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_holdings",
                         lambda rid: [_zj_holding()])
     with pytest.raises(RuntimeError):
         hangzhou._Client().get_holdings("HZ:1+ZJ:2")
@@ -255,7 +255,7 @@ def test_get_book_detail_composite_takes_hz(monkeypatch):
                                               "author": "刘慈欣", "publisher": "重庆出版社",
                                               "publish_year": "2008", "isbn": "9787536692930",
                                               "call_number": "I247.55", "summary": "hz 简介"})
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_work_detail",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_work_detail",
                         lambda rid: pytest.fail("复合 id 应路由优先级最高的 HZ 成员"))
     d = hangzhou._Client().get_book_detail("HZ:2006220724+ZJ:11000002313805")
     assert d.record_id == "HZ:2006220724+ZJ:11000002313805"  # 保留查询原样
@@ -263,7 +263,7 @@ def test_get_book_detail_composite_takes_hz(monkeypatch):
 
 
 def test_get_book_detail_zj_member(monkeypatch):
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_work_detail",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_work_detail",
                         lambda rid: {"work_id": "w", "title": "三体", "author": "刘慈欣著",
                                      "publisher": "重庆出版社", "publish_year": "2008",
                                      "isbn": "978-7-5366-9293-0", "call_number": "I247.55",
@@ -277,7 +277,7 @@ def test_get_book_detail_zj_failure_raises(monkeypatch):
     def boom(rid):
         raise RuntimeError("浙江图书馆接口返回异常：code=500, desc=服务器繁忙，请稍后重试")
 
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_work_detail", boom)
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_work_detail", boom)
     with pytest.raises(RuntimeError) as ei:
         hangzhou._Client().get_book_detail("ZJ:99999999999999")
     assert "服务器繁忙" in str(ei.value)  # 站点 desc 原样穿透

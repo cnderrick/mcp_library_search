@@ -1,7 +1,7 @@
 """天津 ISBN 归并与复合 book_id：跨源同 ISBN 合并、无 ISBN 并列、成员拆分路由。"""
 from pathlib import Path
 
-from mcp_library_search.adapters import tianjin
+from mcp_library_search.adapters.cn import tianjin
 from mcp_library_search.aleph import Book
 from mcp_library_search.aleph import client as aleph_client
 

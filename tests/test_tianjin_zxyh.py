@@ -4,7 +4,7 @@ il_search/il_holdings/il_detail 为模块级名字，测试直接 monkeypatch。
 """
 from pathlib import Path
 
-from mcp_library_search.adapters import tianjin
+from mcp_library_search.adapters.cn import tianjin
 from mcp_library_search.aleph import Holding
 from mcp_library_search.aleph import client as aleph_client
 

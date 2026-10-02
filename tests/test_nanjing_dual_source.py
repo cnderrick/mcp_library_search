@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import nanjing
+from mcp_library_search.adapters.cn import nanjing
 from mcp_library_search.aleph import Book, CaptchaError
 from mcp_library_search.aleph import client as aleph_client
 from mcp_library_search.uopac import client as uopac_client

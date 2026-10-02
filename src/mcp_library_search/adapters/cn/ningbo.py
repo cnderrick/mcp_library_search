@@ -49,7 +49,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _BASE = "https://opac.nblib.cn/api/tcc-opac/999"
 _REFERER = "https://opac.nblib.cn/999"

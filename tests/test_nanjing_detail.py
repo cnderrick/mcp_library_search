@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import nanjing
+from mcp_library_search.adapters.cn import nanjing
 from mcp_library_search.adapters.base import validate_book_detail, validate_holdings
 from mcp_library_search.uopac import client as uopac_client
 

@@ -37,9 +37,9 @@ import time
 from dataclasses import dataclass
 from types import SimpleNamespace
 
-from .. import interlib
-from ..interlib import InterlibConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import interlib
+from ...interlib import InterlibConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
     city="qingdao", name_cn="青岛市公共图书馆联合目录",

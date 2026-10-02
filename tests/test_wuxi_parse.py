@@ -6,7 +6,7 @@
 import json
 import pathlib
 
-from mcp_library_search.adapters import wuxi
+from mcp_library_search.adapters.cn import wuxi
 
 _FIXTURES = pathlib.Path("tests/fixtures/wuxi")
 

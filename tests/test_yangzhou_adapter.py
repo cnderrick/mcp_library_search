@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import yangzhou
+from mcp_library_search.adapters.cn import yangzhou
 from mcp_library_search.adapters.base import (
     validate_book_detail, validate_holdings, validate_search_page)
 from mcp_library_search.uopac import UopacConfig

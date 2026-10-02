@@ -9,7 +9,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from mcp_library_search.adapters import base, hefei
+from mcp_library_search.adapters import base
+from mcp_library_search.adapters.cn import hefei
 
 
 def _patch_client(monkeypatch, **return_values):

@@ -32,11 +32,11 @@ msg=login_to_continue,连根路径 JS 跳转的 presearch.php 也锁),匿名不�
 """
 from dataclasses import replace
 
-from .. import aleph
-from .. import uopac
-from ..aleph import AlephConfig, CaptchaError
-from ..uopac import UopacConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import aleph
+from ... import uopac
+from ...aleph import AlephConfig, CaptchaError
+from ...uopac import UopacConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _THROTTLE = 4.0  # 秒/host,按 spec 保守限速
 

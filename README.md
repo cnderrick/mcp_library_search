@@ -54,13 +54,13 @@ claude mcp add mcp-library-search -- uvx mcp_library_search
 
 ## 使用
 
-接入后提供 3 个 tool，查询链路为：先 `search_books` 按关键字找到 `book_id`，再用它查馆藏或详情。都带 `city` 参数（默认 `shanghai`，未接入的城市会返回明确提示）：
+接入后提供 3 个 tool，查询链路为：先 `search_books` 按关键字找到 `book_id`，再用它查馆藏或详情。都带 `region` 与 `city` 两个定位参数：`region` 是地区标识（取域名后缀），默认 `cn`（中国）；`city` 默认 `shanghai`。未接入的地区或城市会返回明确提示：
 
 | tool | 作用 |
 |---|---|
-| `search_books(keyword, city, page, limit)` | 按关键字（书名、ISBN、作者等）搜书，返回分页列表，每条带 `book_id` 和可借概况 |
-| `find_book_availability(book_id, city, only_available)` | 查这本书在哪些馆有、是否可借，可借的馆排前面；`only_available=False` 时已借出的馆藏带预计归还时间（`due_date`） |
-| `get_book_detail(book_id, city)` | 查这本书的完整介绍（ISBN、索书号、内容简介） |
+| `search_books(keyword, region, city, page, limit)` | 按关键字（书名、ISBN、作者等）搜书，返回分页列表，每条带 `book_id` 和可借概况 |
+| `find_book_availability(book_id, region, city, only_available)` | 查这本书在哪些馆有、是否可借，可借的馆排前面；`only_available=False` 时已借出的馆藏带预计归还时间（`due_date`） |
+| `get_book_detail(book_id, region, city)` | 查这本书的完整介绍（ISBN、索书号、内容简介） |
 
 典型用法：对 Claude 说"帮我查《三体》在哪个馆能借到" → 搜书拿到 `book_id` → 查各馆可借状态 → 就近推荐。
 

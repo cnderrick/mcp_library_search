@@ -8,18 +8,18 @@ ALEPH 侧结构细节全部见 tests/fixtures/tianjin/NOTES.md，解析与 HTTP 
 import re
 from dataclasses import replace
 
-from .. import aleph
-from ..aleph import AlephConfig
-from ..aleph import Book as _Book
-from ..aleph import CaptchaError as _CaptchaError
-from ..aleph import Holding as _Holding
-from ..aleph import SearchResult as _SearchResult
-from ..aleph.parser import looks_like_isbn as _looks_like_isbn
-from ..interlib import InterlibConfig
-from ..interlib import get_book_detail as il_detail
-from ..interlib import get_holdings as il_holdings
-from ..interlib import search_raw as il_search
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import aleph
+from ...aleph import AlephConfig
+from ...aleph import Book as _Book
+from ...aleph import CaptchaError as _CaptchaError
+from ...aleph import Holding as _Holding
+from ...aleph import SearchResult as _SearchResult
+from ...aleph.parser import looks_like_isbn as _looks_like_isbn
+from ...interlib import InterlibConfig
+from ...interlib import get_book_detail as il_detail
+from ...interlib import get_holdings as il_holdings
+from ...interlib import search_raw as il_search
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _THROTTLE = 4.0  # ALEPH 验证码墙按 IP 封，限速是硬约束（NOTES.md）
 # 验证码墙按 IP 封，两台 ALEPH 可能同时被封：解封指引一次列全地址，免得解一个才发现另一个

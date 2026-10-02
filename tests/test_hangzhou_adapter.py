@@ -5,7 +5,7 @@
 取数函数，只验证「杭州适配器是否把 InterlibConfig 正确传给家族接口、
 book_id 是否带 HZ: 前缀、裸 id 是否仍按兼容垫片路由 HZ」，不打真网。
 """
-from mcp_library_search.adapters import hangzhou
+from mcp_library_search.adapters.cn import hangzhou
 
 
 def _zj_empty():
@@ -26,7 +26,7 @@ def test_config_and_delegation(monkeypatch):
                            "availability_summary": "", "isbn": "9787536692930"}]}
 
     monkeypatch.setattr("mcp_library_search.interlib.search_raw", fake_search)
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.search",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.search",
                         lambda keyword, page=1, limit=20: _zj_empty())
     page = hangzhou.search_books("三体", page=2, limit=5)
     # 合计口径＝存活源之和（HZ 1 ＋ ZJ 0）
@@ -56,9 +56,9 @@ def test_holdings_and_detail_delegate(monkeypatch):
                               "publisher": "重庆出版社", "publish_year": "2008",
                               "isbn": "", "call_number": "", "summary": ""},
     )
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_holdings",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_holdings",
                         lambda rid: zj_calls.append(f"holdings:{rid}") or [])
-    monkeypatch.setattr("mcp_library_search.adapters._zjlib.get_work_detail",
+    monkeypatch.setattr("mcp_library_search.adapters.cn._zjlib.get_work_detail",
                         lambda rid: zj_calls.append(f"detail:{rid}") or {})
     hs = hangzhou.get_holdings("123", only_available=False)
     assert hs[0]["library"] == "x" and hs[0]["available"] is True

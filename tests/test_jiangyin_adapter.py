@@ -9,7 +9,7 @@ from unittest.mock import Mock
 import pytest
 
 from mcp_library_search.adapters import base
-from mcp_library_search.adapters import jiangyin
+from mcp_library_search.adapters.cn import jiangyin
 
 
 def test_config_and_delegation(monkeypatch):

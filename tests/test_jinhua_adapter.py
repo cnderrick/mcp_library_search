@@ -11,7 +11,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from mcp_library_search.adapters import jinhua
+from mcp_library_search.adapters.cn import jinhua
 from mcp_library_search.adapters.base import (
     validate_book_detail,
     validate_holdings,

@@ -38,7 +38,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _BASE = "http://ykt.dl-library.net.cn"
 _ENTRY = _BASE + "/uhtbin/cgisirsi/x/x/0/49/"  # 根路径 meta-refresh 的稳定目标

@@ -18,9 +18,9 @@ uopac 家族 client 认出壳页就会抛含馆名的错误（不静默退化成
 - ISBN 索引按「存储原样」前缀匹配，走数字间插 `*` 的通配（meta=14）——
   与金陵同一策略，通配路由与状态词表都在 uopac 家族里。
 """
-from .. import uopac
-from ..uopac import UopacConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import uopac
+from ...uopac import UopacConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _THROTTLE = 4.0  # 秒/host，按 spec 保守限速
 

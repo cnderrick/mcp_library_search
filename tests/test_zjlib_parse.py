@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import _zjlib
+from mcp_library_search.adapters.cn import _zjlib
 
 FIX = Path(__file__).parent / "fixtures" / "zjlib"
 

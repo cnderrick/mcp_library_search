@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import hefei
+from mcp_library_search.adapters.cn import hefei
 from mcp_library_search.interlib import client as il_client
 
 _FIX = Path(__file__).parent / "fixtures" / "hefei"

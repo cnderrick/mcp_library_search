@@ -3,7 +3,7 @@ from unittest.mock import Mock, call
 
 import pytest
 
-from mcp_library_search.adapters import shanghai
+from mcp_library_search.adapters.cn import shanghai
 
 
 @pytest.fixture

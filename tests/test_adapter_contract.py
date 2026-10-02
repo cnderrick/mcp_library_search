@@ -1,7 +1,7 @@
 """契约测试：_ADAPTERS 里每个适配器的输出必须符合 base.py 的模型。
 
-新增城市注册进 _ADAPTERS 后会被这里的循环自动校验；字段名写歪、
-类型不对、缺字段，测试直接红。
+新增城市注册进 _ADAPTERS（地区 → 城市两级）后会被这里的循环自动校验；
+字段名写歪、类型不对、缺字段，测试直接红。
 """
 from types import SimpleNamespace
 from unittest.mock import Mock
@@ -11,7 +11,11 @@ import pytest
 from mcp_library_search import adapters
 from mcp_library_search.adapters import base
 
-CITIES = sorted(adapters._ADAPTERS)
+CASES = [
+    (region, city)
+    for region, by_city in adapters._ADAPTERS.items()
+    for city in sorted(by_city)
+]
 
 
 def _patch_client(monkeypatch, module, **return_values):
@@ -31,9 +35,9 @@ def _book(**kw):
     return SimpleNamespace(**{**defaults, **kw})
 
 
-@pytest.mark.parametrize("city", CITIES)
-def test_search_books_contract(monkeypatch, city):
-    mod = adapters._ADAPTERS[city]
+@pytest.mark.parametrize("region, city", CASES)
+def test_search_books_contract(monkeypatch, region, city):
+    mod = adapters._ADAPTERS[region][city]
     result = SimpleNamespace(
         success=True,
         error="",
@@ -44,9 +48,9 @@ def test_search_books_contract(monkeypatch, city):
     base.validate_search_page(mod.search_books("三体"))
 
 
-@pytest.mark.parametrize("city", CITIES)
-def test_get_holdings_contract(monkeypatch, city):
-    mod = adapters._ADAPTERS[city]
+@pytest.mark.parametrize("region, city", CASES)
+def test_get_holdings_contract(monkeypatch, region, city):
+    mod = adapters._ADAPTERS[region][city]
     holdings = [
         SimpleNamespace(library="A馆", location="2楼", call_number="I247.5", status="可借", is_available=lambda: True, item_id=""),
         SimpleNamespace(library="B馆", location="", call_number="", status="已借出", is_available=lambda: False, item_id="item-1"),
@@ -56,8 +60,8 @@ def test_get_holdings_contract(monkeypatch, city):
     client.get_return_date.assert_called_once_with("item-1")
 
 
-@pytest.mark.parametrize("city", CITIES)
-def test_get_book_detail_contract(monkeypatch, city):
-    mod = adapters._ADAPTERS[city]
+@pytest.mark.parametrize("region, city", CASES)
+def test_get_book_detail_contract(monkeypatch, region, city):
+    mod = adapters._ADAPTERS[region][city]
     _patch_client(monkeypatch, mod, get_book_detail=_book())
     base.validate_book_detail(mod.get_book_detail("rid-1"))

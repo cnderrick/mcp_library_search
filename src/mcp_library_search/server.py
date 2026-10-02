@@ -25,9 +25,10 @@ mcp = FastMCP("mcp-library-search", version=_VERSION)
 
 
 @mcp.tool
-def search_books(keyword: str, city: str = "shanghai", page: int = 1, limit: int = 20) -> SearchPage:
+def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page: int = 1, limit: int = 20) -> SearchPage:
     """按关键字搜索城市图书馆的馆藏图书，返回分页列表。
 
+    region 为地区标识（取域名后缀），默认 "cn"（中国）；已接入城市均在 cn 下。
     已接入城市：shanghai（上海，全市 900+ 网点，含地铁站 24 小时自助机）、
     guangzhou（广州）、hangzhou（杭州，杭州图书馆＋浙江图书馆双源合并，
     同一本书跨馆归并成一条结果）、shenzhen（深圳，167 馆统一平台）、
@@ -57,18 +58,19 @@ def search_books(keyword: str, city: str = "shanghai", page: int = 1, limit: int
 
     参数：
         keyword：书名、ISBN、作者等检索词
+        region：地区标识（域名后缀），默认 "cn"（中国）
         city：城市标识，默认 "shanghai"
         page：页码，默认 1
         limit：每页条数，默认 20
     """
     try:
-        return adapters.search_books(city, keyword, page=page, limit=limit)
+        return adapters.search_books(region, city, keyword, page=page, limit=limit)
     except Exception as e:
         raise RuntimeError(f"搜索失败：{e}") from e
 
 
 @mcp.tool
-def find_book_availability(book_id: str, city: str = "shanghai", only_available: bool = True) -> list[Holding]:
+def find_book_availability(book_id: str, region: str = "cn", city: str = "shanghai", only_available: bool = True) -> list[Holding]:
     """查询指定图书在各分馆的馆藏与可借状态，可借的馆排前面。
 
     已借出的馆藏可能带 due_date（预计归还时间，YYYY-MM-DD），仅在
@@ -84,18 +86,19 @@ def find_book_availability(book_id: str, city: str = "shanghai", only_available:
     均属数据边界。
 
     参数：
-        book_id：search_books 返回的图书 ID，需与 search_books 使用同一 city
+        book_id：search_books 返回的图书 ID，需与 search_books 使用同一 region 与 city
+        region：地区标识（域名后缀），默认 "cn"（中国）
         city：城市标识，默认 "shanghai"
         only_available：True（默认）只返回当前可借的馆；False 返回全部馆藏
     """
     try:
-        return adapters.get_holdings(city, book_id, only_available=only_available)
+        return adapters.get_holdings(region, city, book_id, only_available=only_available)
     except Exception as e:
         raise RuntimeError(f"查询馆藏失败：{e}") from e
 
 
 @mcp.tool
-def get_book_detail(book_id: str, city: str = "shanghai") -> BookDetail:
+def get_book_detail(book_id: str, region: str = "cn", city: str = "shanghai") -> BookDetail:
     """查询指定图书的完整介绍：书名、作者、出版社、出版年、ISBN、索书号、内容简介。
 
     上海数据源没有独立简介区块，内容简介取自书目"附注"字段，可能带有
@@ -108,11 +111,12 @@ def get_book_detail(book_id: str, city: str = "shanghai") -> BookDetail:
     （数据边界，非故障）。
 
     参数：
-        book_id：search_books 返回的图书 ID，需与 search_books 使用同一 city
+        book_id：search_books 返回的图书 ID，需与 search_books 使用同一 region 与 city
+        region：地区标识（域名后缀），默认 "cn"（中国）
         city：城市标识，默认 "shanghai"
     """
     try:
-        return adapters.get_book_detail(city, book_id)
+        return adapters.get_book_detail(region, city, book_id)
     except Exception as e:
         raise RuntimeError(f"查询图书详情失败：{e}") from e
 

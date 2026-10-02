@@ -14,10 +14,10 @@ import json
 import re
 from dataclasses import dataclass, field, replace
 
-from ..interlib import InterlibConfig
-from ..interlib import client as il_client
-from ..interlib import parser as il_parser
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ...interlib import InterlibConfig
+from ...interlib import client as il_client
+from ...interlib import parser as il_parser
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 
 @dataclass(frozen=True)

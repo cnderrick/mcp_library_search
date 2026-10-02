@@ -18,7 +18,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _BASE = "http://202.101.180.43/ILASOPAC"
 _UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"

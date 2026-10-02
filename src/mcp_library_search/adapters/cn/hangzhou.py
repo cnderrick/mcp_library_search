@@ -15,10 +15,10 @@ book_id 形态：HZ:{bookrecno} / ZJ:{originalId}；跨源同 ISBN 命中合成�
 import re
 from dataclasses import dataclass, field, replace
 
-from .. import interlib
-from ..interlib import InterlibConfig
+from ... import interlib
+from ...interlib import InterlibConfig
 from . import _zjlib
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
     city="hangzhou", name_cn="杭州图书馆", base_url="https://my1.zjhzlib.cn"

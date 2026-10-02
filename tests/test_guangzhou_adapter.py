@@ -1,7 +1,7 @@
 """广州适配器测试：config 正确、委托 interlib 家族、契约缝生效。"""
 import pytest
 
-from mcp_library_search.adapters import guangzhou
+from mcp_library_search.adapters.cn import guangzhou
 
 
 def test_config_and_delegation(monkeypatch):

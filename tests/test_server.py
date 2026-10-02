@@ -9,16 +9,28 @@ def test_server_version_matches_package_metadata():
     assert server.mcp.version == version("mcp_library_search")
 
 
-def test_search_books_delegates_with_default_city(monkeypatch):
+def test_search_books_delegates_with_default_region_and_city(monkeypatch):
     calls = []
 
-    def fake(city, keyword, page=1, limit=20):
-        calls.append((city, keyword, page, limit))
+    def fake(region, city, keyword, page=1, limit=20):
+        calls.append((region, city, keyword, page, limit))
         return {"books": []}
 
     monkeypatch.setattr(adapters, "search_books", fake)
     assert server.search_books("三体") == {"books": []}
-    assert calls == [("shanghai", "三体", 1, 20)]
+    assert calls == [("cn", "shanghai", "三体", 1, 20)]
+
+
+def test_search_books_delegates_region_and_city(monkeypatch):
+    calls = []
+
+    def fake(region, city, keyword, page=1, limit=20):
+        calls.append((region, city, keyword, page, limit))
+        return {"books": []}
+
+    monkeypatch.setattr(adapters, "search_books", fake)
+    server.search_books("三体", region="cn", city="guangzhou", page=2)
+    assert calls == [("cn", "guangzhou", "三体", 2, 20)]
 
 
 def test_search_books_wraps_errors(monkeypatch):
@@ -32,7 +44,8 @@ def test_search_books_wraps_errors(monkeypatch):
 
 def test_find_book_availability_delegates_and_wraps(monkeypatch):
     monkeypatch.setattr(
-        adapters, "get_holdings", lambda city, rid, only_available=True: [{"library": "徐汇馆"}]
+        adapters, "get_holdings",
+        lambda region, city, rid, only_available=True: [{"library": "徐汇馆"}],
     )
     assert server.find_book_availability("r1") == [{"library": "徐汇馆"}]
 
@@ -45,7 +58,7 @@ def test_find_book_availability_delegates_and_wraps(monkeypatch):
 
 
 def test_get_book_detail_delegates_and_wraps(monkeypatch):
-    monkeypatch.setattr(adapters, "get_book_detail", lambda city, rid: {"book_id": "r1"})
+    monkeypatch.setattr(adapters, "get_book_detail", lambda region, city, rid: {"book_id": "r1"})
     assert server.get_book_detail("r1") == {"book_id": "r1"}
 
     def boom(*args, **kwargs):
@@ -58,4 +71,9 @@ def test_get_book_detail_delegates_and_wraps(monkeypatch):
 
 def test_unsupported_city_gets_clear_message():
     with pytest.raises(RuntimeError, match="暂未接入：beijing"):
-        adapters.search_books("beijing", "三体")
+        adapters.search_books("cn", "beijing", "三体")
+
+
+def test_unsupported_region_gets_clear_message():
+    with pytest.raises(RuntimeError, match="该地区暂未接入：jp"):
+        adapters.search_books("jp", "shanghai", "三体")

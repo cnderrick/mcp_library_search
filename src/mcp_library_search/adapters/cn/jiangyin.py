@@ -13,9 +13,9 @@ bookInfoTable、馆藏 JSON 接口全部同构，单租户自建站点无需 cur
 from dataclasses import dataclass
 from types import SimpleNamespace
 
-from .. import interlib
-from ..interlib import InterlibConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import interlib
+from ...interlib import InterlibConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
     city="jiangyin", name_cn="江阴市图书馆", base_url="http://libopac.jylib.cn:9090"

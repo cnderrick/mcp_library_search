@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import dalian
+from mcp_library_search.adapters.cn import dalian
 from mcp_library_search.adapters.base import validate_search_page
 
 _FIX = Path(__file__).parent / "fixtures" / "dalian"

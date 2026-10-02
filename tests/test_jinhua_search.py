@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import jinhua
+from mcp_library_search.adapters.cn import jinhua
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "jinhua"
 _SEARCH = (_FIXTURES / "search.html").read_text(encoding="utf-8")

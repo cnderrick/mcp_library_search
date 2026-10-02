@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-from mcp_library_search.adapters import shenzhen
+from mcp_library_search.adapters.cn import shenzhen
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "shenzhen"
 _SEARCH = json.loads((_FIXTURES / "search.json").read_text(encoding="utf-8"))

@@ -1,6 +1,6 @@
 """上海适配器：vendor 的 LibraryClient → base.py 统一模型。"""
-from ..vendor.shanghai_library.library_client import LibraryClient
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ...vendor.shanghai_library.library_client import LibraryClient
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _client = LibraryClient()
 

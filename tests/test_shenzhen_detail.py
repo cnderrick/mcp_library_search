@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import shenzhen
+from mcp_library_search.adapters.cn import shenzhen
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "shenzhen"
 _DETAIL = json.loads((_FIXTURES / "detail.json").read_text(encoding="utf-8"))

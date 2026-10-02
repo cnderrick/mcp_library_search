@@ -11,9 +11,9 @@
 from dataclasses import dataclass
 from types import SimpleNamespace
 
-from .. import interlib
-from ..interlib import InterlibConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import interlib
+from ...interlib import InterlibConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
     city="wenzhou", name_cn="温州市图书馆", base_url="https://opac3.wzlib.cn"

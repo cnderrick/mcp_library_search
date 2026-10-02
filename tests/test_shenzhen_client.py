@@ -1,6 +1,6 @@
 import pytest
 
-from mcp_library_search.adapters import shenzhen
+from mcp_library_search.adapters.cn import shenzhen
 
 
 def test_get_sets_headers_and_parses_json(monkeypatch):

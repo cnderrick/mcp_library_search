@@ -9,7 +9,7 @@ import urllib.parse
 
 import pytest
 
-from mcp_library_search.adapters import dalian
+from mcp_library_search.adapters.cn import dalian
 from mcp_library_search.adapters.base import validate_book_detail, validate_holdings
 
 _FIX = Path(__file__).parent / "fixtures" / "dalian"

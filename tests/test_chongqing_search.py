@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from mcp_library_search.adapters import chongqing
+from mcp_library_search.adapters.cn import chongqing
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "chongqing"
 _SESSION = (_FIXTURES / "session.html").read_text(encoding="utf-8")

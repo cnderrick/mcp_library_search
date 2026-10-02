@@ -28,7 +28,7 @@ import urllib.request
 from dataclasses import dataclass, replace
 from types import SimpleNamespace
 
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _NAME = "无锡市新吴区图书馆"
 _BASE = "http://wxxqlsp.xw.i-wnd.cn:8013"

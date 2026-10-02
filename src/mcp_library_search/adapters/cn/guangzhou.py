@@ -1,25 +1,19 @@
-"""台州适配器：图创 Interlib 家族（pro2018 新版模板变体）。
+"""广州适配器：图创 Interlib 家族。
 
-台州市图书馆（https://opac.tzlib.cn:8182，全市通借网络）。HTTP 层、检索参数集、
-馆藏 JSON 与广州基准同构，全部直接复用家族；搜索页（libBookLi 模板）与详情页
-（bkTxt 左右两列模板）属 pro2018 模板代——家族自 2026-10-02 起内置该模板解析，
-本模块以 `InterlibConfig(pro2018=True)` 开关启用，不再自带本地解析副本。
-
-薄包装 + 契约测试兼容缝同广州/杭州：公开原语全部经由模块级 _client 取数，
+薄包装 + 契约测试兼容缝：公开原语全部经由模块级 _client 取数，
 契约测试（tests/test_adapter_contract.py）monkeypatch 的就是这个 _client，
-因此不能把三个原语写成对底层函数的直连委托——那样 mock 会落空、
-测试会真打图书馆网站。字段侦察依据 tests/fixtures/taizhou/NOTES.md。
+因此不能把三个原语写成对 interlib 函数的直连委托——那样 mock 会落空、
+测试会真打图书馆网站。
 """
 from dataclasses import dataclass
 from types import SimpleNamespace
 
-from .. import interlib
-from ..interlib import InterlibConfig
-from .base import BookDetail, BookSummary, Holding, SearchPage
+from ... import interlib
+from ...interlib import InterlibConfig
+from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
-    city="taizhou", name_cn="台州市图书馆", base_url="https://opac.tzlib.cn:8182",
-    pro2018=True,
+    city="guangzhou", name_cn="广州图书馆", base_url="https://opac.gzlib.org.cn"
 )
 
 
@@ -40,16 +34,14 @@ class _Holding:
 
 
 class _Client:
-    """把家族解析返回值包装成契约测试期望的 attribute 对象形态。"""
+    """把 interlib 家族返回值包装成契约测试期望的 attribute 对象形态。"""
 
     def search(self, keyword, page=1, limit=20):
-        # 家族 search_raw：pro2018 搜索解析 + 带连字符 ISBN 首搜为空时去连字符重试
-        r = interlib.search_raw(_CONFIG, keyword, page, limit)
+        r = interlib.search_books(_CONFIG, keyword, page=page, limit=limit)
         return SimpleNamespace(
             success=True,
             error="",
-            statistics={"total_results": r["total_results"], "page": page,
-                        "total_pages": r["total_pages"], "has_next": r["has_next"]},
+            statistics={k: r[k] for k in ("total_results", "page", "total_pages", "has_next")},
             # 家族 TypedDict 用 book_id，契约形态用 record_id，此处显式映射
             books=[SimpleNamespace(record_id=b["book_id"], title=b["title"],
                                    author=b["author"], publisher=b["publisher"],
@@ -59,13 +51,11 @@ class _Client:
         )
 
     def get_holdings(self, book_id):
-        # 馆藏 JSON 与广州完全同构，直接走家族原语（NOTES.md 实测）
         hs = interlib.get_holdings(_CONFIG, book_id, only_available=False)
         return [_Holding(**h) for h in hs]
 
     def get_book_detail(self, book_id):
-        d = interlib.get_book_detail(_CONFIG, book_id)
-        return SimpleNamespace(**d)
+        return SimpleNamespace(**interlib.get_book_detail(_CONFIG, book_id))
 
 
 _client = _Client()
@@ -75,7 +65,7 @@ def search_books(keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
     """按关键词搜索馆藏。上游报错抛 RuntimeError。"""
     result = _client.search(keyword=keyword, page=page, limit=limit)
     if not result.success:
-        raise RuntimeError(f"台州市图书馆搜索失败：{result.error}")
+        raise RuntimeError(f"广州图书馆搜索失败：{result.error}")
 
     books: list[BookSummary] = [
         {
@@ -114,7 +104,7 @@ def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
             "due_date": getattr(h, "due_date", "") or "",
         }
         # 契约测试要求已借出且带单册 item_id 时查归还时间；Interlib 的应还日期
-        # 已在馆藏 JSON 里解析（loanWorkMap.returnDate），真网 item_id 恒空不会走到这
+        # 已在馆藏 JSON 里解析（interlib.parser._holding_due_date），真网 item_id 恒空不会走到这
         if not available and getattr(h, "item_id", ""):
             item["due_date"] = _client.get_return_date(h.item_id)
         items.append(item)

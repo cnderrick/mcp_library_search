@@ -11,7 +11,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from mcp_library_search.adapters import qingdao
+from mcp_library_search.adapters.cn import qingdao
 from mcp_library_search.adapters.base import (
     validate_book_detail, validate_holdings, validate_search_page,
 )
