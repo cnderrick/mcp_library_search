@@ -1,0 +1,20 @@
+HTTP/1.1 200 OK
+Server: ******
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Date: Fri, 02 Oct 2026 06:53:48 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Set-Cookie: PHPSESSID=q3q27jnn8t56c6f48a6j17ers6; path=/; HttpOnly
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=63072000; includeSubDomains
+Referrer-Policy: strict-origin
+Content-Security-Policy: font-src 'self';
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Download-Options: value
+X-Permitted-Cross-Domain-Policies: value
+Set-Cookie: HttpOnly;Secure;SameSite=Lax;
+

@@ -1,0 +1,114 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<a href=/_ascnlink_k></a>
+<head>
+    <title>南京市公共图书馆书目全文检索馆藏书目全文检索 v1.0</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="keywords" content="汇文,区域联合馆藏书目全文检索,图书检索,marc检索">
+	<meta http-equiv="description" content="汇文系统区域联合馆藏书目全文检索">
+	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" >
+	<link rel="stylesheet" href="../css/ui.all.css" charset="utf-8" media="all" />
+	<link rel="shortcut icon" href="../img/favicon.ico" />     
+	
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/ui.core.js"></script>
+	<script type="text/javascript" src="../js/ui.tabs.js"></script>
+	<script type="text/javascript" src="../js/highlighter.js"></script>
+  </head>
+<body>
+  <div id="header" >
+   <span style="font-size:12px; color:green;" >
+	
+	 	<a href="login.action"><font color="red">登录</font> </a>
+	 
+	</span>
+  </div>
+
+	
+
+
+<div id="searchmain">
+	<table cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td width=25% rowspan="2">
+		<a href="/uopac/s/search.action"><img title="区域联合馆藏书目全文检索" src="../img/logo.gif"/></a></td>
+	</tr>
+	<tr valign="top">
+	    <td style="background:transparent" >
+	    <form id="search_result" name="sForm" action="/uopac/s/search_result.action" method="get">
+			<table id="sTable" cellspacing="1" cellpadding="0"  align="center">
+				<tbody>
+					<tr>
+						<td><input id="q" type="text" value="9787229100605" name="q" maxlength="80" size="50"/></td>
+						<td><input type="submit" size="30" value=" 检 索 " /></td>
+					</tr>
+					<tr>
+						 <td colspan="2" align=left nowrap><font size=-1><span style="text-align:left">
+							 <input  type="radio" name="meta" value="20"  >任意
+							 <input  type="radio" name="meta" value="11"  >题名
+							 <input  type="radio" name="meta" value="12"  >责任者
+							 <input  type="radio" name="meta" value="15"  >主题词
+							 <input  type="radio" name="meta" value="13"  >出版社
+							 <input  type="radio" name="meta" value="14" checked >ISBN
+							 <input  type="radio" name="meta" value="16"  >丛书名
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+
+</td>
+	    <td></td>
+	</tr>
+	</table>
+</div>
+
+     
+	
+
+<div id="main">
+
+
+  <div id="found">有 <font color="red">0</font> 项符合<font color="red">"9787229100605"</font>的查询结果</div>
+  <div style="padding:20px ; color:red ; font-size:15px; ">无匹配结果，请更改检索词后重新检索</div>
+
+
+
+    
+</div>
+
+<script type="text/javascript">
+<!--
+	MarkHighLight(document.getElementById("right_content"),'9787229100605');
+
+	function showHoldings(id,school,url,marcNo){
+		$("#loading").show();
+		 $.ajax({
+		   type: "GET",
+		   url: '/uopac/s/ajax_holding.action',
+		   data: "url="+ url + "&type=simple",
+		   success: function(msg){
+		     $("#lend_" + id + "_" + school+"_"+ marcNo).html(msg);
+		     $("#loading").hide();
+		   }
+		 });
+	}
+-->
+</script>
+	
+	<div id="footer">
+		<div id="copy">南京市公共图书馆书目全文检索 &nbsp;&nbsp;版权所有©2012 <a href="http://www.libsys.com.cn" target='_blank' class="blue">江苏汇文软件有限公司</a>
+		</div>
+	</div>
+</body>
+</html> 

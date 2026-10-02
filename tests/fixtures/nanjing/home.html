@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+
+﻿<!-- 主菜单 -->
+  <title>金陵图书馆书目检索系统</title>
+<link type="text/css" rel="stylesheet" href="../tpl/css/style.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/mylib.css" />
+<link type="text/css" rel="stylesheet" href="../tpl/css/ui-lightness/jquery-ui.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/font-awesome.css">
+
+
+<script  type="text/javascript" src="../tpl/js/jquery.js"></script>
+<script  type="text/javascript" src="../tpl/js/jquery-ui.js"></script>
+<script  type="text/javascript" src="../tpl/js/highlighter.js"></script>
+
+
+<script type="text/javascript" src="../tpl/js/md5.js"></script>
+<script type="text/javascript" src="../tpl/js/base64.js"></script>
+</head>
+<body>
+<div id="header_opac">
+	<h1 class="header_opac_img">
+		<div class="header_opac_logo">
+    	金陵图书馆书目检索系统<br>
+			<p>Online Public Access Catalogue</p>
+
+		</div>
+	</h1>
+	<div class="header_right header_right_top">
+		<p class="header_right_font">       </p>
+		<p style="margin-top: 60px;" class="header_right_font">
+			<select class="option" name="locale" size="1" style="width: 60px;"
+				onchange="changeLocale(this.value);">
+      		<option value='zh_CN' selected>中文</option><option value='en_US'>English</option>          </select>
+         | <a href="../opac/book_cart.php">暂存书架(<span id="bookcartCount">0</span>)
+			</a> | <font color="blue"></font> <a href="../reader/login.php" style="color:#ff0000;">登录</a></p>
+	</div>
+</div>
+
+<div id="menubar">
+	<ul id="menu_top">
+    		  	<li><a href="../opac/search_adv.php" target="_self">书目检索</a></li>
+	  		  	<li><a href="../top/top_lend.php" target="_self">热门推荐</a></li>
+	  		  	<li><a href="../browse/cls_browsing.php" target="_self">分类浏览</a></li>
+	  		  	<li><a href="../newbook/newbook_cls_browse.php" target="_self">新书通报</a></li>
+	  		  	<li><a href="../peri/peri_nav_e.php" target="_self">期刊导航</a></li>
+	  		  	<li><a href="../asord/asord_hist.php" target="_self">读者荐购</a></li>
+	  		  	<li><a href="../shelf/curriculum_browse.php" target="_self">学科参考</a></li>
+	  		  	<li><a href="../info/info_guide.php" target="_self">信息发布</a></li>
+	  		  	<li><a class="menu_top_on" style="color: #6C5B23;"
+			href="../reader/redr_info.php" target="_self">我的图书馆</a></li>
+	  		  	 	  		 	<li><a href="http://uopac.jllib.cn/uopac/" target="_blank">馆际借阅</a></li>
+	  		  	        <div class="clear"></div>
+	</ul>
+</div>
+<div id="submenu">
+	        <div class="clear"></div>
+</div>
+
+<script type="text/javascript"> 
+    function changeLocale(obj) {  
+    	$.ajax({
+			 url: "../locale/ajax_change_locale.php",
+ 			  data: "lan="+obj,
+ 			  type: 'POST',
+			  success: function(html){
+// 				  setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+// 					  window.location.reload(true);//页面刷新
+// 					  },500);
+				  window.location.reload(true);
+			  }
+		}); 
+    }
+    
+</script>
+		
+ 
+
+<script type="text/javascript">
+    $(function(){
+		$("#epa").load("ajax_ep.php");
+	});
+
+function encode(){
+	//var _str = document.getElementById("passwd").value;
+	var _str = document.getElementsByName("passwd")[0].value;
+	//var staticchars = "PXhw7UT1B0a9kQDKZsjIASmOezxYG4CHo5Jyfg2b8FLpEvRr3WtVnlqMidu6cN";
+    //var staticchars = document.getElementById("sca").value;
+	var staticchars = document.getElementsByName("sca")[0].value;
+    //var staticchars = "";
+	var encodechars = "";
+    if(staticchars !='') {
+	for(var i=0;i<_str.length;i++){
+		var num0 = staticchars.indexOf(_str[i]);
+		if(num0 == -1){
+		    var code = _str[i].charCodeAt(0);
+            code = code.toString(16);
+		}else{
+		    var code = staticchars[(num0+3)%62];
+            code = code.charCodeAt(0).toString(16);
+		}
+		var num1 = parseInt(Math.random()*62,10);
+		var num2 = parseInt(Math.random()*62,10);
+		encodechars += staticchars[num1]+code+staticchars[num2];
+	}
+	//document.getElementById("passwd").value = encodechars;
+	document.getElementsByName("passwd")[0].value = encodechars;
+    }
+	return true;
+}
+
+</script>
+
+<div id="mainbox">
+   <div id="container">
+      <div id="left_tab">
+      <h5 class="box_bgcolor"><strong>登录我的图书馆</strong></h5>
+      	<form action="redr_verify_phone.php" name="frm_login" method="POST" onsubmit="return encode()">
+        <table width="95%" border="0" cellpadding="3" cellspacing="1">
+          <tr>
+            <td width="150" align="right">用户名： </td>
+            <td colspan="2" align="left"><input class="input" name="number" type="text" size="20" style="width:150px" autocomplete="off" ></td>
+          </tr>
+          <tr>
+            <td height="40" align="right">密码： </td>
+            <td colspan="2" align="left"><input class="input" name="passwd" type="password" size="20" style="width:150px" autocomplete="new-password" ></td>
+          </tr>
+          		  
+          <tr>
+            <td height="40" align="right">手机号后4位： </td>
+            <td width="160" align="left" valign="middle"><input class="input" name="captcha" type="text" size="20" style="width:150px" placeholder="手机号后4位">
+            
+			</td>
+          </tr>          
+
+                    <tr>
+            <td align="right">&nbsp;</td>
+            <td colspan="2" align="left"><!--<input  type="Radio" name="select" value="cert_no" checked="checked" />证件号-->
+						<input type="Radio" name="select" value="bar_no"  checked="checked" />借书证号/一卡通号
+                                                      <input  type="Radio" name="select" value="cert_no" />证件号 </td>
+          </tr>
+          <span id="epa"></span>
+		  <tr>
+		  	<td></td>
+		  	<td></td>
+		  	<td></td>
+		  </tr>
+          <tr>
+            <td align="right">&nbsp;</td>
+            <td colspan="2" align="left"><input class="btn btn-danger" type="submit"   value="登录"><input type="hidden" name="returnUrl" value="" />
+            <!--<input class="btn" type="button" value="密码重置" onclick="javascript:location.href='get_pwd.php' " />-->			</td>
+          </tr>
+		  <tr>
+		  	<td></td>
+		  	<td colspan="2"><font id="fontMsg" color="red"></font></td>
+	  	  </tr>
+        </table>
+      	<input type="hidden" name="csrf_token" value="K6O7UQT9IO" />
+        </form>  	 
+      </div>
+       
+      
+      <div id="right_con">
+          <h5>提示</h5>
+          <div id="content_note">
+            <ul>
+               <li >选择证件号登录在用户名栏请输入办理读者证时填写的身份证号、驾驶证号、护照号、军官证号、士兵证号等证件信息</li>
+
+               <li style="list-style-type: none;"><br/></li>
+               <li>密码在进入系统后可由读者重新设置</li>
+               <li style="list-style-type: none;"><br/></li>
+               <li>初始密码为身份证最后6位（不含X，末位为X的则为X前的6位数字）</li>
+               <li style="list-style-type: none;"><br/></li>
+	        <li>如遇验证信息有误，请携带有效证件至办证处重置</li>
+            </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+   </div>	
+   <div class="clear"></div>		  	 
+</div>
+<div id="footer"><div id="copy"><p> 金陵图书馆&nbsp;&nbsp; OPAC v5.6.1.240429  &nbsp;&nbsp;</p><p>馆藏地前标注*为行业（企业）自建分馆，本馆普通读者证不能借阅该馆藏地文献</p><p>Authorized Use of Jinling Library,COPYRIGHT 1999-2015 JIANGSU HUIWEN SOFTWARE CO.,LTD All rights reserved.</p><p>金陵图书馆授权使用 版权所有 江苏汇文软件有限公司</p></div></div></body></html>

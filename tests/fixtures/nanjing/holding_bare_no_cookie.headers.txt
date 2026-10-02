@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 02 Oct 2026 07:14:20 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 6619
+Connection: keep-alive
+Keep-Alive: timeout=20
+Set-Cookie: JSESSIONID=4E15654E9970C8C7533B5672BDBA1326; Path=/uopac/; HttpOnly
+X-Frame-Options: SAMEORIGIN
+

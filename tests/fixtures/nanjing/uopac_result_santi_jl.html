@@ -1,0 +1,758 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<a href=/_ascnlink_k></a>
+<head>
+    <title>南京市公共图书馆书目全文检索馆藏书目全文检索 v1.0</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="keywords" content="汇文,区域联合馆藏书目全文检索,图书检索,marc检索">
+	<meta http-equiv="description" content="汇文系统区域联合馆藏书目全文检索">
+	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" >
+	<link rel="stylesheet" href="../css/ui.all.css" charset="utf-8" media="all" />
+	<link rel="shortcut icon" href="../img/favicon.ico" />     
+	
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/ui.core.js"></script>
+	<script type="text/javascript" src="../js/ui.tabs.js"></script>
+	<script type="text/javascript" src="../js/highlighter.js"></script>
+  </head>
+<body>
+  <div id="header" >
+   <span style="font-size:12px; color:green;" >
+	
+	 	<a href="login.action"><font color="red">登录</font> </a>
+	 
+	</span>
+  </div>
+
+	
+
+
+<div id="searchmain">
+	<table cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td width=25% rowspan="2">
+		<a href="/uopac/s/search.action"><img title="区域联合馆藏书目全文检索" src="../img/logo.gif"/></a></td>
+	</tr>
+	<tr valign="top">
+	    <td style="background:transparent" >
+	    <form id="search_result" name="sForm" action="/uopac/s/search_result.action" method="get">
+			<table id="sTable" cellspacing="1" cellpadding="0"  align="center">
+				<tbody>
+					<tr>
+						<td><input id="q" type="text" value="三体" name="q" maxlength="80" size="50"/></td>
+						<td><input type="submit" size="30" value=" 检 索 " /></td>
+					</tr>
+					<tr>
+						 <td colspan="2" align=left nowrap><font size=-1><span style="text-align:left">
+							 <input  type="radio" name="meta" value="20" checked >任意
+							 <input  type="radio" name="meta" value="11"  >题名
+							 <input  type="radio" name="meta" value="12"  >责任者
+							 <input  type="radio" name="meta" value="15"  >主题词
+							 <input  type="radio" name="meta" value="13"  >出版社
+							 <input  type="radio" name="meta" value="14"  >ISBN
+							 <input  type="radio" name="meta" value="16"  >丛书名
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+
+</td>
+	    <td></td>
+	</tr>
+	</table>
+</div>
+
+     
+	
+
+<div id="main">
+
+  <div id="found">
+  	<span id="loading" style="color:red;float:left;display:none;" ><img src="../img/loading.gif" />加载中...</span>
+  	有 <font color="red">23</font> 项符合<font color="red">"三体"</font>的查询结果
+  </div>
+
+
+
+
+	<div id="left_content">
+    	<div class="left_content_line">
+          <h4>缩小检索范围</h4>
+          <dl>
+				<dt>
+					<storng>成员馆</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=JL">金陵图书馆</a>(23)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=QX">栖霞区图书馆</a>(7)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=PK">浦口区图书馆</a>(7)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=LH2T">江北新区图书馆</a>(6)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=LH">六合区图书馆</a>(6)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=XWC">玄武区少年儿童图书馆</a>(4)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=GC">高淳区图书馆</a>(4)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=JY">建邺区图书馆</a>(3)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=JN">江宁区图书馆</a>(3)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=GL">鼓楼区图书馆</a>(3)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=YH">雨花台区图书馆</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=QH">秦淮区图书馆</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_libs&fval=LSH">溧水区图书馆</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>责任者</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97">刘慈欣著</a>(8)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E6%9D%8E%E6%B7%BC%E8%91%97">李淼著</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E8%B5%B5%E7%AB%8B%E4%BC%9F%E8%91%97">赵立伟著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E8%A9%B9%E7%90%B0%EF%BC%8C%E8%B7%AF%E5%A7%9C%E6%B3%A2%E8%91%97">詹琰，路姜波著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E6%B1%AA%E5%AE%B6%E8%A8%B8%E7%BC%96%E8%91%97">汪家訸编著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E6%AE%B5%E6%88%90%E6%A1%82%E8%91%97">段成桂著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E6%9D%8E%E5%B9%BF%E7%9B%8A%EF%BC%8C%E9%99%88%E9%A2%80%E7%BC%96">李广益，陈颀编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E5%AE%9D%E6%A0%91%E8%91%97">宝树著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E5%94%90%E5%8B%87%E4%B8%BB%E7%BC%96">唐勇主编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E5%8D%8E%E6%B8%85%E6%B3%A2%EF%BC%8C%E5%8D%8E%E7%AB%8B%E4%BA%BA%E7%BC%96%E8%91%97">华清波，华立人编著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E5%85%AB%E8%B7%AF%E8%91%97">八路著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%E4%B8%89%E4%BD%93%E5%AE%87%E5%AE%99%EF%BC%8C%E6%9C%AA%E6%9D%A5%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%B1%80%EF%BC%8C%E6%A3%AE%E9%9B%A8%E6%96%87%E5%8C%96%E8%81%94%E5%90%88%E7%BC%96%E8%91%97">三体宇宙，未来事务管理局，森雨文化联合编著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%28%E6%B8%85%29%E9%A1%A7%E7%82%8E%E6%AD%A6%E6%92%B0+%E7%BF%81%E6%96%B9%E7%B6%B1%E6%92%B0+%E5%AD%AB%E6%98%9F%E8%A1%8D%E8%A8%82">(清)顧炎武撰 翁方綱撰 孫星衍訂</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_author&fval=%28%E6%B8%85%29%E5%AD%AB%E6%98%9F%E8%A1%8D%E6%92%B0+%28%E6%BC%A2%29%E8%94%A1%E9%82%95%E6%92%B0">(清)孫星衍撰 (漢)蔡邕撰</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版年</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2020">2020</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2019">2019</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2017">2017</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2016">2016</a>(5)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2015">2015</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2012">2012</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2010">2010</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2008">2008</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=2007">2007</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=1997">1997</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=1986">1986</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_year&fval=1961">1961</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版社</storng>
+				</dt>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E9%87%8D%E5%BA%86%E5%87%BA%E7%89%88%E7%A4%BE">重庆出版社</a>(9)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E7%A7%91%E5%AD%A6%E5%87%BA%E7%89%88%E7%A4%BE">科学出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6%E6%96%87%E7%8C%AE%E5%87%BA%E7%89%88%E7%A4%BE">社会科学文献出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E7%94%9F%E6%B4%BB%C2%B7%E8%AF%BB%E4%B9%A6%C2%B7%E6%96%B0%E7%9F%A5%E4%B8%89%E8%81%94%E4%B9%A6%E5%BA%97">生活·读书·新知三联书店</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E6%B9%96%E5%8D%97%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">湖南科学技术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E6%B5%99%E6%B1%9F%E4%BA%BA%E6%B0%91%E7%BE%8E%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">浙江人民美术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E6%B2%B3%E5%8C%97%E5%B0%91%E5%B9%B4%E5%84%BF%E7%AB%A5%E5%87%BA%E7%89%88%E7%A4%BE">河北少年儿童出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E6%9C%BA%E6%A2%B0%E5%B7%A5%E4%B8%9A%E5%87%BA%E7%89%88%E7%A4%BE">机械工业出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E6%97%B6%E4%BB%A3%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE">时代文艺出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E5%B9%BF%E9%99%B5%E4%B9%A6%E7%A4%BE">广陵书社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E5%A4%A9%E6%B4%A5%E4%BA%BA%E6%B0%91%E5%87%BA%E7%89%88%E7%A4%BE">天津人民出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E5%9B%9B%E5%B7%9D%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">四川科学技术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E5%95%86%E5%8B%99%E5%8D%B0%E6%9B%B8%E9%A4%A8">商務印書館</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E5%90%B3%E7%B8%A3%E6%9C%B1%E8%A8%98%E6%A6%AE%E6%A7%90%E5%BB%AC%E5%AE%B6%E5%A1%BE">吳縣朱記榮槐廬家塾</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&amp;fkey=facet_libs&amp;fval=JL&fkey=facet_publisher&fval=%E4%B8%8A%E6%B5%B7%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">上海科学技术出版社</a>(1)
+				</dd>
+				
+			</dl>			
+        </div>
+    </div>
+    
+    <div id="right_content">
+        	
+              <div class="searchcontent" >
+                      <h2>1.<a target="_blank" href="/uopac/s/detail.action?id=4386216">三体问题 </a></h2>
+                      <p style=color:#666;>汪家訸编著 / 科学出版社  /  / 1961</p>
+                      <p>　　〓=[讠禾](he) </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>2.<a target="_blank" href="/uopac/s/detail.action?id=5440164">三体艺术插画集 </a></h2>
+                      <p style=color:#666;>三体宇宙，未来事务管理局，森雨文化联合编著 / 浙江人民美术出版社  / 9787534073304 / 2019</p>
+                      <p>　　由三体宇宙授权出版 主编：常金 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>3.<a target="_blank" href="/uopac/s/detail.action?id=5135812">《三体》导读 </a></h2>
+                      <p style=color:#666;>詹琰，路姜波著 / 天津人民出版社  / 9787201108926 / 2016</p>
+                      <p>　　本书意在对《三体》三部曲进行全方位简化解读，在对科学知识和技术名字进行扫盲的时候，着重介绍其效用及对情节发展的推动，同时，更注重挖掘原作品的人文意义。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>4.<a target="_blank" href="/uopac/s/detail.action?id=5146248">中国新三板年度报告 2016年 </a></h2>
+                      <p style=color:#666;>唐勇主编 / 机械工业出版社  / 9787111564836 / 2017</p>
+                      <p>　　本书梳理和总结了2016年新三板市场的发展情况，以国家“十三五”发展战略规划的重要产业为切入点，精选了优质的新三板企业进行案例分析，以此展示出新三板区别于其他证券市场的特性。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>5.<a target="_blank" href="/uopac/s/detail.action?id=4658131">三体钢笔字技法 </a></h2>
+                      <p style=color:#666;>华清波，华立人编著 / 上海科学技术出版社  / 753234519X / 1997</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>6.<a target="_blank" href="/uopac/s/detail.action?id=5115893">《三体》的X种读法 </a></h2>
+                      <p style=color:#666;>李广益，陈颀编 / 生活·读书·新知三联书店  / 9787108059642 / 2017</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>7.<a target="_blank" href="/uopac/s/detail.action?id=5473597">特种兵学校 23 三体战舰 </a></h2>
+                      <p style=color:#666;>八路著 / 河北少年儿童出版社  / 9787559530820 / 2020</p>
+                      <p>　　阳刚少年书系 学会生存成为强者 科技特战系列 强军梦系列主题图书 本书讲述了：乌云部队在海上建立了秘密基地，他们研制并装备了一艘神奇的“三体战舰”，并以此为平台在海上胡作非为。猛虎小队和飞禽小队奉命追踪三体战舰，并与乌云部队展开一场前所未有的海空大战。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>8.<a target="_blank" href="/uopac/s/detail.action?id=5430783">《三体》中的物理学 </a></h2>
+                      <p style=color:#666;>李淼著 / 湖南科学技术出版社  / 9787571001483 / 2019</p>
+                      <p>　　本书是一本特别的科普书。物理学家李淼以刘慈欣的科幻小说《三体》为起点，介绍了令人耳目一新的现代物理学和现代宇宙学知识。宇宙的生死，世界的实在性和不确定性，乃至人的自由意志，在李淼的笔下妙趣横生；智子、水滴、二向箔、思想钢印等《三体》中的超级神器，他也一一分析了能否真正在现实中出现。《三体》涉及的种种科学问题，你都可以在这本书中找到全威的答案，从而深入地领略《三体》的意趣；如果你还没有读过《三体》，这本书也会带你进入一个奇异的新世界，让你充分感受科学的魅力，惊叹物理学为人类提供的可能性。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            雨花台区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>9.<a target="_blank" href="/uopac/s/detail.action?id=5079421">三体X·观想之宙 典藏版 </a></h2>
+                      <p style=color:#666;>宝树著 / 重庆出版社  / 9787229100636 / 2016</p>
+                      <p>　　《三体》系列外传 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>10.<a target="_blank" href="/uopac/s/detail.action?id=5556501">三体 图文版 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229151003 / 2020</p>
+                      <p>　　本书讲述了：“文化大革命”如火如荼进行的同时，军方探寻外星文明的绝密计划“红岸工程”取得了突破性进展。但无人料到，地球文明向宇宙发出的第一声啼鸣彻底改变了人类的命运。四光年外，为了生存挣扎的“三体文明”接收到了地球发来的信息。在运用超技术锁死地球人的基础科学之后，三体人庞大的宇宙舰队开始向地球进发。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>11.<a target="_blank" href="/uopac/s/detail.action?id=3811953">《三体》中的物理学 </a></h2>
+                      <p style=color:#666;>李淼著 / 四川科学技术出版社  / 9787536480681 / 2015</p>
+                      <p>　　英文并列题名取自于封面 本书从近年来在世界范围内产生广泛影响的科幻小说《三体》切入，展现了宇宙的生死、世界的实在性和不确定性，乃至人的自由意志；同时分析了智子、水滴、二向箔、思想钢印等《三体》中诸多超级神器在未来出现的可能性。 大众读者。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            建邺区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            高淳区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江宁区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>12.<a target="_blank" href="/uopac/s/detail.action?id=3911408">三体 典藏版 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229100605 / 2016</p>
+                      <p>　　科学世界唯一官方权威典藏版本 国内科学界发生巨大变故，有某种思想在动摇着科学家的观念，不少科学家相继自杀，而他们都有个共同点――加入了“科学边界”这个学术组织。其组织后面是个更大的阴谋，大到足以摧毁整个人类世界，国际世界大为震撼，军队严阵以待，但敌人竟是外星文明，对他们而言，人类不过是虫子。女科学家叶文洁偶然间发现外星文明正准备入侵地球，以为人类终于有了突破性发展的机会，于是，她成了地球叛军的领袖。最终，这一切都成为一出悲剧，人类依靠自身的力量开始了与外星人的抗争。这是一个关于生存和死亡；忠诚和背叛的故事。作者以宏大的设定和天马行空的想象力构建了一个似真非真的未来世界，两大文明激烈冲突引领读者对人性和道德进行反思。 大众读者。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            鼓楼区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            高淳区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            雨花台区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            玄武区少年儿童图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>13.<a target="_blank" href="/uopac/s/detail.action?id=4450876">古今名联铅笔、圆珠笔、钢笔字帖 正楷、行草、隶书三体字 </a></h2>
+                      <p style=color:#666;>段成桂著 / 时代文艺出版社  /  / 1986</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>14.<a target="_blank" href="/uopac/s/detail.action?id=5174691">地球往事 三体 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229042066 / 2012</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>15.<a target="_blank" href="/uopac/s/detail.action?id=3905165">三体 “地球往事”三部曲之一 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787536692930 / 2008</p>
+                      <p>　　中国科幻银河奖特别奖获奖作品 书脊上有英文并列题名 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>16.<a target="_blank" href="/uopac/s/detail.action?id=5032254">三体 典藏版 Ⅱ 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229100612 / 2016</p>
+                      <p>　　科学世界唯一官方权威典藏版本 故事紧接上一部的剧情，讲述了三体人准备入侵地球这四百年间的事情。为了代替被智子锁死已经无法进步的科技前端，地球人提出了“面壁计划”。四个来自不同国家，不同种族的人类被推上了峰尖浪口，他们被赋予了最大的权限以及一切犯罪行为的豁免权，这一切只为了欺骗那个比地球科技领先百余倍的外星文明，获得四百年后末日之战的胜利。然而，在智子的协助下，反地球组织ETO一一破解了面壁者们的计划。最后一位幸存的面壁者罗辑在叶文洁的提示下，无意中了解到宇宙文明的真相。于是他以此为条件，与三体人展开了谈判。末日之战就此拉开帷幕。 大众读者。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            鼓楼区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            玄武区少年儿童图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>17.<a target="_blank" href="/uopac/s/detail.action?id=5032476">三体 典藏版 Ⅲ 死神永生 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229100629 / 2016</p>
+                      <p>　　科学世界唯一官方权威典藏版本 在三体星系的外星文明对太阳系发起入侵后，人类在两个文明间建立了岌岌可危的战略平衡。但没过多久，三体文明突然对地球发起进攻，并迅速占领了地球。人类的远航飞船不得不飞向银河深处，文明的种子开始在新世界发芽。 大众读者。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            鼓楼区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            玄武区少年儿童图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>18.<a target="_blank" href="/uopac/s/detail.action?id=3514225">三体 Ⅱ 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787536693968 / 2008</p>
+                      <p>　　丛书主编：姚海军 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            溧水区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            建邺区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            高淳区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            栖霞区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            秦淮区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>19.<a target="_blank" href="/uopac/s/detail.action?id=4090582">三体 Ⅲ Ⅲ 死神永生 Dead end </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229030933 / 2010</p>
+                      <p>　　本书为中国当代科学幻想小说。讲述了：在三体星系的外星文明对太阳系发起入侵后，人类利用宇宙社会的黑暗森林原理，以可能导致两个文明同归于尽的宇宙坐标广播为威胁，在两个文明间建立了岌岌可危的战略平衡。掌握威摄控制的人被称为执剑人。在第一任执剑人罗辑老去，新的执剑人任意接替威摄控制后，三体文明突然对地球发起进攻。任意缺乏决断力，没能及时启动坐标广播，至使三体文明迅速占领地球。人类的远航飞船不得不飞向银河深处，文明的种子开始在新世界发芽。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                            浦口区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            建邺区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            高淳区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            六合区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江宁区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            江北新区图书馆 
+                          &nbsp;&nbsp;
+                        
+                            玄武区少年儿童图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>20.<a target="_blank" href="/uopac/s/detail.action?id=4713852">魏三體石經遺字攷 一卷 二卷，補遺一卷 刻本 </a></h2>
+                      <p style=color:#666;>(清)孫星衍撰 (漢)蔡邕撰 / 吳縣朱記榮槐廬家塾  /  / 清光緒10至11年(1884-1885)</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            金陵图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+          
+        
+
+
+<div id="num">
+	
+		<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&fkey=facet_libs&fval=JL&page=1" class="blue">首页</a>&nbsp;&nbsp;
+		
+		<b><font color=red>1</font>&nbsp; / &nbsp;<font color=black>2</font></b>&nbsp;
+		
+			<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&fkey=facet_libs&fval=JL&page=2" class="blue">下一页</a>&nbsp;&nbsp;
+		
+		<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&fkey=facet_libs&fval=JL&page=2" class="blue">末页</a>
+	 
+</div>
+    </div>
+    <div class="clear" ></div>
+
+    
+</div>
+
+<script type="text/javascript">
+<!--
+	MarkHighLight(document.getElementById("right_content"),'三体');
+
+	function showHoldings(id,school,url,marcNo){
+		$("#loading").show();
+		 $.ajax({
+		   type: "GET",
+		   url: '/uopac/s/ajax_holding.action',
+		   data: "url="+ url + "&type=simple",
+		   success: function(msg){
+		     $("#lend_" + id + "_" + school+"_"+ marcNo).html(msg);
+		     $("#loading").hide();
+		   }
+		 });
+	}
+-->
+</script>
+	
+	<div id="footer">
+		<div id="copy">南京市公共图书馆书目全文检索 &nbsp;&nbsp;版权所有©2012 <a href="http://www.libsys.com.cn" target='_blank' class="blue">江苏汇文软件有限公司</a>
+		</div>
+	</div>
+</body>
+</html> 
