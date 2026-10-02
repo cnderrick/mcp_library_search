@@ -16,7 +16,7 @@
 | `probe_detail_notfound.json` | getWorkById 不存在 id 的探针 |
 | `probe_isbn.json` | pageList 任意词检索 ISBN 探针 |
 
-## 与调研笔记（docs/team/research/2026-10-02-spa-nblib-xwnd-zjlib.md）的出入
+## 与调研笔记（docs/team/research/2026-10-02-spa-nblib-xwnd-zjlib.md，本地存档不入库）的出入
 
 以本 NOTES 为准（实抓优先）：
 

@@ -4,28 +4,36 @@
 get_book_detail 三个原语（返回结构对齐 base.py 的 TypedDict，由契约测试强制），
 然后在本文件 _ADAPTERS 里注册一行。server 层与具体城市解耦。
 """
+from . import chengdu
 from . import chongqing
+from . import dalian
 from . import guangzhou
 from . import hangzhou
 from . import hefei
 from . import jiangyin
 from . import jinhua
 from . import nanjing
+from . import ningbo
 from . import shanghai
+from . import shaoxing
 from . import shenzhen
 from . import taizhou
 from . import tianjin
 from . import wenzhou
 
 _ADAPTERS = {
+    "chengdu": chengdu,
     "chongqing": chongqing,
+    "dalian": dalian,
     "guangzhou": guangzhou,
     "hangzhou": hangzhou,
     "hefei": hefei,
     "jiangyin": jiangyin,
     "jinhua": jinhua,
     "nanjing": nanjing,
+    "ningbo": ningbo,
     "shanghai": shanghai,
+    "shaoxing": shaoxing,
     "shenzhen": shenzhen,
     "taizhou": taizhou,
     "tianjin": tianjin,

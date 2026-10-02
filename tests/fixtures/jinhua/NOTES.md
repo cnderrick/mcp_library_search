@@ -4,7 +4,7 @@
 （UILAS 知识检索平台，ILAS 家族 HTML OPAC，Tomcat/JSP）。裸 IP，**仅 HTTP**——
 443 端口开放但证书已过期，别走 https。全程匿名零 cookie 实测可通（检索/翻页/详情
 均 200），无验证码、无登录墙；共 9 个实抓请求（间隔 ≥4.5 秒）未触发任何限频。
-解析器以本文件为准；与先期调研笔记（docs/team/research/2026-10-02-ilas-jinhua.md）
+解析器以本文件为准；与先期调研笔记（docs/team/research/2026-10-02-ilas-jinhua.md，本地存档不入库）
 的出入在文末专列。
 
 ## fixture 清单

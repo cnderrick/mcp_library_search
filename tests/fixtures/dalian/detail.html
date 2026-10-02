@@ -1,0 +1,1146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright 2000 - 2018 Sirsi Corporation. All rights reserved. - Defines the head  body of each page. -->
+
+<html lang="zh"  dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1;" />
+		
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+
+		
+
+		
+<!-- sirsi-data session-state is 5 -->
+  <title>馆藏显示
+    - 三体 Ⅲ 死神永生 专著 典藏版 刘慈欣著
+  </title>
+		
+
+		
+
+		<!-- Set the expiration date to the past so the page will always be reloaded -->
+		
+			<meta http-equiv="Expires" content="Sun, 1 Jan 1995 08:00:00 CST"/>
+		
+
+		
+			  <!-- Not the login page -->
+				
+
+					<!-- Set the refresh to do an EXIT right before the session times out. This will cause timed out sessions to automatically go back to the login/first page, ready for the next user. - Since there is no way to target the _top frame, cannot do this if any frames are used, else the refresh goes into the main frame. - Also, the URL below has to be a full URL, so cannot do this without using the HTTP_ADDRESS. -->
+
+					<meta http-equiv="refresh" content="840; URL=http://ykt.dl-library.net.cn/uhtbin/cgisirsi/?ps=19iKlapreY/DALIANLIB/X/58"/>
+					
+			
+
+			<script type="text/javascript">
+				setTimeout(function() { var pop = new myPop(); pop.popOut("您的登录会话已处于非活动状态一段时间了。 您将会在 60 秒的非活动状态后被自动退出本次会话。"); }, (840-60)*1000);
+			</script>
+		
+
+		<script type="text/javascript" src="/Js/prototype-1.6.1.js"></script>
+		<script type="text/javascript" src="/Js/scriptaculous.js"></script>
+		<script type="text/javascript" src="/Js/sirsidynix.js"></script>
+		<script type="text/javascript" src="/Js/datetimepicker.js"></script>
+
+		
+			
+				<script type="text/javascript" src="/Js/all-js-4-enriched-content.js"></script>
+			
+		
+
+		
+
+		<link rel="stylesheet" href="/Css/default/default.css" type="text/css" />
+
+		
+
+		
+			
+		
+
+		
+
+	</head>
+	<!-- if copies=0 or no holdings allowed, default tab to Catalog Record  -->
+	
+		
+			
+		
+	
+
+	<!-- Start the body of the document.  WARNING:  No comments are allowed inside of the body element's definition. - assign CSS Class of 'body_style' to tag -  If this is a download search results state (14, 62), then load the results in a new browser window to facilitate printing. -  If this is an Archive image view state (911), then open a new window to display the image in new window. -  To help prevent premature selection of a toolbar button (i.e., before the new toolbar is loaded), clear it when the page is unloaded. -->
+	<body onLoad="">
+
+	
+
+	<noscript>
+		Your browser does not support JavaScript and this application utilizes JavaScript to build content and provide links to additional information. You should either enable JavaScript in your browser settings or use a browser that supports JavaScript in order to take full advantage of this application.
+	</noscript>
+<!--  Copyright 2000 - 2016, Sirsi Corporation. All rights reserved. - Symphony Item View Page; State #5 -->
+<!--  Copyright (c) 1996 - 2010, SirsiDynix Form for starting a new session in a new window. -->
+
+<!-- By setting the "document.new_session.action" property to the URL for logging into a new session at the particular  page you want, a new window will be opened and a new WebCat session will be started automatically. Remember that many WebCat states are dependent on previous states, so only certain "cgi types" can be opened.
+
+Also, by setting the "document.new_session.new_gateway_db.value" property to a gateway database name, the new session will use that gateway instead of the user's default gateway. Note that the use of Javascript is required to submit this form. -->
+
+<form name="new_session" method="post" action="/uhtbin/cgisirsi/?ps=CHTe1RcGVc/DALIANLIB/0/57/49" target="new_session">
+	
+		<input type="hidden" name="user_id" value="WEBSERVER"/>
+		<input type="hidden" name="password" value=""/>
+	
+	<input type="hidden" name="new_gateway_db" value=""/>
+</form>
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Puts the top-of-page information common to all pages. -->
+<div id="header_container" class="header_container">
+      <a class="skipnav" href="#skipnav">跳过导航</a>  <a name="top"></a>
+  <div class="branding_container" >
+      <div class="branding">
+            <img border="0" src="/WebCat_Images/Chinese/Other/MiscD/LIBLOGO.gif" alt="大连地区网上联合目录查询系统" title="大连地区网上联合目录查询系统"/>
+      </div>
+      <div class="branding_subheading">
+         <!-- Print the gateway envn title if not blank -->
+          e-Library at ...
+          大连地区网上联合目录查询系统
+      </div>      
+	</div>
+  <div class="login_container">
+	   <!-- present language choices -->
+		  <div class="module_language_choices">
+<!-- Add the Language options -->
+  <!-- Suppress an option for the current language -->
+  <!-- Suppress an option for the current language -->
+    <a href="/uhtbin/cgisirsi/?ps=MHN5NAfasN/DALIANLIB/X/111/ENGLISH" title="English" target="_top"><img src="/WebCat_Images/Chinese/Other/MiscD/ENGLISH.gif" border=0 class="langicon" alt="English Language" title="English"/></a>
+      </div>
+
+			
+				<form name="loginform" method="post" action="/uhtbin/cgisirsi/?ps=EpNdVQ8jPS/DALIANLIB/X/303">
+			
+<!--  Copyright 2004 - 2016, Sirsi Corporation. All rights reserved.  - myProfile login or view myFavorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+	  <!-- only user ID is used if both on -->
+		<div class="user_name">
+			<label for="user_id">借阅证号码:</label>
+			<input class="user_name_input" type="text" name="user_id" id="user_id"  maxlength="20" value="" />
+		</div>
+	
+	 
+		<div class="password">
+			<label for="password">个人密码:</label>
+			<input class="password_input" type="password" name="password" id="password"  maxlength="25" value="" />
+		</div>  
+	
+	 
+	<input type="submit" value="Login to iLink" style="margin-left:7px;margin-right:4px" class="login_button"/>
+
+	
+
+	 
+
+
+
+			</form>
+	  
+	<!-- login form-->
+	 
+  </div>
+</div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Root Bar. -->
+<div id="header_menu_container" class="header_menu_container">
+  <h2>Navigation Menu</h2>
+  <ul class="menu">
+    <!-- display text with CSS instead -->
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=BfO68xAv3I/DALIANLIB/X/38/1/X/BLASTOFF" class="blastoff">
+       查询首页</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=2jkJzjHzTt/DALIANLIB/X/1/1168/X/BLASTOFF" class="rootbar">
+       我的账号</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=DGxybmyrCD/DALIANLIB/X/60/1182/X/BLASTOFF" class="rootbar">
+       </a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=ggklL3yAJ6/DALIANLIB/X/1/1188/X/BLASTOFF" class="rootbar">
+       地方文献</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=6MT9I5lKyK/DALIANLIB/X/1/1191/X/BLASTOFF" class="rootbar">
+       音乐图书馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=RrzoIgoO9S/DALIANLIB/X/1/1450/X/BLASTOFF" class="rootbar">
+       鲁迅路外文分馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=iJL4qNnsIg/DALIANLIB/X/1/1485/X/BLASTOFF" class="rootbar">
+       少儿分级阅读</a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+
+
+<script language="JavaScript" type="text/javascript">
+	setLocalizedValue("CREATE_A_LIST","Create a list before attempting to keep an item");
+</script>
+<!--  Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Item View page, state #5. -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=NA5GN1hqyX/DALIANLIB/X/2/7" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=1Kb6l2HCrb/DALIANLIB/X/2/7" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','full_details');
+    //]]>
+  </script>
+</li>
+	
+<li class="menu_link"><a  href="/uhtbin/cgisirsi/?ps=Fgzt4DAnaV/DALIANLIB/X/49" title="新的检索">新的检索</a></li>
+
+<!-- Backward button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'SCROLL^B'; document.item_view.submit()">后退</a></li>
+
+<!-- Forward button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'SCROLL^F'; document.item_view.submit()">向前</a></li>
+
+<!-- Cross Reference button -->
+
+<!-- Text Archive Button -->
+	
+<!-- View Options Button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'VOPTIONS'; document.item_view.submit()">查看选项</a></li>
+
+<!-- Capture Button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'CAPTURE'; document.item_view.submit()">打印或者以电子邮件邮寄保存的记录</a></li>
+
+
+<!-- hidden ebook processing -->
+
+  <!-- gateway's custom buttons -->
+
+
+
+
+
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=vR7UPQCsY8/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+
+<script language="javascript" type="text/javascript">
+  SdCommon.setPrefix('ptp');
+
+  SdEcValues.setParameter("ordinal"                      ,'1'                                                         );
+  SdEcValues.setParameter('isbn'                         ,'9787229100629'               );
+  SdEcValues.setParameter('use-syndetic-enhanced-content','0');
+  SdEcValues.setParameter('syndetics-base-url'           ,'http://www.syndetics.com/index.aspx?'           );
+  SdEcValues.setParameter('novelist-base-url'            ,'http://eit.ebscohost.com/'            );
+  SdEcValues.setParameter('syndetics-rel-path'           ,''                 );
+  SdEcValues.setParameter('novelist-rel-path'            ,''                 );
+  SdEcValues.setParameter('syndetics-client-code'        ,''        );
+  SdEcValues.setParameter('use-chili-enhanced-content'   ,'0'   );
+  SdEcValues.setParameter("language-name"                ,'CHINESE'                );
+  SdEcValues.setParameter('chilifresh-languages'         ,''         );
+  SdEcValues.setParameter("chilifresh-account"           ,''           );
+  SdEcValues.setParameter("chilifresh-profile"           ,'ALL '                   );
+  SdEcValues.setParameter("chilifresh-js-url"            ,'/Js/sd-ec-elibrary.js'                  );
+  SdEcValues.setParameter("defer-chili-data-load"        , ''       );
+  SdEcValues.setParameter('use-novelist-enhanced-content','0');
+  SdEcValues.setParameter('use-novelist-authors'         ,'0'             );
+  SdEcValues.setParameter('use-novelist-titles'          ,'1'              );
+  SdEcValues.setParameter('use-novelist-related'         ,'1'             );
+  SdEcValues.setParameter("novelist-prof"                ,''             );
+  SdEcValues.setParameter("novelist-pwd"                 ,''            );
+  SdEcValues.setParameter('show-content-regions'         ,''         );
+
+  SdEcValues.setParameter("down-gif"     ,'/WebCat_Images/Chinese/Other/MiscD/admin-icon-expand.png');
+  SdEcValues.setParameter("up-gif"       ,'/WebCat_Images/Chinese/Other/MiscD/admin-icon-collapse.png');
+  SdEcValues.setVariable ('webcat-url'   ,'/uhtbin/cgisirsi/?ps=Lt70Ev9Ku0/DALIANLIB'    );
+  SdEcValues.setParameter("session"      ,'X');
+  SdEcValues.setParameter('isbns'        ,'9787229100629');
+
+  SdEcValues.setParameter("contentcfg-author-bio", '');
+  SdEcValues.setParameter("contentcfg-review"    , ''    );
+  SdEcValues.setParameter("contentcfg-blreview"  , ''  );
+  SdEcValues.setParameter("contentcfg-chreview"  , ''  );
+  SdEcValues.setParameter("contentcfg-ljreview"  , ''  );
+  SdEcValues.setParameter("contentcfg-sljreview" , '' );
+  SdEcValues.setParameter("contentcfg-summary"   , ''   );
+  SdEcValues.setParameter("contentcfg-toc"       , ''       );
+
+  SdEcValues.setParameter("disp-content-author-bio", '1');
+  SdEcValues.setParameter("disp-content-review"    , '1'    );
+  SdEcValues.setParameter("disp-content-blreview"  , '1'  );
+  SdEcValues.setParameter("disp-content-chreview"  , '1'  );
+  SdEcValues.setParameter("disp-content-ljreview"  , '1'  );
+  SdEcValues.setParameter("disp-content-sljreview" , '1' );
+  SdEcValues.setParameter("disp-content-summary"   , '1'   );
+  SdEcValues.setParameter("disp-content-toc"       , '1'       );
+
+  SdEcValues.setTranslation("Author Notes"                 ,"作者传记");
+  SdEcValues.setTranslation("Booklist Review"              ,"Booklist Review");
+  SdEcValues.setTranslation("CHOICE Review"                ,"CHOICE Review");
+  SdEcValues.setTranslation("Library Journal Review"       ,"Library Journal Review");
+  SdEcValues.setTranslation("Publishers Weekly Review"     ,"Publishers Weekly Review");
+  SdEcValues.setTranslation("School Library Journal Review","School Library Journal Review");
+  SdEcValues.setTranslation("Table of Contents"            ,"目次");
+  SdEcValues.setTranslation("Summary"                      ,"概要");
+
+  SdEcValues.setTranslation("VIEW_ENRICHMENT","更多连结信息");
+  SdEcValues.setTranslation("to read more see \"A Look Inside\"","to read more see \"{VIEW_ENRICHMENT}\"");
+
+  SdEcValues.setTranslation("Click a title to expand (see) an article - Click the title again to contract (hide) the article","Click a title to expand (see) an article - Click the title again to contract (hide) the article");
+
+  SdEcValues.setTranslation("Author Read-alikes"    ,"Author Read-alikes")
+  SdEcValues.setTranslation("Feature Articles"      ,"Feature Articles")
+  SdEcValues.setTranslation("Curricular Connections","Curricular Connections")
+  SdEcValues.setTranslation("Author Biographies"    ,"Author Biographies")
+  SdEcValues.setTranslation("Recommended Reads"     ,"Recommended Reads")
+  SdEcValues.setTranslation("What We're Reading"    ,"What We're Reading")
+  SdEcValues.setTranslation("Award Winners"         ,"Award Winners")
+  SdEcValues.setTranslation("Other Articles"        ,"Other Articles")
+
+  SdEcValues.setTranslation("Similar Authors","Similar Authors")
+  SdEcValues.setTranslation("Similar Titles" ,"Similar Titles");
+  SdEcValues.setTranslation("Similar Loading","Loading...");
+  SdEcValues.setTranslation("Similar Nothing Found","Nothing similar found");
+  SdEcValues.setTranslation("Collapse Icon"  ,"Collapse Icon");
+  SdEcValues.setTranslation("Expand Icon"    ,"Expand Icon");
+</script>
+
+
+
+<div class="columns_container">
+	<div class="column pct75 details_left_column">
+		<form name="item_view" method="post" action="/uhtbin/cgisirsi/?ps=ikg6f88Aqh/DALIANLIB/X/13">
+
+			
+			<!-- Print any WEBIMAGE tags that should appear before the list of tags -->
+
+
+<!-- begin routine to discover/discern enrichment types for this item (also netLibrary, URL and DMA -->
+ <!-- counter for enr types that builds content in iB/iL -->
+ <!-- counter for enr types that open up a new window -->
+
+
+ <!-- show image links for URL or DMA tags (placed with enrichment) -->
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+       	
+
+<!-- end of disc_enrich.h -->
+<!-- end routine -->
+
+			<!-- Find appropriate call number to display from list of call numbers -->
+			
+			
+			
+				
+				
+				
+					
+					
+					
+					
+				
+			
+			<input type="hidden" name="first_hit" value="3"/>
+			<input type="hidden" name="last_hit" value="3"/>
+			<div class="content_container searchsum_hits">
+				<div class="content">
+					<p>
+						<!-- Print the message, if one exists (except for "volume does not exist",
+						"This item has been marked lost" and "This item is assumed lost") -->
+						
+
+						
+							
+								记录
+								3
+								of
+								862
+								检索词
+<!--  Copyright 2000 - 2017, Sirsi Corporation. All rights reserved. - e-Library Catalog Keyword search summary -->
+<!-- Print the search summary -->
+<strong>
+  题名
+    "三体"
+
+
+
+
+
+
+
+</strong>
+							
+						
+					</p>
+					<!-- View Options Button -->
+					
+						
+							<a class="display_options" href="javascript:document.item_view.form_type.value = 'VOPTIONS'; document.item_view.submit()">查看选项</a>
+						
+					
+				</div>
+			</div>
+			<div class="content_container item_details">
+				<div class="content">
+					<h3>Item Details</h3>
+					
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.signalEvent( "top-of-hit-list", {'hit-list-isbn-list' : ['9787229100629']} );
+						</script>
+<!--  Copyright (c)  2008 - 2010, SirsiDynix - Unicorn Hit Permanent Keep Button  -->
+
+<ul class="itemservices">
+
+
+	
+		
+			 
+			
+			
+				<li class="hit_list_keepremove">
+					<script language="javascript" type="text/javascript">
+						//<![CDATA[
+						put_keepremove_button('3305715', '选取','/WebCat_Images/Chinese/Other/MiscD','选取','/uhtbin/cgisirsi/?ps=TycEBjUCml/DALIANLIB','X','删除');
+						//]]>
+					</script>
+				</li>
+			
+		
+
+		
+	
+
+	 <!-- eLibrary configured with content -->
+
+
+	
+		<li id="rating" class='chili_review'></li>
+		<li class="hidden">
+			<script language="javascript" type="text/javascript">
+				SdEcPageInterface.populateContentRegion('rating','/Js/sd-detail-rating.xml',false);
+			</script>
+		</li>
+	
+
+	 <!-- BUYNOW -->
+
+	<!-- Only show the HOLD buttons if no E-BOOKs exist -->
+	
+		
+			
+				
+					 <!-- hold link for all copies -->
+				 
+			 <!-- hold icon -->
+		
+	
+
+	<!-- only use if LIKESEARCH type is not set to EXACT -->
+	
+		
+		
+<!--  Copyright (c) 2000 - 2010, SirsiDynix -  Related Search Button - These variables must be defined before including this file: - ENTRY_TYPE - tag entry type character to build the buttons for. - LINK_NAME - name of href link. -->
+
+
+
+
+
+                        <!-- Single term in tag -->
+
+
+
+
+
+
+   <li> <a class="related" href="/uhtbin/cgisirsi/?ps=WNskfYsYQx/DALIANLIB/X/18/XAU/XAUTHOR/%E5%88%98%E6%85%88%E6%AC%A3">查找该作者其它作品</a></li>
+
+
+
+		
+		
+<!--  Copyright (c) 2000 - 2010, SirsiDynix -  Related Search Button - These variables must be defined before including this file: - ENTRY_TYPE - tag entry type character to build the buttons for. - LINK_NAME - name of href link. -->
+
+
+
+
+
+                        <!-- Single term in tag -->
+
+
+
+
+
+
+   <li> <a class="related" href="/uhtbin/cgisirsi/?ps=tzqufmvhLL/DALIANLIB/X/18/XSU/XSUBJECT/%E7%A7%91%E5%AD%A6%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4+%E4%B8%AD%E5%9B%BD+%E5%BD%93%E4%BB%A3">查找本主题的其它作品</a></li>
+
+
+	
+
+	<!-- Find appropriate call number to display from list of call numbers -->
+
+	
+	
+		
+		
+			
+		
+	
+
+
+	<!-- Print call number browse search-->
+	
+		<li><a  href="/uhtbin/cgisirsi/?ps=WaHojVFj7v/DALIANLIB/X/19/I247.55^2F9275-PT/PLDLIB|NO|CLC">书架上邻近的馆藏</a></li>
+		 
+
+
+		 
+
+	
+
+</ul>
+ <!-- show tabbed view if suported by browser and the environment is configured to do so -->		
+	<ul id="detail-tabs-container" class="tabs_container pct70"> <!-- show tabs for the panel -->
+		<!--  Build this tab only copies exist -->
+		
+			<li class="detail_item_information">
+				
+					馆藏详细信息
+							
+			</li>
+		
+
+			<!-- do not display a look inside tab -->
+		
+
+		<li class="detail_marc_record"> 书名相关信息 </li>
+
+		
+			<!-- do not display related articles tab -->
+		
+
+		
+	</ul> <!-- end tabholder span -->
+ <!-- end conditional to show the tabs -->
+
+<ul class="tab_panels pct70 detail_page">
+	
+
+	
+		<li id="detail_item_information">
+			<h4>Bibliographic Information</h4>
+
+
+			
+
+<dl>
+	<dt class="title_label">题名</dt>
+	<dd class="title">
+		
+			 
+				三体 Ⅲ 死神永生 专著 典藏版 刘慈欣著
+			
+		
+
+		
+
+		
+
+		
+	</dd>
+
+	<dt class="author_label">著者</dt>
+	<dd class="author">
+		
+			 <!-- Print the author, if one exists -->
+				刘慈欣 (1963-) 著
+			
+		
+
+		
+		&nbsp;
+	</dd>
+	 <!-- extract requested bib data -->
+		
+			
+				<dt class="publisher_label">出版者:</dt>
+				<dd class="publisher">重庆出版社</dd>
+				
+			 <!-- Ju data -->
+		 <!-- iteminfo option1 -->
+
+		
+			 
+				<dt class="publishing_date_label">出版日期:</dt>
+				<dd class="publishing_date">2016</dd>
+				
+			 <!-- Jv data -->
+		 <!-- iteminfo option2 -->
+
+		
+			
+				<dt class="pages_label">面页册数:</dt>
+				<dd class="pages">566页</dd>
+				
+			 <!-- Jt data -->
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+		 <!-- iteminfo option1 -->
+
+		 <!-- iteminfo option2 -->
+
+		 <!-- iteminfo option3 -->
+	 <!-- list LT -->
+
+	 <!-- Print ISBN number, if exists -->
+		<dt class="isbn_label">ISBN:</dt>
+		<dd class="isbn">9787229100629</dd>
+		 
+
+	 <!--list_of_available/holdings -->
+		<dt class="copy_info_label">
+			
+				馆藏分布状况:
+				 
+		</dt>
+		<dd class="copy_info">
+			 <!-- show if catalog or call-num item view -->
+				
+					
+						
+							2 件馆藏在架上 普兰店分馆.<br/>
+						
+					
+				
+
+				
+					
+				
+			
+		</dd>
+		
+		<!-- Electre online resource link -->
+				
+</dl>
+
+<ul class="enriched_content">
+	<li class="enrichment_container">
+
+		<!-- dynamic content lookup -->
+		
+
+		<!-- Electre enriched content -->
+		
+		
+		  
+	</li>
+</ul> 
+
+<ul class="enrichment_container">
+	<li id="detail-item-content" class="enriched_content"></li>
+	<li>
+		<script language="javascript" type="text/javascript">
+			SdEcPageInterface.populateContentRegion('detail-item-content', '/Js/sd-detail-item-tab.xml', '');
+			SdEcPageInterface.populateContentRegion('detail-item-content', '', ''); 
+		</script>
+	</li>
+	<!-- container for the expansion of similar authors and titles -->
+	<ul>
+		<li id="ncdiv1" class="hidden">
+			<ul id="similar1" class="hidden"></ul>
+		</li>
+	</ul>
+	
+		<li id="detail-chili-content" class="chili_iframe"></li>
+		<li>
+			<script language="javascript" type="text/javascript">
+				SdEcPageInterface.populateContentRegion('detail-chili-content', '/Js/sd-detail-chili.xml', '');
+			</script>
+		</li>
+	
+</ul>
+
+<ul>
+	 <!-- show if catalog or call-num item view -->
+		
+			<li>
+<!-- check for the existence of MARC Holdings data -->
+
+			</li>
+
+			 <!-- show holdings -->
+				
+				<li>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Holdings and Orders for a Single Item View. -->
+<h5>Holdings</h5>
+<table border="0" cellpadding="0" cellspacing="0" id="display_holdings_table" title="The Holdings Table" summary="The Holdings Table contains all of the holdings for this item.">
+  <th colspan=3 class="enrichheader" align="center">馆藏</th>
+        <!-- holdings allowed -->
+        <!-- new library -->
+        <tr> <!-- Print library header line -->
+	   
+            <th class="holdingsheader" align="left">
+	   
+                普兰店分馆
+            </th>
+      <th class="holdingsheader" align="center">
+	   馆藏
+	  </th>
+	  <th class="holdingsheader" align="center">
+	   馆藏类型
+	  </th>
+      <th class="holdingsheader" align="center">
+	   馆藏位置
+	  </th>
+     </tr>
+     <!-- new library -->
+	
+     <tr>
+         <!-- Number of copies -->  <!-- Start new callnum -->
+      <td class="holdingslist">
+	   I247.55/9275-PT
+	  </td>
+
+	  <td class="holdingslist" align="center">
+	   2
+	  </td>
+      <td class="holdingslist" align="center">
+	   
+             流通图书
+      </td>
+          <td class="holdingslist" align="center">
+ 	  
+            普成人外借
+
+        </td>
+     </tr>
+
+    <!-- Boundwith holdings -->
+
+</table>
+				</li>
+			
+		
+
+		
+			
+		
+	
+	<li>
+<!--  Copyright (c)  2008 - 2010, SirsiDynix - Check for additional syndetic content  -->
+
+	</li>
+		
+		
+</ul>
+		</li>
+	
+	
+		<!-- do not display a look inside tab -->
+	
+
+	
+		<!-- do not display related articles tab -->
+	
+
+	<li id="detail_marc_record" style="display:none;">
+		<h4>MARC Record</h4>
+		 <!-- don't show the repeating bib info unless using single-item tabbed view -->
+			<div class="bibinfo"> <!-- displays, author, title, etc on all panels -->
+				 <!-- Print the title, if one exists -->
+					<strong>三体 Ⅲ 死神永生 专著 典藏版 刘慈欣著</strong>
+					
+
+
+					<br/>
+				
+
+				 <!-- Print the author, if one exists -->
+					刘慈欣 (1963-) 著<br/>
+				
+			</div> 	
+		
+		
+<a name="marc_data"></a>
+
+
+<!-- The View Unformatted and Regular Views have been separated b/c of an additional column that has to appear for the indicators. The first conditional is to check to show unformatted, then the tables are then constructed using the list code. -->
+ <!-- view formatted -->
+
+
+<!-- Print the tags -->
+<dl>
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    记录控制号:
+  </dt>
+  <dd class="viewmarctags">
+    008118824
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    记录版本标识:
+  </dt>
+  <dd class="viewmarctags">
+    20170123171126.0
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    ISBN:
+  </dt>
+  <dd class="viewmarctags">
+    978-7-229-10062-9 CNY48.00
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    作品语种:
+  </dt>
+  <dd class="viewmarctags">
+    chi
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    出版或制作国别:
+  </dt>
+  <dd class="viewmarctags">
+    CN 500000
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- "Likeable" tag -->
+
+  <dt class="viewmarctags">
+    题名与责任者:
+  </dt>
+  <dd class="viewmarctags">
+                        <!-- Single term in tag -->
+          <a href="/uhtbin/cgisirsi/?ps=81NCXUzsSQ/DALIANLIB/X/18/XU200/XTITLE/%E4%B8%89%E4%BD%93+san+ti+%E2%85%A2+%E6%AD%BB%E7%A5%9E%E6%B0%B8%E7%94%9F+%E4%B8%93%E8%91%97+%E5%85%B8%E8%97%8F%E7%89%88+%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97">三体 Ⅲ 死神永生 专著 典藏版 刘慈欣著</a>
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    出版发行项:
+  </dt>
+  <dd class="viewmarctags">
+    重庆 重庆出版社 2016
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    载体形态:
+  </dt>
+  <dd class="viewmarctags">
+    566页 21cm
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- "Likeable" tag -->
+
+  <dt class="viewmarctags">
+    丛编说明:
+  </dt>
+  <dd class="viewmarctags">
+                        <!-- Single term in tag -->
+          <a href="/uhtbin/cgisirsi/?ps=Sh3tiOPSCO/DALIANLIB/X/18/XU071/XSERIES/%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%B9%BB%E5%9F%BA%E7%9F%B3%E4%B8%9B%E4%B9%A6">中国科幻基石丛书 姚海军主编</a>
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- "Likeable" tag -->
+
+  <dt class="viewmarctags">
+    学科名称主题:
+  </dt>
+  <dd class="viewmarctags">
+                        <!-- Single term in tag -->
+          <a href="/uhtbin/cgisirsi/?ps=cmdQ6ad3u0/DALIANLIB/X/18/XU606/XSUBJECT/%E7%A7%91%E5%AD%A6%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4+%E4%B8%AD%E5%9B%BD+%E5%BD%93%E4%BB%A3">科学幻想小说 中国 当代</a>
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- Regular tag -->
+
+   <dt class="viewmarctags">
+     <!-- Regular tag -->
+    中图图书分类法类号:
+  </dt>
+  <dd class="viewmarctags">
+    I247.55
+  </dd>
+
+ <!-- Print inline webimage-type tag -->
+   <!-- "Likeable" tag -->
+
+  <dt class="viewmarctags">
+    个人名称—等同责任者:
+  </dt>
+  <dd class="viewmarctags">
+                        <!-- Single term in tag -->
+          <a href="/uhtbin/cgisirsi/?ps=DdtewryoaN/DALIANLIB/X/18/XU701/XAUTHOR/%E5%88%98%E6%85%88%E6%AC%A3">刘慈欣 (1963-) 著</a>
+  </dd>
+
+</dl><!--end of bib cell-->
+
+ <!-- Print any WEBIMAGE tags that should appear after the list of tags -->
+	
+  <div class="clear_all"></div>
+	</li>
+</ul> <!-- div container for content panels -->
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.signalEvent( "end-of-hit-list", {'hit-list-isbn-list' : ['9787229100629']} );
+						</script>
+					
+				</div>
+			</div>
+			<input type="hidden" name="form_type" value=""/>
+		</form>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - LC Category hidden search form for javascript to work. -->
+    <form name="lc_search_form" method="post" action="/uhtbin/cgisirsi/?ps=VyDQSFVLwU/DALIANLIB/X/5/5/69/1">
+      <input type="hidden" name="searchdata1" value=""/>
+      <input type="hidden" name="search_disp_data1" value=""/>
+    </form>
+    <form name="lc_return_form" method="post" action="/uhtbin/cgisirsi/?ps=rTxxxQAkdF/DALIANLIB/X/5/0/69/0">
+      <input type="hidden" name="searchdata1" value=""/>
+      <input type="hidden" name="sort_by" value=""/>
+    </form>
+	</div>
+	<div class="column pct25 details_right_column">
+		
+<!--  Copyright 2000 - 2017, Sirsi Corporation. All rights reserved. - Unicorn Other Searches -->
+
+<!-- when search field is not blank, assign term to ENGINE_TERM -->
+
+  <div class="content_container">
+    <div class="content">
+      </ul>
+    </div>
+  </div>
+
+			
+
+		
+		
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - LC Categories list page. -->
+		
+		
+			  
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Cross Reference "quick-view" box. This page file is processed by a SIRSI_Command for an So response. -->
+ <!-- if xref list present -->
+			
+		
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+	var myImage;
+	var origImage;
+	myImage = document.getElementById("detailsImage");
+	if (myImage != null)
+	{
+		origImage = document.createElement("img");
+		origImage.src = myImage.src;
+		if (origImage.height == 1 && origImage.width == 1) 
+		{
+			myImage.height = 1;
+			myImage.width = 1;
+			myImage.src = origImage.src;
+		}
+	}
+</script>
+
+<div class="bottom_buttons">
+<!--  Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Item View page, state #5. -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=PmIXM4Rk5A/DALIANLIB/X/2/7" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=IulMJxkft7/DALIANLIB/X/2/7" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','full_details');
+    //]]>
+  </script>
+</li>
+	
+<li class="menu_link"><a  href="/uhtbin/cgisirsi/?ps=LhvKqWMUMm/DALIANLIB/X/49" title="新的检索">新的检索</a></li>
+
+<!-- Backward button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'SCROLL^B'; document.item_view.submit()">后退</a></li>
+
+<!-- Forward button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'SCROLL^F'; document.item_view.submit()">向前</a></li>
+
+<!-- Cross Reference button -->
+
+<!-- Text Archive Button -->
+	
+<!-- View Options Button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'VOPTIONS'; document.item_view.submit()">查看选项</a></li>
+
+<!-- Capture Button -->
+  <li class="menu_link"><a  href="javascript:document.item_view.form_type.value = 'CAPTURE'; document.item_view.submit()">打印或者以电子邮件邮寄保存的记录</a></li>
+
+
+<!-- hidden ebook processing -->
+
+  <!-- gateway's custom buttons -->
+
+
+
+
+
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=vg4JV16uAR/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+</div>
+<div class="footer_container">
+  <!--  Copyright (c) 1996 - 2014, SirsiDynix - Copyright statement -->
+  <table border="0" cellpadding="3" cellspacing="0" width="100%" class="footer">
+   <tr>
+    <td align="left" valign="bottom" width="25%" class="footer">
+        <img src="/WebCat_Images/Chinese/Other/MiscD/sirsi_button.gif" alt="Powered by: SirsiDynix" border="0"/>
+    </td>
+      <td align="center" class="footer">
+        Search the library catalog on&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">Facebook</a>&nbsp;or on your&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">mobile phone</a>!
+      </td>
+    <td align="right" class="footer" width="25%" id="requiredCell"><!-- Display the description -->
+      <a name="bottom" href="#top">TOP</a>
+      <div id="feature">
+        <div id="required"></div>
+      </div>
+    </td>
+   </tr>
+  </table>
+</div>
+
+  <script language="JavaScript" type="text/javascript">
+    setLocalizedValue("PERMALINK","固定链接");
+    setLocalizedValue("TO_LINK","可从email,博客或其它网页中用以下的链接连接到当前的馆藏,列表,检索结果或页面.");
+    setLocalizedValue("CLOSE","关闭");
+    setLocalizedValue("PAGE_LINK","页面链接");
+    setLocalizedValue("NEW_TAB","在新选项卡中打开链接 ");
+  </script>
+
+</body>
+</html>
+
+

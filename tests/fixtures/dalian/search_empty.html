@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright 2000 - 2018 Sirsi Corporation. All rights reserved. - Defines the head  body of each page. -->
+
+<!-- 环境: WEBSERVER, 工作站的环境参数: 8 -->
+<!-- 服务器版本: 3.5.3.1.GA -->
+
+<html  lang="zh"  dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1;" />
+
+		
+		  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+
+		
+		
+<!-- sirsi-data session-state is 6 -->
+  <title>目录检索结果</title>
+		
+
+		
+
+		<!-- Set the expiration date to the past so the page will always be reloaded -->
+		
+			<meta http-equiv="Expires" content="Sun, 1 Jan 1995 08:00:00 CST"/>
+		
+
+		  <!-- Not the login page -->
+			
+
+				<!-- Set the refresh to do an EXIT right before the session times out. This will cause timed out sessions to automatically go back to the login/first page, ready for the next user. - Since there is no way to target the _top frame, cannot do this if any frames are used, else the refresh goes into the main frame. - Also, the URL below has to be a full URL, so cannot do this without using the HTTP_ADDRESS. -->
+
+				
+					
+						
+							<meta http-equiv="refresh" content="840; URL=http://ykt.dl-library.net.cn/uhtbin/cgisirsi/?ps=vXlWulW72u/DALIANLIB/X/58"/>
+							<script type="text/javascript">
+								setTimeout(function() { var pop = new myPop(); pop.popOut("您的登录会话已处于非活动状态一段时间了。 您将会在 60 秒的非活动状态后被自动退出本次会话。"); }, (840-60)*1000);
+							</script>
+						
+					
+				
+			
+		
+
+		<script type="text/javascript" src="/Js/prototype-1.6.1.js"></script>
+		<script type="text/javascript" src="/Js/scriptaculous.js"></script>
+		<script type="text/javascript" src="/Js/sirsidynix.js"></script>
+		<script type="text/javascript" src="/Js/datetimepicker.js"></script>
+
+		
+			<script type="text/javascript" src="/Js/getcontent.js"></script>
+		
+
+		
+
+		
+			<link rel="stylesheet" href="/Css/default/default.css" type="text/css" />
+		
+
+		
+
+		
+			
+		
+
+		
+
+	</head>
+	<!-- Start the body of the document.  WARNING:  No comments are allowed inside of the body element's definition. - assign CSS Class of 'body_style' to tag -  If this is a download search results state (14, 62), then load the results in a new browser window to facilitate printing. -  If this is an Archive image view state (911), then open a new window to display the image in new window. -  To help prevent premature selection of a toolbar button (i.e., before the new toolbar is loaded), clear it when the page is unloaded. -->
+	<body onLoad="">
+
+		
+
+		<noscript>
+		Your browser does not support JavaScript and this application utilizes JavaScript to build content and provide links to additional information. You should either enable JavaScript in your browser settings or use a browser that supports JavaScript in order to take full advantage of this application.
+		</noscript>
+
+
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - e-Library Browse List & Term Search List Page; State #6 -->
+<!--  Copyright (c) 1996 - 2010, SirsiDynix Form for starting a new session in a new window. -->
+
+<!-- By setting the "document.new_session.action" property to the URL for logging into a new session at the particular  page you want, a new window will be opened and a new WebCat session will be started automatically. Remember that many WebCat states are dependent on previous states, so only certain "cgi types" can be opened.
+
+Also, by setting the "document.new_session.new_gateway_db.value" property to a gateway database name, the new session will use that gateway instead of the user's default gateway. Note that the use of Javascript is required to submit this form. -->
+
+<form name="new_session" method="post" action="/uhtbin/cgisirsi/?ps=lVNbCwDSAO/DALIANLIB/0/57/49" target="new_session">
+	
+		<input type="hidden" name="user_id" value="WEBSERVER"/>
+		<input type="hidden" name="password" value=""/>
+	
+	<input type="hidden" name="new_gateway_db" value=""/>
+</form>
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Puts the top-of-page information common to all pages. -->
+<div id="header_container" class="header_container">
+      <a class="skipnav" href="#skipnav">跳过导航</a>  <a name="top"></a>
+  <div class="branding_container" >
+      <div class="branding">
+            <img border="0" src="/WebCat_Images/Chinese/Other/MiscD/LIBLOGO.gif" alt="大连地区网上联合目录查询系统" title="大连地区网上联合目录查询系统"/>
+      </div>
+      <div class="branding_subheading">
+         <!-- Print the gateway envn title if not blank -->
+          e-Library at ...
+          大连地区网上联合目录查询系统
+      </div>      
+	</div>
+  <div class="login_container">
+	   <!-- present language choices -->
+		  <div class="module_language_choices">
+<!-- Add the Language options -->
+  <!-- Suppress an option for the current language -->
+  <!-- Suppress an option for the current language -->
+    <a href="/uhtbin/cgisirsi/?ps=qHPwxPfeYV/DALIANLIB/X/111/ENGLISH" title="English" target="_top"><img src="/WebCat_Images/Chinese/Other/MiscD/ENGLISH.gif" border=0 class="langicon" alt="English Language" title="English"/></a>
+      </div>
+
+			
+				<form name="loginform" method="post" action="/uhtbin/cgisirsi/?ps=5pqCwy6MIp/DALIANLIB/X/303">
+			
+<!--  Copyright 2004 - 2016, Sirsi Corporation. All rights reserved.  - myProfile login or view myFavorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+	  <!-- only user ID is used if both on -->
+		<div class="user_name">
+			<label for="user_id">借阅证号码:</label>
+			<input class="user_name_input" type="text" name="user_id" id="user_id"  maxlength="20" value="" />
+		</div>
+	
+	 
+		<div class="password">
+			<label for="password">个人密码:</label>
+			<input class="password_input" type="password" name="password" id="password"  maxlength="25" value="" />
+		</div>  
+	
+	 
+	<input type="submit" value="Login to iLink" style="margin-left:7px;margin-right:4px" class="login_button"/>
+
+	
+
+	 
+
+
+
+			</form>
+	  
+	<!-- login form-->
+	 
+  </div>
+</div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Root Bar. -->
+<div id="header_menu_container" class="header_menu_container">
+  <h2>Navigation Menu</h2>
+  <ul class="menu">
+    <!-- display text with CSS instead -->
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=c3lIexWnPl/DALIANLIB/X/38/1/X/BLASTOFF" class="blastoff">
+       查询首页</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=bT39gPu8U3/DALIANLIB/X/1/1168/X/BLASTOFF" class="rootbar">
+       我的账号</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=xw8qsy8IIo/DALIANLIB/X/60/1182/X/BLASTOFF" class="rootbar">
+       </a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=DsyPxlj2LK/DALIANLIB/X/1/1188/X/BLASTOFF" class="rootbar">
+       地方文献</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=lntmD6i91M/DALIANLIB/X/1/1191/X/BLASTOFF" class="rootbar">
+       音乐图书馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=H1vSm2vJE6/DALIANLIB/X/1/1450/X/BLASTOFF" class="rootbar">
+       鲁迅路外文分馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=iOTlmRYDro/DALIANLIB/X/1/1485/X/BLASTOFF" class="rootbar">
+       少儿分级阅读</a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Buttons for Browse List and Term Search page -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=4qspp62NOx/DALIANLIB/X/2/14" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=lBg9o2Ho89/DALIANLIB/X/2/14" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','browse_list');
+    //]]>
+  </script>
+</li>
+
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=Kd7IoCLNdJ/DALIANLIB/X/49" title="新的检索">新的检索</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=iVOm0JWloT/DALIANLIB/X/7/B" title="后退">后退</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=xJEAyQrN6T/DALIANLIB/X/7/F" title="向前">向前</a></li>
+
+  <!-- gateway's custom buttons -->
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=LnHfUTpPaH/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+<div class="columns_container">
+<form name="item_view" method="post" action="/uhtbin/cgisirsi/?ps=Shr1LnDTmh/DALIANLIB/X/13">
+  <div class="column pct75">
+    <div class="content_container browse_list left_column">
+      <div class="content">
+        <ul class="hit_list">
+          <li>
+<!-- when search field is not blank, assign term to ENGINE_TERM -->
+<div class="hitstop">
+  <h3>
+    <!-- If "term" exists, then this is a Term Search page; else a Browse List -->
+        目录检索结果: 
+	  &nbsp;&nbsp;
+<!--  Copyright 2000 - 2017, Sirsi Corporation. All rights reserved. - e-Library Catalog Keyword search summary -->
+<!-- Print the search summary -->
+<strong>
+  题名
+    "zzz不存在书名qqq9527"
+
+
+
+
+
+
+
+</strong>
+  </h3>
+ </div>
+
+
+				  </li>
+            <li><strong>没找到所需文献--也许下面的清单对你有帮助</strong></li>
+					<li>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Generates the browse list from the "LB" list in the response. -->
+<!-- Loop through the hits, printing each -->
+<div class="searchsummary">
+&nbsp;
+</div>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #1">Browse Results #1</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				1.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=kpOq8TRycd/DALIANLIB/X/8/5701119/Zzzzz+%E4%B8%80+%E6%9C%AC+%E8%AE%B2%E8%BF%B0+%E7%9D%A1%E8%A7%89+%E7%9A%84+%E4%B9%A6">Zzzzz 一 本 讲述 睡觉 的 书</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #2">Browse Results #2</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				2.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=E7XttONBaX/DALIANLIB/X/8/1346036/Z+%E5%8F%98%E6%8D%A2">Z 变换</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #3">Browse Results #3</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				3.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=f8jlSDw55i/DALIANLIB/X/8/1331090/Z+%E5%8F%98%E6%8D%A2+%E6%96%B9%E6%B3%95+%E5%8F%8A+%E5%85%B8%E5%9E%8B+%E9%A2%98%E8%A7%A3+%E5%88%86%E6%9E%90">Z 变换 方法 及 典型 题解 分析</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #4">Browse Results #4</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				4.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=VYBfz6DLSn/DALIANLIB/X/8/1346084/Z-+%E5%8F%98%E6%8D%A2+%E4%B8%8E+%E6%8B%89+%E6%99%AE+%E6%8B%89+%E6%96%AF+%E5%8F%98%E6%8D%A2">Z- 变换 与 拉 普 拉 斯 变换</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #5">Browse Results #5</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				5.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=0EFkNC1BGG/DALIANLIB/X/8/3629602/Z+%E5%88%9B%E6%96%B0">Z 创新</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #6">Browse Results #6</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				6.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=amvsczrHQM/DALIANLIB/X/8/1475469/Z+%E7%9A%84+%E6%82%B2%E5%89%A7">Z 的 悲剧</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				3
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #7">Browse Results #7</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				7.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=HHHhtqSead/DALIANLIB/X/8/4158482/Z+%E7%9A%84+%E6%82%B2%E5%89%A7+z+de+bei+ju">Z 的 悲剧 z de bei ju</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #8">Browse Results #8</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				8.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=rTjE0T3vV7/DALIANLIB/X/8/194184/Z+%E9%AB%98+%E8%BE%BE">Z 高 达</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #9">Browse Results #9</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				9.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=szWCLWpLgJ/DALIANLIB/X/8/518253/Z+%E7%90%86%E8%AE%BA">Z 理论</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				5
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #10">Browse Results #10</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				10.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=e2bHDzgrLb/DALIANLIB/X/8/3926074/Z+%E6%B0%91%E5%8A%9E+%E5%9B%AD+%E5%9B%AD+%E6%9C%AC+%E8%AF%BE%E7%A8%8B+%E5%BC%80%E5%8F%91+%E7%9A%84+%E5%8F%99%E4%BA%8B+%E7%A0%94%E7%A9%B6">Z 民办 园 园 本 课程 开发 的 叙事 研究</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #11">Browse Results #11</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				11.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=FxacaqjxUk/DALIANLIB/X/8/5159173/Z+%E4%B8%96%E4%BB%A3+%E8%90%A5%E9%94%80">Z 世代 营销</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #12">Browse Results #12</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				12.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=WAH2TbQpaO/DALIANLIB/X/8/3129026/Z+%E5%85%88%E7%94%9F+%E5%92%8C+%E4%BB%96+%E7%9A%84+%E8%AE%BF%E5%AE%A2+%E4%BB%AC">Z 先生 和 他 的 访客 们</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #13">Browse Results #13</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				13.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=sd6SJ7KoBv/DALIANLIB/X/8/5578635/Z+%E6%98%9F+%E6%8E%A2%E9%99%A9+%E5%9B%A2">Z 星 探险 团</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				3
+			</dd>
+		</dl>
+	</li>
+</ul>
+
+<div class="searchsum_container_bottom">
+&nbsp;
+</div>
+
+
+					</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="column pct25 right_column">
+  </div>
+  </form>
+</div>
+<div class="bottom_buttons">  
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Buttons for Browse List and Term Search page -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=UIhmwQBrrx/DALIANLIB/X/2/14" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=nctv4ceyfA/DALIANLIB/X/2/14" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','browse_list');
+    //]]>
+  </script>
+</li>
+
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=C6NDARzRGT/DALIANLIB/X/49" title="新的检索">新的检索</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=PJkIfEb8B1/DALIANLIB/X/7/B" title="后退">后退</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=ObKsyeW8dY/DALIANLIB/X/7/F" title="向前">向前</a></li>
+
+  <!-- gateway's custom buttons -->
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=SH1D4YJM0U/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+</div>
+
+
+<div class="footer_container">
+  <!--  Copyright (c) 1996 - 2014, SirsiDynix - Copyright statement -->
+  <table border="0" cellpadding="3" cellspacing="0" width="100%" class="footer">
+   <tr>
+    <td align="left" valign="bottom" width="25%" class="footer">
+        <img src="/WebCat_Images/Chinese/Other/MiscD/sirsi_button.gif" alt="Powered by: SirsiDynix" border="0"/>
+    </td>
+      <td align="center" class="footer">
+        Search the library catalog on&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">Facebook</a>&nbsp;or on your&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">mobile phone</a>!
+      </td>
+    <td align="right" class="footer" width="25%" id="requiredCell"><!-- Display the description -->
+      <a name="bottom" href="#top">TOP</a>
+      <div id="feature">
+        <div id="required"></div>
+      </div>
+    </td>
+   </tr>
+  </table>
+</div>
+
+  <script language="JavaScript" type="text/javascript">
+    setLocalizedValue("PERMALINK","固定链接");
+    setLocalizedValue("TO_LINK","可从email,博客或其它网页中用以下的链接连接到当前的馆藏,列表,检索结果或页面.");
+    setLocalizedValue("CLOSE","关闭");
+    setLocalizedValue("PAGE_LINK","页面链接");
+    setLocalizedValue("NEW_TAB","在新选项卡中打开链接 ");
+  </script>
+
+</body>
+</html>
+
+
