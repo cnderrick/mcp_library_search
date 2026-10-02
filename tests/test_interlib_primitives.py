@@ -28,6 +28,17 @@ def test_search_books_maps_to_contract(monkeypatch):
     assert page["page"] == 1
     assert page["total_results"] == 2763
     assert page["books"][0]["book_id"].isdigit()
+    # 契约形态不带 isbn（内部字段只出现在 search_raw）
+    assert "isbn" not in page["books"][0]
+
+
+def test_search_raw_exposes_isbn_for_merge(monkeypatch):
+    from mcp_library_search.interlib import search_raw
+
+    monkeypatch.setattr(_client, "get", lambda cfg, path, params=None: _SEARCH)
+    r = search_raw(_CFG, "活着", page=1, limit=10)
+    assert r["total_results"] == 2763
+    assert r["books"][0]["isbn"] == "978-986-507-471-5"
 
 
 def test_search_books_wraps_errors(monkeypatch):

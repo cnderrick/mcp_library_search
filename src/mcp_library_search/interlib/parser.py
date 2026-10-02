@@ -12,6 +12,10 @@ _PUB_YEAR_RE = re.compile(r"出版日期\s*[:：]?\s*((?:19|20)\d{2})")
 _TOTAL_RE = re.compile(r"检索到\s*[:：]?\s*([\d,]+)\s*条")
 _TOTAL_PAGES_RE = re.compile(r"共\s*(\d+)\s*页")
 _ISBN_RE = re.compile(r"[\d\-]{10,}")
+# 条目后随的 expressServiceTab div（bookmeta 的兄弟节点）带 ISBN 属性，
+# 作内部字段供天津三源 ISBN 归并；不进 BookSummary 契约
+_EXPRESS_ISBN_RE = re.compile(
+    r'express_bookrecno="(\d+)"[^>]*?express_isbn="([^"]*)"')
 _YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
 
@@ -94,6 +98,7 @@ class _SearchParser(HTMLParser):
             "publisher": self._cur.get("publisher", ""),
             "publish_year": m.group(1) if m else "",
             "availability_summary": "",
+            "isbn": self._cur.get("isbn", ""),
         })
         self._cur = None
 
@@ -102,13 +107,17 @@ def parse_search(html: str) -> dict:
     """解析 Interlib 搜索页。
 
     返回 {"books": [{book_id,title,author,publisher,publish_year,
-    availability_summary}...], "total_results": int|None,
+    availability_summary,isbn}...], "total_results": int|None,
     "total_pages": int, "has_next": bool}。total_results 解析不到为 None；
-    total_pages 解析不到时保守取 1。
+    total_pages 解析不到时保守取 1。isbn 为内部字段（express_isbn 属性），
+    不进 BookSummary 契约。
     """
     p = _SearchParser()
     p.feed(html)
     p._finish_book()
+    isbns = {rec: isbn.strip() for rec, isbn in _EXPRESS_ISBN_RE.findall(html)}
+    for b in p.books:
+        b["isbn"] = isbns.get(b["book_id"], "")
     return {
         "books": p.books,
         "total_results": p.total_results,

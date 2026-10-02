@@ -47,17 +47,23 @@ def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> di
     return parser.parse_search(html)
 
 
-def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
-    """按关键字检索馆藏，返回统一分页结构。失败抛 RuntimeError（消息含中文馆名）。
+def search_raw(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> dict:
+    """检索并返回 parser 原始结构（books 条目含 isbn 内部字段）。
 
-    带连字符的 ISBN 在 marc 检索下命中不了（真网实测），首搜为空时
-    去连字符重试一次。
+    供天津三源 ISBN 归并使用；search_books 是它的契约形态包装。
+    带连字符的 ISBN 在 marc 检索下命中不了（真网实测），首搜为空时去连字符重试一次。
     """
     r = _search_once(cfg, keyword, page, limit)
     if not r["books"] and "-" in keyword:
         retry = _search_once(cfg, keyword.replace("-", ""), page, limit)
         if retry["books"]:
             r = retry
+    return r
+
+
+def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
+    """按关键字检索馆藏，返回统一分页结构。失败抛 RuntimeError（消息含中文馆名）。"""
+    r = search_raw(cfg, keyword, page, limit)
     return {
         "total_results": r["total_results"],
         "page": page,
