@@ -1,0 +1,88 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/jquery-1.2.6.js"></script>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#C5DBEC" class="table-line">
+	<tr align="center" bgcolor="#F5F8F9">
+	     <td ><strong>索书号</strong></td>
+	     <td ><strong>条码号</strong></td>
+	     <td ><strong>年卷期</strong></td>
+	     <td ><strong>校区</strong></td>
+	     <td ><strong>馆藏地</strong></td>
+	     <td ><strong>馆藏书刊状态</strong></td>
+	</tr>
+	<tr align="center" bgcolor="#FFFFFF">
+            <td width="10%" >J228.2/482</td>
+            <td width="15%" >240011191</td>
+            <td width="15%" ></td>
+            <td width="10%" >委托借阅</td>
+            <td width="20%" >网约书</td>
+            <td width="20%" ><font color=green>可借</font></td>
+         </tr>
+    <tr align="center" bgcolor="#FFFFFF">
+            <td width="10%" >J228.2/482</td>
+            <td width="15%" >240011188</td>
+            <td width="15%" ></td>
+            <td width="10%" >总馆</td>
+            <td width="20%" >少儿外借室</td>
+            <td width="20%" ><font color=green>可借</font></td>
+         </tr>
+    <tr align="center" bgcolor="#FFFFFF">
+            <td width="10%" >J228.2/482</td>
+            <td width="15%" >240011189</td>
+            <td width="15%" ></td>
+            <td width="10%" >总馆</td>
+            <td width="20%" >少儿外借室</td>
+            <td width="20%" >借出</td>
+         </tr>
+    <tr align="center" bgcolor="#FFFFFF">
+            <td width="10%" >J228.2/482</td>
+            <td width="15%" >240011190</td>
+            <td width="15%" ></td>
+            <td width="10%" >总馆</td>
+            <td width="20%" >少儿外借室</td>
+            <td width="20%" ><font color=green>可借</font></td>
+         </tr>
+    <tr align="left" bgcolor="#FFFFFF">
+		<td colspan="8" align="center">
+			可借 / 馆藏 (3 / 4) 
+			&nbsp;&nbsp;<a class="blue" target="_blank" href="http://opac.yzlib.cn:8080/api/itemgo.php?libCode=YZLIB&marc_no=0000984184&appid=uopac&time=1790953337089&sign=5ce08e1d664b004da641f60a0405c7cb" title="到书所在馆的OPAC查看具体信息">书所在馆OPAC查看</a>
+		</td>
+	</tr>
+	<tr align="left" bgcolor="#FFFFFF">
+		<td colspan="8" align="center">
+			不可申请：<font color="red">请先登录！</font></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	function applyClick(bookLib,id){
+		var item = $('input[@name=take_loca_'+bookLib+'][@checked]').val(); 
+		var itemnull = $('#take_loca_null').val();
+		
+		if(itemnull != undefined && itemnull != ""){
+			if(item == undefined || item == "")
+				item = itemnull;
+		}
+		
+		if( item == undefined || item == "" ){
+				alert('请先选择取书地!');
+				return;
+		}
+		
+		var data = "book_lib=" + bookLib + "&call_no=" + $("#call_no_" + bookLib).val() + "&take_loca=" 
+				   	+ item + "&id=" + id + "&time=" + new Date().getTime();
+		if($("#attachment").val() == "on")
+			data = data + "&attachment=1";
+			//alert(data);
+		if(confirm('确定申请此书?')){
+			$.ajax({
+			   type: "get",
+			   url: "prelend.action",
+			   data: data,
+			   success: function(msg){		   
+			     alert( msg.replace(/^\s+|\s+$/g,""));
+			   }
+			 });
+	    }		
+	}
+</script> 
+	

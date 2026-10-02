@@ -1,0 +1,179 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--<title>中心联合目录馆藏书目全文检索 v1.0</title>-->
+	<title>扬州市图书馆联盟馆藏书目检索 v1.0</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="keywords" content="汇文,区域联合馆藏书目全文检索,图书检索,marc检索">
+	<meta http-equiv="description" content="汇文系统区域联合馆藏书目全文检索">
+	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" >
+	<link rel="stylesheet" href="../css/ui.all.css" charset="utf-8" media="all" />
+	<link rel="shortcut icon" href="../img/favicon.ico" />     
+	
+	<script type="text/javascript" src="../js/jquery-1.2.6.js"></script>
+	<script type="text/javascript" src="../js/ui.core.js"></script>
+	<script type="text/javascript" src="../js/ui.tabs.js"></script>
+	<script type="text/javascript" src="../js/highlighter.js"></script>
+  </head>
+<body>
+  <div id="header" >
+   <span style="font-size:12px; color:green;" >
+	
+	 	<a href="login.action"><font color="red">登录</font> </a>
+	 
+	</span>
+  </div>
+
+	
+	
+<div id="searchmain">
+	<table cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td width=25% rowspan="2">
+		<a href="/uopac/s/search.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF"><img title="区域联合馆藏书目全文检索" src="../img/logo.gif"/></a></td>
+	</tr>
+	<tr valign="top">
+	    <td style="background:transparent" >
+	    <form id="search_result" name="sForm" action="/uopac/s/search_result.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF" method="get">
+			<table id="sTable" cellspacing="1" cellpadding="0"  align="center">
+				<tbody>
+					<tr>
+						<td><input id="q" type="text" value="9*7*8*7*5*3*3*9*7*4*0*2*2" name="q" maxlength="80" size="50"/></td>
+						<td><input type="submit" size="30" value=" 检 索 " /></td>
+					</tr>
+					<tr>
+						 <td colspan="2" align=left nowrap><font size=-1><span style="text-align:left">
+							 <input  type="radio" name="meta" value="20"  >任意
+							 <input  type="radio" name="meta" value="11"  >题名
+							 <input  type="radio" name="meta" value="12"  >责任者
+							 <input  type="radio" name="meta" value="15"  >主题词
+							 <input  type="radio" name="meta" value="13"  >出版社
+							 <input  type="radio" name="meta" value="14" checked >ISBN
+							 <input  type="radio" name="meta" value="16"  >丛书名
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+
+
+</td>
+	    <td></td>
+	</tr>
+	</table>
+</div>
+
+     
+	
+
+<div id="main">
+
+  <div id="found">
+  	<span id="loading" style="color:red;float:left;display:none;" ><img src="../img/loading.gif" />加载中...</span>
+  	有 <font color="red">1</font> 项符合<font color="red">"9*7*8*7*5*3*3*9*7*4*0*2*2"</font>的查询结果
+  </div>
+
+
+
+
+	<div id="left_content">
+    	<div class="left_content_line">
+          <h4>缩小检索范围</h4>
+          <dl>
+				<dt>
+					<storng>成员馆</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF?q=9*7*8*7*5*3*3*9*7*4*0*2*2&amp;meta=14&amp;page=1&fkey=facet_libs&fval=YZLIB">扬州市图书馆</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>责任者</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF?q=9*7*8*7*5*3*3*9*7*4*0*2*2&amp;meta=14&amp;page=1&fkey=facet_author&fval=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97">刘慈欣原著</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版年</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF?q=9*7*8*7*5*3*3*9*7*4*0*2*2&amp;meta=14&amp;page=1&fkey=facet_year&fval=2024">2024</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版社</storng>
+				</dt>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF?q=9*7*8*7*5*3*3*9*7*4*0*2*2&amp;meta=14&amp;page=1&fkey=facet_publisher&fval=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE">浙江文艺出版社</a>(1)
+				</dd>
+				
+			</dl>			
+        </div>
+    </div>
+    
+    <div id="right_content">
+        	
+              <div class="searchcontent" >
+                      <h2>1.<a target="_blank" href="/uopac/s/detail.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF?id=780232">三体漫画 起源 地球大危机 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533974022 / 2024</p>
+                      <p>　　三体宇宙官方授权 其他题名取自于封面 汪淼是一位普通的物理学家，有一天，军队的人突然出现，把他带到一个叫“特殊作战中心”的地方，告诉他全球正在面临巨大危机，需要他打入敌方做“间谍”。汪淼不想帮忙，但在警官史强的“激将”下，他还是答应了。然而诡异的是，第二天他的眼前就开始出现只有他能看到的倒计时难道自己被敌人发现了？！ 少儿 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+          
+        
+
+
+<div id="num">
+	 
+</div>
+    </div>
+    <div class="clear" ></div>
+
+    
+</div>
+
+<script type="text/javascript">
+<!--
+	MarkHighLight(document.getElementById("right_content"),'9*7*8*7*5*3*3*9*7*4*0*2*2');
+
+	function showHoldings(id,school,url,marcNo){
+		$("#loading").show();
+		 $.ajax({
+		   type: "GET",
+		   url: '/uopac/s/ajax_holding.action;jsessionid=AC5ACAFA3A398B2900C7B2FA4AB121BF',
+		   data: "url="+ url + "&type=simple",
+		   success: function(msg){
+		     $("#lend_" + id + "_" + school+"_"+ marcNo).html(msg);
+		     $("#loading").hide();
+		   }
+		 });
+	}
+-->
+</script>
+	
+	<div id="footer">
+		<div id="copy">中心联合目录 &nbsp;&nbsp;版权所有：扬州市图书馆 &nbsp;&nbsp;技术支持：<a href="http://www.libsys.com.cn" target='_blank' class="blue">江苏汇文软件有限公司</a>
+		</div>
+	</div>
+</body>
+</html> 

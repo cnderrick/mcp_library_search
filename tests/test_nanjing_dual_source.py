@@ -10,6 +10,7 @@ import pytest
 from mcp_library_search.adapters import nanjing
 from mcp_library_search.aleph import Book, CaptchaError
 from mcp_library_search.aleph import client as aleph_client
+from mcp_library_search.uopac import client as uopac_client
 
 _JL_FIX = Path(__file__).parent / "fixtures" / "nanjing"
 _PROV_FIX = Path(__file__).parent / "fixtures" / "nanjing_prov"
@@ -24,13 +25,13 @@ def _prov(name):
 
 
 def _mock_jl(monkeypatch, text=None, error=None):
-    """金陵源：mock 模块级 _open。"""
-    def spy(req, timeout=90):
+    """金陵源：mock uopac 家族 HTTP 入口。"""
+    def spy(url, cfg):
         if error:
             raise error
         return text
 
-    monkeypatch.setattr(nanjing, "_open", spy)
+    monkeypatch.setattr(uopac_client, "get", spy)
 
 
 def _mock_prov(monkeypatch, text=None, error=None):
@@ -150,11 +151,11 @@ def test_search_captcha_punches_through_source_tolerance(monkeypatch):
 def test_detail_composite_takes_first_member(monkeypatch):
     calls = []
 
-    def spy(req, timeout=90):
-        calls.append(req.full_url)
+    def spy(url, cfg):
+        calls.append(url)
         return _jl("uopac_detail_jl.html")
 
-    monkeypatch.setattr(nanjing, "_open", spy)
+    monkeypatch.setattr(uopac_client, "get", spy)
     _mock_prov(monkeypatch, error=AssertionError("取首个成员（JL），不该打南图"))
     d = nanjing.get_book_detail("JL:4308867+NJL01:002912577")
     assert d["book_id"] == "JL:4308867+NJL01:002912577"   # 原样回传
@@ -180,9 +181,9 @@ def test_detail_prov_member_routes_aleph(monkeypatch):
 def test_holdings_composite_aggregates_both_sources(monkeypatch):
     seen = []
 
-    def jl_spy(req, timeout=90):
-        seen.append(req.full_url)
-        if "detail.action" in req.full_url:
+    def jl_spy(url, cfg):
+        seen.append(url)
+        if "detail.action" in url:
             return _jl("uopac_detail_jl.html")
         return _jl("uopac_holding_jl.html")
 
@@ -190,7 +191,7 @@ def test_holdings_composite_aggregates_both_sources(monkeypatch):
         seen.append(url)
         return _prov("holdings_MCBKL.html")
 
-    monkeypatch.setattr(nanjing, "_open", jl_spy)
+    monkeypatch.setattr(uopac_client, "get", jl_spy)
     monkeypatch.setattr(aleph_client, "get", prov_spy)
     hs = nanjing.get_holdings("JL:4308867+NJL01:002912577", only_available=False)
     assert any("uopac" in u for u in seen)
@@ -201,8 +202,8 @@ def test_holdings_composite_aggregates_both_sources(monkeypatch):
 def test_holdings_prov_url_carries_empty_params(monkeypatch):
     """南图 item-global 的 year/volume/sub_library 可留空但不能省略（否则错误页）。"""
     urls = []
-    monkeypatch.setattr(nanjing, "_open",
-                        lambda req, timeout=90: _jl("uopac_detail_jl.html"))
+    monkeypatch.setattr(uopac_client, "get",
+                        lambda url, cfg: _jl("uopac_detail_jl.html"))
 
     def spy(url, config=None, timeout=20):
         urls.append(url)

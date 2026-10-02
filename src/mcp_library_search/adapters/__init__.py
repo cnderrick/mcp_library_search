@@ -22,6 +22,7 @@ from . import taizhou
 from . import tianjin
 from . import wenzhou
 from . import wuxi
+from . import yangzhou
 
 _ADAPTERS = {
     "chengdu": chengdu,
@@ -42,6 +43,7 @@ _ADAPTERS = {
     "tianjin": tianjin,
     "wenzhou": wenzhou,
     "wuxi": wuxi,
+    "yangzhou": yangzhou,
 }
 
 _SUPPORTED = "、".join(sorted(_ADAPTERS))

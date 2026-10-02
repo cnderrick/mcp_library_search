@@ -59,9 +59,9 @@
 |  | 潮州 | — | ⛔ 不通 | http://www.czlib.net （潮州市图书馆） | — | — |
 |  | 揭阳 | — | ⛔ 不通 | http://www.jylib.net （揭阳市图书馆） | — | — |
 |  | 云浮 | — | ⛔ 不通 | http://www.yflib.net （云浮市图书馆） | — | — |
-| 江苏省 | 南京 | `nanjing` | ✅ 接入 | http://uopac.jllib.cn/uopac/s/search.action （金陵图书馆联合目录，金陵运营，覆盖金陵＋12 区馆） | 汇文 uopac 区域联合 OPAC（Struts2；金陵自研 PHP OPAC `opac.jllib.cn/opac/*` 整体登录墙不可用，勿当入口） | `adapters/nanjing.py`（双源合并：金陵 `JL:` ＋ 南图 `NJL01:`，天津口径；金陵源独立实现，原生数字 book_id 现带 `JL:` 前缀、裸数字走兼容垫片；源站偶发 chunked 停顿，已按 NOTES 口径重试一次） |
+| 江苏省 | 南京 | `nanjing` | ✅ 接入 | http://uopac.jllib.cn/uopac/s/search.action （金陵图书馆联合目录，金陵运营，覆盖金陵＋12 区馆） | 汇文 uopac 区域联合 OPAC（Struts2；金陵自研 PHP OPAC `opac.jllib.cn/opac/*` 整体登录墙不可用，勿当入口） | `uopac/` 家族 + `adapters/nanjing.py`（双源合并：金陵 `JL:` ＋ 南图 `NJL01:`，天津口径；金陵源解析走 uopac 家族、与扬州共用，原生数字 book_id 现带 `JL:` 前缀、裸数字走兼容垫片；源站偶发 chunked 停顿，已按 NOTES 口径重试一次） |
 |  |  |  | ✅ 接入 | https://opac.jslib.org.cn/F/ （南京图书馆/江苏省图） | Ex Libris ALEPH `u20_1 / www_f_chi`（外层 openresty 全局验证码墙；**按 host 独立封禁**，解南图不解天津） | `aleph/` 家族原语 ＋ `adapters/nanjing.py`（南图源，`item_global_all_params=True`）；2026-10-02 全链路实网跑通，库代码表·两处坑与家族兼容性证据见 `tests/fixtures/nanjing_prov/NOTES.md` |
-|  | 扬州 | — | 📋 计划 | http://ytlmopac.cn:8080/uopac/s/search.action | 汇文 Libsys/uopac（Struts2，已确认） | 🔍 可接入·待立项：站点的 JS AES Cookie 反爬（securitycam）经壳页静态分析为**静态挑战**——key/IV/密文全硬编码、cookie 恒定，纯 Python 可解（无需浏览器引擎）；实现与 ToS 评估待用户拍板 |
+|  | 扬州 | `yangzhou` | ✅ 接入 | http://ytlmopac.cn:8080/uopac/s/search.action （扬州市图书馆联盟联合目录，含邗江区馆等成员馆） | 汇文 Libsys/uopac（Struts2，与金陵同系统；全路径 securitycam 静态挑战） | `uopac/` 家族 + `adapters/yangzhou.py`；壳页 key/IV/密文为硬编码常量、cookie 恒定（解出值见 NOTES），故直接带常量 cookie，无需 JS 引擎；常量轮换由家族 HTTP 层认出壳页抛错，不静默空结果 |
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
 |  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `adapters/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
 |  | 苏州 | — | 🔍 待核验 | https://reader.szlib.com/opac （苏州图书馆） | — | — |
@@ -346,14 +346,20 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 - 同家族但未接入：国家图书馆（检索码 NLC01/NLC09，仅 HTTP；当日探测仍 empty reply）
   ——状态与依据见总览表。
 
-## 汇文 uopac 系（南京金陵源）
+## 汇文 uopac 家族（南京金陵源、扬州）
 
-南京城适配器 `adapters/nanjing.py` 的**金陵源**（另一源是南图 ALEPH，见上章）：
-独立实现（urllib **无状态**、无 Cookie——裸请求与带会话响应
-逐字节相同，实证），API 基址 http://uopac.jllib.cn （汇文「南京市公共图书馆书目全文
-检索」，金陵图书馆运营，成员馆＝金陵＋12 区馆），节流 4 秒/host，timeout 90 秒
-（源站 chunked 传输可停顿 ≥60 秒，重试即好——适配器据此重试一次网络类失败，
-HTTP 状态错误不重试）。
+家族模块 `uopac/`：`parser.py` 页面解析（检索结果／详情／馆藏表）、`client.py`
+HTTP 层（每 host 节流、网络类错误重试一次、可选 securitycam cookie）。城市差异
+只允许以 `UopacConfig` 带默认值的字段（quirk）新增，默认值即金陵行为。适配器：
+`adapters/nanjing.py`（金陵源＋南图 ALEPH 双源合并）、`adapters/yangzhou.py`（单源）。
+扬州接入时把金陵源一并家族化——两站实测逐项同构，避免两份会各自漂移的解析副本
+（同 Interlib／ALEPH 家族先例）。
+
+**金陵源**（另一源是南图 ALEPH，见上章）：API 基址 http://uopac.jllib.cn
+（汇文「南京市公共图书馆书目全文检索」，金陵图书馆运营，成员馆＝金陵＋12 区馆），
+**无状态、无 Cookie**（裸请求与带会话响应逐字节相同，实证），节流 4 秒/host，
+timeout 90 秒（源站 chunked 传输可停顿 ≥60 秒，重试即好——家族 HTTP 层据此重试
+一次网络类失败，HTTP 状态错误不重试）。
 
 - **金陵自研 PHP OPAC 整体登录墙**：`opac.jllib.cn/opac/*`（search_adv.php/search.php/
   presearch.php/top_lend.php）全部 `302 → ../reader/login.php?msg=login_to_continue`，
@@ -375,9 +381,30 @@ HTTP 状态错误不重试）。
   （due_date 归一提取，坏日期不猜），词表外保守不可借；单馆代理失败容忍不整败。
 - book_id＝`JL:` ＋ uopac 原生数字 id（源前缀由双源合并引入；**向后兼容**：0.4.0 已上线的
   裸数字 id 一律按 JL 成员路由，兼容垫片钉在 `tests/test_nanjing_dual_source.py`）。
-- 侦察结论见 `tests/fixtures/nanjing/NOTES.md`（「钉死事实一/二」节）。**汇文 uopac
-  防护逐站不同**：南京站无扬州站那套 JS AES 加密 Cookie（securitycam）反爬墙——同系统、
-  不同站点、防护不同，将来评估其他汇文站点必须逐站实测，不能按系统家族推定。
+- 侦察结论见 `tests/fixtures/nanjing/NOTES.md`（「钉死事实一/二」节）。
+
+### 扬州（`yangzhou`，汇文 uopac 家族）
+
+- **入口与范围**：http://ytlmopac.cn:8080/uopac/s/search.action ——页头「扬州市图书馆
+  联盟馆藏书目检索 v1.0」，与金陵**同系统、页面逐项同构**（检索页/详情页/馆藏表
+  全字段同形），解析直接走 `uopac/` 家族；单源，不做成员馆过滤（联盟联合口径）。
+  成员馆实测含扬州市图书馆（`YZLIB`）与扬州市邗江区图书馆（`YZHJQG`）等。
+- **securitycam 反爬＝静态挑战（与金陵的唯一差别）**：全路径要求 `securitycam`
+  cookie，缺 cookie 返回 ~2.5KB JS 壳页（HTTP 200，非 403）。壳页里 key／IV／密文
+  三个常量**硬编码且跨请求逐字节相同**（多次响应只有回显的 `location.href` 不同），
+  单块 AES-128-CBC 解出的 cookie 是固定值 → 直接写进 `UopacConfig.securitycam`，
+  **不引入 JS 引擎、不移植 slowAES**。常量若被轮换，家族 HTTP 层认出壳页即抛含馆名
+  的错误（不静默退化成空结果），重算一条命令，推导与命令见
+  `tests/fixtures/yangzhou/NOTES.md`。
+- **`;jsessionid=` 无关**：带不带都同样被壳页拦或不拦，真正的门是 cookie。
+- **状态词表**：实测只有「可借」「借出」两种裸词，**源站不给应还日期**——按家族
+  统一口径 `due_date` 恒空串（数据边界，非故障；与浙江图书馆源、金华源同理）。
+- **无索书号字段**：详情页同金陵，`call_number` 恒空串（中图法分类号不冒充）。
+- 侦察结论见 `tests/fixtures/yangzhou/NOTES.md`。
+
+**汇文 uopac 防护逐站不同**：同系统不代表同防护——南京站匿名全通，扬州站有
+securitycam 墙。将来评估其他汇文站点必须逐站实测，不能按系统家族推定；页面结构
+则相反（两站同构，可共用解析）。
 
 ## 自研 JSON 系（深圳、浙江图书馆）
 
@@ -424,6 +451,9 @@ HTTP 状态错误不重试）。
 
 - **检索**：`POST /search/`（尾斜杠；`bookSearch` 是开放平台端点、参数形态不同且
   长期「系统异常」，勿混用）body `{current,size,searchWay,sortWay,sortOrder,hasholding,q}`；
+  `hasholding` 是二值过滤，`1`（或缺省）＝只看有馆藏、`0`＝只看无馆藏，两集合不相交
+  （实测「三体」375 条 vs 32 条；前端「在馆记录」复选框默认勾选即 1）——**接入时曾误传 0**，
+  结果集被限死在聚合条目所在的空壳子集上，现已固定传 1；
   `searchWay` 词表与 Interlib 同款（marc=任意词/title/isbn/author）；响应无 `code` 字段
   即成功，`numFound` 为字符串。
 - **滑块风控**：`code ∈ {43001,-1,-402}` 触发前端滑块验证 → 程序化停手抛错，不硬闯。
@@ -432,8 +462,9 @@ HTTP 状态错误不重试）。
   聚合条目无本地书目（数据边界）。
 - **馆藏**：`POST /service/hold/pagelist {current,size:500,bibliosId}`，单册级；
   `statename` 原生状态词、`returnTime` 时间戳取日期段；一页 500 册封顶（前端同款）。
-- **数据边界**：联合目录含区县馆与城市书房（馆名带源站原值前缀）；聚合条目详情/馆藏
-  可能为空；检索条目 publisher/pubdate 常空（索引未富化，完整字段看详情）；老书目出版项
+- **数据边界**：联合目录含区县馆与城市书房（馆名带源站原值前缀）；聚合条目无本地书目
+  （详情「数据不存在」/馆藏 0 条），它们属「无馆藏」子集，`hasholding=1` 不返回；有馆藏
+  条目字段已富化，「无馆藏」子集的 publisher/pubdate 常为空串；老书目出版项
   可能缺失（出版年兜底取 100$a）；`classno` 是分类号不作索书号，单册完整索书号在馆藏 `callno`。
 
 ## InDigLib（重庆）
