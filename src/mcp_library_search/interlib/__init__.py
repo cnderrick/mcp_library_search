@@ -27,10 +27,11 @@ class InterlibConfig:
     city: str       # 城市标识，如 "guangzhou"
     name_cn: str    # 报错与文档用的中文名，如 "广州图书馆"
     base_url: str   # OPAC 站点根地址，不含末尾斜杠，如 "https://opac.gzlib.org.cn"
+    curlibcode: str = ""  # 多租户云托管馆按馆过滤（如 STC001），默认空 = 穗杭不带该参数
 
 
 def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
-    html = client.get(cfg, "/opac/search", {
+    params = {
         "q": keyword,
         "searchType": "standard",
         "searchWay0": "marc",
@@ -39,7 +40,10 @@ def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> di
         "sortWay": "score",
         "sortOrder": "desc",
         "page": page,
-    })
+    }
+    if cfg.curlibcode:
+        params["curlibcode"] = cfg.curlibcode
+    html = client.get(cfg, "/opac/search", params)
     return parser.parse_search(html)
 
 
