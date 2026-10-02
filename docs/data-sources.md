@@ -26,7 +26,7 @@
 |  | 扬州 | — | http://ytlmopac.cn:8080/uopac/s/search.action | 汇文 Libsys/uopac（Struts2，已确认） | 🔜 搁置：站点部署 JS AES 加密 Cookie 反爬（securitycam），所有路径仅返回 2.5KB JS 壳，需浏览器引擎或逆向才能接入（2026-10-02 调研，见 `docs/team/research/2026-10-02-uopac.md`） |
 |  | 江阴 | `jiangyin` | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
 |  | 无锡（新吴区） | — | http://wxxqlsp.xw.i-wnd.cn:8013/#/home | 图星 LibStar Find v3.2023.12（已确认；北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题，2026-10-02 实测）；站点恢复后可再评估，见 `docs/team/research/2026-10-02-spa-nblib-xwnd-zjlib.md` |
-| 辽宁省 | 大连 | `dalian`（拟） | 超星入口 http://www.dl.superlib.net/ （搁置）；**替代入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录，官网 www.dl-library.net.cn「馆藏资源」外链） | 超星 Superlib 区域模式（IP 白名单硬墙未变）；替代入口为 **SirsiDynix iLink**（`/uhtbin/cgisirsi/`，本仓库首见的新家族） | ✅ 复活调研成功·待接入拍板：三原语匿名可达——检索 POST 表单（searchdata1+srchfield1，「三体」题名实测 15+ 条）、详情/馆藏 HTML 内联；复杂度：ps token＋会话 cookie 每请求变、必须同 cookie jar（类重庆会话流程），全 HTML 无 JSON；与成都不同家族不能共享模块（2026-10-02 调研，见 `docs/team/research/2026-10-02-superlib-revival.md`） |
+| 辽宁省 | 大连 | `dalian` | 超星入口 http://www.dl.superlib.net/ （搁置）；**在用入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录，官网 www.dl-library.net.cn「馆藏资源」外链） | SirsiDynix iLink（`/uhtbin/cgisirsi/`，本仓库首见新家族；匿名可用，与成都不同家族不共享模块）；原超星入口 IP 白名单硬墙仍搁置 | `adapters/dalian.py`（独立实现；ps token＋会话 cookie 每请求变、全程同 cookie jar，类重庆会话流程；节流 ≥4 秒/host）（2026-10-02 复活调研与接入，见 `docs/team/research/2026-10-02-superlib-revival.md`） |
 | 山东省 | 青岛 | — | http://124.129.202.157/opac/index | 图创 Interlib（已确认；站点自报「青岛市公共图书馆联合目录」，26 馆联合，主馆馆码 QT） | 🔜 搁置：检索入口 `/opac/search` 被滑动验证码常态拦截（slideVerify，新会话首请求即触发，匿名与带会话均命中，非限速型）；详情 `/opac/book/{id}` 与馆藏 `/opac/api/holding/{id}` 开放且家族 parser 零改动兼容（实抓验证），检索通道若可用即可快速复活（2026-10-02 实测 9 请求，见 `tests/fixtures/qingdao/NOTES.md`） |
 | 四川省 | 成都 | `chengdu` | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；调研原话「汇文 Libsys Pro2018」有误——meta keywords 自报「opac, 图创, interlib」、页脚 © interlib.com.cn） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/chengdu.py`（搜索/详情 pro2018 模板解析适配器内本地实现，台州同款路径；自带 ≥2 秒节流） |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/hangzhou.py`（双源合并，杭图 `HZ:`） |
@@ -37,7 +37,7 @@
 |  | 台州 | `taizhou` | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/taizhou.py`（搜索/详情 pro2018 模板解析在适配器内本地实现） |
 |  | 金华 | `jinhua` | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（已确认；ILAS 系 HTML OPAC，Tomcat/JSP，与深圳的自研 JSON API 封装不同，不可复用） | `adapters/jinhua.py`（独立实现，HTML 解析，匿名全链路）；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
 
-2026-10-02 批量登记：用户提供一批城市入口，已逐一实测 HTTP 可达性与技术组件指纹（状态与初判照实记录在上表；「初判」以首页指纹为据，实抓侦察后修正）。第一批实现 6 个 Interlib 候选城市（青岛、江阴、温州、绍兴、台州、合肥双源合并）；其余入口调研结论见 `docs/team/research/`。
+2026-10-02 批量登记：用户提供一批城市入口，已逐一实测 HTTP 可达性与技术组件指纹（状态与初判照实记录在上表；「初判」以首页指纹为据，实抓侦察后修正）。当天分批落地的接入：江阴、温州、台州、合肥双源（Interlib 家族）、金华（UILAS）、南京（金陵 uopac）、成都（Interlib pro2018）、宁波（tcc-opac）、绍兴（pro2018）、大连（iLink）；青岛因检索入口滑动验证码搁置。其余入口调研结论见 `docs/team/research/`。
 
 ## 上海（VuFind）
 

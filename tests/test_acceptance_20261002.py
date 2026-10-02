@@ -12,14 +12,15 @@ from mcp_library_search import adapters, server
 
 _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources.md"
 
-# 本批交付后的完整注册面：既有 6 城＋新增 6 标识（hangzhou 重构不减既有）
+# 完整注册面：既有 6 城＋第一批 6 标识＋第二批 4 标识（成都/宁波/绍兴/大连）
 _EXPECTED = [
-    "chongqing", "guangzhou", "hangzhou", "hefei", "jiangyin", "jinhua",
-    "nanjing", "shanghai", "shenzhen", "taizhou", "tianjin", "wenzhou",
+    "chengdu", "chongqing", "dalian", "guangzhou", "hangzhou", "hefei",
+    "jiangyin", "jinhua", "nanjing", "ningbo", "shanghai", "shaoxing",
+    "shenzhen", "taizhou", "tianjin", "wenzhou",
 ]
 
 
-def test_registry_has_exactly_twelve_identifiers():
+def test_registry_has_exactly_sixteen_identifiers():
     assert sorted(adapters._ADAPTERS) == _EXPECTED
 
 
@@ -56,7 +57,7 @@ def test_availability_docstring_due_date_boundaries():
 
 def test_detail_docstring_nanjing_call_number_boundary():
     doc = server.get_book_detail.__doc__
-    assert "南京数据源详情页无索书号字段" in doc
+    assert "南京、宁波数据源详情页无索书号字段" in doc
     assert "call_number 为空串" in doc
 
 
