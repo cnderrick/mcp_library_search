@@ -11,6 +11,11 @@
 xian（西安市图书馆，集群平台）、xianyang（咸阳，公共图书馆联盟）、
 baoji（宝鸡，集群平台）、ankang（安康）、hanzhong（汉中，全市联合目录含洋县等县馆）、
 yulin（榆林）。
+第二批：海口、株洲、孝感、荆门、湖南图书馆（hunan_prov）、福建省图书馆（fujian_prov）、
+阳江、淄博、德州、周口、泉州、通辽、河源、黑龙江省图书馆（heilongjiang）、长春、
+唐山、包头、乌海、呼和浩特、潮州（以上图创 Interlib，其中唐山/包头/乌海/呼和浩特/
+潮州/黑龙江/长春检索页有滑动验证码改走内嵌 Solr）、兰州（lanzhou）、江门（jiangmen，
+新版 UILAS REST）、河南省图书馆（henan_prov，老版 UILAS）。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -67,7 +72,15 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     xianyang（咸阳，公共图书馆联盟）、baoji（宝鸡，集群平台）、
     ankang（安康，详情走 /api/book 接口）、
     hanzhong（汉中，全市联合目录含洋县等县馆）、
-    yulin（榆林，新版 UILAS REST 平台），
+    yulin（榆林，新版 UILAS REST 平台）、
+    haikou（海口）、zhuzhou（株洲）、xiaogan（孝感）、jingmen（荆门）、
+    hunan_prov（湖南图书馆）、fujian_prov（福建省图书馆）、yangjiang（阳江）、
+    zibo（淄博）、dezhou（德州）、zhoukou（周口）、quanzhou（泉州）、
+    tongliao（通辽）、heyuan（河源）、heilongjiang（黑龙江省图书馆）、
+    changchun（长春）、tangshan（唐山）、baotou（包头）、wuhai（乌海）、
+    huhehaote（呼和浩特）、chaozhou（潮州）（以上图创 Interlib，馆藏到单册级）、
+    lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
+    henan_prov（河南省图书馆，老版 UILAS HTML OPAC），
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，

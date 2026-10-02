@@ -1,0 +1,6746 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+		
+		<script type="text/javascript">
+			var $$opac_bookcover = "http://book-resource.dataesb.com/websearch/metares";
+			var ctx = "/opac";
+		</script>
+
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css"></link>
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/jquery-3.7.1.min.js" type="text/javascript" ></script>
+<script src="/opac/media/js/jquery/jquery-migrate-3.5.0.min.js" type="text/javascript" ></script>
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-6.1.0/highcharts.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-6.1.0/themes/grid.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/colldata-1.1215.full.js" charset="utf-8"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js"></script>
+		<script>
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		<script>
+			// 初始化 SDK
+			var sensors = window['TcDataCollectWebSDK'];
+			var initAppid = 'P2SD0533139';
+			
+			
+			
+			
+
+			sensors.init({
+				app_id: initAppid,
+				show_log: true,   // 是否打印日志信息
+				heatmap: {
+					/**
+					 * 1. 默认 $WebClick 只采集 a，button，input ，textarea 四个 dom 元素的点击事件。
+					 * 2. default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭。
+					 */
+					clickmap:'default',
+
+					// 配置不采集元素点击事件 true:采集   false:不采集
+					collect_element: function(element_target){
+						return !$(element_target).is("INPUT");
+					},
+
+					// default 表示开启，自动采集 $WebStay 事件，滚屏是触发，但页面停留必须过4秒后（可自定义）；可以设置 'not_collect' 表示关闭。
+					scroll_notice_map:'not_collect',
+					// 设置有效停留时长， 毫秒，默认是4000毫秒
+					scroll_delay_time: 6000
+				},
+				preset_properties: {
+					//是否采集 $url 页面地址作为公共属性，默认值 false
+					url: true,
+					//是否采集 $title 页面标题作为公共属性，默认值 false
+					title: true,
+				}
+			});
+
+            // 设置之后，SDK 就会自动收集页面浏览事件($pageview), 默认是关闭的
+            sensors.quick('autoTrack')
+
+			// 手动调用, 用户自定义埋点
+			function trackSearch(word) {
+				sensors.track('OpacSearch', {
+					KeyWord: word
+				});
+			}
+
+			function trackLogin(rdid) {
+				sensors.login(rdid, function () {
+
+				});
+			}
+
+			function trackLogout() {
+				sensors.logout(false);
+
+			}
+
+		</script>
+		
+		
+			
+				
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+                
+				</script>
+			
+			
+		
+		<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js"></script>
+
+		<script type="text/javascript" src="/opac/media/js/common/charts.js"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<title></title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+<!-- jQuery UI 依赖 -->
+<script>$.uiBackCompat = true;</script> <!-- 关键：启用旧版API兼容 -->
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery/jquery-ui-1.14.1.css">
+<script type="text/javascript" src="/opac/media/js/jquery/jquery-ui-1.14.1.min.js"></script>
+<!-- 修复jQuery UI Dialog关闭按钮图标缺失问题 - 图标精灵图(images目录)不存在，用纯文字×替代 -->
+<style>
+.ui-dialog .ui-dialog-titlebar-close {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: -14px 0 0 0 !important;
+    padding: 0 !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    background: #f5f5f5 !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+.ui-dialog .ui-dialog-titlebar-close .ui-icon {
+    background-image: none !important;
+    text-indent: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    position: static !important;
+}
+.ui-dialog .ui-dialog-titlebar-close .ui-icon::after {
+    content: "\00D7" !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    color: #666 !important;
+    line-height: 1 !important;
+    display: block !important;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover {
+    background: #e8e8e8 !important;
+    border-color: #999 !important;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover .ui-icon::after {
+    color: #333 !important;
+}
+</style>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="referrer" content="same-origin" />
+
+    
+    
+        <meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 淄博市图书馆" />
+   
+
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js"></script>
+
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+
+
+
+
+</style>
+<script>
+	$(document).ready(function() {
+		// 原始字符串
+		var resourceStr = "";
+		if(resourceStr==null || resourceStr == ''){resourceStr = "/opac/media/css/aiSupport.css,/opac/media/js/common/aiSupport.js";}
+
+		// 分割字符串为数组
+		var resources = resourceStr.split(',');
+		// 分割字符串为数组
+		var resources = resourceStr.split(',');
+
+		// 遍历资源数组
+		$.each(resources, function(index, url) {
+			// 判断资源类型（JS/CSS）
+			if (url.endsWith('.js')) {
+				// 动态创建script标签
+				var script = document.createElement('script');
+				script.src = url;
+				script.async = false; // 保证按顺序加载
+				$('body').append(script);
+			} else if (url.endsWith('.css')) {
+				// 动态创建link标签
+				var link = document.createElement('link');
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = url;
+				$('head').append(link);
+			}
+		});
+	});
+
+</script>
+
+<script type="text/javascript">
+	function logout(){
+		trackLogout();
+		location.href="/opac/reader/logout";
+	}
+	
+	$(document).ready(function(){
+		
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.space".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.newpub".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.loanAnalysis".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar"
+		
+			
+			
+			
+		
+>
+	<div class="navbar_bd" >
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index">
+							
+								
+								
+								
+								
+									检索
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/advance">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											高级检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/integration">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											集群检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls">
+							
+								
+								
+								
+								
+									书目浏览
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/cls">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/space">
+							
+								
+								
+								
+								
+									我的图书馆
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/newpub/cls">
+							
+								
+								
+								
+								
+									新书通报
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/newpub/cls">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类查看
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/ranking/bookLoanRank">
+							
+								
+								
+								
+								
+									借阅分析
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/ranking/bookLoanRank">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											图书借阅排行榜
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/ranking/bookHotRank">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											热门图书排行榜
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+
+				<!-- 开始是给广少图用的东西 -->
+				
+
+
+
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				<option value="en">English</option>
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!--
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				<option value="en">English</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				
+					
+					<span id="readerLogin" ><a  href="/opac/reader/login">登录</a></span>
+				
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+
+			
+				
+					<a href="/opac/reader/login">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+
+    
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" href="/opac/media/style/default/space.css" rel="stylesheet" />
+<style type="text/css">
+	#showVisitedCountDiv{
+		text-align:right;
+		padding-right:20px;
+		margin-top:26px;
+	}
+</style>
+<script type="text/javascript">
+<!--
+$(function() {
+	var $navPageBaseURL = $("#navPageBaseURL").text();
+	if($navPageBaseURL != "") {
+		$("#reSearchButton").show();
+	}
+	
+	if("1" == "1")
+	{
+		if("false" == "true")
+		{
+			$("#baseSearchForm select[name='searchWay']").val("");
+			return;
+		}
+		if("true"=="true")
+		{
+			$("#baseSearchForm select[name='searchWay']").val("");
+			return;
+		}
+		$("#baseSearchForm select[name='searchWay']").val("title");
+	}
+});
+function reSearch() {
+	var qword = $("#q").val();
+	
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	var $navPageBaseURL = $("#navPageBaseURL").text();
+	var q = encodeURIComponent($("#q").val());
+	if(q == "") {
+		alert("请输入检索词.");
+		return;
+	}
+	q = "marc:" + q;
+	var baseURL = "/opac/search?";
+	var targetURL = baseURL + $navPageBaseURL + "&research.q=" + q;
+	document.location.href = targetURL;
+}
+//显示计数
+$(function() {
+	
+	$.ajax({
+		type: "GET",
+		url: "/opac/jsonAnalytics/getTotalVisitedCount/json",
+		success: function(count){
+			showVisitedCount(count);
+		}
+	});
+	
+});
+function showVisitedCount(count){
+	var countStr = new String(count);
+	while(countStr.length < 8) {
+		countStr = "0" + countStr;
+	}
+	var len = countStr.length;
+	var result = "访问量：<span style='letter-spacing:3px;color:#00BB00;height:10px;' >"+countStr+"</span>";
+	$("#showVisitedCountDiv").html(result);
+	$("#showVisitedCountDiv").fadeIn(1000);
+}
+$(function() {
+	/*
+	$("#baseSearchForm").submit(function() {
+		var searchWay = $("#baseSearchForm select[name='searchWay']").val();
+		if(searchWay == "callno") {
+			$(this).append(
+				$("<input/>").attr("name", "sortWay").attr("type", "hidden").val("callno_sort"))
+				.append(
+				$("<input/>").attr("name", "sortOrder").attr("type", "hidden").val("asc"));
+		}
+	});
+	*/
+});
+
+function baseSearch() {
+	var qword = $("#q").val();
+	
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	var q = encodeURIComponent($("#q").val());
+	if(q == "") {
+		alert("请输入检索词.");
+		return;
+	}
+	//q = "marc:" + q;
+	trackSearch(q);
+	var baseURL = "/opac/search?";
+	var targetURL = baseURL + "&q=" + q;
+    
+	
+		var $searchWay = $("#baseSearchForm select[name='searchWay']");
+		if ($searchWay != null){
+			var searchWay = $searchWay.val();
+			targetURL = targetURL+"&searchWay="+searchWay;
+			if(searchWay == "callno") {
+				targetURL += "&sortWay=callno_sort";
+				targetURL += "&sortOrder=asc";
+			}
+		}
+	
+	if(targetURL.indexOf("sortWay") < 0){
+		var sortWay = "score";
+		var sortOrder = "desc";
+		if(sortWay != ""){
+			targetURL = targetURL + "&sortWay=" + sortWay;
+		}
+		if(sortOrder != ""){
+			targetURL = targetURL + "&sortOrder=" + sortOrder;
+		}
+	}
+	var $scWay = $("#baseSearchForm select[name='scWay']");
+	targetURL += "&scWay="+$scWay.val();
+	
+			targetURL += "&hasholding=1";
+	
+	
+	
+    	var cirlibs = $.cookie("searcher_libcode");
+    	if(cirlibs){
+    	    var libArray = cirlibs.split("[]");
+    	    for (var i in libArray){
+                targetURL += "&curlibcode="+libArray[i];
+            }
+        }
+	
+	targetURL += "&searchSource=reader";
+	if($("#navPageBaseURL").text().indexOf("view=express")!=-1){
+		targetURL += "&view=express";
+		var locals = "";
+		var codeArrays = locals.split(",");
+		for (index in codeArrays) {
+			if(codeArrays[index]!=""){
+				targetURL += "&curlocal="+codeArrays[index];
+			}
+		}         
+	}else if ($("#navPageBaseURL").text().indexOf("view=reserveloan")!=-1) {
+		targetURL += "&view=reserveloan";	//如果是网上预借页面则加上view=reserveloan标识
+	}
+	
+	var curlocalconfig = $.cookie("localConfig");
+	var ipLimit = "";//没有根据ip限定馆藏地的时候才用这个cookie，不然有可能会导致拼接的地址过长
+	if(curlocalconfig != null && curlocalconfig != "" && ipLimit != "1"){
+		var values = curlocalconfig.split(",");     
+		for(var i = 0; i<values.length; i++){
+			targetURL += "&curlocal=" + values[i];    
+		}             
+	} 
+	document.location.href = targetURL;
+}
+$(document).ready(function(){
+	$("#baseSearchForm").submit(function(){
+		return false;   
+	});     
+	
+	
+
+	
+});
+//-->
+</script>
+
+<div id="page_header">
+	<div id="page_nav">
+		
+		<form id="baseSearchForm" action="/opac/search" method="get">
+		
+					<input type="hidden" name="hasholding" id="hasholding" value="1"/> 
+		  
+		
+	    
+		<div class="logo"><a href="/opac/index"><img src="/opac/media/images/logo.png"
+			
+			
+			
+			
+			/></a></div>
+		
+		<div class="page_nav_search">
+				<input type="hidden" name="rows" value="10" />
+				
+					
+				
+				
+				<div style="display: none;" >
+					<select name="scWay"  class="search_select">
+						<option value="prefixMatch">前方一致</option>
+						<option value="dim" selected="selected">模糊检索</option>
+						<option value="full">精确检索</option>
+					</select>
+				</div>
+				
+				
+				<div>
+					<select name="searchWay" class="search_select"
+							
+					>
+						<option value="" selected="selected">任意词</option>
+						<option value="title">题名</option>
+						<option value="title200a">正题名</option>
+						
+						
+						<option value="isbn">ISBN/ISSN</option>
+						<option value="author">著者</option>
+						<option value="subject">主题词</option>
+						<option value="class">分类号</option>
+						
+						
+							<option value="ctrlno">控制号</option>
+							<option value="orderno">订购号</option>
+						
+						<option value="publisher">出版社</option>
+						
+						<option value="callno">索书号</option>
+						
+					</select>
+				</div>
+				
+				
+					
+					      
+						<div class="search_input"
+								
+						>
+							
+							
+								<input type="text" id="q" name="q" value="三体" onkeydown="if(event.keyCode==13) baseSearch();" size="50" placeholder=""/>
+							
+						</div>
+					
+				
+				<input type="button" class="search_button"
+						
+					   value="检索"  onclick="baseSearch()"/>
+			<input type="button" class="search_result_button"
+				   style="display:none;" id="reSearchButton" value="在结果中检索" onclick="reSearch()" />
+				
+					<input type="button" name="advance_search" id="advanceSearchButton" class="advance_search_button"
+							
+						   value="高级检索" onclick="window.location='/opac/index/advance'"/>
+				
+				
+		</div>
+		</form>
+		
+		<div id="showVisitedCountDiv"></div>
+	</div>
+</div>
+			<div id="page_content">
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="referrer" content="unsafe-url">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/timeFacetCharts.js"></script>
+
+	<script type="text/javascript">
+		mainCategories.push("2008");
+		timeStatisticArr.push("2");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2010");
+		timeStatisticArr.push("1");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2013");
+		timeStatisticArr.push("1");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2014");
+		timeStatisticArr.push("1");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2015");
+		timeStatisticArr.push("1");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2016");
+		timeStatisticArr.push("14");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2017");
+		timeStatisticArr.push("4");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2018");
+		timeStatisticArr.push("4");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2019");
+		timeStatisticArr.push("11");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2020");
+		timeStatisticArr.push("7");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2021");
+		timeStatisticArr.push("2");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2022");
+		timeStatisticArr.push("4");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2024");
+		timeStatisticArr.push("5");
+	</script>
+
+	<script type="text/javascript">
+		mainCategories.push("2025");
+		timeStatisticArr.push("4");
+	</script>
+
+
+<style>
+	.cloudArea{
+		width: 164px;
+		position: relative;
+		margin-top: 6px;
+	}
+	#tree li{
+		height: unset;
+		overflow: unset;
+		margin-left: unset;
+	}
+	.cloudBtn,
+	.libInBook{
+		font-size: 13px;
+		font-weight: bold;
+		color:#fff;
+		text-align: center;
+		display:block;
+		width: 174px;
+		height: 27px;
+		line-height: 27px;
+		background-repeat:no-repeat;
+		position:relative;
+	}
+
+	.cloudBtn{
+		background-image: url(/opac/media/pro2018/images/yunBtn.png);
+	}
+	.libInBook{
+		background-image: url(/opac/media/pro2018/images/yunBtn02.png);
+	}
+
+	.cloudPokt,
+	.libInBookIcon{
+		width: 20px;
+		height:20px;
+		background-repeat:no-repeat;
+		display:inline-block;
+		vertical-align: middle;
+		margin:-3px 5px 0 0;
+	}
+	.ebook{
+		margin: 10px;
+	}
+	.cloudPokt{
+		background-image: url(/opac/media/pro2018/images/yunPokt.png);
+	}
+
+	.libInBookIcon{
+		background-image: url(/opac/media/pro2018/images/yunPokt02.png);
+	}
+
+	.bookmetaTD .gdhydx_link {
+		background: #f3f392;
+		color: #000;
+		padding: 4px 6px;
+		border-radius: 8px;
+		border: 1px solid #f2f3f4;
+	}
+	.tagSpan{
+		background-color: #f2eaad;
+		padding:3px 8px;
+		margin: 0px 8px;
+		border-radius: 10px;
+		font-size: 12px;
+	}
+</style>
+<link rel="stylesheet" href="/opac/media/pro2018/css/browse.css" type="text/css" media="all">
+<link rel="stylesheet" href="/opac/media/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/opac/media/layui/css/layui.css" type="text/css" media="all">
+<link rel="stylesheet" href="/opac/media/pro2018/css/theme/themeGf.css" type="text/css" media="all">
+<script src="/opac/media/js/custominfo/libcodeURL.js"></script>
+<script src="/opac/media/js/markdown-it/markdown-it.min.js/"></script>
+<script>
+	document.title = "检索结果";
+</script>
+
+
+
+
+
+
+
+
+
+<span id="navPageBaseURL" style="display:none;">q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND</span>
+
+<span id="baseURL" style="display:none;">rows=10&searchWay0=marc&logical0=AND</span>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 注意下面facetUrl生成的链接是没有&开头的param,例如:"q=java&fq=xx" -->
+
+
+
+<script>
+	var $ctx = "/opac";
+	var map = {};
+	
+	
+	var key = "999";
+	var value = "2";
+	map[key] = value;
+	
+	var key = "ZBT";
+	var value = "61";
+	map[key] = value;
+	
+	var key = "ZCT";
+	var value = "1";
+	map[key] = value;
+	
+	var key = "zst";
+	var value = "4";
+	map[key] = value;
+	
+	
+	var facetBaseURL = "q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND";
+
+</script>
+<script src="/opac/media/zTree/v3/js/jquery.ztree.core.min.js"></script>
+
+
+<script src="/opac/media/layui/layui.js"></script>
+<script type="text/javascript">
+
+	
+
+	//排序
+	function reSort() {
+		var sortWay = $("#sortWay").val();
+		var sortOrder = $("#sortOrder").val();
+		document.location.href = "search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&searchWay0=marc&logical0=AND" + "&sortWay=" + sortWay + "&sortOrder=" + sortOrder;
+	}
+	function reSortOrder(op){
+		document.location.href = "search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&searchWay0=marc&logical0=AND" + "&sortWay=" + op + "&sortOrder=desc";
+	}
+	function getBookrecnos() {
+		var bookrecnos = new Array();
+		$("div[bookrecno]").each(function(index) {
+			bookrecnos.push($(this).attr("bookrecno"));
+		});
+		return bookrecnos;
+	}
+	function getCallnos(bookrecnos) {
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/callnos",
+			data: {
+				"bookrecnos": bookrecnos.join(",")
+			},
+			dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+			success: function(xml){
+				insertCallnos(xml);
+			}
+		});
+	}
+	function insertCallnos(data) {
+		var records = $(data).find("record");
+		records.each(function(index){
+			var bookrecno = $(this).find("bookrecno").text();
+			var callnos = $(this).find("callno");
+			var callnoArray = new Array();
+			callnos.each(function(j){
+				if($(this).text()) {
+					callnoArray.push($(this).text());
+				}
+			});
+			var callnoInfo = callnoArray.join(",");
+			if(callnoInfo.length > 30) {
+				callnoInfo = callnoInfo.substring(0, 30) + "...";
+			}
+			if(callnoInfo.length>0){
+				$("div[bookrecno='" + bookrecno + "'] .callnosSpan").html(callnoInfo);
+			}
+		});
+	}
+	$(function() {
+		var bookrecnos = getBookrecnos();
+		getCallnos(bookrecnos);
+	});
+
+	function getRdid() {
+		var rdid = "";
+		
+		return rdid;
+	}
+	//处理保存检索结果列表
+	$(function() {
+		$("#saveSearchResultListDialog").dialog({
+			autoOpen: false,
+			modal: true,
+			width: 550,
+			height: 400
+		});
+		
+		$("#saveSearchResultListDialog input[name='isPublic']").eq(1).attr("checked","checked");
+		$("#saveSearchResultListTag").hide();
+		
+	});
+	function showSearchResultList() {
+		var checking = checkLogin();
+		if(!checking){
+			return;
+		}
+		var keywords = "三体";
+		var searchURL = "q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND";
+		$("#title").val(keywords);
+		$("#searchURL").val(searchURL);
+
+		$("#saveSearchResultListDialog").dialog("open");
+	}
+	
+	function saveKeyword(){
+
+		var keyword = "三体";
+		var checking = checkLogin();
+		if(!checking){
+			return;
+		}else if($.trim(keyword) == ""||keyword == "*:*"){
+			alert("无效的检索词，请重新发起检索");
+			return;
+		}
+		$.ajax({
+			type: "post",
+			url: "/opac/subscription/keyword/save",
+			data: {
+				"keyword": keyword,
+				"searchway": ""
+			},
+			dataType: "json",
+			success: function(data){
+				if(data.flag=="1"){
+					if(confirm("检索词已保存到我的订阅列表中，现在去看看？")){
+						window.location.href="/opac/subscription/keyword/list";
+					}
+				}else{
+					alert("无法保存检索词："+keyword);
+				}
+			}
+		});
+	}
+	function saveSearchResultList() {
+		$.ajax({
+			type: "post",
+			url: "/opac/searchResultList/save",
+			data: {
+				"title": $("#title").val(),
+				"searchURL": $("#searchURL").val(),
+				"description": $("#description").val(),
+				"isPublic": $("#saveSearchResultListDialog input[name='isPublic']:checked").val()
+			},
+			dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+			success: function(xml){
+				showSaveSearchResultListResult(xml);
+			}
+		});
+	}
+	function showSaveSearchResultListResult(data) {
+		var state = $(data).find("state").text();
+		if(state == "1") {
+			alert("保存成功!");
+			$("#saveSearchResultListDialog").dialog("close");
+		} else {
+			alert("保存失败!");
+		}
+	}
+	//添加图书专题
+	function addBookSpecial(){
+		window.location.href="/opac/admin/bookSpecial/edit?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND";
+	}
+	//保存书单至输出邮件/本地文件列表
+	function saveBookIdList(){
+		bookItemStr = "";
+		$("input[name='bookItemCheckbox']").each(function(i) {
+			if($(this).attr("checked")) {
+				bookItemStr = bookItemStr + $(this).val() + ",";
+			}
+		});
+		if(bookItemStr.length==0 || bookItemStr==""){
+			alert("请选择需要输出的书籍");
+			return ;
+		}
+		bookItemStr = bookItemStr.substring(0, bookItemStr.lastIndexOf(","));
+		$("input[type='hidden'][name='printBookIdList']").attr("value" , bookItemStr);
+		$("form[name='printBookIdListForm']").trigger("submit");
+	}
+	//书单
+	function selectAllBookItems() {
+		$("input[name='bookItemCheckbox']").attr("checked", true);
+	}
+	function clearAllBookItems() {
+		$("input[name='bookItemCheckbox']").attr("checked", false);
+	}
+	var bookListId="";
+	var bookItemStr ="";
+	function saveItemsToBookList() {
+		var rdid = getRdid();
+		if(rdid == "") {
+			alert("请先登录!");
+			return;
+		}
+		bookListId = $("#bookLists").val();
+		bookItemStr = "";
+		$("input[name='bookItemCheckbox']").each(function(i) {
+			if($(this).prop("checked")) {
+				bookItemStr = bookItemStr + $(this).val() + ",";
+			}
+		});
+		console.log("bookItemStr:"+bookItemStr);
+		console.log("bookListId:"+bookListId);
+
+		if(bookItemStr == "") {
+			alert("请选择图书.");
+			return;
+		}
+		if($("#bookLists").val()=="")
+		{
+			newBookListDialog();
+			return;
+		}
+		addBookItems();
+	}
+	//把添加这一块单独提取出来，可能多个地方会用到
+	function addBookItems()
+	{
+		$.ajax({
+			type: "post",
+			url: "/opac/booklistitem/save",
+			data: {
+				"bookListId": bookListId,
+				"bookListItems": bookItemStr
+			},
+			dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+			success: function(xml){
+				showSaveBookListItemResult(xml);
+			}
+		});
+	}
+	function newBookList(){
+		if($("#new_listName").val()=="")
+		{
+			alert("书单名称不能为空！");
+			return;
+		}
+		$.ajax({
+			type:"post",
+			url:"/opac/booklist/save",
+			data:{
+				"listName": $("#new_listName").val(),
+				"description": $("#new_description").val(),
+				"privacy": $("#newBookListDialog input[name='new_privacy']:checked").val()
+			},
+			dataType:"xml",
+			success:function(xml){
+				showNewBookListResult(xml);
+			}
+		});
+	}
+	function showNewBookListResult(data){
+		//alert(data.text());
+		var state=$(data).find("state").text();
+		if(state=="2")
+		{
+			if(confirm("你已创建过了相同名称的书单，是否直接保存进该书单！"))
+			{
+				bookListId=$(data).find("bookListId").text();
+				addBookItems();
+			}
+			$("#newBookListDialog").dialog("close");
+			clearNewBookList();
+		}
+		else if(state=="1")
+		{
+			bookListId=$(data).find("bookListId").text();
+			$("#bookLists").append("<option value='"+bookListId+"'>"+$("#new_listName").val()+"</option>");
+			addBookItems();
+			$("#newBookListDialog").dialog("close");
+			clearNewBookList();
+		}
+		else
+		{
+			alert("创建书单或者加入书单失败！");
+		}
+	}
+	function clearNewBookList()
+	{
+		$("#new_listName").attr("value","");
+		$("#new_description").attr("value","");
+		
+		$("#newBookListDialog input[name='new_privacy']").eq(0).attr("checked","checked");
+		
+	}
+	function showSaveBookListItemResult(data) {
+		var state = $(data).find("state").text();
+		if(state == "1") {
+			alert("保存成功!");
+		} else {
+			alert("保存失败!");
+		}
+	}
+	function newBookListDialog() {
+		$("#newBookListDialog").dialog("open");
+		clearNewBookList();
+	}
+	$(function() {
+		$("#newBookListDialog").dialog({
+			autoOpen: false,
+			modal: true,
+			width: 510,
+			buttons:[{
+				text:"新增并加入书单",
+				click:function(){
+					newBookList();
+				}
+			}
+			]
+		});
+		
+	});
+
+	//读取显示隐藏趋势图的cookie信息
+	$(document).ready(function(){
+		//设置JS调用getI18nMsg方法获取的国际化标签
+		i18nMessages['searchResultI18n.showClassFacet']="显示分类导航";
+		i18nMessages['searchResultI18n.hideClassFacet']="隐藏分类导航";
+		i18nMessages['chartI18n.showChart']="显示趋势图";
+		i18nMessages['chartI18n.hideChart']="隐藏趋势图";
+
+		integrationBaseUrl = "q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND";
+		loadIntegratedLibraries('{"张店区少儿图书馆":"http://60.210.7.146:8084/opac","周村区图书馆":"http://60.210.104.142:8080/opac","高青县图书馆":"http://120.220.25.26:8081/opac","桓台县图书馆":"http://218.56.110.92/opac","淄川区图书馆":"http://27.195.3.227:8088/opac","临淄区图书馆":"http://60.210.100.150:9000/opac"}');
+
+		var chartCookie = $.cookie('chartCookie');
+		var libcode="P2SD0533139";
+		if(chartCookie!=null){
+			if(chartCookie=='hide'){
+				$("#display").html("&nbsp;"+i18nMessages['chartI18n.showChart']);//显示趋势图
+				$("#chartCtnr").hide(0);
+				$("#btnDiv").attr("align","left");
+			}else{
+				$("#display").html(i18nMessages['chartI18n.hideChart']+"&nbsp;");
+			}
+		}else{
+			var timeChartFlag = "1";
+			if(timeChartFlag=="0"){
+				$("#chartCtnr").hide(0);
+			}else if(timeChartFlag=="1"){
+				$("#display").html(i18nMessages['chartI18n.hideChart']+"&nbsp;");
+			}else if(timeChartFlag=="2"){
+				$("#display").html("&nbsp;"+i18nMessages['chartI18n.showChart']);//显示趋势图
+				$("#chartCtnr").hide(0);
+				$("#btnDiv").attr("align","left");
+			}
+		}
+
+		var classFacetCookie = $.cookie('classFacetCookie');
+		var glc = "P2SD0533139";
+		if(glc == 'FMM0001'){
+			$("#sohDiv").remove();
+			$("#classFacetDiv").remove();
+		}else if(classFacetCookie!=null){
+			if(classFacetCookie=='hide'){
+				$("#block").html("&nbsp;"+i18nMessages['searchResultI18n.showClassFacet']);//显示
+				$("#classFacetDiv").hide(0);
+				$("#sohDiv").attr("align","left");
+			}else{
+				$("#block").html(i18nMessages['searchResultI18n.hideClassFacet']+"&nbsp;");
+			}
+		}else{
+			if(glc=="ESH021039"){
+				$("#block").html("&nbsp;"+i18nMessages['searchResultI18n.showClassFacet']);//显示
+				$("#classFacetDiv").hide(0);
+				$("#sohDiv").attr("align","left");
+			}else{
+				$("#block").html(i18nMessages['searchResultI18n.hideClassFacet']+"&nbsp;");
+			}
+		}
+	});
+	//当馆藏为空时，判断该书目是否在订购中，如果是则提示
+	$(function() {
+		
+		
+//如果有光盘，显示提示“含光盘”，方便读者预订
+		
+		showAttachment(getBookrecnos());
+		
+	});
+
+	function showAttachment(bookrecnos){
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/getAttachments",
+			data: {
+				"bookrecnos": bookrecnos.join(",")
+			},
+			dataType: "json",
+			success: function(data){
+				for(var i in data) {
+					var bookrecno = data[i];
+					$("span[id='attachment_" + bookrecno + "']").show();
+				}
+			}
+		});
+	}
+
+	function getOrderStatus(bookrecnos) {
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/orderStatus",
+			data: {
+				"bookrecnos": bookrecnos.join(",")
+			},
+			dataType: "json",//这里要用xml,如果用html,则在IE下无法解析这个数据
+			success: function(data){
+				for(var i in data) {
+					var bookrecno = data[i];
+					$("div[bookrecno='" + bookrecno + "'] span.biblios_ordering").show();
+				}
+			}
+		});
+	}
+	function getReservationCount(bookrecnos) {
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/currentReservationCount",
+			data: {
+				"bookrecnos": bookrecnos.join(",")
+			},
+			dataType: "json",
+			success: function(data){
+				for (var i=0;i<bookrecnos.length;i++){
+					var bookrecno = bookrecnos[i];
+					var count = data[bookrecno];
+					$("div[bookrecno='" + bookrecno + "'] span.reservation_count").html('预约登记人次（'+count+"）");
+				}
+			}
+		});
+	}
+	function bookDetail(bookrecno,index,flag){
+		var base = encodeURIComponent("q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=false&view=standard&ro=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&rows=1");
+		var glc = "P2SD0533139";
+		if(glc=='U1YN0871005' || glc=='U1GX0773015'){
+			base = "";
+		}
+		var curlibParam = getCurlibcodes();
+		if(curlibParam){
+			curlibParam = "&curlibcode="+curlibParam;
+		}
+		var url = "/opac/book/"+bookrecno+"?index="+index+"&globalSearchWay=&base="+base+curlibParam+"";
+		var isCluster = 'false';
+		if (isCluster != ""){
+			url += "&isCluster=" + isCluster;
+		}
+
+		//南山教育局图书馆需要根据查询时限定的馆来查询该图书馆在这些限定馆的馆藏情况
+		if("P2SD0533139" == "EGD0755003" && "false"){
+			url = "/opac/book/"+bookrecno+"?index="+index+"&globalSearchWay=&base="+base+"&limitLibcodes=";
+		}
+
+		url += "&searchKeyword=" + encodeURIComponent("三体");	//跳转到图书详情页的时候也把检索词携带上, 之后分析会用
+
+		if(flag==1){
+			window.open(url);
+		}else if(flag==0){
+			window.location.href=url;
+		}
+	}
+	//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- jQuery UI 依赖 -->
+<script>$.uiBackCompat = true;</script> <!-- 关键：启用旧版API兼容 -->
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery/jquery-ui-1.14.1.css">
+<script type="text/javascript" src="/opac/media/js/jquery/jquery-ui-1.14.1.min.js"></script>
+<!-- 修复jQuery UI Dialog关闭按钮图标缺失问题 - 图标精灵图(images目录)不存在，用纯文字×替代 -->
+<style>
+.ui-dialog .ui-dialog-titlebar-close {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: -14px 0 0 0 !important;
+    padding: 0 !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    background: #f5f5f5 !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+.ui-dialog .ui-dialog-titlebar-close .ui-icon {
+    background-image: none !important;
+    text-indent: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    position: static !important;
+}
+.ui-dialog .ui-dialog-titlebar-close .ui-icon::after {
+    content: "\00D7" !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    color: #666 !important;
+    line-height: 1 !important;
+    display: block !important;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover {
+    background: #e8e8e8 !important;
+    border-color: #999 !important;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover .ui-icon::after {
+    color: #333 !important;
+}
+</style>
+<style type="text/css">
+	body,h2{margin:0 ; padding:0;}
+	#faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+	#faqdiv{position:absolute;width:400px; left:50%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #fff solid; padding:1px; padding-bottom: 30px}
+	#faqdiv h2{ height:25px; font-size:14px; background-color:#C4C4C4 ; position:relative; padding-left:10px; line-height:25px;}
+	#faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+	#faqdiv .form{padding:10px;}
+
+	.form li{ clear:left; }
+
+	/* 修复jQuery UI Dialog关闭按钮图标缺失问题 - 图标精灵图不存在，用纯文字替代 */
+	.ui-dialog .ui-dialog-titlebar-close {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		width: 28px !important;
+		height: 28px !important;
+		margin: -14px 0 0 0 !important;
+		padding: 0 !important;
+		border: 1px solid #ccc !important;
+		border-radius: 4px !important;
+		background: #f5f5f5 !important;
+		cursor: pointer !important;
+		outline: none !important;
+	}
+	.ui-dialog .ui-dialog-titlebar-close .ui-icon {
+		background-image: none !important;
+		text-indent: 0 !important;
+		width: auto !important;
+		height: auto !important;
+		margin: 0 !important;
+		position: static !important;
+	}
+	.ui-dialog .ui-dialog-titlebar-close .ui-icon::after {
+		content: "\00D7" !important;
+		font-size: 20px !important;
+		font-weight: bold !important;
+		color: #666 !important;
+		line-height: 1 !important;
+		display: block !important;
+	}
+	.ui-dialog .ui-dialog-titlebar-close:hover {
+		background: #e8e8e8 !important;
+		border-color: #999 !important;
+	}
+	.ui-dialog .ui-dialog-titlebar-close:hover .ui-icon::after {
+		color: #333 !important;
+	}
+</style>
+<script>
+
+	$(document).ready(function(){
+		$("#loginDialog").dialog({
+			autoOpen: false,
+			modal: true,
+			width: 350,
+			resizable:false,
+			//height: 'auto',
+			open: function(){
+				$("#loginFrame").attr("src",'/opac/reader/login?loginFlag=dialog');
+			},
+			close: function() {
+				$('#rdPasswd').val("");
+				$("#loginmsg").html("");
+			},
+			show: {
+				effect: "blind",
+				duration: 1000
+			}
+		});
+	});
+
+	//检查是否登录
+	function loginTo(toPage){
+		$("#toPageUrl").val(toPage);
+		var res =false;
+		$.ajax({
+			type:'get',
+			dataType:'json',
+			async : false,
+			url:'/opac/reader/getReaderInfo?return_fmt=json',
+			success:function(data){
+				if(data.reader==null||data.reader=='undefined'){
+					$("#loginDialog").dialog("open");
+					
+					
+					
+					$("#loginDialog").dialog("open");
+					
+					
+				}else{
+					if(toPage!=""){
+						window.location.href = toPage;
+					}
+					res = true;
+				}
+			},
+			error: function(){
+				
+				
+				
+				$("#loginDialog").dialog("open");
+				
+				
+			}
+		});
+		return res;
+	}
+	function checkLogin(){
+		return loginTo("");
+	}
+</script>
+<input type="hidden" id="reader" name="reader" value=""/>
+<input type="hidden" id="data" name="data" />
+<input type="hidden" id="toPageUrl" name="toPageUrl" />
+<!-- <div id="faqbg"></div>-->
+<div id="loginDialog" class="hide" title="登录我的图书馆" align="center" valign="top">
+	<iframe id="loginFrame" name="loginFrame" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+</div>
+<form action="/opac/book/saveBookIdList" method="post"
+	  name="printBookIdListForm" style="display:none;">
+	<input type="hidden" name="printBookIdList" >
+</form>
+<div id="newBookListDialog" class="hide" title="新增书单">
+	<table align="center" cellspacing="5">
+		<tr>
+			<td width="100px" align="right">名称:</td>
+			<td>
+				<input type="text" name="new_listName" id="new_listName" style="width:350px;height:20px;border:1px #888888 solid;"/>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">描述:</td>
+			<td>
+				<textarea name="new_description" id="new_description" style="width:350px;height:70px;border:1px #888888 solid; "></textarea>
+			</td>
+		</tr>
+		<tr id="publicBookListTag">
+			<td align="right">公开/私有:</td>
+			<td>
+				<input type="radio" name="new_privacy" value="1" />公开
+				<input type="radio" name="new_privacy" value="0" checked="checked"/>私有
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="contentDiv">
+	<div id="saveSearchResultListDialog" class="hide" title="保存检索结果列表">
+		<table>
+			<tr>
+				<td>标题:</td>
+				<td>
+					<input type="hidden" name="searchURL" id="searchURL" />
+					<input type="text" name="title" id="title" />
+				</td>
+			</tr>
+			<tr>
+				<td>描述:</td>
+				<td>
+					<textarea name="description" id="description"></textarea>
+				</td>
+			</tr>
+			<tr id="saveSearchResultListTag">
+				<td>公开/私有:</td>
+				<td>
+					<input type="radio" name="isPublic" value="1" checked="checked" />公开
+					<input type="radio" name="isPublic" value="0" />私有
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="button" value="保存" onclick="saveSearchResultList()" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="search_meta">
+		<div>
+			
+			检索词:
+			<span class="highLight-text" style="color:red;">
+				三体
+				
+				
+				
+			</span>,
+			
+			检索到: 61 条结果,
+			
+			检索时间: 0.03 秒
+			,
+				排序选项:
+				<select id="sortWay" class="select" name="sortWay" onchange="reSort()">
+					<option value="score" selected="selected">匹配度</option>
+					<option value="pubdate_sort" >出版日期</option>
+					<option value="subject_sort" >主题词</option>
+					<option value="title_sort" >题名</option>
+					<option value="author_sort" >著者</option>
+					<option value="callno_sort" >索书号</option>
+					<option value="pinyin_sort" >题名拼音</option>
+					<option value="loannum_sort" >借阅次数</option>
+					<option value="renewnum_sort" >续借次数</option>
+					<option value="title200Weight" >题名权重</option>
+					<option value="title200aWeight" >正题名权重</option>
+					<option value="title200h" >卷册号</option>
+				</select>
+				排序方式:
+				<select id="sortOrder" name="sortOrder" onchange="reSort()" class="select">
+					<option value="desc" selected="selected">降序排列</option>
+					<option value="asc" >升序排列</option>
+				</select>
+				<input type="button" class="button" value="保存检索结果列表" onclick="showSearchResultList()" />
+				
+				
+				<!--a href="javascript:document.location.href=document.location.href + '&view=rss'">RSS</a-->
+				<span id="sohDiv" align="right"><a href="javascript:void(0)" id="block" onclick="displayClassFacet('classFacetDiv')">隐藏分类导航</a></span>
+				
+					|
+					<span id="btnDiv" align="right"><a href="javascript:void(0)" id="display" onclick="displayChart('chartCtnr')">隐藏趋势图</a></span>
+				
+			
+		</div>
+	</div><!-- end of search_meta -->
+
+	<div id="wikiDiv" class="searchResultMetaInfo" style="display:none;">
+		<b style="font-size:14px;color:green">三体</b>
+		<span id="wikip" class="searchResultMetaInfoContent"></span>
+	</div>
+
+	
+		<div id="cadalDiv" style="display:none;">
+			<fieldset style="border:1px solid #ccc;">
+				<legend><b>CADAL电子资源</b></legend>
+				<p style="margin:3px;padding:3px;">
+				<table>
+					<tr>
+					</tr>
+				</table>
+				</p>
+			</fieldset>
+		</div>
+	
+
+	<fieldset style="border:1px solid #ccc;display: none;" id="integrationLibs">
+		<legend><b>集群图书馆</b></legend>
+	</fieldset>
+
+	<!-- start class facet navigate -->
+	
+		<div id="classFacetDiv">
+			<fieldset style="border:1px solid #ccc;">
+				<legend><b>分类导航</b></legend>
+				<p style="margin:3px;padding:3px;">
+						
+					
+						
+					
+					
+					
+					
+					
+
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="i">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=i">
+							
+								
+								
+									I 文学
+								
+							
+						</a><span>(39)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="j">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=j">
+							
+								
+								
+									J 艺术
+								
+							
+						</a><span>(12)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="o">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=o">
+							
+								
+								
+									O 数理科学与化学
+								
+							
+						</a><span>(3)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="k">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=k">
+							
+								
+								
+									K 历史、地理
+								
+							
+						</a><span>(2)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="b">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=b">
+							
+								
+								
+									B 哲学、宗教
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="f">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=f">
+							
+								
+								
+									F 经济
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="g">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=g">
+							
+								
+								
+									G 文化、科学、教育、体育
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="p">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=p">
+							
+								
+								
+									P 天文学、地球科学
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="v">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=v">
+							
+								
+								
+									V 航空、航天
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+					
+					
+					<div class="search_facetClassLevel2Div" style="float:left;" aa="z">
+						<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_class1=z">
+							
+								
+								
+									Z 综合性图书
+								
+							
+						</a><span>(1)</span>
+					</div>
+				
+				<div style="width: 250px;">
+					
+				</div>
+				</p>
+			</fieldset>
+		</div><!-- end class facet navigate -->
+	
+
+	<!-- HighChartContainer -->
+	
+		<div id="chartCtnr" ></div>
+	
+
+	<br/>
+	
+	
+
+	
+	<br/>
+
+	
+		<div>
+			<div id="facetTile">
+				
+				
+				<!-- 分面处理 -->
+				<div class="facetList">
+					<!-- 文献类型 -->
+					<div class="facetContainer">
+						<ol id="booktypeFacetUL"><h4><a href="#">文献类型</a></h4>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_booktype=1" title="44">
+												成人图书
+										</a>
+									
+									<span class="facetCount">(44)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_booktype=5" title="17">
+												少儿图书
+										</a>
+									
+									<span class="facetCount">(17)</span>
+								</li>
+							
+							<li id="booktypeFacetLI" style="display:none;">
+								<a href="javascript:moreOrLessFacet('booktypeFacet')" id="booktypeFacetA">显示更多..</a>
+							</li>
+						</ol>
+					</div>
+					<!--主题-->
+					<div class="facetContainer">
+						<ol id="subjectFacetUL"><h4><a href="#">主题</a></h4>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%B8%AD%E5%9B%BD" title="48">
+												中国
+										</a>
+									
+									<span class="facetCount">(48)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%BD%93%E4%BB%A3" title="34">
+												当代
+										</a>
+									
+									<span class="facetCount">(34)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E7%A7%91%E5%AD%A6%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4" title="19">
+												科学幻想小说
+										</a>
+									
+									<span class="facetCount">(19)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E9%95%BF%E7%AF%87%E5%B0%8F%E8%AF%B4" title="16">
+												长篇小说
+										</a>
+									
+									<span class="facetCount">(16)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4" title="15">
+												幻想小说
+										</a>
+									
+									<span class="facetCount">(15)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E7%8E%B0%E4%BB%A3" title="15">
+												现代
+										</a>
+									
+									<span class="facetCount">(15)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E6%BC%AB%E7%94%BB" title="9">
+												漫画
+										</a>
+									
+									<span class="facetCount">(9)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E8%BF%9E%E7%8E%AF%E7%94%BB" title="9">
+												连环画
+										</a>
+									
+									<span class="facetCount">(9)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%84%BF%E7%AB%A5%E5%B0%8F%E8%AF%B4" title="8">
+												儿童小说
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%B0%8F%E8%AF%B4%E9%9B%86" title="8">
+												小说集
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E7%9F%AD%E7%AF%87%E5%B0%8F%E8%AF%B4" title="5">
+												短篇小说
+										</a>
+									
+									<span class="facetCount">(5)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%B0%8F%E8%AF%B4%E7%A0%94%E7%A9%B6" title="4">
+												小说研究
+										</a>
+									
+									<span class="facetCount">(4)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%B8%AD%E7%AF%87%E5%B0%8F%E8%AF%B4" title="3">
+												中篇小说
+										</a>
+									
+									<span class="facetCount">(3)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%BD%9C%E5%93%81%E9%9B%86" title="2">
+												作品集
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E5%B0%8F%E8%AF%B4%E8%AF%84%E8%AE%BA" title="2">
+												小说评论
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E7%A0%94%E7%A9%B6" title="2">
+												研究
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%B8%AD%E5%9B%BD%E5%8E%86%E5%8F%B2" title="1">
+												中国历史
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%B8%AD%E5%9B%BD%E7%94%BB" title="1">
+												中国画
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%BA%8C%E5%8D%81%E4%BA%94%E5%8F%B2" title="1">
+												二十五史
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_subject=%E4%BD%9C%E5%93%81%E7%BB%BC%E5%90%88%E9%9B%86" title="1">
+												作品综合集
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+							<li id="subjectFacetLI" style="display:none;">
+								<a href="javascript:moreOrLessFacet('subjectFacet')" id="subjectFacetA">显示更多..</a>
+							</li>
+						</ol>
+					</div>
+					<!--著者-->
+					<div class="facetContainer">
+						<ol id="authorFacetUL"><h4><a href="#">著者</a></h4>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%88%98%E6%85%88%E6%AC%A3" title="34">
+												刘慈欣
+										</a>
+									
+									<span class="facetCount">(34)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97" title="22">
+												刘慈欣著
+										</a>
+									
+									<span class="facetCount">(22)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97" title="8">
+												刘慈欣原著
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E6%88%88%E9%97%BB%E9%A0%94" title="8">
+												戈闻頔
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E8%8D%89%E7%A5%AD%E4%B9%9D%E6%97%A5%E4%B8%9C" title="8">
+												草祭九日东
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E8%8D%89%E7%A5%AD%E4%B9%9D%E6%97%A5%E4%B8%9C%E7%BB%98" title="8">
+												草祭九日东绘
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E8%94%A1%E5%8A%B2" title="8">
+												蔡劲
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E8%94%A1%E5%8A%B2%EF%BC%8C%E6%88%88%E9%97%BB%E9%A0%94%EF%BC%8C%E8%96%84%E6%9A%AE%E6%94%B9%E7%BC%96" title="8">
+												蔡劲，戈闻頔，薄暮改编
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E8%96%84%E6%9A%AE" title="8">
+												薄暮
+										</a>
+									
+									<span class="facetCount">(8)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%BC%A0%E4%BC%9F%E5%BB%BA" title="5">
+												张伟建
+										</a>
+									
+									<span class="facetCount">(5)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%BC%A0%E4%BC%9F%E5%BB%BA%2C+%E6%B5%A6%E4%B8%80%E5%8D%9A%E7%BB%98" title="5">
+												张伟建, 浦一博绘
+										</a>
+									
+									<span class="facetCount">(5)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E6%B5%A6%E4%B8%80%E5%8D%9A" title="5">
+												浦一博
+										</a>
+									
+									<span class="facetCount">(5)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%88%98%E6%85%88%E6%AC%A3%E7%AD%89%E8%91%97" title="3">
+												刘慈欣等著
+										</a>
+									
+									<span class="facetCount">(3)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%85%AB%E8%B7%AF" title="2">
+												八路
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E5%85%AB%E8%B7%AF%E8%91%97" title="2">
+												八路著
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E6%9D%8E%E6%B7%BC" title="2">
+												李淼
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%E6%9D%8E%E6%B7%BC%E8%91%97" title="2">
+												李淼著
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%28%E7%BE%8E%29+%E6%88%B4%E5%A4%AB%C2%B7%E6%88%88%E5%BE%B7%E5%A0%A1%2C+%E6%9D%B0%E5%A4%AB%C2%B7%E5%B8%83%E6%B4%9B%E5%A7%86%E5%A5%8E%E6%96%AF%E7%89%B9%E8%91%97" title="1">
+												(美) 戴夫·戈德堡, 杰夫·布洛姆奎斯特著
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%28%E8%8B%B1%29%E5%B0%BC%E5%8F%A4%E6%8B%89%E6%96%AF%C2%B7%E6%89%98%E9%A9%AC%E6%9E%97%EF%BC%8C%28%E8%8B%B1%29%E7%BD%97%E6%81%A9%C2%B7%E9%9C%8D%E5%B0%94%E8%91%97" title="1">
+												(英)尼古拉斯·托马林，(英)罗恩·霍尔著
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_author=%28%E9%9F%A9%29%E9%9F%A9%E6%B1%9F%E8%91%97" title="1">
+												(韩)韩江著
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+							<li id="authorFacetLI" style="display:none;">
+								<a href="javascript:moreOrLessFacet('authorFacet')" id="authorFacetA">显示更多..</a>
+							</li>
+						</ol>
+					</div>
+					<!--出版日期-->
+					<div class="facetContainer">
+						<ol id="pubdateFacetUL"><h4><a href="#">出版日期</a></h4>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2016" title="14">
+												2016
+										</a>
+									
+									<span class="facetCount">(14)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2019" title="11">
+												2019
+										</a>
+									
+									<span class="facetCount">(11)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2020" title="7">
+												2020
+										</a>
+									
+									<span class="facetCount">(7)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2024" title="5">
+												2024
+										</a>
+									
+									<span class="facetCount">(5)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2017" title="4">
+												2017
+										</a>
+									
+									<span class="facetCount">(4)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2018" title="4">
+												2018
+										</a>
+									
+									<span class="facetCount">(4)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2022" title="4">
+												2022
+										</a>
+									
+									<span class="facetCount">(4)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2025" title="4">
+												2025
+										</a>
+									
+									<span class="facetCount">(4)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2008" title="2">
+												2008
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2021" title="2">
+												2021
+										</a>
+									
+									<span class="facetCount">(2)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2010" title="1">
+												2010
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2013" title="1">
+												2013
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2014" title="1">
+												2014
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+								
+								
+								<li class="hide">
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_pubdate=2015" title="1">
+												2015
+										</a>
+									
+									<span class="facetCount">(1)</span>
+								</li>
+							
+							<li id="pubdateFacetLI" style="display:none;">
+								<a href="javascript:moreOrLessFacet('pubdateFacet')" id="pubdateFacetA">显示更多..</a>
+							</li>
+						</ol>
+					</div>
+					<!-- 馆藏地点 -->
+					
+						<div class="facetContainer">
+							<ol id="curlocalFacetUL"><h4><a href="#">馆藏地点</a></h4>
+								
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT017" title="27">
+															文学借阅室
+													</a>
+												
+												<span class="facetCount">(27)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT011" title="12">
+															综合借阅室
+													</a>
+												
+												<span class="facetCount">(12)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT030" title="12">
+															城市书房（紫园）
+													</a>
+												
+												<span class="facetCount">(12)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT045" title="9">
+															城市书房（凯悦）
+													</a>
+												
+												<span class="facetCount">(9)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT049" title="9">
+															城市书房（新空间）
+													</a>
+												
+												<span class="facetCount">(9)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT034" title="8">
+															城市书房（福园）
+													</a>
+												
+												<span class="facetCount">(8)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT062" title="8">
+															城市书房（川阳书苑）
+													</a>
+												
+												<span class="facetCount">(8)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT024" title="6">
+															少儿文学借阅室
+													</a>
+												
+												<span class="facetCount">(6)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT039" title="6">
+															城市书房（天鸿）
+													</a>
+												
+												<span class="facetCount">(6)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li >
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT071" title="6">
+															城市书房（丽水九樾）
+													</a>
+												
+												<span class="facetCount">(6)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT032" title="5">
+															流动图书车
+													</a>
+												
+												<span class="facetCount">(5)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT033" title="5">
+															城市书房（云泰）
+													</a>
+												
+												<span class="facetCount">(5)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT057" title="5">
+															城市书房（城中）
+													</a>
+												
+												<span class="facetCount">(5)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT026" title="4">
+															基本书库（2006之后）
+													</a>
+												
+												<span class="facetCount">(4)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=B" title="3">
+															
+													</a>
+												
+												<span class="facetCount">(3)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT046" title="3">
+															城市书房（新华书店）
+													</a>
+												
+												<span class="facetCount">(3)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT012" title="2">
+															少儿综合借阅室
+													</a>
+												
+												<span class="facetCount">(2)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=ZBT020" title="2">
+															24小时自助借还区
+													</a>
+												
+												<span class="facetCount">(2)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=20180829-whk3" title="1">
+															
+													</a>
+												
+												<span class="facetCount">(1)</span>
+											</li>
+										
+									
+								
+									
+									
+									
+									
+										
+										
+											<li class="hide">
+												
+												
+													<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_curlocal=999-003" title="1">
+															
+													</a>
+												
+												<span class="facetCount">(1)</span>
+											</li>
+										
+									
+								
+								<li id="curlocalFacetLI" style="display:none;">
+									<a href="javascript:moreOrLessFacet('curlocalFacet')" id="curlocalFacetA">显示更多..</a>
+								</li>
+							</ol>
+						</div>
+					
+					<!-- 图书馆 -->
+					<div class="facetContainer">
+						<ol id="curlibcodeFacetUL"><h4><a href="#">图书馆</a></h4>
+							
+								
+									
+										
+											
+											
+												
+												
+													
+													<li >
+														<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&curlibcode=999" title="中心馆（桓台）">中心馆（桓台）
+														</a>
+														<span class="facetCount">(2)</span>
+													</li>
+												
+											
+												
+												
+													
+													<li >
+														<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&curlibcode=ZBT" title="淄博市图书馆">淄博市图书馆
+														</a>
+														<span class="facetCount">(61)</span>
+													</li>
+												
+											
+												
+												
+											
+												
+												
+											
+										
+										
+									
+									<li id="curlibcodeFacetLI" style="display:none;">
+										<a href="javascript:moreOrLessFacet('curlibcodeFacet')" id="curlibcodeFacetA">显示更多..</a>
+									</li>
+								
+								
+							
+						</ol>
+						
+					</div>
+					<!-- 语言种类 -->
+					<div class="facetContainer">
+						<ol id="langFacetUL"><h4><a href="#">语言种类</a></h4>
+							
+								
+								
+								<li >
+									
+									
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&f_lang=chi" title="61">
+												汉语
+										</a>
+									
+									<span class="facetCount">(61)</span>
+								</li>
+							
+							<li id="langFacetLI" style="display:none;">
+								<a href="javascript:moreOrLessFacet('langFacet')" id="langFacetA">显示更多..</a>
+							</li>
+						</ol>
+					</div>
+					<!-- 在馆 -->
+					
+						<div class="facetContainer">
+							<ol id="loanableFacetUL">
+								<h4><a href="#">
+									
+										
+										在馆
+									
+								</a></h4>
+								
+									<li>
+										
+										
+											
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&hasholding=1" title="61">
+												
+													
+													在馆
+												
+											</a>
+											
+											
+											
+												<span class="facetCount">(61)</span>
+									</li>
+								
+								<li id="loanableFacetLI" style="display:none;">
+									<a href="javascript:moreOrLessFacet('loanableFacet')" id="loanableFacetA">显示更多..</a>
+								</li>
+							</ol>
+						</div>
+					
+					<!--  -->
+					
+					<!--  -->
+					
+						<div class="facetContainer">
+							<ol id="intimeFacetUL"><h4><a href="#">新到时间</a></h4>
+								
+								
+									
+									
+										
+										<li>
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitDays=7" title="0">
+												过去7天
+											</a>
+											<span class="facetCount">(0)</span>
+										</li>
+									
+										
+										<li>
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitDays=30" title="0">
+												过去30天
+											</a>
+											<span class="facetCount">(0)</span>
+										</li>
+									
+										
+										<li>
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitDays=60" title="3">
+												过去60天
+											</a>
+											<span class="facetCount">(3)</span>
+										</li>
+									
+										
+										<li>
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitDays=90" title="3">
+												过去90天
+											</a>
+											<span class="facetCount">(3)</span>
+										</li>
+									
+										
+										<li>
+											<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitDays=180" title="3">
+												过去180天
+											</a>
+											<span class="facetCount">(3)</span>
+										</li>
+									
+									<li>
+										<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&limitEndDate=2026-04-06" title="3">
+										超过180天
+										</a>
+										<span class="facetCount">(61)</span>
+									</li>
+									<li id="intimeFacetLI" style="display:none;">
+										<a href="javascript:moreOrLessFacet('intimeFacet')" id="intimeFacetA">显示更多..</a>
+									</li>
+								
+							</ol>
+						</div>
+					
+					<!--资源类型 -->
+					
+				</div><!-- end facetList -->
+			</div>
+				<div id="resultTile">
+				<div style="width:auto; height:auto;float: right;">
+					
+				</div>
+
+
+				<style type="text/css">
+					.show-content{
+						/* 				    width: 750px; */
+						background-color: #eeeeee;
+						padding:15px 20px;
+					}
+					.show-title{
+						font-size: 18px;
+						padding: 0;
+						margin:0;
+						margin-left:12px;
+						margin-bottom:5px;
+					}
+					.show-div{
+						width:27%;
+						height:100px;
+						display: inline-block;
+						overflow: hidden;
+						padding:10px;
+						margin:10px;
+						border:1px solid #fff;
+						border-radius:10px;
+						height:100px;
+
+						position:relative;
+						box-shadow: 2px 2px 5px #ccc,
+						-2px -2px 5px #ccc,
+						-2px 2px 5px #ccc,
+						2px -2px 5px #ccc;
+						webkit-box-shadow: 2px 2px 5px #ccc,
+						-2px -2px 5px #ccc,
+						-2px 2px 5px #ccc,
+						2px -2px 5px #ccc;
+					}
+					.show-div>div{
+						/** background: green;**/
+						width: 94%;
+						height: 60px;
+						display: -webkit-box;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 3;
+						overflow: hidden;
+						overflow:hidden;
+						font-size:15px;
+						text-align:center;
+						box-sizing:border-box;
+						position:absolute;
+						top:50%;
+						left:10px;
+						margin-top:-30px;
+					}
+				</style>
+				
+
+				<div class="header_buttons">
+					<input type="button" class="button" value="全选" onclick="selectAllBookItems()" />
+					<input type="button" class="button" value="取消选择" onclick="clearAllBookItems()" />
+					保存至书单:
+					<select name="bookLists" id="bookLists" class="select">
+						<option value=''>创建新书单</option>
+						
+					</select>
+					<input type="button" class="button"
+						   value="保存"
+						   onclick="saveItemsToBookList()" />
+					
+					
+				</div>
+
+				<div class="meneame">
+					<span class="disabled">共 7 页</span>
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=1">首页</a>
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=1">&lt;上一页</a>
+					
+						
+							
+								<b>1</b>
+							
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=2">2</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=3">3</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=4">4</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=5">5</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=6">6</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=7">7</a>
+							
+						
+					
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=2">下一页&gt;</a>&nbsp;
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=7">尾页&gt;&gt;</a>
+				</div>
+				<div class="resultList">
+					<table class="resultTable">
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900259657" value="900259657" />
+								</td>
+								<td width="20px">
+										1.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900259657,1,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-201-10892-6"  bookrecno="900259657"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#F8F8F8">
+									<div class="bookmeta" bookrecno="900259657" booktype="1">
+										<div id="bookid_900259657">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900259657,1,0);" id="title_900259657">
+										
+										
+											《三体》导读
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900259657,1,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借19次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900259657" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E8%A9%B9%E7%90%B0%EF%BC%8C%E8%B7%AF%E5%A7%9C%E6%B3%A2%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														詹琰，路姜波著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E5%A4%A9%E6%B4%A5%E4%BA%BA%E6%B0%91%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													天津人民出版社
+											</a>
+											&nbsp;
+											出版日期: 2016.11
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/1" class="booktypeIcon" />
+											
+												
+												
+													成人图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">I207.425/64</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900259657"
+										 express_bookrecno="900259657" express_isbn="978-7-201-10892-6"
+										 express_title="《三体》导读"
+										 express_author="詹琰，路姜波著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900259657"><a id="holdingPreview_A_900259657" href="#holdingPreviewDiv_900259657"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900259657"><a href="#bookSimpleDetailDiv_900259657"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-201-10892-6"><a href="#bookCatalog_900259657">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-201-10892-6"><a href="#bookPreview_900259657">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-201-10892-6"><a href="#bookContentSummary_900259657">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-201-10892-6"><a href="#bookAuthorIntroduction_900259657">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900259657" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900259657" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900259657">
+												<iframe id="bookSimpleDetailIFrame_900259657" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900259657"></div>
+											
+											
+												<div id="bookPreview_900259657"></div>
+											
+											
+												<div id="bookContentSummary_900259657"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900259657"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900259657">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900094009" value="900094009" />
+								</td>
+								<td width="20px">
+										2.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900094009,2,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5057-3733-4"  bookrecno="900094009"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#FFF">
+									<div class="bookmeta" bookrecno="900094009" booktype="1">
+										<div id="bookid_900094009">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900094009,2,0);" id="title_900094009">
+										
+										
+											三体世界
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900094009,2,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借89次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900094009" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E5%89%91%E9%94%8B%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘剑锋著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E4%B8%AD%E5%9B%BD%E5%8F%8B%E8%B0%8A%E5%87%BA%E7%89%88%E5%85%AC%E5%8F%B8" target="_blank" rel="noopener noreferrer">
+													中国友谊出版公司
+											</a>
+											&nbsp;
+											出版日期: 2016
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/1" class="booktypeIcon" />
+											
+												
+												
+													成人图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">I247.55/133</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900094009"
+										 express_bookrecno="900094009" express_isbn="978-7-5057-3733-4"
+										 express_title="三体世界"
+										 express_author="刘剑锋著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900094009"><a id="holdingPreview_A_900094009" href="#holdingPreviewDiv_900094009"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900094009"><a href="#bookSimpleDetailDiv_900094009"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5057-3733-4"><a href="#bookCatalog_900094009">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5057-3733-4"><a href="#bookPreview_900094009">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5057-3733-4"><a href="#bookContentSummary_900094009">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5057-3733-4"><a href="#bookAuthorIntroduction_900094009">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900094009" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900094009" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900094009">
+												<iframe id="bookSimpleDetailIFrame_900094009" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900094009"></div>
+											
+											
+												<div id="bookPreview_900094009"></div>
+											
+											
+												<div id="bookContentSummary_900094009"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900094009"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900094009">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416863" value="900416863" />
+								</td>
+								<td width="20px">
+										3.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416863,3,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-8071-9"  bookrecno="900416863"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#F8F8F8">
+									<div class="bookmeta" bookrecno="900416863" booktype="5">
+										<div id="bookid_900416863">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416863,3,0);" id="title_900416863">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．6
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416863,3,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借2次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416863" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2025
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:6</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416863"
+										 express_bookrecno="900416863" express_isbn="978-7-5339-8071-9"
+										 express_title="三体漫画．Ⅱ，黑暗森林．6"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416863"><a id="holdingPreview_A_900416863" href="#holdingPreviewDiv_900416863"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416863"><a href="#bookSimpleDetailDiv_900416863"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-8071-9"><a href="#bookCatalog_900416863">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-8071-9"><a href="#bookPreview_900416863">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-8071-9"><a href="#bookContentSummary_900416863">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-8071-9"><a href="#bookAuthorIntroduction_900416863">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416863" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416863" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416863">
+												<iframe id="bookSimpleDetailIFrame_900416863" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416863"></div>
+											
+											
+												<div id="bookPreview_900416863"></div>
+											
+											
+												<div id="bookContentSummary_900416863"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416863"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416863">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416864" value="900416864" />
+								</td>
+								<td width="20px">
+										4.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416864,4,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-8073-3"  bookrecno="900416864"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#FFF">
+									<div class="bookmeta" bookrecno="900416864" booktype="5">
+										<div id="bookid_900416864">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416864,4,0);" id="title_900416864">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．8
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416864,4,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借3次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416864" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2025
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:8</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416864"
+										 express_bookrecno="900416864" express_isbn="978-7-5339-8073-3"
+										 express_title="三体漫画．Ⅱ，黑暗森林．8"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416864"><a id="holdingPreview_A_900416864" href="#holdingPreviewDiv_900416864"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416864"><a href="#bookSimpleDetailDiv_900416864"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-8073-3"><a href="#bookCatalog_900416864">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-8073-3"><a href="#bookPreview_900416864">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-8073-3"><a href="#bookContentSummary_900416864">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-8073-3"><a href="#bookAuthorIntroduction_900416864">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416864" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416864" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416864">
+												<iframe id="bookSimpleDetailIFrame_900416864" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416864"></div>
+											
+											
+												<div id="bookPreview_900416864"></div>
+											
+											
+												<div id="bookContentSummary_900416864"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416864"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416864">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416846" value="900416846" />
+								</td>
+								<td width="20px">
+										5.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416846,5,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-7733-7"  bookrecno="900416846"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#F8F8F8">
+									<div class="bookmeta" bookrecno="900416846" booktype="5">
+										<div id="bookid_900416846">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416846,5,0);" id="title_900416846">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．1
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416846,5,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借2次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416846" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2024
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:1</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416846"
+										 express_bookrecno="900416846" express_isbn="978-7-5339-7733-7"
+										 express_title="三体漫画．Ⅱ，黑暗森林．1"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416846"><a id="holdingPreview_A_900416846" href="#holdingPreviewDiv_900416846"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416846"><a href="#bookSimpleDetailDiv_900416846"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-7733-7"><a href="#bookCatalog_900416846">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-7733-7"><a href="#bookPreview_900416846">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-7733-7"><a href="#bookContentSummary_900416846">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-7733-7"><a href="#bookAuthorIntroduction_900416846">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416846" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416846" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416846">
+												<iframe id="bookSimpleDetailIFrame_900416846" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416846"></div>
+											
+											
+												<div id="bookPreview_900416846"></div>
+											
+											
+												<div id="bookContentSummary_900416846"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416846"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416846">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416865" value="900416865" />
+								</td>
+								<td width="20px">
+										6.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416865,6,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-7736-8"  bookrecno="900416865"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#FFF">
+									<div class="bookmeta" bookrecno="900416865" booktype="5">
+										<div id="bookid_900416865">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416865,6,0);" id="title_900416865">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．4
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416865,6,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借3次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416865" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2024
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:4</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416865"
+										 express_bookrecno="900416865" express_isbn="978-7-5339-7736-8"
+										 express_title="三体漫画．Ⅱ，黑暗森林．4"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416865"><a id="holdingPreview_A_900416865" href="#holdingPreviewDiv_900416865"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416865"><a href="#bookSimpleDetailDiv_900416865"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-7736-8"><a href="#bookCatalog_900416865">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-7736-8"><a href="#bookPreview_900416865">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-7736-8"><a href="#bookContentSummary_900416865">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-7736-8"><a href="#bookAuthorIntroduction_900416865">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416865" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416865" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416865">
+												<iframe id="bookSimpleDetailIFrame_900416865" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416865"></div>
+											
+											
+												<div id="bookPreview_900416865"></div>
+											
+											
+												<div id="bookContentSummary_900416865"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416865"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416865">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416866" value="900416866" />
+								</td>
+								<td width="20px">
+										7.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416866,7,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-7735-1"  bookrecno="900416866"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#F8F8F8">
+									<div class="bookmeta" bookrecno="900416866" booktype="5">
+										<div id="bookid_900416866">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416866,7,0);" id="title_900416866">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．3
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416866,7,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借1次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416866" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2024
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:3</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416866"
+										 express_bookrecno="900416866" express_isbn="978-7-5339-7735-1"
+										 express_title="三体漫画．Ⅱ，黑暗森林．3"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416866"><a id="holdingPreview_A_900416866" href="#holdingPreviewDiv_900416866"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416866"><a href="#bookSimpleDetailDiv_900416866"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-7735-1"><a href="#bookCatalog_900416866">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-7735-1"><a href="#bookPreview_900416866">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-7735-1"><a href="#bookContentSummary_900416866">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-7735-1"><a href="#bookAuthorIntroduction_900416866">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416866" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416866" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416866">
+												<iframe id="bookSimpleDetailIFrame_900416866" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416866"></div>
+											
+											
+												<div id="bookPreview_900416866"></div>
+											
+											
+												<div id="bookContentSummary_900416866"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416866"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416866">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900417637" value="900417637" />
+								</td>
+								<td width="20px">
+										8.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900417637,8,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-7734-4"  bookrecno="900417637"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#FFF">
+									<div class="bookmeta" bookrecno="900417637" booktype="5">
+										<div id="bookid_900417637">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900417637,8,0);" id="title_900417637">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．2
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900417637,8,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借1次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900417637" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2024
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:2</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900417637"
+										 express_bookrecno="900417637" express_isbn="978-7-5339-7734-4"
+										 express_title="三体漫画．Ⅱ，黑暗森林．2"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900417637"><a id="holdingPreview_A_900417637" href="#holdingPreviewDiv_900417637"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900417637"><a href="#bookSimpleDetailDiv_900417637"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-7734-4"><a href="#bookCatalog_900417637">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-7734-4"><a href="#bookPreview_900417637">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-7734-4"><a href="#bookContentSummary_900417637">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-7734-4"><a href="#bookAuthorIntroduction_900417637">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900417637" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900417637" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900417637">
+												<iframe id="bookSimpleDetailIFrame_900417637" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900417637"></div>
+											
+											
+												<div id="bookPreview_900417637"></div>
+											
+											
+												<div id="bookContentSummary_900417637"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900417637"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900417637">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416862" value="900416862" />
+								</td>
+								<td width="20px">
+										9.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416862,9,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-8072-6"  bookrecno="900416862"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#F8F8F8">
+									<div class="bookmeta" bookrecno="900416862" booktype="5">
+										<div id="bookid_900416862">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416862,9,0);" id="title_900416862">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．7
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416862,9,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借2次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416862" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2025
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:7</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416862"
+										 express_bookrecno="900416862" express_isbn="978-7-5339-8072-6"
+										 express_title="三体漫画．Ⅱ，黑暗森林．7"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416862"><a id="holdingPreview_A_900416862" href="#holdingPreviewDiv_900416862"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416862"><a href="#bookSimpleDetailDiv_900416862"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-8072-6"><a href="#bookCatalog_900416862">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-8072-6"><a href="#bookPreview_900416862">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-8072-6"><a href="#bookContentSummary_900416862">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-8072-6"><a href="#bookAuthorIntroduction_900416862">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416862" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416862" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416862">
+												<iframe id="bookSimpleDetailIFrame_900416862" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416862"></div>
+											
+											
+												<div id="bookPreview_900416862"></div>
+											
+											
+												<div id="bookContentSummary_900416862"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416862"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416862">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+							
+							
+							<tr>
+								<td width="20px">
+									<input type="checkbox" name="bookItemCheckbox"
+										   id="bookItem_900416861" value="900416861" />
+								</td>
+								<td width="20px">
+										10.
+								</td>
+								
+									<td class="coverTD">
+										<a href="javascript:bookDetail(900416861,10,0);">
+											
+												
+											
+										
+											<img class="bookcover_img" src="/opac/media/images/book-default-small.gif"
+												 onerror="this.src='/opac/media/images/book-default-small.gif'";
+												 isbn="978-7-5339-8070-2"  bookrecno="900416861"/>
+											</a>
+
+											<div style="padding: 10px 0px;">封面仅供参考</div>
+										
+										
+									</td>
+								
+								
+								<td class="bookmetaTD" style="background-color:#FFF">
+									<div class="bookmeta" bookrecno="900416861" booktype="5">
+										<div id="bookid_900416861">
+								<span class="bookmetaTitle">
+									<a class="title-link" href="javascript:bookDetail(900416861,10,0);" id="title_900416861">
+										
+										
+											三体漫画．Ⅱ，黑暗森林．5
+										
+									</a>
+
+								</span>
+											<a href="javascript:bookDetail(900416861,10,1);">
+												<img border="0" title="在新窗口显示详细信息" src="/opac/media/images/newwin.png" />
+											</a>
+											
+											
+											
+											<span style="padding-top:15px;float: right;">
+								
+									
+									
+										已借3次.
+									
+								
+								
+								</span>
+											<span class="biblios_ordering" style="display: none;">
+									订购中
+								</span>
+								<span class="reservation_count" ></span>
+								<!-- 湖北省馆 【全文传递目前不用了20191128】-->
+									
+
+								<!-- 如果有附件则显示非书资料的图标 -->
+								
+								<span id="attachment_900416861" style="display: none;"><font color="green">(含光盘)</font></span>
+								
+										</div>
+										<div>
+											
+											著者:
+											
+												<a class="author-link"
+												   href="/opac/search?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97"
+												   target="_blank" rel="noopener noreferrer">
+														刘慈欣原著
+												</a>
+											
+										</div>
+										<div>
+											出版社:
+											<a class="publisher-link" href="/opac/search?searchWay=publisher&q=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE" target="_blank" rel="noopener noreferrer">
+													浙江文艺出版社
+											</a>
+											&nbsp;
+											出版日期: 2025
+										</div>
+										<div>
+											
+										</div>
+										<div>
+											文献类型:
+											
+											<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+											
+												
+												
+													少儿图书
+													
+														,
+														索书号:
+														<span class="callnosSpan">J228.2/1430:2:5</span>
+													
+												
+											
+											
+										</div>
+									</div>
+									<div class="expressServiceTab" id="express_tab_900416861"
+										 express_bookrecno="900416861" express_isbn="978-7-5339-8070-2"
+										 express_title="三体漫画．Ⅱ，黑暗森林．5"
+										 express_author="刘慈欣原著"
+										 express_bookmeta_loaded="0">
+										<ul>
+											<li id="holdingPreview_900416861"><a id="holdingPreview_A_900416861" href="#holdingPreviewDiv_900416861"
+													>在馆信息</a></li>
+											
+												
+												
+												
+												
+												
+											
+											
+											
+											
+											
+											
+											<li id="bookSimpleDetailDiv_A_900416861"><a href="#bookSimpleDetailDiv_900416861"
+													>图书信息概览</a></li>
+											
+											
+												
+													<li class="hide" id="book_catalog_978-7-5339-8070-2"><a href="#bookCatalog_900416861">图书目录</a></li>
+												
+												
+													<li class="hide" id="book_preview_978-7-5339-8070-2"><a href="#bookPreview_900416861">试读信息</a></li>
+												
+												
+													<li class="hide" id="book_summary_978-7-5339-8070-2"><a href="#bookContentSummary_900416861">内容简介</a></li>
+												
+												
+													<li class="hide" id="book_authorIntroduction_978-7-5339-8070-2"><a href="#bookAuthorIntroduction_900416861">著者简介</a></li>
+												
+											
+											
+											
+
+											
+										</ul>
+										<!--iframe id="holdingPreviewIFrame_900416861" width="100%" frameborder="0">
+							</iframe-->
+										<div id="holdingPreviewDiv_900416861" inittimes="0">
+										</div>
+
+										
+											<div id="bookSimpleDetailDiv_900416861">
+												<iframe id="bookSimpleDetailIFrame_900416861" width="100%" frameborder="0">
+												</iframe>
+											</div>
+										
+										
+											
+												<div id="bookCatalog_900416861"></div>
+											
+											
+												<div id="bookPreview_900416861"></div>
+											
+											
+												<div id="bookContentSummary_900416861"></div>
+											
+											
+												<div id="bookAuthorIntroduction_900416861"></div>
+											
+										
+										
+										
+											
+											
+											
+											
+											
+											
+										
+
+										
+										
+										
+										
+										
+									</div>
+									<div class="headIcon cloudArea" id="cloudArea_900416861">
+
+									</div>
+									
+								</td>
+							</tr>
+						
+					</table>
+				</div>
+				<div class="meneame">
+					<span class="disabled">共 7 页</span>
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=1">首页</a>
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=1">&lt;上一页</a>
+					
+						
+							
+								<b>1</b>
+							
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=2">2</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=3">3</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=4">4</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=5">5</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=6">6</a>
+							
+						
+					
+						
+							
+							
+								<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=7">7</a>
+							
+						
+					
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=2">下一页&gt;</a>&nbsp;
+					<a href="/opac/search?q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND&page=7">尾页&gt;&gt;</a>
+				</div>
+				<!-- end of 根据numFound判断是否有检索到记录 -->
+			</div>
+		</div>
+	
+
+	<div id="debug"></div>
+</div>
+<script src="/opac/media/zTree/v3/js/jquery.ztree.core.min.js"></script>
+
+
+<script type="text/javascript">
+	// function confirmtransfer(id){
+
+	// 	if(!confirm("请注意：使用本服务需要首先注册文献传递帐户。登录后系统会自动填充您的文献传递服务单。\n \n关于文献传递请求的声明：“湖北省数字图书馆文献信息中心”为用户提供文献传递服务。根据《中华人民共和国著作权法》湖北省数字图书馆文献信息中心提供的少量文献复制件，仅用于个人学习或者研究的目的，不能用于任何商业目的。如果用户为超出“合理使用”的意图，湖北省数字图书馆文献信息中心保留拒绝接受该请求的权利。\n \n关于馆际互借请求的版权声明：根据《中华人民共和国著作权法》，在法律规定的特定条件下，图书馆对已经出版的图书、期刊上的文章或其他资料可以做少量复制。复制品只能用于个人学习、研究的目的。如果在此范围之外提出互借请求 ，或者后来使用该复制品用于商业目的，则属于侵权行为。")) return;
+	// 	var url = "/opac/ebook/getDocument/" + id;
+	// 	location.href = url;
+	// }
+	//处理tab
+		$(function () {
+		$(".expressServiceTab").tabs({
+			collapsible: true,
+			
+			event: 'mouseover',
+			
+			beforeActivate: function (event, ui) {
+				var bookrecno = $(this).attr("express_bookrecno");
+				//安全获取面板 ID
+				const panelId = $(ui.newPanel).attr("id") || "";
+				if (panelId == "holdingPreviewDiv_" + bookrecno) {
+					//常州市武进区图书馆
+					
+					var curLibcodes = "";//用于限定显示的分馆
+					var url = $("#seriesOrderIFrame_" + bookrecno).attr("src");
+					if (!url) {
+						url = "/opac/series/currentissue/"+bookrecno+"?view=simple&libcodes="+curLibcodes+"";
+						$("#seriesOrderIFrame_" + bookrecno).attr("src", url);
+					}
+				} else if (panelId == "bookSimpleDetailDiv_" + bookrecno) {
+					var url = $("#bookSimpleDetailIFrame_" + bookrecno).attr("src");
+					if (!url) {
+						url = "/opac/book/"+bookrecno+"" + "?view=simple";
+						$("#bookSimpleDetailIFrame_" + bookrecno).attr("src", url);
+					}
+				} else if (panelId == "test_bookCatalog_" + bookrecno) {
+					showBookAllMetaInfo(bookrecno);
+				} else if (panelId == "test_bookPreview_" + bookrecno) {
+					showBookAllMetaInfo(bookrecno);
+
+				} else if (panelId == "test_bookContentSummary_" + bookrecno) {
+					showBookAllMetaInfo(bookrecno);
+				} else if (panelId == "eBook_" + bookrecno) {
+
+				}
+			}
+		});
+		// 核心修复：所有tabs初始化时【全部折叠】，无任何激活项
+		$(".expressServiceTab").tabs("option", "active", false);
+	});
+
+	var GLOBAL_BASE_API_URL = "http://api.interlib.com.cn:6699/interes";
+
+	function iframeAutoFit(iframeObj) {
+		setTimeout(function () {
+			if (!iframeObj) return;
+			iframeObj.height = (iframeObj.Document ? iframeObj.Document.body.scrollHeight : iframeObj.contentDocument.body.offsetHeight);
+		}, 200)
+	}
+
+	function callFn(data) {}
+	function showAllBookMetaInfoTab(data) {
+		$.each(data, function (i) {
+			var isbn = data[i].isbn;
+			var isCatalogEmpty = data[i].isCatalogEmpty;
+			var isPreviewEmpty = data[i].isPreviewEmpty;
+			var isSummaryEmpty = data[i].isSummaryEmpty;
+			var isAuthorIntroduction = data[i].isAuthorIntroductionEmpty;
+			if (!isCatalogEmpty) {
+				$("#book_catalog_" + isbn).show();
+			}
+			if (!isPreviewEmpty) {
+				$("#book_preview_" + isbn).show();
+			}
+			if (!isSummaryEmpty) {
+				$("#book_summary_" + isbn).show();
+			}
+			if (!isAuthorIntroduction) {
+				$("#book_authorIntroduction_" + isbn).show();
+			}
+		});
+	}
+
+	//图书目录信息,图书试读信息,图书内容简介,图书著者简介
+	function showBookAllMetaInfo(bookrecno) {
+		if ($.cookie("configouternet") != "false") {
+			getBookAllMetaInfo(bookrecno);
+		}
+	}
+
+	function getBookAllMetaInfo(bookrecno) {
+		var loaded = $("#express_tab_" + bookrecno).attr("express_bookmeta_loaded");
+		if (trimToEmpty(loaded) == "1") {
+			return;
+		}
+		$("#express_tab_" + bookrecno).attr("express_bookmeta_loaded", "1");
+		var isbn = $("#express_tab_" + bookrecno).attr("express_isbn");
+		//isbn = "9787308090957";
+		if ($.trim(isbn) == "") {
+			return;
+		}
+		var globalLibraryCode = "P2SD0533139";
+		//$.getJSON(strURL, {});
+	}
+
+	function insertAllBookMetaInfo(json) {
+		if (json.isbn == undefined || json.isbn == null ||
+				json.result == undefined || json.result == null || json.result.length == 0) {
+			//TODO 取豆瓣数据
+			//showDoubanSubject();
+			return;
+		}
+		var isbn = json.isbn;
+		var bookCatalog = json.result.catalog;
+		var previewUrl = trimToEmpty(json.result.previewUrl);
+		var previewContent = json.result.previewContent;
+		var summary = trimToEmpty(json.result.summary);
+		var authorIntroduction = trimToEmpty(json.result.authorIntroduction);
+		var bookrecno = $("div[express_isbn='" + isbn + "']").attr("express_bookrecno");
+		if (trimToEmpty(bookrecno) == "") {
+			return;
+		}
+		var goTopTitleBlock = "<p><a href='#title_" + bookrecno + "'>回到顶部</a></p>";
+		//$("#bookCatalog_" + bookrecno).html(bookCatalog);
+		if (bookCatalog != "") {
+			$("#bookCatalog_" + bookrecno).html(bookCatalog + goTopTitleBlock);
+		}
+		if (previewUrl != "") {
+			var previewBlock = "<p><a href='" + previewUrl + "' target='_blank'>" +
+					"<span style='color:blue;'>" + "查看全部试读信息" + "</span></a></p>" +
+					"<br/>" + previewContent;
+			$("#bookPreview_" + bookrecno).html(previewBlock + goTopTitleBlock);
+		} else {
+			if (previewContent != "") {
+				$("#bookPreview_" + bookrecno).html(previewContent + goTopTitleBlock);
+			}
+		}
+		if (summary != "") {
+			$("#bookContentSummary_" + bookrecno).html(summary);
+		}
+		if (authorIntroduction != null) {
+			$("#bookAuthorIntroduction_" + bookrecno).html(authorIntroduction);
+		}
+		if (summary == "" || authorIntroduction == "") {
+			//showDoubanSubject();
+		}
+	}
+
+	function showHoldingPreview(bookrecno) {
+		//这里需要这么做是因为$(".expressServiceTab").tabs('select', 0);这个动作会在tabs初始化后全部打开
+		//一次第一个tab,造成所有第一个tab数据同时请求服务器然后加载,所以这里用个标识,在第二次点击选择tab才
+		//真正请求加载数据然后显示
+		var initTimes = $("#holdingPreviewDiv_" + bookrecno).attr("inittimes");
+		if (initTimes == "0") {
+			$("#holdingPreviewDiv_" + bookrecno).attr("inittimes", "1");
+			return;
+		} else if (initTimes == "1") {
+			var isDone = $.trim($("#holdingPreviewDiv_" + bookrecno).html());
+			if (isDone == "") {
+				var curLibcodes = getCurlibcodes();
+				$.ajax({
+					type: "GET",
+					url: "/opac/book/holdingpreview/"+bookrecno+"",
+					data: {
+						"curLibcodes": curLibcodes
+					},
+					dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+					success: function (xml) {
+						insertHoldingPreview(bookrecno, xml);
+					}
+				});
+			}
+		}
+	}
+
+	function getCurlibcodes() {
+		return "";
+	}
+
+	function insertHoldingPreview(bookrecno, data) {
+		var glc = "P2SD0533139";
+		var tableHeader = new Array("索书号", "所在分馆", "所在馆藏地点", "在馆复本数");
+		if (glc == "P3JS0519059") {
+			tableHeader = new Array("架位号", "所在馆藏地点", "索书号", "所在分馆", "在馆复本数");
+		}
+		var tableContent = new Array();
+		var records = $(data).find("record");
+		records.each(function (i) {
+			var callno = $(this).find("callno").text();
+			var curlib = $(this).find("curlib").text();
+			var curlibName = $(this).find("curlibName").text();
+			var curlocal = $(this).find("curlocal").text();
+			var curlocalName = $(this).find("curlocalName").text();
+			var copycount = $(this).find("copycount").text();
+			var shelfno = $(this).find("shelfno").text();
+			var dataArray = new Array(callno, curlibName, curlocalName, copycount);
+			if (glc == "P3JS0519059") {
+				dataArray = new Array(shelfno, curlocalName, callno, curlibName, copycount);
+			}
+			tableContent.push(dataArray);
+		});
+		var tableStr = "";
+		if (records.length == 0) {
+			
+			
+			
+			tableStr = "没有在馆复本记录.";
+			
+			
+		} else {
+			tableStr = createTable("expressTable", tableHeader, tableContent);
+			//是否多于10条
+			if (records.length > 10) {
+				tableStr += "<a href='book/" + bookrecno
+						+ "?globalSearchWay='>查看更多</a>";
+			}
+		}
+		$("#holdingPreviewDiv_" + bookrecno).html(tableStr);
+	}
+
+	function createTable(className, tableHeader, tableContent) {
+		var s = "<table style='width:100%;'><tr>";
+		if (className != undefined && className != "") {
+			s = '<table style="width:100%" class="' + className + '"><tr>';
+		}
+		for (index in tableHeader) {
+			s += "<td>" + tableHeader[index] + "</td>";
+		}
+		s += "</tr>";
+		var i = 0;
+		for (index in tableContent) {
+			s += "<tr>";
+			var recordData = tableContent[index];
+			var glc = "P2SD0533139";
+			for (j in recordData) {
+				var style = "";
+				if (glc == "P3JS0519059" && j == 0) {
+					style = " style='color:red;'";
+				}
+				s += "<td" + style + ">" + recordData[j] + "</td>";
+			}
+			s += "</tr>";
+			i++;
+			if (i == 10) { //页面中只显示10条
+				break;
+			}
+		}
+		s += "</table>";
+		return s;
+	}
+
+	function trimToEmpty(str) {
+		if (str == undefined || str == null) {
+			return "";
+		}
+		return $.trim(str);
+	}
+
+	<!-- 成都市地方志图书馆内容简介走marc数据的330a和303a字段（优先取330a，330a如果不存在就取303a -->
+	
+
+	$(function () {
+		setTimeout(function () {
+			function getDivISBNs() {
+				var divObjects = $("div[express_isbn]");
+				var isbns = "";
+				divObjects.each(function (index) {
+					var isbn = $(this).attr("express_isbn");
+					isbns += "," + isbn;
+				});
+				return isbns;
+			}
+
+			function getDivBOOKRECNOs() {
+				var divObjects = $("div[express_bookrecno]");
+				var bookrecnos = "";
+				divObjects.each(function (index) {
+					var bookrecno = $(this).attr("express_bookrecno");
+					bookrecnos += "," + bookrecno;
+				});
+				return bookrecnos;
+			}
+
+			var glc = "P2SD0533139";
+			var isBookInfo= "";
+			var isbns = getDivISBNs();
+			var bookrecnos = getDivBOOKRECNOs();
+			isbns = isbns.split("\,");
+			bookrecnos = bookrecnos.split("\,");
+			for (let isbn in isbns) {
+				for (let bookrecno in bookrecnos) {
+					if (isbn == bookrecno) {
+						if (glc == 'ESC028267') {
+							showInfoByMarc(isbns[isbn], bookrecnos[bookrecno]);
+						}else
+						if(glc == 'P1HBE027004' && isBookInfo == "1"){
+							showInfoByHuBeiCustomMade(isbns[isbn], bookrecnos[bookrecno]);
+						}else {
+							showInfo(isbns[isbn], bookrecnos[bookrecno]);
+							break;
+						}
+					}
+				}
+			}
+		}, 900);
+	});
+
+	function showInfo(isbn, bookrecno) {
+		var strIsbn = isbn;
+		if (isbn.search(/\-/g) != -1) {
+			isbn = isbn.replace(/\-/g, "");
+		}
+		$.ajax({
+			type: "get",
+			url: "https://book-resource.dataesb.com/book/searchbook?page=1&size=10&keywords=" + isbn,
+			dataType: "json",
+			success: function (res) {
+				if(res.data==null || res.data.result[0]==null){return;}
+				<!-- 成都市地方志图书馆内容简介走marc数据的330a和303a字段（优先取330a，330a如果不存在就取303a -->
+				
+				if (res.data.result[0].summary == null) {
+				} else {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.data.result[0].summary + '</td></tr></table>';
+					$("#bookContentSummary_" + bookrecno).html(html);
+					$("#book_summary_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+				
+				if (res.data.result[0].catalog == null) {
+				} else {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.data.result[0].catalog + '</td></tr></table>';
+					$("#bookCatalog_" + bookrecno).html(html);
+					$("#book_catalog_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+				if (res.data.result[0].authorIntro == null) {
+				} else {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.data.result[0].authorIntro + '</td></tr></table>';
+					$("#bookAuthorIntroduction_" + bookrecno).html(html);
+					$("#bookAuthorIntroduction_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+			},
+			error: function (res) {
+				console.log("res" + res);
+			}
+		});
+	};
+	function showInfoByHuBeiCustomMade(isbn, bookrecno) {
+
+		var strIsbn = isbn;
+		$.ajax({
+			type: "get",
+			url: "https://www.bookcovers.cn/indexc.php?client=hblib&isbn="+isbn+"&callback=?",
+			dataType: "jsonp",
+			success: function (res) {
+				if (res.result.summary !== null && res.result.summary !== undefined && res.result.summary !== "") {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.result.summary + '</td></tr></table>';
+					$("#bookContentSummary_" + bookrecno).html(html);
+					$("#book_summary_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+				if (res.result.catalog !== null && res.result.catalog !== undefined && res.result.catalog !== "") {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.result.catalog + '</td></tr></table>';
+					$("#bookCatalog_" + bookrecno).html(html);
+					$("#book_catalog_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+				if (res.result.authorIntroduction !== null && res.result.authorIntroduction !== undefined && res.result.authorIntroduction !== "") {
+					var html = '<table style="width:100%" class="expressTable"><tr><td>' + res.result.authorIntroduction + '</td></tr></table>';
+					$("#bookAuthorIntroduction_" + bookrecno).html(html);
+					$("#bookAuthorIntroduction_" + strIsbn).removeClass("hide ui-state-default ui-corner-top").addClass("ui-state-default ui-corner-top");
+				}
+			},
+			error: function (res) {
+				console.log("res" + res);
+			}
+		});
+	}
+	$(function () {
+		var facetFields = new Array("curlibcodeFacet", "curlocalFacet", "subjectFacet", "authorFacet",
+				"pubdateFacet", "booktypeFacet", "langFacet", "class1Facet");
+		for (index in facetFields) {
+			var facetField = facetFields[index];
+			var isHide = $("#" + facetField + "UL .hide").length;
+			if (isHide > 0) {
+				$("#" + facetField + "LI").show();
+			}
+		}
+	});
+
+	function moreOrLessFacet(facetField) {
+		var aObj = $("#" + facetField + "A");
+		var facetUL = $("#" + facetField + "UL .hide");
+		if (facetUL.length > 0) {
+			facetUL.removeClass("hide").addClass("show");
+			aObj.html("显示较少..");
+		} else {
+			$("#" + facetField + "UL .show").removeClass("show").addClass("hide");
+			aObj.html("显示较多..");
+		}
+	}
+
+	
+
+	function getHoldingPreviews(bookrecnos) {
+		var curLibcodes = getCurlibcodes();
+		var isCluster = 'false';
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/holdingPreviews",
+			data: {
+				"bookrecnos": bookrecnos.join(","),
+				"curLibcodes": curLibcodes,
+				"return_fmt": "json",
+				"isCluster": isCluster
+			},
+			dataType: "json",
+			success: function (data) {
+				insertHoldingPreviews(bookrecnos, data);
+			}
+		});
+	}
+
+	function insertHoldingPreviews(bookrecnos, data) {
+		var showLocal = $.cookie("showLocal");//用于限定显示的馆藏地点
+		if (showLocal == null || showLocal == "") {
+			showLocal = "";
+		}
+		var curLibcodes = getCurlibcodes();//用于限定显示的分馆
+		var limitFlag = "0";
+		var recnoArray = new Array();//无馆藏记录的期刊集合
+		var glc = "P2SD0533139";
+
+		var bookrecnoArr = new Array();
+		for (var i in bookrecnos) {
+			var totalCopeyCount = 0;
+			var totalLoanableCount = 0;
+			var bookrecno = bookrecnos[i];
+			var tableHeader = new Array(
+					
+					"索书号",
+					"所在分馆",
+					"所在馆藏地点");
+			
+			
+			
+			
+			
+			tableHeader.push("在馆数/馆藏总数");
+			
+			
+			var tableContent = new Array();
+			var records = data.previews[bookrecno];
+			for (var j in records) {
+				var callnos = records[j].callno;
+				var curlib = records[j].curlib;
+				var curlibName = records[j].curlibName;
+				var curlocal = records[j].curlocal;
+				var curlocalName = records[j].curlocalName;
+				var copycount = records[j].copycount;
+				var loanableCount = records[j].loanableCount;
+				var exist = false;
+				if (showLocal != null) {
+					var locals = showLocal.split(",");
+					for (var i = 0; i < locals.length; i++) {
+						if (curlocal == locals[i]) {
+							exist = true;
+						}
+					}
+				}
+				if (showLocal != null && showLocal != "" && !exist && curLibcodes == "") {
+					continue;
+				}
+				if (limitFlag == "1" && curLibcodes && (curLibcodes + ",").indexOf(curlib + ",") == -1) {
+					//只累计馆藏总数
+					totalCopeyCount += copycount;
+					continue;
+				}
+				var callno = "";
+				if (callnos) {
+					var callnoArray = callnos.split(",");
+					for (var index in callnoArray) {
+						if (index <= 2) {
+							if (callno) {
+								callno += ",";
+							}
+							callno += callnoArray[index];
+						} else if (index == 3) {
+							callno += "..."
+						}
+					}
+				}
+				totalCopeyCount += copycount;
+				totalLoanableCount += loanableCount;
+				
+				
+				
+				var dataArray = new Array(callno, curlibName, curlocalName, loanableCount + "/" + copycount);
+				
+				
+				// 厦门 and 泉州
+				
+				tableContent.push(dataArray);
+				var limits = "";
+				if (limits == "" || (limits + ",").indexOf(curlocal + ",") != -1) {
+					if (loanableCount > 0) {
+						$("#loanDiv_" + bookrecno).show();
+					}
+				}
+			}
+			var tableStr = "";
+			
+			
+			
+			
+			var holding_available = "在馆";
+			
+			
+			var tabStr = holding_available + "(" + totalLoanableCount
+					+ ")/馆藏(" + totalCopeyCount + ")";
+			var flag = false;
+			if (records == undefined || records == null || totalCopeyCount == 0) {
+				
+				
+				
+				tableStr = "没有在馆复本记录.";
+				
+				
+				var divObj = $("div[bookrecno='" + bookrecno + "']");
+				if (divObj && divObj.attr("booktype") == "2") {
+					recnoArray.push(bookrecno);
+					tabStr = '到馆信息';
+					tableStr = '没有记录!';
+					flag = true;
+				} else if (divObj && divObj.attr("booktype") == "6") {
+					if (glc == 'P2GD020003') {
+						//隐藏电子资源馆藏标签
+						$("#holdingPreview_A_" + bookrecno).parent().hide();
+					} else if (glc == 'P1HNX0731004') {
+						//湖南省图书馆定制检索booktype=6 馆藏为0
+						tableStr = "此书为古籍，请前往古籍阅览室查询";
+						$("#holdingPreviewDiv_" + bookrecno).css("color", "red");
+						$("#holdingPreviewDiv_" + bookrecno).css("font-weight", "bold");
+					}
+				}
+			} else {
+				tableStr = createTable("expressTable", tableHeader, tableContent);
+				//是否多于10条
+				if (tableContent.length > 10) {
+					tableStr += "<a href='book/" + bookrecno
+							+ "?globalSearchWay='>查看更多</a>";
+				}
+
+				//---开采 网借
+				bookrecnoArr.push(bookrecno);
+			}
+			$("#holdingPreview_A_" + bookrecno).text(tabStr);
+			if (flag) {
+				$("#holdingPreviewDiv_" + bookrecno).html("<iframe id='seriesOrderIFrame_" + bookrecno + "' width='100%' frameborder='0'></iframe>");
+			} else {
+				$("#holdingPreviewDiv_" + bookrecno).html(tableStr);
+			}
+		}
+		
+	}
+
+	
+
+	function to_kaicai_loan(bookrecnoArr) {
+		var url = prefix_loan + "/api/" + unitcode_loan + "/product/checkBookExist" +
+				"?type=0&skuIds=" + bookrecnoArr.join(",");
+		console.log(url);
+		$.ajax({
+			type: "GET",
+			url: url,
+			dataType: "jsonp",
+			jsonpCallback: "showLoanResource"
+		});
+	};
+
+	function showLoanResource(data) {
+		if (data.code == 0) {
+			var result = data.result;
+			for (var key in result) {
+				var state = result[key].state;
+				if (state == 1) {
+					var skuId = result[key].skuId;
+					var book_url = prefix_loan + "/" + unitcode_loan + "/product/" + skuId + ".html";
+					//判断读者是否登入
+					
+					var appendStr = "<a href='" + book_url + "' target='_blank' class='libInBook'>" +
+							"<i class='libInBookIcon'></i>馆内图书&nbsp;配送到家</a>";
+					$("#cloudArea_" + key).html(appendStr);
+				}
+			}
+		}
+	};
+
+	Date.prototype.Format = function (fmt) {
+		var o = {
+			"M+": this.getMonth() + 1, // 月份
+			"d+": this.getDate(), // 日
+			"h+": this.getHours(), // 小时
+			"m+": this.getMinutes(), // 分
+			"s+": this.getSeconds(), // 秒
+			"q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+			"S": this.getMilliseconds() // 毫秒
+		};
+		if (/(y+)/.test(fmt))
+			fmt = fmt.replace(RegExp.$1, (this.getFullYear() + ""));
+		for (var k in o)
+			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+		return fmt;
+	}
+
+
+	function wrapSSOUrl(account, aimUrl) {
+		var d = new Date().Format("yyyyMMdd");
+		var validateCode = $.md5("" + d + account + unitcode_loan);
+		var ssoUrl = prefix_loan + "/" + unitcode_loan + "/account/autoLogin?account=" + account
+				+ "&validateCode=" + validateCode + "&password=autoLogin&aimUrl=" + aimUrl;
+		return ssoUrl;
+	}
+
+	$(function () {
+		var bookrecnos = getBookrecnos();
+		getHoldingPreviews(bookrecnos);
+
+		
+
+	});
+
+	//请求期刊订购数据
+	function seriesOrders(recnos, curLibcodes) {
+		var data = {
+			"bookrecnos": recnos,
+			"return_fmt": "json"
+		}
+		if (curLibcodes) {
+			data.libcodes = curLibcodes.split(",");
+		}
+		$.ajax({
+			type: "GET",
+			url: "/opac/series/order",
+			data: data,
+			traditional: true,
+			dataType: "json",
+			success: function (data) {
+				if (data.serOrderList) {
+					var tableHeader = new Array("分馆名称", "订购年", "订购份数");
+					var containsArray = new Array();
+					var yearArray = new Array();
+
+					for (var i in data.serOrderList) {
+						var lib = data.libcodeMap[data.serOrderList[i].libcode];
+						var year = data.serOrderList[i].orderYear;
+						var count = data.serOrderList[i].copies;
+						var bookrecno = data.serOrderList[i].bookrecno;
+						//保存前两个年份
+						if (yearArray.length == 0 || yearArray.length < 2 && yearArray[0] != year) {
+							yearArray.push(year);
+						}
+						if ($.inArray(bookrecno, containsArray) == -1) {
+							var tableContent = new Array();
+							var dataArray = new Array(lib, year, count);
+							tableContent.push(dataArray);
+							containsArray.push(bookrecno);
+							$("#holdingPreviewDiv_" + bookrecno).html("");
+							var tableStr = createTable("expressTable", tableHeader, tableContent);
+							$("#holdingPreviewDiv_" + bookrecno).html(tableStr);
+						} else {
+							
+							var appendStr = "<tr><td>" + lib + "</td><td>" + year + "</td><td>" + count + "</td></tr>";
+							$("#holdingPreviewDiv_" + bookrecno).find('table').append(appendStr);
+						}
+
+					}
+
+				}
+			}
+		});
+	}
+
+	
+
+	
+
+	
+
+	
+
+	function replace(categoryDesc) {
+		var title;
+		switch (categoryDesc) {
+			case "ebook":
+				title = "电子书";
+				break;
+			case "video":
+				title = "视频";
+				break;
+			case "audio":
+				title = "音频";
+				break;
+			case "magazine":
+				title = "期刊杂志";
+				break;
+			case "image":
+				title = "图像";
+				break;
+		}
+		return title;
+	}
+
+	
+
+
+	//--------------福建省馆超星电子书START
+	
+	//--------------福建省馆超星电子书END
+	
+	
+	/**
+	 * 东莞职业学院可知电子书
+	 * @type {*|jQuery|HTMLElement}
+	 */
+
+	// 东莞图书馆对接掌阅电子书资源
+	
+	
+
+	$(function () {
+		//做一个高亮效果
+		function trim(s) {
+			//去除左右空格
+			return s.replace(/(^\s*)|(\s*$)/g, "");
+		}
+
+		var searchValueUpper;
+		var reg;
+
+		function highlighter(items) {
+			if (!items) {
+				return;
+			}
+			items.each(function () {
+
+				var innerText = trim($(this).html());
+
+				//处理大小写问题
+				var innerTextUpper = innerText.toUpperCase();
+				var _index = innerTextUpper.indexOf(searchValueUpper);
+				innerTextVal = innerText.substr(_index, searchValueUpper.length);
+				if (reg.test(innerText)) {
+					console.log(innerTextVal);
+					//匹配成功
+					var newinner = innerText.replace(reg, '<span class="highlight" style="color:red">' + innerTextVal + '</span>')//处理HTML字符串，为目标文本加上样式，即替换对应的HTML结构
+					$(this).html(newinner);//把处理后的HTML字符串写回到容器中
+				}
+
+			});
+		}
+
+		//检索词
+		function light(searchValue, searchway) {
+			searchValueUpper = searchValue.toUpperCase();
+			if (searchValue && searchValue != "*:*") {
+				reg = new RegExp(searchValue, "gi");
+				if (searchway == "" || searchway == "marc") {
+					highlighter($(".title-link"));
+					highlighter($(".author-link"));
+					highlighter($(".publisher-link"));
+				} else if (searchway == "title" || searchway == "title200a") {
+					highlighter($(".title-link"));
+				} else if (searchway == "author") {
+					highlighter($(".author-link"));
+				} else if (searchway == "publisher") {
+					highlighter($(".publisher-link"));
+				}
+			}
+		}
+
+		var searchway = "";
+		if (!searchway) {
+			searchway = "marc";
+		}
+		
+		light("三体", searchway);
+		
+		light("三體", searchway);
+		
+	});
+
+
+	//延迟加载的内容
+	$(window).load(function () {
+		setTimeout(function () {
+			var globalLibraryCode = "P2SD0533139";
+			<!-- 中国盲文图书馆不需要封面 -->
+			<!--厦门馆对接蓝博图封面，所以也不调此方法-->
+			console.log("当前馆代码{}", globalLibraryCode)
+			
+			//获取封面
+			loadBookcovers(globalLibraryCode);
+			
+			//自动获取图书元数据信息是否存在的标识 
+			if ($.cookie("configouternet") == "false") {
+				return;
+			}
+			var haveBookMetaResource = "1";
+			if (haveBookMetaResource != '1') {
+				return;
+			}
+
+			function getDivISBNs() {
+				var divObjects = $("div[express_isbn]");
+				var isbns = "";
+				divObjects.each(function (index) {
+					var isbn = $(this).attr("express_isbn");
+					isbns += "," + isbn;
+				});
+				return isbns;
+			}
+
+			var isbns = getDivISBNs();
+			if (isbns == "") {
+				return;
+			}
+
+			var strURL = GLOBAL_BASE_API_URL + "/api/bookmetadatastatus?glc=" + globalLibraryCode + "&isbns=" + isbns
+					+ "&returnType=json&callback=showAllBookMetaInfoTab&jsoncallback=?";
+			$.getJSON(strURL, {});
+		}, 1000);
+	});
+
+	var logRec = true;
+	$(function () {
+		//信息推送
+		$.getScript("http://api.interlib.com.cn:8586/InterlibCommonService/media/centerservice.js").done(function () {
+			try {
+				if (logRec) {
+					var baseParam = "q=%E4%B8%89%E4%BD%93&searchType=standard&isFacet=true&view=standard&rows=10&sortWay=score&sortOrder=desc&searchWay0=marc&logical0=AND";
+					baseParam += "&numFound=61";
+					pushResultData(1, "P2SD0533139", baseParam);
+					showAD();
+				}
+
+				logRec = false;
+			} catch (e) {
+				console.error(e)
+			}
+		});
+	});
+
+	
+	$(function () {
+		$.cookie("searcher_libcode", "", {
+			expires: 365,
+			path: '/opac'
+		});
+	});
+</script>
+
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function(){
+		
+		
+	});
+</script>
+<div id="page_footer" >
+	
+		
+	
+		
+			<div class="page_footer_bd" >
+				
+					
+						<span>© 2005－<script>document.write(new Date().getFullYear());</script> www.interlib.com.cn, all rights reserved</span>
+					
+				
+				<span class="fcenter"></span>
+				<span class="fright">
+		
+		
+		
+					
+						<!--a href="#">隐私声明</a-->
+					
+			
+		</span>
+			</div>
+			
+		
+	
+</div>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+		
+	</body>
+</html>

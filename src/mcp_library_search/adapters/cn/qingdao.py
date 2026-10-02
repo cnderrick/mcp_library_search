@@ -39,6 +39,7 @@ from types import SimpleNamespace
 
 from ... import interlib
 from ...interlib import InterlibConfig
+from ...interlib import parser
 from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = InterlibConfig(
@@ -48,8 +49,6 @@ _CONFIG = InterlibConfig(
 
 _THROTTLE = 2.0  # 秒/host 最小间隔（家族 client 无限速，本模块自带保守节流）
 _last_request = 0.0
-
-_YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
 
 def _throttle():
@@ -61,57 +60,19 @@ def _throttle():
     _last_request = time.monotonic()
 
 
-def _clean(text):
-    """Solr 字段值 → 原值字符串（None→空串），只去首尾空白，不改内容。"""
-    if text is None:
-        return ""
-    return str(text).strip()
-
-
-def _year(text):
-    """pubdate_meta（「2017」/「2019.01」等）→ 四位年份；取不到返回空串。"""
-    m = _YEAR_RE.search(str(text or ""))
-    return m.group(0) if m else ""
-
-
 def _parse_solr(payload):
-    """Solr 检索响应（`wt=json`）→ 家族 search 原始结构（books + total_results）。
+    """Solr 检索响应（`wt=json`）→ 家族 search 原始结构。
 
-    `availability_summary` 恒空串：Solr 无逐书目可借概况，`hasholding` 因服务端
-    默认 fq 限定而恒为 `y`（数据边界，原值不冒充概况）。
-
-    缺少 `response` 键即视为接口形态漂移（Solr 出错时只返回 `responseHeader`＋
-    `error`），抛错而非静默降级成 0 条结果。
+    实现已上收家族 `interlib.parser.parse_solr`（本城与一批带滑动验证码的城市共用），
+    此处保留同名函数作本模块测试的稳定缝。`availability_summary` 恒空串；缺少
+    `response` 键视为接口漂移或 Solr 查询出错，抛错而非静默降级成 0 条。
     """
-    if not isinstance(payload, dict) or "response" not in payload:
-        detail = ""
-        if isinstance(payload, dict) and isinstance(payload.get("error"), dict):
-            # Solr 查询出错（如关键词触到未定义字段）同样只有 responseHeader＋error：
-            # 把上游 msg 带出来，别把「查询本身有问题」报成「接口形态变了」
-            detail = f"：{_clean(payload['error'].get('msg'))}"
-        raise RuntimeError(
-            f"{_CONFIG.name_cn}：检索响应缺少 response（Solr 查询出错或接口变更）{detail}")
-    resp = payload.get("response") or {}
-    try:
-        total = int(resp.get("numFound") or 0)
-    except (TypeError, ValueError):
-        total = 0
-    books = []
-    for doc in resp.get("docs") or []:
-        if not isinstance(doc, dict):
-            continue
-        book_id = _clean(doc.get("id"))
-        if not book_id:
-            continue
-        books.append({
-            "book_id": book_id,
-            "title": _clean(doc.get("title_meta")),
-            "author": _clean(doc.get("author_meta")),
-            "publisher": _clean(doc.get("publisher_meta")),
-            "publish_year": _year(doc.get("pubdate_meta")),
-            "availability_summary": "",
-        })
-    return {"books": books, "total_results": total}
+    r = parser.parse_solr(payload, _CONFIG.name_cn)
+    return {"books": [{"book_id": b["book_id"], "title": b["title"], "author": b["author"],
+                       "publisher": b["publisher"], "publish_year": b["publish_year"],
+                       "availability_summary": b["availability_summary"]}
+                      for b in r["books"]],
+            "total_results": r["total_results"]}
 
 
 def _positive_int(value, default):

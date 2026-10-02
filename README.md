@@ -40,6 +40,29 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 安康 | `ankang` | ✅ 已接入 | 安康市图书馆（图创 Interlib pro2018） |
 | 汉中 | `hanzhong` | ✅ 已接入 | 汉中市图书馆全市联合目录（图星 LibStar Find，含洋县等县馆） |
 | 榆林 | `yulin` | ✅ 已接入 | 榆林市图书馆（新版 UILAS REST 平台） |
+| 海口 | `haikou` | ✅ 已接入 | 海口市图书馆（图创 Interlib） |
+| 株洲 | `zhuzhou` | ✅ 已接入 | 株洲市图书馆（图创 Interlib） |
+| 孝感 | `xiaogan` | ✅ 已接入 | 孝感市图书馆（图创 Interlib） |
+| 荆门 | `jingmen` | ✅ 已接入 | 荆门市图书馆（图创 Interlib） |
+| 湖南图书馆 | `hunan_prov` | ✅ 已接入 | 湖南图书馆省级馆（图创 Interlib） |
+| 福建省图书馆 | `fujian_prov` | ✅ 已接入 | 福建省图书馆（图创 Interlib） |
+| 阳江 | `yangjiang` | ✅ 已接入 | 阳江市图书馆（图创 Interlib） |
+| 淄博 | `zibo` | ✅ 已接入 | 淄博市图书馆（图创 Interlib） |
+| 德州 | `dezhou` | ✅ 已接入 | 德州市图书馆（图创 Interlib） |
+| 周口 | `zhoukou` | ✅ 已接入 | 周口市图书馆（图创 Interlib） |
+| 泉州 | `quanzhou` | ✅ 已接入 | 泉州市图书馆（图创 Interlib） |
+| 通辽 | `tongliao` | ✅ 已接入 | 通辽市图书馆（图创 Interlib） |
+| 河源 | `heyuan` | ✅ 已接入 | 河源市图书馆（图创 Interlib） |
+| 黑龙江省图书馆 | `heilongjiang` | ✅ 已接入 | 黑龙江省图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 长春 | `changchun` | ✅ 已接入 | 长春市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 唐山 | `tangshan` | ✅ 已接入 | 唐山市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 包头 | `baotou` | ✅ 已接入 | 包头市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 乌海 | `wuhai` | ✅ 已接入 | 乌海市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 呼和浩特 | `huhehaote` | ✅ 已接入 | 呼和浩特市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 潮州 | `chaozhou` | ✅ 已接入 | 潮州市图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 兰州 | `lanzhou` | ✅ 已接入 | 兰州市图书馆（新版 UILAS REST 平台） |
+| 江门 | `jiangmen` | ✅ 已接入 | 江门市图书馆（新版 UILAS REST 平台） |
+| 河南省图书馆 | `henan_prov` | ✅ 已接入 | 河南省图书馆（老版 UILAS HTML OPAC） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装

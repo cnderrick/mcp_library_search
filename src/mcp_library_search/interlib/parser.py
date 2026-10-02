@@ -229,6 +229,48 @@ def parse_detail(html: str) -> dict:
     return p.fields
 
 
+def parse_solr(payload: dict, name: str = "") -> dict:
+    """站点内嵌 Solr 检索响应（`wt=json`）→ {"books", "total_results"}。
+
+    形态（青岛及一批带滑动验证码的 Interlib 站点共用，见
+    tests/fixtures/qingdao/NOTES.md）：命中数 `response.numFound`，书目在
+    `response.docs[]`，字段名带 `_meta` 后缀（`title_meta`/`author_meta`/
+    `publisher_meta`/`pubdate_meta`/`isbn_meta`），稳定 id 是 `docs[].id`。
+    `availability_summary` 恒空串（Solr 无逐书目可借概况）。缺少 `response`
+    键即视为接口形态漂移或 Solr 查询出错，抛错而非静默返回 0 条。
+    """
+    if not isinstance(payload, dict) or "response" not in payload:
+        detail = ""
+        if isinstance(payload, dict) and isinstance(payload.get("error"), dict):
+            detail = f"：{str(payload['error'].get('msg') or '').strip()}"
+        prefix = f"{name}：" if name else ""
+        raise RuntimeError(f"{prefix}检索响应缺少 response（Solr 查询出错或接口变更）{detail}")
+    resp = payload.get("response") or {}
+    try:
+        total = int(resp.get("numFound") or 0)
+    except (TypeError, ValueError):
+        total = 0
+    books = []
+    for doc in resp.get("docs") or []:
+        if not isinstance(doc, dict):
+            continue
+        book_id = "" if doc.get("id") is None else str(doc.get("id")).strip()
+        if not book_id:
+            continue
+        pub = str(doc.get("pubdate_meta") or "")
+        ym = _YEAR_RE.search(pub)
+        books.append({
+            "book_id": book_id,
+            "title": _clean(doc.get("title_meta")),
+            "author": _clean(doc.get("author_meta")),
+            "publisher": _clean(doc.get("publisher_meta")),
+            "publish_year": ym.group(0) if ym else "",
+            "availability_summary": "",
+            "isbn": _clean(doc.get("isbn_meta")),
+        })
+    return {"books": books, "total_results": total}
+
+
 def parse_detail_api(payload: dict) -> dict:
     """解析 `/api/book/{recno}` JSON 的书目字段（api_detail 城市用）。
 

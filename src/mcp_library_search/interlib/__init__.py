@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -32,9 +33,25 @@ class InterlibConfig:
     pro2018_cite_author: bool = False  # pro2018 详情以引文块首句兜底责任者（绍兴实证），默认关
     ctx: str = "/opac"             # 应用上下文路径（西安 `/opac3`），默认广州基准 `/opac`
     api_detail: bool = False       # 详情改走 `/api/book/{recno}` JSON（安康详情页 HTML 被源站截断），默认 False = HTML 详情页
+    solr_search: bool = False      # 检索改走站点内嵌 Solr `/api/search`（青岛及一批带滑动验证码的站点），默认 False = HTML 检索页
 
 
 def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
+    if cfg.solr_search:
+        # 检索页被滑动验证码拦截的站点改走内嵌 Solr：q/rows/page/wt=json，
+        # 服务端凭 page 自算 start（直传 start 被忽略），命中数在 response.numFound。
+        body = client.get(cfg, f"{cfg.ctx}/api/search",
+                          {"q": str(keyword or ""), "rows": limit, "page": page, "wt": "json"})
+        try:
+            payload = json.loads(body)
+        except json.JSONDecodeError as e:
+            raise RuntimeError(
+                f"{cfg.name_cn}：检索响应不是 JSON（可能被拦截或接口变更）：{body[:120]}") from e
+        r = parser.parse_solr(payload, cfg.name_cn)
+        total = r["total_results"]
+        total_pages = math.ceil(total / limit) if total > 0 and limit > 0 else 0
+        return {"books": r["books"], "total_results": total,
+                "total_pages": total_pages, "has_next": page < total_pages}
     params = {
         "q": keyword,
         "searchType": "standard",
@@ -57,9 +74,11 @@ def search_raw(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20
 
     供天津三源 ISBN 归并使用；search_books 是它的契约形态包装。
     带连字符的 ISBN 在 marc 检索下命中不了（真网实测），首搜为空时去连字符重试一次。
+    Solr 通道下越界页同样返回空 books（numFound 不变），故判据用 total_results==0。
     """
     r = _search_once(cfg, keyword, page, limit)
-    if not r["books"] and "-" in keyword:
+    empty = (r["total_results"] == 0) if cfg.solr_search else (not r["books"])
+    if empty and "-" in keyword:
         retry = _search_once(cfg, keyword.replace("-", ""), page, limit)
         if retry["books"]:
             r = retry
