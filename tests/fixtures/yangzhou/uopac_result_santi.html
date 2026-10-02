@@ -1,0 +1,682 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <!--<title>中心联合目录馆藏书目全文检索 v1.0</title>-->
+	<title>扬州市图书馆联盟馆藏书目检索 v1.0</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="keywords" content="汇文,区域联合馆藏书目全文检索,图书检索,marc检索">
+	<meta http-equiv="description" content="汇文系统区域联合馆藏书目全文检索">
+	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" >
+	<link rel="stylesheet" href="../css/ui.all.css" charset="utf-8" media="all" />
+	<link rel="shortcut icon" href="../img/favicon.ico" />     
+	
+	<script type="text/javascript" src="../js/jquery-1.2.6.js"></script>
+	<script type="text/javascript" src="../js/ui.core.js"></script>
+	<script type="text/javascript" src="../js/ui.tabs.js"></script>
+	<script type="text/javascript" src="../js/highlighter.js"></script>
+  </head>
+<body>
+  <div id="header" >
+   <span style="font-size:12px; color:green;" >
+	
+	 	<a href="login.action"><font color="red">登录</font> </a>
+	 
+	</span>
+  </div>
+
+	
+	
+<div id="searchmain">
+	<table cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td width=25% rowspan="2">
+		<a href="/uopac/s/search.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A"><img title="区域联合馆藏书目全文检索" src="../img/logo.gif"/></a></td>
+	</tr>
+	<tr valign="top">
+	    <td style="background:transparent" >
+	    <form id="search_result" name="sForm" action="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A" method="get">
+			<table id="sTable" cellspacing="1" cellpadding="0"  align="center">
+				<tbody>
+					<tr>
+						<td><input id="q" type="text" value="三体" name="q" maxlength="80" size="50"/></td>
+						<td><input type="submit" size="30" value=" 检 索 " /></td>
+					</tr>
+					<tr>
+						 <td colspan="2" align=left nowrap><font size=-1><span style="text-align:left">
+							 <input  type="radio" name="meta" value="20" checked >任意
+							 <input  type="radio" name="meta" value="11"  >题名
+							 <input  type="radio" name="meta" value="12"  >责任者
+							 <input  type="radio" name="meta" value="15"  >主题词
+							 <input  type="radio" name="meta" value="13"  >出版社
+							 <input  type="radio" name="meta" value="14"  >ISBN
+							 <input  type="radio" name="meta" value="16"  >丛书名
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+
+
+</td>
+	    <td></td>
+	</tr>
+	</table>
+</div>
+
+     
+	
+
+<div id="main">
+
+  <div id="found">
+  	<span id="loading" style="color:red;float:left;display:none;" ><img src="../img/loading.gif" />加载中...</span>
+  	有 <font color="red">73</font> 项符合<font color="red">"三体"</font>的查询结果
+  </div>
+
+
+
+
+	<div id="left_content">
+    	<div class="left_content_line">
+          <h4>缩小检索范围</h4>
+          <dl>
+				<dt>
+					<storng>成员馆</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_libs&fval=YZLIB">扬州市图书馆</a>(51)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_libs&fval=YZHJQG">扬州市邗江区图书馆</a>(15)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_libs&fval=YZJDQG">扬州江都区图书馆</a>(10)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_libs&fval=YZGLQG">扬州市广陵区图书馆</a>(7)
+				</dd>
+				
+				<dt>
+					<storng>责任者</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97">刘慈欣著</a>(25)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%88%98%E6%85%88%E6%AC%A3%E5%8E%9F%E8%91%97">刘慈欣原著</a>(20)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E8%AE%B8%E5%AE%9D%E9%A9%AF%E4%B9%A6">许宝驯书</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E6%9D%8E%E6%B7%BC%E8%91%97">李淼著</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%85%AB%E8%B7%AF%E8%91%97">八路著</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%281963-%29%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97">(1963-)刘慈欣著</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E9%BD%90%E9%94%90%E8%91%97">齐锐著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E9%AB%98%E5%BE%B7%E8%91%97">高德著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E9%A1%BE%E4%BB%B2%E5%AE%89%E4%B9%A6">顾仲安书</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E8%A9%B9%E7%90%B0%EF%BC%8C%E8%B7%AF%E5%A7%9C%E6%B3%A2%E8%91%97">詹琰，路姜波著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E8%96%9B%E9%93%B8%E8%91%97">薛铸著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E7%8E%8B%E4%B8%80%E8%91%97">王一著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E6%9F%A5%E7%B4%AB%E9%98%B3%E7%BC%96">查紫阳编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E6%9D%8E%E9%81%93%E6%96%B0%E8%91%97">李道新著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E6%9D%8E%E5%B9%BF%E7%9B%8A%2C%E9%99%88%E9%A2%80%E7%BC%96">李广益,陈颀编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%AE%9D%E6%A0%91%E8%91%97">宝树著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%A2%A8%E5%AE%9D%E5%9B%BE%E4%B9%A6%E7%BC%96">墨宝图书编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%90%B4%E9%A3%9E%E8%91%97">吴飞著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%8D%A2%E6%A1%82%E5%B9%B3%E4%B8%BB%E7%BC%96">卢桂平主编</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E5%88%98%E5%89%91%E9%94%8B%E8%91%97">刘剑锋著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E4%BF%9E%E5%BB%BA%E5%8D%8E%E7%AD%89%E4%B9%A6">俞建华等书</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E4%B8%89%E4%BD%93%E5%AE%87%E5%AE%99%E7%BC%96%E8%91%97">三体宇宙编著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%E4%B8%89%E4%BD%93%E5%AE%87%E5%AE%99%2C+%E8%8A%B1%E7%94%9F%E5%8A%A8%E7%94%BB%2C+%E7%A3%A8%E9%93%81%E6%9C%89%E7%8B%90%E7%BC%96%E8%91%97">三体宇宙, 花生动画, 磨铁有狐编著</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%28%E6%B8%85%29%E7%BA%AA%E6%98%80%EF%BC%8C%28%E6%B8%85%29%E6%B0%B8%E7%91%A2%E7%AD%89%E7%BC%96%E7%BA%82">(清)纪昀，(清)永瑢等编纂</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_author&fval=%281963%7E%29%E5%88%98%E6%85%88%E6%AC%A3%E8%91%97">(1963~)刘慈欣著</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版年</storng>
+				</dt>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2025">2025</a>(6)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2024">2024</a>(15)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2023">2023</a>(3)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2022">2022</a>(5)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2020">2020</a>(4)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2019">2019</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2017">2017</a>(6)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2016">2016</a>(10)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2015">2015</a>(3)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2011">2011</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2010">2010</a>(4)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2009">2009</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=2008">2008</a>(7)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=1991">1991</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=1990">1990</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=1987">1987</a>(1)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=1985">1985</a>(2)
+				</dd>
+				
+				<dd>
+					&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_year&fval=1983">1983</a>(1)
+				</dd>
+				
+				<dt>
+					<storng>出版社</storng>
+				</dt>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E9%87%8D%E5%BA%86%E5%87%BA%E7%89%88%E7%A4%BE">重庆出版社</a>(29)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%B5%99%E6%B1%9F%E6%96%87%E8%89%BA%E5%87%BA%E7%89%88%E7%A4%BE">浙江文艺出版社</a>(20)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%B2%B3%E5%8C%97%E5%B0%91%E5%B9%B4%E5%84%BF%E7%AB%A5%E5%87%BA%E7%89%88%E7%A4%BE">河北少年儿童出版社</a>(2)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%B9%BF%E9%99%B5%E4%B9%A6%E7%A4%BE">广陵书社</a>(2)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%AD%A6%E6%9E%97%E5%87%BA%E7%89%88%E7%A4%BE">学林出版社</a>(2)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E8%AF%91%E6%9E%97%E5%87%BA%E7%89%88%E7%A4%BE">译林出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E7%94%9F%E6%B4%BB%C2%B7%E8%AF%BB%E4%B9%A6%C2%B7%E6%96%B0%E7%9F%A5%E4%B8%89%E8%81%94%E4%B9%A6%E5%BA%97">生活·读书·新知三联书店</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%B9%96%E5%8D%97%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">湖南科学技术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%B9%96%E5%8C%97%E7%BE%8E%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">湖北美术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%B5%99%E6%B1%9F%E5%8F%A4%E7%B1%8D%E5%87%BA%E7%89%88%E7%A4%BE">浙江古籍出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E6%96%87%E5%8C%96%E8%89%BA%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">文化艺术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%A4%A9%E6%B4%A5%E4%BA%BA%E6%B0%91%E5%87%BA%E7%89%88%E7%A4%BE">天津人民出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%9B%BD%E9%99%85%E6%96%87%E5%8C%96%E5%87%BA%E7%89%88%E5%85%AC%E5%8F%B8">国际文化出版公司</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%9B%9B%E5%B7%9D%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">四川科学技术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%8F%B0%E6%B9%BE%E5%95%86%E5%8A%A1%E5%8D%B0%E4%B9%A6%E9%A6%86%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8">台湾商务印书馆股份有限公司</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%8D%97%E4%BA%AC%E5%B8%88%E8%8C%83%E5%A4%A7%E5%AD%A6%E5%87%BA%E7%89%88%E7%A4%BE">南京师范大学出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E5%8C%97%E4%BA%AC%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%87%BA%E7%89%88%E7%A4%BE">北京科学技术出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%BA%BA%E6%B0%91%E9%82%AE%E7%94%B5%E5%87%BA%E7%89%88%E7%A4%BE">人民邮电出版社</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%B8%AD%E5%9B%BD%E5%8F%8B%E8%B0%8A%E5%87%BA%E7%89%88%E5%85%AC%E5%8F%B8">中国友谊出版公司</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%B8%AD%E4%BF%A1%E5%87%BA%E7%89%88%E9%9B%86%E5%9B%A2">中信出版集团</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%B8%96%E7%95%8C%E5%9B%BE%E4%B9%A6%E5%87%BA%E7%89%88%E5%B9%BF%E4%B8%9C%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8">世界图书出版广东有限公司</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%B8%89%E8%81%94%E4%B9%A6%E5%BA%97">三联书店</a>(1)
+				</dd>
+				
+				<dd>&middot;<a href="/uopac/s/search_result.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?q=%E4%B8%89%E4%BD%93&amp;meta=20&amp;page=1&fkey=facet_publisher&fval=%E4%B8%89%E7%A7%A6%E5%87%BA%E7%89%88%E7%A4%BE">三秦出版社</a>(1)
+				</dd>
+				
+			</dl>			
+        </div>
+    </div>
+    
+    <div id="right_content">
+        	
+              <div class="searchcontent" >
+                      <h2>1.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=780232">三体漫画 起源 地球大危机 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533974022 / 2024</p>
+                      <p>　　三体宇宙官方授权 其他题名取自于封面 汪淼是一位普通的物理学家，有一天，军队的人突然出现，把他带到一个叫“特殊作战中心”的地方，告诉他全球正在面临巨大危机，需要他打入敌方做“间谍”。汪淼不想帮忙，但在警官史强的“激将”下，他还是答应了。然而诡异的是，第二天他的眼前就开始出现只有他能看到的倒计时难道自己被敌人发现了？！ 少儿 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>2.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1054519">三体 图像小说 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 译林出版社  / 9787575302807 / 2025</p>
+                      <p>　　本书改编自科幻巨著《三体》，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                            扬州市邗江区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>3.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=776410">三体创意艺术图集 </a></h2>
+                      <p style=color:#666;>三体宇宙, 花生动画, 磨铁有狐编著 / 国际文化出版公司  / 9787512514300 / 2022.12</p>
+                      <p>　　原著：刘慈欣 有索引 本书共收录140幅精美插画及设计图，通过平面视觉的艺术形式，全方位、多维度想读者展现可视化的《三体》世界。 绘画爱好者。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>4.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1089014">不要回答 Vol. 01 红岸 </a></h2>
+                      <p style=color:#666;>三体宇宙编著 / 中信出版集团  / 9787521775266 / 2025.07</p>
+                      <p>　　三体宇宙 三体 英文分辑并列题名取自封面 主编: 蔡雅琳 本书主题为“红岸”，包括刘慈欣短访、创造者访谈、红岸原型、射电望远镜、天文望远镜科普和科幻小说等诸多内容。 小说爱好者 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>5.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=626416">三体X 观想之宙 典藏版 </a></h2>
+                      <p style=color:#666;>宝树著 / 重庆出版社  / 9787229100636 / 2016</p>
+                      <p>　　大众读物 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>6.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=196155">三体.2 2 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787536693968 / 2008</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市邗江区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>7.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=207147">三体.3 3 </a></h2>
+                      <p style=color:#666;>刘慈欣著 / 重庆出版社  / 9787229030933 / 2010</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市邗江区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>8.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=740470">三体漫画 第一部 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533970369 / 2023</p>
+                      <p>　　本书是刘慈欣著名长篇小说《三体》的漫画改编版。故事以一系列科学家的离奇命案开始，在查案过程中揭露出即将毁灭的高端文明三体文明，正打算锁死地球文明的科技进程，并最终占领地球的计划。与此同时，一个地球人的组织“地球三体组织”正在为迎接三体文明的到来做着准备。原来，一切都始于几十年前“红岸基地”的一条宇宙广播。人类内部的纷争仍未解决，来自三体文明的智子已经抵达地球并锁死了基础科学，人类的未来似乎已经注定…… </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市广陵区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>9.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=314907">三体世界 </a></h2>
+                      <p style=color:#666;>刘剑锋著 / 中国友谊出版公司  / 9787505737334 / 2016</p>
+                      <p>　　刘剑锋, 作家, 编剧, 十年前开始从事科幻小说创作。 《三体世界》是一本由中国当代新锐作家刘剑锋创作的长篇小说, 本书是一本以天文学三体系统为背景的科幻小说, 讲述了物理学者刘廷遇到的关于平行宇宙的故事: 盛京市云山风景区天文观测3号站执行观测主任刘廷, 在临近年底的一天中午, 接到了一个电话。三天后, 按照电话里的约定, 刘廷来到了云州区上海路15号--盛京市精神疾病关怀中心……在这里, 刘廷揭开了人生新的一幕 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                            扬州市邗江区图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>10.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=522697">《三体》导读 </a></h2>
+                      <p style=color:#666;>詹琰，路姜波著 / 天津人民出版社  / 9787201108926 / 2016</p>
+                      <p>　　本书意在对《三体》三部曲进行全方位简化解读，在对科学知识和技术名字进行扫盲的时候，着重介绍其效用及对情节发展的推动，同时，更注重挖掘原作品的人文意义。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>11.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1056131">三体漫画 Ⅱ 4 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533977368 / 2024</p>
+                      <p>　　果麦 三体宇宙官方授权出版 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>12.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1076240">三体漫画 上 接触 太阳实验 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533973995 / 2024</p>
+                      <p>　　《三体漫画》系列（少年版） 8 果麦 分辑题名取自封面 三体宇宙官方授权出版 本书讲述了：为了验证自己的猜想，叶文洁对着太阳发射超强电波，没想到实验一次就成功。但也因此暴露了地球的方向，让残酷的三体人发现了美丽的地球。面对“不要回答”的警告，叶文洁会选择为保护人类而沉默，还是选择为报复人类而回答。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>13.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1076241">三体漫画 中 接触 智子锁死地球 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533973995 / 2024</p>
+                      <p>　　《三体漫画》系列（少年版） 9 果麦 分辑题名取自封面 三体宇宙官方授权出版 本书讲述了：叶文洁被捕后交待了她和伊文斯组建ETO的经过，并告诉所有人，地球科学已经被三体人发出的两个智子锁死。为了破解真相，史强和汪淼他们必须获得“审判日”号油轮上的资料。可船上都是ETO残党，一旦被发现资料就会遭销毁。正当大家头疼的时候，史强提出了一个奇招。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>14.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1076250">三体漫画 下 接触 人类反击 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533973995 / 2024</p>
+                      <p>　　《三体漫画》系列（少年版） 10 果麦 分辑题名取自封面 三体宇宙官方授权出版 本书讲述了：结合“审判日”号和《三体》游戏里的资料，人们终于知道了三体文明为殖民地球实施的一系列行动，汪淼、史强经历的“神迹”也由此得到了科学解答。在智子的科技锁死和无死角监控下，人类还有反击的可能吗。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>15.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1089477">三体漫画 Ⅱ 8 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533980733 / 2025</p>
+                      <p>　　三体宇宙官方授权出版 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>16.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1089476">三体漫画 Ⅱ 5 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533980702 / 2025</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>17.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1089478">三体漫画 Ⅱ 6 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533980719 / 2025</p>
+                      <p>　　三体宇宙官方授权出版 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>18.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=1089474">三体漫画 Ⅱ 7 黑暗森林 </a></h2>
+                      <p style=color:#666;>刘慈欣原著 / 浙江文艺出版社  / 9787533980726 / 2025</p>
+                      <p>　　三体宇宙官方授权 本书讲述了：罗辑在史强帮助下找到庄颜，两人去雪山散步，探讨三体人的问题与面壁者的任务，罗辑还向庄颜表明心意，说庄颜的任务是让自己开心。与此同时，史强完成罗辑交给他的寻找任务后，向罗辑透露自己已经患上白血病，需进入冬眠，并要与罗辑定下在未来相见的约定。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>19.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=184708">宋词三体书法 </a></h2>
+                      <p style=color:#666;>薛铸著 / 三秦出版社  / 7805463328 / 1990</p>
+                      <p>　　 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+        	
+              <div class="searchcontent" >
+                      <h2>20.<a target="_blank" href="/uopac/s/detail.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A?id=564134">《三体》的X种读法 </a></h2>
+                      <p style=color:#666;>李广益,陈颀编 / 生活·读书·新知三联书店  / 9787108059642 / 2017.6</p>
+                      <p>　　刘慈欣的《三体》三部曲，是近年在中国，乃至全世界引发热潮的现象级作品。那么，当我们谈论《三体》的时候，我们究竟在谈论什么呢？从强国派到自由派，从新古典主义到后现代主义，从科学崇拜到生态主义，从影射历史到创造未来，可以说，《三体》文本构成了一个神奇的场域，其中的解读路径包含几乎所有当代中国的主流思潮。本书精选了8篇较有深度的《三体》评论文章，它们在角度、观点上各异其趣。 </p>
+                      <p style=color:#666;><strong style="color:#006600;">所在馆：</strong>
+                        
+                            扬州市图书馆 
+                          &nbsp;&nbsp;
+                        
+                      </p>
+                      <div class="clear"></div>
+              </div>
+          
+        
+
+
+<div id="num">
+	
+		<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&page=1" class="blue">首页</a>&nbsp;&nbsp;
+		
+		<b><font color=red>1</font>&nbsp; / &nbsp;<font color=black>4</font></b>&nbsp;
+		
+			<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&page=2" class="blue">下一页</a>&nbsp;&nbsp;
+		
+		<a href="/uopac/s/search_result.action?q=%E4%B8%89%E4%BD%93&meta=20&page=4" class="blue">末页</a>
+	 
+</div>
+    </div>
+    <div class="clear" ></div>
+
+    
+</div>
+
+<script type="text/javascript">
+<!--
+	MarkHighLight(document.getElementById("right_content"),'三体');
+
+	function showHoldings(id,school,url,marcNo){
+		$("#loading").show();
+		 $.ajax({
+		   type: "GET",
+		   url: '/uopac/s/ajax_holding.action;jsessionid=A73D7A0BD36B193683B96C04AC1E343A',
+		   data: "url="+ url + "&type=simple",
+		   success: function(msg){
+		     $("#lend_" + id + "_" + school+"_"+ marcNo).html(msg);
+		     $("#loading").hide();
+		   }
+		 });
+	}
+-->
+</script>
+	
+	<div id="footer">
+		<div id="copy">中心联合目录 &nbsp;&nbsp;版权所有：扬州市图书馆 &nbsp;&nbsp;技术支持：<a href="http://www.libsys.com.cn" target='_blank' class="blue">江苏汇文软件有限公司</a>
+		</div>
+	</div>
+</body>
+</html> 

@@ -11,6 +11,7 @@ import pytest
 
 from mcp_library_search.adapters import nanjing
 from mcp_library_search.adapters.base import validate_book_detail, validate_holdings
+from mcp_library_search.uopac import client as uopac_client
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "nanjing"
 _DETAIL_JL = (_FIXTURES / "uopac_detail_jl.html").read_text(encoding="utf-8")
@@ -42,11 +43,11 @@ def _mock_open(monkeypatch, pages):
     calls = []
     seq = iter(pages)
 
-    def spy(req, timeout=90):
-        calls.append(req.full_url)
+    def spy(url, cfg):
+        calls.append(url)
         return next(seq)
 
-    monkeypatch.setattr(nanjing, "_open", spy)
+    monkeypatch.setattr(uopac_client, "get", spy)
     return calls
 
 
@@ -54,16 +55,16 @@ def _mock_open_by_url(monkeypatch, holding_map):
     """按 URL 路由:detail.action → _DETAIL_JL;ajax_holding 按 lib= 码查表。"""
     calls = []
 
-    def spy(req, timeout=90):
-        calls.append(req.full_url)
-        if "detail.action" in req.full_url:
+    def spy(url, cfg):
+        calls.append(url)
+        if "detail.action" in url:
             return _DETAIL_JL
         for code, resp in holding_map.items():
-            if f"lib={code}&" in req.full_url or req.full_url.endswith(f"lib={code}"):
+            if f"lib={code}&" in url or url.endswith(f"lib={code}"):
                 return resp
         return ""
 
-    monkeypatch.setattr(nanjing, "_open", spy)
+    monkeypatch.setattr(uopac_client, "get", spy)
     return calls
 
 

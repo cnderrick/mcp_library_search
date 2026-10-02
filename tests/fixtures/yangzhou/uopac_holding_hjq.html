@@ -1,0 +1,64 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../js/jquery-1.2.6.js"></script>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#C5DBEC" class="table-line">
+	<tr align="center" bgcolor="#F5F8F9">
+	     <td ><strong>索书号</strong></td>
+	     <td ><strong>条码号</strong></td>
+	     <td ><strong>年卷期</strong></td>
+	     <td ><strong>校区</strong></td>
+	     <td ><strong>馆藏地</strong></td>
+	     <td ><strong>馆藏书刊状态</strong></td>
+	</tr>
+	<tr align="center" bgcolor="#FFFFFF">
+            <td width="10%" >J228.2/118</td>
+            <td width="15%" >HJ26001014</td>
+            <td width="15%" ></td>
+            <td width="10%" >总馆</td>
+            <td width="20%" >少儿书库</td>
+            <td width="20%" ><font color=green>可借</font></td>
+         </tr>
+    <tr align="left" bgcolor="#FFFFFF">
+		<td colspan="8" align="center">
+			可借 / 馆藏 (1 / 1) 
+			&nbsp;&nbsp;<a class="blue" target="_blank" href="http://58.220.251.62:8083/api/itemgo.php?libCode=YZHJQG&marc_no=0000483297&appid=uopac&time=1790953370870&sign=cc606f2004d72c1d77b96ee453b354e9" title="到书所在馆的OPAC查看具体信息">书所在馆OPAC查看</a>
+		</td>
+	</tr>
+	<tr align="left" bgcolor="#FFFFFF">
+		<td colspan="8" align="center">
+			不可申请：<font color="red">请先登录！</font></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	function applyClick(bookLib,id){
+		var item = $('input[@name=take_loca_'+bookLib+'][@checked]').val(); 
+		var itemnull = $('#take_loca_null').val();
+		
+		if(itemnull != undefined && itemnull != ""){
+			if(item == undefined || item == "")
+				item = itemnull;
+		}
+		
+		if( item == undefined || item == "" ){
+				alert('请先选择取书地!');
+				return;
+		}
+		
+		var data = "book_lib=" + bookLib + "&call_no=" + $("#call_no_" + bookLib).val() + "&take_loca=" 
+				   	+ item + "&id=" + id + "&time=" + new Date().getTime();
+		if($("#attachment").val() == "on")
+			data = data + "&attachment=1";
+			//alert(data);
+		if(confirm('确定申请此书?')){
+			$.ajax({
+			   type: "get",
+			   url: "prelend.action",
+			   data: data,
+			   success: function(msg){		   
+			     alert( msg.replace(/^\s+|\s+$/g,""));
+			   }
+			 });
+	    }		
+	}
+</script> 
+	

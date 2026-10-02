@@ -1,7 +1,9 @@
 """南京适配器：金陵图书馆联合目录（JL:）＋ 南京图书馆（NJL01:）双源合并。
 
-金陵源＝汇文 uopac 区域联合 OPAC（uopac.jllib.cn，金陵运营，覆盖金陵＋12 区馆）；
-南图源＝Ex Libris ALEPH（opac.jslib.org.cn，江苏省图，走 `aleph/` 家族原语）。
+金陵源＝汇文 uopac 区域联合 OPAC（uopac.jllib.cn，金陵运营，覆盖金陵＋12 区馆），
+页面结构与扬州同系统、逐项同构，解析走 `uopac/` 家族模块（金陵无 securitycam
+反爬、扬州有——差异收在 UopacConfig.securitycam）；南图源＝Ex Libris ALEPH
+（opac.jslib.org.cn，江苏省图，走 `aleph/` 家族原语）。
 book_id 形态：JL:{uopac 数字 id} / NJL01:{doc_number}；跨源同 ISBN 命中合成复合
 id（成员按优先级 JL > NJL01 以 + 连接，书目字段取 JL 成员原值）。
 **向后兼容**：0.4.0 已上线的裸数字 book_id（无前缀）一律视为 JL 成员路由
@@ -25,59 +27,22 @@ msg=login_to_continue,连根路径 JS 跳转的 presearch.php 也锁),匿名不�
   锁登录,代理路径匿名可取;裸请求与带会话逐字节相同 → 客户端完全无状态)。
 
 金陵 ISBN 索引按存储原样字符串前缀匹配且各馆存储带/不带连字符不一 → ISBN 形态
-关键词去连字符后每数字间插 `*` 走 meta=14(通配实证,子序列等长即数字全等)。
-状态词表:「可借」→ available=True;「借出-应还日期：X」→ False+due_date;
-词表外保守 False,原值照登。
+关键词去连字符后每数字间插 `*` 走 meta=14(通配实证,子序列等长即数字全等);
+通配路由与状态词表都在 uopac 家族里,本模块不再自带解析副本。
 """
-import html
-import math
-import re
-import time
-import urllib.error
-import urllib.parse
-import urllib.request
-from dataclasses import dataclass, field, replace
+from dataclasses import replace
 
 from .. import aleph
-from ..aleph import AlephConfig
-from ..aleph import CaptchaError
+from .. import uopac
+from ..aleph import AlephConfig, CaptchaError
+from ..uopac import UopacConfig
 from .base import BookDetail, BookSummary, Holding, SearchPage
 
-_BASE = "http://uopac.jllib.cn"
-_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-_HEADERS = {"User-Agent": _UA}
 _THROTTLE = 4.0  # 秒/host,按 spec 保守限速
-_TIMEOUT = 90    # 秒;源站偶发慢响应/传输中途停顿(侦察与冒烟各实测一次),放宽
-_PAGE_SIZE = 20  # 源站固定每页条数,无参数可调
 
-_last_request = 0.0
-
-
-def _open(req, timeout=_TIMEOUT, retries=1):
-    """HTTP 入口:无状态(源站匿名可通,无需 Cookie)+ 4 秒节流,返回文本。
-
-    失败抛含馆名的 RuntimeError。金陵源站偶发 chunked 传输中途停顿(≥60 秒后超时,
-    NOTES.md 记「重试即好」)——网络类错误默认重试一次(每次重试照常节流);
-    HTTP 状态错误是确定性的,不重试。
-    """
-    global _last_request
-    last = None
-    for _ in range(retries + 1):
-        wait = _THROTTLE - (time.monotonic() - _last_request)
-        if wait > 0:
-            time.sleep(wait)
-        _last_request = time.monotonic()
-        try:
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return resp.read().decode("utf-8", errors="replace")
-        except urllib.error.HTTPError as e:
-            raise RuntimeError(f"金陵图书馆请求失败：{e}") from e
-        except (urllib.error.URLError, OSError) as e:
-            last = e
-    raise RuntimeError(f"金陵图书馆请求失败：{last}") from last
-
-
-# ---- 双源配置与归并口径 ----
+# 金陵源：汇文 uopac 家族。金陵匿名全通 → 不带 securitycam cookie。
+_JL = UopacConfig(name_cn="金陵图书馆", base_url="http://uopac.jllib.cn",
+                  throttle=_THROTTLE)
 
 # 南图源：ALEPH 家族。检索库、馆藏库、book_id 前缀都用 NJL01（中文文献库）。
 # 验证码墙按 IP、按 host 独立封禁（解南图不解天津），解封指引只列本 host。
@@ -91,63 +56,10 @@ _SOURCE_PRIORITY = ("JL", "NJL01")   # 市馆 > 省馆，同杭州口径（HZ > 
 _SOURCE_NAMES = {"JL": "金陵图书馆", "NJL01": "南京图书馆"}
 
 
-def _looks_like_isbn(keyword):
-    """ISBN 形态判断:去连字符后 13 位(978/979 开头)或 10 位(末位可为 X)。同深圳口径。"""
-    s = str(keyword or "").replace("-", "").strip()
-    if len(s) == 13 and s.isdigit():
-        return s[:3] in ("978", "979")
-    if len(s) == 10 and s[:9].isdigit():
-        return s[9].isdigit() or s[9] in "Xx"
-    return False
-
-
-def _isbn_wildcard(keyword):
-    """ISBN → 数字间插 * 的通配查询(如 9*7*8*7*…)。
-
-    ISBN 索引是存储原样前缀匹配、各馆连字符形态不一(NOTES.md 实证),通配
-    子序列匹配下等长即数字全等,* 只吸收连字符;X 校验位统一大写。
-    """
-    digits = re.sub(r"[^0-9Xx]", "", str(keyword)).upper()
-    return "*".join(digits)
-
-
-def _clean(text):
-    """去标签、&nbsp; 与首尾空白,返回纯文本原值。"""
-    s = re.sub(r"<[^>]+>", "", html.unescape(str(text or "")))
-    return s.replace("\xa0", " ").strip()
-
-
-def _year(text):
-    m = re.search(r"(?:19|20)\d{2}", str(text or ""))
-    return m.group(0) if m else ""
-
-
-def _clean_publisher(text):
-    """出版发行项形如「重庆:重庆出版社,2016」,拆出纯出版社名。同深圳口径。"""
-    s = re.sub(r",?\s*(?:19|20)\d{2}\S*$", "", str(text or "")).strip()
-    if re.search(r"[:：]", s):
-        s = re.split(r"[:：]", s, maxsplit=1)[1].strip()
-    return s
-
-
-def _check_jl_id(book_id):
-    """金陵成员 id 是 uopac 原生数字（源前缀已由 _split_book_id 剥掉）。"""
-    s = str(book_id or "").strip()
-    if not s.isdigit():
-        raise RuntimeError(f"金陵图书馆：book_id 格式应为 uopac 数字 id：{book_id}")
-    return s
-
-
 # ---- 跨源 ISBN 归并（口径同天津/杭州适配器） ----
 
-def _norm_isbn(isbn):
-    """ISBN 归一：去连字符与空白并转大写；非 ISBN 形态返回空串（不参与归并）。"""
-    s = re.sub(r"[\s-]", "", str(isbn or "")).upper()
-    return s if _looks_like_isbn(s) else ""
-
-
 def _merge_books(per_source):
-    """跨源按归一 ISBN 归并：{source: [ _Book ]} → 归并后的 _Book 列表。
+    """跨源按归一 ISBN 归并：{source: [ Book ]} → 归并后的 Book 列表。
 
     口径（天津/杭州口径的南京变体——差别在源内重复与排列）：
     - **只有跨源命中的 ISBN 才合并**：该 ISBN 出现在两个源里才合成一条复合
@@ -166,21 +78,21 @@ def _merge_books(per_source):
     # 归一键 = 出现在 ≥2 个源里的 ISBN；单源重复不算
     sources_of = {}
     for b in flat:
-        key = _norm_isbn(b.isbn)
+        key = uopac.parser.norm_isbn(b.isbn)
         if key:
             sources_of.setdefault(key, set()).add(b.record_id.split(":")[0])
     merge_keys = {k for k, seen in sources_of.items() if len(seen) > 1}
 
     groups = {}
     for b in flat:
-        key = _norm_isbn(b.isbn)
+        key = uopac.parser.norm_isbn(b.isbn)
         if key in merge_keys:
             groups.setdefault(key, []).append(b)
 
     merged = []
     emitted = set()
     for b in flat:
-        key = _norm_isbn(b.isbn)
+        key = uopac.parser.norm_isbn(b.isbn)
         if key not in merge_keys:
             merged.append(b)        # 无 ISBN 与单源重复：原位原样
             continue
@@ -216,235 +128,23 @@ def _split_book_id(book_id):
     return sorted(members, key=lambda m: _SOURCE_PRIORITY.index(m[0]))
 
 
-@dataclass
-class _Book:
-    record_id: str = ""
-    title: str = ""
-    author: str = ""
-    publisher: str = ""
-    publish_year: str = ""
-    availability_summary: str = ""
-    isbn: str = ""
-    call_number: str = ""
-    summary: str = ""
-
-
-@dataclass
-class _SearchResult:
-    success: bool = True
-    error: str = ""
-    statistics: dict = field(default_factory=dict)
-    books: list = field(default_factory=list)
-
-
-@dataclass
-class _Holding:
-    library: str = ""
-    location: str = ""
-    call_number: str = ""
-    status: str = ""
-    available: bool = False
-    item_id: str = ""
-    due_date: str = ""
-
-    def is_available(self):
-        return self.available
-
-
-# ---------- 检索结果页 ----------
-
-_RESULT_MARK = '<div id="found">'
-_FOUND_TOTAL = re.compile(r'有\s*<font color="red">(\d+)</font>\s*项')
-_NUM_PAGES = re.compile(
-    r'<font color=red>(\d+)</font>&nbsp; / &nbsp;<font color=black>(\d+)</font>')
-_BLOCKS = re.compile(r'<div class="searchcontent"\s*>(.*?)<div class="clear">', re.S)
-# 裸请求(无 Cookie)时 Tomcat 把 action URL 重写为 detail.action;jsessionid=…?id=
-# (NOTES.md「jsessionid URL 重写」)→ 容忍两者之间的任意段
-_ENTRY_LINK = re.compile(r'detail\.action[^?]*\?id=(\d+)">(.*?)</a>', re.S)
-_META_LINE = re.compile(r'<p style=color:#666;>(.*?)</p>', re.S)
-_LIBS_LINE = re.compile(r'所在馆：</strong>(.*?)</p>', re.S)
-
-
-def _split_meta_line(line):
-    """元信息行「责任者 / 出版社 / ISBN / 出版年」→ (author, publisher, year, isbn)。
-
-    固定末三段为出版社/ISBN/年,其余拼回责任者(责任者本身可能含斜杠);
-    不足四段时防御性退化为只有责任者(ISBN 空串)。
-    """
-    parts = [_clean(p) for p in str(line or "").split("/")]
-    if len(parts) < 4:
-        return (_clean(line), "", "", "")
-    author = "/".join(parts[:-3]).strip()
-    publisher = parts[-3]
-    year = _year(parts[-1])
-    return author, publisher, year, parts[-2]
-
-
-def _parse_libs(raw):
-    """所在馆块 → 馆名列表(名称间是空白与 &nbsp;)。"""
-    text = html.unescape(str(raw or "")).replace("\xa0", " ")
-    text = re.sub(r"<[^>]+>", "", text)
-    return [n for n in text.split() if n]
-
-
-def _parse_search(text):
-    """结果页 → {"books", "total_results", "total_pages"}。
-
-    ISBN 从元信息行取原值（供跨源归并）；record_id 前缀 JL: 由调用方补。
-    """
-    m = _FOUND_TOTAL.search(text)
-    total = int(m.group(1)) if m else None
-    m = _NUM_PAGES.search(text)
-    if m:
-        total_pages = int(m.group(2))
-    else:
-        # 空结果页无 num 分页区 → 按源站固定每页 20 条回退
-        total_pages = math.ceil(total / _PAGE_SIZE) if total else 0
-    books = []
-    for block in _BLOCKS.findall(text):
-        link = _ENTRY_LINK.search(block)
-        if not link:
-            continue
-        rid, title = link.group(1), _clean(link.group(2))
-        meta = _META_LINE.search(block)
-        author, publisher, year, isbn = _split_meta_line(meta.group(1) if meta else "")
-        libs = _LIBS_LINE.search(block)
-        names = _parse_libs(libs.group(1)) if libs else []
-        books.append(_Book(
-            record_id=f"JL:{rid}",
-            title=title,
-            author=author,
-            publisher=publisher,
-            publish_year=year,
-            availability_summary=("所在馆：" + "、".join(names)) if names else "",
-            isbn=isbn,
-        ))
-    return {"books": books, "total_results": total, "total_pages": total_pages}
-
-
-# ---------- 详情页 ----------
-
-_DD = re.compile(r"<dt>(.*?)</dt>\s*<dd>(.*?)</dd>", re.S)
-_TAB_NAME = re.compile(r'<li><a href="#loca_([A-Za-z0-9_]+)">(.*?)</a></li>')
-_TAB_DATA = re.compile(
-    r'<div id="loca_([A-Za-z0-9_]+)">.*?<span id="data"\s*>(.*?)</span>', re.S)
-
-
-def _parse_detail(text):
-    """详情页 → 书目字段 dict。无索书号字段,call_number 恒空串(NOTES.md)。"""
-    fields = {}
-    for dt, dd in _DD.findall(text):
-        fields[_clean(dt).rstrip("：:")] = _clean(dd)
-    title, _, author = fields.get("题名/责任者", "").partition("/")
-    publish = fields.get("出版发行项", "")
-    return {
-        "title": title.strip(),
-        "author": author.strip(),
-        "publisher": _clean_publisher(publish),
-        "publish_year": _year(publish),
-        "isbn": fields.get("ISBN", ""),
-        "call_number": "",
-        "summary": fields.get("提要文摘附注", ""),
-    }
-
-
-def _parse_tabs(text):
-    """详情页馆藏 tab → [(馆名, ajax 绝对 URL)]。span#data 是相对 URL,& 可能
-    以 &amp; 出现(页面 JS 有 replace 防御),统一 unescape。"""
-    names = {code: _clean(name) for code, name in _TAB_NAME.findall(text)}
-    tabs = []
-    for code, rel in _TAB_DATA.findall(text):
-        rel = html.unescape(rel).strip()
-        if "ajax_holding.action" not in rel:
-            continue
-        tabs.append((names.get(code, code), f"{_BASE}/uopac/s/{rel}"))
-    return tabs
-
-
-# ---------- 馆藏表(ajax_holding 响应) ----------
-
-_ITEM_ROW = re.compile(
-    r'<tr align="center" bgcolor="#FFFFFF">\s*'
-    r'<td[^>]*>(.*?)</td>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>(.*?)</td>\s*'
-    r'<td[^>]*>(.*?)</td>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>(.*?)</td>\s*</tr>',
-    re.S,
-)
-_DUE_DATE = re.compile(r"应还日期[：:]\s*(\d{4}-\d{2}-\d{2})")
-
-
-def _parse_holding_rows(text, library):
-    """馆藏表 → 单册级 _Holding 列表。列序:索书号/条码号/年卷期/校区/馆藏地/状态。
-
-    条码号与年卷期无契约字段,舍弃;location=校区+馆藏地(空格连接,空段跳过)。
-    状态词表:「可借」→ True;其余(含「借出-应还日期：X」与词表外)保守 False,
-    原值照登;应还日期仅认「应还日期：YYYY-MM-DD」标准形态,否则空串不猜。
-    """
-    holdings = []
-    for callno, _barcode, _issue, campus, loc, status in _ITEM_ROW.findall(text):
-        status = _clean(status)
-        m = _DUE_DATE.search(status)
-        holdings.append(_Holding(
-            library=library,
-            location=" ".join(x for x in (_clean(campus), _clean(loc)) if x),
-            call_number=_clean(callno),
-            status=status,
-            available=(status == "可借"),
-            due_date=m.group(1) if m else "",
-        ))
-    return holdings
-
-
 class _Client:
-    """双源客户端：JL＝金陵 uopac 联合目录，NJL01＝南京图书馆 ALEPH 家族原语。
+    """双源客户端：JL＝金陵 uopac 联合目录（uopac 家族）＋ NJL01＝南京图书馆 ALEPH。
 
-    把两源原始响应解析成与 vendor 对象同形的结构，再按 ISBN 归并成城市级结果。
+    把两源原始响应解析成同形结构（两家族的 Book/Holding 是逐字段同形的
+    dataclass），再按 ISBN 归并成城市级结果。
     """
 
-    def _fetch(self, url):
-        return _open(urllib.request.Request(url, headers=_HEADERS))
-
-    # ---- JL（金陵 uopac 联合目录） ----
+    # ---- JL（金陵 uopac 联合目录，解析在 uopac 家族） ----
 
     def _search_jl(self, keyword, page=1, limit=20):
-        if _looks_like_isbn(keyword):
-            params = {"q": _isbn_wildcard(keyword), "meta": "14", "page": str(page)}
-        else:
-            params = {"q": str(keyword or ""), "meta": "20", "page": str(page)}
-        url = f"{_BASE}/uopac/s/search_result.action?" + urllib.parse.urlencode(params)
-        text = self._fetch(url)
-        if _RESULT_MARK not in text:
-            raise RuntimeError("金陵图书馆：检索未返回结果页（可能被拦截或接口变更）")
-        return _parse_search(text)
-
-    def _jl_detail_page(self, rid):
-        return self._fetch(f"{_BASE}/uopac/s/detail.action?id={_check_jl_id(rid)}")
+        return uopac.search_raw(_JL, keyword, page=page, prefix="JL:")
 
     def _holdings_jl(self, rid):
-        tabs = _parse_tabs(self._jl_detail_page(rid))
-        holdings = []
-        for library, url in tabs:
-            try:
-                text = self._fetch(url)
-            except RuntimeError:
-                # 单馆代理失败(成员馆不可达等)→ 该馆 0 条,不拖垮整体
-                continue
-            holdings.extend(_parse_holding_rows(text, library))
-        return holdings
+        return uopac.get_holdings(_JL, rid)
 
     def _detail_jl(self, rid):
-        d = _parse_detail(self._jl_detail_page(rid))
-        if not d["title"]:
-            raise RuntimeError(f"金陵图书馆：未找到该书详情：{rid}")
-        return _Book(
-            record_id=str(rid),
-            title=d["title"],
-            author=d["author"],
-            publisher=d["publisher"],
-            publish_year=d["publish_year"],
-            isbn=d["isbn"],
-            call_number=d["call_number"],
-            summary=d["summary"],
-        )
+        return uopac.get_book_detail(_JL, rid)
 
     # ---- NJL01（南京图书馆 ALEPH） ----
 
@@ -477,7 +177,7 @@ class _Client:
         # 合计口径：任一存活源不提供总数 → 合计不可知，如实 None
         totals = [r["total_results"] for r in per_source.values()]
         total = None if any(t is None for t in totals) else sum(totals)
-        return _SearchResult(
+        return uopac.SearchResult(
             success=True,
             error="",
             statistics={

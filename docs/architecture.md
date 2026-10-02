@@ -6,6 +6,7 @@
 - `adapters/`：每座城市一个模块，实现 `search_books` / `get_holdings` / `get_book_detail` 三个原语，返回结构对齐 `base.py` 的 TypedDict（由契约测试强制）。新增城市 = 新适配器模块 + `adapters/__init__.py` 的 `_ADAPTERS` 注册一行，server 和 tool 接口不动。
 - `interlib/`：图创 Interlib 家族共享模块（广州、杭州、江阴、温州共用，详见 [data-sources.md](data-sources.md)）。
 - `aleph/`：Ex Libris ALEPH 家族共享模块（天津主馆/少儿馆、南京图书馆共用）：`client.py` HTTP 层＋每 host 节流＋验证码墙、`parser.py` 三种页面解析、`__init__.py` 三原语与 `AlephConfig`。城市差异只允许以带默认值的 `AlephConfig` 字段（quirk）新增，默认值即天津行为。
+- `uopac/`：汇文 Libsys/uopac 家族共享模块（南京金陵源、扬州共用）：`client.py` HTTP 层＋每 host 节流＋可选 securitycam cookie 与壳页识别、`parser.py` 三种页面解析、`__init__.py` 原语与 `UopacConfig`。城市差异只允许以带默认值的 `UopacConfig` 字段（quirk）新增，默认值即金陵行为；反爬逐站不同（金陵匿名全通、扬州有静态挑战），页面结构两站同构故共用解析。
 - `vendor/`：第三方项目代码，一个组件一个子目录，各保留原始 LICENSE。
 
 ## 契约测试与 `_client` 形态

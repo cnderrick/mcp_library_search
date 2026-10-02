@@ -1,7 +1,7 @@
 """南京适配器检索：JL 源(金陵 uopac 联合目录)的 meta 路由、ISBN 通配、解析与分页。
 
-mock 点为模块级 `_open(req, timeout)`:req 是 urllib Request,测试按顺序返回
-fixture 文本并记录 full_url(金陵无会话、全 GET,无 POST body)。
+mock 点为 uopac 家族 HTTP 入口 `client.get(url, cfg)`：测试按顺序返回 fixture
+文本并记录 url（金陵无会话、全 GET，无 POST body）。
 南图 ALEPH 源由 `_stub_prov` 置为失败——本文件只测金陵侧,源级容错会吞掉它。
 fixture 结论以 tests/fixtures/nanjing/NOTES.md 为准。
 """
@@ -12,6 +12,8 @@ import pytest
 from mcp_library_search.adapters import nanjing
 from mcp_library_search.adapters.base import validate_search_page
 from mcp_library_search.aleph import client as aleph_client
+from mcp_library_search.uopac import UopacConfig
+from mcp_library_search.uopac import client as uopac_client
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "nanjing"
 _RESULT = (_FIXTURES / "uopac_result_santi.html").read_text(encoding="utf-8")
@@ -33,15 +35,15 @@ def _stub_prov(monkeypatch):
 
 
 def _mock_open(monkeypatch, pages):
-    """按顺序返回 pages;记录 full_url 列表。"""
+    """按顺序返回 pages;记录 url 列表。"""
     calls = []
     seq = iter(pages)
 
-    def spy(req, timeout=90):
-        calls.append(req.full_url)
+    def spy(url, cfg):
+        calls.append(url)
         return next(seq)
 
-    monkeypatch.setattr(nanjing, "_open", spy)
+    monkeypatch.setattr(uopac_client, "get", spy)
     return calls
 
 
@@ -164,8 +166,10 @@ def test_non_result_page_raises(monkeypatch):
 
 
 def test_module_shape(monkeypatch):
-    # 独立实现范式:模块级 _client + _open(契约形态硬要求,别破坏)
+    # 独立实现范式:模块级 _client(契约形态硬要求,别破坏);
+    # 金陵侧解析已家族化——委托 uopac 家族,由该家族的无状态 HTTP 入口取数
     assert hasattr(nanjing, "_client")
     for meth in ("search", "get_holdings", "get_book_detail"):
         assert callable(getattr(nanjing._client, meth))
-    assert callable(nanjing._open)
+    assert isinstance(nanjing._JL, UopacConfig)
+    assert nanjing._JL.securitycam == ""   # 金陵匿名全通,不带 cookie

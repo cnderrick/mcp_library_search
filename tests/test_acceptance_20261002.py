@@ -17,14 +17,16 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources.md"
 # 完整注册面：既有 6 城＋第一批 6 标识＋第二批 4 标识（成都/宁波/绍兴/大连）
 # ＋青岛（2026-10-02 发现开放 Solr 检索通道后接入）
 # ＋无锡（2026-10-02 修正误判后接入，无锡市新吴区图书馆单馆）
+# ＋扬州（2026-10-02 定性 securitycam 为静态挑战后接入，汇文 uopac 家族）
 _EXPECTED = [
     "chengdu", "chongqing", "dalian", "guangzhou", "hangzhou", "hefei",
     "jiangyin", "jinhua", "nanjing", "ningbo", "qingdao", "shanghai",
     "shaoxing", "shenzhen", "taizhou", "tianjin", "wenzhou", "wuxi",
+    "yangzhou",
 ]
 
 
-def test_registry_has_exactly_eighteen_identifiers():
+def test_registry_has_exactly_nineteen_identifiers():
     assert sorted(adapters._ADAPTERS) == _EXPECTED
 
 
