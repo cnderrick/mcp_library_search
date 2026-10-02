@@ -22,16 +22,19 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋徐州（2026-10-03 立项城市落地，抽出图星 LibStar Find 家族）
 # ＋淮安、盐城（2026-10-03 立项城市落地，LibStar 家族新增配置）
 # ＋丽水（Interlib pro2018）、舟山（抽出 UILAS 家族，旧式 TLS quirk）
+# ＋陕西批量：西安/咸阳/宝鸡/安康（Interlib，新增 ctx/api_detail quirk）、
+#   汉中（LibStar 家族新增配置）、陕西省图书馆/榆林（抽出新版 UILAS REST 家族）
 _EXPECTED = [
-    "chengdu", "chongqing", "dalian", "guangzhou", "hangzhou", "hefei",
-    "huaian", "jiangyin", "jinhua", "lishui", "nanjing", "ningbo",
-    "qingdao", "shanghai", "shaoxing", "shenzhen", "suzhou", "taizhou",
-    "tianjin", "wenzhou", "wuxi", "xuzhou", "yancheng", "yangzhou",
-    "zhoushan",
+    "ankang", "baoji", "chengdu", "chongqing", "dalian", "guangzhou",
+    "hangzhou", "hanzhong", "hefei", "huaian", "jiangyin", "jinhua",
+    "lishui", "nanjing", "ningbo", "qingdao", "shaanxi", "shanghai",
+    "shaoxing", "shenzhen", "suzhou", "taizhou", "tianjin", "wenzhou",
+    "wuxi", "xian", "xianyang", "xuzhou", "yancheng", "yangzhou",
+    "yulin", "zhoushan",
 ]
 
 
-def test_registry_has_exactly_twenty_five_identifiers():
+def test_registry_has_exactly_thirty_two_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

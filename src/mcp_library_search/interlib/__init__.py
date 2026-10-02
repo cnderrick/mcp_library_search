@@ -30,6 +30,8 @@ class InterlibConfig:
     curlibcode: str = ""  # 多租户云托管馆按馆过滤（如 STC001），默认空 = 穗杭不带该参数
     pro2018: bool = False          # 搜索/详情为 pro2018 模板代（台州/成都/绍兴），默认 False = 广州基准
     pro2018_cite_author: bool = False  # pro2018 详情以引文块首句兜底责任者（绍兴实证），默认关
+    ctx: str = "/opac"             # 应用上下文路径（西安 `/opac3`），默认广州基准 `/opac`
+    api_detail: bool = False       # 详情改走 `/api/book/{recno}` JSON（安康详情页 HTML 被源站截断），默认 False = HTML 详情页
 
 
 def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
@@ -45,7 +47,7 @@ def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> di
     }
     if cfg.curlibcode:
         params["curlibcode"] = cfg.curlibcode
-    html = client.get(cfg, "/opac/search", params)
+    html = client.get(cfg, f"{cfg.ctx}/search", params)
     parse = parser.parse_search_pro2018 if cfg.pro2018 else parser.parse_search
     return parse(html)
 
@@ -88,7 +90,7 @@ def search_books(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 
 
 def get_holdings(cfg: InterlibConfig, book_id: str, only_available: bool = True) -> list[Holding]:
     """指定书目在各分馆的馆藏与可借状态，可借的排前面。失败抛 RuntimeError。"""
-    body = client.get(cfg, f"/opac/api/holding/{book_id}",
+    body = client.get(cfg, f"{cfg.ctx}/api/holding/{book_id}",
                       {"limitLibcodes": "", "isCluster": ""})
     try:
         payload = json.loads(body)
@@ -116,13 +118,23 @@ def get_book_detail(cfg: InterlibConfig, book_id: str) -> BookDetail:
 
     多租户云托管馆（curlibcode 非空）详情 URL 必须带该参数，否则 HTTP 500
     （ZXYH 实测，见 tests/fixtures/tianjin/NOTES.md）。
+
+    `api_detail=True` 时改走 `/api/book/{recno}` JSON（安康详情页 HTML 被源站
+    截断，HTML 详情拿不到书目字段；该接口各 Interlib 站点均可通）。
     """
     params = {"curlibcode": cfg.curlibcode} if cfg.curlibcode else None
-    html = client.get(cfg, f"/opac/book/{book_id}", params)
-    if cfg.pro2018:
-        d = parser.parse_detail_pro2018(html, cite_author=cfg.pro2018_cite_author)
+    if cfg.api_detail:
+        body = client.get(cfg, f"{cfg.ctx}/api/book/{book_id}")
+        try:
+            d = parser.parse_detail_api(json.loads(body))
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"{cfg.name_cn}：详情数据解析失败：{e}") from e
     else:
-        d = parser.parse_detail(html)
+        html = client.get(cfg, f"{cfg.ctx}/book/{book_id}", params)
+        if cfg.pro2018:
+            d = parser.parse_detail_pro2018(html, cite_author=cfg.pro2018_cite_author)
+        else:
+            d = parser.parse_detail(html)
     if not d["title"]:
         raise RuntimeError(f"{cfg.name_cn}：未找到该书详情：{book_id}")
     return {

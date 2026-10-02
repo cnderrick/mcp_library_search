@@ -33,6 +33,13 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 盐城 | `yancheng` | ✅ 已接入 | 盐城市图书馆（图星 LibStar Find，单实例） |
 | 丽水 | `lishui` | ✅ 已接入 | 丽水市公共图书馆联合目录（图创 Interlib pro2018，含景宁/庆元/缙云等县馆） |
 | 舟山 | `zhoushan` | ✅ 已接入 | 舟山市图书馆（UILAS 知识检索平台） |
+| 陕西省图书馆 | `shaanxi` | ✅ 已接入 | 陕西省图书馆（新版 UILAS REST 平台，省级馆馆址西安） |
+| 西安 | `xian` | ✅ 已接入 | 西安市公共图书馆集群平台（图创 Interlib pro2018，上下文 `/opac3`） |
+| 咸阳 | `xianyang` | ✅ 已接入 | 咸阳市公共图书馆联盟（图创 Interlib） |
+| 宝鸡 | `baoji` | ✅ 已接入 | 宝鸡市公共图书馆集群平台（图创 Interlib） |
+| 安康 | `ankang` | ✅ 已接入 | 安康市图书馆（图创 Interlib pro2018） |
+| 汉中 | `hanzhong` | ✅ 已接入 | 汉中市图书馆全市联合目录（图星 LibStar Find，含洋县等县馆） |
+| 榆林 | `yulin` | ✅ 已接入 | 榆林市图书馆（新版 UILAS REST 平台） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装

@@ -229,6 +229,30 @@ def parse_detail(html: str) -> dict:
     return p.fields
 
 
+def parse_detail_api(payload: dict) -> dict:
+    """解析 `/api/book/{recno}` JSON 的书目字段（api_detail 城市用）。
+
+    返回与 parse_detail 同形的 dict。字段：`biblios.title/author/publisher/
+    pubdate(→四位年)/isbn/classNo/summary`，缺失为空串。
+    """
+    b = (payload or {}).get("biblios") or {}
+
+    def s(key):
+        v = b.get(key)
+        return "" if v is None else str(v).strip()
+
+    ym = _YEAR_RE.search(s("pubdate"))
+    return {
+        "title": s("title"),
+        "author": s("author"),
+        "publisher": s("publisher"),
+        "publish_year": ym.group(0) if ym else "",
+        "isbn": s("isbn"),
+        "call_number": s("classNo"),
+        "summary": s("summary"),
+    }
+
+
 # 可借/不可借状态词：命中不可借词优先，都不中保守判不可借（计划 Review Focus）。
 # 词表覆盖 holdStateMap 已知 29 项中的流通语义（在馆/借出/闭架/丢失/剔除/编目……），
 # 未来新增状态未识别时一律不可借，避免读者白跑。

@@ -1,0 +1,2616 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+		<script type="text/javascript">
+			var $$opac_bookcover = "http://book-resource.dataesb.com/websearch/metares";
+			var ctx = "/opac3";
+		</script>
+		
+		
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<link rel="stylesheet" href="/opac3/media/pro2018/css/reset_pc.css" type="text/css" media="all">	
+		<link rel="stylesheet" href='/opac3/media/pro2018/fullcalendar/fullcalendar.css' type="text/css" media="all">
+		<link rel="stylesheet" href="/opac3/media/pro2018/ultimate/css/gfpublic.css" type="text/css" media="all">
+		<link rel="stylesheet" href="/opac3/media/pro2018/ultimate/css/gfindex.css" type="text/css" media="all">
+		<link rel="stylesheet" href="/opac3/media/pro2018/ultimate/css/page_footer_ultimate.css" type="text/css" media="all">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac3/media/js/jquery/jquery-3.7.1.min.js" type="text/javascript" ></script>
+<script src="/opac3/media/js/jquery/jquery-migrate-3.5.0.min.js" type="text/javascript" ></script>
+		<script src="/opac3/media/pro2018/js/placeholderfriend.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/ultimate/js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/distpicker.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/distpicker.js" type="text/javascript" charset="utf-8"></script>
+	 	<script src="/opac3/media/pro2018/js/main.js" type="text/javascript" charset="utf-8"></script>
+	 	<script src="/opac3/media/pro2018/js/jquery.pagination.min.js" type="text/javascript" charset="utf-8"></script>
+	 	<script src="/opac3/media/pro2018/js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/opac3/media/pro2018/js/high.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="/opac3/media/js/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/opac3/media/js/common/common.js"></script>
+		<script type="text/javascript" src="/opac3/media/js/common/bookcover.js"></script>
+		<script type="text/javascript" src="/opac3/media/js/common/banned.js"></script>
+
+		
+		
+			
+				<script type="text/javascript" src="/opac3/media/js/i18n/message_zh.js"></script>
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+				</script>
+			
+			
+		
+		
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac3/media/js/common/i18nUtil.js"></script>
+
+		<link rel="shortcut icon" href="/opac3/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac3/media/images/favicon.ico" type="image/vnd.microsoft.icon" />
+		
+			
+			
+				<title>检索系统</title>
+			
+		
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- jQuery UI 依赖 -->
+<script>$.uiBackCompat = true;</script> <!-- 关键：启用旧版API兼容 -->
+<link rel="stylesheet" type="text/css" href="/opac3/media/js/jquery/jquery-ui-1.14.1.css">
+<script type="text/javascript" src="/opac3/media/js/jquery/jquery-ui-1.14.1.min.js"></script>
+		<!-- meta keywords, etc -->
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<!--#以上代码IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame.-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+<!--以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。  -->
+<meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 西安市公共图书馆集群信息化管理平台" />
+
+		<meta name="referrer" content="same-origin" />
+		<link rel="stylesheet" href="/opac3/media/pro2018/css/theme/themeTwo.css" type="text/css" media="all">
+	</head>
+	<body class="themeGf bgWhite" style="overflow-x:hidden;">
+		
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/opac3/media/pro2018/css/popCon.css" type="text/css" media="all">
+<link rel="stylesheet" href="/opac3/media/pro2018/css/theme/themeTwo.css" type="text/css" media="all">
+<meta name="referrer" content="unsafe-url">
+<style>
+	
+	.simpleArea{
+		/*width: 88px;*/
+		margin-left:20px;
+		cursor: pointer;
+		display: inline-block;
+	}
+	.simpleArea a{
+		display: block;
+		font-size: 14px;
+		color:#FFFFFF;
+	}
+	.homeCss{
+		width: 1200px;
+		display: flex;
+		justify-content: center;
+	}
+	.hdScondMenu2{
+		width: 210px;
+		top: 78px;
+		margin-left: -105px;
+	}
+	.sigSearchRight .sigSearchBtn{
+		width:130px;
+	}
+	.hotWordArea{
+		margin-left: 20px;
+	}
+	
+</style>
+<script>
+	$(document).ready(function(){
+		$(".toggleNavBtn").click(function(){
+			$(".navInUl").toggle()
+		});
+		function changeLang(lang) {
+			$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+			document.location.reload();
+		}
+		//检查是否登录
+		
+			$(".peropArea").bind("click",function() {
+				
+				
+				
+				
+				
+				$("#loginFrame").attr("src", '/opac3/reader/login?loginFlag=dialog');
+				
+				
+			});
+		$(".popDel").bind("click", function () {
+			$('#rdPasswd').val("");
+			$("#loginmsg").html("");
+		});
+		
+		
+		
+
+		$(".navInLi").hover(function () {
+			$(this).find(".menuOpCon").show();
+		},function () {
+			$(this).find(".menuOpCon").hide();
+		});
+
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE");
+
+		$("#zhlang option[value='"+lang+"']").prop("selected", true);
+
+		
+
+	});
+
+    
+
+	function zhchangeLang() {
+		var lang = $("#zhlang").val();
+		if(lang == ""){
+			// var selectedIndex = $("#zhlang").get(0).selectedIndex;
+			// $("#zhlang").each(function(){
+			// 	$(this).find("option").eq(selectedIndex).prop("selected",true)
+			// });
+			return;
+		}
+		// var selectedIndex = $("#zhlang").get(0).selectedIndex;
+		// $("#zhlang").each(function(){
+		// 	$(this).find("option").eq(selectedIndex).prop("selected",true)
+		// });
+		/**
+		 var currentURL = document.location.href;
+		 var langParam = "&lang=" + lang;
+		 if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+		 document.location.href = currentURL + langParam;
+		 */
+		$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+		document.location.reload();
+	}
+</script>
+
+
+<div class="searchOut sigSearchOut"
+
+	
+	
+		style='background-image:url(/opac3/media/pro2018/zjlib/images/bg01.png);background-size:
+		cover;'
+	
+
+>
+<div class="headerArea bHeadArea thBHeadArea" >
+		<div class="navArea">
+			<div class="wrap homeCss">
+			<div class="gfLogoArea disInlineBk" style="background: transparent;">
+				
+					
+					
+						<img src='/opac3/faq/getImage/1901'
+							 alt="logo">
+					
+					
+				
+			</div>
+			<div class="disInlineBk navIn">
+				<a href="javascript:;" class="toggleNavBtn"></a>
+				<ul class="navInUl">
+					
+					<li class="navInLi">
+						<a href="/opac3/index" class="navInLink">首页</a>
+					</li>
+					
+					
+					
+						
+							
+							
+								<li class="navInLi">
+									<a class="navInLink" href="/opac3/search?searchType=browse">
+										
+											
+											
+												资源检索
+											
+										
+									</a>
+									
+										<ul class="hdScondMenu hdScondMenu2">
+											
+												
+													<li class="hdScondLi">
+														<a href="/opac3/search?searchType=browse" class="hdScondLink">
+															
+																
+																
+																	资源检索
+																
+															
+														</a>
+													</li>
+												
+											
+												
+													<li class="hdScondLi">
+														<a href="/opac3/browse/xueke/all" class="hdScondLink">
+															
+																
+																
+																	浏览期刊
+																
+															
+														</a>
+													</li>
+												
+											
+										</ul>
+									
+								</li>
+							
+						
+					
+						
+							
+							
+								<li class="navInLi">
+									<a class="navInLink" href="/opac3/recommend/custom">
+										
+											
+											
+												荐购图书
+											
+										
+									</a>
+									
+										<ul class="hdScondMenu hdScondMenu2">
+											
+												
+													<li class="hdScondLi">
+														<a href="/opac3/recommend/custom" class="hdScondLink">
+															
+																
+																
+																	自定义荐购
+																
+															
+														</a>
+													</li>
+												
+											
+												
+													<li class="hdScondLi">
+														<a href="/opac3/recommend/pbatch" class="hdScondLink">
+															
+																
+																
+																	荐购书单
+																
+															
+														</a>
+													</li>
+												
+											
+										</ul>
+									
+								</li>
+							
+						
+					
+						
+							
+							
+								<li class="navInLi">
+									<a class="navInLink" href="/opac3/recommend/guessYouLike">
+										
+											
+											
+												图书推荐
+											
+										
+									</a>
+									
+								</li>
+							
+						
+					
+						
+							
+							
+								<li class="navInLi">
+									<a class="navInLink" href="/opac3/reader/space">
+										
+											
+											
+												个人图书馆
+											
+										
+									</a>
+									
+								</li>
+							
+						
+					
+
+					
+					<select name="lang" id="zhlang" onchange="zhchangeLang()">
+						<option value="">语言</option>
+						
+							<option value="zh">中文</option>
+						
+						
+						
+						
+						
+						
+					</select>
+				</ul>
+			</div>
+			<div class="disInlineBk gfPerDown navRt">
+				<i class="headLine"></i>
+				<div class="peropArea  disInlineBk">
+					<div >
+						<i class="hdLoginIcon"></i>
+						<span class="loginBtn">
+							
+									
+										登录
+										
+									
+									
+								
+						</span>
+					</div>
+					<div class="perOpCon" style="display: none;">
+						<i class="upSan"></i>
+						<ul class="perOpUl" style="width: 135px">
+							
+							<li style="display:none;">
+								<a href="#">
+									<i class="perOpIcon perMes"></i>
+									<span>消息</span>
+									<span class="perMesNum">0</span>
+								</a>
+							</li>
+							<li>
+								<a href="/opac3/privateCollection/privateCollectionList">
+									<i class="perOpIcon perLike"></i>
+									<span>收藏</span>
+								</a>
+							</li>
+							<li>
+								<a href="/opac3/reader/logout">
+									<i class="perOpIcon perOut"></i>
+									<span>退出</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+
+			
+			
+			<div class="langArea disInlineBk gfPerDown" style="display: none;">
+				<!-- <div class="langIconArea">
+					<span class="langFont disInlineBk">简体中文</span>
+					<i class="gfDownIcon langDown disInlineBk"></i>
+				</div> -->
+				<div class="langIconArea">
+					<span class="langFont disInlineBk">
+					
+						
+						
+						
+						
+						
+						中文
+					
+					</span>
+					<i class="langDown headIcon"></i>
+				</div>
+				<div class="langCon" style="display: none;">
+					<i class="upSan"></i>
+					<ul class="langOpUl">
+						
+						<li class="curLang">
+						<a href="javascript:changeLang('zh');">中文</a>
+						</li>
+						
+						
+						
+						
+						
+						
+					</ul>
+				</div>
+			</div>
+			
+			
+			<div class="simpleArea mobileHide">
+				<a href="/opac3/index?type=simple"
+					
+				>简化版 </a>
+			</div>
+			
+		 </div>
+	</div>
+</div>
+	<div class="sigSearchCon" style="padding-left: 0px;">
+		
+		<div class="searchArea">
+			<div class="disInlineBk searchLeft sigSearchLeft">
+				<div class="searchType sigSearchType disInlineBk">
+					<div class="choseType sigChoseType">
+						<span class="choseFont sigChoseFont">题名</span>
+						<i class="searDown sigSearDown headIcon"></i>
+					</div>
+					<ul class="searchTypeUl sigSearchTypeUl">
+						<li class="marc"><a href="javascript:changeSearchWay('');">
+							
+								
+								
+									任意词
+								
+							
+						</a></li>
+						<li class="title sTypeCur"><a href="javascript:changeSearchWay('title');">题名</a></li>
+						
+							<li><a href="javascript:changeSearchWay('title200a');">正题名</a></li>
+						
+						<li class="isbn"><a href="javascript:changeSearchWay('isbn');">ISBN/ISSN</a></li>
+						<li class="author"><a href="javascript:changeSearchWay('author');">著者</a></li>
+						<li class="subject"><a href="javascript:changeSearchWay('subject');">主题词</a></li>
+						<li class="class"><a href="javascript:changeSearchWay('class');">分类号</a></li>
+						
+							<li class="ctrlno"><a href="javascript:changeSearchWay('ctrlno');">控制号</a></li>
+						
+						<li class="orderno"><a href="javascript:changeSearchWay('orderno');">订购号</a></li>
+						<li class="publisher"><a href="javascript:changeSearchWay('publisher');">出版社</a></li>
+						<li class="callno"><a href="javascript:changeSearchWay('callno');">索书号</a></li>
+						
+							<li class="pubplace"><a href="javascript:changeSearchWay('pubplace');">出版地</a></li>
+						
+						
+					</ul>
+				</div>
+				<div class="disInlineBk overHide searchIn sigSearchIn">
+					<div class="flLeft searchInp sigSearchInp">
+						<form name="searchForm" id="searchForm" action="search" method="get">
+							<input type="text" id="q" name="q" class="searchInpIn sigSearchInpIn"
+								   onkeypress="if(event.keyCode==13){searchIndexBtn.click();return false;}"
+										
+											
+												placeholder="输入图书检索关键字 "
+										
+										
+									
+							/>
+							<input type="hidden" name="searchWay" id="searchWay" value="title" />
+							<input type="hidden" id="searchSource" name="searchSource" value="reader" />
+							<input type="hidden" id="view" name="view" value="" />
+							<input type="hidden" id="scWay" name="scWay" value="dim" />
+							<input type="hidden" id="federatedResource" name="resource" value="全部资源" />
+							
+								<input type="hidden" name="hasholding" value="1" />
+							
+						</form>
+					</div>
+					<input type="button" id="searchIndexBtn" class="flRight searchBtn sigSearchBtn" value="检索"
+							
+								
+								
+									onclick="search('')"
+								
+							
+						    />
+				</div>
+			</div>
+			<div class="disInlineBk sigSearchRight" id="searchAdvBtn">
+				<button type="button" onclick="gotoAdvancedSearch();" class="searchBtn sigSearchBtn">高级搜索</button>
+			</div>
+
+		
+
+		</div>
+		
+			<div class="hotWordArea" style="height: 23px; overflow: hidden;">
+				热门词：
+				
+					
+					<a href="javascript:searchByHotKeyword('大中华寻宝记')">
+							大中华寻宝记
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('人鱼陷落')">
+							人鱼陷落
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('盗墓笔记')">
+							盗墓笔记
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('天官赐福')">
+							天官赐福
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('鬼灭之刃')">
+							鬼灭之刃
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('十日终焉')">
+							十日终焉
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('查理九世')">
+							查理九世
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('寻宝记')">
+							寻宝记
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('如果历史是一群喵')">
+							如果历史是一群喵
+					</a>
+				
+					
+					<a href="javascript:searchByHotKeyword('童年')">
+							童年
+					</a>
+				
+			</div>
+		
+
+		<div class="mobliePerFnArea">
+			
+			<a href="/opac3/booklist/list" class="mobliePerFn mobliePerFn02">我的借阅</a>
+			<a href="/opac3/reader/space" class="mobliePerFn mobliePerFn03">我的书单</a>
+		</div>
+	</div>
+</div>
+
+
+<!-- 登录弹出框 -->
+<div class="loginPopArea">
+ 	<div class="popMask" style="z-index:2;"></div>
+ 	<div class="popIn loginPopIn" >
+      <a href="javascript:void(0)" class="popDel"></a>
+      <input type="hidden" id="reader" name="reader" value=""/>
+		<input type="hidden" id="data" name="data" />
+		<input type="hidden" id="toPageUrl" name="toPageUrl" />
+		<!-- <div id="faqbg"></div>-->
+		<div id="loginDialog" class="loginPInCon" title="登录我的图书馆" align="center" valign="top">
+		<iframe id="loginFrame" name="loginFrame" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+		</div>
+ 	</div>
+</div>
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function search(view) {
+	$("#view").val(view);
+	var qword = $("#q").val();
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	$("#searchForm").submit();
+}
+
+function changeSearchWay(op){
+	$("#searchWay").val(op);
+}
+
+function searchByHotKeyword(hotSearchKeyword) {
+	$("#q").val(hotSearchKeyword);
+	$("#searchForm").submit();
+}
+
+//高级搜索
+function gotoAdvancedSearch() {
+	document.location.href = '/opac3/index/advance';
+}
+
+//纸电整合搜索
+function searchAllRes(view){
+	$("#view").val(view);
+	var qword = $("#q").val();
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	var path = '/opac3/ebook/federatedResources';
+    $("#searchForm").attr("action", path).submit();
+}
+
+</script>
+
+
+
+<script>
+$(function(){
+	//默认检索方式
+	var defaultWay = "title";
+	if(defaultWay == ""){
+		$(".searchTypeUl .marc").addClass('sTypeCur').siblings().removeClass('sTypeCur');
+		$('.choseFont').text($(".searchTypeUl .marc").find('a').text());
+	}else{
+		$(".searchTypeUl").find("."+defaultWay).addClass('sTypeCur').siblings().removeClass('sTypeCur');
+		$('.choseFont').text($(".searchTypeUl").find("."+defaultWay).find('a').text());
+	}
+	$(this).addClass('sTypeCur').siblings().removeClass('sTypeCur');
+	changeSearchWay(defaultWay);
+
+	
+});
+
+</script>
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+</style>
+
+<script>
+    $(document).ready(function() {
+        // 原始字符串
+        var resourceStr = "";
+        if(resourceStr==null || resourceStr == ''){resourceStr = "/opac3/media/css/aiSupport.css,/opac3/media/js/common/aiSupport.js";}
+        // 分割字符串为数组
+        var resources = resourceStr.split(',');
+
+        // 遍历资源数组
+        $.each(resources, function(index, url) {
+            // 判断资源类型（JS/CSS）
+            if (url.endsWith('.js')) {
+                // 动态创建script标签
+                var script = document.createElement('script');
+                script.src = url+'?v='+Date.now();
+                script.async = false; // 保证按顺序加载
+                $('body').append(script);
+            } else if (url.endsWith('.css')) {
+                // 动态创建link标签
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = url+'?v='+Date.now();
+                $('head').append(link);
+            }
+        });
+    });
+
+</script>
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+    /*隐藏左下角标识*/
+    .amap-logo { display: none; }
+    .amap-copyright { bottom:-100px;  display: none; }
+    #outer-box,#container { height: 100%; width: 100%; padding-right: 0; position: relative;}
+	.amap-info { width: 456px;}
+	.amap-ui-smp-ifwn-info-title{font-weight: 700;font-size: 16px !important;color:#000000 !important;}
+	#my-list li.selected .libName,#my-list li.selected .libAddr{color: #fff;}
+
+
+	
+
+	.msgDiv{
+		height: 378px;
+		margin-top: 12px;
+		border: 1px solid #e5e5e5;
+	}
+	.msgKindUl{
+		height: 37px;
+		border-bottom: 1px solid #e7e7e7;
+		overflow: hidden;
+	}
+	.msgKindLi{
+		padding: 0px 16px;
+		float: left;
+		line-height: 33px;
+		font-size: 14px;
+		color: #000000;
+		text-align: center;
+		cursor: pointer;
+	}
+	.msgKindLi.on{
+		border-bottom: 3px solid #f17800;
+	}
+	.msgBox{
+	
+	
+	
+		height: 340px;
+	
+	
+		overflow: auto;
+	}
+	.msgItem{
+		padding:10px 10px;
+		border-bottom: 1px solid #f0f0f0;
+	}
+	.msgItems table td{
+		vertical-align: middle;
+	}
+	.imga{
+		width:186px;
+		height:104px;
+		margin-right: 10px;
+		display: block;
+		background: #fff;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+	}
+	.imga img{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		object-fit:contain;
+	}
+	.msgTitle{
+		font-size: 16px;
+	}
+	.msgBrief{
+		font-size: 12px;
+		margin: 6px 0px;
+	}
+	.msgTime{
+		font-size: 12px;
+	}
+	.libname{
+		font-size: 12px;
+	}
+	#msgContent{
+		display: none;
+		margin-bottom: 20px;
+	}
+	.zgzwA{
+		width:160px;
+		height:150px;
+		border-radius: 3px;
+		background-color: #0f7b7b;
+		color: #FFF;
+		font-size:20px;
+		line-height: 150px;
+		text-align: center;
+		display: block;
+	}
+	.czstA{
+		width:160px;
+		height:150px;
+		border-radius: 3px;
+		background-color: #0e90d2;
+		color: #FFF;
+		font-size:16px;
+		line-height: 150px;
+		text-align: center;
+		display: block;
+		margin-top: 18px;
+	}
+	.zgzwIcon{
+		width: 30px;
+		height: 30px;
+		background-image: url('/opac3/media/images/czgrtsg.png');
+		background-size: contain;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.czstIcon{
+		width: 30px;
+		height: 30px;
+		background-image: url('/opac3/media/images/jiansuo.png');
+		background-size: contain;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.onLineCreat2 {
+		font-size: 18px;
+		color: #fff;
+		height: 48px;
+		line-height: 48px;
+		display: block;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		-ms-border-radius: 10px;
+		-o-border-radius: 10px;
+		border-radius: 10px;
+		margin-bottom: 16px;
+		padding-left: 80px;
+		position: relative;
+	}
+	.msgBox_hw {
+		height: 217px;
+		overflow: auto;
+	}
+	.msgTitle_hw {
+		font-size: 10px;
+	}
+	.msgBrief_hw {
+		font-size: 8px;
+		margin: 6px 0px;
+	}
+	.msgTime_hw {
+		font-size: 8px;
+	}
+</style>
+
+<script>
+	var $ctx = "/opac3";
+</script>
+<script type="text/javascript">
+	<!-- 旧获取公众号二维码逻辑 -->
+/*$(function(){
+var glcWechat = "P2SXS029038";
+var mobileurl = 'http://opac.xalib.org.cn:80/opac3/m/index';
+var qrcodeUrl = "/opac3/reader/qrCodeImage?qrcode="+mobileurl+"";
+if (glcWechat!=""&&glcWechat!="EJS0519071") {
+    $.ajax({
+        url: "https://u.interlib.cn/index.php?g=Mysql&m=Qrcodeapi&a=getQrcode&glcwechat=" + glcWechat,
+        type: "get",
+        dataType: "json",
+        success: function (result) {
+            if(result.status == true){
+                $.each(result.data, function (key, val) {
+                    if (key == 1) return false;
+                    $("img[name='eqImg']").each(
+                   		function(){
+                   			$(this).attr("src",val.qrcode);
+                   		}
+                   	);
+                    $("#eqAcountName").text(val.wxname);
+                    $("#eqAcountName2").text("微信公众号");
+                });
+            }else{
+            	$("img[name='eqImg']").attr("src",qrcodeUrl);
+            	$("#eqAcountName").text("扫码进入");
+            	$("#eqAcountName2").text("手机端");
+            }
+        }, error: function (e, msg) {
+        	$("img[name='eqImg']").attr("src",qrcodeUrl);
+        	$("#eqAcountName").text("扫码进入");
+        	$("#eqAcountName2").text("手机端");
+        }
+    });
+}else{
+	if(glcWechat=="EJS0519071"){ //常州教育局的直接显示图片
+		$("img[name='eqImg']").attr("src","/opac3/media/images/czjy_qrcode.jpg");
+		$("#eqAcountName").text("常州教育微信公众号");
+		$("#eqAcountName2").text("扫码关注");
+	}else{
+		$("img[name='eqImg']").attr("src",qrcodeUrl);
+		$("#eqAcountName").text("扫码进入");
+		$("#eqAcountName2").text(手机端);
+	}
+}
+});*/
+
+
+
+
+function search_autor(sql){
+	//var q = $(".recThemTit").text();
+	var q = sql;
+	var url = "/opac3/search?"+sql;
+	window.open(url, "_blank");
+}
+
+</script>
+
+
+<div class="overHide wrap plateOne">
+	
+	<div class="flLeft plateOneCenter">
+		
+			
+			
+			
+				<div class="bannerArea">
+					<div id="slideBox" class="bannerSlideBox">
+						<div class="hd">
+							<ul>
+								
+									
+										
+											<li>1</li>
+										
+									
+									
+								
+							</ul>
+						</div>
+						<div class="bd">
+							<ul>
+								
+									
+										
+											<li><a href="http://112.46.235.64:8082/opac3/" target="_blank"><img src='/opac3/faq/getImage/1601' /></a></li>
+										
+									
+									
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+		
+		<div class="listModel">
+			<div class="overHide listModTit">
+				<div class="listModTitIn"><i class="titLine idxTitIcon hotRead"></i>热门阅读</div>
+				<a href="/opac3/recommend/guessYouLike" class="listChekMore">查看更多<i class="moreIcon"></i></a>
+			</div>
+			<div class="listModTab">
+				<div class="slideTxtBox hotSlide">
+					<div class="hd">
+						<ul class="overHide lModTabHdUl hotBook">
+							<li class="lModTabHdLi" name="boss" data-tab-idx="0">总分类</li>
+							
+						</ul>
+						<a href="javascript:;" class="mOpSlideHdBtn">展开</a>
+					</div>
+					<div class="bd" id="likeBkLI">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="listModel">
+			<div class="overHide listModTit">
+				<div class="listModTitIn"><i class="titLine idxTitIcon newRead"></i>新书上架</div>
+				<a href="/opac3/newpub/cls" class="listChekMore">查看更多<i class="moreIcon"></i></a>
+			</div>
+			<div class="listModTab">
+				<div class="slideTxtBox hotSlide">
+					<div class="hd">
+						<ul class="overHide lModTabHdUl lModTabHdUlNewBook">
+							<li class="lModTabHdLi" name="boss" data-tab-idx="0">总分类</li>
+							
+						</ul>
+						<a href="javascript:;" class="mOpSlideHdBtn">展开</a>
+					</div>
+					<div class="bd" id="BkDiv">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="flRight plateOneRight">
+		
+			
+			
+			
+			
+				<div class="rightLink">
+					<a href="/opac3/reader/register" class="onLineCreat onLink01"
+							
+								style="display: none;"
+							
+					>
+						<i class="cardIcon"></i>
+						<span>在线办证</span>
+					</a>
+					<a href="/opac3/reader/space" class="onLineCreat onLink01"
+							
+								style="height: 150px;line-height: 150px; display: flex; justify-content: center; align-items: center; padding-left: 0px;"
+							
+					>
+						<i class="bordIcon" style="margin: 0;"></i>
+						<span>我的借阅</span>
+					</a>
+					<a href="/opac3/booklist/list" class="onLineCreat onLink01"
+							
+								style="height: 150px;line-height: 150px; display: flex; justify-content: center; align-items: center; padding-left: 0px;"
+							
+					>
+						<i class="bkBordIcon" style="margin: 0;"></i>
+						<span>我的书单</span>
+					</a>
+				</div>
+			
+		
+
+		<div class="rankArea">
+			<div class="rankTitArea">
+				<i class="disInlineBk rankLineIcon" style="width: 25px;"></i>
+				<i class="disInlineBk rankTitIcon"></i>
+				<span class="disInlineBk rankTit">借阅排行榜</span>
+				<i class="disInlineBk rankLineIcon" style="width: 25px;"></i>
+			</div>
+			<div class="rankTitCon">
+				<div class=" borRankBox">
+					<div class="hd">
+						<ul class="rankTabHd">
+							
+								
+								
+									<li class="rankTabLi on" name="boss" data-tab-idx="0"><a href="javascript:;">总榜</a></li>
+									<li class="rankTabLi" name="G" data-tab-idx="1">教育</li>
+									<li class="rankTabLi" name="A1,F" data-tab-idx="2">经济</li>
+									<li class="rankTabLi" name="I" data-tab-idx="3">文学</li>
+									<li class="rankTabLi" name="K" data-tab-idx="4">历史</li>
+								
+							
+						</ul>
+					</div>
+					<div class="bd">
+						<ul class="rankclazzUl">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="outModel outModelRes padBot" id="recommend" style="display:none;">
+	<div class="wrap">
+		<div class="outModelTit padTop"> <i class="disInlineBk outMdTitIcon outMdTitIcon01"></i>为您推荐</div>
+		<div class="slideTxtBox forResSlide">
+		   <div class="hd">
+				<a href="javascript:void(0);" class="listChekMore" style="display:none;">查看更多<i class="moreIcon"></i></a>
+				<ul class="lModTabHdUl recommend2you">
+					<li class="lModTabHdLi" name="boss" data-tab-idx="0"><a href="javascript:;">全部</a></li>
+				</ul>
+			</div>
+			<div class="bd guessYouLike">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="outModel" id="bookspecial" style="display:none;">
+	<div class="wrap">
+		<div class="outModelTit"><i class="disInlineBk outMdTitIcon outMdTitIcon02"></i>主题推荐</div>
+		
+	</div>
+</div>
+
+
+
+
+	
+		<div class="wrap mobileHide" id="msgContent">
+			<div class="libInActTitArea overHide">
+				<div class="flLeft libInActTit"><i class="disInlineBk outMdTitIcon outMdTitIcon05"></i>消息动态</div>
+				<a href="/opac3/activity/list" target="_blank" class="listChekMore">查看更多<i class="moreIcon"></i></a>
+			</div>
+			<div class="msgDiv">
+				<div class="hd">
+					<ul class="msgKindUl">
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+
+	<div class="outModel wxModelArea" id="weChatNotiArea" style="display: none;">
+		<div class="wrap">
+			<div class="outModelCon ">
+				<div class="picScroll-left">
+					<div class="hd">
+						<div class="outModelTit"><i class="disInlineBk outMdTitIcon outMdTitIcon06"></i>微信公告</div>
+						<div class="flRight overHide wxOpRight">
+							<div class="flLeft  picLfBtn ">
+								<a class="next"></a>
+								<ul></ul>
+								<a class="prev"></a>
+							</div>
+							<div class="flRight wxPubMore" style="display:none;">
+								<a href="javascript:void(0);" class="listChekMore">查看更多<i class="moreIcon"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="bd">
+						<ul class="picList">
+							<li>
+								<div class="wxPubUl overHide" id="slide1">
+
+								</div>
+							</li>
+							<li>
+								<div class="wxPubUl overHide" id="slide2">
+
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="outModel" id="libDistibuArea">
+		<div class="outModelCon mapModel">
+			<div class="outModelTit">分馆地址</div>
+			<div class="mapArea">
+				<div id="outer-box" class="outMapBox">
+			        <div id="container"></div>
+			        <div class="mapAddr">
+			       	 	<div id="panel" class="libLiArea">
+				            <ul id="my-list"></ul>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+
+<!--浮动右侧栏 -->
+<div class="followRtArea">
+	
+		
+		
+		
+			<!-- 微信公众号 -->
+			
+
+			<!-- 图书馆 -->
+			
+
+			<!-- 借阅宝 -->
+			
+		
+	
+
+	<a href="javascript:void(0);" class="floLink notBor backTop" id="go_top">
+		<div class="floIcon floIcon04"></div>
+		<p>TOP</p>
+	</a>
+</div>
+
+<!-- 活动列表弹出框 -->
+<div class="actLiPopArea">
+	<div class="popIn actLiPopIn" >
+       <a href="javascript:void(0)" class="popDel"></a>
+       <div class="actTmLine"></div>
+       <div class=" actLiPInCon">
+
+ 	   </div>
+	</div>
+</div>
+
+<script src='/opac3/media/pro2018/ultimate/js/index.js' type="text/javascript" charset="utf-8"></script>
+<script src='/opac3/media/pro2018/fullcalendar/fullcalendar.min.js' type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=19b3dae09a81a5e980b52fce22ce9b1a"></script>
+<!-- UI组件库 1.0 -->
+<script src="https://webapi.amap.com/ui/1.0/main.js"></script>
+<script src='/opac3/media/pro2018/zjlib/js/map.js' type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/opac3/media/js/common/aes.js"></script>
+<script type="text/javascript" src="/opac3/media/js/common/md5util.js"></script>
+
+<script>
+	jQuery(".bannerSlideBox").slide({
+		mainCell:".bd ul",
+		effect:"left",
+		autoPlay:true
+	});
+	jQuery(".slideTxtBox").slide();
+	jQuery(".actSlideBox").slide({
+		mainCell:".bd ul",
+		effect:"left",
+		autoPlay:true
+	});
+
+
+	//SSO资源跳转
+    var flag = 0;
+    function goSSOResource(sid){
+        if(flag>0){
+            window.open("/goto/"+sid);
+        }else{
+            flag++;
+            window.open("/opac3/reader/redictInterlibSSO");
+        }
+    }
+
+$(document).ready(function() {
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	var activityMap = {};
+	var dmap  = new Array();
+	$('#calendar').fullCalendar({
+		header: {
+			left: '1123 ',
+			center: 'title'
+		},
+		aspectRatio:1.8,
+		titleFormat:{
+			month: ' yyyy 年  MMMM', // September 2013
+			day: 'yyyy,MMM d, dddd  ' // Tuesday, Sep 8, 2013
+		},
+		buttonText:{
+			today: '返回今天'
+		},
+		monthNames:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+		dayNames:['日','一','二','三','四','五','六'],
+		dayNamesShort:['日','一','二','三','四','五','六'],
+		editable: false,
+		eventRender : function(event, element, view) {          //当Event对象开始渲染时触发
+
+        },
+        eventAfterAllRender : function(view){},   //当所有Event对象渲染完成时触发
+		events: function(start, end, callback){
+         	 $("#calendar").fullCalendar('removeEvents');
+             var datamap = new Array();
+             $.ajax({
+                 type: "GET",
+                 url: "/opac3/actionlist",
+                 data: {
+                     "start": $.fullCalendar.formatDate(start, "yyyy-MM-dd"),
+                     "end": $.fullCalendar.formatDate(end, "yyyy-MM-dd"),
+                     "return_fmt": "json"
+                 },
+                 dataType: "json",
+                 success: function (data) {
+                	 var events = [];
+                     var list = data.activitys;
+                     if (list) {
+                         $.each(list, function (key, value) {
+                             var aid = value.id;
+                             activityMap[aid]=value;
+                             var start_time = $.fullCalendar.parseDate(value.act_start_time.split(' ')[0]);//移除时刻分钟
+                             var end_time = $.fullCalendar.parseDate(value.act_end_time);
+                             //alert(start_time + "|" + end_time)
+                             for (var i = new Date(start); i <= end;) {
+                                 if (i >= start_time && i <= end_time) {
+                                     var timStr = $.fullCalendar.formatDate(i, "yyyy-MM-dd");
+                                     var existFlag = true;
+                                     for (var m in datamap) {
+                                         if (datamap[m].time == timStr) {
+                                             datamap[m].list.push(aid);
+                                             existFlag = false;
+                                             break;
+                                         }
+                                     }
+                                     if (existFlag) {
+                                         var arr = new Array();
+                                         arr[0] = aid;
+                                         datamap.push({time: timStr, list: arr});
+                                     }
+                                 }
+                                 i.setDate(i.getDate() + 1);
+                             }
+                         });
+
+                         dmap = datamap;
+                         for (var i in datamap) {
+                        	 var classNameValue = "pasTime";
+                        	 if(new Date(datamap[i].time) >= new Date()){
+                        		 classNameValue = "hasAct";
+                        	 }
+                        	 events.push({
+                        		 title: datamap[i].list.length + "",
+                                 start: datamap[i].time,
+                                 className: classNameValue
+                        	 });
+                         }
+                         callback(events);
+                     }
+
+                 }
+             });
+
+         },
+         dayClick: function(date, jsEvent, view) {//空白的日期区，单击时触发
+
+         },
+         eventClick: function(eventObj) {//日程区块，单击时触发
+             if (eventObj.start) {
+                 var time = $.fullCalendar.formatDate(eventObj.start,"yyyy-MM-dd");
+	  			 for(var i in dmap){
+				 	if(dmap[i].time==time){
+		                      $(".actTmLine").text(time+" 活动信息");
+		                      $(".actLiPInCon").html("");
+				           for(var j in dmap[i].list){
+				               var aid = dmap[i].list[j];
+				               $(".actLiPInCon").append("<p><a href='"+aid+"' target='_blank'>"+
+								   (++j)+". "+activityMap[aid].title+"</a></p>");
+						   }
+		                      $('.actLiPopArea').show();
+		                      var popupH = $('.popIn').height();
+		                      $('.popIn').css('margin-top', -popupH / 2);
+						   break;
+					   }
+	  			 }
+              	return false;
+            } else {
+                alert('Clicked ' + eventObj.title);
+            }
+        }
+	});
+
+	//异步加载[活动模块]
+	var actionJsonData = {'rows': 6, 'offsetNum': 0};
+	$.ajax({
+		type: "POST",
+		url: "/opac3/getActionInfoList",
+		dataType: "json",
+		data: actionJsonData,
+		success:function(data){
+			if(data.activitys){
+				var actionUrl = "";
+				var actionSize = data.activitys.length > 6? 6 : data.activitys.length;
+				if(actionSize > 0) {
+					$(".libInActArea").show();
+				}
+				for(var i = 0; i < actionSize; i++){
+					var actionInfoList = data.activitys[i];
+					var actionStr =
+						'<div class="libActLi overHide">' +
+							'<div class="libActState libActState01">'+actionInfoList.state_name+'</div>' +
+							'<a href="'+data.actionBaseUrl+actionInfoList.id+'" target="_blank"  class="libActImg flLeft"><img src="'+actionUrl+'/'+actionInfoList.play_bill_pic+'" alt="" /></a>' +
+							'<div class="libActDet flLeft">' +
+								'<a href="'+data.actionBaseUrl+actionInfoList.id+'" target="_blank"  class="libActTit">'+actionInfoList.title+'</a>' +
+								'<div class="libActTm" style="margin-top: 20px;">活动时间：'+actionInfoList.act_start_time+'~'+ actionInfoList.act_end_time+'</div>' +
+								'<a href="'+data.actionBaseUrl+actionInfoList.id+'" target="_blank"  class="libActInfo">' +
+									'活动地点：' + actionInfoList.action_site
+								'</a>' +
+							'</div>' +
+						'</div>';
+					if(actionSize == 6){
+						if(i < 2) {
+							$("#act1").append(actionStr);
+						} else if(i < 4){
+							$("#act2").append(actionStr);
+						} else if(i < 6){
+							$("#act3").append(actionStr);
+						}
+					} else if(actionSize < 6 && actionSize > 2){
+						if(i < 2) {
+							$("#act1").append(actionStr);
+						} else if(i < 4){
+							$("#act2").append(actionStr);
+						}
+					} else if(actionSize <= 2){
+						$("#act1").append(actionStr);
+					}
+
+				}
+
+			} else {
+				$(".libInActArea").hide();
+			}
+		}
+	});
+
+
+	//异步加载[微信模块]
+	var wechatJsonData = {"webChatInfoNum": "8"};
+	$.ajax({
+		type: "POST",
+		url: "/opac3/getWechatCtnList",
+		dataType: "json",
+		data: wechatJsonData,
+		success:function(data){
+			if(data.advertistList){
+				if(data.advertistList.length > 0) {
+					$("#weChatNotiArea").show();
+				}
+				var size1 = 0;
+				var startIndex = 0
+				var size2 = 0;
+				if(data.advertistList.length > 4){
+					size1 = 4;
+					size2 = data.advertistList.length;
+					startIndex = 4;
+				}
+				for (var i = 0; i < size1; i++){
+					var wechatInfo = data.advertistList[i];
+					var wechatBody = '<div class="wxPubLi">' +
+		 			'<a target="_blank" href="'+wechatInfo.url+'" class="wxPubLink">' +
+		 				'<div class="wxPubImg"><img src="wechat/get_material?media_id='+wechatInfo.thumb_media_id+'" alt="" /></div>' +
+		 				'<div class="wxPubTit" title="'+wechatInfo.title+'">' +
+		 					wechatInfo.title +
+		 				'</div>' +
+		 			'</a></div>';
+		 			$("#slide1").append(wechatBody);
+				}
+				for (var i = startIndex; i < size2; i++){
+					var wechatInfo = data.advertistList[i];
+					var wechatBody = '<div class="wxPubLi">' +
+		 			'<a target="_blank" href="'+wechatInfo.url+'" class="wxPubLink">' +
+		 				'<div class="wxPubImg"><img src="wechat/get_material?media_id='+wechatInfo.thumb_media_id+'" alt="" /></div>' +
+		 				'<div class="wxPubTit" title="'+wechatInfo.title+'">' +
+		 					wechatInfo.title +
+		 				'</div>' +
+		 			'</a></div>';
+		 			$("#slide2").append(wechatBody);
+				}
+
+				$(".picScroll-left").slide({
+					titCell:".hd ul",
+					mainCell:".bd ul",
+					autoPage:true,
+					effect:"left",
+					autoPlay:false,
+					vis:1,
+					trigger:"click"
+				});
+
+			}
+		},
+		error: function(){
+			//alert("error");
+		}
+	});
+});
+
+
+$(function(){
+
+	
+	function add0(m){
+		return m<10?'0'+m:m;
+	}
+	function format(shijianchuo) {
+		var time = new Date(shijianchuo);
+		var y = time.getFullYear();
+		var m = time.getMonth()+1;
+		var d = time.getDate();
+		var h = time.getHours();
+		var mm = time.getMinutes();
+		var s = time.getSeconds();
+		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+	}
+
+	var $glc = "P2SXS029038";
+	function getMsgByKind(kindId){
+		$(".msgKindLi").removeClass("on");
+		$(".msgKindLi[data="+kindId+"]").addClass("on");
+		if($(".msgBox"+kindId).size()>0){
+			if ($glc === "EGD0755036") {
+				$(".msgBox_hw").hide();
+			} else {
+				$(".msgBox").hide();
+			}
+			$(".msgBox"+kindId).show();
+		}else{
+			if ($glc === "EGD0755036") { //华为图书馆样式特殊处理
+				$(".msgDiv").append("<div class='msgBox_hw msgBox"+kindId+"'></div>");
+			} else {
+				$(".msgDiv").append("<div class='msgBox msgBox" + kindId + "'></div>");
+			}
+			$.ajax({
+				url:'/opac3/activity/getByKindId',
+				data:{
+					"kindId":kindId
+				},
+				type:"GET",
+				success:function(data){
+					if(data){
+						$.each(data,function (index,item) {
+							var aurl = '/opac3/activity/detail/'+item.id;
+							var cont = "";
+							if(item.image){
+								if ($glc === "EGD0755036") {
+									cont = "<div class='msgItem'>"
+											+ "<table><tr><td style='vertical-align: middle;'>"
+											+ "<a class='imga' href='" + aurl + "'><img src='"+ item.image +"'></a>"
+											+ "</td><td style='vertical-align: middle;'><p class='msgTitle_hw'>"
+											+ "<a href='"+aurl+"'>" + item.title + "</a></p>"
+											/*+ "<p class='msgBrief_hw'>" + item.brief + "</p>"*/
+											+ "<p class='msgTime_hw'>" + format(item.time) + "</p>"
+											+ "</td></tr></table></div>";
+								} else {
+									cont = "<div class='msgItem'>"
+											+ "<table><tr><td style='vertical-align: middle;'>"
+											+ "<a class='imga' href='" + aurl + "'><img src='"+ item.image +"'></a>"
+											+ "</td><td style='vertical-align: middle;'><p class='msgTitle'>"
+											+ "<a href='"+aurl+"'>" + item.title + "</a></p>"
+											+ "<p class='msgBrief'>" + item.brief + "</p>"
+											+ "<p class='libname'>来自：" + item.libname + "</p>"
+											+ "<p class='msgTime'>" + format(item.time) + "</p>"
+											+ "</td></tr></table></div>";
+								}
+							}else{
+								if ($glc === "EGD0755036") {
+									cont = "<div class='msgItem'>"
+											+ "<p class='msgTitle_hw'>"
+											+ "<a href='"+aurl+"'>" + item.title + "</a></p>"
+											/*+ "<p class='msgBrief_hw'>" + item.brief + "</p>"*/
+											+ "<p class='msgTime_hw'>" + format(item.time) + "</p>"
+											+ "</div>";
+								} else {
+									cont = "<div class='msgItem'>"
+											+ "<p class='msgTitle'>"
+											+ "<a href='"+aurl+"'>" + item.title + "</a></p>"
+											+ "<p class='msgBrief'>" + item.brief + "</p>"
+											+ "<p class='libname'>来自：" + item.libname + "</p>"
+											+ "<p class='msgTime'>" + format(item.time) + "</p>"
+											+ "</div>";
+								}
+							}
+							$(".msgBox"+kindId).append(cont);
+						});
+						if ($glc === "EGD0755036") {
+							$(".msgBox_hw").hide();
+						} else {
+							$(".msgBox").hide();
+						}
+						$(".msgBox"+kindId).show();
+					}
+				}
+			});
+		}
+	}
+
+	//消息动态tab标签事件
+	$(".msgKindUl").on('mouseenter', '.msgKindLi', function(){
+		var kindId = $(this).attr("data");
+		getMsgByKind(kindId);
+	});
+
+	//热门阅读点击tab标签事件
+	$(".hotBook").on('mouseenter', '.lModTabHdLi', function(){
+		var index = $(this).attr("data-tab-idx");
+		var name = $(this).attr("name");
+		var searchWay = "class";
+		if(name == 'boss'){
+			name = '';
+			searchWay = '';
+		}
+		bookMayLikeFromLocalServer(name, searchWay, index);
+		$(this).addClass("on").siblings().removeClass("on");
+	});
+
+	bookMayLikeFromLocalServer("", "", 0);
+
+	//热门阅读hotBook
+	function bookMayLikeFromLocalServer(name, searchWay, index){
+		var $elem = $("#likeBkLI").find(".likeBkUl" + index);
+		if($elem.length > 0){
+			$("#likeBkLI .likeBkUl"+ index).show().siblings().hide();
+			return;
+		}
+		var page = 1;
+		var libcode = "";
+		var booktype = "1";
+		$.ajax({
+			url:'/opac3/search',
+			data:{
+				"isFacet":"false",
+				"view":"json",
+				"curlibcode":libcode,
+				"booktype":booktype,
+				"hasholding":"1",
+				"scWay":"full",
+				"sortWay":"bookclickcount",
+				"sortOrder":"desc",
+				"return_fmt":"json",
+				"rows":"10",
+				"page":page,
+				"q": name,
+				"searchWay": searchWay
+			},
+			dataType: "json",
+			success:function(data){
+				if(data){
+					var size = (data.bookList.length > 5)? 5 : data.bookList.length;
+					var parentElem = '<ul class="lModTabBdUl likeBkUl'+index+'" data-tab-idx="'+index+'" ></ul>';
+					$("#likeBkLI").append(parentElem);
+					$("#likeBkLI .likeBkUl"+ index).siblings().hide();
+					for (var i = 0; i < size; i++){
+						var biblio = data.bookList[i];
+						var bookrecno = biblio.bookrecno;
+						var isbn = biblio.isbn;
+						var title = biblio.title;
+						var htmlString = '<li class="lModTabBdLi">' +
+						'<a href="book/'+ bookrecno + '" class="lModTabBdLink">' +
+						'<div class="lBookImg">' +
+						'<img style="width:100%;height:100%;max-width:100%;max-height:100%;" isbn="'+isbn+'" bookrecno="'+bookrecno+'" src="media/pro2018/images/book-default.jpg" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" />' +
+						'</div>' +
+						'<div class="lBookName" title="'+title+'">' + title + '</div>' +
+						'</a>' +
+						'</li>';
+						$(".likeBkUl" + index).append(htmlString);
+					}
+					var globalLibraryCode = "P2SXS029038";
+					loadBookcovers(globalLibraryCode);
+				}
+			}
+		});
+	}
+
+	//排行榜点击tab标签事件
+	$(".rankTabHd").on('mouseenter', '.rankTabLi', function(){
+		var index = $(this).attr("data-tab-idx");
+		var name = $(this).attr("name");
+		var searchWay = "class";
+		if(name == 'boss'){
+			name = '';
+			searchWay = '';
+		}
+		bookRankLocalServer(name, searchWay, index);
+		$(this).addClass("on").siblings().removeClass("on");
+	});
+
+	bookRankLocalServer("", "", 0);
+
+	function bookRankLocalServer(name, searchWay, index){
+		var $elem = $(".rankclazzUl").find(".rankTabIndex" + index);
+		if($elem.length > 0){
+			$(".rankclazzUl .rankTabIndex"+ index).show().siblings().hide();
+			return;
+		}
+		var page = 1;
+		var libcode = "";
+		var booktype = "1";
+		$.ajax({
+			type:"GET",
+			url:'/opac3/search',
+			data:{
+				"isFacet":"false",
+				"view":"json",
+				"curlibcode":libcode,
+				"booktype":booktype,
+				"hasholding":"1",
+				"sortWay":"loannum_sort",
+				"sortOrder":"desc",
+				"scWay":"full",
+				"return_fmt":"json",
+				"rows":"10",
+				"page":page,
+				"q": name,
+				"searchWay": searchWay
+			},
+			traditional: true,
+			dataType:"json",
+			success:function(data){
+				if(data){
+					var parentElem = '<li class="rankTabIndex rankTabIndex'+index+' data-tab-idx="'+index+'"><ul class="rankTabBd rankBkUl'+index+'"  ></ul></li>';
+					$(".rankclazzUl").append(parentElem);
+					$(".rankclazzUl .rankTabIndex"+ index).siblings().hide();
+					for (var i = 0; i < data.bookList.length; i++){
+						var biblio_rank = data.bookList[i];
+						var bookrecno_rank = biblio_rank.bookrecno;
+						var title_rank = biblio_rank.title;
+						var author_rank = biblio_rank.author;
+						var publisher_rank =  biblio_rank.publisher;
+						var isbn = biblio_rank.isbn;
+
+						var diplay_block = (i == 0)? "style=\"display: block;\"" : "style=\"display: none;\"";
+						var diplay_none = (i == 0)? "style=\"display: none;\"" : "";
+						var hasTop_flag = (i < 3)? "hasTop":"";
+						var title_rank = (biblio_rank.title.length > 12)? biblio_rank.title.substring(0, 12) : biblio_rank.title;
+
+						var div_head = '<li>';
+						var div_tail = '</li>';
+
+						var div_1 = '<div class="bkLineName" '+diplay_none+'>' +
+				    	'<div class="disInlineBk rankNum '+hasTop_flag+'">'+(i+1)+'</div>' +
+						'<a href="book/'+bookrecno_rank+'" class="disInlineBk rankBkName">'+title_rank+'</a>' +
+				    	'</div>';
+
+				    	var div_2 = '<div class="bkBlockCon" '+diplay_block+'>' +
+				    	'<div class="disInlineBk rankNum '+hasTop_flag+'">'+(i+1)+'</div>' +
+						'<a href="book/'+bookrecno_rank+'" class="disInlineBk rankBkImg">' +
+						'<img isbn="'+isbn+'" bookrecno="'+bookrecno_rank+'" src="media/pro2018/images/book-default.jpg" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" />' +
+						'</a>' +
+						'<div class="disInlineBk bkBlokDet">' +
+						'<a href="book/'+bookrecno_rank+'" class="bkBlokTit">' +
+						title_rank +
+						'</a>' +
+						'<div class="bkBlokWirte"><p style="margin-bottom:10px;white-space: nowrap;overflow:hidden;" title="'+author_rank+'">著者：'+author_rank+'</p>出版：'+publisher_rank+'</div>' +
+						'</div>' +
+						'</div>';
+
+						var liStr = div_head + div_1 + div_2 + div_tail;
+						$(".rankBkUl" + index).append(liStr);
+					}
+
+					var globalLibraryCode = "P2SXS029038";
+					loadBookcovers(globalLibraryCode);
+				}
+			},
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+			    if(XMLHttpRequest.status==403){
+			        alert("您的手速有点快，请稍后尝试");
+	            }else{
+			        alert(XMLHttpRequest.status+"错误！请稍后重试");
+	            }
+	        }
+		});
+	}
+
+	var cat_hash_r = {"哲学":"B", "经济学":"F", "法学":"D", "教育学":"G", "文学":"I", "历史学":"K", "理学":"O", "工学":"T", "农学":"S", "医学":"R", "军事学":"E", "管理学":"C"};
+	//为你推荐点击tab标签事件
+	$(".recommend2you").on('mouseenter', '.lModTabHdLi', function(){
+		var index = $(this).attr("data-tab-idx");
+		var categoryDesc = $(this).find("a").text();
+		var classno = cat_hash_r[categoryDesc];
+		if(categoryDesc == '全部'){
+			classno = '';
+		}
+		//console.log("classno==" + classno)
+		likeAndRank(classno, index);
+		$(this).addClass("on").siblings().removeClass("on");
+	});
+
+	likeAndRank("", 0);
+
+	function likeAndRank(classno, index){
+		var $elem = $(".guessYouLike").find(".guessBkUl" + index);
+		if($elem.length > 0){
+			$(".guessYouLike .guessBkUl"+ index).show().siblings().hide();
+			return;
+		}
+		var dataJson = {"isClassfy":"1","classno":classno,"cmd":"001"};
+		$.ajax({
+			type: "POST",
+			url: "/opac3/getRecommendBook",
+			dataType: "json",
+			data: dataJson,
+			success:function(data){
+				if(data){
+					if(data.newBook){
+						var size = (data.newBook.length > 8)? 8 : data.newBook.length;
+						if(size > 0) {
+							$("#recommend").show();
+						}
+						var parentElem = '<ul class="lModTabBdUl guessBkUl'+index+'" ></ul>';
+						$(".guessYouLike").append(parentElem);
+						$(".guessYouLike .guessBkUl"+ index).siblings().hide();
+						for (var i = 0; i < size; i++){
+							var biblio = data.newBook[i];
+							var bookrecno = biblio.bookrecno;
+							var coverUrl = biblio.coverUrl;
+							if(coverUrl == null || coverUrl == "") {
+								coverUrl = 'media/pro2018/images/book-default.jpg';
+							}
+							var title = biblio.title;
+							var htmlString = '<li class="lModTabBdLi">' +
+							'<a href="book/'+ bookrecno + '" class="lModTabBdLink">' +
+							'<div class="lBookImg">' +
+							'<img class="imgCover" src="' + coverUrl + '" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" />' +
+							'</div>' +
+							'<div class="lBookName" title="'+title+'">' + title + '</div>' +
+							'</a>' +
+							'</li>';
+							$(".guessBkUl" + index).append(htmlString);
+						}
+					} else {
+						$("#recommend").hide();
+					}
+
+				}
+			}
+		});
+	}
+
+	//新书点击tab标签事件
+	$(".lModTabHdUlNewBook").on('mouseenter', '.lModTabHdLi', function(){
+		var index = $(this).attr("data-tab-idx");
+		var name = $(this).attr("name");
+		var searchWay = "class";
+		if(name == 'boss'){
+			name = '';
+			searchWay = '';
+		}
+		newBook(name, searchWay, index);
+		$(this).addClass("on").siblings().removeClass("on");
+	});
+	var glc = "P2SXS029038";
+	newBook("", "", 0, "");
+	//新书上架
+	function newBook(name, searchWay, index){
+		var $elem = $("#BkDiv").find(".newBkUl" + index);
+		if($elem.length > 0){
+			$("#BkDiv .newBkUl"+ index).show().siblings().hide();
+			return;
+		}
+		$.ajax({
+			type:"GET",
+			url:'/opac3/search',
+			data:{
+				"searchType":"newpub",
+				"isFacet":"false",
+				"view":"json",
+				"hasholding":"1",
+				"scWay":"full",
+				"return_fmt":"json",
+				"rows":"5",
+				"q": name,
+				"searchWay": searchWay
+			},
+			traditional: true,
+			dataType:"json",
+			success:function(data){
+				if(data){
+					var parentElem = '<ul class="lModTabBdUl newBkUl'+index+'" data-tab-idx="'+index+'"></ul>';
+					$("#BkDiv").append(parentElem);
+					$("#BkDiv .newBkUl"+ index).siblings().hide();
+					for (i in data.bookList) {
+						var bookrecno = data.bookList[i].bookrecno;
+						var title = data.bookList[i].title;
+						var isbn = data.bookList[i].isbn;
+						var link = '/opac3/book/'+bookrecno+'';
+						var lihtml = "";
+                         if(glc == "ESXS0912014" || glc == "EGS0937045"){
+							 var indate = data.bookList[i].indate;
+							 lihtml =  '<li class="lModTabBdLi"><a href="'+link+'" class="lModTabBdLink"><div class="lBookImg">'+
+									 '<img class="imgCover" isbn="'+isbn+'" bookrecno="'+bookrecno+'" src="/opac3/media/pro2018/images/book-default.jpg" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" />'+
+									 '</div><div class="lBookName" title="'+title+'">'+title+'</div><div  style="color:cornflowerblue">'+"入藏时间"+'</div><div style="color:cornflowerblue" class="indate" title="'+indate+'">'+indate+'</div></a></li>';
+						 }else {
+							 lihtml =  '<li class="lModTabBdLi"><a href="'+link+'" class="lModTabBdLink"><div class="lBookImg">'+
+									 '<img class="imgCover" isbn="'+isbn+'" bookrecno="'+bookrecno+'" src="/opac3/media/pro2018/images/book-default.jpg" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" />'+
+									 '</div><div class="lBookName" title="'+title+'">'+title+'</div></a></li>';
+
+						 }
+								$(".newBkUl" + index).append(lihtml);
+					}
+					var globalLibraryCode = "P2SXS029038";
+					//获取封面
+					loadBookcovers(globalLibraryCode);
+				}
+			}
+		});
+	}
+    if($glc != 'ESXS0912014' && $glc != 'EGS0937045') {
+		xuekeCat(".lModTabHdUl");
+	}
+	//郭煌馆不显示分类
+	if($glc == 'EGS0937045') {
+		$('.hotSlide').find('.hd').hide();
+	}
+
+
+
+
+	var cat_hash = {"哲学":"2", "经济学":"6001", "法学":"4010", "教育学":"7005,7", "文学":"9", "历史学":"11002,11003,11", "理学":"13,13001,13002,13003", "工学":"5001010", "农学":"17", "医学":"16", "军事学":"5", "管理学":"3012"};
+
+	//获取学科分类
+	function xuekeCat(elem){
+		$.ajax({
+			type:"GET",
+			url:'/opac3/browse/xuekeQuery',
+			data:{
+				"parentId":0
+			},
+			traditional: true,
+			dataType:"XML",
+			success:function(data){
+				if(data){
+					var allRecords = $(data).find("record");
+					for(var i = 0;  i < allRecords.length; i++){
+						var id = allRecords.eq(i).find("id").text();
+						var name = allRecords.eq(i).find("name").text();
+						var categoryDesc = allRecords.eq(i).find("categoryDesc").text();
+						var index = i + 1;
+						var title = replace(categoryDesc);
+						var htmlStr = '<li class="lModTabHdLi" name="'+name+'" data-tab-idx="'+index+'">'+title+'</li>';
+						$(elem).append(htmlStr);
+					}
+					if(($(".slideTxtBox .hd ul").height()-6) > 28){
+						$(".mOpSlideHdBtn").addClass("moreCon");
+						$(".slideTxtBox .hd ul").height(34);
+					}
+				}
+			}
+		})
+	}
+	function replace(categoryDesc){
+		var title;
+		switch (categoryDesc) {
+			case "哲学":
+				title = "哲学 ";
+				break;
+			case "经济学":
+				title = "经济学 ";
+				break;
+			case "法学":
+				title = "法学 ";
+				break;
+			case "教育学":
+				title = "教育学 ";
+				break;
+			case "文学":
+				title = "文学 ";
+				break;
+			case "历史学":
+				title = "历史学 ";
+				break;
+			case "理学":
+				title = "理学 ";
+				break;
+			case "工学":
+				title = "工学 ";
+				break;
+			case "农学":
+				title = "农学 ";
+				break;
+			case "医学":
+				title = "医学 ";
+				break;
+			case "军事学":
+				title = "军事学 ";
+				break;
+			case "管理学":
+				title = "管理学 ";
+				break;
+		}
+		return title;
+	}
+
+	//电子书点击tab标签事件
+	$(".lModTabHdUlEbook").on('mouseenter', '.lModTabHdLi', function(){
+		var index = $(this).attr("data-tab-idx");
+		var categoryDesc = $(this).find("a").text();
+		//console.log('categoryDesc=' + categoryDesc);
+		var catid = cat_hash[categoryDesc];
+		if(categoryDesc == '全部'){
+			catid = '';
+		}
+		getEbooksFromCat(catid, "10006", index);
+		$(this).addClass("on").siblings().removeClass("on");
+	});
+
+
+	getEbooksFromCat(null, "10006", "0");
+	//获取玉屋粟电子书资源
+	function getEbooksFromCat(catid, type, index){
+		//console.log("index=" + index + ",catid=" + catid);
+		var $elem = $("#onlineEbook").find(".eBookUl" + index);
+		//console.log($elem.length);
+		if($elem.length > 0){
+			$("#onlineEbook .eBookUl"+ index).show().siblings().hide();
+			return;
+		}
+		$.ajax({
+				type:"GET",
+				url:'/opac3/ebook/yws/getEbooksFromCat',
+				data:{
+					"resid": "16",
+					"pageSize": "4",
+					"pageIndex": "1",
+					"catid": catid,
+					"type": type
+				},
+				traditional: true,
+				dataType: "json",
+				success:function(data){
+					if(data){
+						if(data.stateCode == "1"){
+							//console.log("来了" + index);
+							var parentElem = '<ul class="ebkBdUl overHide eBookUl'+index+'" data-tab-idx="'+index+'"></ul>';
+							$("#onlineEbook").append(parentElem);
+							$("#onlineEbook .eBookUl"+ index).siblings().hide();
+							for(i in data.dataEbook.books.books){
+								var book = data.dataEbook.books.books[i];
+								var coverImg = book.CoverImg;
+								var title = book.Title;
+								var readerURL = book.ReaderURL;
+								var arg = encodeURIComponent(readerURL);
+								var urlStr = "/opac3/reader/qrCodeImagePlus/"+new Date().getTime()+"?qrcode=" + arg + "";
+
+								var htmlStr = '<li class="ebkBdLi flLeft overHide">' +
+											  '<a href="javascript:void(0);" class="ebkBdLink">' +
+											  '<div class="ebkBdBkImg flLeft"><img src="'+coverImg+'" alt="" /></div>' +
+											  '<div class="flLeft ebookDet">' +
+											  '<div class="ebkImg">' +
+											  '<img src="'+urlStr+'" alt="" />' +
+											  '</div>' +
+											  '<div class="ebkTit" title="'+title+'">'+title+'</div>' +
+											  '</div></a></li>';
+								$(".eBookUl" + index).append(htmlStr);
+							}
+						} else {
+							var notyInfo = '<div style="font-size:17px;font-weight:700px;line-height:70px;text-align:center;;color:#5566ff;">暂无电子资源</div>';
+							$("#onlineEbook").html(notyInfo);
+						}
+
+					} else {
+						$("#ebookArea").hide();
+					}
+				}
+		});
+	}
+
+
+	//专题模块
+	/*$.ajax({
+			type:"GET",
+			url:'/opac3/bookSpecial/getLatelyOne',
+			data:{
+				"orderType": "1",
+			},
+			traditional: true,
+			dataType: "json",
+			success:function(data){
+				if(data){
+					var title = data.title;
+					var detail = data.detail;
+					var customSQL = data.customSQL;
+					$(".recThemTit").html(title);
+					$(".recThemCon").html("<div style='height:180px;overflow:hidden;' title='"+delHtmlTag(detail)+"'>" + detail + "</div>");
+					var urlStr = "/opac3/search?"+customSQL;
+					//console.log("urlStr=" + urlStr);
+					$.ajax({
+						type:"GET",
+						url: urlStr,
+						data:{
+							"view":"json",
+							"return_fmt":"json"
+						},
+						traditional: true,
+						dataType:"json",
+						success:function(data){
+							if(data){
+								var size = data.bookList.length;
+								if(size > 0) {
+									$("#bookspecial").show();
+								}
+								for (var i = 0; i < size; i++){
+									var bookSpe = data.bookList[i];
+									var s_bookrecno = bookSpe.bookrecno;
+									var s_title = bookSpe.title;
+									var s_isbn = bookSpe.isbn;
+									var htmlStr = '<li>' +
+									'<a href="book/'+s_bookrecno+'" class="recThemBkLink">' +
+									'<div class="recThemBkImg"><img isbn="'+s_isbn+'" bookrecno="'+s_bookrecno+'" src="media/pro2018/images/book-default.jpg" onerror="this.src=\"/media/pro2018/images/book-default.jpg\"" /></div>' +
+									'<div class="recThemBkNm" title="'+s_title+'">'+s_title+'</div>' +
+									'</a></li>';
+									$(".recThemBkUl").append(htmlStr);
+								}			
+								var globalLibraryCode = "P2SXS029038";
+								loadBookcovers(globalLibraryCode);	
+								jQuery(".picMarquee-left").slide({
+									mainCell:".bd ul",
+									autoPlay:true,
+									effect:"leftMarquee",
+									vis:5,
+									interTime:30
+								});
+							}
+						}
+					})
+				} else {
+					$("#bookspecial").hide();
+				}
+			}
+	});*/
+
+	$("#bookspecial .outModelCon").each(function (index,element) {
+		var urlStr = "/opac3/search?"+$(this).attr("data_customSQL");
+		var tempStr = $(this).find(".detailCon").text()
+		$(this).find(".detailCon").attr("title",tempStr);
+		$.ajax({
+			type:"GET",
+			url: urlStr,
+			data:{
+				"view":"json",
+				"return_fmt":"json"
+			},
+			traditional: true,
+			dataType:"json",
+			success:function(data){
+				if(data){
+					var size = data.bookList.length;
+					for (var i = 0; i < size; i++){
+						var bookSpe = data.bookList[i];
+						var s_bookrecno = bookSpe.bookrecno;
+						var s_title = bookSpe.title;
+						var s_isbn = bookSpe.isbn;
+						var htmlStr = '<li>' +
+								'<a href="book/'+s_bookrecno+'" class="recThemBkLink">' +
+								'<div class="recThemBkImg"><img isbn="'+s_isbn+'" bookrecno="'+s_bookrecno+'" src="media/pro2018/images/book-default.jpg" onerror="this.src=\'/opac3/media/pro2018/images/book-default.jpg\'" /></div>' +
+								'<div class="recThemBkNm" title="'+s_title+'">'+s_title+'</div>' +
+								'</a></li>';
+						$("#bookspecial .outModelCon").eq(index).find(".recThemBkUl").append(htmlStr);
+					}
+					var globalLibraryCode = "P2SXS029038";
+					loadBookcovers(globalLibraryCode);
+					jQuery(".picMarquee-left").slide({
+						mainCell:".bd ul",
+						autoPlay:true,
+						effect:"leftMarquee",
+						vis:5,
+						interTime:30
+					});
+				}
+			}
+		})
+		$("#bookspecial").show();
+	});
+
+
+    //热门资源库模块
+	var ssoServer = "";
+	if(ssoServer){
+        $.ajax({
+            type: "GET",
+            url: '/opac3/ebook/SSOResources',
+            data: {
+                "return_fmt": "json"
+            },
+            dataType: "json",
+            success: function (data) {
+				if(data&&data.ssoResourceMap){
+				    for(var group in data.ssoResourceMap){
+				        var groupname = data.ssoResourceMap[group].groupname;
+				        var li = "<li gourp='"+group+"'"+(group==0?" class='forFirtLi'":"")+">"+groupname+"</li>";
+				        $("#resoruceGroup").append(li);
+				        var resouces = data.ssoResourceMap[group].greltionses;
+				        for(var resouce in resouces){
+				            var resourceName = resouces[resouce].linkName;
+                            if(resourceName.length>15){
+                                resourceName = resourceName.substring(0,15)+'...';
+                            }
+				            var innerli = "<li group='"+group+"'"+(group>0?" style='display:none;'":"")+" class=\"hotEResLi flLeft \">\n" +
+                                "<a href=\"javascript:goSSOResource('"+resouces[resouce].recno+"');\" title=\""+resouces[resouce].linkName+"\" class=\"hotEResLink\">\n" +
+                                "	<div class=\"hotEResImg \">\n" +
+                                "<img width='209' height='86' src=\""+ssoServer+"/interface/dglibImg/logo_sys_"+resouces[resouce].recno+".gif\" alt=\""+resouces[resouce].linkName+"\" onerror=\"this.src='/opac3/media/pro2018/images/resouce_default.png'\"/>\n" +
+                                //"<i class=\"hasBuy\"></i>\n" +
+                                "</div>\n" +
+                                "<div class=\"hotEResDet \">\n" +
+                                "<p><span class=\"hotDTit\">"+resourceName+"</span><span></span></p>\n" +
+                                "<p><span class=\"hotDTit\">访问量：</span><span id='reqCount"+resouces[resouce].recno+"'></span></p>\n" +
+                                "</div>\n" +
+                                "</a>\n" +
+                                "</li>"
+                            $(".hotEResUl").append(innerli);
+						}
+					}
+					//加载tab标签和样式
+                    jQuery(".resourceSlide").slide();
+				    //加载tab事件
+                    $("#resoruceGroup>li").each(function(index,element){
+                        $(this).mouseover(function(){
+                            $(".hotEResUl>li[group='"+index+"']").show();
+                            $(".hotEResUl>li").not("[group='"+index+"']").hide();
+                        });
+					});
+                    //加载访问量
+                    $.ajax({
+                        type: "GET",
+                        url: '/opac3/ebook/SSOResources/sorted',
+                        data: {
+							"sortBy":"reqCount"
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            if(data&&data.records){
+                                for(var resource in data.records){
+                                    var id = data.records[resource].sysId;
+                                    var reqCount = data.records[resource].reqCount;
+                                    $("#reqCount"+id).html(reqCount);
+								}
+							}
+                        }
+                    });
+				}
+            }
+        });
+    }
+
+});
+
+<!-- 旧获取借阅宝二维码和其他馆获取二维码方式-->
+/*//获取后台配置公共馆，借阅宝的微信二维码
+$(function(){
+	var $publib_lib_wx = "";
+	if($publib_lib_wx != null && $publib_lib_wx != "undefined" && $publib_lib_wx.length > 0){
+		$(".pubLibWx").html($publib_lib_wx);
+		var $content = $(".pubLibWx img").attr("content");
+		$(".pubLibWx_name").text($content);
+		$("#pb_wx").show()
+	} else {
+		$("#pb_wx").hide();
+	}
+
+	var $jyb_lib_wx = "";
+	if($jyb_lib_wx != null && $jyb_lib_wx != "undefined" && $jyb_lib_wx.length > 0){
+		$(".jybWx").html($publib_lib_wx);
+		var $content = $(".jybWx img").attr("content");
+		$(".jybWx_name").text($content);
+		$("#jyb_wx").show()
+	} else {
+		$("#jyb_wx").hide();
+	}
+});*/
+
+
+
+    //左侧多级菜单栏
+    function getItems(appendElem, category, pid){
+        $.ajax({
+            type: "get",
+            url: "/opac3/" + 'browse/query/' + new Date().getTime(),
+            data: {
+                "category": category,
+                "id": encodeURIComponent(pid)
+            },
+            dataType: "xml",
+            success: function(data){
+                if(data){
+                    createHtml(appendElem, pid, data);
+                }
+            }
+        });
+    }
+
+    function createHtml(appendElem, pid, data){
+        var records = $(data).find("record");
+        var recordLen = records.length;
+        if(pid != "0" && recordLen > 0){
+            var htmlCtn = "<div class='bkClsIn'><ul class='bkClsInUl'></ul></div>";
+            $("li[catId='"+pid+"']").append(htmlCtn);
+        }
+
+        for(var i=0; i<recordLen; i++) {
+            var record = $(records[i]);
+            var r_id = record.find("id").text();
+            var r_parentId = record.find("parentId").text();
+            var r_name = record.find("name").text();
+            var r_categoryDesc = record.find("categoryDesc").text();
+            var r_showOrder = record.find("showOrder").text();
+            var r_libcode = record.find("libcode").text();
+            var r_childrenCount = record.find("childrenCount").text();
+            var bookcount = record.find("bookcount").text();
+			var desc_count = r_categoryDesc + "(" + bookcount + ")";
+            var libcode= "";
+            var booktype = "";
+            var curlocal = "";
+            bookClass = r_name;
+            link = "/opac3/"+ "search?isFacet=true&searchWay=class&q="+bookClass+"&classname="+encodeURIComponent(r_categoryDesc)+"&libcode="+encodeURIComponent(libcode)+"&booktype="+encodeURIComponent(booktype)+"&curlocal="+encodeURIComponent(curlocal);
+            var htmlStr = "";
+            if(pid == "0"){
+                htmlStr = "<li class='bkClsLi' catId='"+r_id+"' catPid='"+pid+"' title='"+desc_count+"'><a href='"+link+"' target='_blank' class='bkClsLink'>"+desc_count+"</a></li>";
+                $(appendElem).append(htmlStr);
+                getItems($("li[catId='"+r_id+"']"), "cls", r_id);
+            } else{
+                var htmlStr = "<li class='bkClsInli' catId='"+r_id+"' catPid='"+pid+"'><a href='"+link+"' target='_blank' class='bkClsInlink'>"+desc_count+"</a></li>";
+                $(appendElem).find(".bkClsInUl").append(htmlStr);
+            }
+        }
+        return true;
+    }
+
+    $(function(){
+        getItems(".bkClsUl", "cls", "0");
+        $(".bkClsUl").on('mouseover', '.bkClsLi', function(){
+            $(this).find('.bkClsIn').show().parents('li').siblings().find('.bkClsIn').hide();
+        });
+        $(".bkClsUl").on('mouseout', '.bkClsLi', function(){
+            $(this).find('.bkClsIn').hide();
+        })
+    });
+
+	// 20201119 展开更多tab头部
+
+	$(".mOpSlideHdBtn").click(function(){
+		if (!$(this).hasClass("isTap")) {
+			$(this).addClass("isTap");
+			$(this).prev("ul").height('auto')
+			$(this).text("收起")
+		} else{
+			$(this).removeClass("isTap");
+			$(this).prev("ul").height(34)
+			$(this).text("展开")
+		}
+	});
+</script>
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+//显示计数
+$(function() {
+	
+	var glcWechat = "P2SXS029038";
+	var mobileurl = 'http://opac.xalib.org.cn:80/opac3/m/index';
+	var qrcodeUrl = "/opac3/reader/qrCodeImage?qrcode="+mobileurl+"";
+    if (glcWechat!="") {
+        $.ajax({
+            url: "https://u.interlib.cn/index.php?g=Mysql&m=Qrcodeapi&a=getQrcode&glcwechat=" + glcWechat,
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if(result.status == true){
+                    $.each(result.data, function (key, val) {
+                        if (key == 1) return false;
+                        
+                        $("img[name='eqImg']").each(
+                       		function(){
+                       			$(this).attr("src",val.qrcode);
+                       		}
+                       	);
+                        $("#eqAcountName").text(val.wxname+"公众号");
+                        $("#eqDiv").show();
+                    });
+                }else{
+                	$("#wechatQrcode").attr("src",qrcodeUrl);
+                }
+            }, error: function (e, msg) {
+            	$("#wechatQrcode").attr("src",qrcodeUrl);
+            }
+        });
+    }else{
+    	$("#wechatQrcode").attr("src",qrcodeUrl);
+    }
+});
+function showVisitedCount(count){
+	var countStr = new String(count);
+	while(countStr.length < 8) {
+		countStr = "0" + countStr;
+	}
+	var len = countStr.length;
+	var result = "访问量："+countStr+"";
+	$("#showVisitedCountDiv").html(result);
+	$("#showVisitedCountDiv").fadeIn(1000);
+}
+</script>
+
+	
+	
+	
+		<div class="footerArea">
+	
+
+	
+		
+		
+		
+			<div class="container footAreaIn">
+				<div class="footLeft clearfix">
+					<div class="footHintArea" style="color: #ffffff;">
+						
+							
+							
+								<p class="copyRight">© 2005－<script>document.write(new Date().getFullYear());</script> www.interlib.com.cn, all rights reserved</p>
+							
+						
+						<p class="footHint">
+							<span id="showVisitedCountDiv"></span>&nbsp;&nbsp;&nbsp;
+							<span>
+					
+					语言&nbsp;:
+					
+						
+						
+						
+						
+						
+						中文
+					
+					</span>
+						</p>
+					</div>
+				</div>
+				<div class="footHintArea" style="color: #ffffff;">
+					
+						
+						
+							<span>技术支持：广州图创计算机软件开发有限公司 </span>
+						
+					
+					<span style="margin-left: 200px;"></span>
+				</div>
+				
+			</div>
+		
+	
+</div>
+
+
+
+
+		<div style="display:none;">
+			<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+
+		
+	</body>
+</html>

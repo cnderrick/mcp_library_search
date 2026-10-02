@@ -7,7 +7,10 @@
 大连（地区联合目录）、青岛（全市联合目录）、无锡（新吴区图书馆）、
 扬州（扬州市图书馆联盟联合目录）、苏州（苏州图书馆）、徐州（徐州市图书馆）、
 淮安（淮安市图书馆）、盐城（盐城市图书馆）、丽水（丽水市公共图书馆联合目录）、
-舟山（舟山市图书馆）。
+舟山（舟山市图书馆）、shaanxi（陕西省图书馆，省级馆馆址西安）、
+xian（西安市图书馆，集群平台）、xianyang（咸阳，公共图书馆联盟）、
+baoji（宝鸡，集群平台）、ankang（安康）、hanzhong（汉中，全市联合目录含洋县等县馆）、
+yulin（榆林）。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -58,7 +61,13 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     huaian（淮安，全市联合目录含少儿馆、清江浦区馆等成员馆，馆藏到单册级）、
     yancheng（盐城，市图书馆单实例，馆藏到单册级）、
     lishui（丽水，全市联合目录含景宁/庆元/缙云等县馆与城市书房）、
-    zhoushan（舟山，市图书馆，馆藏到单册级），
+    zhoushan（舟山，市图书馆，馆藏到单册级）、
+    shaanxi（陕西省图书馆，新版 UILAS REST 平台，省级馆馆址西安）、
+    xian（西安市图书馆，西安市公共图书馆集群平台，上下文 /opac3）、
+    xianyang（咸阳，公共图书馆联盟）、baoji（宝鸡，集群平台）、
+    ankang（安康，详情走 /api/book 接口）、
+    hanzhong（汉中，全市联合目录含洋县等县馆）、
+    yulin（榆林，新版 UILAS REST 平台），
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，

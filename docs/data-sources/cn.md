@@ -70,7 +70,7 @@
 |  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `libstar/` 家族 + `adapters/cn/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
 |  |  | — | ⛔ 不通 | http://222.191.248.124:8088/opac/book_cart.php （无锡市图书馆旧 OPAC） | — | 2026-10-03 实测 8088 端口空响应、同 IP 80 端口仅 Tomcat 默认 404；官网 www.wxlib.cn 仍指向该 8088 旧 OPAC，暂无可用检索入口，市图源 `WXST` 继续搁置 |
 |  | 苏州 | `suzhou` | ✅ 接入 | https://reader.szlib.com/opac/index （苏州图书馆，页标题「检索系统」，全市集群目录） | 图创 Interlib（已确认：页内自报图创／interlib、`/opac/media/*`、`bookrecno`；2026-10-03 实抓「三体」232 条、24 页） | `interlib/` 家族 + `adapters/cn/suzhou.py`（默认模板零 quirk，不需要 `curlibcode`） |
-|  |  | — | 🔍 待核验 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | — |
+|  |  | — | 📋 计划 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | 2026-10-03 用户实测入口可达，升级为准计划待立项；技术组件与适配层待侦察 |
 |  | 徐州 | `xuzhou` | ✅ 接入 | https://findxz.libsp.com （徐州市图书馆，同名多分馆含鼓楼区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `libstar/` 家族 + `adapters/cn/xuzhou.py`；`groupCode=3203001001`（与主馆 libCode 同）。检索须带 `Referer`＋`groupcode` 头，缺 `groupcode` 静默 0 结果；实抓「三体」407 条 |
 |  | 常州 | — | ⛔ 不通 | http://www.czlib.net （常州市图书馆） | — | 2026-10-03 实测域名解析到 198.20.x.x 域名停放段、TCP 空响应，非馆方站点；近似域名 czlib.cn＝潮州市图书馆，亦非本市，未找到可用检索入口 |
 |  | 南通 | — | ⛔ 不通 | https://www.ntlib.org.cn （南通市图书馆） | — | 2026-10-03 实测 `www.ntlib.org.cn`（58.221.24.12）TLS 握手直接 EOF，裸 `ntlib.org.cn` 302 指回 www 形成循环；原登记 `www.ntlib.net` 落在 198.20.x.x 域名停放段，均无可用检索入口 |
@@ -293,17 +293,17 @@
 |  | 德宏 | — | ❓ 缺失 | — | — | — |
 |  | 怒江 | — | ❓ 缺失 | — | — | — |
 |  | 迪庆 | — | ❓ 缺失 | — | — | — |
-| 陕西省 | 西安 | — | 🔍 待核验 | https://uilas.sxlib.org.cn （陕西省图书馆） | — | — |
-|  |  | — | 🔍 待核验 | http://www.xalib.org.cn （西安图书馆） | — | — |
-|  | 铜川 | — | ❓ 缺失 | — | — | — |
-|  | 宝鸡 | — | ❓ 缺失 | — | — | — |
-|  | 咸阳 | — | ❓ 缺失 | — | — | — |
-|  | 渭南 | — | ❓ 缺失 | — | — | — |
-|  | 延安 | — | ❓ 缺失 | — | — | — |
-|  | 汉中 | — | ❓ 缺失 | — | — | — |
-|  | 榆林 | — | ❓ 缺失 | — | — | — |
-|  | 安康 | — | ❓ 缺失 | — | — | — |
-|  | 商洛 | — | ❓ 缺失 | — | — | — |
+| 陕西省 | 西安 | `shaanxi` | ✅ 接入 | https://uilas.sxlib.org.cn （陕西省图书馆，页标题「UILAS知识检索平台」） | 新版 UILAS（ILAS REST 平台，Vue 前端＋`/prod-api/*` JSON，与老版 UILAS 同宗不同代） | `uilas_rest/` 家族 + `adapters/cn/shaanxi.py`（省级馆，馆址西安） |
+|  |  | `xian` | ✅ 接入 | https://opac.xalib.org.cn/opac3/index （西安市图书馆，西安市公共图书馆集群信息化管理平台） | 图创 Interlib（pro2018 模板，应用上下文 `/opac3`） | `interlib/` 家族 + `adapters/cn/xian.py`（`ctx=/opac3`、`pro2018=True`、`api_detail=True`） |
+|  | 铜川 | — | 🔍 待核验 | https://uilas.sxlib.org.cn/#/index （铜川市图书馆，入口与陕图同平台） | 新版 UILAS（同陕图） | 用户所给入口即陕图省馆平台（`shaanxi`）；铜川馆专有检索入口待确认 |
+|  | 咸阳 | `xianyang` | ✅ 接入 | http://61.185.20.96:8082/opac/index （咸阳市公共图书馆联盟） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/xianyang.py`（`api_detail=True`）；实抓「三体」79 条 |
+|  | 宝鸡 | `baoji` | ✅ 接入 | http://1.82.133.119:8082/opac/ （宝鸡市公共图书馆集群信息化管理平台） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/baoji.py`（`api_detail=True`）；实抓「三体」110 条 |
+|  | 渭南 | — | ⛔ 不通 | http://www.wnlib.org.cn/ | — | 2026-10-03 实测：站点仅返 971 字节 Vue 壳、无检索入口（用户亦述「没查询入口」） |
+|  | 延安 | — | ⛔ 不通 | https://ydlib.mh.chaoxing.com/ | 超星智慧门户 | 2026-10-03 实测：根路径 HTTP 400（13 字节），不可达 |
+|  | 汉中 | `hanzhong` | ✅ 接入 | https://findhanzhong.libsp.cn/#/home | 图星 LibStar Find（JSON API） | `libstar/` 家族 + `adapters/cn/hanzhong.py`；`groupCode=100121`；实抓「三体」930 条 |
+|  | 榆林 | `yulin` | ✅ 接入 | https://www.yulinlib.org.cn/opac/#/index | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/yulin.py`（Referer 须 `/opac/`）；实抓「三体」16 条 |
+|  | 安康 | `ankang` | ✅ 接入 | http://219.145.206.134:8082/opac/index | 图创 Interlib（pro2018 模板） | `interlib/` 家族 + `adapters/cn/ankang.py`（`pro2018=True`、`api_detail=True`；详情页 HTML 被源站截断，改走 `/api/book/{}`）；实抓「三体」161 条 |
+|  | 商洛 | — | ⛔ 不通 | https://shangluo.superlib.libsou.com/ | 超星（superlib/libsou） | 2026-10-03 实测：站点为超星发现页、无书目 OPAC 检索入口（用户亦述「没查询入口」） |
 | 甘肃省 | 兰州 | — | 🔍 待核验 | https://www.gslib.com.cn （甘肃省图书馆） | — | — |
 |  |  | — | 🔍 待核验 | http://www.lzlib.com.cn （兰州市图书馆） | — | — |
 |  | 嘉峪关 | — | ❓ 缺失 | — | — | — |
@@ -417,6 +417,16 @@
 | 青岛 | 默认，**检索通道在适配器内改走站点内嵌 Solr** | 主站 HTML 检索页 `/opac/search` 被滑动验证码常态拦截（`slideVerify`，新会话首个检索请求即触发，非限速型；验证结果只落在当次浏览器会话），而站点内嵌的 Solr 后端 `GET /opac/api/search` 开放——检索原语改走该通道（`wt=json`，`q`＋`rows`＋`page`；服务端凭 `page` 自算 `start`，直传 `start` 被忽略），是本城相对广州基准的唯一结构差异。`docs[].id` 即 `bookrecno`，可直接用于详情与馆藏端点；详情无需 `curlibcode`，`/opac/book/{id}` 与 `/opac/api/holding/{id}` 与广州基准完全同构，家族 parser 零改动全字段解析。数据边界：服务端默认 `fq` 是硬编码状态白名单＋定位集合，自行追加 `fq` 会被整体覆盖，故结果默认只含有馆藏书目、`hasholding` 恒为 `y`（`availability_summary` 恒空串）；带连字符 ISBN 命中不了（同广州 marc），首搜为空时去连字符重试；自带 ≥2 秒节流。`tests/fixtures/qingdao/NOTES.md`。 |
 | 苏州 | 默认（零 quirk，不需要 `curlibcode`） | `https://reader.szlib.com`，默认（非 pro2018）模板；检索/详情/馆藏裸参数均通，无需 `curlibcode`。详情页内嵌馆藏请求带 `jsessionid`＋`isCluster=false`，但家族 `isCluster=`（空）实测同样返回完整 holdingList、不依赖会话，故不新增字段。libcodeMap 仅 4 项（`ST=苏图`、`999=中心馆`、`zd=职大分馆`、`GS=姑苏区分馆`，馆名译名缩写「苏图」原值照登）、localMap 250 项。部分书目 `holdingList` 为空但 maps 齐全，属记录级数据事实（无实体单册），返回空馆藏列表正确。tagTr stale-label 缺陷在苏州记录上未触发。`tests/fixtures/suzhou/NOTES.md`。 |
 | 丽水 | `pro2018=True` | 裸 IP ＋ HTTP：base_url `http://60.190.125.252:8086`；pro2018 模板代（搜索条目 `libBookLi`，页内也带 `bookrecno`）。检索/详情/馆藏裸参数均通，不需要 `curlibcode`；不需要 `pro2018_cite_author`（author 直取「刘慈欣」）。全市联合目录：libcodeMap 含丽水市图书馆（`lsslib`）与景宁/庆元/缙云/遂昌/松阳/云和/青田等县馆及乡镇分馆、城市书房、阅读驿站。部分书目 holdingList 为空而 maps 齐全属记录级数据事实；详情记录无内容提要时 summary 空串。`tests/fixtures/lishui/NOTES.md`。 |
+| 西安（西安市图书馆） | `ctx="/opac3"`＋`pro2018=True`＋`api_detail=True` | 西安市公共图书馆集群信息化管理平台，应用上下文**是 `/opac3` 非 `/opac`**（家族 `ctx` 字段的第二个城市，首个是合肥市图 `/lib2`）。pro2018 模板；详情走 `/api/book/{recno}` JSON。集群含碑林区图书馆等成员馆。`tests/fixtures/xian/NOTES.md`。 |
+| 咸阳 | `api_detail=True` | 咸阳市公共图书馆联盟（`http://61.185.20.96:8082`），默认（非 pro2018）模板；详情走 `/api/book/{recno}` JSON。联盟含兴平图书馆等。`tests/fixtures/xianyang/NOTES.md`。 |
+| 宝鸡 | `api_detail=True` | 宝鸡市公共图书馆集群平台（`http://1.82.133.119:8082`），默认模板；详情走 `/api/book/{recno}` JSON。含「宝图-工人文化宫分馆」等网点。`tests/fixtures/baoji/NOTES.md`。 |
+| 安康 | `pro2018=True`＋`api_detail=True` | pro2018 模板；**详情页 HTML 被源站截断**（实测稳定停在 ~67597 字节、无书目表），故 `api_detail=True` 走 `/api/book/{recno}` JSON；馆藏 `/api/holding/{recno}` 正常。`tests/fixtures/ankang/NOTES.md`。 |
+
+**`api_detail` quirk（2026-10-03）**：`/api/book/{recno}`（各 Interlib 站点均提供）
+返回 `{biblios:{title,author,publisher,pubdate,isbn,classNo,summary,…}, holdings:[…]}`
+的书目 JSON，比 HTML 详情页更稳（不受模板差异与页面截断影响）。`api_detail=True`
+的省份详情走该接口；**注意它返回的 holdings 是原始馆码未翻译**，故馆藏仍统一走
+`/api/holding/{recno}`（含 libcodeMap/localMap/holdStateMap 映射）。
 
 新接同族城市：`adapters/cn/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/cn/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 
@@ -673,13 +683,42 @@ Tomcat/JSP），全链路匿名零 cookie。
   带上述 TLS quirk）。两城页面结构逐项同构，家族 parser 零改动。
 - 字段侦察与出入清单见 `tests/fixtures/jinhua/NOTES.md`、`tests/fixtures/zhoushan/NOTES.md`。
 
-## 图星 LibStar Find（无锡、徐州、盐城、淮安）
+## 新版 UILAS REST（陕西省图书馆、榆林）
+
+家族模块 `uilas_rest/`：`client.py`（HTTP 层＋`Referer` 必需头＋节流）、
+`parser.py`（检索/详情/馆藏 JSON 解析）、`__init__.py`（三原语与
+`UilasRestConfig`）。成员：陕西省图书馆（`adapters/cn/shaanxi.py`）、榆林市图书馆
+（`adapters/cn/yulin.py`）。与老版 `uilas/`（HTML OPAC，`NTRdrBookRetr.do`）
+**同宗不同代**：新版是前后端分离的 REST 平台（前端 Vue），接口在 `/prod-api/*`
+（nginx 映射后端 `/ILASOPAC/*`），返回 JSON，故独立成家族。城市差异只允许以
+`UilasRestConfig` 带默认值的字段新增。
+
+- **检索**：`GET /prod-api/bookSearch/search`，参数 `searchKey`/`pageNum`/`pageSize`
+  （`pageSize` 服务端生效）。响应 `data.pageList.list[]`（条目）＋
+  `data.pageList.totalElements`（总数）＋ `totalPages/currentPage`。
+- **详情＋馆藏一步**：`GET /prod-api/book/bookDetail?recno={id}`。书目在
+  `data.bookDetail`（`name/author/publish/pubyear/isbn/classno/contents/publish…`），
+  馆藏在 `data.inList[]`（`status/callno/curlib/curlocal/retudate/cirtype/barcode`），
+  馆名表 `data.libraryList`。`book_id` 即裸 `id`（数字字符串）。
+- **馆藏状态码**（前端 i18n `bookinfo_hold_status_*`）：`a=采编 / b=在馆 / c=借出 /
+  d=租出 / e=预约`；**只有 `b`（在馆）视为可借**，其余与未知码保守不可判借。
+- **必需 `Referer`**：部分部署（榆林）只认与站点同路径的 Referer——榆林须
+  `https://www.yulinlib.org.cn/opac/`，用根路径 `/` 时**所有 `/prod-api/*` 接口**
+  都回 `{"code":401,"msg":"…认证失败…"}`（接口本身匿名可通，401 是 Referer 门，
+  实测）。故 `UilasRestConfig.referer` 逐站配置。
+- **数据边界**：检索条目的可借概况由 `holdingCount`（总册）/`inHoldingCount`（在馆）
+  拼装；`bookDetail.contents`（提要）可为 null → summary 空串；`retudate` 为 `null`
+  或 `"0"` 时 `due_date` 空串。
+- 字段侦察结论见 `tests/fixtures/shaanxi/NOTES.md`、`tests/fixtures/yulin/NOTES.md`。
+
+## 图星 LibStar Find（无锡、徐州、盐城、淮安、汉中）
 
 家族模块 `libstar/`：`client.py`（HTTP 层＋`Referer`/`groupcode` 必需头＋节流）、
 `parser.py`（检索/详情/馆藏解析）、`__init__.py`（单实例三原语与 `LibStarConfig`）。
 成员：无锡市新吴区图书馆（`adapters/cn/wuxi.py`，单实例＋多源预留）、徐州
 （`adapters/cn/xuzhou.py`）、淮安（`adapters/cn/huaian.py`）、盐城
-（`adapters/cn/yancheng.py`）。城市差异只允许以 `LibStarConfig` 带默认值的字段新增。
+（`adapters/cn/yancheng.py`）、汉中（`adapters/cn/hanzhong.py`，`groupCode=100121`）。
+城市差异只允许以 `LibStarConfig` 带默认值的字段新增。
 技术组件是图星 LibStar Find v3.2023.12（北京图星/超星集团），与图创 Interlib 是
 两家厂商，不共用代码；家族 client 节流 1 秒/host。
 
