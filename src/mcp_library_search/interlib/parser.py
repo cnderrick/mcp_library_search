@@ -307,3 +307,297 @@ def parse_holdings(payload: dict) -> list[dict]:
             "due_date": _holding_due_date(it, loan_work),
         })
     return holdings
+
+
+# ---------- pro2018 模板代解析（台州/成都/绍兴共用，2026-10-02 家族化） ----------
+
+_PRO2018_TOTAL_RE = re.compile(r'schResNumIn">\s*([\d,]+)\s*</i>')
+_PRO2018_TOTAL_PAGES_RE = re.compile(r"totalPage:\s*(\d+)")
+_PRO2018_CURRENT_PAGE_RE = re.compile(r"currentPage:\s*(\d+)")
+# 空结果页不渲染总数区，但有明确提示锚点（源站明说没有相关书目 → 判 0，不是猜测）
+_PRO2018_NO_RESULT_RE = re.compile(r"notFindFt")
+_PRO2018_BOOK_DETAIL_RE = re.compile(r"bookDetail\((\d+)")
+_PRO2018_YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+
+
+class _Pro2018SearchParser(HTMLParser):
+    """pro2018 搜索结果页：li.libBookLi 容器定边界，class/标签锚点定字段。
+
+    - 标题：第一个 a.libBookDetNm；书目 ID 取其 href 的 bookDetail（数字，
+      封面 img 的 bookrecno 属性兜底（条目内该属性散落多处，均同值）。
+    - 字段标签是 span.libBkDetTit 文本（责任者/出版信息），标签后随首个 <a>：
+      作者、出版社取 a 文本；出版年是出版社 a 之后、下一个 <p> 之前的裸文本
+      （「,2010.11」形态）；ISBN 取封面 img 的 isbn 属性（内部字段，不进契约）。
+    """
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.books = []
+        self._cur = None
+        self._label = ""        # 条目内最近一个 libBkDetTit 标签文本
+        self._label_parts = []
+        self._in_label = False
+        self._a_text = None     # 正在抓取的 a 标签文本
+        self._a_role = None     # title/author/publisher/None
+        self._tail = False      # 出版社 a 结束后抓出版年裸文本
+        self._tail_done = False
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        cls = (a.get("class") or "").split()
+        if tag == "li" and "libBookLi" in cls:
+            self._finish_book()
+            self._cur = {"book_id": "", "title": "", "author": "",
+                         "publisher": "", "publish_year": "", "isbn": ""}
+            self._label = ""
+            return
+        if self._cur is None:
+            return
+        if tag == "img":
+            # 封面 img 属性兜底：isbn 与 bookrecno
+            if not self._cur["isbn"]:
+                self._cur["isbn"] = (a.get("isbn") or "").strip()
+            if not self._cur["book_id"]:
+                self._cur["book_id"] = (a.get("bookrecno") or "").strip()
+        elif tag == "span" and "libBkDetTit" in cls:
+            self._in_label = True
+            self._label_parts = []
+        elif tag == "a":
+            self._a_text = []
+            href = a.get("href") or ""
+            if "libBookDetNm" in cls and not self._cur["title"]:
+                self._a_role = "title"
+                m = _PRO2018_BOOK_DETAIL_RE.search(href)
+                if m and not self._cur["book_id"]:
+                    self._cur["book_id"] = m.group(1)
+            elif self._label == "责任者" and not self._cur["author"]:
+                self._a_role = "author"
+            elif self._label == "出版信息" and not self._cur["publisher"]:
+                self._a_role = "publisher"
+            else:
+                self._a_role = None
+        elif tag == "p":
+            # 出版年只在出版社 a 之后、本 <p> 结束前的裸文本里找
+            self._tail = False
+
+    def handle_endtag(self, tag):
+        if self._cur is None:
+            return
+        if tag == "span" and self._in_label:
+            self._label = _clean("".join(self._label_parts))
+            self._in_label = False
+        elif tag == "a" and self._a_text is not None:
+            text = _clean("".join(self._a_text))
+            if self._a_role == "title":
+                self._cur["title"] = text
+            elif self._a_role == "author":
+                self._cur["author"] = text
+            elif self._a_role == "publisher":
+                self._cur["publisher"] = text
+                self._tail = True
+                self._tail_done = False
+            self._a_text = None
+            self._a_role = None
+        # 条目内嵌套 li（馆藏信息 tab 等）不影响边界：只认 libBookLi class 开新条
+
+    def handle_data(self, data):
+        if self._cur is None:
+            return
+        if self._in_label:
+            self._label_parts.append(data)
+        if self._a_text is not None:
+            self._a_text.append(data)
+        if self._tail and not self._tail_done:
+            m = _PRO2018_YEAR_RE.search(data)
+            if m:
+                self._cur["publish_year"] = m.group(0)
+                self._tail_done = True
+
+    def _finish_book(self):
+        if self._cur is not None:
+            if self._cur["book_id"]:
+                self._cur["availability_summary"] = ""
+                self.books.append(self._cur)
+            self._cur = None
+
+
+def _parse_search_pro2018(html: str) -> dict:
+    """解析 pro2018 搜索页（libBookLi 模板），返回结构与家族 parse_search 对齐。
+
+    返回 {"books": [{book_id,title,author,publisher,publish_year,
+    availability_summary,isbn}...], "total_results": int|None,
+    "total_pages": int, "has_next": bool}。total_results：总数区缺失且无
+    空结果提示时为 None；total_pages 解析不到保守取 1；
+    has_next = currentPage < totalPage（JS 分页配置，页面无可点分页锚点）。
+    """
+    p = _Pro2018SearchParser()
+    p.feed(html)
+    p._finish_book()
+    m = _PRO2018_TOTAL_RE.search(html)
+    if m:
+        total_results = int(m.group(1).replace(",", ""))
+    elif _PRO2018_NO_RESULT_RE.search(html):
+        total_results = 0
+    else:
+        total_results = None
+    tp = _PRO2018_TOTAL_PAGES_RE.search(html)
+    cp = _PRO2018_CURRENT_PAGE_RE.search(html)
+    total_pages = int(tp.group(1)) if tp else 1
+    current_page = int(cp.group(1)) if cp else 1
+    return {
+        "books": p.books,
+        "total_results": total_results,
+        "total_pages": total_pages,
+        "has_next": current_page < total_pages,
+    }
+
+
+# ---------- pro2018 详情页解析（bkTxt 模板 + 可选引文块责任者兜底） ----------
+# 标签词表：ISBN/出版发行/中图分类法（内容提要/主要责任者按记录可选，
+# 实抓记录均缺，保留词表位以待有记录带该 li 时照抓）；标题取 a.bkTxtTit。
+# 责任者兜底（cite_author=True 时启用，绍兴实证）：引文块 div.sendToConIn
+# 「刘慈欣著.三体.重庆出版社,2010.11.」取首个句点前段（原值照登，含「著/编」字样）；
+# 简介无标签行则恒空串（数据边界）。
+_PRO2018_DETAIL_LABELS = {
+    "ISBN": "isbn",
+    "出版发行": "publish",
+    "内容提要": "summary",
+    "中图分类法": "call_number",
+    "主要责任者": "author",
+}
+_PRO2018_ISBN_RE = re.compile(r"[\d\-]{10,}")
+
+
+class _Pro2018DetailParser(HTMLParser):
+    """pro2018 默认详情页：bkTxtLeft/bkTxtRight 两列，每字段一个 li（标签：<span>值）；
+    责任者可选从引文块 sendToConIn 兜底。"""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.fields = {k: "" for k in
+                       ("title", "author", "publisher", "publish_year",
+                        "isbn", "call_number", "summary")}
+        self._depth = 0            # 字段列容器深度，0 = 不在容器内
+        self._label = None         # 当前 li 的标签（None = 不在 li 内）
+        self._label_parts = []
+        self._in_span = False
+        self._span_parts = []
+        self._link_parts = None    # 非 None 表示正在抓值内首个 <a> 文本
+        self._first_link = ""
+        self._title_parts = None
+        self._cite_parts = None    # 非 None 表示正在抓引文块文本
+        self._citation = ""        # 首个 sendToConIn 的完整文本
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        cls = (a.get("class") or "").split()
+        if tag == "a" and "bkTxtTit" in cls and not self.fields["title"]:
+            self._title_parts = []
+            return
+        if tag == "div" and "sendToConIn" in cls and not self._citation:
+            self._cite_parts = []
+            return
+        if tag == "div" and ("bkTxtLeft" in cls or "bkTxtRight" in cls):
+            self._depth = 1        # 两列是兄弟容器，进入新列重置深度
+            return
+        if not self._depth:
+            return
+        if tag == "div":
+            self._depth += 1
+        elif tag == "li" and self._label is None:
+            self._label = ""
+            self._label_parts = []
+        elif tag == "span" and self._label is not None and not self._in_span:
+            self._in_span = True
+            self._span_parts = []
+            self._first_link = ""
+        elif tag == "a" and self._in_span and self._link_parts is None:
+            self._link_parts = []
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._title_parts is not None:
+            self.fields["title"] = _clean("".join(self._title_parts))
+            self._title_parts = None
+            return
+        if tag == "div" and self._cite_parts is not None:
+            self._citation = _clean("".join(self._cite_parts))
+            self._cite_parts = None
+            return
+        if tag == "a" and self._link_parts is not None:
+            self._first_link = _clean("".join(self._link_parts))
+            self._link_parts = None
+            return
+        if not self._depth:
+            return
+        if tag == "div":
+            self._depth -= 1
+        elif tag == "span" and self._in_span:
+            self._in_span = False
+            self._assign_value()
+        elif tag == "li":
+            self._label = None
+
+    def handle_data(self, data):
+        if self._title_parts is not None:
+            self._title_parts.append(data)
+        if self._cite_parts is not None:
+            self._cite_parts.append(data)
+        if not self._depth:
+            return
+        if self._in_span:
+            self._span_parts.append(data)
+            if self._link_parts is not None:
+                self._link_parts.append(data)
+        elif self._label is not None:
+            # li 内、span 前的文本是标签（「ISBN：」形态，全/半角冒号均现）
+            self._label_parts.append(data)
+            joined = "".join(self._label_parts)
+            m = re.split("([：:])", joined, maxsplit=1)
+            if len(m) > 1:
+                self._label = m[0].strip()
+
+    def _assign_value(self):
+        label = self._label or ""
+        value = _clean("".join(self._span_parts))
+        if label not in _PRO2018_DETAIL_LABELS or not value:
+            return
+        kind = _PRO2018_DETAIL_LABELS[label]
+        if kind == "isbn":
+            m = _PRO2018_ISBN_RE.search(value)
+            self.fields["isbn"] = m.group(0) if m else ""
+        elif kind == "publish":
+            # 出版社取首个 a 文本（去尾部逗号）；出版年在整格文本里找
+            self.fields["publisher"] = self._first_link.rstrip("，,").strip()
+            m = _PRO2018_YEAR_RE.search(value)
+            self.fields["publish_year"] = m.group(0) if m else ""
+        elif kind == "summary":
+            self.fields["summary"] = value
+        elif kind == "call_number":
+            self.fields["call_number"] = value.split("版次")[0].strip()
+        elif kind == "author":
+            self.fields["author"] = self._first_link or (value.split()[0] if value else "")
+
+    def finish(self):
+        """引文块兜底：标签行无责任者时，取引文首个句点前段（「刘慈欣著.三体.…」）。"""
+        if not self.fields["author"] and self._citation:
+            self.fields["author"] = self._citation.split(".", 1)[0].strip()
+
+
+def _parse_detail_pro2018(html: str, cite_author: bool = False) -> dict:
+    """解析 pro2018 默认详情页（bkTxt 模板），返回结构与家族 parse_detail 对齐，
+    缺失字段为空串；cite_author=True 启用引文块责任者兜底（绍兴实证）。"""
+    p = _Pro2018DetailParser()
+    p.feed(html)
+    if cite_author:
+        p.finish()
+    return p.fields
+
+
+def parse_search_pro2018(html: str) -> dict:
+    """pro2018 模板代搜索结果页解析（家族化自台州/成都/绍兴适配器，2026-10-02）。"""
+    return _parse_search_pro2018(html)
+
+
+def parse_detail_pro2018(html: str, cite_author: bool = False) -> dict:
+    """pro2018 模板代详情页解析；cite_author=True 启用引文块责任者兜底（绍兴）。"""
+    return _parse_detail_pro2018(html, cite_author=cite_author)

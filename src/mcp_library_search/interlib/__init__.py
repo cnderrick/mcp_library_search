@@ -28,6 +28,8 @@ class InterlibConfig:
     name_cn: str    # 报错与文档用的中文名，如 "广州图书馆"
     base_url: str   # OPAC 站点根地址，不含末尾斜杠，如 "https://opac.gzlib.org.cn"
     curlibcode: str = ""  # 多租户云托管馆按馆过滤（如 STC001），默认空 = 穗杭不带该参数
+    pro2018: bool = False          # 搜索/详情为 pro2018 模板代（台州/成都/绍兴），默认 False = 广州基准
+    pro2018_cite_author: bool = False  # pro2018 详情以引文块首句兜底责任者（绍兴实证），默认关
 
 
 def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
@@ -44,7 +46,8 @@ def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> di
     if cfg.curlibcode:
         params["curlibcode"] = cfg.curlibcode
     html = client.get(cfg, "/opac/search", params)
-    return parser.parse_search(html)
+    parse = parser.parse_search_pro2018 if cfg.pro2018 else parser.parse_search
+    return parse(html)
 
 
 def search_raw(cfg: InterlibConfig, keyword: str, page: int = 1, limit: int = 20) -> dict:
@@ -116,7 +119,10 @@ def get_book_detail(cfg: InterlibConfig, book_id: str) -> BookDetail:
     """
     params = {"curlibcode": cfg.curlibcode} if cfg.curlibcode else None
     html = client.get(cfg, f"/opac/book/{book_id}", params)
-    d = parser.parse_detail(html)
+    if cfg.pro2018:
+        d = parser.parse_detail_pro2018(html, cite_author=cfg.pro2018_cite_author)
+    else:
+        d = parser.parse_detail(html)
     if not d["title"]:
         raise RuntimeError(f"{cfg.name_cn}：未找到该书详情：{book_id}")
     return {

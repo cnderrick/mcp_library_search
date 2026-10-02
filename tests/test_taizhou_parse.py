@@ -5,7 +5,10 @@ fixture 为 2026-10-02 实抓(见 tests/fixtures/taizhou/NOTES.md),钉死值以�
 """
 import json
 
-from mcp_library_search.adapters.taizhou import _parse_detail, _parse_search
+from mcp_library_search.interlib.parser import (
+    parse_detail_pro2018 as _parse_detail,
+    parse_search_pro2018 as _parse_search,
+)
 from mcp_library_search.interlib import parser as family_parser
 
 P1 = open("tests/fixtures/taizhou/search_p1.html", encoding="utf-8").read()

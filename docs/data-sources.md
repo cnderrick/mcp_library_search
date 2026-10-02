@@ -28,13 +28,13 @@
 |  | 无锡（新吴区） | — | http://wxxqlsp.xw.i-wnd.cn:8013/#/home | 图星 LibStar Find v3.2023.12（北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题） |
 | 辽宁省 | 大连 | `dalian` | 超星入口 http://www.dl.superlib.net/ （搁置）；**在用入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录） | SirsiDynix iLink（`/uhtbin/cgisirsi/`，本仓库首见新家族，与成都不同家族不共享模块）；原超星入口 IP 白名单硬墙 | `adapters/dalian.py`（独立实现；ps token＋会话 cookie 每请求变、全程同 cookie jar，类重庆会话流程；节流 ≥4 秒/host） |
 | 山东省 | 青岛 | — | http://124.129.202.157/opac/index | 图创 Interlib（站点自报「青岛市公共图书馆联合目录」，26 馆联合，主馆馆码 QT） | 🔜 搁置：检索入口 `/opac/search` 被滑动验证码常态拦截（slideVerify，新会话首请求即触发，非限速型）；详情 `/opac/book/{id}` 与馆藏 `/opac/api/holding/{id}` 开放且家族 parser 零改动兼容，检索通道若可用即可快速接入 |
-| 四川省 | 成都 | `chengdu` | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/chengdu.py`（搜索/详情 pro2018 模板解析适配器内本地实现，台州同款路径；自带 ≥2 秒节流） |
+| 四川省 | 成都 | `chengdu` | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族 ＋ `adapters/chengdu.py`（`pro2018=True` 启用家族 pro2018 解析；自带 ≥2 秒节流） |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/hangzhou.py`（双源合并，杭图 `HZ:`） |
 |  |  |  | https://www.zjlib.cn/ （浙江图书馆，BFF 网关 `/bff-api/`） | 自研微服务（已确认；Nuxt 3＋Java/Spring＋ES，纯 JSON、无需鉴权；省级馆，6 馆区） | `adapters/_zjlib.py`（浙图 `ZJ:`，天津模式并入 `hangzhou`） |
 |  | 宁波 | `ningbo` | https://opac.nblib.cn/999 | 图创 tcc-opac（已确认；Java/Spring＋Vue2 SPA，纯 JSON＋JWT 访客令牌，与 Interlib 不同产品线，不可复用家族） | `adapters/ningbo.py`（独立实现；真实检索端点为 `POST /search/` 尾斜杠形态——`bookSearch` 是开放平台端点、参数形态不同且长期「系统异常」，勿混用）；数据边界：聚合条目可能无本地书目（详情空属正常）、馆藏一页 500 册封顶 |
 |  | 温州 | `wenzhou` | https://opac3.wzlib.cn/opac/index | 图创 Interlib（已确认，与广州同模板；站点为温州市图书馆，全市总分馆 91 馆） | `interlib/` 家族 + `adapters/wenzhou.py` |
-|  | 绍兴 | `shaoxing` | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，pro2018 模板代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/shaoxing.py`（搜索/详情 pro2018 解析在适配器内本地实现，台州同款路径） |
-|  | 台州 | `taizhou` | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/taizhou.py`（搜索/详情 pro2018 模板解析在适配器内本地实现） |
+|  | 绍兴 | `shaoxing` | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，pro2018 模板代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | `interlib/` 家族 ＋ `adapters/shaoxing.py`（`pro2018=True`＋`pro2018_cite_author=True` 启用家族解析与引文块责任者兜底） |
+|  | 台州 | `taizhou` | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族 ＋ `adapters/taizhou.py`（`pro2018=True` 启用家族 pro2018 解析） |
 |  | 金华 | `jinhua` | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（ILAS 系 HTML OPAC，Tomcat/JSP，与深圳的自研 JSON API 封装不同，不可复用） | `adapters/jinhua.py`（独立实现，HTML 解析，匿名全链路）；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
 
 ## 上海（VuFind）
@@ -60,7 +60,13 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 - 温州差异：本地部署，curlibcode 默认空（首页 28 处 curlibcode 是模板 JS 的「限定所在馆」筛选逻辑）；首页 675KB 偏大是 91 馆/2555 地点筛选区全量服务端渲染，三端点与广州基准同构；部分书目有独立「索书号」行（data-sort=130，词表外不参与解析，call_number 维持取「中图分类法」，完整索书号以馆藏 JSON callno 为准）；「主要责任者」「内容提要」行是记录级可选，缺失则 author/summary 空串（数据边界）；主馆馆码 WT（温图市府路馆），纯电子书书目 holdingList 为空属正常。
 - 详情页 tagTr 污染缺陷已修复（2026-10-02，江阴/温州各自独立实证）：「标签」行左格是裸 `<td>` 无 leftTD，其值「没有标签」曾挂到上一个已消费标签名下（污染 author 或 call_number）——穗杭 fixture 恰有「次要责任者」行重置才从未触发，**任何家族城市缺责任者行的记录都会命中**。修复口径：`_finish_value` 标签与值一对一消费（消费即清空 `_label`），钉在 `tests/test_jiangyin_parser.py` 与 `tests/test_wenzhou_compat.py`。
 - 绍兴（`opac.sxlib.com`）确属家族但跑 **pro2018 模板代**，搜索/详情两个解析面与穗杭基准不兼容（`libBookUl`/`bkTxtTit` 结构）——**2026-10-02 已按台州同款「适配器本地解析」路径接入**（`adapters/shaoxing.py`，未动家族共享模块）；联合目录 holding 取数口径见 `tests/fixtures/shaoxing/NOTES.md`。
-- 台州是 **pro2018 新版模板变体的已接入实证**：HTTP 层/检索参数集/馆藏 JSON 与广州基准同构（家族原样复用），仅搜索/详情两页解析放 `adapters/taizhou.py` 本地（结构对齐家族 parser）——pro2018 城市**不必动家族共享模块**即可交付。家族化候选提案（未合入，patch 存档于台州交付报告）：`InterlibConfig.search_template/detail_template` 判别字段 + parser 并行分支；`InterlibConfig.ctx` 上下文路径字段（默认 `/opac`，合肥市图 `/lib2` 实证需要，目前 hefei.py 内本地实现单源三原语）——出现第二个同形态城市时再家族化，避免投机抽象。**2026-10-02 成都接入后该条件已满足**（pro2018 第二城，台州解析器对成都 fixture 零修改全兼容），家族化执行安排在 batch3/批 4 合并收口之后，避免与在制批次产生共享文件冲突。
+- **pro2018 模板代已家族化**（2026-10-02）：`InterlibConfig.pro2018`（默认 False＝广州基准）
+  ＋ `pro2018_cite_author`（引文块责任者兜底，绍兴实证）＋ `parser.parse_search_pro2018`/
+  `parse_detail_pro2018`；台州/成都/绍兴三城以开关委托，家族内不再有本地解析副本。
+  pro2018 搜索分页必须走 JS 变量 `totalPage:`/`currentPage:`（广州基准的「下一页」锚点
+  探测法在 pro2018 页恒 `has_next=False`，是错误结果）。`InterlibConfig.ctx`
+  上下文路径字段仍未合入（合肥市图 `/lib2` 已由 hefei.py 本地实现，出现第二个
+  非 `/opac` 上下文城市再抽象）。
 - 新接同族城市：`adapters/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/__init__.py` 注册 + 在本文件总览表登记。城市差异以带默认值的 `InterlibConfig` 字段（quirk）表达，默认值即广州行为。
 
 ## 深圳（自研 JSON API）
@@ -194,9 +200,9 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
 ## 台州（Interlib pro2018 模板变体，2026-10-02 接入）
 
 `adapters/taizhou.py`：台州市图书馆（浙江地级市馆，馆藏含 S1 线地铁站等全市通借网点，
-确系浙江台州非江苏泰州）。HTTP 层、检索参数集、馆藏 JSON 与广州基准同构（家族
-`interlib.client`/`get_holdings` 原样复用），但搜索/详情是 pro2018 新版皮肤，两页解析
-在适配器内本地实现（结构对齐家族 parser，含 isbn 内部字段）：
+确系浙江台州非江苏泰州）。HTTP 层、检索参数集、馆藏 JSON 与广州基准同构，家族
+`interlib.client`/`get_holdings` 原样复用；搜索/详情为 pro2018 模板，经
+`InterlibConfig(pro2018=True)` 走家族内置 pro2018 解析：
 
 - 搜索页：条目 `li.libBookLi`（非 bookmeta），总数在 `schResNumIn` 元素，分页是 JS
   配置 `totalPage:`/`currentPage:`——广州基准的「共 N 页」+「下一页」锚点探测法在台州
@@ -204,8 +210,8 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
 - 详情页：`a.bkTxtTit` 标题 + `bkTxtLeft/bkTxtRight` 两列 li（非 bookInfoTable/h2）。
 - `rows` 参数服务端真实生效（total_pages 随 limit 变）；借出单册带应还日期，
   逾期形态原值照登；curlibcode 不需要（检索/详情裸参数可通）。
-- 与绍兴同属 pro2018 模板代——台州证明该模板可适配器本地解析交付，不动家族模块
-  （家族化提案与 patch 存档于交付报告，见家族小节）。
+- 与绍兴/成都同属 pro2018 模板代，三城共用家族 pro2018 解析（2026-10-02 家族化，
+  见家族小节与 `interlib/parser.py` 的 pro2018 段）。
 - 字段侦察结论见 `tests/fixtures/taizhou/NOTES.md`。
 
 ## 金华（UILAS HTML OPAC，2026-10-02 接入）
@@ -275,8 +281,8 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
   interlib」、页脚 © www.interlib.com.cn、静态资源 `/opac/media/pro2018/simple/`）确认为
   图创 Interlib pro2018 模板代；证据链见 `tests/fixtures/chengdu/NOTES.md`。
 - HTTP 层、检索参数集、馆藏 JSON 与广州基准同构（家族原样复用）；搜索（libBookLi）/详情
-  （bkTxt）两页解析在适配器本地实现——台州解析器对成都 fixture 零修改全兼容，pro2018
-  同形态第二城，家族化提案条件已满足（见家族小节，执行排在批次收口后）。
+  （bkTxt）走家族 pro2018 解析（`pro2018=True`）——台州解析器对成都 fixture 零修改全兼容，
+  pro2018 家族化已于 2026-10-02 落地（见家族小节）。
 - 状态码语义与调研初判**相反**：holdStateMap 原值 `2→在馆`（可借）、`3→借出`（不可借），
   家族词表判定无需新表；应还日期 loanWorkMap.returnDate 直取，远期/远逾期原值照登。
 - detail 的 `?return_fmt=json` 完整 MARC 为可选增强，未采用（HTML 详情已覆盖契约全字段）。
@@ -307,8 +313,8 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 ## 绍兴（Interlib pro2018，2026-10-02 接入）
 
 `adapters/shaoxing.py`：绍兴市公共图书馆联合目录（联合绍兴/上虞/诸暨等）。HTTP 层、
-检索参数集、馆藏 JSON 与广州基准同构（家族复用）；搜索/详情为 pro2018 模板，两页解析
-在适配器内本地实现（台州同款路径，未动家族共享模块）：
+检索参数集、馆藏 JSON 与广州基准同构（家族复用）；搜索/详情为 pro2018 模板，经
+`pro2018=True` 走家族解析，另以 `pro2018_cite_author=True` 启用引文块责任者兜底：
 
 - 搜索：结果容器 `<ul class="libBookUl"><li class="libBookLi">`（非 `bookmeta`）；
   稳定 ID 取题名锚点 `bookDetail(<recno>,…)` 调用；`has_next` 仍可靠「下一页」锚点。

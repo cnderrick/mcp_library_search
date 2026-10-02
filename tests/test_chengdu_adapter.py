@@ -64,7 +64,8 @@ def test_config_and_search_delegation(monkeypatch):
     monkeypatch.setattr(_family_client, "get", fake_get)
     page = chengdu.search_books("三体", page=2, limit=5)
     assert seen["cfg"] == InterlibConfig(
-        city="chengdu", name_cn="成都图书馆", base_url="https://opac.cdclib.cn"
+        city="chengdu", name_cn="成都图书馆", base_url="https://opac.cdclib.cn",
+        pro2018=True,
     )
     assert seen["path"] == "/opac/search"
     # 检索参数与家族 _search_once 同款（成都实测该参数集可用）
