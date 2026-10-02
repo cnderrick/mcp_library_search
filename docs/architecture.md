@@ -5,6 +5,7 @@
 - `server.py` 是薄层：只做参数传递与异常包装，业务逻辑、第三方代码 import 一律不进这层。
 - `adapters/`：适配层。`base.py` 是统一返回模型（TypedDict）。按地区分子包，地区标识取域名后缀（ccTLD），默认 `cn`（中国）；子包（如 `cn/`）内每座城市一个模块，实现 `search_books` / `get_holdings` / `get_book_detail` 三个原语，输出对齐 `base.py`（由契约测试强制）。地区子包暴露 `ADAPTERS`（城市标识 → 模块）与 `NAME`（中文名）；顶层 `__init__.py` 汇总为 **地区 → 城市** 两级注册表 `_ADAPTERS` 并分派。新增城市 = 在地区子包内新建模块 + 在该子包 `ADAPTERS` 注册一行；新增地区 = 新建子包 + 在顶层 `_REGION_MODULES` 注册一行。server 和 tool 接口不动。
 - `interlib/`：图创 Interlib 家族共享模块（广州、杭州、江阴、温州、苏州、丽水、西安、咸阳、宝鸡、安康等共用，详见 [data-sources/cn.md](data-sources/cn.md)）。
+- `tccopac/`：图创 tcc-opac 家族共享模块（宁波、济南、鄂尔多斯共用）：`client.py` HTTP 层＋4 秒/host 节流＋按 base_url 缓存的 JWT 访客令牌、`parser.py` 检索/详情/馆藏 JSON 解析、`__init__.py` 三原语与 `TccOpacConfig`。与 `interlib/` 是不同产品线（纯 JSON＋访客令牌 vs HTML OPAC），不可复用；base_url 形态 `{host}/api/tcc-opac/{首段路径}`。
 - `uilas_rest/`：新版 UILAS（ILAS REST 检索平台）家族共享模块（陕西省图书馆、榆林共用）：`client.py` HTTP 层＋`Referer` 必需头、`parser.py` 检索/详情/馆藏 JSON 解析、`__init__.py` 三原语与 `UilasRestConfig`。与老版 `uilas/` 同宗不同代（REST vs HTML），城市差异只允许以带默认值的字段（quirk）新增；`Referer` 逐站配置（榆林须 `/opac/` 子路径）。
 - `uilas/`：UILAS（ILAS 系 HTML OPAC）家族共享模块（金华、舟山共用）：`client.py` HTTP 层＋4 秒/host 节流＋可选旧式 TLS 兜底、`parser.py` 三种解析、`__init__.py` 三原语与 `UilasConfig`。城市差异只允许以带默认值的 `UilasConfig` 字段（quirk）新增；旧式 TLS 站点（舟山）用 `ssl_ciphers` 显式放行静态 RSA 套件。
 - `libstar/`：图星 LibStar Find 家族共享模块（无锡新吴、徐州、淮安、盐城、汉中共用）：`client.py` HTTP 层＋`Referer`/`groupcode` 必需头、`parser.py` 三种解析、`__init__.py` 单实例三原语与 `LibStarConfig`。城市差异只允许以带默认值的 `LibStarConfig` 字段（quirk）新增；多实例按 ISBN 归并的城市（无锡预留市图源）在适配器内包装家族 `search_raw`。

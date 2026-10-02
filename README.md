@@ -63,6 +63,8 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 兰州 | `lanzhou` | ✅ 已接入 | 兰州市图书馆（新版 UILAS REST 平台） |
 | 江门 | `jiangmen` | ✅ 已接入 | 江门市图书馆（新版 UILAS REST 平台） |
 | 河南省图书馆 | `henan_prov` | ✅ 已接入 | 河南省图书馆（老版 UILAS HTML OPAC） |
+| 济南 | `jinan` | ✅ 已接入 | 济南市图书馆（图创 tcc-opac 全市联合目录） |
+| 鄂尔多斯 | `eerduosi` | ✅ 已接入 | 鄂尔多斯市图书馆（图创 tcc-opac） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装

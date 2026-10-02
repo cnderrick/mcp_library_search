@@ -1,15 +1,14 @@
-"""宁波适配器：宁波市图书馆图创 tcc-opac 全市联合目录（opac.nblib.cn/999）。
-
-tcc-opac（Java/Spring＋Vue2 SPA，纯 JSON＋JWT 访客令牌）与穗杭的图创 Interlib 是
-不同产品线。协议与解析已上收 `tccopac/` 家族（宁波、济南、鄂尔多斯共用），本模块
-是家族之上的薄适配器。
+"""济南市图书馆适配器：图创 tcc-opac（全市联合目录）。
 
 薄包装 + 契约测试兼容缝：公开原语全部经由模块级 _client 取数，
 契约测试（tests/test_adapter_contract.py）monkeypatch 的就是这个 _client，
 因此不能把三个原语写成对 tccopac 函数的直连委托——那样 mock 会落空、
 测试会真打图书馆网站。
 
-数据边界与字段口径见 tests/fixtures/ningbo/NOTES.md。
+tcc-opac（Java/Spring＋Vue2 SPA，纯 JSON＋JWT 访客令牌）与穗杭的图创 Interlib 是
+不同产品线。协议与解析已上收 `tccopac/` 家族，本模块是薄适配器。API 根
+`https://www.jnlib.net.cn:8087/api/tcc-opac/999`（`{host}/api/tcc-opac/{seg}` 形态）。字段侦察结论见
+tests/fixtures/jinan/NOTES.md。
 """
 from dataclasses import dataclass
 from types import SimpleNamespace
@@ -19,9 +18,9 @@ from ...tccopac import TccOpacConfig
 from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _CONFIG = TccOpacConfig(
-    city="ningbo", name_cn="宁波图书馆",
-    base_url="https://opac.nblib.cn/api/tcc-opac/999",
-    referer="https://opac.nblib.cn/999",
+    city="jinan", name_cn="济南市图书馆",
+    base_url="https://www.jnlib.net.cn:8087/api/tcc-opac/999",
+    referer="https://www.jnlib.net.cn:8087/999",
 )
 
 

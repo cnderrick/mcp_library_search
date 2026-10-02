@@ -26,19 +26,19 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 #   汉中（LibStar 家族新增配置）、陕西省图书馆/榆林（抽出新版 UILAS REST 家族）
 _EXPECTED = [
     "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
-    "chongqing", "dalian", "dezhou", "fujian_prov", "guangzhou", "haikou",
-    "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov", "heyuan",
-    "huaian", "huhehaote", "hunan_prov", "jiangmen", "jiangyin", "jingmen",
-    "jinhua", "lanzhou", "lishui", "nanjing", "ningbo", "qingdao",
-    "quanzhou", "shaanxi", "shanghai", "shaoxing", "shenzhen", "suzhou",
-    "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou", "wuhai",
-    "wuxi", "xian", "xianyang", "xiaogan", "xuzhou", "yancheng",
+    "chongqing", "dalian", "dezhou", "eerduosi", "fujian_prov", "guangzhou",
+    "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
+    "heyuan", "huaian", "huhehaote", "hunan_prov", "jiangmen", "jiangyin",
+    "jinan", "jingmen", "jinhua", "lanzhou", "lishui", "nanjing", "ningbo",
+    "qingdao", "quanzhou", "shaanxi", "shanghai", "shaoxing", "shenzhen",
+    "suzhou", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
+    "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xuzhou", "yancheng",
     "yangjiang", "yangzhou", "yulin", "zhoukou", "zhoushan", "zhuzhou",
     "zibo",
 ]
 
 
-def test_registry_has_exactly_fifty_five_identifiers():
+def test_registry_has_exactly_fifty_seven_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

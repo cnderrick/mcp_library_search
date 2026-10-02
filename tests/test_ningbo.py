@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from mcp_library_search import tccopac
 from mcp_library_search.adapters.cn import ningbo
 from mcp_library_search.adapters.base import validate_book_detail, validate_search_page
 
@@ -28,10 +29,9 @@ _SANTI_AGG_ID = "1849291138475802626"  # 聚合条目:详情「数据不存在�
 
 @pytest.fixture(autouse=True)
 def _reset_state(monkeypatch):
-    """令牌缓存与节流计时是模块级状态,逐测试复位。"""
-    monkeypatch.setattr(ningbo, "_token", "")
-    monkeypatch.setattr(ningbo, "_token_exp", 0.0)
-    monkeypatch.setattr(ningbo, "_last_request", 0.0)
+    """令牌缓存与节流计时是家族 client 的模块级状态,逐测试复位。"""
+    monkeypatch.setattr(tccopac.client, "_token_cache", {})
+    monkeypatch.setattr(tccopac.client, "_last_request", 0.0)
 
 
 def _mock_open(monkeypatch, pages):
@@ -39,11 +39,11 @@ def _mock_open(monkeypatch, pages):
     calls = []
     seq = iter(pages)
 
-    def spy(req, timeout=30):
+    def spy(config, req, timeout=30):
         calls.append((req.full_url, req.data))
         return next(seq)
 
-    monkeypatch.setattr(ningbo, "_open", spy)
+    monkeypatch.setattr(tccopac.client, "open", spy)
     return calls
 
 
@@ -144,7 +144,7 @@ def test_token_1003_refetch_and_retry(monkeypatch):
 def test_token_failure_raises(monkeypatch):
     bad = json.dumps({"code": 500, "data": None, "desc": "内部错误"})
     _mock_open(monkeypatch, [bad])
-    with pytest.raises(RuntimeError, match="访客令牌失败"):
+    with pytest.raises(RuntimeError, match="令牌失败"):
         ningbo.search_books("三体")
 
 
@@ -236,8 +236,8 @@ def test_holdings_aggregate_entry_empty(monkeypatch):
 
 
 def test_module_shape():
-    # 独立实现范式:模块级 _client + _open(契约形态硬要求,别破坏)
+    # 家族范式:模块级 _client(契约形态硬要求) + 家族 HTTP 出口 tccopac.client.open
     assert hasattr(ningbo, "_client")
     for meth in ("search", "get_holdings", "get_book_detail"):
         assert callable(getattr(ningbo._client, meth))
-    assert callable(ningbo._open)
+    assert callable(tccopac.client.open)

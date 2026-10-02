@@ -13,6 +13,7 @@ from . import chengdu
 from . import chongqing
 from . import dalian
 from . import dezhou
+from . import eerduosi
 from . import fujian_prov
 from . import guangzhou
 from . import haikou
@@ -27,6 +28,7 @@ from . import huhehaote
 from . import hunan_prov
 from . import jiangmen
 from . import jiangyin
+from . import jinan
 from . import jingmen
 from . import jinhua
 from . import lanzhou
@@ -72,6 +74,7 @@ ADAPTERS = {
     "chongqing": chongqing,
     "dalian": dalian,
     "dezhou": dezhou,
+    "eerduosi": eerduosi,
     "fujian_prov": fujian_prov,
     "guangzhou": guangzhou,
     "haikou": haikou,
@@ -86,6 +89,7 @@ ADAPTERS = {
     "hunan_prov": hunan_prov,
     "jiangmen": jiangmen,
     "jiangyin": jiangyin,
+    "jinan": jinan,
     "jingmen": jingmen,
     "jinhua": jinhua,
     "lanzhou": lanzhou,
