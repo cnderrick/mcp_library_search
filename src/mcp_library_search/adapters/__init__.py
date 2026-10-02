@@ -7,6 +7,7 @@ get_book_detail 三个原语（返回结构对齐 base.py 的 TypedDict，由契
 from . import chongqing
 from . import guangzhou
 from . import hangzhou
+from . import jiangyin
 from . import shanghai
 from . import shenzhen
 from . import tianjin
@@ -15,6 +16,7 @@ _ADAPTERS = {
     "chongqing": chongqing,
     "guangzhou": guangzhou,
     "hangzhou": hangzhou,
+    "jiangyin": jiangyin,
     "shanghai": shanghai,
     "shenzhen": shenzhen,
     "tianjin": tianjin,
