@@ -1,8 +1,9 @@
-"""苏州适配器测试：config 正确、委托 interlib 家族、契约缝生效。
+"""苏州双源适配器测试：模块级 _client 契约缝 + 双源归并/容错/路由。
 
-苏州已注册进 _ADAPTERS（tests/test_adapter_contract.py 覆盖它）；本文件的
-输出结构自断言保留，作为城市级的补充钉子（2026-10-03 接入）。
+覆盖：两源配置、ISBN 复合 book_id、源级容错、馆藏成员路由、详情优先级成员。
+fixture 结论见 tests/fixtures/suzhou/NOTES.md。
 """
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
 
@@ -10,91 +11,169 @@ import pytest
 
 from mcp_library_search.adapters import base
 from mcp_library_search.adapters.cn import suzhou
+from mcp_library_search.interlib import client as il_client
+
+_FIX = Path(__file__).parent / "fixtures" / "suzhou"
+_SZ_SEARCH = (_FIX / "sz" / "search_p1.html").read_text(encoding="utf-8")
+_SZ_DETAIL = (_FIX / "sz" / "detail.html").read_text(encoding="utf-8")
+_SZ_HOLDING = (_FIX / "sz" / "holding.json").read_text(encoding="utf-8")
+_SIP_SEARCH = (_FIX / "sip" / "search_p1.html").read_text(encoding="utf-8")
+_SIP_DETAIL = (_FIX / "sip" / "detail.html").read_text(encoding="utf-8")
+_SIP_HOLDING = (_FIX / "sip" / "holding.json").read_text(encoding="utf-8")
 
 
-def test_config_and_delegation(monkeypatch):
-    from mcp_library_search.interlib import InterlibConfig
-
-    seen = {}
-
-    def fake(cfg, keyword, page=1, limit=20):
-        seen["cfg"] = cfg
-        seen["args"] = (keyword, page, limit)
-        return {"total_results": 232, "page": 1, "total_pages": 24, "has_next": True,
-                "books": [{"book_id": "1006429505", "title": "三体：典藏版",
-                           "author": "刘慈欣著", "publisher": "重庆出版社",
-                           "publish_year": "2016", "availability_summary": ""}]}
-
-    monkeypatch.setattr("mcp_library_search.interlib.search_books", fake)
-    page = suzhou.search_books("三体", page=2, limit=5)
-    assert page["total_results"] == 232
-    # 家族 book_id → 契约 record_id 的映射在 _Client.search 内完成，
-    # 必须用非空 books 覆盖
-    assert page["books"][0]["book_id"] == "1006429505"
-    assert page["books"][0]["title"] == "三体：典藏版"
-    assert seen["cfg"] == InterlibConfig(
-        city="suzhou", name_cn="苏州图书馆", base_url="https://reader.szlib.com"
-    )
-    assert seen["args"] == ("三体", 2, 5)
-    base.validate_search_page(page)
+# ---------- 双源配置 ----------
 
 
-def test_holdings_and_detail_delegate(monkeypatch):
-    monkeypatch.setattr(
-        "mcp_library_search.interlib.get_holdings",
-        lambda cfg, book_id, only_available=True: [
-            {"library": "苏图", "location": "一馆综合室(三楼)",
-             "call_number": "I247.55/1121", "status": "在馆",
-             "available": True, "due_date": ""},
-            {"library": "苏图", "location": "北馆书库",
-             "call_number": "I247.55/1121", "status": "借出",
-             "available": False, "due_date": "2026-10-31"},
-        ],
-    )
-    monkeypatch.setattr(
-        "mcp_library_search.interlib.get_book_detail",
-        lambda cfg, book_id: {"book_id": book_id, "title": "三体：图像小说",
-                              "author": "刘慈欣", "publisher": "译林出版社",
-                              "publish_year": "2025", "isbn": "978-7-5753-0280-7",
-                              "call_number": "I247.55", "summary": "…"},
-    )
-    hs = suzhou.get_holdings("1006489923", only_available=False)
-    assert hs[0]["library"] == "苏图"
-    assert hs[0]["available"] is True
-    # 可借的排前面
-    assert [h["available"] for h in hs] == [True, False]
-    base.validate_holdings(hs)
-    d = suzhou.get_book_detail("1006489923")
-    assert d["title"] == "三体：图像小说"
-    assert d["book_id"] == "1006489923"
-    base.validate_book_detail(d)
+def test_source_configs():
+    assert suzhou._SOURCE_PRIORITY == ("SZ", "SIP")
+    assert suzhou._SOURCES["SZ"].cfg == suzhou.InterlibConfig(
+        city="sz", name_cn="苏州图书馆", base_url="https://reader.szlib.com")
+    assert suzhou._SOURCES["SIP"].cfg == suzhou.InterlibConfig(
+        city="sip", name_cn="苏州工业园区图书馆", base_url="http://opac.sdll.cn:8088")
 
 
-def test_only_available_filters(monkeypatch):
-    monkeypatch.setattr(
-        "mcp_library_search.interlib.get_holdings",
-        lambda cfg, book_id, only_available=True: [
-            {"library": "苏图", "location": "", "call_number": "",
-             "status": "在馆", "available": True, "due_date": ""},
-            {"library": "苏图", "location": "", "call_number": "",
-             "status": "借出", "available": False, "due_date": "2026-10-31"},
-        ],
-    )
-    hs = suzhou.get_holdings("1006489923", only_available=True)
-    assert len(hs) == 1 and hs[0]["status"] == "在馆"
-    base.validate_holdings(hs)
+# ---------- ISBN 归并与复合 book_id ----------
 
 
-def test_error_wraps_with_library_name(monkeypatch):
-    def boom(cfg, keyword, page=1, limit=20):
-        raise RuntimeError("苏州图书馆请求失败：reset")
+def _b(prefix, rid, isbn="", title="三体"):
+    return suzhou._Book(record_id=f"{prefix}:{rid}", title=title, author="刘慈欣",
+                        publisher="重庆出版社", publish_year="2008",
+                        availability_summary="", isbn=isbn)
 
-    monkeypatch.setattr("mcp_library_search.interlib.search_books", boom)
+
+def test_merge_same_isbn_composite_id():
+    merged = suzhou._merge_books(
+        {"SZ": [_b("SZ", "100", "978-7-5366-9293-0")],
+         "SIP": [_b("SIP", "200", "9787536692930")]})
+    assert len(merged) == 1
+    assert merged[0].record_id == "SZ:100+SIP:200"
+    assert merged[0].title == "三体"
+
+
+def test_merge_no_isbn_stays_single():
+    merged = suzhou._merge_books(
+        {"SZ": [_b("SZ", "A", ""), _b("SZ", "C", "9787536692930")],
+         "SIP": [_b("SIP", "D", "123")]})
+    assert {m.record_id for m in merged} == {"SZ:A", "SZ:C", "SIP:D"}
+
+
+def test_split_book_id():
+    assert suzhou._split_book_id("SIP:2+SZ:1") == [("SZ", "1"), ("SIP", "2")]
+    assert suzhou._split_book_id("SZ:1") == [("SZ", "1")]
+    with pytest.raises(RuntimeError, match="book_id"):
+        suzhou._split_book_id("100100")
+    with pytest.raises(RuntimeError, match="book_id"):
+        suzhou._split_book_id("AH:1")
+
+
+# ---------- _Client.search：双源合并、total、容错 ----------
+
+
+def _dispatch(mapping):
+    calls = []
+
+    def fake_get(cfg, path, params=None, timeout=20):
+        calls.append((cfg.city, path, params))
+        return mapping[(cfg.city, path)]
+
+    return fake_get, calls
+
+
+def test_search_merges_two_sources(monkeypatch):
+    fake, calls = _dispatch({("sz", "/opac/search"): _SZ_SEARCH,
+                             ("sip", "/opac/search"): _SIP_SEARCH})
+    monkeypatch.setattr(il_client, "get", fake)
+    r = suzhou._Client().search("三体")
+    assert r.success is True
+    assert r.statistics["total_results"] == 232 + 98
+    assert r.statistics["total_pages"] == 24       # 各源最大值
+    assert r.statistics["has_next"] is True
+    ids = {b.record_id for b in r.books}
+    assert all(i.startswith(("SZ:", "SIP:")) for i in ids)
+    assert {c[0] for c in calls} == {"sz", "sip"}
+
+
+def test_search_survives_one_source_failure(monkeypatch):
+    def fake_get(cfg, path, params=None, timeout=20):
+        if cfg.city == "sip":
+            raise RuntimeError("苏州工业园区图书馆请求失败：timed out")
+        return _SZ_SEARCH
+
+    monkeypatch.setattr(il_client, "get", fake_get)
+    r = suzhou._Client().search("三体")
+    assert r.success is True
+    assert r.statistics["total_results"] == 232
+    assert r.books and all(b.record_id.startswith("SZ:") for b in r.books)
+
+
+def test_search_both_fail_raises(monkeypatch):
+    def fake_get(cfg, path, params=None, timeout=20):
+        raise RuntimeError(f"{cfg.name_cn}请求失败：connection reset")
+
+    monkeypatch.setattr(il_client, "get", fake_get)
+    with pytest.raises(RuntimeError) as ei:
+        suzhou._Client().search("三体")
+    assert "苏州" in str(ei.value)
+    assert "苏州图书馆" in str(ei.value) and "苏州工业园区图书馆" in str(ei.value)
+
+
+# ---------- _Client.get_holdings：成员路由 ----------
+
+
+def test_holdings_composite_aggregates_and_routes(monkeypatch):
+    # 用真实馆藏 JSON，但 book_id 用 SZ/SIP 前缀路由
+    fake, calls = _dispatch({
+        ("sz", "/opac/api/holding/1006489923"): _SZ_HOLDING,
+        ("sip", "/opac/api/holding/872372"): _SIP_HOLDING,
+    })
+    monkeypatch.setattr(il_client, "get", fake)
+    hs = suzhou._Client().get_holdings("SZ:1006489923+SIP:872372")
+    assert len(hs) == 8 + 4
+    flags = [h.available for h in hs]
+    assert flags == sorted(flags, reverse=True)     # 可借在前
+    assert {c[0] for c in calls} == {"sz", "sip"}
+
+
+def test_holdings_attached_source_failure_skipped(monkeypatch):
+    def fake_get(cfg, path, params=None, timeout=20):
+        if cfg.city == "sip":
+            raise RuntimeError("苏州工业园区图书馆请求失败：reset")
+        return _SZ_HOLDING
+
+    monkeypatch.setattr(il_client, "get", fake_get)
+    hs = suzhou._Client().get_holdings("SZ:1006489923+SIP:872372")
+    assert len(hs) == 8
+
+
+def test_holdings_primary_source_failure_raises(monkeypatch):
+    def fake_get(cfg, path, params=None, timeout=20):
+        if cfg.city == "sz":
+            raise RuntimeError("苏州图书馆请求失败：reset")
+        return _SIP_HOLDING
+
+    monkeypatch.setattr(il_client, "get", fake_get)
     with pytest.raises(RuntimeError, match="苏州图书馆"):
-        suzhou.search_books("三体")
+        suzhou._Client().get_holdings("SZ:1006489923+SIP:872372")
 
 
-# ---------- 契约缝自断言（镜像 tests/test_adapter_contract.py 的注入形态） ----------
+# ---------- _Client.get_book_detail：优先级成员 ----------
+
+
+def test_detail_uses_priority_member(monkeypatch):
+    fake, calls = _dispatch({
+        ("sz", "/opac/book/1006489923"): _SZ_DETAIL,
+        ("sip", "/opac/book/872372"): _SIP_DETAIL,
+    })
+    monkeypatch.setattr(il_client, "get", fake)
+    b = suzhou._Client().get_book_detail("SZ:1006489923+SIP:872372")
+    assert [c[1] for c in calls] == ["/opac/book/1006489923"]
+    assert b.record_id == "SZ:1006489923+SIP:872372"
+    assert b.title == "三体：图像小说"
+    assert b.isbn == "978-7-5753-0280-7"
+
+
+# ---------- 契约缝合约（镜像 test_adapter_contract.py 的注入形态） ----------
 
 
 def _patch_client(monkeypatch, **return_values):
@@ -107,38 +186,46 @@ def _patch_client(monkeypatch, **return_values):
 
 def _book(**kw):
     defaults = dict(
-        record_id="1006429505", title="三体：典藏版", author="刘慈欣著",
+        record_id="SZ:1006429505", title="三体：典藏版", author="刘慈欣著",
         publisher="重庆出版社", publish_year="2016", availability_summary="有馆藏",
         isbn="978-7-229-10060-5", call_number="I247.55/1121", summary="简介……",
     )
     return SimpleNamespace(**{**defaults, **kw})
 
 
-def test_search_books_contract_shape(monkeypatch):
+def test_search_books_contract(monkeypatch):
     result = SimpleNamespace(
-        success=True,
-        error="",
+        success=True, error="",
         statistics={"total_results": 2, "page": 1, "total_pages": 1, "has_next": False},
-        books=[_book(), _book(record_id="1005629854", title="三体：典藏版")],
+        books=[_book(), _book(record_id="SIP:872372", title="一说《三体》")],
     )
     _patch_client(monkeypatch, search=result)
-    base.validate_search_page(suzhou.search_books("三体"))
+    page = suzhou.search_books("三体")
+    assert page["books"][0]["book_id"] == "SZ:1006429505"
+    assert page["books"][1]["book_id"] == "SIP:872372"
+    base.validate_search_page(page)
 
 
-def test_get_holdings_contract_shape(monkeypatch):
+def test_get_holdings_contract(monkeypatch):
     holdings = [
-        SimpleNamespace(library="苏图", location="一馆综合室(三楼)",
-                        call_number="I247.55/1121", status="在馆",
-                        is_available=lambda: True, item_id=""),
-        SimpleNamespace(library="苏图", location="北馆书库", call_number="",
-                        status="借出", is_available=lambda: False, item_id="item-1"),
+        SimpleNamespace(library="苏图", location="北馆书库", call_number="I247.55/1121",
+                        status="在馆", is_available=lambda: True, item_id="", due_date=""),
+        SimpleNamespace(library="工业园区图书馆", location="网借书库（联创产业园）",
+                        call_number="N49/681", status="借出", is_available=lambda: False,
+                        item_id="item-1", due_date="2026-10-21"),
     ]
     client = _patch_client(monkeypatch, get_holdings=holdings,
-                           get_return_date="2026-10-31")
-    base.validate_holdings(suzhou.get_holdings("1006489923", only_available=False))
+                           get_return_date="2026-10-21")
+    hs = suzhou.get_holdings("SZ:1+SIP:2", only_available=False)
+    base.validate_holdings(hs)
+    assert [h["available"] for h in hs] == [True, False]
     client.get_return_date.assert_called_once_with("item-1")
+    assert hs[1]["due_date"] == "2026-10-21"
 
 
-def test_get_book_detail_contract_shape(monkeypatch):
+def test_get_book_detail_contract(monkeypatch):
     _patch_client(monkeypatch, get_book_detail=_book())
-    base.validate_book_detail(suzhou.get_book_detail("1006429505"))
+    d = suzhou.get_book_detail("SZ:1006429505")
+    base.validate_book_detail(d)
+    assert d["book_id"] == "SZ:1006429505"
+    assert d["title"] == "三体：典藏版"

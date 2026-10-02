@@ -18,7 +18,7 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋青岛（2026-10-02 发现开放 Solr 检索通道后接入）
 # ＋无锡（2026-10-02 修正误判后接入，无锡市新吴区图书馆单馆）
 # ＋扬州（2026-10-02 定性 securitycam 为静态挑战后接入，汇文 uopac 家族）
-# ＋苏州（2026-10-03 立项城市落地，图创 Interlib 家族默认模板零 quirk）
+# ＋苏州（2026-10-03 立项城市落地；后并入苏州工业园区馆为双源，图创 Interlib）
 # ＋徐州（2026-10-03 立项城市落地，抽出图星 LibStar Find 家族）
 # ＋淮安、盐城（2026-10-03 立项城市落地，LibStar 家族新增配置）
 # ＋丽水（Interlib pro2018）、舟山（抽出 UILAS 家族，旧式 TLS quirk）
@@ -28,13 +28,13 @@ _EXPECTED = [
     "ankang", "baoji", "chengdu", "chongqing", "dalian", "guangzhou",
     "hangzhou", "hanzhong", "hefei", "huaian", "jiangyin", "jinhua",
     "lishui", "nanjing", "ningbo", "qingdao", "shaanxi", "shanghai",
-    "shaoxing", "shenzhen", "suzhou", "suzhou_sip", "taizhou", "tianjin",
-    "wenzhou", "wuxi", "xian", "xianyang", "xuzhou", "yancheng",
-    "yangzhou", "yulin", "zhoushan",
+    "shaoxing", "shenzhen", "suzhou", "taizhou", "tianjin", "wenzhou",
+    "wuxi", "xian", "xianyang", "xuzhou", "yancheng", "yangzhou",
+    "yulin", "zhoushan",
 ]
 
 
-def test_registry_has_exactly_thirty_three_identifiers():
+def test_registry_has_exactly_thirty_two_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED
