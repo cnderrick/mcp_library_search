@@ -4,7 +4,7 @@
 
 - `server.py` 是薄层：只做参数传递与异常包装，业务逻辑、第三方代码 import 一律不进这层。
 - `adapters/`：每座城市一个模块，实现 `search_books` / `get_holdings` / `get_book_detail` 三个原语，返回结构对齐 `base.py` 的 TypedDict（由契约测试强制）。新增城市 = 新适配器模块 + `adapters/__init__.py` 的 `_ADAPTERS` 注册一行，server 和 tool 接口不动。
-- `interlib/`：图创 Interlib 家族共享模块（广州、杭州共用，详见 [data-sources.md](data-sources.md)）。
+- `interlib/`：图创 Interlib 家族共享模块（广州、杭州、江阴、温州共用，详见 [data-sources.md](data-sources.md)）。
 - `vendor/`：第三方项目代码，一个组件一个子目录，各保留原始 LICENSE。
 
 ## 契约测试与 `_client` 形态
