@@ -32,6 +32,7 @@ from . import jinan
 from . import jingmen
 from . import jinhua
 from . import lanzhou
+from . import lijiang
 from . import lishui
 from . import nanjing
 from . import ningbo
@@ -93,6 +94,7 @@ ADAPTERS = {
     "jingmen": jingmen,
     "jinhua": jinhua,
     "lanzhou": lanzhou,
+    "lijiang": lijiang,
     "lishui": lishui,
     "nanjing": nanjing,
     "ningbo": ningbo,

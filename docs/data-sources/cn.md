@@ -282,7 +282,7 @@
 |  | 玉溪 | — | ⛔ 不通 | http://www.yxstsg.cn （外源候选，域名不存在） | — | 2026-10-03 DNS 无解析（NXDOMAIN），非馆方站点 |
 |  | 保山 | — | ❓ 缺失 | — | — | — |
 |  | 昭通 | — | ❓ 缺失 | — | — | — |
-|  | 丽江 | — | 📋 计划 | https://www.ljstsg.cn/opac/ （丽江市图书馆） | 图创 Interlib（已确认：/opac/ 标题「检索系统」、页内 interlib／opac/api） | 2026-10-03 OPAC 已定位、HTTP 200（148KB）；首页 https://www.ljstsg.cn。可立项接入 |
+|  | 丽江 | `lijiang` | ✅ 接入 | https://www.ljstsg.cn/opac/index （丽江市图书馆） | 图创 Interlib（已确认，meta keywords 自报；默认模板） | `interlib/` 家族 + `adapters/cn/lijiang.py`（`api_detail=True`）；实抓「三体」80 条 |
 |  | 普洱 | — | ❓ 缺失 | — | — | — |
 |  | 临沧 | — | ❓ 缺失 | — | — | — |
 |  | 楚雄 | — | ❓ 缺失 | — | — | — |

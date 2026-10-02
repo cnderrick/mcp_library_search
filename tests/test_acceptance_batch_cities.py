@@ -29,16 +29,16 @@ _EXPECTED = [
     "chongqing", "dalian", "dezhou", "eerduosi", "fujian_prov", "guangzhou",
     "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
     "heyuan", "huaian", "huhehaote", "hunan_prov", "jiangmen", "jiangyin",
-    "jinan", "jingmen", "jinhua", "lanzhou", "lishui", "nanjing", "ningbo",
-    "qingdao", "quanzhou", "shaanxi", "shanghai", "shaoxing", "shenzhen",
-    "suzhou", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
-    "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xuzhou", "yancheng",
-    "yangjiang", "yangzhou", "yulin", "zhoukou", "zhoushan", "zhuzhou",
-    "zibo",
+    "jinan", "jingmen", "jinhua", "lanzhou", "lijiang", "lishui", "nanjing",
+    "ningbo", "qingdao", "quanzhou", "shaanxi", "shanghai", "shaoxing",
+    "shenzhen", "suzhou", "taizhou", "tangshan", "tianjin", "tongliao",
+    "wenzhou", "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xuzhou",
+    "yancheng", "yangjiang", "yangzhou", "yulin", "zhoukou", "zhoushan",
+    "zhuzhou", "zibo",
 ]
 
 
-def test_registry_has_exactly_fifty_seven_identifiers():
+def test_registry_has_exactly_fifty_eight_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

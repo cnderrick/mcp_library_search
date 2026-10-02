@@ -10,7 +10,8 @@
 舟山（舟山市图书馆）、shaanxi（陕西省图书馆，省级馆馆址西安）、
 xian（西安市图书馆，集群平台）、xianyang（咸阳，公共图书馆联盟）、
 baoji（宝鸡，集群平台）、ankang（安康）、hanzhong（汉中，全市联合目录含洋县等县馆）、
-yulin（榆林）、jinan（济南，tcc-opac 全市联合目录）、eerduosi（鄂尔多斯，tcc-opac）。
+yulin（榆林）、jinan（济南，tcc-opac 全市联合目录）、eerduosi（鄂尔多斯，tcc-opac）、
+lijiang（丽江，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆）。
 第二批：海口、株洲、孝感、荆门、湖南图书馆（hunan_prov）、福建省图书馆（fujian_prov）、
 阳江、淄博、德州、周口、泉州、通辽、河源、黑龙江省图书馆（heilongjiang）、长春、
 唐山、包头、乌海、呼和浩特、潮州（以上图创 Interlib，其中唐山/包头/乌海/呼和浩特/
@@ -81,7 +82,8 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     huhehaote（呼和浩特）、chaozhou（潮州）（以上图创 Interlib，馆藏到单册级）、
     lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
-    jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录），
+    jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、
+    lijiang（丽江市图书馆，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆），
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
