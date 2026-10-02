@@ -10,6 +10,8 @@
 |---|---|---|---|---|---|
 | 上海市（直辖市） | 上海 | `shanghai` | https://vufind.library.sh.cn | VuFind（上海中心图书馆"一卡通"总分馆体系，900+ 网点） | `vendor/shanghai_library/` + `adapters/shanghai.py` |
 | 北京市（直辖市） | 北京 | — | 待调研 | Ex Libris Primo（初判） | 🔜 搁置：站点 WAF 拦截程序化访问 |
+| 天津市（直辖市） | 天津 | `tianjin` | http://opacwh.tjl.tj.cn:8991/F 等三个源（见下） | Ex Libris ALEPH ×2 + 图创 Interlib | `adapters/tianjin.py`（三源合并） |
+| 重庆市（直辖市） | 重庆 | `chongqing` | http://222.177.237.197:8080/InDigLib/ | InDigLib 集群数字图书馆（Struts2+Solr） | `adapters/chongqing.py`（独立实现） |
 | 广东省 | 广州 | `guangzhou` | https://opac.gzlib.org.cn | 图创 Interlib | `interlib/` 家族 + `adapters/guangzhou.py` |
 |  | 深圳 | `shenzhen` | https://www.szlib.org.cn/opac/ | 图书馆之城自研 JSON API（后端 ILAS，167 馆统一平台） | `adapters/shenzhen.py`（独立实现） |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn | 图创 Interlib（与广州同模板） | `interlib/` 家族 + `adapters/hangzhou.py` |
@@ -47,3 +49,63 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 - 应还日期：`BorrowedBook` 单册的 `ReturnDate`（`YYYYMMDD` → 归一 `YYYY-MM-DD`）。
 - 公共参数 `client_id=t1` 由 client 层统一注入，业务函数不传。
 - 注意：该 API 非官方公开接口，字段可能漂移；字段侦察结论见 `tests/fixtures/shenzhen/NOTES.md`，漂移时以实抓为准更新解析与 fixture。
+
+## 天津（三源合并，首个「一城多源」范本）
+
+`adapters/tianjin.py` 一个城市聚合三个独立系统：
+
+| 源 | 前缀 | 系统 | 入口 |
+|---|---|---|---|
+| 天津图书馆（主馆，含全市通借网络） | `TJL01` | Ex Libris ALEPH 20.1 www_f_chi | http://opacwh.tjl.tj.cn:8991/F |
+| 天津市少年儿童图书馆 | `TJC01` | 同款 ALEPH（独立 host 独立 base） | http://opacse.tjl.tj.cn:8991/F |
+| 中新友好图书馆（生态城） | `ZXYH` | 图创 Interlib（租户 STC001） | http://sm.interlib.cn:8104 |
+
+- **两 ALEPH 不可并查**：opacwh/opacse 是两台独立服务器、各自独立 `local_base`，
+  同一「三体」检索 TJL01 156 条 vs TJC01 32 条，数据互不相通——必须分别检索再归并。
+- **book_id 形态**：单成员 `源前缀:记录号`（如 `TJL01:002892667`、`ZXYH:217795`）；
+  跨源同 ISBN 命中合成**复合 id**，成员按优先级 TJL01 > TJC01 > ZXYH 以 `+` 连接
+  （如 `TJL01:000856840+TJC01:000178012+ZXYH:217795`），书目字段取最高优先级成员原值。
+  holdings/detail 按成员拆分路由后聚合（可借在前、馆名升序）。
+- **ISBN 归并口径**：去连字符与空白、校验形态后归并；脏值与无 ISBN 不参与、各自成条；
+  源内同 ISBN 多条（多卷/重印）保留首条。合计口径：`total_results`＝存活源之和，
+  任一存活源无总数则如实 None。
+- **ALEPH quirks**（详见 `tests/fixtures/tianjin/NOTES.md`）：检索码以页内下拉为准——
+  ISBN 是 **ISB**（`ISBN` 会报「检索请求解析错误」）、全字段 WRD、系统号 SYS；
+  ISB/SYS 单命中**直接返回完整记录页**（非 brief 列表）；`short-jump` 的 jump 是
+  **记录偏移不是页码**（页 P → jump=(P-1)×10+1），且必须用页内会话 URL（`F/VV...` 前缀，
+  set_number 绑定 cookie 会话）；brief 页 publish section 注释块多于真实条目（13 vs 10），
+  以 `class=itemtitle` 锚定并按 DOC-NUMBER 去重；**编码 UTF-8**（GBK 初判被实测否定）；
+  无会话 `full-set-set` 直连不可用，详情走 SYS 检索。
+- **单册页 item-global 列语义**：「单册状态」列是流通类型（阅览/中文图书借阅…），
+  「应还日期」列才是可借性原值（在架上 / 借出日期 / 分配中·编目中·物流中等）；
+  可借判定只看应还日期列，词表外保守不可借。
+- **限频与验证码墙**：约 8 个快速请求触发 **HTTP 401 按 IP 封**（上次实测约 1 小时，
+  需浏览器打开 OPAC 输入验证码手动解封）；实抓以 8 秒间隔稳定，适配器按 4 秒/host 节流。
+  401 与 200 验证码页统一抛 `_CaptchaError`（带手动解封指引），**穿透源级容错**直达
+  调用方——封禁是全局信号，静默降级成部分结果会误导。其余源级失败：≥1 源存活即返回，
+  三源全失败汇总报错。
+- **ZXYH 走 interlib 家族**：检索与详情必须带 `curlibcode=STC001`（家族 quirk 字段，
+  缺详情参数直接 HTTP 500），馆藏 JSON 不需要；ISBN 在 `expressServiceTab` 兄弟节点上，
+  家族 parser 以 `express_bookrecno` 后挂；`search_raw` 暴露内部 isbn 字段供归并
+  （契约 `BookSummary` 不含 isbn）。
+
+## 重庆（InDigLib）
+
+`adapters/chongqing.py` 独立实现（urllib + CookieJar 会话），入口
+http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr）。
+
+- **会话流程**：先 GET `frontV2/SearchIndex!simple.action?opacType=local` 拿 JSESSIONID，
+  再 POST `OpacMarcSearchSolr!simpleSearch.action`；会话失效按页面标题标记判定
+  （`opac检索结果页`/`书目详细页面`/`opac查询页`），失效重建一次再试，仍失败抛错。
+- **检索参数**：`select1` 词表（all/isbn/title/author/publisher/subject/series…）+ `text1`
+  关键词 + `pageSize`（生效）；ISBN 形态关键词路由 `select1=isbn`。
+- **分页 quirk**：POST 的 `page` 参数被**静默忽略**，翻页必须 GET 全查询串带 `pageNo`
+  （含 `lastSearchValue={select1}FIELD_SPLITVALUE_SPLIT{keyword}`）。
+- **总数**：源只给 `#totalPage`（总页数）不给总条数 → `total_results` 恒为 None，不编造。
+- **详情**：`book_id = {metatable}:{metaid}`（如 `i_biblios:2313420`）；字段锚点
+  h4 题名/「著者」/出版社/ISBN-ISSN em/tipbox 简介；详情页无索书号字段 → `call_number=""`。
+- **馆藏只到馆级**：详情页「馆藏信息」注释块内 `class="first"` 馆名可匿名取；
+  **单册级 JSON `GetAsset.action` 有读者登录门槛**（带全链路头重放三次均 302 登录页），
+  故 `available=False`、`status=""` 保守返回，不预设可借——这是公共数据的边界，
+  不是解析缺陷。
+- 字段侦察与端点真伪结论见 `tests/fixtures/chongqing/NOTES.md`。
