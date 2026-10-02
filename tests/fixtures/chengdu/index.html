@@ -1,0 +1,535 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<title>简版首页</title>
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/reset_pc.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/public.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/index.css" type="text/css" media="all">
+	
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/theme/themeGf.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/css/theme/themeGf.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/popCon.css" type="text/css" media="all">
+	<!-- jQuery UI 依赖 -->
+	<script>$.uiBackCompat = true;</script> <!-- 关键：启用旧版API兼容 -->
+	<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery/jquery-ui-1.14.1.css">
+	<script type="text/javascript" src="/opac/media/js/jquery/jquery-ui-1.14.1.min.js"></script>
+
+	<link rel="stylesheet" href="/opac/media/layui/css/layui.css" type="text/css" media="all">
+</head>
+
+<script type="text/javascript">
+	var ctx = "/opac";
+</script>
+<style>
+	.cityH{
+		margin-top: 15%;
+	}
+	.homeCss{
+		width: 1010px;
+		display: flex;
+		justify-content: center;
+	}
+	.hdScondMenu2{
+		width: 210px;
+		top: 78px;
+		margin-left: -105px;
+	}
+	
+	.navInLink{
+		color:white;
+	}
+	
+	.navInLi a:hover { color: #fff; }
+	
+	.layui-regionContent ul li:first-child{
+		float: inherit;
+		width: 120px;
+	}
+	
+</style>
+<body class=" bgWhite">
+
+<div class="headerArea  bHeadArea thBHeadArea">
+	<div class="navArea">
+		<div class="wrap homeCss">
+			<div class="csLogo">
+				
+					
+					
+					
+						<img src='/opac/faq/getImage/223' alt="logo">
+					
+					
+				
+			</div>
+			<div class="disInlineBk">
+				<ul class="navInUl">
+					
+				</ul>
+			</div>
+			<div class="navRt">
+				
+				<div class="langArea disInlineBk" style="display:none">
+					<div class="langIconArea">
+						<span class="langFont disInlineBk">简体中文</span>
+						<i class="langDown disInlineBk"></i>
+					</div>
+					<div class="langCon" style="display: none;">
+						<i class="upSan"></i>
+						<ul class="langOpUl">
+							<li class="curLang"><a href="javascript:void(0)">简体中文</a></li>
+							<li><a href="javascript:void(0)">英文</a></li>
+							<li><a href="javascript:void(0)">日文</a></li>
+							<li><a href="javascript:void(0)">俄文</a></li>
+						</ul>
+					</div>
+				</div>
+				
+					
+
+					
+					
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="searchOut overHide">
+	<form name="searchForm" id="searchForm" action="search" method="get">
+		<div class="wrap ">
+
+			<div class="searchCon">
+				<div class="searchTabBd">
+					<div class="disInlineBk searchLeft">
+						<div class="searchType disInlineBk">
+							<div class="choseType">
+								<span class="choseFont doubChoseFont">题名</span>
+								<i class="searDown"></i>
+							</div>
+							<ul class="searchTypeUl">
+								<li><a href="javascript:changeSearchWay('');">
+									
+										
+										
+											任意词
+										
+									
+								</a></li>
+								<li class="sTypeCur"><a href="javascript:changeSearchWay('title');">题名</a></li>
+								<li><a href="javascript:changeSearchWay('title200a');">正题名</a></li>
+								<li><a href="javascript:changeSearchWay('isbn');">ISBN/ISSN</a></li>
+								<li><a href="javascript:changeSearchWay('author');">著者</a></li>
+								<li><a href="javascript:changeSearchWay('subject');">主题词</a></li>
+								<li><a href="javascript:changeSearchWay('class');">分类号</a></li>
+								<li><a href="javascript:changeSearchWay('orderno');">订购号</a></li>
+								<li><a href="javascript:changeSearchWay('publisher');">出版社</a></li>
+								<li><a href="javascript:changeSearchWay('callno');">索书号</a></li>
+							</ul>
+						</div>
+						<div class="disInlineBk overHide searchIn">
+							<i class="disInlineBk searchIcon"></i>
+							<div class="disInlineBk searchInp">
+								<input type="text" id="q" name="q" class="searchInpIn"
+									   onkeypress="if(event.keyCode==13){searchIndexBtn.click();return false;}"
+										
+											
+												placeholder="输入图书检索关键字"
+											
+											
+										
+								/>
+								<input type="checkbox" name="hasholding" value="1" class="headIcon"
+										
+											checked="checked"
+										
+								/>
+								<input type="hidden" name="searchWay" id="searchWay" value="title" />
+								<input type="hidden" name="searchSource" value="reader" />
+								<input type="hidden" id="view" name="view" value="" />
+								<input type="hidden" id="scWay" name="scWay" value="dim" />
+								<input type="hidden" id="federatedResource" name="resource" value="全部资源" />
+							</div>
+						</div>
+
+					</div>
+					<div class="disInlineBk searchRight">
+								<a href="javascript:search('')" class="disInlineBk searchBtn"><span style="color:white;">搜索</span></a>
+								<button type="button" class="disInlineBk hSearchBtn" onclick="gotoAdvancedSearch();">高级搜索</button>
+					</div>
+				</div>
+				
+					<div class="hotWordArea">
+						热门词：
+						
+							
+							<a href="javascript:searchByHotKeyword('哈小浪')">
+									哈小浪
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('猫小九')">
+									猫小九
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('猫七夜')">
+									猫七夜
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('我与地坛')">
+									我与地坛
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('某某')">
+									某某
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('雍正皇帝')">
+									雍正皇帝
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('9787511561169')">
+									9787511561169
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('红楼梦')">
+									红楼梦
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('我的世界')">
+									我的世界
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('猫武士')">
+									猫武士
+							</a>
+						
+					</div>
+				
+			</div>
+			
+			<div class="libImg"></div>
+
+		</div>
+	</form>
+</div>
+		<div class="footer"><span>© 2005 - 2014 www.interlib.com.cn, all rights reserved</span><span class="marginLt20">隐私声明</span></div>
+</div>
+
+<!-- 登录弹出框 -->
+<div class="loginPopArea">
+	<div class="popMask" style="z-index:2;"></div>
+	<div class="popIn loginPopIn" >
+		<a href="javascript:void(0)" class="popDel"></a>
+		<input type="hidden" id="reader" name="reader" value=""/>
+		<input type="hidden" id="data" name="data" />
+		<input type="hidden" id="toPageUrl" name="toPageUrl" />
+		<!-- <div id="faqbg"></div>-->
+		<div id="loginDialog" class="loginPInCon" style="height: 337px;" title="登录我的图书馆" align="center" valign="top">
+			<iframe id="loginFrame" name="loginFrame" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+		</div>
+	</div>
+</div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/mobile_loan/js/js-one.oneone.one.js" type="text/javascript" ></script>
+<script>
+    /*加载失败切换本地js库方法*/
+    if (!window.jQuery) {
+        console.log("加载js失败，切换路径");
+        document.write('<script src=\"/opac/media/mobile_loan/js/js-one.oneone.one.js\" type=\"text/javascript\"><\/script>');
+    }
+</script>
+<script src="/opac/media/pro2018/simple/js/placeholderfriend.js" type="text/javascript" charset="utf-8"></script>
+<script src="/opac/media/pro2018/simple/js/index.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/opac/media/js/common/banned.js"></script>
+<script>
+	//是否有馆藏选择
+	function holdingFilterSearch() {
+		var checker = $("#holdingChecker:checked").val();
+		if(checker&&checker=='1'){
+			document.location.href = "/opac/search?&hasholding=1";
+		}else{
+			document.location.href = "/opac/search?";
+		}
+
+	}
+	$(document).ready(function(){
+		// 原始字符串
+		var resourceStr = "";
+		if(resourceStr==null || resourceStr == ''){resourceStr = "/opac/media/css/aiSupport.css,/opac/media/js/common/aiSupport.js";}
+		// 分割字符串为数组
+		var resources = resourceStr.split(',');
+
+		// 遍历资源数组
+		$.each(resources, function(index, url) {
+			// 判断资源类型（JS/CSS）
+			if (url.endsWith('.js')) {
+				// 动态创建script标签
+				var script = document.createElement('script');
+				script.src = url+'?v='+Date.now();
+				script.async = false; // 保证按顺序加载
+				$('body').append(script);
+			} else if (url.endsWith('.css')) {
+				// 动态创建link标签
+				var link = document.createElement('link');
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = url+'?v='+Date.now();
+				$('head').append(link);
+			}
+		});
+		//检查是否登录
+		
+		$(".loginBtn").bind("click",function(){
+			$("#loginFrame").attr("src",'/opac/reader/login?loginFlag=dialog');
+		});
+		$(".loginBtn").click(function(){
+			$(".loginPopArea").show();
+			$('html,body').addClass('overHide');
+		});
+		$(".popDel").bind("click",function(){
+			$('#rdPasswd').val("");
+			$("#loginmsg").html("");
+			$(".loginPopArea").hide();
+			$('html,body').removeClass('overHide');
+		});
+		
+		
+		
+		
+		
+		
+
+
+		
+	});
+
+	function changeSearchWay(op){
+		$("#searchWay").val(op);
+	}
+	function searchByHotKeyword(hotSearchKeyword) {
+		$("#q").val(hotSearchKeyword);
+		$('#allLib').val('');
+		$("#searchForm").submit();
+	}
+	function search(view) {
+		$("#view").val(view);
+		var qword = $("#q").val();
+		if(qword!=""&&bannedHashSet.contains(qword)){
+			alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+			return;
+		}
+		$('#allLib').val('');
+		$("#searchForm").submit();
+	}
+	//高级搜索
+	function gotoAdvancedSearch() {
+		document.location.href = '/opac/index/advance';
+	}
+</script>
+	<script src="/opac/media/layui/layui.js"></script>
+    <script src="/opac/media/pro2018/js/highSearch/regionCheckBox/regionCheckBoxCommon.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		// 获取所选图书馆
+		function getAllChecked(name){
+			var all = '';
+			$("input:checkbox[name="+name+"]:checked").each(function(){
+				all += $(this).val() + ',';
+			});
+			return all.substring(0, all.length-1);
+		}
+
+		var regionList;
+		layui.extend({
+			
+			
+			
+			// 成都馆隐藏分馆筛选
+			
+			
+			
+
+		});
+		$.ajax({
+			'url': '/opac/tree/libcodes',
+			'dataType': 'json',
+			'type': 'POST',
+			'async': true,
+			'success': function(data){
+				if(data.length){
+					var cdList;
+					var firstArr = [];
+					var libcode_first = data.filter(function(item){
+						return item.plibcode === '999';
+					});
+
+					$.each(libcode_first, function(index, term){
+						var pid = term.plibcode;
+						var id = term.libcode;
+						var name = term.simpleName;
+						//判断该节点是否存在子节点
+						var hasChildNode = data.some(function (val, index, arr) {
+							return val.plibcode === id;
+						})
+
+						//二级分馆展示
+						var libcode_sec = data.filter(function(item){
+							return item.plibcode === id;
+						});
+
+						var secArr = [];
+						if (libcode_sec.length > 0) {
+							$.each(libcode_sec, function(idx, item){
+								var pid = item.plibcode;
+								var id = item.libcode;
+								var name = item.simpleName;
+								var secObj = {"id":id,"parentId":pid,"name":name,"checked":false};
+								secArr.push(secObj);
+							})
+						}
+						var firstObj = {"id":id,"parentId":pid,"name":name,"checked":false,"twoList":secArr};
+						/*if(id == "CD101"){
+                            cdList = {"id":"CD101","parentId":pid,"name":name,"checked":hasChecked,"twoList":secArr};
+                        }else{
+                            firstArr.push(firstObj);
+                        }*/
+						firstArr.push(firstObj);
+					});
+
+					if(firstArr.length > 1){
+						var one = null;
+						firstArr.find((item, index) => {
+							if (item.id === "CD101") {
+								one = item;
+								firstArr.splice(index, 1)
+								return item;
+								//return;
+							}
+						});
+						firstArr.unshift(one);
+					}
+					//var json_data = {"cdList":cdList,"shopList":firstArr};
+					regionList = {"regionData":firstArr};
+					//doData(json_data);
+
+				}
+			},
+
+			complete:function(XMLHttpRequest, textStatus){
+				var $, regionLibCheckBox;
+				layui.config({
+					base: '/opac/media/pro2018/js/highSearch/' // 配置组件存放的基础目录
+				})
+
+				layui.use(['regionCheckBox'], function () {
+					$ = layui.$;
+					layui.link('/opac/media/pro2018/js/highSearch/regionCheckBox/regionCheckBox.css?v=1' , function(){
+
+					}, 'regionCheckBox');
+					var regionCheckBox = layui.regionCheckBox;
+					var initVal = [];
+					
+					
+					
+					
+					//执行实例
+					regionLibCheckBox = regionCheckBox.render({
+						elem: '#regionLibCheckBox',
+						name: 'f_curlibcode', // 对应input name
+						value: initVal, // 赋初始值
+						width: '99%', // 默认550px
+						border: true, // 默认true
+						// 初始化完成时执行
+						ready: function(){
+							$('#all1').html(this.name + '=' + getAllChecked(this.name));
+						},
+						// 点击复选框时执行
+						change: function(result){
+							$('#click1').html(result.value);
+							$('#all1').html(this.name + '=' + getAllChecked(this.name));
+						}
+					});
+				});
+			}
+		});
+
+		function searchByMultipleLibcode(){
+			var parms = delParam(facetBaseURL,"curlibcode");
+			var checkers = $(".children_content").find("input[type='checkbox']:checked");
+			checkers.each(function(){
+				var dataId = $(this).attr("data-id");
+				if(dataId){
+					parms = parms + "&curlibcode=" + dataId;
+				}
+			});
+			var to_url = "/opac/search?" + parms;
+			window.location.href = to_url;
+		}
+
+		function searchByNoLibcode(){
+			var parms = delParam(facetBaseURL,"curlibcode");
+			var to_url = "/opac/search?" + parms;
+			window.location.href = to_url;
+		}
+
+		/**
+		 * 去除url参数串中的某个参数
+		 * @param urlParams 原url参数，如：libcode=001&hasholding=1&searchWay=title
+		 * @param paramKey 要去除的参数名，如：libcode
+		 * @returns {string|*} 去除libcode之后的参数串，如：hasholding=1&searchWay=title
+		 */
+		function delParam(urlParams,paramKey){
+			var arr = new Array();
+			if (urlParams != "") {
+				var urlParamArr = urlParams.split("&"); //将参数按照&符分成数组
+				for (var i = 0; i < urlParamArr.length; i++) {
+					var paramArr = urlParamArr[i].split("="); //将参数键，值拆开
+					//如果键雨要删除的不一致，则加入到参数中
+					if (paramArr[0] != paramKey) {
+						arr.push(urlParamArr[i]);
+					}
+				}
+			}
+			if (arr.length > 0) {
+				return arr.join("&");
+			}
+			return urlParams;
+		}
+
+	</script>
+</body>
+</html>

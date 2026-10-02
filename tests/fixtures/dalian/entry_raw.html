@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright 2000 - 2018 Sirsi Corporation. All rights reserved. - Defines the head  body of each page. -->
+
+<!-- 环境: WEBSERVER, 工作站的环境参数: 8 -->
+<!-- 服务器版本: 3.5.3.1.GA -->
+
+<html  lang="zh"  dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1;" />
+
+		
+		  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+
+		
+		
+<!-- sirsi-data session-state is 3 -->
+    <title>快速检索</title>
+		
+
+		
+
+		<!-- Set the expiration date to the past so the page will always be reloaded -->
+		
+			<meta http-equiv="Expires" content="Sun, 1 Jan 1995 08:00:00 CST"/>
+		
+
+		  <!-- Not the login page -->
+			
+
+				<!-- Set the refresh to do an EXIT right before the session times out. This will cause timed out sessions to automatically go back to the login/first page, ready for the next user. - Since there is no way to target the _top frame, cannot do this if any frames are used, else the refresh goes into the main frame. - Also, the URL below has to be a full URL, so cannot do this without using the HTTP_ADDRESS. -->
+
+				
+					
+						
+							<meta http-equiv="refresh" content="840; URL=http://ykt.dl-library.net.cn/uhtbin/cgisirsi/?ps=9Gi5MvxGSp/DALIANLIB/X/58"/>
+							<script type="text/javascript">
+								setTimeout(function() { var pop = new myPop(); pop.popOut("您的登录会话已处于非活动状态一段时间了。 您将会在 60 秒的非活动状态后被自动退出本次会话。"); }, (840-60)*1000);
+							</script>
+						
+					
+				
+			
+		
+
+		<script type="text/javascript" src="/Js/prototype-1.6.1.js"></script>
+		<script type="text/javascript" src="/Js/scriptaculous.js"></script>
+		<script type="text/javascript" src="/Js/sirsidynix.js"></script>
+		<script type="text/javascript" src="/Js/datetimepicker.js"></script>
+
+		
+			<script type="text/javascript" src="/Js/getcontent.js"></script>
+		
+
+		
+
+		
+			<link rel="stylesheet" href="/Css/default/default.css" type="text/css" />
+		
+
+		
+
+		
+			
+		
+
+		
+
+	</head>
+	<!-- Start the body of the document.  WARNING:  No comments are allowed inside of the body element's definition. - assign CSS Class of 'body_style' to tag -  If this is a download search results state (14, 62), then load the results in a new browser window to facilitate printing. -  If this is an Archive image view state (911), then open a new window to display the image in new window. -  To help prevent premature selection of a toolbar button (i.e., before the new toolbar is loaded), clear it when the page is unloaded. -->
+	<body onLoad="">
+
+		
+
+		<noscript>
+		Your browser does not support JavaScript and this application utilizes JavaScript to build content and provide links to additional information. You should either enable JavaScript in your browser settings or use a browser that supports JavaScript in order to take full advantage of this application.
+		</noscript>
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Symphony Search Page; State #3 -->
+<!--  Copyright (c) 1996 - 2010, SirsiDynix Form for starting a new session in a new window. -->
+
+<!-- By setting the "document.new_session.action" property to the URL for logging into a new session at the particular  page you want, a new window will be opened and a new WebCat session will be started automatically. Remember that many WebCat states are dependent on previous states, so only certain "cgi types" can be opened.
+
+Also, by setting the "document.new_session.new_gateway_db.value" property to a gateway database name, the new session will use that gateway instead of the user's default gateway. Note that the use of Javascript is required to submit this form. -->
+
+<form name="new_session" method="post" action="/uhtbin/cgisirsi/?ps=flh6H05f1y/DALIANLIB/0/57/49" target="new_session">
+	
+		<input type="hidden" name="user_id" value="WEBSERVER"/>
+		<input type="hidden" name="password" value=""/>
+	
+	<input type="hidden" name="new_gateway_db" value=""/>
+</form>
+
+
+<div id="header_container" class="header_container">
+      <a class="skipnav" href="#skipnav">跳过导航</a>  <a name="top"></a>
+  <div class="branding_container" >
+      <div class="branding">
+            <img border="0" src="/WebCat_Images/Chinese/Other/MiscD/LIBLOGO.gif" alt="大连地区网上联合目录查询系统" title="大连地区网上联合目录查询系统"/>
+      </div>
+      <div class="branding_subheading">
+         <!-- Print the gateway envn title if not blank -->
+          e-Library at ...
+          大连地区网上联合目录查询系统
+      </div>      
+	</div>
+  <div class="login_container">
+	   <!-- present language choices -->
+		  <div class="module_language_choices">
+<!-- Add the Language options -->
+  <!-- Suppress an option for the current language -->
+  <!-- Suppress an option for the current language -->
+    <a href="/uhtbin/cgisirsi/?ps=lF941o7dcP/DALIANLIB/X/111/ENGLISH" title="English" target="_top"><img src="/WebCat_Images/Chinese/Other/MiscD/ENGLISH.gif" border=0 class="langicon" alt="English Language" title="English"/></a>
+      </div>
+
+			
+				<form name="loginform" method="post" action="/uhtbin/cgisirsi/?ps=mSw1qGx4uF/DALIANLIB/X/303">
+			
+<!--  Copyright 2004 - 2016, Sirsi Corporation. All rights reserved.  - myProfile login or view myFavorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+	  <!-- only user ID is used if both on -->
+		<div class="user_name">
+			<label for="user_id">借阅证号码:</label>
+			<input class="user_name_input" type="text" name="user_id" id="user_id"  maxlength="20" value="" />
+		</div>
+	
+	 
+		<div class="password">
+			<label for="password">个人密码:</label>
+			<input class="password_input" type="password" name="password" id="password"  maxlength="25" value="" />
+		</div>  
+	
+	 
+	<input type="submit" value="Login to iLink" style="margin-left:7px;margin-right:4px" class="login_button"/>
+
+	
+
+	 
+
+
+
+			</form>
+	  
+	<!-- login form-->
+	 
+  </div>
+</div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Root Bar. -->
+<div id="header_menu_container" class="header_menu_container">
+  <h2>Navigation Menu</h2>
+  <ul class="menu">
+    <!-- display text with CSS instead -->
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=o6LBkStiGs/DALIANLIB/X/38/1/X/BLASTOFF" class="blastoff">
+       查询首页</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=B35PUn7s0G/DALIANLIB/X/1/1168/X/BLASTOFF" class="rootbar">
+       我的账号</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=w8Ldgxwbxx/DALIANLIB/X/60/1182/X/BLASTOFF" class="rootbar">
+       </a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=DfnSDS18iq/DALIANLIB/X/1/1188/X/BLASTOFF" class="rootbar">
+       地方文献</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=V1oA258Waa/DALIANLIB/X/1/1191/X/BLASTOFF" class="rootbar">
+       音乐图书馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=obnLLUtxuM/DALIANLIB/X/1/1450/X/BLASTOFF" class="rootbar">
+       鲁迅路外文分馆</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=8e7vnFCjLV/DALIANLIB/X/1/1485/X/BLASTOFF" class="rootbar">
+       少儿分级阅读</a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+<!--  Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Catalog Access page, state #3. -->
+
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=hJMS2vJfhO/DALIANLIB/X/2/5" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=MwgIgpMX67/DALIANLIB/X/2/5" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+
+<!-- Help button -->
+		  <!-- use context HTML help -->
+<li class="menu_link">
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[ 
+    put_help_button('Chinese','说明','search');
+    //]]>
+  </script>
+</li>
+
+  <!-- gateway's custom buttons -->
+
+
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=bQp53B5aVf/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+
+<div class="columns_container">
+  <div class="column pct75 left_column">
+    <div class="content_container quick_search">
+      <div class="content">
+<!-- Some complication is added here because of the "more searches" button having to be inside of the "icon search" form.  So, if this is an "icon search, start the form here. -->
+<div class="searchservices">
+  <!-- Print element's description if present, else print the heading -->
+      <h3>快速检索</h3>
+  <!-- Catalog Access destinations may either be of type Search, Browse, or Term Search -->
+<!-- Copyright (c) 1996 - 2010, SirsiDynix - Catalog Access - Search form (for state #3). -->
+     <!-- Single Labelled field -->
+   <form name="searchform" method="post" action="/uhtbin/cgisirsi/?ps=yUNUlvTKL7/DALIANLIB/X/123">
+<!--  Copyright 2001 - 2017, Sirsi Corporation. All rights reserved.  "Single-label" search form (for state #3). -->
+
+  <!-- The search input field and library selection -->
+  <div class="searchcontent">
+   <div class="row">
+  <!-- If there was a previous search before this one, then use that search's terms and operators.  Match type of field using the entry num. -->
+   <label for="searchdata1">
+        <span style="display:none;">Search</span>
+        <input type="text" name="searchdata1" id="searchdata1" maxlength="255" size="30" style="width: 300px;"
+         value=""
+          />
+   </label>
+	
+   <label for="srchfield1">
+   <select name="srchfield1" id="srchfield1">
+	<option value="GENERAL^SUBJECT^GENERAL^^所有字段">所有字段</option>
+	<option value="AU^AUTHOR^AUTHORS^Author Processing^著者">著者</option>
+	<option value="TI^TITLE^SERIES^Title Processing^题名">题名</option>
+	<option value="SU^SUBJECT^SUBJECTS^^主题">主题</option>
+	<option value="SER^SERIES^SERIES^Title Processing^丛书">丛书</option>
+	<option value="PER^PERTITLE^SERIES^Title Processing^期刊名">期刊名</option>
+   </select></label>
+     <input type="submit" value="确定" class="button"/>
+   </div>
+   <div class="row">
+      <!-- Define the policy type list based on whether to use the "library list" policies in addition to the singular library policies. -->
+      <label for="library">馆别:</label>
+
+        <select name="library" id="library" >
+<option selected value="ALL">ALL</option>
+<option value="DTBDLIB-S">91550专业分馆</option>
+<option value="93253LIB-S">93253专业分馆</option>
+<option value="ZSLIB-S">中山区分馆</option>
+<option value="BZLIB-S">八中专业分馆</option>
+<option value="GAJTLIB-S">公安交通局专业分馆</option>
+<option value="KQLIB-S">口腔医院专业分馆</option>
+<option value="SFJLIB-S">司法局专业分馆</option>
+<option value="DTSUBLIB-S">大图分馆组</option>
+<option value="DALANLIB-S">大连中心馆</option>
+<option value="SHAOERLIBS">少儿分馆</option>
+<option value="GRWHGLIB-S">工人文化宫分馆</option>
+<option value="ZHLIB-S">庄河分馆</option>
+<option value="KFQLIB-S">开发区分馆</option>
+<option value="JSXYLIB-S">技师学院专业分馆</option>
+<option value="ZXLIB-S">政协专业分馆</option>
+<option value="LSLIB-S">旅顺分馆</option>
+<option value="PLDLIB-S">普兰店分馆</option>
+<option value="SHKLIB-S">沙河口分馆</option>
+<option value="HYZXLIB-S">海洋中心专业分馆</option>
+<option value="WFDLIB-S">瓦房店分馆</option>
+<option value="GJZLIB-S">甘井子分馆</option>
+<option value="XGLIB-S">西岗区分馆</option>
+<option value="CZJLIB-S">财政局专业分馆</option>
+<option value="JZLIB-S">金州分馆</option>
+<option value="JRLIB-S">金融专业分馆</option>
+<option value="CXDLIB-S">长兴岛分馆</option>
+<option value="CHLIB-S">长海分馆</option>
+<option value="GXGALIB-S">高新公安专业分馆</option>
+<option value="GXLIB-S">高新凌水街道分馆</option>
+<option value="LUXUNLIB-S">鲁迅路分馆</option>
+</select>
+   </div>
+  <!-- CFG_EBOOKS -->
+     <!-- End Search History -->
+    <!-- display link to powersearch only if front page -->
+   <div class="row">
+       <a href="/uhtbin/cgisirsi/?ps=ytx9ny9sGd/DALIANLIB/X/38/0/POWER_SEARCH" class="searchlinks">进阶查询</a>
+   </div>
+  </div>
+
+
+  <!-- Any default search options configured for use -->
+
+
+
+
+        <input type="hidden" name="sort_by" value="ANY"/>
+   </form>
+   <!-- This form is used only to send the "Reset Query" request using the Javascript button above. -->
+   <form name="reset_query_form" method="post" action="/uhtbin/cgisirsi/?ps=dOIiDNI5R2/DALIANLIB/X/4>">
+    <input type="hidden" name="reset_dummy_field" value=""/>
+   </form>
+    <script language="JavaScript" type="text/javascript">
+     if (document.searchform.searchdata1.type != "hidden")
+        document.searchform.searchdata1.focus();
+     else if (document.searchform.searchdata2.type != "hidden")
+        document.searchform.searchdata2.focus();
+     else if (document.searchform.searchdata3.type != "hidden")
+        document.searchform.searchdata3.focus();
+     else if (document.searchform.searchdata4.type != "hidden")
+        document.searchform.searchdata4.focus();
+     else if (document.searchform.searchdata5.type != "hidden")
+        document.searchform.searchdata5.focus();
+     else if (document.searchform.searchdata6.type != "hidden")
+        document.searchform.searchdata6.focus();
+        if (document.searchform.searchdata1.type != "hidden")
+           document.searchform.searchdata1.select();
+	else if (document.searchform.searchdata2.type != "hidden")
+           document.searchform.searchdata2.select();
+	else if (document.searchform.searchdata3.type != "hidden")
+           document.searchform.searchdata3.select();
+	else if (document.searchform.searchdata4.type != "hidden")
+           document.searchform.searchdata4.select();
+	else if (document.searchform.searchdata5.type != "hidden")
+           document.searchform.searchdata5.select();
+	else if (document.searchform.searchdata6.type != "hidden")
+           document.searchform.searchdata6.select();
+    </script>
+
+
+</div>
+
+        <!-- checking to see if we need the cell -->
+            <!-- if an icon search -->
+          <!-- if any special search resource is on -->
+      </div>
+    </div>
+      <div class="content_container lib_info">
+        <div class="content">
+          <ul class="most_popular">
+              <!-- WHAT'S HOT/MOST POPULAR ITEMS -->
+                  <li >
+<!--  Copyright (c) 2000 - 2014, SirsiDynix - Builds the Most Popular / What Others Are Reading box. -->
+<!-- If the env parameter SEARCH_LIBRARY is "HERE", then translate it to the station library instead. -->
+
+
+<h3>最热门馆藏</h3>
+<ul class="whats_hot">
+  <li>
+    题名:
+<!--  Copyright (c) 2001 - 2010, SirsiDynix - Most Popular list for a particular type of term - This page file is processed by a SIRSI_Command for an gM response. -->
+
+
+  
+
+
+
+
+
+  
+  
+    <a href="/uhtbin/cgisirsi/?ps=CCrMqA3re8/DALIANLIB/X/5/1?searchdata1=%E6%9C%AA%E6%9D%A5+%E5%86%9B%E5%AE%98+%E5%AD%A6%E6%A0%A1+%E4%B8%9B%E4%B9%A6+%E4%BA%8C+%E5%8D%81+%E4%BA%8C+%E7%A7%8D&amp;srchfield1=TI^TITLE^TITLES^Title+Processing^&amp;search_disp_data1=未来军官学校丛书  二十二种 中国人民解放军成都军区主编&amp;match_on=EXACT&amp;library=ALL">未来军官学校丛书  二十二种 中国人民解放军成都军区主编</a>
+  
+  
+    <br/>
+  
+
+
+
+
+
+  </li>
+  <li>
+    著者:
+<!--  Copyright (c) 2001 - 2010, SirsiDynix - Most Popular list for a particular type of term - This page file is processed by a SIRSI_Command for an gM response. -->
+
+
+  
+
+
+
+
+
+  
+  
+    <a href="/uhtbin/cgisirsi/?ps=NJ1M2mVFU3/DALIANLIB/X/5/1?searchdata1=%E7%AC%91+%E6%B1%9F%E5%8D%97&amp;srchfield1=AU^AUTHOR^AUTHORS^Author+Processing^&amp;search_disp_data1=笑江南 编绘&amp;match_on=EXACT&amp;library=ALL">笑江南 编绘</a>
+  
+  
+    <br/>
+  
+
+
+
+
+
+  </li>
+  <li>
+    主题:
+<!--  Copyright (c) 2001 - 2010, SirsiDynix - Most Popular list for a particular type of term - This page file is processed by a SIRSI_Command for an gM response. -->
+
+  <!-- SUBJECT -->
+  
+
+
+
+
+
+  
+  
+    <a href="/uhtbin/cgisirsi/?ps=cfXY0jxxyY/DALIANLIB/X/5/1?searchdata1=%E9%95%BF%E7%AF%87+%E5%B0%8F%E8%AF%B4&amp;srchfield1=SU^SUBJECT^SUBJECTS^^&amp;search_disp_data1=长篇小说 中国 当代&amp;match_on=EXACT&amp;library=ALL">长篇小说 中国 当代</a>
+  
+  
+    <br/>
+  
+
+
+
+
+
+  </li>
+  <li>
+    <a href="/uhtbin/cgisirsi/?ps=RhtDQazYpw/DALIANLIB/X/122/2002" style="color: #888888">更多文献</a>
+  </li>
+</ul>
+
+
+                  </li>
+              <!-- LIBRARY INFORMATION -->
+              <!-- myProfile login or show myFavorites -->
+                <li class="most_popular_favorites">
+<!--  Copyright 1996 - 2017, Sirsi Corporation. All rights reserved. - Personal login or Favorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Favorites Box. -  This page file is processed by a SIRSI_Command for an ng response. -->
+
+<!-- Show the favorites box only if the user has any favorites set up. -->
+
+
+
+
+                </li>
+            </ul>
+
+        </div>
+      </div>
+	  
+        <!-- if an icon search -->
+      <!-- if any special search resource is on -->
+     <!-- display only if front page -->
+  </div>
+  <div class="column pct25 right_column">
+  </div>
+</div>
+
+<div class="bottom_buttons">
+<!--  Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Catalog Access page, state #3. -->
+
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=cLOHYiLRhe/DALIANLIB/X/2/5" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=q6V8e3Nm8B/DALIANLIB/X/2/5" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+
+<!-- Help button -->
+		  <!-- use context HTML help -->
+<li class="menu_link">
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[ 
+    put_help_button('Chinese','说明','search');
+    //]]>
+  </script>
+</li>
+
+  <!-- gateway's custom buttons -->
+
+
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=EoHCxxQMc2/DALIANLIB/X/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+  <!-- display date change options if allowed -->
+  <div>
+    <div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Element Bottom-of-page (for all gateway groups and destinations). -->
+<!-- Print paragraph file GATEWWWPGCD if GATESUSEPARCD says to print at bottom - of page (i.e., its value is 2).-->
+<!-- Print footer file GATEWWWFOOTERCD if GATEWWWUSEFTCD is 1. -->
+    </div>
+    <div>
+        <form name="url_form" action=""><input type="hidden" name="url" value=""/></form>
+    </div>
+  </div>
+</div>	
+
+<div class="footer_container">
+  <!--  Copyright (c) 1996 - 2014, SirsiDynix - Copyright statement -->
+  <table border="0" cellpadding="3" cellspacing="0" width="100%" class="footer">
+   <tr>
+    <td align="left" valign="bottom" width="25%" class="footer">
+        <img src="/WebCat_Images/Chinese/Other/MiscD/sirsi_button.gif" alt="Powered by: SirsiDynix" border="0"/>
+    </td>
+      <td align="center" class="footer">
+        Search the library catalog on&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">Facebook</a>&nbsp;or on your&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=DLUL">mobile phone</a>!
+      </td>
+    <td align="right" class="footer" width="25%" id="requiredCell"><!-- Display the description -->
+      <a name="bottom" href="#top">TOP</a>
+      <div id="feature">
+        <div id="required"></div>
+      </div>
+    </td>
+   </tr>
+  </table>
+</div>
+
+  <script language="JavaScript" type="text/javascript">
+    setLocalizedValue("PERMALINK","固定链接");
+    setLocalizedValue("TO_LINK","可从email,博客或其它网页中用以下的链接连接到当前的馆藏,列表,检索结果或页面.");
+    setLocalizedValue("CLOSE","关闭");
+    setLocalizedValue("PAGE_LINK","页面链接");
+    setLocalizedValue("NEW_TAB","在新选项卡中打开链接 ");
+  </script>
+
+</body>
+</html>
+
+
+	

@@ -1,4 +1,4 @@
-"""绍兴 OPAC 侦察证据测试（该城降级「待调研」，本文件是结论的可执行留档）。
+"""绍兴 OPAC 侦察证据测试（pro2018 与家族 parser 不兼容的可执行留档）。
 
 绍兴（opac.sxlib.com）确属图创 Interlib，但跑的是 pro2018 模板代：搜索结果页与
 详情页的 HTML 结构与家族 parser（interlib/parser.py，以广州为基准）依赖的标记全部
@@ -9,8 +9,12 @@
 3. 家族 parser 实跑绍兴 fixture 的结果——搜索 0 条、详情全空（不兼容的硬证据），
    而 holding JSON 顶层键与广州一致（结构兼容）。
 
-若将来家族 parser 被扩展以覆盖 pro2018 模板，本文件的「不兼容」断言会变红——
-那是正确信号：说明降级前提已变，应重新评估接入。详见 fixtures/shaoxing/NOTES.md。
+【2026-10-02 下午更新】该城已按台州路径立项接入 `adapters/shaoxing.py`
+（pro2018 搜索/详情解析在适配器本地实现，家族模块未动——本文件的断言因此
+依然全绿且继续有效：它们钉住的是「家族 parser 不兼容 pro2018」这一事实，
+正是绍兴解析必须留在适配器本地的依据）。若将来家族 parser 被扩展以覆盖
+pro2018 模板，本文件的「不兼容」断言会变红——那是正确信号：说明本地解析
+可以迁回家族，应重构 shaoxing.py/taizhou.py。详见 fixtures/shaoxing/NOTES.md。
 """
 import json
 import re
@@ -101,5 +105,6 @@ def test_holding_json_structure_is_family_compatible():
     # holdStateMap 形状一致：{状态码: {stateType, stateName}}
     sample = next(iter(HOLDING["holdStateMap"].values()))
     assert "stateName" in sample and "stateType" in sample
-    # 本书单册数组为空（联合目录取数条件待查，照实记录不猜语义）
+    # 本书单册数组为空(已查明:联合层书目无本地单册,有单册的书目如 879551
+    # 返回完整 holdingList,见 NOTES.md「立项更新」节与 holding_879551.json)
     assert parser.parse_holdings(HOLDING) == []
