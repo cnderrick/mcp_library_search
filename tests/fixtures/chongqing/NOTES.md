@@ -54,6 +54,19 @@ simpleSearch（实抓验证：opacSearch 不接受这些参数）。
   边界，不是故障。
 - 不对 GetAsset 做读者登录（无凭据、且属个人数据边界）。
 
+## 真网验证（2026-10-02，适配器实调，6 项全过）
+
+- `search_books("三体")`：20 条/页，total_pages=1630，has_next=True。
+- `search_books("9787508687193")`：ISBN 路由生效，命中《上瘾 · 1 · 选择一座城市，
+  选择一种人生》（i_biblios:2313420）。
+- `search_books("三体", page=2)`：GET pageNo=2 翻页生效，与第 1 页无重复；
+  实测第 2 页返回 10 条（少于 pageSize，源站行为，原值记录）。
+- `search_books("三体", limit=5)`：pageSize 被源站接受，返回 5 条。
+- `get_book_detail("i_biblios:2649440")`：《三体》字段与浏览器一致（isbn
+  9787229166922，call_number 空，summary 空）。
+- `get_holdings("i_biblios:2649440", only_available=False)`：1 条「重庆图书馆」，
+  status 空、available False，与侦察结论一致。
+
 ## 其它
 
 - 详情页**无索书号字段**（检索条目里有，如 I247.59/2376，详情页不显示），
