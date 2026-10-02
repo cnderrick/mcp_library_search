@@ -1,6 +1,6 @@
 """MCP server：城市图书馆馆藏查询——"这本书在哪些馆能借到"。
 
-多城市架构，已接入：上海（上海中心图书馆"一卡通"总分馆体系，900+ 网点）。
+多城市架构，已接入：上海、广州、杭州、深圳、天津（三源合并）、重庆。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -23,7 +23,11 @@ mcp = FastMCP("mcp-library-search", version=_VERSION)
 def search_books(keyword: str, city: str = "shanghai", page: int = 1, limit: int = 20) -> SearchPage:
     """按关键字搜索城市图书馆的馆藏图书，返回分页列表。
 
-    已接入城市：shanghai（上海，全市 900+ 网点，含地铁站 24 小时自助机）；其他城市待接入。
+    已接入城市：shanghai（上海，全市 900+ 网点，含地铁站 24 小时自助机）、
+    guangzhou（广州）、hangzhou（杭州）、shenzhen（深圳，167 馆统一平台）、
+    tianjin（天津，主馆＋少儿馆＋中新友好三源合并，同一本书跨馆归并成一条结果）、
+    chongqing（重庆，馆藏到馆级；单册可借状态需读者登录，接口不返回）；
+    其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
     直到 has_next 为 false 或 books 为空。
