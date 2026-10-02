@@ -16,6 +16,8 @@ from dataclasses import dataclass, field
 from http.cookiejar import CookieJar
 
 from ..interlib import InterlibConfig
+from ..interlib import get_holdings as il_holdings
+from ..interlib import search_raw as il_search
 from .base import BookDetail, BookSummary, Holding, SearchPage
 
 _SOURCES = {
@@ -255,7 +257,7 @@ def _parse_find(text, source):
 
 
 class _Client:
-    """三源客户端：本任务先实现 ALEPH 两源检索；ZXYH 与归并在后续任务接入。"""
+    """三源客户端：ALEPH 两源 + 中新友好（interlib 租户，复用家族原语）。"""
 
     def _fetch_find(self, source, keyword, page):
         cfg = _SOURCES[source]
@@ -273,24 +275,67 @@ class _Client:
                 _check_captcha(text)
         return text
 
+    def _search_zxyh(self, keyword, page, limit):
+        """中新友好源：家族 search_raw（带 isbn 内部字段）；失败返回 None（源级容错）。"""
+        try:
+            zr = il_search(_ZXYH, keyword, page=page, limit=limit)
+        except RuntimeError:
+            return None
+        return {
+            "books": [
+                _Book(record_id=f"ZXYH:{b['book_id']}", title=b["title"], author=b["author"],
+                      publisher=b["publisher"], publish_year=b["publish_year"],
+                      availability_summary=b["availability_summary"], isbn=b.get("isbn", ""))
+                for b in zr["books"]
+            ],
+            "total_results": zr["total_results"],
+            "total_pages": zr["total_pages"],
+        }
+
     def search(self, keyword, page=1, limit=20):
         per_source = {}
         for source in _SOURCES:
             per_source[source] = _parse_find(self._fetch_find(source, keyword, page), source)
-        books = [b for source in _SOURCES for b in per_source[source]["books"]]
-        total = sum(r["total_results"] for r in per_source.values())
-        total_pages = max(r["total_pages"] for r in per_source.values())
+        zxyh = self._search_zxyh(keyword, page, limit)
+        if zxyh is not None:
+            per_source["ZXYH"] = zxyh
+        books = [b for source in (*_SOURCES, "ZXYH")
+                 for b in per_source.get(source, {"books": []})["books"]]
+        # 合计口径：任一源不提供总数（ZXYH 检索页无「检索到 N 条」）→ 合计不可知，
+        # 如实 None，不拿部分源的数编造全城总数
+        totals = [r["total_results"] for r in per_source.values()]
+        total = None if any(t is None for t in totals) else sum(totals)
         return _SearchResult(
             success=True,
             error="",
             statistics={
                 "total_results": total,
                 "page": page,
-                "total_pages": total_pages,
-                "has_next": page < total_pages,
+                "total_pages": max(r["total_pages"] for r in per_source.values()),
+                "has_next": any(page < r["total_pages"] for r in per_source.values()),
             },
             books=books,
         )
+
+    def get_holdings(self, book_id):
+        """单成员 book_id 的馆藏：ZXYH 走家族原语，ALEPH 走 item-global 单册页。
+
+        复合 id（多源归并成员）的拆分与聚合在归并任务实现。
+        """
+        source, _, rid = str(book_id).partition(":")
+        if source == "ZXYH":
+            return [
+                _Holding(library=h["library"], location=h["location"],
+                         call_number=h["call_number"], status=h["status"],
+                         available=h["available"], due_date=h.get("due_date", ""))
+                for h in il_holdings(_ZXYH, rid, only_available=False)
+            ]
+        if source in _SOURCES:
+            url = (f"{_SOURCES[source]['host']}/F?func=item-global"
+                   f"&doc_library={source}&doc_number={rid}")
+            text = _open(urllib.request.Request(url, headers=_HEADERS))
+            return _parse_item_global(text)
+        raise RuntimeError(f"天津图书馆：未知 book_id 前缀：{book_id}")
 
 
 _client = _Client()

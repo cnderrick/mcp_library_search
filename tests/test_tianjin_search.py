@@ -4,9 +4,20 @@ mock 点为模块级 `_open(req, timeout)`；fixture 结论见 tests/fixtures/ti
 """
 from pathlib import Path
 
+import pytest
+
 from mcp_library_search.adapters import tianjin
 
 _FIX = Path(__file__).parent / "fixtures" / "tianjin"
+
+
+@pytest.fixture(autouse=True)
+def _stub_zxyh(monkeypatch):
+    """本文件只测 ALEPH 解析；ZXYH 源置空，避免真网。"""
+    monkeypatch.setattr(tianjin, "il_search",
+                        lambda cfg, keyword, page=1, limit=20: {
+                            "books": [], "total_results": 0,
+                            "total_pages": 1, "has_next": False})
 
 
 def _load(name):
