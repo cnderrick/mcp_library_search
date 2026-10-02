@@ -13,8 +13,10 @@ def _load(name):
     return (_FIX / name).read_text(encoding="utf-8")
 
 
-def _mock_aleph(monkeypatch, default="find_tjl01.html"):
+def _mock_aleph(monkeypatch, default="find_tjl01.html", tjc01="find_tjc01.html"):
     def spy(req, timeout=20):
+        if tjc01 and "local_base=TJC01" in req.full_url:
+            return _load(tjc01)
         return _load(default)
 
     monkeypatch.setattr(tianjin, "_open", spy)

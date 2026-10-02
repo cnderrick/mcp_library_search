@@ -24,8 +24,12 @@ def _load(name):
     return (_FIX / name).read_text(encoding="utf-8")
 
 
-def _mock_open(monkeypatch, by_url=None, default=None):
-    """by_url: [(子串, fixture 名)] 按序匹配；default 兜底。返回记录的 URL 列表。"""
+def _mock_open(monkeypatch, by_url=None, default=None, tjc01="find_tjc01.html"):
+    """by_url: [(子串, fixture 名)] 按序匹配；default 兜底。返回记录的 URL 列表。
+
+    tjc01 缺省路由到少儿馆自己的 fixture：两源 fixture 的 ISBN 无交集（NOTES.md），
+    保证归并不会把单源断言变成复合 id。
+    """
     urls = []
 
     def spy(req, timeout=20):
@@ -35,6 +39,8 @@ def _mock_open(monkeypatch, by_url=None, default=None):
             for frag, name in by_url:
                 if frag in url:
                     return _load(name)
+        if tjc01 and "local_base=TJC01" in url:
+            return _load(tjc01)
         return _load(default)
 
     monkeypatch.setattr(tianjin, "_open", spy)
@@ -97,7 +103,8 @@ def test_page_two_uses_session_short_jump(monkeypatch):
     assert jumps and "jump=11" in jumps[0]
     assert "/F/" in jumps[0]
     tj = [b for b in r.books if b.record_id.startswith("TJL01:")]
-    assert tj[0].record_id == "TJL01:002916281"  # p2 首条与 p1 不同
+    # 两源的 jump URL 都命中 short-jump 分支返回同一 p2 fixture → 同 ISBN 归并成复合 id
+    assert tj[0].record_id.startswith("TJL01:002916281")  # p2 首条与 p1 不同
 
 
 def test_captcha_page_raises(monkeypatch):

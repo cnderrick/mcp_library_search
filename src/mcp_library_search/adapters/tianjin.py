@@ -12,7 +12,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from http.cookiejar import CookieJar
 
 from ..interlib import InterlibConfig
@@ -24,6 +24,8 @@ _SOURCES = {
     "TJL01": {"host": "http://opacwh.tjl.tj.cn:8991", "name": "天津图书馆"},
     "TJC01": {"host": "http://opacse.tjl.tj.cn:8991", "name": "天津市少年儿童图书馆"},
 }
+# 归并优先级：主馆 > 少儿馆 > 中新友好（复合 book_id 成员顺序与主记录取值同源）
+_SOURCE_PRIORITY = ("TJL01", "TJC01", "ZXYH")
 _ZXYH = InterlibConfig(city="zxyh", name_cn="中新友好图书馆",
                        base_url="http://sm.interlib.cn:8104", curlibcode="STC001")
 _UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
@@ -110,6 +112,63 @@ class _Holding:
 
     def is_available(self):
         return self.available
+
+
+# ---- ISBN 归并与复合 book_id（口径见 tests/fixtures/tianjin/NOTES.md） ----
+
+def _norm_isbn(isbn):
+    """ISBN 归一：去连字符与空白并转大写；非 ISBN 形态返回空串（不参与归并）。"""
+    s = re.sub(r"[\s-]", "", str(isbn or "")).upper()
+    return s if _looks_like_isbn(s) else ""
+
+
+def _merge_books(per_source):
+    """跨源按归一 ISBN 归并：{source: [ _Book ]} → 归并后的 _Book 列表。
+
+    口径：
+    - 同一 ISBN 每源至多一个成员（源内同 ISBN 多条——多卷/重印——保留首条，
+      其余条目让位于首条的馆藏，spec 已接受该取舍）；
+    - 多源命中合成复合 record_id（成员以 + 连接，按优先级排序），
+      书目字段取优先级最高成员的原值；
+    - 无 ISBN（含脏值）不参与归并，各自成条；
+    - 顺序：ISBN 分组按首次出现顺序，未分组条目按源顺序排在最后。
+    """
+    order = []    # ISBN 首次出现顺序
+    groups = {}   # 归一 ISBN -> {source: _Book}
+    singles = []  # 无 ISBN 条目
+    for source in _SOURCE_PRIORITY:
+        for b in per_source.get(source, []):
+            key = _norm_isbn(b.isbn)
+            if not key:
+                singles.append(b)
+                continue
+            members = groups.setdefault(key, {})
+            if source in members:
+                continue
+            if not members:
+                order.append(key)
+            members[source] = b
+    merged = []
+    for key in order:
+        ordered = [groups[key][s] for s in _SOURCE_PRIORITY if s in groups[key]]
+        if len(ordered) == 1:
+            merged.append(ordered[0])
+        else:
+            merged.append(replace(ordered[0],
+                                  record_id="+".join(m.record_id for m in ordered)))
+    merged.extend(singles)
+    return merged
+
+
+def _split_book_id(book_id):
+    """复合/单成员 book_id → 按优先级排序的 [(source, record_id)]；形态非法即抛错。"""
+    members = []
+    for part in str(book_id or "").split("+"):
+        source, sep, rid = part.strip().partition(":")
+        if not sep or not rid or source not in _SOURCE_PRIORITY:
+            raise RuntimeError(f"天津图书馆：未知 book_id 形态：{book_id}")
+        members.append((source, rid))
+    return sorted(members, key=lambda m: _SOURCE_PRIORITY.index(m[0]))
 
 
 # ---- ALEPH 解析（结构证据：tests/fixtures/tianjin/NOTES.md） ----
@@ -299,8 +358,7 @@ class _Client:
         zxyh = self._search_zxyh(keyword, page, limit)
         if zxyh is not None:
             per_source["ZXYH"] = zxyh
-        books = [b for source in (*_SOURCES, "ZXYH")
-                 for b in per_source.get(source, {"books": []})["books"]]
+        books = _merge_books({s: r["books"] for s, r in per_source.items()})
         # 合计口径：任一源不提供总数（ZXYH 检索页无「检索到 N 条」）→ 合计不可知，
         # 如实 None，不拿部分源的数编造全城总数
         totals = [r["total_results"] for r in per_source.values()]
@@ -318,11 +376,18 @@ class _Client:
         )
 
     def get_holdings(self, book_id):
-        """单成员 book_id 的馆藏：ZXYH 走家族原语，ALEPH 走 item-global 单册页。
+        """复合 book_id 拆成员逐个查询后聚合（可借在前、馆名升序）；单成员同一路径。
 
-        复合 id（多源归并成员）的拆分与聚合在归并任务实现。
+        成员级容错（主源失败抛错、次源失败跳过）在三源容错任务实现，当前如实上抛。
         """
-        source, _, rid = str(book_id).partition(":")
+        holdings = []
+        for source, rid in _split_book_id(book_id):
+            holdings.extend(self._holdings_for(source, rid))
+        holdings.sort(key=lambda h: (not h.available, h.library))
+        return holdings
+
+    def _holdings_for(self, source, rid):
+        """单成员馆藏：ZXYH 走家族原语，ALEPH 走 item-global 单册页。"""
         if source == "ZXYH":
             return [
                 _Holding(library=h["library"], location=h["location"],
@@ -330,12 +395,10 @@ class _Client:
                          available=h["available"], due_date=h.get("due_date", ""))
                 for h in il_holdings(_ZXYH, rid, only_available=False)
             ]
-        if source in _SOURCES:
-            url = (f"{_SOURCES[source]['host']}/F?func=item-global"
-                   f"&doc_library={source}&doc_number={rid}")
-            text = _open(urllib.request.Request(url, headers=_HEADERS))
-            return _parse_item_global(text)
-        raise RuntimeError(f"天津图书馆：未知 book_id 前缀：{book_id}")
+        url = (f"{_SOURCES[source]['host']}/F?func=item-global"
+               f"&doc_library={source}&doc_number={rid}")
+        text = _open(urllib.request.Request(url, headers=_HEADERS))
+        return _parse_item_global(text)
 
 
 _client = _Client()
