@@ -28,13 +28,13 @@ _EXPECTED = [
     "ankang", "baoji", "chengdu", "chongqing", "dalian", "guangzhou",
     "hangzhou", "hanzhong", "hefei", "huaian", "jiangyin", "jinhua",
     "lishui", "nanjing", "ningbo", "qingdao", "shaanxi", "shanghai",
-    "shaoxing", "shenzhen", "suzhou", "taizhou", "tianjin", "wenzhou",
-    "wuxi", "xian", "xianyang", "xuzhou", "yancheng", "yangzhou",
-    "yulin", "zhoushan",
+    "shaoxing", "shenzhen", "suzhou", "suzhou_sip", "taizhou", "tianjin",
+    "wenzhou", "wuxi", "xian", "xianyang", "xuzhou", "yancheng",
+    "yangzhou", "yulin", "zhoushan",
 ]
 
 
-def test_registry_has_exactly_thirty_two_identifiers():
+def test_registry_has_exactly_thirty_three_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED
