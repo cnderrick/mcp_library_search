@@ -7,11 +7,19 @@ session_number cookie。检索是 POST 表单到首页 searchform 的 action（�
 library + sort_by）。**ps token 每个响应都变**：一律从上一步响应里解析下一步的
 form action / hitlist action，绝不硬编码拼 URL；全程同一 CookieJar 串行。
 
+检索语义：源站裸词是**逐字 AND** 宽匹配、无相关度排序（所有字段「三体」实测 27944 条，
+首条与题名无关；题名「三体」862 条，前两条亦不相关）。**ASCII 双引号才是短语检索**
+（所有字段「"三体"」→ 132 条、题名「"三体"」→ 63 条，均相关）。故检索与详情重检索
+一律先按短语下发；短语 0 命中或源站拒答（词含源站索引不收的字符，如罗马数字「Ⅲ」
+会回 Error message 页）时退回裸词再试一次。
+
 详情/馆藏没有可直接 GET 的 catkey URL：详情页是 hitlist 表单里「详细资料」按钮
 （VIEW^N）POST 到 hitlist action（/X/9）的响应，N 是命中序号（会话内位置）。
 catkey 本身不可检索（GENERAL 检索 catkey 实测 0 命中）。因此 book_id = "{catkey}:{题名}"，
 get_book_detail / get_holdings 用题名（TI 字段）重检索命中列表、按 catkey 定位序号、
-再 POST VIEW^N 取详情页（题名重检索实测能把目标 catkey 稳定带回首页，见 NOTES）。
+再 POST VIEW^N 取详情页。题名是列表页原值拼串（「题名＋资料类型＋版本＋责任者＋语种」），
+整串即便是短语检索也 0 命中，故按候选梯度下发：短语截断题名 → 裸截断题名 → 裸整串
+（实测《船舶结构与设备》短语截断题名命中 24 条、目标在第 1 位；见 NOTES）。
 
 数据边界：匿名「馆藏显示」页只到**索书号级**（分馆 + 索书号 + 复本数 + 馆藏类型 +
 馆藏位置），无单册条码、无应还日期 → due_date 恒空串。可借口径保守：copy_info
@@ -86,6 +94,40 @@ def _year(text):
     return m.group(0) if m else ""
 
 
+def _is_quoted(keyword):
+    """输入是否已自带成对 ASCII 双引号（调用方显式指定短语检索）。"""
+    s = str(keyword or "").strip()
+    return len(s) >= 2 and s.startswith('"') and s.endswith('"')
+
+
+def _phrase(keyword):
+    """按短语下发：源站裸词是逐字 AND 宽匹配（无相关度），加 ASCII 双引号才是短语检索。
+    已自带引号的输入原样保留，不二次包裹。
+    """
+    s = str(keyword or "").strip()
+    return s if _is_quoted(s) else f'"{s}"'
+
+
+# 列表页题名拼串里的资料类型分隔词（「题名 专著 版本 责任者 语种」）
+_TITLE_TYPE_MARK = re.compile(r"\s+(?:专著|期刊|会议录|学位论文|电子资源|音像制品|缩微品|地图|乐谱)")
+
+
+def _title_variants(title):
+    """题名重检索候选梯度：短语截断题名（首选）→ 裸截断题名 → 裸整串。
+
+    列表页题名是拼串，源站短语索引只认题名主体——整串即便短语检索实测也 0 命中；
+    截断题名若含罗马数字等非索引字符，短语会 0 命中，故用裸词兜底（逐字 AND）。
+    """
+    t = str(title or "").strip()
+    if not t:
+        return []
+    short = _TITLE_TYPE_MARK.split(t, 1)[0].strip() or t
+    out = [_phrase(short), short]
+    if t != short:
+        out.append(t)
+    return out
+
+
 # ---- 页面形态判定（会话失效＝退回「快速检索」首页；结果页含非空/空两种）----
 _RESULT_MARK = "目录检索结果"   # 结果页 title（空结果页仍含，靠「没找到所需文献」/总数区分）
 _DETAIL_MARK = "馆藏显示"       # 详情页 title
@@ -97,6 +139,12 @@ def _is_result_page(text):
 
 def _is_detail_page(text):
     return _DETAIL_MARK in (text or "") or "display_holdings_table" in (text or "")
+
+
+def _is_entry_page(text):
+    """是否退回「快速检索」首页形态（会话失效的判据，区别于源站回 Error 页）。"""
+    t = text or ""
+    return "快速检索" in t and "searchform" in t
 
 
 # ---- 从响应解析下一步 form action（ps token 每响应变，绝不硬编码）----
@@ -355,20 +403,27 @@ class _Client:
     def search(self, keyword, page=1, limit=20):
         # iLink 无 ISBN 专用字段；ISBN 形态与通用关键词统一走 GENERAL（所有字段）
         srchfield = _SRCHFIELD_GENERAL
-        text = self._search_once(keyword, srchfield)
+        query = _phrase(keyword)
+        text = self._search_once(query, srchfield)
         if not _is_result_page(text):
             _reset_session()  # 会话失效：退回入口/异常 → 重建一次再试
-            text = self._search_once(keyword, srchfield)
-            if not _is_result_page(text):
-                raise RuntimeError("大连图书馆：检索未返回结果页（重复失败，可能会话无法建立）")
-        total = _parse_total(text)
+            text = self._search_once(query, srchfield)
+        total = _parse_total(text) if _is_result_page(text) else 0
+        if (not _is_result_page(text) or total == 0) and query != str(keyword or "").strip() \
+                and not _is_entry_page(text):
+            # 短语被源站拒答（含非索引字符回 Error 页）或 0 命中 → 退回裸词再试一次
+            bare = self._search_once(keyword, srchfield)
+            if _is_result_page(bare) and _parse_total(bare) > 0:
+                query, text, total = keyword, bare, _parse_total(bare)
+        if not _is_result_page(text):
+            raise RuntimeError("大连图书馆：检索未返回结果页（重复失败，可能会话无法建立）")
         if page > 1 and total > 0:
             jumped = self._jump(text, page)
             if _is_result_page(jumped):
                 text = jumped
             else:
                 _reset_session()
-                text2 = self._search_once(keyword, srchfield)
+                text2 = self._search_once(query, srchfield)
                 jumped = self._jump(text2, page) if _is_result_page(text2) else ""
                 if not _is_result_page(jumped):
                     raise RuntimeError("大连图书馆：翻页失败（重复失败，可能会话无法建立）")
@@ -386,16 +441,21 @@ class _Client:
             books=_parse_hits(text),
         )
 
-    # ---- 详情/馆藏共用：题名重检索 → catkey 定位 → VIEW^N ----
+    # ---- 详情/馆藏共用：题名候选梯度重检索 → catkey 定位 → VIEW^N ----
     def _detail_attempt(self, ckey, title):
-        text = self._search_once(title, _SRCHFIELD_TITLE)
-        if not _is_result_page(text):
-            return None
-        pos = _find_ckey_position(text, ckey)
-        if pos is None:
-            return None
-        detail = self._view(text, pos)
-        return detail if _is_detail_page(detail) else None
+        for query in _title_variants(title):
+            text = self._search_once(query, _SRCHFIELD_TITLE)
+            if not _is_result_page(text):
+                if _is_entry_page(text):
+                    return None  # 会话失效：交给上层重建后再试
+                continue  # 源站拒答该候选（含非索引字符回 Error 页）→ 换下一个候选
+            pos = _find_ckey_position(text, ckey)
+            if pos is None:
+                continue  # 该候选没把目标 catkey 带回 → 换下一个候选
+            detail = self._view(text, pos)
+            if _is_detail_page(detail):
+                return detail
+        return None
 
     def _fetch_detail(self, ckey, title):
         detail = self._detail_attempt(ckey, title)
