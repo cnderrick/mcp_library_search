@@ -1,7 +1,7 @@
 """独立验收测试：2026-10-02 批量城市接入（QA 侧钉子，全离线不打真网）。
 
-验收依据：docs/data-sources.md 总览表＋AGENTS.md 铁律。本文件钉的是
-「注册表 ↔ server.py 文案 ↔ data-sources.md 登记」三方一致性——任何一侧
+验收依据：docs/data-sources/cn.md 总览表＋AGENTS.md 铁律。本文件钉的是
+「注册表 ↔ server.py 文案 ↔ data-sources 登记」三方一致性——任何一侧
 单独增删城市或改口径而另两侧没跟上，这里直接红。行为级验收（tagTr 修复、
 杭州裸 id 垫片、双源归并）已由 test_jiangyin_parser / test_wenzhou_compat /
 test_hefei_parse / test_hangzhou_merge / test_hefei_merge 各自钉住，不在此重复；
@@ -12,7 +12,7 @@ from pathlib import Path
 
 from mcp_library_search import adapters, server
 
-_DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources.md"
+_DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.md"
 
 # 完整注册面：既有 6 城＋第一批 6 标识＋第二批 4 标识（成都/宁波/绍兴/大连）
 # ＋青岛（2026-10-02 发现开放 Solr 检索通道后接入）
@@ -49,7 +49,7 @@ def test_search_docstring_lists_every_registered_city():
 
 
 def test_search_docstring_data_boundaries_match_docs():
-    # 与 data-sources.md 各城小节口径一致（2026-10-02 验收基准）
+    # 与 data-sources/cn.md 各城小节口径一致（2026-10-02 验收基准）
     doc = server.search_books.__doc__
     assert "limit 不生效" in doc                 # 南京：每页固定 20 条
     assert "双源合并" in doc                      # 杭州／合肥
