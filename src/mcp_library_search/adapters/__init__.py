@@ -10,6 +10,7 @@ from . import hangzhou
 from . import jiangyin
 from . import shanghai
 from . import shenzhen
+from . import taizhou
 from . import tianjin
 from . import wenzhou
 
@@ -20,6 +21,7 @@ _ADAPTERS = {
     "jiangyin": jiangyin,
     "shanghai": shanghai,
     "shenzhen": shenzhen,
+    "taizhou": taizhou,
     "tianjin": tianjin,
     "wenzhou": wenzhou,
 }

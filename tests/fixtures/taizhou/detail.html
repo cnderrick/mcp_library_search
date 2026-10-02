@@ -1,0 +1,1001 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/jquery-3.7.1.min.js;jsessionid=A1B71EC67006CB618E090B9C10044123" type="text/javascript" ></script>
+<script src="/opac/media/js/jquery/jquery-migrate-3.5.0.min.js;jsessionid=A1B71EC67006CB618E090B9C10044123" type="text/javascript" ></script>
+<style type="text/css">
+<!--
+/**control scroll bar for IE*/
+html, body, iframe {
+	SCROLLBAR-ARROW-COLOR:#333333;
+	SCROLLBAR-FACE-COLOR:#DDDDDD;
+	SCROLLBAR-DARKSHADOW-COLOR:#DDDDDD;
+	SCROLLBAR-HIGHLIGHT-COLOR:#DDDDDD;
+	SCROLLBAR-3DLIGHT-COLOR:#DDDDDD;
+	SCROLLBAR-SHADOW-COLOR:#DDDDDD;
+	SCROLLBAR-TRACK-COLOR:#EEEEEE;
+}
+/**control scroll bar for webkit*/
+::-webkit-scrollbar {
+    width: 13px;
+    height: 13px;
+}
+::-webkit-scrollbar-button:vertical {
+    background-color: #DDDDDD;
+    border: 1px dashed #DDDDDD;
+}
+/* Turn on single button up on top, and down on bottom */
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: block;
+}
+/* Turn off the down area up on top, and up area on bottom */
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement {
+    display: none;
+}
+/* Place The scroll down button at the bottom */
+::-webkit-scrollbar-button:vertical:increment {
+    background-color: #CCCCCC;
+    border: 1px solid #CCCCCC;
+}
+/* Place The scroll up button at the up */
+::-webkit-scrollbar-button:vertical:decrement {
+    background-color: #CCCCCC;
+    border: 1px solid #CCCCCC;
+}
+::-webkit-scrollbar-track:vertical {
+    background-color: #EEEEEE;
+    border: 1px dashed #EEEEEE;
+}
+/* Top area above thumb and below up button */
+::-webkit-scrollbar-track-piece:vertical:start {
+    border: 1px solid #EEEEEE;
+}
+/* Bottom area below thumb and down button */
+::-webkit-scrollbar-track-piece:vertical:end {
+    border: 1px solid #EEEEEE;
+}
+/* Track below and above */
+::-webkit-scrollbar-track-piece {
+    background-color: #EEEEEE;
+}
+/* The thumb itself */
+::-webkit-scrollbar-thumb:vertical {
+    /**height: 50px;*/
+    background-color: #DDDDDD;
+}
+::-webkit-scrollbar-thumb:hover {
+    /**height: 50px;*/
+    background-color: #CCCCCC;
+}
+/* Corner */
+::-webkit-scrollbar-corner:vertical {
+    background-color: #EEEEEE;
+}
+/* Resizer */
+::-webkit-scrollbar-resizer:vertical {
+    background-color: #EEEEEE;
+}
+
+#bookInfoTable {
+	width: 100%;
+	font-size: 80%;
+}
+#bookInfoTable .leftTD {
+	min-width: 65px;
+}
+#bookInfoTable .rightTD {
+	border-bottom: 1px solid #ccc;
+}
+-->
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		window.print();
+	});
+</script>
+
+
+
+
+<div id="rightDiv">
+<!-- TODO 下面的a元素链接要加上target="_blank"属性 -->
+<table id="bookInfoTable">
+<!-- 选择判断CNMARC和USMARC -->
+
+
+	<!-- CNMARC的情况下 -->
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td align="left" class="leftTD">
+				<div align="left">
+					题名:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=title&q=
+三体">
+						
+三体
+					</a>&nbsp;
+				
+				
+				
+san ti
+				/
+				
+刘慈欣著
+				,
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					ISBN:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+978-7-229-16692-2
+				
+				价格：
+CNY42.00
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					语种:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+chi
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					载体形态:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				
+				
+					
+360页
+					
+					
+21cm
+					
+				
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					出版发行:
+				</div>
+			</td>
+			<td class="rightTD">
+				出版地：
+				
+重庆
+				出版社：
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=publisher&q=
+重庆出版社">
+					
+重庆出版社
+				</a>
+				出版日期：
+				
+2022
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					主题词:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+幻想小说">
+						
+幻想小说
+					</a>&nbsp;
+				
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=">
+					
+				</a>
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+中国">
+					
+中国
+				</a>
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+当代">
+					
+当代
+				</a>
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					主题词:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+长篇小说">
+						
+长篇小说
+					</a>&nbsp;
+				
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=">
+					
+				</a>
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+中国">
+					
+中国
+				</a>
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=subject&q=
+当代">
+					
+当代
+				</a>
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					中图分类法:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+I247.55
+				版次：
+				
+5
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					主要责任者:
+				</div>
+			</td>
+			<td class="rightTD">
+				<a href="/opac/search;jsessionid=A1B71EC67006CB618E090B9C10044123?searchWay=author&q=
+刘慈欣">
+					
+刘慈欣
+				</a>
+				
+liu ci xin
+				
+著
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr>
+			<td class="leftTD">
+				<div align="left">
+					责任者附注:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					
+刘慈欣，祖籍河南，长于山西，高级工程师，中国作家协会会员等，著有《鲸歌》等。&nbsp;
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!-- CNMARC结束 -->
+
+
+
+
+</table>
+</div><!-- end of rightDiv -->
+
+
+
+<script type="text/javascript">
+<!--
+//TODO 这里要加上jquery库
+//hotbook用的点击率
+$(function(){
+	var bookrecno = "1185362";
+	if(bookrecno!=""){
+		$.ajax({
+			type: "get",
+			url: '/opac/hotbook/1185362;jsessionid=A1B71EC67006CB618E090B9C10044123',
+			data: {
+				"classno": 'I247.55',
+				"booktype": '1'
+			},
+			dataType: "xml",
+			success: function(xml){
+			}
+		});
+	}
+});
+$(function() {
+	$("#bookInfoTable a").attr("target", "_blank");
+});
+$(function() {
+	$("a").each(function() {
+		var href = $(this).attr("href");
+		if(href.indexOf('search') > -1) {
+			var index = href.indexOf("q=") + 2;
+			var q = $.trim(href.substring(index));
+			$(this).attr("href", href.replace(q, encodeURIComponent(q)));
+		}
+	});
+});
+
+//-->
+</script>
