@@ -1,0 +1,880 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!-- filename: short-2-head  --> 
+<html> 
+<head> 
+<!-- filename: meta-tags V1.1r008 --> 
+ 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="Sun, 06 Nov 1994 08:49:37 GMT"> 
+<META HTTP-EQUIV="REFRESH" CONTENT="1200; URL=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13590?func=logout"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"> 
+ 
+<link rel="stylesheet" href="/opac_lcl_chi/exlchi.css" TYPE="text/css"> 
+<style> 
+.tabshead{background:url(http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif) bottom repeat-x;} 
+.topbar{background-image:url(http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif);} 
+.middlebar{background-image:url(http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-middle-bar.jpg);} 
+.bottombar{background-image:url(http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-bottom-bar.jpg);} 
+#feedbackbar,.feedbackbar{background-image:url(http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-feedback.jpg);} 
+</style> 
+<script src="/opac_lcl_chi/param.js"></script> 
+<script>var tmp="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13591";</script> 
+<script src="/opac_lcl_chi/CHI.js"></script> 
+<script src="/opac_lcl_chi/exlchi.js"></script> 
+<script> 
+var icon_path="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/"; 
+function dispfmt(fmt){ 
+   if(fmtmap[fmt]){fmt=fmtmap[fmt];} 
+   if(fmt.match(/</)){fmt="XX";} 
+   document.write("<img src="+icon_path+"icon"+fmt+".gif> "+fmt); 
+} 
+document.onclick = function() {if(g('sug'))g('sug').style.display='none';} 
+</script> 
+<title>中文文献库 - Search Results</title> 
+<script language="Javascript"> 
+<!-- 
+  function submit_form1 (val) 
+  { 
+    document.form1.submit_action.value=val; 
+    document.form1.submit(); 
+  } 
+// --> 
+</script> 
+<script language=Javascript> 
+<!-- 
+  function select_record(theForm) 
+  { 
+    if (theForm.ckbox.checked) { 
+      var loc = "http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13592?func=short-select-single&" + theForm.name + "=on"; 
+    } 
+    else { 
+      var loc = "http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13593?func=short-deselect-one&" + theForm.name + "=off"; 
+    } 
+    var imd = new Image(); 
+    imd.src = loc; 
+  } 
+// --> 
+</script> 
+ 
+<script src="/opac_lcl_chi/short.js"></script> 
+</head> 
+<body topmargin="0" 
+      onload="window.focus();"> 
+<!-- filename: head-1-nobor --> 
+<script language="Javascript"> 
+<!-- 
+  function open_window (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+ 
+  function open_window2 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window3 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window4 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window_ext (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function set_iframe_location(url,id){ 
+    eval('document.all.' + id).src = url; 
+  } 
+ 
+  function open_window_confirm (loc,frame) 
+  { 
+    self.name=frame; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function delete_win1 () 
+  { 
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+    w.close(); 
+  } 
+ 
+  function open_window_ill (loc) 
+  { 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+// --> 
+</script> 
+ 
+<script language="javascript"> 
+<!-- 
+ function recommend_nobor(the_url){ 
+     var first_split = the_url.split("//"); 
+     var without_resource = first_split[1]; 
+     var second_split = without_resource.split(":"); 
+     var domain = second_split[0]; 
+ 
+     window.open("http://"+domain+":8118/apsm/recommend/recommend_nobor.jsp","_blank"); 
+} 
+//--> 
+</script> 
+<div id=header> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13594?func=file&file_name=login-session" class="blue" title="输入用户名和密码"> 
+      登录</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13595?func=find-b-0" title="返回检索首页" class="blue"> 
+      检索首页</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13596?func=bor-info" title="查看图书馆读者个人信息" class="blue"> 
+      我的图书馆</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13597?func=option-show&func_param=DISPLAY-OPTION" class="blue" title="设置信息显示选项"> 
+      参数设置</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13598?func=short" class="blue" title="最近一次检索结果列表"> 
+      结果列表</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13599?func=history" class="blue" title="最近检索历史"> 
+      最近检索</a> 
+    <!--  <a href="javascript:recommend_nobor('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13600');"  class="blue" id=head_jg> --> 
+    <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13601?func=bor-info" title="读者荐购"  class="blue" id=head_jg> 
+      读者荐购</a><script>if(flag_recm==0)g('head_jg').style.display='none'</script> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13602?func=file&file_name=hotinfo" class="blue" title="热门信息" class="blue" target="_blank"> 
+      热门信息</a> 
+      <a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13603?func=myshelf-short-lcl" class="blue" title="查看保存在电子书架上的记录"> 
+      电子书架</a> 
+      <a href="/help_cn/help.htm" class="blue" title="使用该系统的帮助" target="new"> 
+      帮助</a> 
+</div> 
+<div id=idxlogo><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13604?func=find-b-0><img src="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a></div> 
+<div id=feedbackbar style="display:none;text-align:center">&nbsp;</div> 
+<script>if(g('feedbackbar').innerHTML.length>10){g('feedbackbar').style.display='';}</script> 
+<!-- filename: search-form  --> 
+<script>g('idxlogo').style.display='none';</script> 
+<a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13605?func=find-b-0><img id=logo src="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a> 
+<script> 
+var reg=new RegExp("/F/(.*?)\\?","i"); 
+if(reg.test(location.href)){var arr=reg.exec(location.href);var sid=decodeURI(arr[1]);} 
+function tagsuggest(json){ 
+        var detail=''; 
+        for (var i = 0; i < json["tags"].length; i++) { 
+                detail += "<a style='cursor:pointer' href='/cgi-bin/tag_m.cgi?find="+json["tags"][i]["tag"]+"&sid="+sid+"'>"+json["tags"][i]["tag"] + "</a><br>"; 
+
+        } 
+        g("details").innerHTML = detail+"<a style='cursor:pointer;float:right'>[关闭]</a>"; 
+        g("details").style.display=""; 
+        g("details").style.left=getPos(g("cclterm")).x+"px"; 
+        g("details").style.top=getPos(g("cclterm")).y+g("cclterm").offsetHeight+"px"; 
+        if(g("format"))g("format").style.display="none"; 
+} 
+function presearch(){ 
+        if(g('find_code').value=='TAG'){ 
+                var script = document.createElement('script'); 
+                script.setAttribute('src', "/cgi-bin/tag_m.cgi?search="+encodeURI(decodeURI(g('cclterm').value))); 
+                document.documentElement.lastChild.appendChild(script); 
+                return false; 
+        } 
+} 
+</script> 
+<table id=search border="0" cellpadding="0" cellspacing="0"> 
+<tr><td id=col1><td id=sgradient><td id=col2> 
+<form name="cclform" method="get" action="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13606" onsubmit="return presearch(this);"> 
+<input type="hidden" id="search_description" value="关键词= 三体"> 
+<input name="func" id="func" value="find-b" type="hidden"> 
+<!-- filename: find-code-include --> 
+    <select name=find_code id=find_code> 
+     <option value=WRD selected     >所有字段</option> 
+     <option value=WTI              >题名关键词</option> 
+     <option value=TIT              >题名(精确匹配）</option> 
+<!--     <option value=ETI              >正题名(精确匹配）</option> --> 
+     <option value=WAU              >著者</option> 
+     <option value=WSU              >主题词</option> 
+     <option value=WPU              >出版社</option> 
+     <option value=ISS              >ISSN</option> 
+     <option value=ISB              >ISBN</option> 
+     <option value=CAL              >索书号</option> 
+     <option value=SYS              >系统号</option> 
+     <option value=BAR              >条形码</option> 
+<!--     <option value=SUD              >Gov't Doc, No.</option> 
+         <option value=LCI              >LCCN</option> 
+     <option value=TXT              >全文</option>            --> 
+     <option value=TAG >用户标签</option> 
+    </select> 
+<input autocomplete="off" style="width:30%" name="request" value='' id=cclterm oninput="clearTimeout(tm);if(event.keyCode!=13)tm=setTimeout(getsug,500)" onkeydown="if('\v'=='v'){clearTimeout(tm);if(event.keyCode!=13&&event.keyCode!=38&&event.keyCode!=40)tm=setTimeout(getsug,500)}" onkeyup="if(event.keyCode==38){shiftsug(sugno-1)}else if(event.keyCode==40){shiftsug(sugno+1)}else if(event.keyCode==13)this.blur()"> &nbsp; 
+<span id=baselist> 
+<!-- filename: base-list-include --> 
+    <select name=local_base id=localbase> 
+     <option value=></option> 
+     <option value=TJL01 selected       >中文文献库</option> 
+     <option value=TJL09                >西文文献库</option> 
+     <option value=LCL52                >征订目录库</option> 
+     <option value=UCS01F                 >国图联编中文文献库</option> 
+     <option value=UCS09F                 >国图联编西文文献库</option> 
+    </select> 
+</span> 
+<span id=refine></span> 
+<input id=lookup value="检索" type="submit"> 
+<input value="二次检索" type="submit" onclick="var setno='035076'==''?'':'035076';g('func').value='short-refine-exec';g('refine').innerHTML='<input type=hidden name=set_number value='+setno+'><input type=hidden name=request_op value=AND>'"> 
+<script> 
+//document.write('<a id=rsslink href="/rss/newbookrss.php?base=TJL01&lib=TJL01&name='+document.getElementById("search_description").value+'&request=" target="_blank"><img border="0" width="24" src="/rss/style/pics/ico_rss.gif"></a>'); 
+</script> 
+<!-- 
+<input type="text" size="8" alt="clrDlg" style="border:none;background:transparent;" readonly> 
+--> 
+<div id="colorpanel" style="position:absolute;display:none;width:253px;height:177px;"></div> 
+<div id="details" style='display:none;font-size:14px;width:400px;position:absolute;z-index:10000;background:#fff;border:1px solid #aaa' onclick='this.style.display="none";if(g("format"))g("format").style.display=""'></div> 
+</form> 
+</table> 
+<script src="/opac_lcl_chi/colorpicker.js"></script> 
+</div> 
+<div style="z-index:999;display:none;position:absolute;border:1px solid black" id=sug></div> 
+ 
+<!-- short-include-buttons  --> 
+<!-- publish section 
+  SET-NUMBER (6100)    = 035076 
+  SORT-SELECTED (6200) = 01---D02-- 
+  SHORT-FORMAT (6300)  = 998 
+  BOR-ID (6400)        = ALEPH 
+  Z303-NAME (6500)     =  
+ 
+  Z05-BASE (9000)      = TJL01 
+  Z05-FIND-CODE (5000) = WRD 
+--> 
+<div id=operate> 
+<span id=label>排序：</span><select name="sort" onchange="if(this.value)window.location=this.value" id=sort> 
+<option value='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13607?func=short-sort&set_number=035076&sort_option=02---A01---D'>著者/年(降序)</option> 
+<option value='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13608?func=short-sort&set_number=035076&sort_option=01---D02---A'>年(降序)/著者</option> 
+<option value='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13609?func=short-sort&set_number=035076&sort_option=02---A03---A'>著者/题名</option> 
+<option value='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13610?func=short-sort&set_number=035076&sort_option=03---A01---D'>题名/年(降序)</option> 
+
+<option value='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13611?func=short-sort&set_number=035076&sort_option=01---D03---A'>年(降序)/题名</option> 
+</select> 
+<script> 
+if("01---D02--"=="02---A01--")g('sort').options[0].selected=true; 
+else if("01---D02--"=="01---D02--")g('sort').options[1].selected=true; 
+else if("01---D02--"=="02---A03--")g('sort').options[2].selected=true; 
+else if("01---D02--"=="03---A01--")g('sort').options[3].selected=true; 
+else if("01---D02--"=="01---D03--")g('sort').options[4].selected=true; 
+</script> 
+&nbsp;<span id=label>格式：</span><select name="format" onchange="if(this.value)window.location=this.value" id=format> 
+<option value="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13612?func=short-format&format=000">简洁视图</option> 
+<option value="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13613?func=short-format&format=998">封面视图</option> 
+<option value="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13614?func=short-format&format=950">详细格式</option> 
+<option value="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13615?func=short-format&format=951">题名著者</option> 
+<option value="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13616?func=short-format&format=952">仅题名</option> 
+</select> 
+<script> 
+if("998"=="000")g('format').options[0].selected=true; 
+else if("998"=="998")g('format').options[1].selected=true; 
+else if("998"=="950")g('format').options[2].selected=true; 
+else if("998"=="951")g('format').options[3].selected=true; 
+else if("998"=="952")g('format').options[4].selected=true; 
+</script> 
+&nbsp;<span onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">选中记录</a><div id=options style="display:none"> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13617?func=short-mail-0" title="Save/Mail" class="blue">保存/邮寄</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13618?func=short-sub" title="Create Subset" class="blue">创建子集</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13619?func=myshelf-add-sel-1" title="Add to My e-Shelf" class="blue">添加至电子书架</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13620?func=save-server-1" title="Save on Server" class="blue">保存到服务器</a> 
+</div></span> 
+&nbsp;<span onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">整合集合</a><div id=options style="display:none"> 
+<script> 
+function checkall(){ 
+        var Elements = document.getElementsByTagName("form"); 
+        var fname;var xform; 
+        for (var i=0;i<Elements.length;i++ ) { 
+                xform=Elements[i]; 
+                fname=xform.getAttribute("name"); 
+                if ( fname.match(/^XXX/) ) {xform.ckbox.checked=xform.ckbox.checked==true?false:true;select_record(xform);} 
+        } 
+} 
+</script> 
+<a href="#" class="blue" onclick="checkall()">全选/取消</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13621?func=short-rank" title="Rank" class="blue">相关度排序</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13622?func=short-refine" title="Refine" class="blue">二次检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13623?func=short-filter" title="Filter" class="blue">过滤</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13624?func=short-sdi" title="SDI" class="blue">定题服务请求</a> 
+</div></span> 
+&nbsp;<span id=advanced onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">重新查询</a><div id=options style="display:none"> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13625?func=find-b-0" class="blue" title="通过关键词查找记录">简单检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13626?func=find-a-0" class="blue">多字段检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13627?func=file&file_name=find-m" class="blue">多库检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13628?func=find-d-0" class="blue">高级检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13629?func=find-c-0" class="blue">通用命令语言检索</a><br> 
+<a href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13630?func=scan-list" class="blue">浏览</a><br> 
+</div></span> 
+&nbsp;<a id=cls href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13631?func=cat-list" class="blue" title="中图、科图分类法浏览">分类浏览</a> 
+&nbsp;<a id=cls href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13632?func=tag-list" class="blue" title="所有标签浏览">标签浏览</a> 
+</div> 
+ 
+<!-- short-include-2    --> 
+<!-- publish section 
+set-number: 035076 
+sort: 01---D02-- 
+format : 998 
+bor-id : ALEPH 
+bor-name :  
+z61-short-no-lines: 10 
+ 
+find-code: WRD 
+base : TJL01 
+--> 
+ 
+<input type=hidden id=borid value="ALEPH"> 
+<input type=hidden id=borname value=""> 
+<div id=brief> 
+<div class="bubble" id="bubble2" style="display: none;" onmouseover="clearTimeout(tm);" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)"> 
+<div class="bubble-head"> 
+<div class="bubble-right" id="bubble_text2"> 
+</div> 
+<div style="clear: both;"></div> 
+</div> 
+<div class="bubble-foot"> 
+<div class="bubble-foot-right"></div> 
+<div class="bubble-foot-left"></div> 
+<div style="clear: both;"></div> 
+</div> 
+</div> 
+<script>var rateno=0;var rateurl="/cgi-bin/review_m.cgi?getrating=1";</script> 
+
+<table width=100%><tr><td valign=top style='border:1px solid #aaa;border-bottom:none'> 
+<div id=hitnum class=hitnum> 
+<div id=nav style="float:right"><script>var fcache=0;if(parseInt("      156")>500)fcache=1;prnnavigate(parseInt("      156"),        2,10,"http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13633?func=short-jump&jump=1")</script></div> 
+     记录         2 -       11 of       156 (最大显示记录      1000 条) 
+</div> 
+ 
+
+<!-- filename: short-lcl-head --> 
+ 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13634?func=service-sfx&doc_number=002916281&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13635?func=service-sfx&doc_number=002916281&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000002 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-220-13931-4 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002916281 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13636?func=full-set-set&set_number=035076&set_entry=000002&format=999>2</A> 
+<form name=XXX000002 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13637?func=full-set-set&set_number=035076&set_entry=000002&format=999 id="TJL01002916281"><script>doclist["TJL01002916281"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13638?func=full-set-set&set_number=035076&set_entry=000002&format=999>古典传奇与未来探幻&nbsp;:&nbsp;《射雕英雄传》与《三体》英译研究&nbsp;:&nbsp;a study of Engl</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13639?func=service-sfx&doc_number=002916281&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-220-13931-4")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>H315.9/1554 
+<tr><td class=label1>出版社：<td class=content valign=top>四川人民出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002916281";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13640?func=item-global&doc_library=TJL01&doc_number=002916281' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13641?func=item-global&doc_library=TJL01&doc_number=002916281&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>H315.9/1554<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13642?func=item-global&doc_library=TJL01&doc_number=002916281&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>H315.9/1554<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13643?func=item-global&doc_library=TJL01&doc_number=002916281&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>H315.9/1554<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13644?func=item-global&doc_library=TJL01&doc_number=002916281&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>H315.9/1554<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13645?func=service-sfx&doc_number=002846792&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13646?func=service-sfx&doc_number=002846792&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000003 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5753-0280-7 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002846792 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =     10 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      3 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13647?func=full-set-set&set_number=035076&set_entry=000003&format=999>3</A> 
+<form name=XXX000003 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13648?func=full-set-set&set_number=035076&set_entry=000003&format=999 id="TJL01002846792"><script>doclist["TJL01002846792"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13649?func=full-set-set&set_number=035076&set_entry=000003&format=999>三体&nbsp;:&nbsp;图像小说</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13650?func=service-sfx&doc_number=002846792&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5753-0280-7")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3826 
+<tr><td class=label1>出版社：<td class=content valign=top>译林出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002846792";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13651?func=item-global&doc_library=TJL01&doc_number=002846792' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13652?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3826<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13653?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3826<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13654?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3826<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13655?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=QHP01 >和平区图书馆图书借阅</A></td><td class=bookid>$$hJ228.2$$i435<td class=holding>     2/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13656?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=QHX01 >河西区图书馆图书借阅</A></td><td class=bookid>$$hJ228.2$$i643<td class=holding>     2/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13657?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=QHD01 >河东区图书馆图书借阅</A></td><td class=bookid>J228.2/3826<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13658?func=item-global&doc_library=TJL01&doc_number=002846792&year=&volume=&sub_library=QDL01 >东丽区图书馆图书借阅</A></td><td class=bookid>$$hJ228.2$$i462<td class=holding>     2/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:    10，已出借复本:     3</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13659?func=service-sfx&doc_number=002926842&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13660?func=service-sfx&doc_number=002926842&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000004 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-8073-3 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002926842 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13661?func=full-set-set&set_number=035076&set_entry=000004&format=999>4</A> 
+<form name=XXX000004 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13662?func=full-set-set&set_number=035076&set_entry=000004&format=999 id="TJL01002926842"><script>doclist["TJL01002926842"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13663?func=full-set-set&set_number=035076&set_entry=000004&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;8</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13664?func=service-sfx&doc_number=002926842&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-8073-3")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-8) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002926842";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13665?func=item-global&doc_library=TJL01&doc_number=002926842' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13666?func=item-global&doc_library=TJL01&doc_number=002926842&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-8)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13667?func=item-global&doc_library=TJL01&doc_number=002926842&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-8)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13668?func=item-global&doc_library=TJL01&doc_number=002926842&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-8)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13669?func=item-global&doc_library=TJL01&doc_number=002926842&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-8)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13670?func=service-sfx&doc_number=002926841&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13671?func=service-sfx&doc_number=002926841&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000005 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-8072-6 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002926841 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13672?func=full-set-set&set_number=035076&set_entry=000005&format=999>5</A> 
+<form name=XXX000005 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13673?func=full-set-set&set_number=035076&set_entry=000005&format=999 id="TJL01002926841"><script>doclist["TJL01002926841"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13674?func=full-set-set&set_number=035076&set_entry=000005&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;7</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13675?func=service-sfx&doc_number=002926841&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-8072-6")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-7) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002926841";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13676?func=item-global&doc_library=TJL01&doc_number=002926841' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13677?func=item-global&doc_library=TJL01&doc_number=002926841&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-7)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13678?func=item-global&doc_library=TJL01&doc_number=002926841&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-7)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13679?func=item-global&doc_library=TJL01&doc_number=002926841&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-7)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13680?func=item-global&doc_library=TJL01&doc_number=002926841&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-7)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13681?func=service-sfx&doc_number=002926840&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13682?func=service-sfx&doc_number=002926840&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000006 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-8071-9 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002926840 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13683?func=full-set-set&set_number=035076&set_entry=000006&format=999>6</A> 
+<form name=XXX000006 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13684?func=full-set-set&set_number=035076&set_entry=000006&format=999 id="TJL01002926840"><script>doclist["TJL01002926840"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13685?func=full-set-set&set_number=035076&set_entry=000006&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;6</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13686?func=service-sfx&doc_number=002926840&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-8071-9")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-6) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002926840";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13687?func=item-global&doc_library=TJL01&doc_number=002926840' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13688?func=item-global&doc_library=TJL01&doc_number=002926840&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-6)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13689?func=item-global&doc_library=TJL01&doc_number=002926840&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-6)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13690?func=item-global&doc_library=TJL01&doc_number=002926840&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-6)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13691?func=item-global&doc_library=TJL01&doc_number=002926840&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-6)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13692?func=service-sfx&doc_number=002946375&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13693?func=service-sfx&doc_number=002946375&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000007 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-7736-8 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002946375 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13694?func=full-set-set&set_number=035076&set_entry=000007&format=999>7</A> 
+<form name=XXX000007 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13695?func=full-set-set&set_number=035076&set_entry=000007&format=999 id="TJL01002946375"><script>doclist["TJL01002946375"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13696?func=full-set-set&set_number=035076&set_entry=000007&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;4</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13697?func=service-sfx&doc_number=002946375&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-7736-8")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-4) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002946375";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13698?func=item-global&doc_library=TJL01&doc_number=002946375' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13699?func=item-global&doc_library=TJL01&doc_number=002946375&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-4)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13700?func=item-global&doc_library=TJL01&doc_number=002946375&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-4)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13701?func=item-global&doc_library=TJL01&doc_number=002946375&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-4)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13702?func=item-global&doc_library=TJL01&doc_number=002946375&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-4)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13703?func=service-sfx&doc_number=002926839&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13704?func=service-sfx&doc_number=002926839&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000008 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-8070-2 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002926839 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13705?func=full-set-set&set_number=035076&set_entry=000008&format=999>8</A> 
+<form name=XXX000008 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13706?func=full-set-set&set_number=035076&set_entry=000008&format=999 id="TJL01002926839"><script>doclist["TJL01002926839"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13707?func=full-set-set&set_number=035076&set_entry=000008&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;5</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13708?func=service-sfx&doc_number=002926839&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-8070-2")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-5) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002926839";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13709?func=item-global&doc_library=TJL01&doc_number=002926839' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13710?func=item-global&doc_library=TJL01&doc_number=002926839&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-5)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13711?func=item-global&doc_library=TJL01&doc_number=002926839&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-5)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13712?func=item-global&doc_library=TJL01&doc_number=002926839&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-5)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13713?func=item-global&doc_library=TJL01&doc_number=002926839&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-5)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13714?func=service-sfx&doc_number=002910022&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13715?func=service-sfx&doc_number=002910022&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000009 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5753-0284-5 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002910022 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      1 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13716?func=full-set-set&set_number=035076&set_entry=000009&format=999>9</A> 
+<form name=XXX000009 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13717?func=full-set-set&set_number=035076&set_entry=000009&format=999 id="TJL01002910022"><script>doclist["TJL01002910022"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13718?func=full-set-set&set_number=035076&set_entry=000009&format=999>三体&nbsp;:&nbsp;图画小说</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13719?func=service-sfx&doc_number=002910022&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5753-0284-5")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3910 
+<tr><td class=label1>出版社：<td class=content valign=top>译林出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002910022";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13720?func=item-global&doc_library=TJL01&doc_number=002910022' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13721?func=item-global&doc_library=TJL01&doc_number=002910022&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3910<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     1，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13722?func=service-sfx&doc_number=002946374&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13723?func=service-sfx&doc_number=002946374&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000010 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5339-7735-1 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002946374 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13724?func=full-set-set&set_number=035076&set_entry=000010&format=999>10</A> 
+<form name=XXX000010 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13725?func=full-set-set&set_number=035076&set_entry=000010&format=999 id="TJL01002946374"><script>doclist["TJL01002946374"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13726?func=full-set-set&set_number=035076&set_entry=000010&format=999>三体漫画.&nbsp;Ⅱ,&nbsp;黑暗森林.&nbsp;3</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13727?func=service-sfx&doc_number=002946374&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5339-7735-1")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J228.2/3932/(2-3) 
+<tr><td class=label1>出版社：<td class=content valign=top>浙江文艺出版社<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002946374";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13728?func=item-global&doc_library=TJL01&doc_number=002946374' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13729?func=item-global&doc_library=TJL01&doc_number=002946374&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-3)<td class=holding>     1/     1</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13730?func=item-global&doc_library=TJL01&doc_number=002946374&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J228.2/3932/(2-3)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13731?func=item-global&doc_library=TJL01&doc_number=002946374&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J228.2/3932/(2-3)<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13732?func=item-global&doc_library=TJL01&doc_number=002946374&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J228.2/3932/(2-3)<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = <BR> - <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13733?func=service-sfx&doc_number=002923200&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a>  => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13734?func=service-sfx&doc_number=002923200&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a> 
+SET-ENTRY (2000)     = 000011 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5217-7179-4 
+SET-NUMBER (3200)    = 035076 
+DOC-NUMBER (3300)    = 002923200 
+Z05-BASE (3400)      = TJL01 
+TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13735?func=full-set-set&set_number=035076&set_entry=000011&format=999>11</A> 
+<form name=XXX000011 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<td class=cover valign=top><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13736?func=full-set-set&set_number=035076&set_entry=000011&format=999 id="TJL01002923200"><script>doclist["TJL01002923200"]=1;</script></a> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13737?func=full-set-set&set_number=035076&set_entry=000011&format=999>瞬间&nbsp;:&nbsp;《三体》官方原画影像设定集</a> <a href="javascript:open_window('http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13738?func=service-sfx&doc_number=002923200&line_number=0000&service_type=RECORD');"><img src=http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-sfx.gif border=0 alt='Use SFX services'></a><script>fmt_issn("978-7-5217-7179-4")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top><BR><td class=label1>索书号：<td class=content valign=top>J905.2/643 
+<tr><td class=label1>出版社：<td class=content valign=top>中信出版集团股份有限公司<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=TJL01|002923200";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13739?func=item-global&doc_library=TJL01&doc_number=002923200' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13740?func=item-global&doc_library=TJL01&doc_number=002923200&year=&volume=&sub_library=WZWJ  >文化中心中文图书借阅</A></td><td class=bookid>J905.2/643<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13741?func=item-global&doc_library=TJL01&doc_number=002923200&year=&volume=&sub_library=WXJC  >文化中心中图基藏</A></td><td class=bookid>J905.2/643<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13742?func=item-global&doc_library=TJL01&doc_number=002923200&year=&volume=&sub_library=FZWJ  >复康路中文图书借阅</A></td><td class=bookid>J905.2/643<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13743?func=item-global&doc_library=TJL01&doc_number=002923200&year=&volume=&sub_library=HZWJ  >海河园中文图书借阅室</A></td><td class=bookid>J905.2/643<td class=holding>     1/     1</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     4，已出借复本:     1</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-tail --> 
+<script> 
+var lists=''; 
+for(var key in doclist)lists+=key+','; 
+w('<script src="'+lkbhost+'/cgi-bin/alkb.cgi?id='+lists+'"><\/script>'); 
+</script> 
+<img name="dummy_image" src="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/empty.gif" alt="" width=0 height=0 border=0> 
+ 
+
+<!-- filename: short-tail --> 
+<!-- publish section 
+  REQUEST (1100) = WRD = ( 三体 ) 
+  BASE    (9000) = TJL01 
+  Z13-ISBN-ISSN (3100) = 978-7-5217-7179-4 
+  SET-NUMBER (3200)    = 035076 
+  DOC-NUMBER (3300)    = 002923200 
+  Z05-BASE (3400)      = TJL01 
+  ACTIVE-LIB (4000)      = TJL01 
+  TOTAL-NUMBER-OF-ITEMS (3500) =      4 
+  TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      1 
+--> 
+ 
+<td id=sides valign=top rowspan=2> 
+<div class=side> 
+<div id=userinfo class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">读者信息 >> 
+</div><div class=content>您好，<script>if(g("borname").value){w("<a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13744?func=bor-info>"+g("borname").value+"</a>");}else{w("匿名用户");}</script></div> 
+</div> 
+<div class=side> 
+<div id=userinfo class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">当前检索 >> 
+</div><div class=content>WRD = ( 三体 )<br><a href=http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13745?func=history>检索历史</a></div> 
+</div> 
+ 
+<script> 
+var libcode="TJL01"; 
+if(typeof facetcode =='undefined') facetcode={}; 
+function refine(type,word){location.href="http://opacwh.tjl.tj.cn:8991/F/NS9Q5GSCY3H3KPQ1NS86MYIVD68FGG51BQYKEIYK6XM4T5R4QE-13746?func=short-refine-exec&find_code="+(facetcode[type]||type)+"&request="+encodeURI(word)+"&local_base=TJL01&set_number=035076&request_op=AND"; } 
+</script> 
+ 
+<div class=side id=kws> 
+<div id=kw class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">主题词 >> 
+</div><div class=content id=kwcon><center><img src="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/loading.gif"></center></div></div> 
+ 
+<div class=side id=facets> 
+<div id=facet class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">缩小范围 >> 
+</div><div class=content id=facetcon><center><img src="http://opacwh.tjl.tj.cn:8991/exlibris/aleph/u20_1/alephe/www_f_chi/icon/loading.gif"></center></div></div> 
+ 
+<tr><td id=navb height=20px class=hitnum style='border:1px solid #aaa;border-top:none'></td> 
+</table> 
+<script> 
+var reg=new RegExp("&tag=(.*)","i"); 
+if(reg.test(location.href)){ 
+      var arr=reg.exec(location.href); 
+      g('cclterm').value=decodeURI(arr[1]); 
+      g('find_code').options[g('find_code').length-1].selected=true; 
+}else{ 
+g('cclterm').value=parseccl('WRD = ( 三体 )'); 
+g('navb').innerHTML=g('hitnum').innerHTML; 
+//g('rsslink').href+="WRD = ( 三体 )"; 
+} 
+</script> 
+<style>#copyright{margin:10px 2px}body{padding-bottom:40px}</style> 
+<!-- filename: copyrights --> 
+<p id=copyright class="copyright"> 
+<a href=# onclick="return shiftlng('xng')">English Version</a><br> 
+&copy; Ex Libris China  2010 
+</p> 
+<script>if(self.location!=parent.location&&g('cclterm')){g('cclterm').value='';if(g('find_code'))g('find_code').options[0].selected=true;} 
+</script> 
+</div> 
+<script> 
+if(self.location==parent.location){ 
+var q='WRD = ( 三体 )'; 
+if(!fcache || q.match(/ (AND|OR|NOT) /i)){w("<script src='/cgi-bin/facet.cgi?db=TJL01&set=035076&lang=chi'><\/script>");} 
+else{w("<script src=/cgi-bin/facet.cgi?db=TJL01&set=035076&lang=chi&q="+encodeURI(q)+"><\/script>");} 
+ 
+} 
+function showratings(json){ 
+          for (var i = 0; i < json['ratings'].length; i++) { 
+             g('rating'+json['ratings'][i]['num']).innerHTML=showrating(json['ratings'][i]['rating']) 
+     } 
+} 
+if(flag_review!=0&&flag_rating!=0)w('<script src="'+rateurl+'"><\/script>') 
+ 
+if(typeof flag_sfx!='undefined' && flag_sfx){ 
+lists='';for(var key in issns)lists+=key+','; 
+if(lists!='')w('<script src="/cgi-bin/asfx.cgi?issns='+lists+'"><\/script>'); 
+} 
+</script> 
+</body> 
+</html> 
+
+ 
