@@ -23,6 +23,7 @@ from . import taizhou
 from . import tianjin
 from . import wenzhou
 from . import wuxi
+from . import xuzhou
 from . import yangzhou
 
 NAME = "中国"
@@ -47,5 +48,6 @@ ADAPTERS = {
     "tianjin": tianjin,
     "wenzhou": wenzhou,
     "wuxi": wuxi,
+    "xuzhou": xuzhou,
     "yangzhou": yangzhou,
 }

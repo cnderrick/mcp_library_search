@@ -7,6 +7,7 @@ import json
 
 import pytest
 
+from mcp_library_search import libstar
 from mcp_library_search.adapters.cn import wuxi
 from mcp_library_search.adapters.base import (
     validate_book_detail, validate_holdings, validate_search_page,
@@ -22,7 +23,8 @@ HOLDINGS = json.loads(open(_FIXTURES + "holdings_shangyin.json", encoding="utf-8
 
 @pytest.fixture(autouse=True)
 def _no_throttle(monkeypatch):
-    monkeypatch.setattr(wuxi, "_throttle", lambda: None)
+    # 节流在家族 HTTP 层（libstar.client.throttle），无锡的 _request 委托给它
+    monkeypatch.setattr(libstar.client, "throttle", lambda: None)
 
 
 def _patch_request(monkeypatch, responses):
@@ -67,7 +69,7 @@ def test_request_always_sends_referer_and_groupcode(monkeypatch):
         seen["url"] = req.full_url
         return _FakeResponse('{"success": true, "data": {"numFound": 0, "searchResult": []}}')
 
-    monkeypatch.setattr(wuxi.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(libstar.client.urllib.request, "urlopen", fake_urlopen)
     wuxi._request("/find/unify/search", payload={"a": 1})
 
     assert seen["headers"]["referer"] == wuxi._BASE + "/"
@@ -85,16 +87,16 @@ def test_request_missing_referer_error_names_the_header():
 def test_request_network_error_wraps_with_library_name(monkeypatch):
     """网络层失败（TLS 重置/超时）要带上馆名上抛，不能裸抛 URLError。"""
     def boom(req, timeout=None):
-        raise wuxi.urllib.error.URLError("connection reset by peer")
+        raise libstar.client.urllib.error.URLError("connection reset by peer")
 
-    monkeypatch.setattr(wuxi.urllib.request, "urlopen", boom)
+    monkeypatch.setattr(libstar.client.urllib.request, "urlopen", boom)
     with pytest.raises(RuntimeError, match="无锡市新吴区图书馆"):
         wuxi.search_books("三体")
 
 
 def test_request_non_json_body_raises_with_library_name(monkeypatch):
     """被中间层换成 HTML（登录页/拦截页）时要点名，不静默降级。"""
-    monkeypatch.setattr(wuxi.urllib.request, "urlopen",
+    monkeypatch.setattr(libstar.client.urllib.request, "urlopen",
                         lambda req, timeout=None: _FakeResponse("<html>拦截</html>"))
     with pytest.raises(RuntimeError, match="无锡市新吴区图书馆"):
         wuxi.search_books("三体")

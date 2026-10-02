@@ -1,44 +1,36 @@
 """无锡适配器：图星 LibStar Find（无锡市新吴区图书馆）。
 
-站点 `http://wxxqlsp.xw.i-wnd.cn:8013`。当前单源——无锡市新吴区图书馆
-（libCode 80050700001）；无锡市图书馆（主馆）源码 `WXST` 已按天津口径预留，
-接入后在同一城市标识下按 ISBN 归并，既有 book_id 契约不变。
+站点 `http://wxxqlsp.xw.i-wnd.cn:8013`。协议、解析与两个必需请求头
+（`Referer`＋`groupcode`）见 `libstar/` 家族；本模块是家族之上的薄层。
 
-技术组件是图星 LibStar Find v3.2023.12（北京图星/超星集团），与图创 Interlib
-是两家厂商，不共用代码。字段侦察结论（字段码表、状态词表、数据边界）见
-tests/fixtures/wuxi/NOTES.md。
-
-**两个必需请求头是本城接入的关键**：
-
-- `Referer`：任意值即可，只校验存在。缺失时**所有内容类端点**返回
-  `errCode:9999`「系统访问中断」——措辞指向服务端宕机，实为反爬兜底。
-  2026-10-02 初判「站点不通」即栽在这里；
-- `groupcode: 800507`：新吴区租户号（≠ libCode 80050700001）。缺失不报错，
-  HTTP 200 但 `numFound` 恒 0。
-
-两者由 `_request()` 统一注入，三个原语全部经由它取数，调用点无从遗漏。
+当前单源——无锡市新吴区图书馆（libCode 80050700001）；无锡市图书馆（主馆）
+源码 `WXST` 已按天津口径预留，接入后在同一城市标识下按 ISBN 归并，既有
+book_id 契约不变。多实例归并是本城相对家族单实例原语的唯一差异。
 """
-import json
 import math
 import re
-import time
-import urllib.error
-import urllib.parse
-import urllib.request
 from dataclasses import dataclass, replace
+from functools import partial
 from types import SimpleNamespace
 
+from ... import libstar
+from ...libstar import LibStarConfig
+from ...libstar import parser as _parser
+from ...libstar.client import request as _family_request
 from ..base import BookDetail, BookSummary, Holding, SearchPage
 
 _NAME = "无锡市新吴区图书馆"
 _BASE = "http://wxxqlsp.xw.i-wnd.cn:8013"
 _GROUPCODE = "800507"
-_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-       "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-_TIMEOUT = 20
 
-_THROTTLE = 1.0  # 秒/host 保守间隔（站点未观测到限频，留余量；单测 monkeypatch 关闭）
-_last_request = 0.0
+_CONFIG = LibStarConfig(city="wuxi", name_cn=_NAME,
+                        base_url=_BASE, groupcode=_GROUPCODE)
+
+# 兼容缝：单测直接引用家族检索模板与解析器；家族解析器带可选 name，此处绑定本馆名。
+_SEARCH_BODY = libstar.SEARCH_BODY
+_parse_search = partial(_parser.parse_search, name=_NAME)
+_parse_detail = partial(_parser.parse_detail, name=_NAME)
+_parse_holdings = partial(_parser.parse_holdings, name=_NAME)
 
 # 数据源表：新增源只需在此加一条（天津口径）。WXST（无锡市图书馆）为预留槽位，
 # 尚未接入——补上配置即可启用，book_id 形态与归并逻辑都已就位。
@@ -48,19 +40,6 @@ _SOURCES = {
 }
 # 归并优先级：主馆在前（复合 book_id 成员顺序与主记录取值同源）
 _SOURCE_PRIORITY = ("WXST", "WXXW")
-
-# 检索请求体模板（约 30 个固定字段）：只有 searchFieldContent / page / rows 随调用变化。
-# 逐次 dict(...) 复制，免得关键词串到下一次请求。
-_SEARCH_BODY = {
-    "docCode": [None], "searchFieldContent": "", "searchField": "keyWord", "matchMode": "2",
-    "resourceType": [], "subject": [], "discode1": [], "publisher": [], "libCode": [],
-    "locationId": [], "eCollectionIds": [], "neweCollectionIds": [], "curLocationId": [],
-    "campusId": [], "kindNo": [], "collectionName": [], "author": [], "langCode": [],
-    "countryCode": [], "publishBegin": None, "publishEnd": None, "coreInclude": [],
-    "ddType": [], "verifyStatus": [], "group": [], "sortField": "relevance",
-    "sortClause": "asc", "page": 1, "rows": 10, "onlyOnShelf": None, "searchItems": None,
-    "newCoreInclude": [], "customSub": [], "customSub0": [], "indexSearch": 1,
-}
 
 
 @dataclass
@@ -92,63 +71,9 @@ class _Holding:
         return self.available
 
 
-def _throttle():
-    """最小间隔限速：距上次请求不足 _THROTTLE 秒时睡足差值（单 host）。"""
-    global _last_request
-    wait = _THROTTLE - (time.monotonic() - _last_request)
-    if wait > 0:
-        time.sleep(wait)
-    _last_request = time.monotonic()
-
-
-def _clean(text):
-    """字段值 → 原值字符串（None→空串），只去首尾空白，不改内容。"""
-    if text is None:
-        return ""
-    return str(text).strip()
-
-
-# ---------- HTTP 出口 ----------
-
-
 def _request(path, payload=None, params=None):
-    """统一 HTTP 出口：注入 Referer 与 groupcode 两个必需头，返回解析后的 JSON 信封。"""
-    url = _BASE + path
-    if params:
-        url = f"{url}?{urllib.parse.urlencode(params)}"
-    headers = {
-        "Referer": _BASE + "/",          # 缺失 → 全站内容端点回 errCode 9999（反爬兜底）
-        "groupcode": _GROUPCODE,         # 缺失 → HTTP 200 但静默 0 结果
-        "User-Agent": _UA,
-        "Accept": "application/json, text/plain, */*",
-    }
-    data = None
-    if payload is not None:
-        data = json.dumps(payload).encode("utf-8")
-        headers["Content-Type"] = "application/json;charset=UTF-8"
-    req = urllib.request.Request(url, data=data, headers=headers)
-    _throttle()
-    try:
-        with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
-            body = resp.read().decode("utf-8", "replace")
-    except (urllib.error.URLError, OSError) as e:
-        # 网络层失败（TLS 重置/超时/DNS）带上馆名上抛，不裸抛 URLError
-        raise RuntimeError(
-            f"{_NAME}：请求失败（{path}）：{getattr(e, 'reason', e)}") from e
-    try:
-        return json.loads(body)
-    except ValueError as e:
-        raise RuntimeError(f"{_NAME}：响应不是 JSON（可能被拦截或接口变更）：{body[:120]}") from e
-
-
-def _check(payload, what):
-    """图星统一信封校验：success 为假即上抛，errCode 9999 补一句头缺失提示。"""
-    if isinstance(payload, dict) and payload.get("success"):
-        return payload.get("data") or {}
-    code = payload.get("errCode") if isinstance(payload, dict) else None
-    msg = payload.get("message") if isinstance(payload, dict) else str(payload)[:120]
-    hint = "；errCode 9999 通常意味着请求漏带 Referer 头（本站反爬闸）" if code == 9999 else ""
-    raise RuntimeError(f"{_NAME}：{what}失败 errCode={code}：{msg}{hint}")
+    """本城 HTTP 出口：委托家族 client，注入 Referer 与 groupcode 两个必需头。"""
+    return _family_request(_CONFIG, path, payload=payload, params=params)
 
 
 # ---- ISBN 归并与复合 book_id（口径照天津/合肥） ----
@@ -222,160 +147,6 @@ def _source(source):
     if cfg is None:
         raise RuntimeError(f"{_NAME}：数据源 {source} 尚未接入（预留槽位）")
     return cfg
-
-
-# ---------- 解析 ----------
-
-_RE_ISBN_TAIL = re.compile(r"[\s/]")
-_YEAR_RE = re.compile(r"(?:19|20)\d{2}")
-
-
-def _year(text):
-    """出版日期原值 → 四位年份（实抓可为「2016.6」）；取不到返回空串。
-
-    同青岛/重庆/宁波口径：只提形态，不做换算猜测。
-    """
-    m = _YEAR_RE.search(str(text or ""))
-    return m.group(0) if m else ""
-
-
-def _isbn_from(values):
-    """cnb04「ISBN及定价」→ ISBN。
-
-    同码可重复，且首条可能只有定价没有 ISBN（实抓 764039：先 `'/271.00 (8册)'`
-    后 `'978-7-229-10062-9/271.00 (8册)'`）——取首个切出的非空 token，照单取首条
-    会把 ISBN 解析成空串。
-    """
-    for raw in values:
-        head = _RE_ISBN_TAIL.split(raw, 1)[0].strip()
-        if head:
-            return head
-    return ""
-
-
-def _availability(record):
-    """可借概况：站点 UI 即用这两个数显示「纸本(N) / 可借(M)」。
-
-    任一项缺失（老书目）则留空串，不拿单项编造。
-    """
-    total, on_shelf = record.get("physicalCount"), record.get("onShelfCountI")
-    if total is None or on_shelf is None:
-        return ""
-    return f"纸本{int(total)}，可借{int(on_shelf)}"
-
-
-def _parse_search(payload):
-    """检索响应 → {"books": [...], "total_results": int}。
-
-    `numFound` 是真实总数（扁平数字）。`publisher` 源站可为 null → 空串。
-    `isbn` 是内部字段（供跨源归并），不进 BookSummary 契约。
-    """
-    data = _check(payload, "检索")
-    try:
-        total = int(data.get("numFound") or 0)
-    except (TypeError, ValueError):
-        total = 0
-    books = []
-    for rec in data.get("searchResult") or []:
-        if not isinstance(rec, dict):
-            continue
-        book_id = _clean(rec.get("recordId"))
-        if not book_id:
-            continue
-        books.append({
-            "book_id": book_id,
-            "title": _clean(rec.get("title")),
-            "author": _clean(rec.get("author")),
-            "publisher": _clean(rec.get("publisher")),
-            "publish_year": _year(rec.get("publishYear")),
-            "availability_summary": _availability(rec),
-            "isbn": _clean(rec.get("isbn")),
-        })
-    return {"books": books, "total_results": total}
-
-
-def _fields(payload):
-    """bean2List → {字段码: [值, ...]}（同码可多条，如 cnb20/cnb67）。"""
-    out = {}
-    for item in (_check(payload, "详情").get("bean2List") or []):
-        if not isinstance(item, dict):
-            continue
-        key = _clean(item.get("key"))
-        if key:
-            out.setdefault(key, []).append(_clean(item.get("fieldVal")))
-    return out
-
-
-def _parse_detail(payload):
-    """详情 → 归一字段。
-
-    - `cnb01` 题名/责任者：按第一个 `/` 切题名与责任者（MARC 200 段惯例）；
-    - `cnb03` 出版发行项：「出版地:出版社,年份」或「出版地,年份」，后者无出版社；
-    - `cnb04` ISBN及定价：取首个 token（其后是装帧/定价，空格或 `/` 分隔）；
-      同码可重复且可能首条无 ISBN，见 `_isbn_from`；
-    - `cnb67` 中图法分类号：可多条，取首条作 call_number（同青岛家族口径，
-      完整索书号在馆藏明细的 call_number 里）；
-    - `cnb96` 提要文摘附注：内容简介。
-    """
-    f = _fields(payload)
-    title_author = (f.get("cnb01") or [""])[0]
-    title, _, author = title_author.partition("/")
-    pub = (f.get("cnb03") or [""])[0]
-    head, _, year = pub.rpartition(",")
-    publisher = head.partition(":")[2] if head else ""
-    return {
-        "title": title.strip(),
-        "author": author.strip(),
-        "publisher": publisher.strip(),
-        "publish_year": _year(year) if head else "",
-        "isbn": _isbn_from(f.get("cnb04") or []),
-        "call_number": (f.get("cnb67") or [""])[0],
-        "summary": (f.get("cnb96") or [""])[0],
-    }
-
-
-_RE_DUE = re.compile(r"应还日期[:：]\s*(\d{4}-\d{2}-\d{2})")
-
-
-def _status_of(process_type):
-    """processType → (status 原值, available, due_date)。
-
-    实测词表只有两态：`在架`（可借）与 `借出-应还日期:YYYY-MM-DD`（不可借且自带
-    应还日期）。未观测到的值一律保守判不可借、原值照登（同重庆口径）。
-    """
-    status = _clean(process_type)
-    if status == "在架":
-        return status, True, ""
-    due = _RE_DUE.search(status)
-    return status, False, due.group(1) if due else ""
-
-
-def _parse_holdings(payload):
-    """馆藏响应 → 单册列表。
-
-    `data.sortedList` 按馆名分组（新吴区全站单馆，实际只有一组）；馆名取分组键
-    （回退到 libName），馆内位置取 `locationName`，索书号取 `callNo`。
-    """
-    data = _check(payload, "馆藏")
-    holdings = []
-    for lib_key, group in (data.get("sortedList") or {}).items():
-        if not isinstance(group, dict):
-            continue
-        name = _clean(group.get("libName")) or _clean(lib_key)
-        for item in group.get("phyItemVo") or []:
-            if not isinstance(item, dict):
-                continue
-            status, available, due = _status_of(item.get("processType"))
-            holdings.append({
-                "library": name,
-                "location": _clean(item.get("locationName")),
-                "call_number": _clean(item.get("callNo")),
-                "status": status,
-                "available": available,
-                "item_id": _clean(item.get("itemId")),
-                "due_date": due,
-            })
-    return holdings
 
 
 # ---------- 契约缝（与成都/台州/青岛同款） ----------

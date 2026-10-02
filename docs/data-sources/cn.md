@@ -67,11 +67,11 @@
 |  |  |  | ✅ 接入 | https://opac.jslib.org.cn/F/ （南京图书馆/江苏省图） | Ex Libris ALEPH `u20_1 / www_f_chi`（外层 openresty 全局验证码墙；**按 host 独立封禁**，解南图不解天津） | `aleph/` 家族原语 ＋ `adapters/cn/nanjing.py`（南图源，`item_global_all_params=True`）；2026-10-02 全链路实网跑通，库代码表·两处坑与家族兼容性证据见 `tests/fixtures/nanjing_prov/NOTES.md` |
 |  | 扬州 | `yangzhou` | ✅ 接入 | http://ytlmopac.cn:8080/uopac/s/search.action （扬州市图书馆联盟联合目录，含邗江区馆等成员馆） | 汇文 Libsys/uopac（Struts2，与金陵同系统；全路径 securitycam 静态挑战） | `uopac/` 家族 + `adapters/cn/yangzhou.py`；壳页 key/IV/密文为硬编码常量、cookie 恒定（解出值见 NOTES），故直接带常量 cookie，无需 JS 引擎；常量轮换由家族 HTTP 层认出壳页抛错，不静默空结果 |
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/cn/jiangyin.py` |
-|  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `adapters/cn/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
+|  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `libstar/` 家族 + `adapters/cn/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
 |  |  | — | ⛔ 不通 | http://222.191.248.124:8088/opac/book_cart.php （无锡市图书馆旧 OPAC） | — | 2026-10-03 实测 8088 端口空响应、同 IP 80 端口仅 Tomcat 默认 404；官网 www.wxlib.cn 仍指向该 8088 旧 OPAC，暂无可用检索入口，市图源 `WXST` 继续搁置 |
 |  | 苏州 | `suzhou` | ✅ 接入 | https://reader.szlib.com/opac/index （苏州图书馆，页标题「检索系统」，全市集群目录） | 图创 Interlib（已确认：页内自报图创／interlib、`/opac/media/*`、`bookrecno`；2026-10-03 实抓「三体」232 条、24 页） | `interlib/` 家族 + `adapters/cn/suzhou.py`（默认模板零 quirk，不需要 `curlibcode`） |
 |  |  | — | 🔍 待核验 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | — |
-|  | 徐州 | — | 📋 计划 | https://findxz.libsp.com （徐州市图书馆，同名多分馆含鼓楼区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `adapters/cn/wuxi.py` 协议可复用；`groupCode=3203001001`（与主馆 libCode 同）。检索须带 `Referer`＋`groupcode` 头，缺 `groupcode` 静默 0 结果；待立项 |
+|  | 徐州 | `xuzhou` | ✅ 接入 | https://findxz.libsp.com （徐州市图书馆，同名多分馆含鼓楼区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `libstar/` 家族 + `adapters/cn/xuzhou.py`；`groupCode=3203001001`（与主馆 libCode 同）。检索须带 `Referer`＋`groupcode` 头，缺 `groupcode` 静默 0 结果；实抓「三体」407 条 |
 |  | 常州 | — | ⛔ 不通 | http://www.czlib.net （常州市图书馆） | — | 2026-10-03 实测域名解析到 198.20.x.x 域名停放段、TCP 空响应，非馆方站点；近似域名 czlib.cn＝潮州市图书馆，亦非本市，未找到可用检索入口 |
 |  | 南通 | — | ⛔ 不通 | https://www.ntlib.org.cn （南通市图书馆） | — | 2026-10-03 实测 `www.ntlib.org.cn`（58.221.24.12）TLS 握手直接 EOF，裸 `ntlib.org.cn` 302 指回 www 形成循环；原登记 `www.ntlib.net` 落在 198.20.x.x 域名停放段，均无可用检索入口 |
 |  | 连云港 | — | 🔍 待核验 | https://4366ha.mh.chaoxing.com/entry/page/ck/peking_library （连云港市图书馆，超星智慧门户） | 超星智慧门户（wisweb／chaoxing 系） | 用户所给入口 `…/entry/global/offline` 实测显示「系统升级中」；门户页本身 HTTP 200，底层书目检索入口未侦察 |
@@ -663,21 +663,21 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 
 ## 图星 LibStar Find（无锡、徐州、盐城、淮安）
 
-`adapters/cn/wuxi.py` 独立实现（urllib + json），单源——无锡市新吴区图书馆
-（`libCode 80050700001`，全站只有这一个馆）。技术组件是图星 LibStar Find
-v3.2023.12（北京图星/超星集团），与图创 Interlib 是两家厂商，不共用代码。
-节流 1 秒/host。
+家族模块 `libstar/`：`client.py`（HTTP 层＋`Referer`/`groupcode` 必需头＋节流）、
+`parser.py`（检索/详情/馆藏解析）、`__init__.py`（单实例三原语与 `LibStarConfig`）。
+成员：无锡市新吴区图书馆（`adapters/cn/wuxi.py`，单实例＋多源预留）、徐州
+（`adapters/cn/xuzhou.py`）。城市差异只允许以 `LibStarConfig` 带默认值的字段新增。
+技术组件是图星 LibStar Find v3.2023.12（北京图星/超星集团），与图创 Interlib 是
+两家厂商，不共用代码；家族 client 节流 1 秒/host。
 
-**同款系统（2026-10-03 侦察，待接入）**：徐州 `https://findxz.libsp.com`
-（`groupCode=3203001001`，与主馆 libCode 同）、盐城 `https://findyctsg.libsp.com`
+**其余同款站点（2026-10-03 侦察，待接入）**：盐城 `https://findyctsg.libsp.com`
 （`groupCode=100026`）、淮安 `https://findhastsg.pub.chaoxing.com`（`groupCode=100382`，
-另有淮安市少儿馆与清江浦区等分馆）。三站与无锡新吴**同协议、同字段**：`POST
-/find/unify/search` 约 30 字段固定请求体，结果 `recordId/title/author/publisher/
-publishYear/isbn/physicalCount/onShelfCountI` 与无锡逐项同形，同样**必须带
-`groupcode` 头（缺则静默 0 结果）**；租户号可由 `POST /find/homePage/getGroupCode
-{mappingPath}` 查得（`data.groupCode`）。`adapters/cn/wuxi.py` 的协议与解析可直接
-复用（多源时可照天津口径合并）。已调通实测：「三体」徐州 407 条、盐城 857 条、
-淮安 3110 条。
+另有淮安市少儿馆与清江浦区等分馆）。与无锡新吴、徐州**同协议、同字段**（`POST
+/find/unify/search` 固定请求体；结果 `recordId/title/author/publisher/publishYear/
+isbn/physicalCount/onShelfCountI` 逐项同形；同样必须带 `groupcode` 头，缺则静默
+0 结果），接入只需在家族加配置与薄适配器。租户号可由 `POST /find/homePage/
+getGroupCode {mappingPath}` 查得（`data.groupCode`）。已调通实测：「三体」盐城
+857 条、淮安 3110 条（徐州 407 条已接入）。
 
 > **`*.libsp.com` 是通配停放域**：`find<城>*.libsp.com` 之类任意子域都解析到
 > 198.20.x.x 停放页（回「新一代图书馆服务平台」），凭域名猜测判断可达性会误判——
@@ -711,12 +711,18 @@ publishYear/isbn/physicalCount/onShelfCountI` 与无锡逐项同形，同样**�
 - **数据边界**：检索索引与馆藏端点会不一致——实抓 143656 索引计 1 册而三种馆藏取法
   全空，**馆藏端点为准**，适配器如实返回空列表；`onShelfCountI=null` 本身不等于无馆藏
   （311140 同为 null 却有 1 册），只是可借概况留空。
-- **多源预留**：无锡市图书馆（主馆）后续接入，届时在本适配器内作第二数据源、按
+- **多源预留**：无锡市图书馆（主馆）后续接入，届时在 `wuxi.py` 内作第二数据源、按
   ISBN 归并（天津口径）。`book_id` 从第一天就带 `WXXW:` 源前缀，故新增源不改变
   既有 id 契约；预留源码 `WXST` 优先级在前，未接入时查询给出明确报错而非静默空。
   2026-10-03 复测：市图旧 OPAC（`222.191.248.124:8088`）仍不通，官网 www.wxlib.cn
   亦仍指向它，市图源继续搁置，待其迁到可用平台（疑为图星/超星系）后再接入。
-- 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/wuxi/NOTES.md`。
+- **徐州（`xuzhou`）差异（均无需新 quirk）**：单实例、无多源归并（所有分馆在同一
+  `sortedList` 多分组里），`book_id` 即裸 `recordId`；主馆分组可为空（实抓 439114
+  主馆无单册、仅鼓楼黄楼分馆 1 册）；状态词表多一态 `本馆归还: 正在上架`（保守判
+  不可借）。详情接口 `errCode` 恒 `9000124`（`success:true`）是源站固定返回码，非
+  错误。侦察结论见 `tests/fixtures/xuzhou/NOTES.md`。
+- 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/wuxi/NOTES.md`、
+  `tests/fixtures/xuzhou/NOTES.md`。
 
 ## 超星智慧门户（宿迁、连云港）
 
