@@ -44,7 +44,9 @@ def search_books(keyword: str, city: str = "shanghai", page: int = 1, limit: int
     馆藏为空属数据边界）、chengdu（成都，成都平原经济区联合目录含德阳/眉山
     等市县馆，馆藏到单册级）、dalian（大连，地区联合目录，会话制检索）、
     qingdao（青岛，全市联合目录含区级馆与城市书房，馆藏到单册级；检索走站点
-    内嵌 Solr 通道，结果只含有馆藏的书目，逐书目可借概况为空串属数据边界）；
+    内嵌 Solr 通道，结果只含有馆藏的书目，逐书目可借概况为空串属数据边界）、
+    wuxi（无锡，无锡市新吴区图书馆单馆，馆藏下沉到街道分馆与社区服务点；
+    市图书馆源预留未接入）；
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
@@ -72,6 +74,9 @@ def find_book_availability(book_id: str, city: str = "shanghai", only_available:
     查看状态原值（入藏/借出等）与应还日期，自行判断。
     浙江图书馆源（hangzhou 双源之一）与金华源的借出馆藏拿不到应还日期
     （due_date 为空串属数据边界，非故障）；杭州图书馆源正常带应还日期。
+    无锡源（wuxi）的检索索引与馆藏端点会不一致：索引计有复本而馆藏端点返回空
+    （如实返回空列表，馆藏端点为准），另有部分书目拿不到在架数导致可借概况为空串，
+    均属数据边界。
 
     参数：
         book_id：search_books 返回的图书 ID，需与 search_books 使用同一 city

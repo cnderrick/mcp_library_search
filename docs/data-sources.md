@@ -63,7 +63,7 @@
 |  |  |  | ✅ 接入 | https://opac.jslib.org.cn/F/ （南京图书馆/江苏省图） | Ex Libris ALEPH `u20_1 / www_f_chi`（外层 openresty 全局验证码墙；**按 host 独立封禁**，解南图不解天津） | `aleph/` 家族原语 ＋ `adapters/nanjing.py`（南图源，`item_global_all_params=True`）；2026-10-02 全链路实网跑通，库代码表·两处坑与家族兼容性证据见 `tests/fixtures/nanjing_prov/NOTES.md` |
 |  | 扬州 | — | 📋 计划 | http://ytlmopac.cn:8080/uopac/s/search.action | 汇文 Libsys/uopac（Struts2，已确认） | 🔍 可接入·待立项：站点的 JS AES Cookie 反爬（securitycam）经壳页静态分析为**静态挑战**——key/IV/密文全硬编码、cookie 恒定，纯 Python 可解（无需浏览器引擎）；实现与 ToS 评估待用户拍板 |
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
-|  | 无锡 | — | ⛔ 不通 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题） |
+|  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `adapters/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
 |  | 苏州 | — | 🔍 待核验 | https://reader.szlib.com/opac （苏州图书馆） | — | — |
 |  |  | — | 🔍 待核验 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | — |
 |  | 徐州 | — | ⛔ 不通 | http://www.xzlib.net （徐州市图书馆） | — | — |
@@ -505,6 +505,46 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 - **数据边界**：借出单册无应还日期（due_date=""，站方访客视角不提供，不猜）。
 - 字段侦察与出入清单见 `tests/fixtures/jinhua/NOTES.md`。
 
+## 图星 LibStar Find（无锡）
+
+`adapters/wuxi.py` 独立实现（urllib + json），单源——无锡市新吴区图书馆
+（`libCode 80050700001`，全站只有这一个馆）。技术组件是图星 LibStar Find
+v3.2023.12（北京图星/超星集团），与图创 Interlib 是两家厂商，不共用代码。
+节流 1 秒/host。
+
+- **两个必需请求头（本城最大的坑）**：`Referer`（任意值即可，只校验存在）与
+  `groupcode: 800507`（新吴区租户号，≠ libCode）。缺 `Referer` 时**所有内容类
+  端点**返回 `errCode:9999`「系统访问中断」——措辞指向下游 OPAC 不可达，实为
+  站点的反爬兜底，**极易误判成服务端宕机**（2026-10-02 初判「无锡不通」即此）；
+  缺 `groupcode` 不报错，HTTP 200 但 `numFound` 恒 0。配置类端点
+  （`findConfig/*`、`webSite/*`）不受影响，所以站点看起来「一半是活的」。
+  两者由 `_request()` 统一注入，三个原语无从遗漏。
+- **检索**：`POST /find/unify/search`，请求体是约 30 个字段的固定模板，只有
+  `searchFieldContent`/`page`/`rows` 随调用变化（`searchField=keyWord` 通吃
+  书名/作者/ISBN）。响应 `data.numFound` 为真实总数（扁平数字）；
+  `data.facetResult` 有 14 个聚类维度。**ISBN 带不带连字符都命中**，无需去连字符重试。
+- **详情**：`GET /find/searchResultDetail/getBookDetail?recordId=`（**必须 GET**，
+  同参数 POST 回 9999）。响应 `data.bean2List[]` 字段码：`cnb01` 题名/责任者
+  （按第一个 `/` 切分）、`cnb03` 出版发行项（`北京:出版社,2022` 或 `北京,2017`）、
+  `cnb04` ISBN及定价、`cnb67` 中图法分类号、`cnb96` 提要文摘附注。
+  详情页无独立索书号字段，`call_number` 取 `cnb67`（同青岛家族口径）。
+- **馆藏**：`POST /find/physical/groupItemsByLibCode {recordId}`，响应
+  `data.sortedList[馆名].phyItemVo[]`，单册含 `callNo`/`locationName`/`inDate`。
+  馆藏下沉到街道分馆与社区服务点（净湖社区、伯渎河文化中心图书馆各层等），原值照登。
+- **状态词表**：`processType` 实测只有两态——`在架`（可借）与
+  `借出-应还日期:YYYY-MM-DD`（不可借，**应还日期直接内嵌在状态串里**，访客视角
+  即可拿到，比浙图/金华强）。词表外观测值保守判不可借、原值照登（同重庆口径）。
+- **可借概况**：检索结果给 `physicalCount`（总册）与 `onShelfCountI`（在架），
+  站点 UI 即以此显示「纸本(N) / 可借(M)」，`availability_summary` 由此二值拼装；
+  任一项缺失（老书目）留空串。
+- **数据边界**：检索索引与馆藏端点会不一致——实抓 143656 索引计 1 册而三种馆藏取法
+  全空，**馆藏端点为准**，适配器如实返回空列表；`onShelfCountI=null` 本身不等于无馆藏
+  （311140 同为 null 却有 1 册），只是可借概况留空。
+- **多源预留**：无锡市图书馆（主馆）后续接入，届时在本适配器内作第二数据源、按
+  ISBN 归并（天津口径）。`book_id` 从第一天就带 `WXXW:` 源前缀，故新增源不改变
+  既有 id 契约；预留源码 `WXST` 优先级在前，未接入时查询给出明确报错而非静默空。
+- 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/wuxi/NOTES.md`。
+
 ## 一城多源合并（天津范本）
 
 一个城市聚合多个独立系统时共用这套口径，天津是最早的范本，杭州、合肥、南京照此实现：
@@ -515,6 +555,7 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 | 杭州 `hangzhou` | 杭州图书馆 `HZ`、浙江图书馆 `ZJ` | HZ > ZJ |
 | 合肥 `hefei` | 安徽省图书馆 `AH`、合肥市图书馆 `HF` | AH > HF |
 | 南京 `nanjing` | 金陵图书馆联合目录（含 12 区馆）`JL`、南京图书馆（江苏省图）`NJL01` | JL > NJL01（南京两源的书目字段取值与 id 顺序同此） |
+| 无锡 `wuxi` | 无锡市新吴区图书馆 `WXXW`（**当前唯一已接入源**）；无锡市图书馆 `WXST` **预留未接入** | WXST > WXXW（主馆在前；市图接入前 WXST 不会命中） |
 
 - **必须分别检索再归并**：各源是独立系统、独立书目库，同一本书的命中互不相同（天津实证：
   同一「三体」TJL01 156 条 vs TJC01 32 条），只查一个源会漏。
