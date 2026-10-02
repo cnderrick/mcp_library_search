@@ -6,9 +6,11 @@
 
 ## 总览
 
-同一省份的城市排在一起，省份列只在该省首行填写（视觉上等同于合并单元格），新增城市时接在本省行之后。
+同一省份的城市排在一起，省份列只在该省首行填写（视觉上等同于合并单元格），新增城市时接在本省行之后。同一城市的多座馆（省馆＋市馆等）接在该城行之后，城市列只在该城首行填写，具体馆名随入口地址注明。表序分三段：直辖市在前、省居中、自治区殿后。
 
-状态列标识：✅ 接入＝全链路实网跑通；⚠️ 部分接入＝链路有环节待修；⛔ 不通＝站点侧拦截或不可达；🚧 攻关＝已侦察、待攻克；📋 计划＝可接入、待立项。
+总览含一批自《全国公共图书馆OPAC查询地址清单》批量补入的未接入城市（据该清单原文照登城市与馆名，标识、技术组件、适配层留空待侦察）。这批行按实测分档：🔍 待核验＝首页实测可达且站点标明确为图书馆；⛔ 不通＝连接失败、或域名实测已被停放/无关站点占用。部分条目存在清单本身的张冠李戴（同一域名被安到多座城市），未作改写，以实测结果为准。
+
+状态列标识：✅ 接入＝全链路实网跑通；⚠️ 部分接入＝链路有环节待修；⛔ 不通＝站点侧拦截、不可达，或实测已被域名停放/无关站点占用；🚧 攻关＝已侦察、待攻克；📋 计划＝可接入、待立项；🔍 待核验＝首页可达、OPAC 未侦察。
 
 | 省份 | 城市 | 标识 | 状态 | 线上图书馆入口 | 技术组件 | 适配层位置 |
 |---|---|---|---|---|---|---|
@@ -21,15 +23,90 @@
 | 重庆市（直辖市） | 重庆 | `chongqing` | ✅ 接入 | http://222.177.237.197:8080/InDigLib/frontV2/SearchIndex!simple.action?opacType=local | InDigLib 集群数字图书馆（Struts2+Solr） | `adapters/chongqing.py`（独立实现） |
 | 安徽省 | 合肥 | `hefei` | ✅ 接入 | https://opac.ahlib.com/opac/index （安徽省图书馆） | 图创 Interlib（已确认，与穗杭完全同模板） | `interlib/` 家族 + `adapters/hefei.py`（双源合并：皖图 `AH:` ＋ 市图 `HF:`，天津口径） |
 |  |  |  | ✅ 接入 | https://opac.hflib.org.cn/lib2/ （合肥市图书馆） | 图创 Interlib（已确认，同模板；应用上下文是 `/lib2` 非 `/opac`，`/opac/*` 返回 nginx 500） |  |
+|  | 芜湖 | — | ⛔ 不通 | http://www.whlib.net （芜湖市图书馆） | — | — |
+|  | 蚌埠 | — | ⛔ 不通 | http://www.bblib.net （蚌埠市图书馆） | — | — |
+|  | 淮南 | — | ⛔ 不通 | http://www.hnlib.net （淮南市图书馆） | — | — |
+|  | 马鞍山 | — | ⛔ 不通 | http://www.maslib.net （马鞍山市图书馆） | — | — |
+|  | 淮北 | — | ⛔ 不通 | http://www.hblib.net （淮北市图书馆） | — | — |
+|  | 铜陵 | — | ⛔ 不通 | http://www.tllib.net （铜陵市图书馆） | — | — |
+|  | 安庆 | — | ⛔ 不通 | http://www.aqlib.net （安庆市图书馆） | — | — |
+|  | 黄山 | — | ⛔ 不通 | http://www.hslib.net （黄山市图书馆） | — | — |
+|  | 滁州 | — | ⛔ 不通 | http://www.czlib.net （滁州市图书馆） | — | — |
+|  | 阜阳 | — | ⛔ 不通 | http://www.fylib.net （阜阳市图书馆） | — | — |
+|  | 宿州 | — | ⛔ 不通 | http://www.szlib.net （宿州市图书馆） | — | — |
+|  | 六安 | — | ⛔ 不通 | http://www.lalib.net （六安市图书馆） | — | — |
+|  | 亳州 | — | ⛔ 不通 | http://www.bzlib.net （亳州市图书馆） | — | — |
+|  | 池州 | — | ⛔ 不通 | http://www.czlib.net （池州市图书馆） | — | — |
+|  | 宣城 | — | ⛔ 不通 | http://www.xclib.net （宣城市图书馆） | — | — |
 | 广东省 | 广州 | `guangzhou` | ✅ 接入 | https://opac.gzlib.org.cn | 图创 Interlib | `interlib/` 家族 + `adapters/guangzhou.py` |
 |  | 深圳 | `shenzhen` | ✅ 接入 | https://www.szlib.org.cn/opac/ | 图书馆之城自研 JSON API（后端 ILAS，167 馆统一平台） | `adapters/shenzhen.py`（独立实现） |
+|  | 韶关 | — | ⛔ 不通 | http://www.sglib.net （韶关市图书馆） | — | — |
+|  | 珠海 | — | ⛔ 不通 | http://www.zhlib.net （珠海市图书馆） | — | — |
+|  | 汕头 | — | ⛔ 不通 | http://www.stlib.net （汕头市图书馆） | — | — |
+|  | 佛山 | — | ⛔ 不通 | http://www.fslib.net （佛山市图书馆） | — | — |
+|  | 江门 | — | 🔍 待核验 | http://www.jmlib.net （江门市图书馆） | — | — |
+|  | 湛江 | — | ⛔ 不通 | http://www.zjlib.net （湛江市图书馆） | — | — |
+|  | 茂名 | — | ⛔ 不通 | http://www.mmlib.net （茂名市图书馆） | — | — |
+|  | 肇庆 | — | ⛔ 不通 | http://www.zqlib.net （肇庆市图书馆） | — | — |
+|  | 惠州 | — | ⛔ 不通 | http://www.hzlib.net （惠州市图书馆） | — | — |
+|  | 梅州 | — | ⛔ 不通 | http://www.mzlib.net （梅州市图书馆） | — | — |
+|  | 汕尾 | — | ⛔ 不通 | http://www.swlib.net （汕尾市图书馆） | — | — |
+|  | 河源 | — | ⛔ 不通 | http://www.hylib.net （河源市图书馆） | — | — |
+|  | 阳江 | — | 🔍 待核验 | http://www.yjlib.net （阳江市图书馆） | — | — |
+|  | 清远 | — | ⛔ 不通 | http://www.qylib.net （清远市图书馆） | — | — |
+|  | 东莞 | — | ⛔ 不通 | http://www.dglib.net （东莞图书馆） | — | — |
+|  | 中山 | — | ⛔ 不通 | http://www.zslib.net （中山市图书馆） | — | — |
+|  | 潮州 | — | ⛔ 不通 | http://www.czlib.net （潮州市图书馆） | — | — |
+|  | 揭阳 | — | ⛔ 不通 | http://www.jylib.net （揭阳市图书馆） | — | — |
+|  | 云浮 | — | ⛔ 不通 | http://www.yflib.net （云浮市图书馆） | — | — |
 | 江苏省 | 南京 | `nanjing` | ✅ 接入 | http://uopac.jllib.cn/uopac/s/search.action （金陵图书馆联合目录，金陵运营，覆盖金陵＋12 区馆） | 汇文 uopac 区域联合 OPAC（Struts2；金陵自研 PHP OPAC `opac.jllib.cn/opac/*` 整体登录墙不可用，勿当入口） | `adapters/nanjing.py`（双源合并：金陵 `JL:` ＋ 南图 `NJL01:`，天津口径；金陵源独立实现，原生数字 book_id 现带 `JL:` 前缀、裸数字走兼容垫片；源站偶发 chunked 停顿，已按 NOTES 口径重试一次） |
 |  |  |  | ✅ 接入 | https://opac.jslib.org.cn/F/ （南京图书馆/江苏省图） | Ex Libris ALEPH `u20_1 / www_f_chi`（外层 openresty 全局验证码墙；**按 host 独立封禁**，解南图不解天津） | `aleph/` 家族原语 ＋ `adapters/nanjing.py`（南图源，`item_global_all_params=True`）；2026-10-02 全链路实网跑通，库代码表·两处坑与家族兼容性证据见 `tests/fixtures/nanjing_prov/NOTES.md` |
 |  | 扬州 | — | 📋 计划 | http://ytlmopac.cn:8080/uopac/s/search.action | 汇文 Libsys/uopac（Struts2，已确认） | 🔍 可接入·待立项：站点的 JS AES Cookie 反爬（securitycam）经壳页静态分析为**静态挑战**——key/IV/密文全硬编码、cookie 恒定，纯 Python 可解（无需浏览器引擎）；实现与 ToS 评估待用户拍板 |
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
-|  | 无锡（新吴区） | — | ⛔ 不通 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home | 图星 LibStar Find v3.2023.12（北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题） |
+|  | 无锡 | — | ⛔ 不通 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题） |
+|  | 苏州 | — | 🔍 待核验 | https://reader.szlib.com/opac （苏州图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | — |
+|  | 徐州 | — | ⛔ 不通 | http://www.xzlib.net （徐州市图书馆） | — | — |
+|  | 常州 | — | ⛔ 不通 | http://www.czlib.net （常州市图书馆） | — | — |
+|  | 南通 | — | ⛔ 不通 | http://www.ntlib.net （南通市图书馆） | — | — |
+|  | 连云港 | — | ⛔ 不通 | http://www.lyglib.net （连云港市图书馆） | — | — |
+|  | 淮安 | — | ⛔ 不通 | http://www.halib.net （淮安市图书馆） | — | — |
+|  | 盐城 | — | ⛔ 不通 | http://www.yclib.net （盐城市图书馆） | — | — |
+|  | 镇江 | — | ⛔ 不通 | http://www.zjlib.net （镇江市图书馆） | — | — |
+|  | 泰州 | — | ⛔ 不通 | http://www.tzlib.net （泰州市图书馆） | — | — |
+|  | 宿迁 | — | ⛔ 不通 | http://www.sqlib.net （宿迁市图书馆） | — | — |
 | 辽宁省 | 大连 | `dalian` | ⚠️ 部分接入 | 超星入口 http://www.dl.superlib.net/ （搁置）；**在用入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录） | SirsiDynix iLink（`/uhtbin/cgisirsi/`，本仓库首见新家族，与成都不同家族不共享模块）；原超星入口 IP 白名单硬墙 | `adapters/dalian.py`（独立实现；ps token＋会话 cookie 每请求变、全程同 cookie jar，类重庆会话流程；节流 ≥4 秒/host）。⚠ 2026-10-02 实网验收：检索正常（空关键词对照=0 条）、**详情链路失败**（干净题名书目亦复现，疑 session/定位问题，待修） |
+|  | 沈阳 | — | ⛔ 不通 | http://www.lnlib.com （辽宁省图书馆） | — | — |
+|  |  | — | ⛔ 不通 | http://www.sylib.net/sylib/index （沈阳市图书馆） | — | — |
+|  | 鞍山 | — | ⛔ 不通 | http://www.aslib.net （鞍山市图书馆） | — | — |
+|  | 抚顺 | — | ⛔ 不通 | http://www.fslib.net （抚顺市图书馆） | — | — |
+|  | 本溪 | — | ⛔ 不通 | http://www.bxlib.net （本溪市图书馆） | — | — |
+|  | 丹东 | — | ⛔ 不通 | http://www.ddlib.net （丹东市图书馆） | — | — |
+|  | 锦州 | — | ⛔ 不通 | http://www.jzlib.net （锦州市图书馆） | — | — |
+|  | 营口 | — | ⛔ 不通 | http://www.yklib.net （营口市图书馆） | — | — |
+|  | 阜新 | — | ⛔ 不通 | http://www.fxlib.net （阜新市图书馆） | — | — |
+|  | 辽阳 | — | ⛔ 不通 | http://www.lylib.net （辽阳市图书馆） | — | — |
+|  | 盘锦 | — | ⛔ 不通 | http://www.pjlib.net （盘锦市图书馆） | — | — |
+|  | 铁岭 | — | ⛔ 不通 | http://www.tllib.net （铁岭市图书馆） | — | — |
+|  | 朝阳 | — | ⛔ 不通 | http://www.cylib.net （朝阳市图书馆） | — | — |
+|  | 葫芦岛 | — | ⛔ 不通 | http://www.hldlib.net （葫芦岛市图书馆） | — | — |
 | 山东省 | 青岛 | `qingdao` | ✅ 接入 | http://124.129.202.157/opac/index | 图创 Interlib（站点自报「青岛市公共图书馆联合目录」，26 馆联合含区级馆与城市书房，主馆馆码 QT） | `interlib/` 家族 ＋ `adapters/qingdao.py`（检索走站点内嵌 Solr 后端 `/opac/api/search`，`wt=json`＋`q`/`rows`/`page`，主站 HTML 检索页 `/opac/search` 仍被滑动验证码常态拦截；自带 ≥2 秒节流）；数据边界：Solr 默认只回有馆藏的书目、逐书目可借概况为空串 |
+|  | 济南 | — | ⛔ 不通 | http://www.sdlib.com （山东省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.jnlib.net.cn （济南市图书馆） | — | — |
+|  | 淄博 | — | ⛔ 不通 | http://www.zblib.net （淄博市图书馆） | — | — |
+|  | 枣庄 | — | 🔍 待核验 | http://www.zzlib.net （枣庄市图书馆） | — | — |
+|  | 东营 | — | ⛔ 不通 | http://www.dylib.net （东营市图书馆） | — | — |
+|  | 烟台 | — | ⛔ 不通 | http://www.ytlib.net （烟台市图书馆） | — | — |
+|  | 潍坊 | — | ⛔ 不通 | http://www.wflib.net （潍坊市图书馆） | — | — |
+|  | 济宁 | — | ⛔ 不通 | http://www.jnlib.net （济宁市图书馆） | — | — |
+|  | 泰安 | — | ⛔ 不通 | http://www.talib.net （泰安市图书馆） | — | — |
+|  | 威海 | — | ⛔ 不通 | http://www.whlib.net （威海市图书馆） | — | — |
+|  | 日照 | — | ⛔ 不通 | http://www.rzlib.net （日照市图书馆） | — | — |
+|  | 临沂 | — | ⛔ 不通 | http://www.lylib.net （临沂市图书馆） | — | — |
+|  | 德州 | — | ⛔ 不通 | http://www.dzlib.net （德州市图书馆） | — | — |
+|  | 聊城 | — | ⛔ 不通 | http://www.lclib.net （聊城市图书馆） | — | — |
+|  | 滨州 | — | ⛔ 不通 | http://www.bzlib.net （滨州市图书馆） | — | — |
+|  | 菏泽 | — | ⛔ 不通 | http://www.hzlib.net （菏泽市图书馆） | — | — |
 | 四川省 | 成都 | `chengdu` | ✅ 接入 | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族 ＋ `adapters/chengdu.py`（`pro2018=True` 启用家族 pro2018 解析；自带 ≥2 秒节流） |
 | 浙江省 | 杭州 | `hangzhou` | ✅ 接入 | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/hangzhou.py`（双源合并，杭图 `HZ:`） |
 |  |  |  | ✅ 接入 | https://www.zjlib.cn/ （浙江图书馆，BFF 网关 `/bff-api/`） | 自研微服务（已确认；Nuxt 3＋Java/Spring＋ES，纯 JSON、无需鉴权；省级馆，6 馆区） | `adapters/_zjlib.py`（浙图 `ZJ:`，天津模式并入 `hangzhou`） |
@@ -38,6 +115,156 @@
 |  | 绍兴 | `shaoxing` | ✅ 接入 | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，pro2018 模板代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | `interlib/` 家族 ＋ `adapters/shaoxing.py`（`pro2018=True`＋`pro2018_cite_author=True` 启用家族解析与引文块责任者兜底） |
 |  | 台州 | `taizhou` | ✅ 接入 | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族 ＋ `adapters/taizhou.py`（`pro2018=True` 启用家族 pro2018 解析） |
 |  | 金华 | `jinhua` | ✅ 接入 | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（ILAS 系 HTML OPAC，Tomcat/JSP，与深圳的自研 JSON API 封装不同，不可复用） | `adapters/jinhua.py`（独立实现，HTML 解析，匿名全链路）；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
+|  | 湖州 | — | ⛔ 不通 | http://www.hzlib.net （湖州市图书馆） | — | — |
+|  | 嘉兴 | — | ⛔ 不通 | http://www.jxlib.net （嘉兴市图书馆） | — | — |
+|  | 舟山 | — | ⛔ 不通 | http://www.zslib.net （舟山市图书馆） | — | — |
+|  | 衢州 | — | ⛔ 不通 | http://www.qzlib.net （衢州市图书馆） | — | — |
+|  | 丽水 | — | ⛔ 不通 | http://www.lslib.net （丽水市图书馆） | — | — |
+| 河北省 | 石家庄 | — | ⛔ 不通 | http://www.helib.net （河北省图书馆） | — | — |
+|  |  | — | ⛔ 不通 | http://www.sjzlib.cn （石家庄市图书馆） | — | — |
+|  | 唐山 | — | 🔍 待核验 | http://www.tslib.net （唐山市图书馆） | — | — |
+|  | 秦皇岛 | — | ⛔ 不通 | http://www.qhdlib.com （秦皇岛市图书馆） | — | — |
+|  | 保定 | — | ⛔ 不通 | http://www.bdlib.net （保定市图书馆） | — | — |
+|  | 邯郸 | — | ⛔ 不通 | http://www.hdlib.net （邯郸市图书馆） | — | — |
+|  | 张家口 | — | ⛔ 不通 | http://www.zjklib.com （张家口市图书馆） | — | — |
+|  | 承德 | — | ⛔ 不通 | http://www.cdlib.net （承德市图书馆） | — | — |
+|  | 沧州 | — | ⛔ 不通 | http://www.czlib.net （沧州市图书馆） | — | — |
+|  | 廊坊 | — | ⛔ 不通 | http://www.lflib.net （廊坊市图书馆） | — | — |
+|  | 衡水 | — | ⛔ 不通 | http://www.hslib.net （衡水市图书馆） | — | — |
+|  | 邢台 | — | ⛔ 不通 | http://www.xtlib.net （邢台市图书馆） | — | — |
+| 山西省 | 太原 | — | 🔍 待核验 | https://lib.sx.cn （山西省图书馆） | — | — |
+|  |  | — | ⛔ 不通 | https://www.tylib.org （太原市图书馆） | — | — |
+|  | 大同 | — | ⛔ 不通 | http://www.dtlib.net （大同市图书馆） | — | — |
+|  | 长治 | — | ⛔ 不通 | http://www.czlib.net （长治市图书馆） | — | — |
+|  | 晋城 | — | ⛔ 不通 | http://www.jclib.net （晋城市图书馆） | — | — |
+|  | 吕梁 | — | ⛔ 不通 | http://www.lllib.net （吕梁市图书馆） | — | — |
+|  | 忻州 | — | ⛔ 不通 | http://www.xzlib.net （忻州市图书馆） | — | — |
+|  | 朔州 | — | ⛔ 不通 | http://www.szlib.net （朔州市图书馆） | — | — |
+|  | 阳泉 | — | ⛔ 不通 | http://www.yqlib.net （阳泉市图书馆） | — | — |
+|  | 晋中 | — | ⛔ 不通 | http://www.jzlib.net （晋中市图书馆） | — | — |
+|  | 运城 | — | ⛔ 不通 | http://www.yclib.net （运城市图书馆） | — | — |
+|  | 临汾 | — | ⛔ 不通 | http://www.lflib.net （临汾市图书馆） | — | — |
+| 吉林省 | 长春 | — | ⛔ 不通 | https://www.jllib.com （吉林省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.ccelib.cn （长春市图书馆） | — | — |
+|  | 吉林 | — | ⛔ 不通 | http://www.jllib.net （吉林市图书馆） | — | — |
+|  | 四平 | — | ⛔ 不通 | http://www.splib.net （四平市图书馆） | — | — |
+|  | 辽源 | — | ⛔ 不通 | http://www.lylib.net （辽源市图书馆） | — | — |
+|  | 通化 | — | ⛔ 不通 | http://www.thlib.net （通化市图书馆） | — | — |
+|  | 白山 | — | ⛔ 不通 | http://www.bslib.net （白山市图书馆） | — | — |
+|  | 松原 | — | ⛔ 不通 | http://www.sylib.net （松原市图书馆） | — | — |
+|  | 白城 | — | ⛔ 不通 | http://www.bclib.net （白城市图书馆） | — | — |
+| 黑龙江省 | 哈尔滨 | — | 🔍 待核验 | http://www.hljlib.org.cn （黑龙江省图书馆） | — | — |
+|  | 齐齐哈尔 | — | ⛔ 不通 | http://www.qqhrlib.net （齐齐哈尔市图书馆） | — | — |
+|  | 鸡西 | — | ⛔ 不通 | http://www.jxlib.net （鸡西市图书馆） | — | — |
+|  | 鹤岗 | — | ⛔ 不通 | http://www.hglib.net （鹤岗市图书馆） | — | — |
+|  | 双鸭山 | — | ⛔ 不通 | http://www.syslib.net （双鸭山市图书馆） | — | — |
+|  | 大庆 | — | 🔍 待核验 | http://www.dqlib.net （大庆市图书馆） | — | — |
+|  | 伊春 | — | ⛔ 不通 | http://www.yclib.net （伊春市图书馆） | — | — |
+|  | 佳木斯 | — | ⛔ 不通 | http://www.jmslib.net （佳木斯市图书馆） | — | — |
+|  | 七台河 | — | ⛔ 不通 | http://www.qthlib.net （七台河市图书馆） | — | — |
+|  | 牡丹江 | — | ⛔ 不通 | http://www.mdjlib.net （牡丹江市图书馆） | — | — |
+|  | 黑河 | — | ⛔ 不通 | http://www.hhlib.net （黑河市图书馆） | — | — |
+|  | 绥化 | — | ⛔ 不通 | http://www.shlib.net （绥化市图书馆） | — | — |
+|  | 大兴安岭 | — | ⛔ 不通 | http://www.dxallib.net （大兴安岭地区图书馆） | — | — |
+| 福建省 | 福州 | — | 🔍 待核验 | http://www.fjlib.net （福建省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | https://www.fzlib.org （福州市图书馆） | — | — |
+|  | 厦门 | — | ⛔ 不通 | https://www.xmlib.net （厦门市图书馆） | — | — |
+|  | 莆田 | — | ⛔ 不通 | http://www.ptlib.net （莆田市图书馆） | — | — |
+|  | 三明 | — | ⛔ 不通 | http://www.smlib.net （三明市图书馆） | — | — |
+|  | 泉州 | — | ⛔ 不通 | http://www.qzlib.net （泉州市图书馆） | — | — |
+|  | 漳州 | — | 🔍 待核验 | http://www.zzlib.net （漳州市图书馆） | — | — |
+|  | 南平 | — | ⛔ 不通 | http://www.nplib.net （南平市图书馆） | — | — |
+|  | 龙岩 | — | ⛔ 不通 | http://www.lylib.net （龙岩市图书馆） | — | — |
+|  | 宁德 | — | ⛔ 不通 | http://www.ndlib.net （宁德市图书馆） | — | — |
+| 江西省 | 南昌 | — | ⛔ 不通 | https://www.jxlibrary.net （江西省图书馆） | — | — |
+|  |  | — | ⛔ 不通 | http://www.nclib.net （南昌市图书馆） | — | — |
+|  | 萍乡 | — | ⛔ 不通 | http://www.pxlib.net （萍乡市图书馆） | — | — |
+|  | 九江 | — | ⛔ 不通 | http://www.jjlib.net （九江市图书馆） | — | — |
+|  | 新余 | — | ⛔ 不通 | http://www.xylib.net （新余市图书馆） | — | — |
+|  | 鹰潭 | — | ⛔ 不通 | http://www.ytlib.net （鹰潭市图书馆） | — | — |
+|  | 赣州 | — | ⛔ 不通 | http://www.gzlib.net （赣州市图书馆） | — | — |
+|  | 吉安 | — | ⛔ 不通 | http://www.jalib.net （吉安市图书馆） | — | — |
+|  | 宜春 | — | ⛔ 不通 | http://www.yclib.net （宜春市图书馆） | — | — |
+|  | 抚州 | — | ⛔ 不通 | http://www.fzlib.net （抚州市图书馆） | — | — |
+|  | 上饶 | — | ⛔ 不通 | http://www.srlib.net （上饶市图书馆） | — | — |
+| 河南省 | 郑州 | — | 🔍 待核验 | https://www.henanlib.com （河南省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | https://www.zzlib.org.cn （郑州图书馆） | — | — |
+|  | 开封 | — | ⛔ 不通 | http://www.kflib.net （开封市图书馆） | — | — |
+|  | 洛阳 | — | ⛔ 不通 | http://www.lylib.net （洛阳市图书馆） | — | — |
+|  | 平顶山 | — | ⛔ 不通 | http://www.pdslib.net （平顶山市图书馆） | — | — |
+|  | 安阳 | — | ⛔ 不通 | http://www.aylib.net （安阳市图书馆） | — | — |
+|  | 鹤壁 | — | ⛔ 不通 | http://www.hblib.net （鹤壁市图书馆） | — | — |
+|  | 新乡 | — | ⛔ 不通 | http://www.xxlib.net （新乡市图书馆） | — | — |
+|  | 焦作 | — | ⛔ 不通 | http://www.jzlib.net （焦作市图书馆） | — | — |
+|  | 濮阳 | — | ⛔ 不通 | http://www.pylib.net （濮阳市图书馆） | — | — |
+|  | 许昌 | — | ⛔ 不通 | http://www.xclib.net （许昌市图书馆） | — | — |
+|  | 漯河 | — | ⛔ 不通 | http://www.lhlib.net （漯河市图书馆） | — | — |
+|  | 三门峡 | — | ⛔ 不通 | http://www.smxlib.net （三门峡市图书馆） | — | — |
+|  | 南阳 | — | ⛔ 不通 | http://www.nylib.net （南阳市图书馆） | — | — |
+|  | 商丘 | — | ⛔ 不通 | http://www.sqlib.net （商丘市图书馆） | — | — |
+|  | 信阳 | — | ⛔ 不通 | http://www.xylib.net （信阳市图书馆） | — | — |
+|  | 周口 | — | ⛔ 不通 | http://www.zklib.net （周口市图书馆） | — | — |
+|  | 驻马店 | — | ⛔ 不通 | http://www.zmdlib.net （驻马店市图书馆） | — | — |
+| 湖北省 | 武汉 | — | 🔍 待核验 | https://www.library.hb.cn （湖北省图书馆） | — | — |
+|  |  | — | ⛔ 不通 | http://www.whlib.org.cn （武汉图书馆） | — | — |
+|  | 十堰 | — | ⛔ 不通 | http://www.sylib.net （十堰市图书馆） | — | — |
+|  | 襄阳 | — | ⛔ 不通 | http://www.xylib.net （襄阳市图书馆） | — | — |
+|  | 鄂州 | — | ⛔ 不通 | http://www.ezlib.net （鄂州市图书馆） | — | — |
+|  | 荆门 | — | 🔍 待核验 | http://www.jmlib.net （荆门市图书馆） | — | — |
+|  | 孝感 | — | 🔍 待核验 | http://www.xglib.net （孝感市图书馆） | — | — |
+|  | 荆州 | — | ⛔ 不通 | http://www.jzlib.net （荆州市图书馆） | — | — |
+|  | 黄冈 | — | ⛔ 不通 | http://www.hhlib.net （黄冈市图书馆） | — | — |
+|  | 咸宁 | — | ⛔ 不通 | http://www.xnlib.net （咸宁市图书馆） | — | — |
+|  | 随州 | — | ⛔ 不通 | http://www.szlib.net （随州市图书馆） | — | — |
+|  | 恩施 | — | ⛔ 不通 | http://www.eslib.net （恩施州图书馆） | — | — |
+| 湖南省 | 长沙 | — | 🔍 待核验 | http://www.library.hn.cn （湖南图书馆） | — | — |
+|  |  | — | 🔍 待核验 | https://opac.changshalib.cn （长沙图书馆） | — | — |
+|  | 株洲 | — | 🔍 待核验 | http://www.zzlib.net （株洲市图书馆） | — | — |
+|  | 湘潭 | — | ⛔ 不通 | http://www.xtlib.net （湘潭市图书馆） | — | — |
+|  | 衡阳 | — | ⛔ 不通 | http://www.hylib.net （衡阳市图书馆） | — | — |
+|  | 邵阳 | — | ⛔ 不通 | http://www.sylib.net （邵阳市图书馆） | — | — |
+|  | 岳阳 | — | ⛔ 不通 | http://www.yylib.net （岳阳市图书馆） | — | — |
+|  | 常德 | — | ⛔ 不通 | http://www.cdlib.net （常德市图书馆） | — | — |
+|  | 张家界 | — | ⛔ 不通 | http://www.zjjlib.net （张家界市图书馆） | — | — |
+|  | 益阳 | — | ⛔ 不通 | http://www.yylib.net （益阳市图书馆） | — | — |
+|  | 郴州 | — | ⛔ 不通 | http://www.czlib.net （郴州市图书馆） | — | — |
+|  | 永州 | — | ⛔ 不通 | http://www.yzlib.net （永州市图书馆） | — | — |
+|  | 怀化 | — | ⛔ 不通 | http://www.hhlib.net （怀化市图书馆） | — | — |
+|  | 娄底 | — | ⛔ 不通 | http://www.ldlib.net （娄底市图书馆） | — | — |
+|  | 湘西 | — | ⛔ 不通 | http://www.xxlib.net （湘西州图书馆） | — | — |
+| 海南省 | 海口 | — | ⛔ 不通 | http://www.hilib.com （海南省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.haikoulib.cn （海口图书馆） | — | — |
+| 贵州省 | 贵阳 | — | 🔍 待核验 | http://www.gzlib.com.cn （贵州省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.gylib.org.cn （贵阳市图书馆） | — | — |
+| 云南省 | 昆明 | — | 🔍 待核验 | http://www.ynlib.cn （云南省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.kmlib.yn.cn （昆明市图书馆） | — | — |
+| 陕西省 | 西安 | — | 🔍 待核验 | https://uilas.sxlib.org.cn （陕西省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.xalib.org.cn （西安图书馆） | — | — |
+| 甘肃省 | 兰州 | — | 🔍 待核验 | https://www.gslib.com.cn （甘肃省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | http://www.lzlib.com.cn （兰州市图书馆） | — | — |
+| 青海省 | 西宁 | — | ⛔ 不通 | http://www.qhlib.org （青海省图书馆） | — | — |
+|  |  | — | 🔍 待核验 | https://www.xnlib.cn （西宁市图书馆） | — | — |
+| 内蒙古自治区 | 呼和浩特 | — | ⛔ 不通 | http://www.nmglib.com （内蒙古图书馆） | — | — |
+|  | 包头 | — | ⛔ 不通 | http://www.btlib.net （包头市图书馆） | — | — |
+|  | 赤峰 | — | ⛔ 不通 | http://www.cflib.net （赤峰市图书馆） | — | — |
+|  | 通辽 | — | ⛔ 不通 | http://www.tllib.net （通辽市图书馆） | — | — |
+|  | 鄂尔多斯 | — | ⛔ 不通 | http://www.ordoslib.net （鄂尔多斯市图书馆） | — | — |
+|  | 呼伦贝尔 | — | ⛔ 不通 | http://www.hlbrlib.net （呼伦贝尔市图书馆） | — | — |
+|  | 巴彦淖尔 | — | ⛔ 不通 | http://www.bynrlib.net （巴彦淖尔市图书馆） | — | — |
+|  | 乌兰察布 | — | 🔍 待核验 | http://www.wlcblib.net （乌兰察布市图书馆） | — | — |
+| 广西壮族自治区 | 南宁 | — | 🔍 待核验 | http://www.gxlib.org.cn （广西壮族自治区图书馆） | — | — |
+|  |  | — | 🔍 待核验 | https://www.nnlib.com （南宁市图书馆） | — | — |
+|  | 桂林 | — | ⛔ 不通 | http://www.gll-gx.org.cn （广西壮族自治区桂林图书馆） | — | — |
+|  | 柳州 | — | ⛔ 不通 | http://www.lzlib.net （柳州市图书馆） | — | — |
+|  | 梧州 | — | ⛔ 不通 | http://www.wzlib.net （梧州市图书馆） | — | — |
+|  | 北海 | — | ⛔ 不通 | http://www.bhlib.net （北海市图书馆） | — | — |
+|  | 防城港 | — | ⛔ 不通 | http://www.fcglib.net （防城港市图书馆） | — | — |
+|  | 钦州 | — | ⛔ 不通 | http://www.qzlib.net （钦州市图书馆） | — | — |
+|  | 贵港 | — | ⛔ 不通 | http://www.gglib.net （贵港市图书馆） | — | — |
+|  | 玉林 | — | ⛔ 不通 | http://www.yllib.net （玉林市图书馆） | — | — |
+|  | 百色 | — | ⛔ 不通 | http://www.bslib.net （百色市图书馆） | — | — |
+| 宁夏回族自治区 | 银川 | — | 🔍 待核验 | http://www.nxlib.cn （宁夏图书馆） | — | — |
+| 新疆维吾尔自治区 | 乌鲁木齐 | — | 🔍 待核验 | https://www.xjlib.org （新疆维吾尔自治区图书馆） | — | — |
 
 ## Interlib 家族（图创，多城共享模块）
 
