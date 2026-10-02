@@ -201,6 +201,9 @@ class _DetailParser(HTMLParser):
 
     def _finish_value(self):
         label, value, link = self._label, _clean("".join(self._value_parts)), self._first_link
+        # 标签与值一对一消费：无 leftTD 的 rightTD（如 tagTr「标签」行）
+        # 不得继承上一行已消费的陈旧标签（2026-10-02，江阴/温州独立实证）
+        self._label = ""
         if label not in _DETAIL_LABELS or not value:
             return
         kind = _DETAIL_LABELS[label]
