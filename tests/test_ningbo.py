@@ -22,6 +22,7 @@ _SEARCH_HUOZHE = (_FIXTURES / "search_huozhe_hasholding.json").read_text(encodin
 _DETAIL = (_FIXTURES / "detail_huozhe.json").read_text(encoding="utf-8")
 _HOLDINGS = (_FIXTURES / "holdings_huozhe.json").read_text(encoding="utf-8")
 _HUOZHE_ID = "670379643136847935"
+_SANTI_HOLD_ID = "670380481158787137"  # hasholding=1 首条:有馆藏书目(36 册)
 _SANTI_AGG_ID = "1849291138475802626"  # 聚合条目:详情「数据不存在」、馆藏 0 条
 
 
@@ -63,19 +64,19 @@ def test_search_parses_list_and_stats(monkeypatch):
     assert payload["searchWay"] == "marc"
     assert payload["current"] == 1
     assert payload["size"] == 20
-    assert payload["hasholding"] == 0
-    # numFound 是字符串 '32' → int;ceil(32/20)=2 页
-    assert page["total_results"] == 32
+    assert payload["hasholding"] == 1  # 1=只看有馆藏(源站默认);0 是空壳子集,勿用
+    # numFound 是字符串 '375' → int;ceil(375/20)=19 页
+    assert page["total_results"] == 375
     assert page["page"] == 1
-    assert page["total_pages"] == 2
+    assert page["total_pages"] == 19
     assert page["has_next"] is True
     assert len(page["books"]) == 10
     b0 = page["books"][0]
-    assert b0["book_id"] == _SANTI_AGG_ID
+    assert b0["book_id"] == _SANTI_HOLD_ID
     assert b0["title"] == "三体"
     assert b0["author"] == "刘慈欣著"
     assert b0["publisher"] == "重庆出版社"
-    assert b0["publish_year"] == ""  # 索引 pubdate 空串,原值照登
+    assert b0["publish_year"] == "2017"  # 有馆藏条目索引已富化(无馆藏子集才常空)
     assert b0["availability_summary"] == ""  # 检索条目无馆藏概况(数据边界)
     validate_search_page(page)
     assert all(isinstance(b["book_id"], str) and b["book_id"] for b in page["books"])
@@ -134,7 +135,7 @@ def test_token_1003_refetch_and_retry(monkeypatch):
     stale = json.dumps({"code": 1003, "desc": "令牌过期"})
     calls = _mock_open(monkeypatch, [_TOKEN, stale, _TOKEN2, _SEARCH_SANTI])
     page = ningbo.search_books("三体")
-    assert page["total_results"] == 32
+    assert page["total_results"] == 375
     token_calls = [c for c in calls if "getOpenApiAccessToken" in c[0]]
     assert len(token_calls) == 2  # 1003 → 重取一次重试
     assert len(calls) == 4

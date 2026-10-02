@@ -10,7 +10,10 @@ JS 逆向(chunk-5a920f2a RefineResults / chunk-3f5b34c0 BookDetails+HoldingTable
   字符串,实测 2523~5108s)→ 请求头 ACCESS-TOKEN;code==1003 过期自动重取一次;
 - 检索 POST /search/(注意尾斜杠;bookSearch 端点是给开放平台的,参数形态
   不同且曾长期「系统异常」,勿混用):body {current,size,searchWay,sortWay,
-  sortOrder,hasholding,q,facetFieldSearch};searchWay 码表 marc=任意词/title/
+  sortOrder,hasholding,q,facetFieldSearch};hasholding 是二值过滤,1(或缺省)
+  =只看有馆藏、0=只看无馆藏,两集合不相交(实测「三体」375 条 vs 32 条,
+  且「缺省」与 1 结果完全一致),取 0 会拿到聚合条目所在的空壳子集,适配器
+  固定传 1;searchWay 码表 marc=任意词/title/
   isbn/author…(与 Interlib 同款词表);响应无 code 字段=成功,顶层 numFound
   是字符串、bookList[] 雪花 id;code∈{43001,-1,-402} 触发前端滑块验证 →
   程序化停手抛错,不硬闯;
@@ -26,9 +29,11 @@ JS 逆向(chunk-5a920f2a RefineResults / chunk-3f5b34c0 BookDetails+HoldingTable
 数据边界(原值照登,不做预设判断):
 - 联合目录含慈溪/奉化等区县馆与城市书房,馆名带「慈溪_」类下划线前缀属
   源站原值;
-- hasholding=0 检索会命中新导入的聚合条目(雪花 id 1849… 段,booktype 同为
-  1),其详情/馆藏可能为空(「数据不存在」/0 条)——不是故障;
-- 检索条目 publisher/pubdate 常为空串(索引未富化),完整字段看详情;
+- 聚合条目(新导入的雪花 id 1849… 段,booktype 同为 1)无本地书目:详情答
+  「数据不存在」、馆藏 0 条,不是故障。它们属「无馆藏」子集,hasholding=1
+  的检索不会返回;解析层仍按 code==-1/0 条防御(book_id 可能被外部直接传入);
+- 「无馆藏」子集的检索条目 publisher/pubdate 常为空串(索引未富化);
+  有馆藏条目实测带 publisher/pubdate/isbn/callno,完整字段仍以详情为准;
 - 老书目 MARC 210/215 可能全空(出版项缺失),出版年兜底从 100$a 定长字段
   取「d+年份」段;
 - 索书号:classno 是分类号不冒充索书号(南京口径),detail.call_number 取
@@ -238,7 +243,7 @@ class _Client:
             "searchWay": "marc",  # 任意词;isbn 专有码表项因存储连字符形态不一未启用
             "sortWay": "score",
             "sortOrder": "desc",
-            "hasholding": 0,      # 0=不过滤无馆藏条目(前端默认),1=只看有馆藏
+            "hasholding": 1,      # 1=只看有馆藏(源站默认,与缺省等价);0=只看无馆藏,勿用
             "q": str(keyword or ""),
             "facetFieldSearch": {},
         }

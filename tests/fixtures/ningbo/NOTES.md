@@ -45,7 +45,7 @@ data:null)——站点已恢复,剩下的是参数形态问题。转为**前端 
 | 原语 | 端点 | 请求形态 | 响应要点 |
 |---|---|---|---|
 | 令牌 | `POST /system/user/getOpenApiAccessToken` | body `{}`,匿名 | `{code:200,data:{token:JWT,expiresIn:"2523"}}`(秒级**字符串**,调研期见 5108,浮动) |
-| 检索 | `POST /search/` | body 见上;头 `ACCESS-TOKEN` | **成功响应无 code 字段**;顶层 `numFound`(**字符串**'32')、`bookList[]`(id/orgId/title/author/pubdate/publisher/isbn/price/booktype/classno/callno…)、`nextPage/start/size`、facet 数组(booktypes/curlibcode/fsubject…) |
+| 检索 | `POST /search/` | body 见上;头 `ACCESS-TOKEN` | **成功响应无 code 字段**;顶层 `numFound`(**字符串**'375',hasholding=1 口径)、`bookList[]`(id/orgId/title/author/pubdate/publisher/isbn/price/booktype/classno/callno…)、`nextPage/start/size`、facet 数组(booktypes/curlibcode/fsubject…) |
 | 详情 | `POST /service/biblios/getbyid?id=&fields=300a,314a,327a,330a` | 查询串参数＋空 body | `data.biblios`(49 键,稀疏)+`data.fieldItem`+`data.fields`+`data.content`(CNMARC 全字段 JSON 串,子字段标记 ▼) |
 | 馆藏 | `POST /service/hold/pagelist` | body `{current:1,size:500,bibliosId}` | `data.records[]`(statename 原生状态词、curOrgName/curlocalName 当前馆/地、orgName/orglocalName 所属馆/登记地、callno、barcode、returnTime/loanTime 完整时间戳、cirTypeName、mediaTypeName、volinfo)、`data.total` |
 
@@ -55,17 +55,20 @@ statename==「在馆」→ True,词表外保守 False。
 
 ## 数据边界(原值照登,不做预设判断)
 
-- **聚合条目**:`hasholding=0`(前端默认)检索命中新导入雪花 id(1849… 段,
-  如《三体》1849291138475802626,booktype 同为 1),getbyid 返回
-  `code:-1「数据不存在」`、pagelist 返回 200+0 条——非故障。老段 id
-  (670…,《活着》670379643136847935)三原语全通。`hasholding=1` 可只看有
-  馆藏条目(《活着》检索 numFound 3594,条目 callno 有值)。
-- 检索条目 publisher/pubdate 常空串(索引未富化);《三体》条目 publisher
-  有值而 pubdate 空,《活着》条目两者皆空但 callno 有值——富化程度逐条不一。
-- `numFound` 口径随 hasholding 变化:同关键词「活着」hasholding=0 实测 245、
-  hasholding=1 实测 3594(源站语义未文档化,原值照登);适配器固定
-  hasholding=0(前端默认),排序 score desc 下聚合条目(1849… 段)常占前排,
-  其详情会抛「未找到该书详情」——已在 server 工具文案与本注记声明。
+- **`hasholding` 语义(2026-10-02 复测钉死)**:`1`(或缺省)＝只看有馆藏、
+  `0`＝只看无馆藏,两集合**不相交**,取 1 与缺省结果完全一致(逐条比对)。
+  实测「三体」1→375 条、0→32 条;「活着」1→3594、0→245;「红楼梦」
+  1→6633、0→558;窄关键词「一说《三体》」1→1 条、0→4 条,两集合无一重合。
+  适配器固定传 `1`;传 0 会把结果集限制在空壳子集上——**这是此前的接入
+  缺陷**,原记录把 0 当成「前端默认」,实为前端「在馆记录」复选框的取消态
+  (组件 data 初值与 resetData 均为 `!0`,请求构造 `!1===h ? 0 : 1`)。
+- **聚合条目**:新导入雪花 id(1849… 段,如《三体》1849291138475802626,
+  booktype 同为 1)无本地书目,getbyid 返回 `code:-1「数据不存在」`、
+  pagelist 返回 200+0 条——非故障。它们属「无馆藏」子集,`hasholding=1`
+  的检索不会返回。老段 id(670…,《活着》670379643136847935)三原语全通。
+- 条目字段富化程度随子集不同:有馆藏条目实测带 publisher/pubdate/isbn/
+  classno/callno(《三体》670380481158787137:重庆出版社 2017,I247.55/251V1);
+  「无馆藏」子集的条目 publisher/pubdate 常为空串。
 - 详情 biblios 主行稀疏(《活着》publisher/pubdate/page/shelfno 全 null),
   CNMARC 210(出版项)/215(载体)子字段全空(`▼a▼c▼d`)——老编目数据缺失,
   出版年兜底从 fieldItem `100$a` 定长字段取(d2003 → 2003)。
