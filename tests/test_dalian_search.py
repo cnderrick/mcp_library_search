@@ -16,6 +16,7 @@ _ENTRY = (_FIX / "entry_raw.html").read_text(encoding="utf-8")
 _SEARCH = (_FIX / "search.html").read_text(encoding="utf-8")
 _P2 = (_FIX / "search_p2.html").read_text(encoding="utf-8")
 _EMPTY = (_FIX / "search_empty.html").read_text(encoding="utf-8")
+_PHRASE = (_FIX / "search_phrase.html").read_text(encoding="utf-8")
 
 
 def _router(monkeypatch, search_resp=_SEARCH, jump_resp=_P2, entry_resp=_ENTRY):
@@ -63,6 +64,45 @@ def test_search_posts_to_form_action_with_general_field(monkeypatch):
     validate_search_page(page)
 
 
+def test_search_sends_quoted_phrase(monkeypatch):
+    calls = _router(monkeypatch, search_resp=_PHRASE)
+    page = dalian.search_books("三体")
+    body = calls[1][1].decode()
+    # 源站裸词是逐字 AND 宽匹配（无相关度）→ 一律按短语（ASCII 双引号）下发
+    assert "searchdata1=%22%E4%B8%89%E4%BD%93%22" in body
+    # 所有字段短语检索实测 132 条（裸词同一关键词为 27944 条）
+    assert page["total_results"] == 132
+    assert page["books"][0]["title"].startswith("赡养人类")
+    validate_search_page(page)
+
+
+def test_user_supplied_quotes_not_double_wrapped(monkeypatch):
+    calls = _router(monkeypatch)
+    dalian.search_books('"三体"')
+    body = calls[1][1].decode()
+    assert "searchdata1=%22%E4%B8%89%E4%BD%93%22" in body
+    assert "%22%22" not in body  # 不二次包裹
+
+
+def test_search_phrase_zero_falls_back_to_bare(monkeypatch):
+    # 词含源站短语索引不收的字符（罗马数字 Ⅲ）→ 短语 0 命中 → 退回裸词再试一次
+    calls = []
+
+    def spy(req, timeout=25):
+        calls.append((req.full_url, req.data))
+        if req.data is None:
+            return _ENTRY
+        body = req.data.decode()
+        return _EMPTY if "%22" in body else _SEARCH
+
+    monkeypatch.setattr(dalian, "_open", spy)
+    page = dalian.search_books("三体Ⅲ")
+    posts = [c for c in calls if c[1] is not None]
+    assert "searchdata1=%22%E4%B8%89%E4%BD%93%E2%85%A2%22" in posts[0][1].decode()
+    assert "%22" not in posts[1][1].decode()
+    assert page["total_results"] == 862
+
+
 def test_search_parses_total_and_maps_book_id(monkeypatch):
     _router(monkeypatch)
     page = dalian.search_books("三体")
@@ -87,9 +127,9 @@ def test_isbn_keyword_routes_to_general(monkeypatch):
     calls = _router(monkeypatch)
     dalian.search_books("9787229100629")
     body = calls[1][1].decode()
-    # ISBN 形态也走 GENERAL（iLink 无 ISBN 字段，NOTES 已记录）
+    # ISBN 形态也走 GENERAL（iLink 无 ISBN 字段，NOTES 已记录）；同样按短语下发
     assert "srchfield1=GENERAL" in body
-    assert "9787229100629" in body
+    assert "searchdata1=%229787229100629%22" in body
 
 
 def test_search_empty_result(monkeypatch):
