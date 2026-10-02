@@ -3,11 +3,14 @@
 会话流：GET frontV2/SearchIndex!simple.action 建立 JSESSIONID，再 POST
 OpacMarcSearchSolr!simpleSearch.action（首页表单 action 是假入口，search.js
 会改写）。翻页走结果页分页链接形态：GET 带 pageNo 等整串参数。
-单册可借状态源站不公开（需读者登录，见 tests/fixtures/chongqing/NOTES.md），
-holdings 只到「哪些分馆有」这一级。
+单册数据走根路径 GetAsset.action（匿名可通，无需会话；frontV2 前缀的同名
+action 有登录拦截，不用，见 tests/fixtures/chongqing/NOTES.md）。源站无明确
+「可借/在架」状态词，可借口径统一保守：全部 available=False，status 原值
+照登，确定借出的带 due_date。
 """
 import http.cookiejar
 import html
+import json
 import re
 import time
 import urllib.error
@@ -180,13 +183,13 @@ def _parse_detail(text):
     }
 
 
-# 馆藏信息 tab 的分馆名列表；单册状态源站不公开（GetAsset 匿名被登录拦截，见 NOTES.md）
+# 馆藏信息 tab 的分馆名列表；GetAsset 不可用时的回退解析（见 _fetch_assets）
 _HOLDING_BLOCK = re.compile(r"<!--馆藏信息开始-->(.*?)<!--馆藏信息结束-->", re.S)
 _LIBRARY = re.compile(r'class="first"[^>]*>(.*?)</a>', re.S)
 
 
 def _parse_holdings(text):
-    """书目详细页面 → 分馆级馆藏列表。无单册状态原值，一律保守 available=False。"""
+    """书目详细页面 → 分馆级馆藏列表（回退路径）。无单册状态原值，一律保守 available=False。"""
     m = _HOLDING_BLOCK.search(text)
     if not m:
         return []
@@ -194,6 +197,44 @@ def _parse_holdings(text):
         _Holding(library=_clean(name), available=False)
         for name in _LIBRARY.findall(m.group(1))
     ]
+
+
+_DUE_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def _norm_due(value):
+    """应还日期已是 YYYY-MM-DD；不是这个形状就归一为空串（不猜不编）。"""
+    s = str(value or "").strip()
+    return s if _DUE_DATE.fullmatch(s) else ""
+
+
+def _parse_assets(text):
+    """GetAsset.action 的 JSON → 单册级 _Holding 列表；非 JSON 返回 None（调用方回退馆名级）。
+
+    可借口径统一保守：源站无明确「可借/在架」状态词，能确定的只有借出
+    （status 含「借出」，带借期与应还日期）；「入藏」等其余状态语义不确定，
+    一律 available=False，status 原值照登，借出的带 due_date。
+    """
+    try:
+        data = json.loads(text)
+    except ValueError:
+        return None
+    items = data.get("list") if isinstance(data, dict) else None
+    if not isinstance(items, list):
+        return None
+    holdings = []
+    for a in items:
+        if not isinstance(a, dict):
+            continue
+        holdings.append(_Holding(
+            library=str(a.get("cursublib") or a.get("sublib") or ""),
+            location=str(a.get("curlocal") or a.get("local") or ""),
+            call_number=str(a.get("callno") or ""),
+            status=str(a.get("status") or ""),
+            available=False,
+            due_date=_norm_due(a.get("retudate")),
+        ))
+    return holdings
 
 
 class _Client:
@@ -265,8 +306,28 @@ class _Client:
                 raise RuntimeError("重庆图书馆：详情页获取失败（重复失败，可能会话无法建立）")
         return text
 
+    def _fetch_assets(self, table, rid):
+        """单册 JSON：根路径 GetAsset.action 匿名 200（两次实证，见 NOTES.md），无需会话。
+
+        frontV2 前缀的同名 action 有登录拦截（302），不用。请求失败或响应
+        非 JSON（门口若哪天被拦会返回登录页 HTML）→ None，调用方回退馆名级。
+        """
+        data = urllib.parse.urlencode({
+            "metatables": table, "metaids": rid, "type": "map", "orderType": "",
+        }).encode()
+        req = urllib.request.Request(
+            f"{_BASE}/InDigLib/GetAsset.action", data=data, headers=_HEADERS)
+        try:
+            return _parse_assets(_open(req))
+        except RuntimeError:
+            return None
+
     def get_holdings(self, book_id):
         table, rid = _split_book_id(book_id)
+        items = self._fetch_assets(table, rid)
+        if items is not None:
+            return items
+        # 单册接口不可用 → 回退详情页馆名级（旧行为）
         return _parse_holdings(self._fetch_detail(table, rid))
 
     def get_book_detail(self, book_id):
@@ -317,7 +378,11 @@ def search_books(keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
 
 
 def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
-    """指定图书在哪些分馆有馆藏。源站不公开单册状态，全部保守按不可借展示。"""
+    """指定图书的单册级馆藏：索书号、馆藏地点、状态原值、借出应还日期。
+
+    源站无明确「可借/在架」状态词，全部保守按不可借展示（only_available=True
+    恒为空）；调用方请用 only_available=False 拿全部原值自行判断。
+    """
     holdings = _client.get_holdings(book_id) or []
     kept = [h for h in holdings if (not only_available or h.is_available())]
     items: list[Holding] = []

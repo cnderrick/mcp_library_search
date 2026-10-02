@@ -10,8 +10,10 @@
 |---|---|---|---|---|---|
 | 上海市（直辖市） | 上海 | `shanghai` | https://vufind.library.sh.cn | VuFind（上海中心图书馆"一卡通"总分馆体系，900+ 网点） | `vendor/shanghai_library/` + `adapters/shanghai.py` |
 | 北京市（直辖市） | 北京 | — | 待调研 | Ex Libris Primo（初判） | 🔜 搁置：站点 WAF 拦截程序化访问 |
-| 天津市（直辖市） | 天津 | `tianjin` | http://opacwh.tjl.tj.cn:8991/F 等三个源（见下） | Ex Libris ALEPH ×2 + 图创 Interlib | `adapters/tianjin.py`（三源合并） |
-| 重庆市（直辖市） | 重庆 | `chongqing` | http://222.177.237.197:8080/InDigLib/ | InDigLib 集群数字图书馆（Struts2+Solr） | `adapters/chongqing.py`（独立实现） |
+| 天津市（直辖市） | 天津 | `tianjin` | http://opacwh.tjl.tj.cn:8991/F （主馆） | Ex Libris ALEPH 20.1 www_f_chi | `adapters/tianjin.py`（三源合并） |
+|  |  |  | http://opacse.tjl.tj.cn:8991/F （少儿馆） | 同款 ALEPH（独立 host 独立 base） |  |
+|  |  |  | http://sm.interlib.cn:8104 （中新友好） | 图创 Interlib（租户 STC001） |  |
+| 重庆市（直辖市） | 重庆 | `chongqing` | http://222.177.237.197:8080/InDigLib/frontV2/SearchIndex!simple.action?opacType=local | InDigLib 集群数字图书馆（Struts2+Solr） | `adapters/chongqing.py`（独立实现） |
 | 广东省 | 广州 | `guangzhou` | https://opac.gzlib.org.cn | 图创 Interlib | `interlib/` 家族 + `adapters/guangzhou.py` |
 |  | 深圳 | `shenzhen` | https://www.szlib.org.cn/opac/ | 图书馆之城自研 JSON API（后端 ILAS，167 馆统一平台） | `adapters/shenzhen.py`（独立实现） |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn | 图创 Interlib（与广州同模板） | `interlib/` 家族 + `adapters/hangzhou.py` |
@@ -52,13 +54,13 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 
 ## 天津（三源合并，首个「一城多源」范本）
 
-`adapters/tianjin.py` 一个城市聚合三个独立系统：
+`adapters/tianjin.py` 一个城市聚合三个独立系统（入口与技术组件见总览表）：
 
-| 源 | 前缀 | 系统 | 入口 |
-|---|---|---|---|
-| 天津图书馆（主馆，含全市通借网络） | `TJL01` | Ex Libris ALEPH 20.1 www_f_chi | http://opacwh.tjl.tj.cn:8991/F |
-| 天津市少年儿童图书馆 | `TJC01` | 同款 ALEPH（独立 host 独立 base） | http://opacse.tjl.tj.cn:8991/F |
-| 中新友好图书馆（生态城） | `ZXYH` | 图创 Interlib（租户 STC001） | http://sm.interlib.cn:8104 |
+| 源 | 前缀 |
+|---|---|
+| 天津图书馆（主馆，含全市通借网络） | `TJL01` |
+| 天津市少年儿童图书馆 | `TJC01` |
+| 中新友好图书馆（生态城） | `ZXYH` |
 
 - **两 ALEPH 不可并查**：opacwh/opacse 是两台独立服务器、各自独立 `local_base`，
   同一「三体」检索 TJL01 156 条 vs TJC01 32 条，数据互不相通——必须分别检索再归并。
@@ -91,8 +93,10 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 
 ## 重庆（InDigLib）
 
-`adapters/chongqing.py` 独立实现（urllib + CookieJar 会话），入口
+`adapters/chongqing.py` 独立实现（urllib + CookieJar 会话），API 基址
 http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr）。
+使用者入口是总览表的 SearchIndex 地址；根路径 `/InDigLib/` 返回的是登录页
+（6455 字节，实测），别当入口登记。
 
 - **会话流程**：先 GET `frontV2/SearchIndex!simple.action?opacType=local` 拿 JSESSIONID，
   再 POST `OpacMarcSearchSolr!simpleSearch.action`；会话失效按页面标题标记判定
@@ -104,8 +108,15 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
 - **总数**：源只给 `#totalPage`（总页数）不给总条数 → `total_results` 恒为 None，不编造。
 - **详情**：`book_id = {metatable}:{metaid}`（如 `i_biblios:2313420`）；字段锚点
   h4 题名/「著者」/出版社/ISBN-ISSN em/tipbox 简介；详情页无索书号字段 → `call_number=""`。
-- **馆藏只到馆级**：详情页「馆藏信息」注释块内 `class="first"` 馆名可匿名取；
-  **单册级 JSON `GetAsset.action` 有读者登录门槛**（带全链路头重放三次均 302 登录页），
-  故 `available=False`、`status=""` 保守返回，不预设可借——这是公共数据的边界，
-  不是解析缺陷。
+- **馆藏到单册级**：根路径 `POST InDigLib/GetAsset.action`（`metatables`/`metaids`/
+  `type=map`/`orderType=`）**匿名可通、无需会话**（响应自带 JSESSIONID Set-Cookie，
+  但非前提），返回 JSON `{list:[…], map:{馆名:[…]}}`，单册字段 barcode/callno/
+  curlocal/cursublib/status/cirtype/loandate/retudate。**`frontV2/` 前缀的同名
+  action 有登录拦截**（全链路头重放三次均 302 登录页），不用——被拦时先试根路径。
+- **可借口径统一保守**：源站无明确「可借/在架」状态词，全部单册 `available=False`、
+  `status` 原值照登（入藏/普通借出…），确定借出的带 `due_date=retudate`
+  （YYYY-MM-DD 归一，异形置空不猜）。`only_available=True` 恒返回空列表——这是
+  数据边界，不是故障；不做「入藏＝在架」预设。
+- **回退**：GetAsset 不可用（请求失败/响应非 JSON）时退回详情页「馆藏信息」注释块
+  的 `class="first"` 馆名，只到分馆级（`status=""`、`available=False`）。
 - 字段侦察与端点真伪结论见 `tests/fixtures/chongqing/NOTES.md`。

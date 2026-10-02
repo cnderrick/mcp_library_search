@@ -1,6 +1,8 @@
 # 重庆 InDigLib 实抓侦察记录
 
 实抓时间：2026-10-02，来源 `http://222.177.237.197:8080/InDigLib`（用户确认为重庆馆实际使用的系统）。
+注意：根路径 `/InDigLib/` 打开是登录页（6455 字节，与 get_asset_anonymous.html 同一张），
+使用者入口是 `frontV2/SearchIndex!simple.action?opacType=local`（「opac查询页」）。
 
 ## 会话流程
 
@@ -31,28 +33,41 @@ simpleSearch（实抓验证：opacSearch 不接受这些参数）。
 - 「馆藏信息」tab：只有分馆名列表（本例仅「重庆图书馆」，li 的 `metas="i_biblios-2649440"`），
   内容区 `<div class="sub_con">` 为空、由 JS 懒加载。
 
-## 单册状态：需读者登录，匿名拿不到（关键结论）
+## 单册状态：根路径 GetAsset.action 匿名可通（关键结论，2026-10-02 修正）
 
-- 懒加载端点 `POST frontV2/GetAsset.action`（参数 `metatables` + `metaids` + `type=map`
-  + `orderType=`），JS 里可见返回 JSON 结构为 `{map: {分馆: [条码号/索书号/当前分馆/
-  馆藏地点/状态/应还时间]}}`，且状态含「借出」时带 `retudate`。
-- 但**匿名访问被登录拦截**：2026-10-02 三次实测（含完整复刻浏览器链路：
-  SearchIndex → BookDetail → frontCloud 登录 iframe → GetAsset，带 Referer），
-  全部 302 到登录页（get_asset_anonymous.html，6455 字节）。
-- 详情页内另一 ajax `GetCurrentBorrow.action` 也是读者登录后功能（判断是否借阅该书以下载
-  随书光盘），不是公开馆藏接口。
-- 检索结果页同样没有任何单册状态词（search.html 全文无 在架/可借/借出/复本）。
+- 懒加载端点 `POST GetAsset.action`（参数 `metatables` + `metaids` + `type=map`
+  + `orderType=`），返回 JSON `{list:[…], map:{分馆:[…]}}`，单册字段 barcode/
+  callno/curlocal(local)/cursublib(sublib)/status/cirtype/loandate/retudate/readerno。
+- **两个门，命运不同**：
+  - 根路径 `InDigLib/GetAsset.action`：**匿名可通，无需会话**。双重实证——用户
+    游客模式浏览器 200 JSON；脚本零 cookie 裸 POST → HTTP 200、9664 字节 JSON
+    （get_asset.json，《上瘾》metaid=2925752，5 册）。响应自带 JSESSIONID
+    Set-Cookie，但非前提。
+  - `frontV2/GetAsset.action`：**登录拦截**。2026-10-02 三次实测（含完整复刻
+    浏览器链路：SearchIndex → BookDetail → frontCloud 登录 iframe → GetAsset，
+    带 Referer），全部 302 到登录页（get_asset_anonymous.html，6455 字节）。
+- 初版「需读者登录，匿名拿不到」的结论只测了 frontV2 那道门，是错的。教训：
+  被 302 拦截时先试根路径同名 action。
+- 详情页内另一 ajax `GetCurrentBorrow.action` 是读者登录后功能（判断是否借阅该书
+  以下载随书光盘），不是公开馆藏接口。
+- 检索结果页没有任何单册状态词（search.html 全文无 在架/可借/借出/复本）。
 
-**结论：重庆公开数据只到「哪些分馆有这本书」这一级，单册可借状态需读者证登录。**
+**可借口径统一保守**（用户定调：只干确定事儿，不确定的统一处理）：源站无明确
+「可借/在架」状态词。确定的只有借出（status 含「借出」，带 loandate/retudate）
+→ `available=False` + `due_date=retudate`；其余一切状态（入藏、保存本 cirtype、
+未见过的值）统一 `available=False`，status 原值照登，**不做「入藏＝在架」预设**。
 
 ## 适配器设计约束（由此推导）
 
 - `search` / `get_book_detail`：按公开 HTML 正常解析。
-- `get_holdings`：分馆名照实返回（library = 馆名，其余字段空）；单册状态无公开
-  原值，`status=""`、`available=False`（保守，与穗杭未匹配状态词的处理一致），
-  不做「可借」预设判断。`only_available=True` 时重庆将返回空列表——这是源站数据
-  边界，不是故障。
-- 不对 GetAsset 做读者登录（无凭据、且属个人数据边界）。
+- `get_holdings`：先根路径 GetAsset 单册级（library=cursublib、location=curlocal、
+  call_number=callno、status 原值、全部 available=False、借出带 due_date）；
+  GetAsset 不可用（请求失败/响应非 JSON，如哪天换回登录页）→ 回退详情页
+  馆名级（library=馆名，其余字段空，status=""、available=False）。
+  item_id 恒空串（barcode 不当 item_id 用，避免触发契约的归还日期查询分支，
+  due_date 直接由 retudate 填）。`only_available=True` 时重庆恒返回空列表——
+  这是源站数据边界，不是故障。
+- 不对 frontV2 GetAsset 做读者登录（无凭据、且属个人数据边界）。
 
 ## 真网验证（2026-10-02，适配器实调，6 项全过）
 
@@ -64,8 +79,10 @@ simpleSearch（实抓验证：opacSearch 不接受这些参数）。
 - `search_books("三体", limit=5)`：pageSize 被源站接受，返回 5 条。
 - `get_book_detail("i_biblios:2649440")`：《三体》字段与浏览器一致（isbn
   9787229166922，call_number 空，summary 空）。
-- `get_holdings("i_biblios:2649440", only_available=False)`：1 条「重庆图书馆」，
-  status 空、available False，与侦察结论一致。
+- `get_holdings("i_biblios:2925752", only_available=False)`（GetAsset 接入后）：
+  5 册单册数据，索书号 TS976.15/585，地点含 重庆馆通借库/重图基藏库(四楼)/
+  重图在线借阅，1 册「普通借出」due_date 2026-08-17，全部 available=False；
+  全程仅 1 个请求（无需先建会话）。
 
 ## 其它
 

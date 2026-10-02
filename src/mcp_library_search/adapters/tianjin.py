@@ -25,6 +25,9 @@ _SOURCES = {
     "TJL01": {"host": "http://opacwh.tjl.tj.cn:8991", "name": "天津图书馆"},
     "TJC01": {"host": "http://opacse.tjl.tj.cn:8991", "name": "天津市少年儿童图书馆"},
 }
+# 验证码墙按 IP 封，两台 ALEPH 可能同时被封：解封指引一次列全地址，免得解一个才发现另一个
+_UNBLOCK_URLS = "、".join(
+    f"{s['host']}（{s['name']}）" for s in _SOURCES.values())
 # 归并优先级：主馆 > 少儿馆 > 中新友好（复合 book_id 成员顺序与主记录取值同源）
 _SOURCE_PRIORITY = ("TJL01", "TJC01", "ZXYH")
 _ZXYH = InterlibConfig(city="zxyh", name_cn="中新友好图书馆",
@@ -83,8 +86,8 @@ def _open(req, timeout=20):
     except urllib.error.HTTPError as e:
         if e.code == 401:
             raise _CaptchaError(
-                "天津图书馆：IP 被验证码墙封禁（HTTP 401），请在浏览器打开 "
-                "http://opacwh.tjl.tj.cn:8991 输入验证码手动解封后重试") from e
+                "天津图书馆：IP 被验证码墙封禁（HTTP 401），请在浏览器逐个打开 "
+                f"{_UNBLOCK_URLS} 输入验证码手动解封后重试") from e
         raise RuntimeError(f"天津图书馆请求失败：{e}") from e
     except (urllib.error.URLError, OSError) as e:
         raise RuntimeError(f"天津图书馆请求失败：{e}") from e
@@ -98,8 +101,8 @@ def _check_captcha(text):
     """验证码墙：立即抛错，不重试硬闯（按 IP 封，硬闯只会延长封禁）。"""
     if "验证码" in text:
         raise _CaptchaError(
-            "天津图书馆：检索过于频繁触发验证码，请在浏览器打开 OPAC "
-            "输入验证码手动解封后重试")
+            "天津图书馆：检索过于频繁触发验证码，请在浏览器逐个打开 "
+            f"{_UNBLOCK_URLS} 输入验证码手动解封后重试")
 
 
 def _looks_like_isbn(keyword):

@@ -26,7 +26,7 @@ def search_books(keyword: str, city: str = "shanghai", page: int = 1, limit: int
     已接入城市：shanghai（上海，全市 900+ 网点，含地铁站 24 小时自助机）、
     guangzhou（广州）、hangzhou（杭州）、shenzhen（深圳，167 馆统一平台）、
     tianjin（天津，主馆＋少儿馆＋中新友好三源合并，同一本书跨馆归并成一条结果）、
-    chongqing（重庆，馆藏到馆级；单册可借状态需读者登录，接口不返回）；
+    chongqing（重庆，馆藏到单册级；源站无明确「可借」状态词，全部保守按不可借展示，状态原值照登）；
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
@@ -50,6 +50,8 @@ def find_book_availability(book_id: str, city: str = "shanghai", only_available:
 
     已借出的馆藏可能带 due_date（预计归还时间，YYYY-MM-DD），仅在
     only_available=False 时出现；数据源查不到时为空串。
+    重庆源站无明确「可借」状态词：only_available=True 恒为空，请用 False
+    查看状态原值（入藏/借出等）与应还日期，自行判断。
 
     参数：
         book_id：search_books 返回的图书 ID，需与 search_books 使用同一 city
