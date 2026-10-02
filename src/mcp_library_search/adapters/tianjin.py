@@ -159,6 +159,62 @@ def _parse_full_record(text, source):
     )
 
 
+# ---- 单册页 item-global（列结构见 NOTES.md） ----
+
+_ITEM_ROW = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+# 可借性原值在「应还日期」列（在架上/日期）；「单册状态」列是流通类型（阅览/中文图书借阅…）
+_AVAIL_WORDS = ("在架", "在馆", "可借")
+
+
+def _item_cell(row, marker):
+    m = re.search(r"<!--" + marker + r"-->\s*<td[^>]*>(.*?)</td>", row, re.S)
+    return _clean(m.group(1)) if m else ""
+
+
+def _norm_due(text):
+    """应还日期归一为 YYYY-MM-DD：支持 YYYYMMDD、YYYY-MM-DD、DD/MM/YYYY；非日期返回空串。"""
+    s = str(text or "").strip()
+    if re.fullmatch(r"\d{8}", s):
+        return f"{s[:4]}-{s[4:6]}-{s[6:]}"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
+        return s
+    m = re.fullmatch(r"(\d{2})/(\d{2})/(\d{4})", s)
+    if m:
+        return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    return ""
+
+
+def _parse_item_global(text):
+    """item-global 单册页 → _Holding 列表。
+
+    可借判定只看应还日期列：含「在架/在馆/可借」→ 可借；是日期 → 已借出（due_date 归一）；
+    其余（含空）保守不可借。流通类型列不参与判定，但与状态原值一并保留在 status 里。
+    """
+    _check_captcha(text)
+    holdings = []
+    for row in _ITEM_ROW.findall(text):
+        if "<!--Loan status-->" not in row:
+            continue
+        loan = _item_cell(row, "Loan status")
+        due = _item_cell(row, "Due date")
+        date = _norm_due(due)
+        if date:
+            status, due_date, available = loan, date, False
+        else:
+            status = " ".join(x for x in (loan, due) if x)
+            due_date = ""
+            available = any(w in due for w in _AVAIL_WORDS)
+        holdings.append(_Holding(
+            library=_item_cell(row, "Sub-library"),
+            location=_item_cell(row, "Collection"),
+            call_number=_item_cell(row, "Location"),
+            status=status,
+            available=available,
+            due_date=due_date,
+        ))
+    return holdings
+
+
 def _parse_find(text, source):
     """find-b 响应 → {"books", "total_results", "total_pages"}。
 
