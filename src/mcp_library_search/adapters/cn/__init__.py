@@ -13,6 +13,7 @@ from . import hefei
 from . import huaian
 from . import jiangyin
 from . import jinhua
+from . import lishui
 from . import nanjing
 from . import ningbo
 from . import qingdao
@@ -27,6 +28,7 @@ from . import wuxi
 from . import xuzhou
 from . import yancheng
 from . import yangzhou
+from . import zhoushan
 
 NAME = "中国"
 
@@ -40,6 +42,7 @@ ADAPTERS = {
     "huaian": huaian,
     "jiangyin": jiangyin,
     "jinhua": jinhua,
+    "lishui": lishui,
     "nanjing": nanjing,
     "ningbo": ningbo,
     "qingdao": qingdao,
@@ -54,4 +57,5 @@ ADAPTERS = {
     "xuzhou": xuzhou,
     "yancheng": yancheng,
     "yangzhou": yangzhou,
+    "zhoushan": zhoushan,
 }

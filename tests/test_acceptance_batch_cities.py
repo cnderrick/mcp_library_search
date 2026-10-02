@@ -21,15 +21,17 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋苏州（2026-10-03 立项城市落地，图创 Interlib 家族默认模板零 quirk）
 # ＋徐州（2026-10-03 立项城市落地，抽出图星 LibStar Find 家族）
 # ＋淮安、盐城（2026-10-03 立项城市落地，LibStar 家族新增配置）
+# ＋丽水（Interlib pro2018）、舟山（抽出 UILAS 家族，旧式 TLS quirk）
 _EXPECTED = [
     "chengdu", "chongqing", "dalian", "guangzhou", "hangzhou", "hefei",
-    "huaian", "jiangyin", "jinhua", "nanjing", "ningbo", "qingdao",
-    "shanghai", "shaoxing", "shenzhen", "suzhou", "taizhou", "tianjin",
-    "wenzhou", "wuxi", "xuzhou", "yancheng", "yangzhou",
+    "huaian", "jiangyin", "jinhua", "lishui", "nanjing", "ningbo",
+    "qingdao", "shanghai", "shaoxing", "shenzhen", "suzhou", "taizhou",
+    "tianjin", "wenzhou", "wuxi", "xuzhou", "yancheng", "yangzhou",
+    "zhoushan",
 ]
 
 
-def test_registry_has_exactly_twenty_three_identifiers():
+def test_registry_has_exactly_twenty_five_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

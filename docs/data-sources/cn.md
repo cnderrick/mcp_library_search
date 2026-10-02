@@ -139,12 +139,12 @@
 |  | 温州 | `wenzhou` | ✅ 接入 | https://opac3.wzlib.cn/opac/index | 图创 Interlib（已确认，与广州同模板；站点为温州市图书馆，全市总分馆 91 馆） | `interlib/` 家族 + `adapters/cn/wenzhou.py` |
 |  | 绍兴 | `shaoxing` | ✅ 接入 | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，pro2018 模板代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | `interlib/` 家族 ＋ `adapters/cn/shaoxing.py`（`pro2018=True`＋`pro2018_cite_author=True` 启用家族解析与引文块责任者兜底） |
 |  | 台州 | `taizhou` | ✅ 接入 | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族 ＋ `adapters/cn/taizhou.py`（`pro2018=True` 启用家族 pro2018 解析） |
-|  | 金华 | `jinhua` | ✅ 接入 | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（ILAS 系 HTML OPAC，Tomcat/JSP，与深圳的自研 JSON API 封装不同，不可复用） | `adapters/cn/jinhua.py`（独立实现，HTML 解析，匿名全链路）；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
-|  | 湖州 | — | ⛔ 不通 | http://www.hzlib.net （湖州市图书馆） | — | — |
+|  | 金华 | `jinhua` | ✅ 接入 | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（ILAS 系 HTML OPAC，Tomcat/JSP） | `uilas/` 家族 + `adapters/cn/jinhua.py`；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
+|  | 湖州 | — | ⛔ 不通 | https://www.hztsg.com/Cloud/Module/Index/index.html （湖州市图书馆） | — | 2026-10-03 实测：`www.hztsg.com` 解析到 **198.20.1.102 域名停放段**，80/443 端口均连接超时无响应字节；原登记 `www.hzlib.net` 亦不通。无可用检索入口 |
 |  | 嘉兴 | — | ⛔ 不通 | http://www.jxlib.net （嘉兴市图书馆） | — | — |
-|  | 舟山 | — | ⛔ 不通 | http://www.zslib.net （舟山市图书馆） | — | — |
+|  | 舟山 | `zhoushan` | ✅ 接入 | https://opac.zsodl.cn/Index?target=0 | UILAS 知识检索平台（与金华同款） | `uilas/` 家族 + `adapters/cn/zhoushan.py`；旧式 TLS quirk（只支持静态 RSA kx 套件，需显式放行，见家族章） |
 |  | 衢州 | — | ⛔ 不通 | http://www.qzlib.net （衢州市图书馆） | — | — |
-|  | 丽水 | — | ⛔ 不通 | http://www.lslib.net （丽水市图书馆） | — | — |
+|  | 丽水 | `lishui` | ✅ 接入 | http://60.190.125.252:8086/opac/index | 图创 Interlib（已确认，pro2018 模板代；丽水市公共图书馆联合目录，含景宁/庆元/缙云等县馆） | `interlib/` 家族 + `adapters/cn/lishui.py`（`pro2018=True`，零 quirk） |
 | 河北省 | 石家庄 | — | ⛔ 不通 | http://www.helib.net （河北省图书馆） | — | — |
 |  |  | — | ⛔ 不通 | http://www.sjzlib.cn （石家庄市图书馆） | — | — |
 |  | 唐山 | — | 🔍 待核验 | http://www.tslib.net （唐山市图书馆） | — | — |
@@ -416,6 +416,7 @@
 | 中新友好（生态城，天津第三源） | `curlibcode=STC001` | 检索与详情必须带 `curlibcode`（缺详情参数直接 HTTP 500），馆藏 JSON 不需要；ISBN 在 `expressServiceTab` 兄弟节点上，家族 parser 以 `express_bookrecno` 后挂；`search_raw` 暴露内部 isbn 字段供归并（契约 `BookSummary` 不含 isbn）。 |
 | 青岛 | 默认，**检索通道在适配器内改走站点内嵌 Solr** | 主站 HTML 检索页 `/opac/search` 被滑动验证码常态拦截（`slideVerify`，新会话首个检索请求即触发，非限速型；验证结果只落在当次浏览器会话），而站点内嵌的 Solr 后端 `GET /opac/api/search` 开放——检索原语改走该通道（`wt=json`，`q`＋`rows`＋`page`；服务端凭 `page` 自算 `start`，直传 `start` 被忽略），是本城相对广州基准的唯一结构差异。`docs[].id` 即 `bookrecno`，可直接用于详情与馆藏端点；详情无需 `curlibcode`，`/opac/book/{id}` 与 `/opac/api/holding/{id}` 与广州基准完全同构，家族 parser 零改动全字段解析。数据边界：服务端默认 `fq` 是硬编码状态白名单＋定位集合，自行追加 `fq` 会被整体覆盖，故结果默认只含有馆藏书目、`hasholding` 恒为 `y`（`availability_summary` 恒空串）；带连字符 ISBN 命中不了（同广州 marc），首搜为空时去连字符重试；自带 ≥2 秒节流。`tests/fixtures/qingdao/NOTES.md`。 |
 | 苏州 | 默认（零 quirk，不需要 `curlibcode`） | `https://reader.szlib.com`，默认（非 pro2018）模板；检索/详情/馆藏裸参数均通，无需 `curlibcode`。详情页内嵌馆藏请求带 `jsessionid`＋`isCluster=false`，但家族 `isCluster=`（空）实测同样返回完整 holdingList、不依赖会话，故不新增字段。libcodeMap 仅 4 项（`ST=苏图`、`999=中心馆`、`zd=职大分馆`、`GS=姑苏区分馆`，馆名译名缩写「苏图」原值照登）、localMap 250 项。部分书目 `holdingList` 为空但 maps 齐全，属记录级数据事实（无实体单册），返回空馆藏列表正确。tagTr stale-label 缺陷在苏州记录上未触发。`tests/fixtures/suzhou/NOTES.md`。 |
+| 丽水 | `pro2018=True` | 裸 IP ＋ HTTP：base_url `http://60.190.125.252:8086`；pro2018 模板代（搜索条目 `libBookLi`，页内也带 `bookrecno`）。检索/详情/馆藏裸参数均通，不需要 `curlibcode`；不需要 `pro2018_cite_author`（author 直取「刘慈欣」）。全市联合目录：libcodeMap 含丽水市图书馆（`lsslib`）与景宁/庆元/缙云/遂昌/松阳/云和/青田等县馆及乡镇分馆、城市书房、阅读驿站。部分书目 holdingList 为空而 maps 齐全属记录级数据事实；详情记录无内容提要时 summary 空串。`tests/fixtures/lishui/NOTES.md`。 |
 
 新接同族城市：`adapters/cn/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/cn/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 
@@ -635,23 +636,25 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
   **`VIEW^N` 的 N 是命中集全局序号**（第 2 页第 1 位＝21），不是页内序号。
 - 会话失效（跳回入口页形态）重建一次再试，仍失败抛错；源站回 Error 页不算会话失效，换候选继续。
 
-## UILAS（金华）
+## UILAS 家族（金华、舟山）
 
-`adapters/cn/jinhua.py` 独立实现（urllib，全链路匿名零 cookie），入口
-http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证书已过期）；
-节流 4 秒/host。先期调研（`docs/team/research/2026-10-02-ilas-jinhua.md`）大方向成立，
-两处实质出入以实抓为准已修正（NOTES.md 先更新再写代码）：
+家族模块 `uilas/`：`client.py`（HTTP 层＋4 秒/host 节流＋可选旧式 TLS 兜底）、
+`parser.py`（检索结果页／详情页／内联馆藏表解析）、`__init__.py`（三原语与
+`UilasConfig`）。成员：金华市图书馆（`adapters/cn/jinhua.py`）、舟山市图书馆
+（`adapters/cn/zhoushan.py`）。城市差异只允许以 `UilasConfig` 带默认值的字段
+（quirk）新增，默认值即金华行为。UILAS 知识检索平台（ILAS 系 HTML OPAC，
+Tomcat/JSP），全链路匿名零 cookie。
 
-- **检索**：POST `NTRdrBookRetr.do`；ISBN 形态路由 `searchType=isbnsrh`（带/不带连字符
-  均命中），其余走任意词；总数「共有 [N]条记录」，空结果页括号为空（`共有 []条记录`）
-  → total=0，总数锚点整体缺失＝非结果页，报错。
+- **检索**：POST `NTRdrBookRetr.do`（`searchType`/`searchKey`）；ISBN 形态路由
+  `searchType=isbnsrh`（带/不带连字符均命中），其余走任意词；总数「共有 [N]条记录」，
+  空结果页括号为空（`共有 []条记录`）→ total=0，总数锚点整体缺失＝非结果页，报错。
 - **翻页 quirk**：GET 带 `nCurrentpage`，**SearchKey 双重 URL 编码**（页内翻页链接原样
   `%25E4%25B8%2589…`），适配器复刻二次编码。
 - **book_id＝裸 recno**（纯数字，无 tablename 前缀——与深圳/重庆 `{table}:{id}` 形态
   不同），非纯数字直接报错。
-- **详情**：GET `NTRdrBookRetrInfo.do?recno=`；详情页标题可能短于列表页（原值照登
-  不对齐）；出版时间可为民国纪年（publish_year 提取公历，提不到空串不猜）；ISBN
-  「书号不详」原值照登。
+- **详情**：GET `NTRdrBookRetrInfo.do?recno=`（标记「书目详细信息」）；详情页标题可能
+  短于列表页（原值照登不对齐）；出版时间可为民国纪年（publish_year 提取公历，提不到
+  空串不猜）；ISBN「书号不详」原值照登。
 - **馆藏**：在 `div#BookHolding` 内（BookHolding 之前的两个 `table.table` 是 CADAL
   数字图书表、常为空 tbody，**别当馆藏解析**——调研笔记此处有误已修正）；只有入藏
   复本时单表「馆藏信息」，有借出才出现「已外借馆藏」两表；状态词表仅
@@ -659,7 +662,16 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 - **简介**：调研称「恒空」被实抓否定——详情页有内联「附注提要」块，summary 取其原值
   （上海「附注」回退同款思路）；`getBookCatalog.do` 仍不接。
 - **数据边界**：借出单册无应还日期（due_date=""，站方访客视角不提供，不猜）。
-- 字段侦察与出入清单见 `tests/fixtures/jinhua/NOTES.md`。
+- **旧式 TLS quirk（舟山，2026-10-03）**：`opac.zsodl.cn` 只支持**静态 RSA 密钥交换**
+  的 TLS 1.2 套件（协商为 `TLS_RSA_WITH_AES_256_GCM_SHA384`），不支持 ECDHE；
+  OpenSSL 3.5 默认密码列表已停用静态 RSA kx，`urllib` 默认上下文直接回
+  `SSLV3_ALERT_HANDSHAKE_FAILURE`（curl/LibreSSL 可通、Python 不可）。配置
+  `UilasConfig.ssl_ciphers="AES256-GCM-SHA384:AES128-GCM-SHA256"`，家族 HTTP 层用
+  `set_ciphers()` 显式放行并按串缓存 opener；金华是裸 IP 纯 HTTP，不受影响。
+- **各城差异**：金华入口 http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，
+  **仅 HTTP**：443 证书已过期）；舟山入口 https://opac.zsodl.cn/Index?target=0（HTTPS，
+  带上述 TLS quirk）。两城页面结构逐项同构，家族 parser 零改动。
+- 字段侦察与出入清单见 `tests/fixtures/jinhua/NOTES.md`、`tests/fixtures/zhoushan/NOTES.md`。
 
 ## 图星 LibStar Find（无锡、徐州、盐城、淮安）
 

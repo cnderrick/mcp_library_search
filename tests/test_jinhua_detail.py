@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+from mcp_library_search import uilas
 from mcp_library_search.adapters.cn import jinhua
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "jinhua"
@@ -20,11 +21,11 @@ def _mock_open(monkeypatch, pages):
     calls = []
     seq = iter(pages)
 
-    def spy(req, timeout=30):
+    def spy(config, req, timeout=30):
         calls.append((req.full_url, req.data))
         return next(seq)
 
-    monkeypatch.setattr(jinhua, "_open", spy)
+    monkeypatch.setattr(uilas.client, "open", spy)
     return calls
 
 

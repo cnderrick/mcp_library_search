@@ -1,13 +1,14 @@
 """金华适配器检索：POST 表单口径、ISBN 路由、双重编码翻页、空结果页、非结果页报错。
 
-mock 点为模块级 `_open(req, timeout)`：req 是 urllib Request，
-测试里按顺序返回 fixture 文本并记录 (full_url, data)。
+mock 点为家族 HTTP 出口 `uilas.client.open(config, req, timeout)`：req 是
+urllib Request，测试里按顺序返回 fixture 文本并记录 (full_url, data)。
 fixture 结论见 tests/fixtures/jinhua/NOTES.md。
 """
 from pathlib import Path
 
 import pytest
 
+from mcp_library_search import uilas
 from mcp_library_search.adapters.cn import jinhua
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "jinhua"
@@ -22,11 +23,11 @@ def _mock_open(monkeypatch, pages):
     calls = []
     seq = iter(pages)
 
-    def spy(req, timeout=30):
+    def spy(config, req, timeout=30):
         calls.append((req.full_url, req.data))
         return next(seq)
 
-    monkeypatch.setattr(jinhua, "_open", spy)
+    monkeypatch.setattr(uilas.client, "open", spy)
     return calls
 
 

@@ -1,0 +1,2048 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <base href="http://opac.zsodl.cn:443/">
+
+
+    <title>书目查询</title>
+    <meta name="referrer" content="no-referrer" />
+    <link type="text/css" rel="stylesheet" href="style/style.css"/>
+    <link rel="stylesheet" media="print" href="style/print.css"/>
+
+    <script type="text/javascript" src="style/jquery.js"></script>
+    <script type="text/javascript" src="style/jquery-migrate.js"></script>
+    
+    
+
+
+<script>
+
+!window.jQuery && document.write("<script src=\"/i18n/jquery-3.5.1.min.js\">"+"</scr"+"ipt>");
+</script>
+<script type="text/javascript" src="/i18n/jquery.i18n.properties-min.js"></script>
+
+<script type="text/javascript" >
+	
+	$trans = $.i18n.prop;
+	var lang = 'null';
+	if(lang==null || lang=="null") {
+		//lang="zh";
+		
+		$.ajax({
+			url:"getSystemLanguage.do",
+			type:"GET"
+		}).done(function(data){
+			lang = data;
+		}).fail(function(){
+			lang = "zh";
+		});
+		
+		$.i18n.properties({
+		    name:'Messages', 
+		    path:'i18n/language/', 
+		    mode:'both',
+		    language: lang,  
+		    callback: function() {
+	    	
+// 		    	console.log($.i18n.prop("msg_world","哈哈"));
+// 		    	console.log($trans("msg_world"));
+		    }
+		});
+	}else{
+		$.i18n.properties({
+		    name:'Messages', 
+		    path:'i18n/language/', 
+		    mode:'both',
+		    language: lang,  
+		    callback: function() {
+		    	
+	// 		    	console.log($.i18n.prop("msg_world","哈哈"));
+	// 		    	console.log($trans("msg_world"));
+			    }
+			});
+	}
+	
+	
+</script>
+
+    <script type="text/javascript" src="style/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="style/jQuery.equalHeights.js"></script>
+    <script type="text/javascript" src="style/func.js"></script>
+    <script type="text/javascript" src="JS/amcharts.js"></script>
+    <script type="text/javascript" src="JS/serial.js"></script>
+    <link rel="stylesheet" href="JS/jquery.autocomplete.css">
+    <script type="text/javascript" src="JS/jquery.autocomplete.js"></script>
+
+    <script type="text/javascript" src="style/jquery.jcarousel.min.js"></script>
+
+
+    <!--[if IE]>
+    <link rel="stylesheet" href="style/ie.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="style/html5.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="style/DD_belatedPNG.js"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix();
+    </script>
+    <![endif]-->
+    <script type="text/javascript">
+        $(function () {
+            $("#searchKey").autocomplete("MyLibProcAPI.do", {
+                minChars: 1,
+                width: 300,
+                autoFill: false,
+                scrollHeight: 400,
+                selectFirst: false,
+                formatItem: function (row, i, max) {
+                    return "<div>" + row[0] + "</div>";
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".searchbox select,.rightselect select").uniform();
+        });
+
+        function ShowShowyear() {
+
+
+            var ShowBookTitle = document.getElementById("Showyear").style.display;
+            if (ShowBookTitle == "none")
+                $("#Showyear").show();
+            else
+                $("#Showyear").hide();
+
+        }
+
+
+        function SaveBookSelf() {
+            var bookListRecno = '';
+            $.ajax({
+                url: '/PutInBookShelf.do;jsessionid=3A1CA30DBAF8B15F5F1E21FC93F2C657?recno=' + bookListRecno,
+                method: 'POST',
+                contentType: "application/json",
+                data: "",
+                dataType: 'json',
+                error: function () {
+                    alert("error");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    var result = data.msg;
+                    if (result == "success") {
+                        alert(data.tip);
+                    }
+                    else {
+                        alert(data.tip);
+                        window.location.href = "NTRdrLogin.do";
+                    }
+
+                }
+            });
+
+        }
+
+        /* 	   function initPara(nShowPageNum)
+                {
+                  for(var i=0;document.getElementsByName("pageNum")[0].length;i++)
+                  {
+                    if (document.getElementsByName("pageNum")[0].options[i].value == nShowPageNum)
+                    {
+                        document.getElementsByName("pageNum")[0].options[i].selected = true;
+                        break;
+                    }
+
+                  }
+
+                } */
+    </script>
+    <style type="text/css">
+        #BgDiv {
+            background-color: #888888;
+            position: absolute;
+            z-index: 88;
+            left: 0;
+            top: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            -moz-opacity: 0.5;
+        }
+
+        #DialogDiv {
+            position: absolute;
+            width: 400px;
+            left: 50%;
+            top: 25%;
+            margin-left: -200px;
+            height: 300px;
+            z-index: 99;
+            background-color: #fff;
+            border: 1px #8FA4F5 solid;
+            padding: 1px;
+            border: 2px solid #DDDDDD;
+            border-radius: 8px;
+            border: 1px solid #c0d7e9;
+            border-radius: 8px;
+            background: #f2feff url(images/bodybg.jpg);
+            padding: 20px;
+
+        }
+
+        #historyDiv {
+            border: 1px solid #c0d7e9;
+            position: absolute;
+            top: 0px;
+            left: 22%;
+            z-index: 100;
+            display: none;
+        }
+
+
+        #DialogDiv .result {
+            padding: 10px 10px 0px 10px;
+            color: #3b9bee;;
+            font-size: 16px;
+            font-style: oblique;
+            font-weight: bold;
+        }
+
+        #DialogDiv .stopresult {
+            padding: 0px 10px 10px 10px;
+            color: #3b9bee;;
+            font-size: 16px;
+            font-style: oblique;
+            font-weight: bold;
+        }
+
+    .bookResutInfo {
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+            display: inline-block;
+            background: #5278af;
+            background: -webkit-linear-gradient(top, #5d82b6, #486fa8);
+            background: -moz-linear-gradient(top, #5d82b6, #486fa8);
+            background: linear-gradient(top, #5d82b6, #486fa8);
+            border: 1px solid #3a5d97;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            overflow: hidden;
+            padding: 0px 10px 0px 10px;
+
+        }
+
+        .bookResutInfo2 {
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+            display: inline-block;
+            background: #5278af;
+            background: -webkit-linear-gradient(top, #5d82b6, #486fa8);
+            background: -moz-linear-gradient(top, #5d82b6, #486fa8);
+            background: linear-gradient(top, #5d82b6, #486fa8);
+            border: 1px solid #3a5d97;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            overflow: hidden;
+            padding: 0px 10px 0px 10px;
+
+        }
+
+        .bookResutInfoTet {
+            width: 75px;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+            display: inline-block;
+            background: #5278af;
+            background: -webkit-linear-gradient(top, #5d82b6, #486fa8);
+            background: -moz-linear-gradient(top, #5d82b6, #486fa8);
+            background: linear-gradient(top, #5d82b6, #486fa8);
+            border: 1px solid #3a5d97;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            overflow: hidden;
+
+        }
+
+        .bookinfo_con {
+            width: 997px;
+            padding: 15px 0 0 0;
+            display: none;
+            margin: 0 -29px -11px -28px;
+        }
+        .bookinfo2_con {
+            width: 997px;
+            padding: 15px 0 0 0;
+            display: none;
+            margin: 0 -29px -11px -28px;
+        }
+
+        .show_Showyear {
+            WRITING-MODE: tb-rl;
+            TEXT-ALIGN: left;
+            OVERFLOW-Y: auto;
+            top: 230px;
+            right: 20px;
+            position: absolute;
+            z-index: 999;
+            border: 1px solid #c0d7e9;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f2feff url(images/bodybg.jpg);
+            padding: 10px;
+        }
+
+        .show_SaveBookSelf {
+            WRITING-MODE: tb-rl;
+            TEXT-ALIGN: left;
+            OVERFLOW-Y: auto;
+            top: 500px;
+            right: 20px;
+            position: absolute;
+            z-index: 999;
+            border: 1px solid #c0d7e9;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #f2feff url(images/bodybg.jpg);
+            padding: 10px;
+        }
+
+        .show_coutnshowyear {
+            cursor: pointer;
+            width: 100%;
+            height: auto;
+            border: 1px solid #c0d7e9;
+            border-radius: 8px;
+            color: #fff;
+            background: #f2feff url(images/bodybg.jpg);
+            margin-bottom: 10px;
+        }
+
+
+    </style>
+</head>
+<body>   <!--onload="initPara('')"  -->
+<section class="wrapper">
+
+    <!--顶部-->
+    <div>
+        
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="http://opac.zsodl.cn:443/">
+    
+    <title></title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+	
+	
+    <link type="text/css" rel="stylesheet" href="/CSS/ilas-common.css?v=201805040" />
+<style>
+
+.show-libs {
+	display: none;
+	z-index: 999;
+	width: 50rem;
+	height: 30rem;
+	background-color: #F2FDFF;
+	border: 1px solid #4B71AA;
+	position:fixed;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0; 
+	bottom:0;
+}
+
+.show-libs .title-libs {
+	height: 2rem;
+	line-height: 2rem;
+	padding: 0px 0;
+	background-color: #4B71AA;
+	color: #E9F5F5;
+	padding-left: 1rem;
+}
+
+.show-libs .title-libs .close{
+	float:right;
+	padding-right: 10px;
+	color: #fff;
+}
+
+.show-libs .title-libs .close:HOVER{
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.show-libs .search-libs {
+	height: 2.5rem;
+	padding: 0.5rem 0 0 0;
+	color: #E9F5F5;
+	padding-left: 1rem;
+}
+
+.show-libs .content-libs {
+	height: 23.9rem;
+	padding: 0.5rem;
+	overflow: auto;
+}
+
+.content-libs li {
+/* 	display: inline-block; */
+/* 	min-width: 25%; */
+	margin: 3px 0;
+	float: left;
+	padding: 0.2rem 0.5rem;
+/* 	border: 1px solid red; */
+	box-sizing: border-box;
+}
+
+.content-libs li span:HOVER {
+	border: 1px solid #4B71AA;
+	background-color: #4B71AA;
+	color: #fff;
+}
+
+.content-libs li span {
+	display: inline-block;
+	padding: 0.2rem 0.5rem;
+	border-radius: 5px;
+	border: 1px solid #4B71AA;
+	background-color: #fff;
+	box-sizing: border-box;
+	color: #4B71AA;
+	cursor: pointer;
+}
+
+.navbar-content-box dl dt,.navbar-content-box dl dd {
+	border-left: 1px solid red;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;	
+}
+
+.navbar-content-box dl dt a {
+	display: inline-block;
+	width: 100%;
+}
+
+.navbar-content-box dl dd a {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 100%;
+}
+
+</style>
+  </head>
+  
+  <body>
+
+	<div class="navbar-wrapper">
+		<div class="wgt-navbar">
+			<div class="navbar-bg">
+				<div class="navbar-bg-top">
+					<div class="navbar-content layout">
+						<div class="navbar-content-box">
+							<dl class="index ">
+								<dt class="user ">
+									<a href="Index?target=0" title='首页'>
+									首页</a>
+								</dt>
+							</dl>
+							<dl class="user ">
+								<dt class="user ">
+
+								
+
+								
+
+	                            
+
+		                       
+			                          <a  href="search.do?target=1&menu1=102" title='特色检索'>
+			                          特色检索</a>
+	                            
+								</dt>
+								<dd>
+									<div id="classNoShow" style="display:none;">
+										<a id="RetrievalSearch3" onclick="javascipt:NTRetrievalSearch('RetrievalSearch3');" title='中图分类法'>
+										中图分类法</a>
+									</div>
+									<div>
+										<a href="search.do?target=1&menu1=102" title='高级检索'>
+										高级检索 </a>
+									</div>
+
+								      <div id="booktag" style="display: none;">
+										<a href="showBookTagList.do?target=1&menu1=103" title='书签列表'>
+			                               书签列表
+			                          </a>
+									</div>
+								</dd>
+							</dl>
+						
+							
+							<dl id="newBookNotice" style="display:none;" class="user ">
+								<dt class="user ">
+										
+	                            		
+		                            
+				                          <a id="NTShowNewBook2" onclick="javascipt:NTShowNewBook('NTShowNewBook2');" title='新书通报'>
+				                          新书通报</a>
+		                            
+
+								</dt>
+							
+								<dd>
+									<div>
+										<a id="NTShowNewBook3" onclick="javascipt:NTShowNewBook('NTShowNewBook3');" title='新书通报'>
+										新书通报</a>
+									</div>
+									<div id="seriesreview" style="display: none;" >
+										<a id="NTShowNewSeries2" onclick="javascipt:NTShowNewSeries('NTShowNewSeries2');" title='新刊通报'>
+										新刊通报</a>
+									</div>
+									
+
+
+
+
+								</dd>
+							</dl>
+							
+							
+							<dl id="hotRank" style="display:none;" class="user ">
+								<dt class="user ">
+			                    	
+			                            <a href="HotTopList.do?target=2&menu2=201" title='热点排行' >
+			                                 热点排行
+			                            </a>
+	                            		
+	                            
+	                                
+	                                
+								</dt>
+								<dd>
+									<div>
+										<a id="NTBookTopList2" onclick="javascipt:NTBookTopList('NTBookTopList2');" title='借阅排行榜'>
+			                                借阅排行榜
+			                            </a>
+									</div>
+									<div>
+										<a href="HotTopList.do?target=2&menu2=201"  title=' 热点排行'>
+			                                 热点排行
+			                            </a>
+									</div>
+								
+								</dd>
+							</dl>
+							
+							<dl id="beforeQuestion" style="display: none;" class="user ">
+								<dt class="user ">
+									 <a href="QuestionPage.do?target=3" title='咨询中心'>
+			                                 咨询中心
+			                             </a>
+								</dt>
+								<dd>
+									<div>
+										 <a href="QuestionPage.do?target=3" title='咨询中心'>
+			                                 咨询中心
+			                             </a>
+									</div>
+								</dd>
+							</dl>
+							
+							<dl id="information" style="display: none;" class="user ">
+								<dt class="user ">
+									 <a href="bookReturnInform.do?target=info" title='信息公告'>
+			                                 信息公告
+			                             </a>
+								</dt>
+								<dd>
+									<div id="libraryInform" style="display:none;">
+										 <a href="information.do?target=info" title=' 通知公告'>
+			                                 通知公告
+			                             </a>
+									</div>
+									<div id="returnInform" style="display:none;">
+										<a href="bookReturnInform.do?target=info" title=' 全馆催还通知'>
+											全馆催还通知
+										</a>
+									</div>
+								</dd>
+
+							</dl>
+							
+							<dl id="linkSearch" class="user "  style="display: none;">
+								<dt class="user ">
+									<a href="ShowJson.do?target=4" title='使用帮助'>
+									使用帮助</a>
+								</dt>
+								<dd>
+									<div>
+									    <a href="ShowJson.do?target=4" title='使用帮助'>
+									    使用帮助</a>
+									</div>
+									
+								</dd>
+							</dl>
+							
+							<dl id="uptodate" class="index " style="display:none;">
+								<dt class="user ">
+									<a href="http://www.uptodate.com/contents/search" target="_blank" rel="noopener noreferrer">UpToDate</a>
+								</dt>
+							</dl>
+							
+							<dl id="moreElectic" class="index " style="display:none;">
+								<dt class="user ">
+									<a href="test.jsp" target="_blank">更多电子资源</a>
+								</dt>
+							</dl>
+							
+							<dl class="user">
+								<dt>
+									<a>语种</a>
+								</dt>
+								<dd>
+									<div>
+										<a href="language?language=zh_CN">中文</a>
+									</div>
+									<div>
+										<a href="language?language=en_US">英文</a>
+									</div>
+								</dd>
+							</dl>
+							<dl class="user">
+								<dt>
+									<a href="about.jsp">关于</a>
+								</dt>
+							</dl>
+
+							
+							<div class="usercenter">
+								    <div>
+										<a id="jumpMyLib" href="javascript:void(0)"  >
+										<em class="cmn-icon cmn-icons cmn-icons_navbar-usercenter"></em>
+										我的图书馆</a>
+									</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="show-libs">
+		<div class="title-libs">选择图书馆<span class="close">关闭</span></div>
+		<div class="search-libs">
+			<input name="" id="libname" class="input" style="width:30rem;margin-left:0.5rem;"  >
+			<input id="libFilter" style="height:2.2rem;line-height:2rem; padding: 0  1rem;margin: 0;" value="筛选" class="vipsearch" type="button" >
+			<input id="libClear" style="height:2.2rem;line-height:2rem; padding: 0  1rem;margin: 0;" value="清空" class="vipsearch" type="button" >
+		</div>
+		<div class="content-libs">
+			<ul >
+<!-- 								<li><span>虚拟馆虚拟馆虚拟馆虚拟馆虚拟馆虚拟馆</span></li> -->
+			</ul>
+		</div>
+	</div>
+</body>
+
+
+ <script type="text/javascript" src="/JS/mod_4302fe0.js"></script>
+<script type="text/javascript" src="/JS/jquery_1.11.1_dfce600.js"></script>
+<script type="text/javascript" src="/JS/jquery.mousewheel_4fde694.js"></script>
+<script type="text/javascript" src="/JS/jquery_2d56800.js"></script>
+<script type="text/javascript" src="/JS/ilas-common.js"></script>
+
+ <script type="text/javascript">
+
+	 $(document).on("click","#jumpMyLib", function(){
+		 var lib = localStorage.getItem("library")
+		 if (lib == 'XMGS') {
+			 window.location.href = '/gongShangLogin.do'
+			 return
+		 }
+		 window.location.href = '/NTRdrLogin.do'
+	 });
+
+
+
+!function(){ 
+	showORhide();
+    var $ = require('wiki-common:widget/lib/jquery/jquery');
+
+    var timer = '';
+
+	$('.wgt-navbar').on('mouseenter', 'dl', function() {
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			$('.wgt-navbar').addClass('wgt-navbar-hover');
+		}, 300);
+	}).on('mouseleave', function() {
+		clearTimeout(timer);
+		$('.wgt-navbar').removeClass('wgt-navbar-hover');
+	}).on('click', 'a', function() {
+		clearTimeout(timer);
+		$('.wgt-navbar').removeClass('wgt-navbar-hover');
+	});
+}();
+
+	
+	 function showORhide(){
+		 $.post("/questionWay.do",{},function(data){
+		 for(var newdata in data){//遍历json对象的每个key/value对,newdata为key
+			var id = "#"+newdata;
+			if($.trim(data[newdata])=="true")
+				$(id).show();
+		 }
+		 });
+	 };
+	 
+	 
+	 	
+		var librariesObj = []
+		
+	 	
+		$(document).on("click",".show-libs .close",function(){
+			$(".show-libs").hide();
+		});
+		
+		
+		$(document).on("click","#libidName", function(){
+			$("#libname").val("");
+			doLibnameFilter();
+			$(".show-libs").show();
+			$("#libname").select();
+			$("#libname").focus();
+		});
+		
+		
+		$(document).on("click",".show-libs .content-libs span", function(){
+			$("#libid").val($(this).attr("data-id"))
+			$("#libidName").val($(this).html())
+			$(".show-libs").hide();
+		});
+		
+		$(document).on("keypress","#libname",function(e){
+			if(e.keyCode==13) {
+				doLibnameFilter();
+			}
+		})
+		
+		
+		$(document).on("click","#libFilter", function(){
+			doLibnameFilter();
+		});
+		
+		
+		$(document).on("click","#libClear", function(){
+			$("#libid").val("");
+			$("#libidName").val("");
+			$(".show-libs").hide();
+		});
+		
+		function doLibnameFilter(){
+			var libname = $("#libname").val();
+			var html = "";
+			if(librariesObj && librariesObj.length>0) {
+				var list = librariesObj;
+				if(libname=="") {
+					for(var i=0; i<list.length; i++) {
+						var item = list[i];
+                        if(item.libid == "center") {
+                            continue;
+                        }
+						html += "<li><span data-id=\""+item.libid+"\">"+item.libname+"</span></li>";
+					}
+				}else{
+					for(var i=0; i<list.length; i++) {
+						var item = list[i];
+                        if(item.libid == "center") {
+                            continue;
+                        }
+						if(item.libname.indexOf(libname)>-1) {
+							html += "<li><span data-id=\""+item.libid+"\">"+item.libname+"</span></li>";
+						}
+					}
+				}
+			}
+			$(".show-libs ul").html(html);
+		}
+		
+		
+		function queryAllLib(){
+			$.ajax({
+				url:"/getAllLibraries.do",
+				type:"post",
+				data:{}
+			}).done(function(data){
+				librariesObj = [];
+				var html = "";
+				if(data && data.state=='200') {
+					if(data.result && data.result.length>0) {
+						var list = data.result;
+						librariesObj = list;
+						for(var i=0; i<list.length; i++) {
+							var item = list[i];
+							if(item.libid == "center") {
+							    continue;
+							}
+							html += "<li><span data-id=\""+item.libid+"\">"+item.libname+"</span></li>";
+							// 默认选中 与更换选中
+							var ylibrary = $("#libid").val();
+							if(item.libid == library && ylibrary ==""){
+								$("#libid").val(item.libid);
+								$("#libidName").val(item.libname);
+							}else if(item.libid == ylibrary){
+								$("#libid").val(item.libid);
+								$("#libidName").val(item.libname);
+							}
+						}
+					}
+				}
+				$(".show-libs ul").html(html);
+			});
+		}
+		
+	    // 获得链接上传来library
+		var library = '';
+		$(function(){
+		    // 放入在本地存储 里		    
+		    if(library == "" || library == undefined){
+		    	library = localStorage.getItem("library");
+		    }else{
+		    	localStorage.setItem("library",library);
+		    }
+			queryAllLib();
+
+		});
+			
+	    
+	 /* function Trim(str)
+     { 
+         return str.replace(/(^\s*)|(\s*$)/g, ""); 
+     } */
+	 function NTRetrievalSearch(id) {
+         var url = "/NTRetrievalSearch.do?target=1&menu1=101&libid="+localStorage.getItem("library");
+         var a = document.getElementById(id);
+         a.href = url;
+         a.click("return false");
+     }
+     function NTShowNewBook(id) {
+         var url = "/NTShowNewBook.do?target=5&menu5=501&libid="+localStorage.getItem("library");
+         var a = document.getElementById(id);
+         a.href = url;
+         a.click("return false");
+     }
+     function NTShowNewSeries(id) {
+         var url = "/NTShowNewSeries.do?target=5&menu5=502&libid="+localStorage.getItem("library");
+         var a = document.getElementById(id);
+         a.href = url;
+         a.click("return false");
+     }
+     function NTBookTopList(id) {
+         var url = "/NTBookTopList.do?target=2&type=2&menu2=202&libid="+localStorage.getItem("library");
+         var a = document.getElementById(id);
+         a.href = url;
+         a.click("return false");
+     }
+	</script> 
+</html>
+
+    </div>
+
+    <div class="content content_1">
+        <div class="mainwidth">
+            <div class="location">
+                当前位置
+                ><a href="Index">首页</a>
+                >书目列表
+            </div>
+
+
+            <div id="lanren">
+                <div onclick="JavaScript:ShowShowyear()" class="show_Showyear"
+                     title="图书出版时间趋势图">
+                    图书出版时间趋势图
+                </div>
+            </div>
+
+
+            <div id="lanren">
+                <div onclick="JavaScript:SaveBookSelf()" class="show_SaveBookSelf"
+                     title="保存书目结果列表">
+                    保存书目结果列表
+                </div>
+            </div>
+
+            <div id="Showyear" class="Showyear" class="show_coutnshowyear">
+                <div id="columndiv" style="width:100%; height: 100px; margin-top:20px;">
+                    <div style="margin-top:40px; margin-left:300px;">
+                        正在加载数据请稍等......
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="ShowBookReview" style="cursor:pointer;width:60%;height:auto; display:none;OVERFLOW-Y:auto;height:400px; top:140px; left:20%; position:absolute;z-index:997;
+		    	border:1px solid #c0d7e9;
+			    border-radius:8px;
+			    background:#f2feff url(images/bodybg.jpg);padding: 20px; ">
+
+                <div id="MessageTitle" style="border-bottom:1px solid  #4b71aa; "></div>
+                <div id="BookReviewList" style="OVERFLOW-Y:auto;height:330px;border-bottom:1px solid  #4b71aa;">
+                    暂无信息</div>
+                <div style="text-align: center;margin-top: 10px;">
+                    <span><a
+                            style="padding:4px 10px 4px 10px;  border:1px solid #4b71aa;border-radius:4px;color: #4b71aa;"
+                            href="javascript:hidebookreview()">关闭窗口</a></span>
+                </div>
+            </div>
+
+
+            <div id="equalize" class="retrievalcon">
+                <div class="retr_left">
+                    <h3 class="retr_title">缩小检索范围</h3>
+
+                    <dl class="sidelist sidelist_show">
+                        
+                            <dt>
+                                <span class="title"><span>分馆</span></span>
+                            </dt>
+
+                            <dd>
+                                <div class="barlistcon">
+                                    <ul class="barlist">
+                                        
+
+                                        
+                                    </ul>
+                                </div>
+                                
+
+                            </dd>
+                        
+                        <dt>
+                            <span class="title"><span>中图分类法</span></span>
+                        </dt>
+
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+                            
+
+                        </dd>
+
+                        <dt>
+                            <span class="title"><span>文献类型</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+
+                            
+                        </dd>
+                        <dt>
+                            <span class="title"><span>主题词</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+                            
+
+                        </dd>
+                        <dt>
+                            <span class="title"><span>出版者</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+                            
+
+                        </dd>
+                        <dt>
+                            <span class="title"><span>作者</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+
+                            
+
+                        </dd>
+
+                        <dt>
+                            <span class="title"><span>出版年</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+                            
+                        </dd>
+
+                        <dt>
+                            <span class="title"><span>语种</span></span>
+                        </dt>
+                        <dd>
+                            <div class="barlistcon">
+                                <ul class="barlist">
+                                    
+
+                                    
+                                </ul>
+                            </div>
+                            
+                        </dd>
+                    </dl>
+
+                </div>
+
+                <div class="retr_right">
+
+                    <div class="choice">
+
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                        <span style="padding:4px 4px 4px 0px;"></span>
+                    </div>
+
+                    <div style="padding: 4px; font-size: 14px; margin-bottom:10px; font-size:16px; color:green;border-bottom:solid 1px #EAEAEA;">
+                        <label id="searchtip" style="margin-left: 20px;"></label>
+                    </div>
+                    <form action="NTRdrBookRetr.do" name="form1" method="post" onsubmit="return check()">
+                        <div class="rightsearch">
+                            <div class="searchbox searchbox_1">
+                                <select id="searchType" name="searchType">
+                                    <option value="name">书名/刊名</option>
+                                    <option value="seriesbook">丛书名</option>
+                                    <option value="author">作者</option>
+                                    <option value="classno">分类号</option>
+                                    <option value="isbnsrh">ISBN/ISSN</option>
+                                    <option value="callno">索书号</option>
+                                    <option value="subject">主题词</option>
+                                    <option value="publish">出版社</option>
+                                    <option value="pubyear">出版年</option>
+                                    <option value="text" selected="selected">任意词</option>
+                                </select>
+                                <select id="searchWay" name="searchWay">
+                                    <option value="searchWayPrv">前方一致</option>
+                                    <option value="searchWayLike">模糊检索</option>
+                                </select>
+                                <input type="text" id="searchKey" name="searchKey" value="" class="input"/>
+
+                                <input type="submit" name="" value="检 索"
+                                       class="vipsearch"/>
+                                <input type="button" onclick="Onresearch('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%25E4%25B8%258D%25E5%25AD%2598%25E5%259C%25A8xyz&PageNum=10&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc')" name=""
+                                       value="在结果中检索" class="vipsearch"/>
+
+                            </div>
+
+                            
+                            <section style="display:none;float: right;text-align: left;"
+                                     id="showLibrarySelector">
+                                <span style="float:left;line-height: 32px;margin: 0 5px;">馆藏所属馆</span>
+                                <input name="libid" id="libid" type="hidden">
+                                <input name="libidName" id="libidName" class="input"
+                                       style="height:32px;float:left;width:150px;margin-left:0px;cursor: pointer;"
+                                       readonly>
+                            </section>
+
+                            <div class="rightselect">
+
+                                <span>每页显示</span>
+                                <select id="pageNum" name="pageNum"
+                                        onchange="ShowPageNum('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%E4%B8%8D%E5%AD%98%E5%9C%A8xyz&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc',this.options[this.selectedIndex].value)">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+
+
+                                <!-- 							<span>图书类型</span> -->
+                                <!-- 							<select id="bibliosType" name="bibliosType" > -->
+                                <!-- 									<option value="">全部文献</option> -->
+                                <!-- 									<option value="1">图书</option> -->
+                                <!-- 									<option value="2">期刊</option> -->
+                                <!-- 							</select> -->
+
+                                <span>排序选项</span>
+
+                                <select onChange="changematchType('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%25E4%25B8%258D%25E5%25AD%2598%25E5%259C%25A8xyz&PageNum=10&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc')" class="matchType" id="matchType"
+                                        name="matchType">
+                                    
+                                    <option value="name">书名/刊名</option>
+                                    <option value="pubyear">出版日期</option>
+                                    <option value="publish">出版社</option>
+                                    <option value="source">匹配度</option>
+                                </select>
+                                <span class="matchSort">排序方式</span>
+                                <select onChange="changematchSort('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%25E4%25B8%258D%25E5%25AD%2598%25E5%259C%25A8xyz&PageNum=10&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc')" id="matchSort" name="matchSort">
+                                    <option value="desc">降序排列</option>
+                                    <option value="asc" selected="selected">升序排列</option>
+                                </select>
+                            </div>
+
+                            <!-- <span class="tips">点击左边的分类类别后，还可以在输入框中增加限定题名、著者或出版社 </span> -->
+                        </div>
+                    </form>
+                    <div class="retr_rightcon">
+                        <div class="pagebox">
+							<span class="total"><span>azbycxq不存在xyz</span>共有
+							[]条记录，共耗时[]秒
+                                
+                                                       
+							<a href="http://baike.baidu.com/search?word=azbycxq不存在xyz&pn=0&rn=0&enc=utf8"
+                               target="_self">词条</a>
+                                                       
+							</span>
+
+                            <div class="pageright">
+                                页码: 1/
+                                每页显示[]条记录 　
+                                
+                                <div class="jumpcon">
+                                    跳转<input type="text" name="goPageNum"
+                                                                                class="input w3"/>
+                                    <input type="submit" name="" value="GO" class="submit"
+                                           onclick="TopGoPageUrl('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%25E4%25B8%258D%25E5%25AD%2598%25E5%259C%25A8xyz&PageNum=10&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc','')"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 添加到书单 20161205 add by huanghuang start -->
+                        <div style="margin-bottom: 12px;">
+                            &nbsp;&nbsp;&nbsp;<input type="button" class="bookBtn"
+                                                     value="全选"
+                                                     onclick="selectAllBookItems()">
+                            <input type="button" class="bookBtn" value="取消选择"
+                                   onclick="clearAllBookItems()">
+                            <input type="button" class="bookBtn" value="添加到书单"
+                                   onclick="saveBookIdList()">
+                            <input type="button" class="bookBtn" value="查看书单"
+                                   onclick="showBookList()">
+                            
+                        </div>
+                        <!-- 添加到书单 20161205 add by huanghuang end -->
+                        
+                        
+                        
+                            
+                        
+                        <ul class="booklist">
+                            
+
+
+                        </ul>
+
+                        <div class="pagebox pagebox_1">
+                         <span class="total"><span>azbycxq不存在xyz</span>共有
+							[]条记录，共耗时[]秒</span>
+                            <div class="pageright">
+                                页码: 1/
+                                每页显示[]条记录 　
+                                
+                                <div class="jumpcon">
+                                    跳转<input type="text" name="goPageNum"
+                                                                                class="input w3"/>
+                                    <input type="submit" name="" value="GO" class="submit"
+                                           onclick="FootGoPageUrl('NTRdrBookRetr.do?SearchType=text&SearchKey=azbycxq%25E4%25B8%258D%25E5%25AD%2598%25E5%259C%25A8xyz&PageNum=10&searchWay=searchWayPrv&matchType=pubyear&matchSort=desc','')"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="http://opac.zsodl.cn:443/">
+    
+    <title>My JSP 'FootPage.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+
+</head>
+  
+  <body>
+    <footer class="footer">
+		<div class="addr_tell">
+
+			<span class="addr"></span>
+<!-- 			<span class="tell">电话：0755-83674700</span> -->
+		</div>
+		
+
+		
+	</footer>
+  </body>
+  	<script type="text/javascript">
+ /*  	$(function(){
+  		 $.ajax({
+		        url:'FootPage.do',
+		 		method: 'POST',
+		 		contentType: "application/json",
+		 		data:"",
+		 	    dataType: 'json',
+		 	    error: function(){alert("error");
+		 	    },
+		 	    success : function(data, textStatus, jqXHR)
+		 	     {     
+		                var result = data.msg;
+		                $(".addr").html(data.tip);  
+		         }                     
+		         });
+  	 }); */
+
+</script>
+</html>
+
+    </div>
+
+</section>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    function showSortType(){
+        var matchType = $("#matchType").val()
+        if (matchType == 'source') {
+            $(".matchSort").hide()
+            $("#uniform-matchSort").hide()
+        } else {
+            $(".matchSort").show()
+            $("#uniform-matchSort").show()
+        }
+
+    }
+
+    function toLocation(url) {
+        window.parent.location.href = url;
+    }
+
+    function setDivCenter(divName) {
+        var top = ($(window).height() - $(divName).height()) / 2;
+        var left = ($(window).width() - $(divName).width()) / 2;
+        var scrollTop = $(document).scrollTop() - 100;
+        var scrollLeft = $(document).scrollLeft();
+        $(divName).css({position: 'absolute', 'top': top + scrollTop, left: left + scrollLeft});
+    }
+
+
+    function hidebookreview() {
+
+        $("#ShowBookReview").hide();
+    }
+
+
+    function ShowListBookContext(recno, recno1) {
+
+        setDivCenter("#ShowBookReview");
+        var ShowBookReview = document.getElementById("ShowBookReview").style.display;
+        if (ShowBookReview == "none")
+            $("#ShowBookReview").show();
+        else
+            $("#ShowBookReview").hide();
+
+//         $("#MessageTitle").html("内容简介");
+        $("#MessageTitle").html($trans("ntrdrbookretr.text1", "内容简介"));
+    }
+
+    function ShowListBookMenu(recno, recno1) {
+
+        setDivCenter("#ShowBookReview");
+        var ShowBookReview = document.getElementById("ShowBookReview").style.display;
+        if (ShowBookReview == "none")
+            $("#ShowBookReview").show();
+        else
+            $("#ShowBookReview").hide();
+
+//        $("#MessageTitle").html("书目目录");
+        $("#MessageTitle").html($trans("ntrdrbookretr.text2", "书目目录"));
+
+        if (recno == recno1) {
+
+            $("#BookReviewList").html($("#dir_1007305_full").html());
+        } else {
+//     	   $("#BookReviewList").html("暂无信息");
+            $("#BookReviewList").html($trans("ntrdrbookretr.text3", "暂无信息"));
+
+        }
+
+    }
+
+
+    function ShowListBookReader(recno, recno1) {
+        setDivCenter("#ShowBookReview");
+        var ShowBookReview = document.getElementById("ShowBookReview").style.display;
+        if (ShowBookReview == "none")
+            $("#ShowBookReview").show();
+        else
+            $("#ShowBookReview").hide();
+
+//        $("#MessageTitle").html("在线试读");
+        $("#MessageTitle").html($trans("ntrdrbookretr.text4", "在线试读"));
+        if (recno == recno1) {
+
+            $("#BookReviewList").html($("#dir_4027_onreader").html());
+        } else {
+//       	   $("#BookReviewList").html("暂无信息");
+            $("#BookReviewList").html($trans("ntrdrbookretr.text3", "暂无信息"));
+
+        }
+    }
+
+    var chart;
+    var chartData = "";
+    AmCharts.ready(function () {
+        initSelect();
+        showSortType();
+        var objectList = new Array();
+
+        function Persion(month, hits, color) {
+            this.month = month;
+            this.hits = hits;
+            this.color = color;
+        }
+
+        var colorArr = ["#e7ba10", "#9c55ad", "#cec3c6", "#639629", "#52596b", "#bd2010"];
+        var toposJson = '';
+        var toposJsonArr = toposJson.split(",");
+        var nCount = 0;
+        for (var i = 0; i < toposJsonArr.length - 1; i++) {
+            var listJsonArr = toposJsonArr[i].split("|");
+            if (nCount > 5)
+                nCount = 0;
+
+            if (parseInt(listJsonArr[0]) > 0) {
+                objectList.push(new Persion(parseInt(listJsonArr[0]), parseInt(listJsonArr[1]), colorArr[nCount]));
+                nCount++;
+            }
+        }
+
+        /*    	chartData=[
+                          {"color":"#e7ba10","hits":31,"month":"1990"},
+                          {"color":"#e7ba10","hits":31,"month":"1990"}
+                      ]; */
+
+        //按从小到大排序
+        objectList.sort(function (a, b) {
+            return a.month - b.month;
+        });
+
+        chartData = objectList;
+        // SERIAL CHART
+        chart = new AmCharts.AmSerialChart();
+        chart.dataProvider = chartData;
+        chart.categoryField = "month";
+
+        // the following two lines makes chart 3D
+//     chart.angle = 30;
+//     chart.depth3D = 15;
+        //columnWidth
+        chart.columnWidth = 0.6;
+        //columnSpacing
+        chart.columnSpacing = 2;
+
+        // AXES
+        // category
+        var categoryAxis = chart.categoryAxis;
+        categoryAxis.autoGridCount = false;
+        categoryAxis.gridCount = chartData.length;
+        categoryAxis.labelRotation = 90;
+        categoryAxis.dashLength = 5;
+        categoryAxis.gridPosition = "start";
+
+        // value
+        var valueAxis = new AmCharts.ValueAxis();
+//      valueAxis.title = "出版时间";
+        valueAxis.title = $trans("ntrdrbookretr.text5", "出版时间");
+        valueAxis.dashLength = 5;
+        chart.addValueAxis(valueAxis);
+
+        // GRAPH
+        var graph = new AmCharts.AmGraph();
+        graph.valueField = "hits";
+        graph.colorField = "color";
+        graph.balloonText = "[[category]]: [[value]]";
+        graph.type = "column";
+        graph.lineAlpha = 0;
+//     graph.lineColor = ['#a7dbe6', '#c4e7ed'];
+        graph.fillAlphas = 1;
+        chart.addGraph(graph);
+
+        // WRITE
+        chart.write("columndiv");
+        $("#Showyear").hide();
+    });
+
+
+    //每页显示多少条记录
+    function ShowPageNum(url, nShowPageNum) {
+        var goUrl = url + "&PageNum=" + nShowPageNum;
+        window.location.href = goUrl;
+
+    }
+
+    //在结果中检索
+    function Onresearch(url) {
+        url = replaceParamVal(url, "searchWay", $('#searchWay').val());
+        var researchSearchType = document.getElementsByName("searchType")[0].value;
+        var researchSearchKey = document.getElementsByName("searchKey")[0].value;
+        var goUrl = url + "&researchSearchType=" + researchSearchType + "&researchSearchKey=" + encodeURIComponent(researchSearchKey);
+        window.location.href = goUrl;
+
+    }
+
+    //跳转
+    function TopGoPageUrl(url, nPageCount) {
+        var nGoPageCount = document.getElementsByName("goPageNum")[0].value;
+        //add by huanghuang
+        if (!isNumber(nGoPageCount)) {
+//         	 alert("输入的页数不合法");
+            alert($trans("ntrdrbookretr.text6", "输入的页数不合法"));
+            return;
+        }
+
+        if (nGoPageCount == "" || parseInt(nGoPageCount) == NaN)
+            return;
+        if (parseInt(nGoPageCount) > parseInt(nPageCount)) {
+            var tparam = [];
+            tparam.push(nPageCount);
+            tparam.push(nPageCount);
+            alert($trans("ntrdrbookretr.text7", "一共有{0}页,你要跳转的页数不能大于{1}", tparam));
+//            alert("一共有{"+nPageCount+"}页,你要跳转的页数不能大于{"+nPageCount+"}");
+        }
+        else {
+            var goUrl = url + "&nCurrentpage=" + nGoPageCount;
+            window.location.href = goUrl;
+        }
+    }
+
+    function FootGoPageUrl(url, nPageCount) {
+        var nGoPageCount = document.getElementsByName("goPageNum")[1].value;
+        //add by huanghuang
+        if (!isNumber(nGoPageCount)) {
+//         	 alert("输入的页数不合法");
+            alert($trans("ntrdrbookretr.text6", "输入的页数不合法"));
+            return;
+        }
+        if (nGoPageCount == "" || parseInt(nGoPageCount) == NaN)
+            return;
+
+        if (parseInt(nGoPageCount) > parseInt(nPageCount)) {
+            var tparam = [];
+            tparam.push(nPageCount);
+            tparam.push(nPageCount);
+            alert($trans("ntrdrbookretr.text7", "一共有{0}页,你要跳转的页数不能大于{1}", tparam));
+//            alert("一共有{"+nPageCount+"}页,你要跳转的页数不能大于{"+nPageCount+"}");
+        }
+        else {
+            var goUrl = url + "&nCurrentpage=" + nGoPageCount;
+            window.location.href = goUrl;
+        }
+
+    }
+
+    function isNumber(oNum) {
+        var t = /^[0-9]*[1-9][0-9]*$/;
+        if (t.test(oNum)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function changematchSort(url) {
+
+        url = replaceParamVal(url, "matchType", $('#matchType option:selected').val());
+        url = replaceParamVal(url, "matchSort", $('#matchSort option:selected').val());
+        window.location.href = url;
+    }
+
+    function changematchType(url) {
+
+        url = replaceParamVal(url, "matchType", $('#matchType option:selected').val());
+        url = replaceParamVal(url, "matchSort", $('#matchSort option:selected').val());
+        window.location.href = url;
+
+
+    }
+
+    function replaceParamVal(oUrl, paramName, replaceWith) {
+        var re = eval('/(' + paramName + '=)([^&]*)/gi');
+        var nUrl = oUrl.replace(re, paramName + '=' + replaceWith);
+        return nUrl;
+    }
+
+    $(function () {
+        var WriteBookReview = $("div#ShowBookReview");
+
+
+        /* 绑定鼠标左键按住事件 */
+        WriteBookReview.bind("mousedown", function (event) {
+            /* 获取需要拖动节点的坐标 */
+            var offset_x = $(this)[0].offsetLeft;//x坐标
+            var offset_y = $(this)[0].offsetTop;//y坐标
+            /* 获取当前鼠标的坐标 */
+            var mouse_x = event.pageX;
+            var mouse_y = event.pageY;
+
+            /* 绑定拖动事件 */
+            /* 由于拖动时，可能鼠标会移出元素，所以应该使用全局（document）元素 */
+            $(document).bind("mousemove", function (ev) {
+                /* 计算鼠标移动了的位置 */
+                var _x = ev.pageX - mouse_x;
+                var _y = ev.pageY - mouse_y;
+
+                /* 设置移动后的元素坐标 */
+                var now_x = (offset_x + _x) + "px";
+                var now_y = (offset_y + _y) + "px";
+                /* 改变目标元素的位置 */
+                WriteBookReview.css({
+                    top: now_y,
+                    left: now_x
+                });
+            });
+        });
+
+
+        /* 当鼠标左键松开，接触事件绑定 */
+        $(document).bind("mouseup", function () {
+            $(this).unbind("mousemove");
+        });
+
+        //$('.sidelist dt:first').addClass('cur');
+        //$('.sidelist dd:first').show();
+        $('.sidelist dt').on('click', function () {
+            if ($(this).hasClass('cur')) {
+                $(this).removeClass('cur').next('dd').slideUp();
+            } else {
+                $(this).addClass('cur').next('dd').slideDown();
+                //$(this).addClass('cur').next('dd').slideDown().siblings('dd').slideUp();
+                //$(this).siblings('dt').removeClass();
+            }
+        });
+
+        $('.sidelist_show dt').addClass('cur');
+        $('.sidelist_show dd').show();
+
+        $('#equalize').equalHeights();
+
+        var bookListisbn = '';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $('.booklist li .bookResutInfo').click(function () {
+            if ($(this).siblings('.bookinfo_con').html().length < 30) {
+
+                var strResult = this;
+                $.ajax({
+                    dataType: 'html',
+                    type: 'post',
+                    url: 'GetBibInfoShow.do?recno=' + $(this).attr("name") + '',
+                    success: function (html) {
+                        //alert(html);
+                        $(strResult).siblings('.bookinfo_con').html(html);
+                    }
+                });
+            }
+            $(this).siblings('.bookinfo_con').slideToggle();
+            return false;
+        });
+
+        $('.booklist li .bookResutInfo2').click(function () {
+            if ($(this).siblings('.bookinfo2_con').html().length < 30) {
+
+                var strResult = this;
+                $.ajax({
+                    dataType: 'html',
+                    type: 'post',
+                    url: 'GetElectronicResources.do?recno=' + $(this).attr("name") + '',
+                    success: function (html) {
+                        //alert(html);
+                        $(strResult).siblings('.bookinfo2_con').html(html);
+                    }
+                });
+            }
+            $(this).siblings('.bookinfo2_con').slideToggle();
+            return false;
+        });
+
+
+        $('.booklist li .see.callno').click(function () {
+            if ($(this).siblings('.booknum_con').html().length < 30) {
+                var libid = localStorage.getItem("library");
+                if (!libid) {
+                    libid = '';
+                }
+                var strResult = this;
+                $.ajax({
+                    dataType: 'html',
+                    type: 'post',
+                    url: 'GetholdingShow.do?recno=' + $(this).attr("name") + '&libid=' + libid,
+                    success: function (html) {
+                        //alert(html);
+                        $(strResult).siblings('.booknum_con').html(html);
+                        // $('.infotitle ul').jcarousel({
+                        //     scroll: 1
+                        // });
+                    }
+                });
+            }
+            $(this).siblings('.booknum_con').slideToggle();
+            return false;
+        });
+
+        $('.booklist li .see.epac').click(function () {
+            if ($(this).siblings('.info_epac').html().length < 30) {
+                var strResult = this;
+                $.ajax({
+                    dataType: 'html',
+                    type: 'post',
+                    url: 'getEpacResource.do?isbn=' + $(this).attr("data-isbn"),
+                    success: function (html) {
+                        $(strResult).siblings('.info_epac').html(html);
+                        $(this).siblings('.info_epac').slideToggle();
+                    }
+                });
+            } else {
+                $(this).siblings('.info_epac').slideToggle();
+            }
+            return false;
+        });
+
+
+
+
+
+        $('.sidelist dd .morebtn').each(function () {
+            $(this).click(function (){
+                var text9 = $trans("ntrdrbookretr.text9", "只显示前5条");
+                var text10 = $trans("ntrdrbookretr.text10", "显示更多信息...");
+                if ($(this).hasClass("show")) {
+                    $(this).prev('.barlistcon').find('.li_off').hide();
+                    $(this).html(text10);
+                    $(this).removeClass("show")
+                }else{
+                    let lioffObj = $(this).prev('.barlistcon').find('.li_off');
+                    if(lioffObj){
+                        let length = lioffObj.length;
+                        // var flag = true;
+                        for (let i = 0; i < lioffObj.length; i=i+5) {
+                            let display = lioffObj[i].style.display;
+                            if(display==""||display=='none'){
+                                let num = 0;
+                                if(i+5>=length){
+                                    num = length;
+                                    $(this).prev('.barlistcon').find('.li_off:lt('+num+')').show();
+                                    $(this).html(text9);
+                                    $(this).addClass("show");
+                                }else {
+                                    num = i+5;
+                                    $(this).prev('.barlistcon').find('.li_off:lt('+num+')').show();
+                                    $(this).html(text10);
+                                    return;
+                                }
+                            }
+                        }
+                        // if(flag==true){
+                        //     $(this).html(text9);
+                        //     $(this).addClass("show")
+                        // }
+                    }
+                }
+            });
+        });
+
+
+        $('.sidelist dd .morebtn').each(function () {
+            $(this).show();
+            /*if($('.barlistcon').height() > 138){
+                $('.barlistcon').height(138);
+            }
+
+            var maxheight=$(this).prev('.barlistcon').find('.barlist').height();
+            if(maxheight > 138){
+                $(this).toggle(function(){
+                    $(this).prev('.barlistcon').animate( {"height": maxheight} , 300);
+                    $(this).html("只显示前5条");
+
+                },function(){
+                    $(this).prev('.barlistcon').animate( {"height":"138"} , 300);
+                    $(this).html("显示更多信息...");
+                })
+            }*/
+        });
+
+
+
+        $('.choice .close').click(function () {
+            $(this).parent('a').hide();
+        })
+
+        
+        $('.rightselect .selector:eq(0)').css({'width': '60px'});
+        $('.rightselect .selector:eq(0) span').css({'width': '20px'});
+        //$(".matchType").val('0');
+
+        initSelect();
+        showSortType()
+
+    })
+
+    function initSelect() {
+        var t = document.getElementById("pageNum");
+        for (var i = 0; i < t.length; i++) {//给select赋值
+            if ('' == t.options[i].value) {
+                t.options[i].selected = true;
+                eeee($('#pageNum'));
+            }
+        }
+
+        t = document.getElementById("matchType");
+        for (var i = 0; i < t.length; i++) {//给select赋值
+            if ('pubyear' == t.options[i].value) {
+                t.options[i].selected = true;
+                eeee($('.matchType'));
+            }
+        }
+
+        t = document.getElementById("matchSort");
+        for (var i = 0; i < t.length; i++) {//给select赋值
+            if ('desc' == t.options[i].value) {
+                t.options[i].selected = true;
+                eeee($('#matchSort'));
+
+            }
+        }
+
+
+        t = document.getElementById("searchType");
+        for (var i = 0; i < t.length; i++) {//给select赋值
+            if ('text' == t.options[i].value) {
+                t.options[i].selected = true;
+                eeee($('#searchType'));
+
+            }
+        }
+
+        t = document.getElementById("searchWay");
+        for (var i = 0; i < t.length; i++) {//给select赋值
+            if ('searchWayPrv' == t.options[i].value) {
+                t.options[i].selected = true;
+                eeee($('#searchWay'));
+
+            }
+        }
+
+        t = document.getElementById("bibliosType");
+        if (t) {
+            for (var i = 0; i < t.length; i++) {//给select赋值
+                if ('' == t.options[i].value) {
+                    t.options[i].selected = true;
+                    eeee($('#bibliosType'));
+
+                }
+            }
+        }
+
+        t = document.getElementById("libid");
+        if (t) {
+            t.value = '';
+        }
+        t = document.getElementById("libidName");
+        if (t) {
+            t.value = '';
+        }
+
+
+        function eeee(o) {
+            var l = o.siblings("span");
+            l.text(o.find(":selected").html());
+
+        }
+
+
+        
+
+    }
+
+    //添加到书单 20161205 add by huanghuang start
+    //全选
+    function selectAllBookItems() {
+        $("input[name='bookItemCheckbox']").prop("checked","checked");
+    }
+
+    //取消全选
+    function clearAllBookItems() {
+        $("input[name='bookItemCheckbox']").removeAttr("checked");
+    }
+
+    //保存到书单
+    function saveBookIdList() {
+        var bookItemStr = "";
+        $("input[name='bookItemCheckbox']").each(function (i) {
+            if ($(this).is(":checked")) {
+                bookItemStr = bookItemStr + $(this).val() + ",";
+            }
+        });
+        if (bookItemStr.length == 0 || bookItemStr == "") {
+// 		alert("请选择需要保存到书单的书目");
+            alert($trans("ntrdrbookretr.text11", "请选择需要保存到书单的书目"));
+            return;
+        }
+        bookItemStr = bookItemStr.substring(0, bookItemStr.lastIndexOf(","));
+        $.ajax({
+            url: "/addBookItems.do?recnos=" + bookItemStr,
+            method: 'POST',
+            contentType: "application/json",
+            data: "",
+            dataType: 'json',
+            error: function () {
+                alert("error");
+            },
+            success: function (data, textStatus, jqXHR) {
+                var result = data.msg;
+                if (result == "success") {
+                    alert(data.tip);
+                    clearAllBookItems();
+                }
+                else
+                    alert(data.tip);
+
+            }
+        });
+    }
+
+    function showBookList() {
+        var url = "/showBookLists.do";
+        var goToUrl = false;
+        if (goToUrl){
+            window.open(url);
+        } else{
+            window.parent.location.href = url;
+        }
+    }
+
+    function xssFilter(s) {
+
+        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+        var rs = "";
+        for (var i = 0; i < s.length; i++) {
+            rs = rs + s.substr(i, 1).replace(pattern, '');
+        }
+        return rs;
+    }
+
+    function check() {
+        var i = 1;//right
+        if (document.form1.searchKey.value == "") {
+            document.getElementById("searchtip").innerHTML = $trans("index.text5", "**检索值不能为空,请输入你要查看图书信息!");
+            document.getElementById("searchtip").style.color = "#ff0000"
+            i = 0;
+        }
+        else {
+            document.getElementById("searchtip").innerHTML = "√";
+            document.getElementById("searchtip").style.color = "#32CD32";
+        }
+
+        // Probe Add 2018.7.4 {{
+        /*var sKey = $("#searchKey").val();
+        var sSafeKey = xssFilter(sKey);
+        if (sSafeKey.length < sKey.length) {
+            $("#searchKey").val(sSafeKey);
+            alert('检索词里不能有 $%;&()<>');
+        }*/
+        //}}
+
+        if (i == 1)
+            return true;
+        else
+            return false;
+    }
+
+    //添加到书单 20161205 add by huanghuang end
+
+
+    $(function () {
+        var height = $(".content").height();
+        height = height + 58 + 45;
+        if ($(window).height() > height) {
+            $('.footer').css({
+                'position': 'fixed',
+                'left': '0',
+                'bottom': '0'
+            });
+        } else {
+            $('.footer').css({
+                'position': 'relative',
+                'left': 'auto',
+                'bottom': 'auto'
+            });
+        }
+
+
+        $(window).resize(function () {
+            if ($(window).height() > height) {
+                $('.footer').css({
+                    'position': 'fixed',
+                    'left': '0',
+                    'bottom': '0'
+                });
+            } else {
+                $('.footer').css({
+                    'position': 'relative',
+                    'left': 'auto',
+                    'bottom': 'auto'
+                });
+                //$('.content').css({'padding-top':'95px'})
+            }
+
+        })
+       /* function popup(popupName){
+            var _scrollHeight = $(document).scrollTop(),//获取当前窗口距离页面顶部高度
+                _windowHeight = $(window).height(),//获取当前窗口高度
+                _windowWidth = $(window).width(),//获取当前窗口宽度
+                _popupHeight = popupName.height(),//获取弹出层高度
+                _popupWeight = popupName.width();//获取弹出层宽度
+            _posiTop = (_windowHeight - _popupHeight)/2 + _scrollHeight;
+            _posiLeft = (_windowWidth - _popupWeight)/2;
+            popupName.css({"left": _posiLeft + "px","top":_posiTop + "px","display":"block"});//设置position
+        }
+        $(".img").mouseenter(function(){
+            popup($("#ShowBookReview"));
+            $("#MessageTitle").html("试读信息");
+        })*/
+    })
+    function closeDiv(thisObjID) {
+        $("#" + thisObjID).css("display", "none");
+        $("#BgDiv").css("display", "none");
+        /* 		  $("#BgDiv").css("display", "none");  */
+        /* 		  $("#" + thisObjID).css("display", "none");
+
+                   $("#historyDiv").css("display", "block"); */
+
+    }
+
+    function recommendBook(thisObjID) {
+        $("#" + thisObjID).css("display", "none");
+        $("#BgDiv").css("display", "none");
+        location.href= "/NTMyRdrOrderCmd.jsp";
+    }
+</script>
+</body>
+</html>

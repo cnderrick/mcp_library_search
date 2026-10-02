@@ -11,6 +11,7 @@ from unittest.mock import Mock
 
 import pytest
 
+from mcp_library_search import uilas
 from mcp_library_search.adapters.cn import jinhua
 from mcp_library_search.adapters.base import (
     validate_book_detail,
@@ -38,8 +39,8 @@ def _book(**kw):
 
 
 def test_throttle_is_four_seconds_per_host():
-    # 天津 ILAS 家族经验的安全线（NOTES.md）
-    assert jinhua._THROTTLE == 4.0
+    # 天津 ILAS 家族经验的安全线（NOTES.md）；节流在家族 HTTP 层
+    assert uilas.client._THROTTLE == 4.0
 
 
 def test_search_delegates_and_maps_nonempty_books(monkeypatch):

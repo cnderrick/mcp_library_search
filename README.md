@@ -31,6 +31,8 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 徐州 | `xuzhou` | ✅ 已接入 | 徐州市图书馆全市联合目录（图星 LibStar Find，含鼓楼区馆等） |
 | 淮安 | `huaian` | ✅ 已接入 | 淮安市图书馆全市联合目录（图星 LibStar Find，含少儿馆、清江浦区馆等） |
 | 盐城 | `yancheng` | ✅ 已接入 | 盐城市图书馆（图星 LibStar Find，单实例） |
+| 丽水 | `lishui` | ✅ 已接入 | 丽水市公共图书馆联合目录（图创 Interlib pro2018，含景宁/庆元/缙云等县馆） |
+| 舟山 | `zhoushan` | ✅ 已接入 | 舟山市图书馆（UILAS 知识检索平台） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装
