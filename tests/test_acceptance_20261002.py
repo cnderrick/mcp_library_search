@@ -4,7 +4,9 @@
 「注册表 ↔ server.py 文案 ↔ data-sources.md 登记」三方一致性——任何一侧
 单独增删城市或改口径而另两侧没跟上，这里直接红。行为级验收（tagTr 修复、
 杭州裸 id 垫片、双源归并）已由 test_jiangyin_parser / test_wenzhou_compat /
-test_hefei_parse / test_hangzhou_merge / test_hefei_merge 各自钉住，不在此重复。
+test_hefei_parse / test_hangzhou_merge / test_hefei_merge 各自钉住，不在此重复；
+南京「金陵＋南图」双源由 test_nanjing_dual_source.py 钉住，南图 ALEPH 侧的
+家族兼容性证据在 test_nanjing_prov_recon.py。
 """
 from pathlib import Path
 
@@ -57,7 +59,8 @@ def test_availability_docstring_due_date_boundaries():
 
 def test_detail_docstring_nanjing_call_number_boundary():
     doc = server.get_book_detail.__doc__
-    assert "南京、宁波数据源详情页无索书号字段" in doc
+    # 南图源接入后（2026-10-02 双源）无索书号的只剩金陵源与宁波源
+    assert "南京金陵源、宁波数据源详情页无索书号字段" in doc
     assert "call_number 为空串" in doc
 
 

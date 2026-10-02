@@ -1,7 +1,8 @@
-"""南京(金陵 uopac 联合目录)适配器检索:meta 路由、ISBN 通配、解析与分页。
+"""南京适配器检索：JL 源(金陵 uopac 联合目录)的 meta 路由、ISBN 通配、解析与分页。
 
 mock 点为模块级 `_open(req, timeout)`:req 是 urllib Request,测试按顺序返回
-fixture 文本并记录 full_url(南京无会话、全 GET,无 POST body)。
+fixture 文本并记录 full_url(金陵无会话、全 GET,无 POST body)。
+南图 ALEPH 源由 `_stub_prov` 置为失败——本文件只测金陵侧,源级容错会吞掉它。
 fixture 结论以 tests/fixtures/nanjing/NOTES.md 为准。
 """
 from pathlib import Path
@@ -10,6 +11,7 @@ import pytest
 
 from mcp_library_search.adapters import nanjing
 from mcp_library_search.adapters.base import validate_search_page
+from mcp_library_search.aleph import client as aleph_client
 
 _FIXTURES = Path(__file__).parent / "fixtures" / "nanjing"
 _RESULT = (_FIXTURES / "uopac_result_santi.html").read_text(encoding="utf-8")
@@ -19,6 +21,15 @@ _RESULT_JL = (_FIXTURES / "uopac_result_santi_jl.html").read_text(encoding="utf-
 _RESULT_EMPTY = (_FIXTURES / "uopac_result_empty.html").read_text(encoding="utf-8")
 _RESULT_ISBN = (_FIXTURES / "uopac_result_isbn_wildcard.html").read_text(encoding="utf-8")
 _LOGIN = (_FIXTURES / "home.html").read_text(encoding="utf-8")
+
+
+@pytest.fixture(autouse=True)
+def _stub_prov(monkeypatch):
+    """南图 ALEPH 源置为失败：单源断言不被第二源污染，且绝不真网。"""
+    def boom(url, config=None, timeout=20):
+        raise RuntimeError("南京图书馆请求失败：stub")
+
+    monkeypatch.setattr(aleph_client, "get", boom)
 
 
 def _mock_open(monkeypatch, pages):
@@ -50,7 +61,7 @@ def test_search_parses_list_and_stats(monkeypatch):
     assert len(page["books"]) == 20
     # 首条:元信息行「汪家訸编著 / 科学出版社  /  / 1961」,ISBN 段为空
     b0 = page["books"][0]
-    assert b0["book_id"] == "4386216"
+    assert b0["book_id"] == "JL:4386216"
     assert b0["title"] == "三体问题"
     assert b0["author"] == "汪家訸编著"
     assert b0["publisher"] == "科学出版社"
@@ -68,7 +79,7 @@ def test_entry_publisher_and_year_variants(monkeypatch):
     _mock_open(monkeypatch, [_RESULT])
     page = nanjing.search_books("三体")
     b3 = page["books"][3]
-    assert b3["book_id"] == "4308867"
+    assert b3["book_id"] == "JL:4308867"
     assert b3["title"] == "三体"
     assert b3["author"] == "刘慈欣著"
     assert b3["publisher"] == "重庆出版社"
@@ -84,7 +95,7 @@ def test_isbn_keyword_uses_wildcard_meta14(monkeypatch):
     assert "q=9%2A7%2A8%2A7%2A2%2A2%2A9%2A1%2A0%2A0%2A6%2A0%2A5" in calls[0]
     assert page["total_results"] == 2
     ids = {b["book_id"] for b in page["books"]}
-    assert ids == {"3911408", "4308867"}
+    assert ids == {"JL:3911408", "JL:4308867"}
     titles = {b["title"] for b in page["books"]}
     assert titles == {"三体 典藏版", "三体"}
 
@@ -103,7 +114,7 @@ def test_page_two_param_and_parse(monkeypatch):
     assert page["page"] == 2
     assert page["total_pages"] == 3
     assert page["has_next"] is True
-    assert page["books"][0]["book_id"] == "3369405"
+    assert page["books"][0]["book_id"] == "JL:3369405"
     # 「俞建华等 /   /  / 19870901」:出版年为 YYYYMMDD 形态,取 4 位年
     assert page["books"][0]["publish_year"] == "1987"
     assert page["books"][0]["publisher"] == ""
@@ -126,7 +137,7 @@ def test_multi_library_availability_summary(monkeypatch):
     page = nanjing.search_books("三体")
     assert page["total_results"] == 23
     assert page["total_pages"] == 2
-    entry = next(b for b in page["books"] if b["book_id"] == "5079421")
+    entry = next(b for b in page["books"] if b["book_id"] == "JL:5079421")
     assert entry["title"] == "三体X·观想之宙 典藏版"
     assert entry["availability_summary"] == "所在馆：栖霞区图书馆、金陵图书馆"
 
@@ -139,7 +150,7 @@ def test_bare_response_jsessionid_urls(monkeypatch):
     page = nanjing.search_books("三体")
     assert page["total_results"] == 59
     assert len(page["books"]) == 20
-    assert page["books"][0]["book_id"] == "4386216"
+    assert page["books"][0]["book_id"] == "JL:4386216"
     assert page["books"][0]["title"] == "三体问题"
     assert page["books"][0]["availability_summary"] == "所在馆：金陵图书馆"
     validate_search_page(page)

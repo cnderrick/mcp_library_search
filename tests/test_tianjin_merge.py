@@ -2,14 +2,16 @@
 from pathlib import Path
 
 from mcp_library_search.adapters import tianjin
+from mcp_library_search.aleph import Book
+from mcp_library_search.aleph import client as aleph_client
 
 _FIX = Path(__file__).parent / "fixtures" / "tianjin"
 
 
 def _b(source, rid, isbn="", title="三体"):
-    return tianjin._Book(record_id=f"{source}:{rid}", title=title, author="刘慈欣",
-                         publisher="重庆出版社", publish_year="2022",
-                         availability_summary="", isbn=isbn)
+    return Book(record_id=f"{source}:{rid}", title=title, author="刘慈欣",
+                publisher="重庆出版社", publish_year="2022",
+                availability_summary="", isbn=isbn)
 
 
 def test_merge_same_isbn_composite_id():
@@ -65,8 +67,8 @@ def test_get_holdings_composite_aggregates(monkeypatch):
     seen = []
     item_html = (_FIX / "item_tjl01.html").read_text(encoding="utf-8")
 
-    def fake_open(req, timeout=20):
-        seen.append(req.full_url)
+    def fake_get(url, config=None, timeout=20):
+        seen.append(url)
         return item_html
 
     def fake_il(cfg, book_id, only_available=True):
@@ -75,7 +77,7 @@ def test_get_holdings_composite_aggregates(monkeypatch):
                  "call_number": "I247.55/107", "status": "借出",
                  "available": False, "due_date": "2024-09-15"}]
 
-    monkeypatch.setattr(tianjin, "_open", fake_open)
+    monkeypatch.setattr(aleph_client, "get", fake_get)
     monkeypatch.setattr(tianjin, "il_holdings", fake_il)
     hs = tianjin._Client().get_holdings("TJL01:002892667+ZXYH:217795")
     assert "il:217795" in seen

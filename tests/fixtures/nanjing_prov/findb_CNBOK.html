@@ -1,0 +1,915 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!-- filename: short-2-head  --> 
+<html> 
+<head> 
+<!-- filename: meta-tags V1.1r007 --> 
+ 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="Sun, 06 Nov 1994 08:49:37 GMT"> 
+<META HTTP-EQUIV="REFRESH" CONTENT="1200; URL=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17452?func=logout"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"> 
+ 
+<link rel="stylesheet" href="/opac_lcl_chi/exlchi.css" TYPE="text/css"> 
+<style> 
+.tabshead{background:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif) bottom repeat-x;} 
+.topbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif);} 
+.middlebar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-middle-bar.jpg);} 
+.bottombar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-bottom-bar.jpg);} 
+#feedbackbar,.feedbackbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-feedback.jpg);} 
+</style> 
+<script src="/opac_lcl_chi/param.js"></script> 
+<script>var tmp="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17453";</script> 
+<script src="/opac_lcl_chi/CHI.js"></script> 
+<script src="/opac_lcl_chi/exlchi.js"></script> 
+<script> 
+var icon_path="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/"; 
+function dispfmt(fmt){ 
+   if(fmtmap[fmt]){fmt=fmtmap[fmt];} 
+   if(fmt.match(/</)){fmt="XX";} 
+   document.write("<img src="+icon_path+"icon"+fmt+".gif> "+fmt); 
+} 
+document.onclick = function() {if(g('sug'))g('sug').style.display='none';} 
+</script> 
+<title>中文文献 - Search Results</title> 
+<script language="Javascript"> 
+<!-- 
+  function submit_form1 (val) 
+  { 
+    document.form1.submit_action.value=val; 
+    document.form1.submit(); 
+  } 
+// --> 
+</script> 
+<script language=Javascript> 
+<!-- 
+  function select_record(theForm) 
+  { 
+    if (theForm.ckbox.checked) { 
+      var loc = "http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17454?func=short-select-single&" + theForm.name + "=on"; 
+    } 
+    else { 
+      var loc = "http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17455?func=short-deselect-one&" + theForm.name + "=off"; 
+    } 
+    var imd = new Image(); 
+    imd.src = loc; 
+  } 
+// --> 
+</script> 
+ 
+<script src="/opac_lcl_chi/short.js"></script> 
+</head> 
+<body topmargin="0" 
+      onload="window.focus();"> 
+<!-- filename: head-1-nobor --> 
+<script language="Javascript"> 
+<!-- 
+  function open_window (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+ 
+  function open_window2 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window3 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window4 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window_ext (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function set_iframe_location(url,id){ 
+    eval('document.all.' + id).src = url; 
+  } 
+ 
+  function open_window_confirm (loc,frame) 
+  { 
+    self.name=frame; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function delete_win1 () 
+  { 
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+    w.close(); 
+  } 
+ 
+  function open_window_ill (loc) 
+  { 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+// --> 
+</script> 
+ 
+<script language="javascript"> 
+<!-- 
+ function recommend_nobor(the_url){ 
+     var first_split = the_url.split("//"); 
+     var without_resource = first_split[1]; 
+     var second_split = without_resource.split(":"); 
+     var domain = second_split[0]; 
+ 
+     window.open("http://"+domain+":8118/apsm/recommend/recommend_nobor.jsp","_blank"); 
+} 
+//--> 
+</script> 
+<div id=header> 
+      <a href="/cgi-bin/sso_auth.cgi" class="blue" title="输入用户名和密码"> 
+      <!--  <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x1.jpg" align="absmiddle" style="border:0px">登录|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17456?func=find-b-0" title="返回检索首页" class="blue" > 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x2.jpg" align="absmiddle" style="border:0px"> 检索首页|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17457?func=bor-info" title="查看图书馆读者个人信息" class="blue"> 
+      <!--<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x3.jpg" align="absmiddle" style="border:0px">我的图书馆|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17458?func=option-show&func_param=DISPLAY-OPTION" class="blue" title="设置信息显示选项"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x4.jpg" align="absmiddle" style="border:0px">参数设置|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17459?func=short" class="blue" title="最近一次检索结果列表"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x5.jpg" align="absmiddle" style="border:0px">结果列表|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17460?func=history" class="blue" title="最近检索历史"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x6.jpg" align="absmiddle" style="border:0px">最近检索|</a> 
+    <!--  <a href="javascript:recommend_nobor('http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17461');"  class="blue" id=head_jg> --> 
+    <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17462?func=bor-info" title="读者荐购"  class="blue" id=head_jg> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x7.jpg" align="absmiddle" style="border:0px">读者荐购|</a><script>if(flag_recm==0)g('head_jg').style.display='none'</script> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17463?func=file&file_name=hotinfo" class="blue" title="热门信息" class="blue" target="_blank"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x8.jpg" align="absmiddle" style="border:0px">热门信息|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17464?func=myshelf-short-lcl" class="blue" title="查看保存在电子书架上的记录"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x9.jpg" align="absmiddle" style="border:0px">电子书架|</a> 
+      <a href="/help_cn/help.htm" class="blue" title="使用该系统的帮助" target="new"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x10.jpg" align="absmiddle" style="border:0px">帮助|</a> 
+</div> 
+<div id=idxlogo><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17465?func=find-b-0><img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a></div> 
+
+<div id=feedbackbar style="display:none;text-align:center">&nbsp;</div> 
+<script>if(g('feedbackbar').innerHTML.length>10){g('feedbackbar').style.display='';}</script> 
+<!-- filename: search-form  --> 
+<script>g('idxlogo').style.display='none';</script> 
+<a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17466?func=find-b-0><img id=logo src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a> 
+<script> 
+var reg=new RegExp("/F/(.*?)\\?","i"); 
+if(reg.test(location.href)){var arr=reg.exec(location.href);var sid=decodeURI(arr[1]);} 
+function tagsuggest(json){ 
+        var detail=''; 
+        for (var i = 0; i < json["tags"].length; i++) { 
+                detail += "<a style='cursor:pointer' href='/cgi-bin/tag_m.cgi?find="+json["tags"][i]["tag"]+"&sid="+sid+"'>"+json["tags"][i]["tag"] + "</a><br>"; 
+        } 
+        g("details").innerHTML = detail+"<a style='cursor:pointer;float:right'>[关闭]</a>"; 
+        g("details").style.display=""; 
+        g("details").style.left=getPos(g("cclterm")).x+"px"; 
+        g("details").style.top=getPos(g("cclterm")).y+g("cclterm").offsetHeight+"px"; 
+        if(g("format"))g("format").style.display="none"; 
+} 
+function presearch(){ 
+        if(g('find_code').value=='TAG'){ 
+                var script = document.createElement('script'); 
+                script.setAttribute('src', "/cgi-bin/tag_m.cgi?search="+encodeURI(decodeURI(g('cclterm').value))); 
+                document.documentElement.lastChild.appendChild(script); 
+                return false; 
+        } 
+} 
+</script> 
+<table id=search border="0" cellpadding="0" cellspacing="0"> 
+<tr><td id=col1><td id=sgradient><td id=col2> 
+<form name="cclform" method="get" action="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17467" onsubmit="return presearch(this);"> 
+<input type="hidden" id="search_description" value="全部词= 红楼梦"> 
+<input name="func" id="func" value="find-b" type="hidden"> 
+<!-- filename: find-code-include-njl01 --> 
+    <select name=find_code> 
+<option value=WRD selected     >全部词</option> 
+<option value=WTI              >题名关键词</option> 
+<option value=TIT              >题名(精确匹配）</option> 
+<option value=WAU              >著者</option> 
+<option value=WSU              >主题词</option> 
+<option value=WPU              >出版者</option> 
+<option value=WPL              >出版地</option> 
+<option value=WSE              >丛编</option> 
+<option value=ISB              >ISBN</option> 
+<option value=ISS              >ISSN</option> 
+<option value=SNV              >国内订购号</option> 
+<option value=UBN              >统一书刊号</option> 
+<option value=CAL              >索书号</option> 
+<option value=CLC              >中图分类号</option> 
+<option value=WOC              >其他分类号</option> 
+<option value=SYS              >系统号</option> 
+</select> 
+ 
+<input autocomplete="off" style="width:30%" name="request" value='' id=cclterm oninput="clearTimeout(tm);if(event.keyCode!=13)tm=setTimeout(getsug,500)" onkeydown="if('\v'=='v'){clearTimeout(tm);if(event.keyCode!=13&&event.keyCode!=38&&event.keyCode!=40)tm=setTimeout(getsug,500)}" onkeyup="if(event.keyCode==38){shiftsug(sugno-1)}else if(event.keyCode==40){shiftsug(sugno+1)}else if(event.keyCode==13)this.blur()"> &nbsp; 
+<span id=baselist> 
+<!-- filename: base-list-include-njl01 --> 
+    <select name=local_base> 
+     <option value=></option> 
+     <option value=NJL01                >中文文献</option> 
+     <option value=CNBOK selected       >中文图书</option> 
+     <option value=CNSER                >中文报刊</option> 
+     <option value=CNOTH                >中文非书资料</option> 
+     <option value=NJL09                >外文文献</option> 
+     <option value=ENBOK                >外文图书</option> 
+     <option value=ENSER                >外文报刊</option> 
+     <option value=ENOTH                >外文非书资料</option> 
+    </select> 
+</span> 
+<span id=refine></span> 
+<input id=lookup value="检索" type="submit"> 
+<input value="二次检索" type="submit" onclick="var setno='002880'==''?'':'002880';g('func').value='short-refine-exec';g('refine').innerHTML='<input type=hidden name=set_number value='+setno+'><input type=hidden name=request_op value=AND>'"> 
+<script> 
+//document.write('<a id=rsslink href="/rss/newbookrss.php?base=CNBOK&lib=CNBOK&name='+document.getElementById("search_description").value+'&request=" target="_blank"><img border="0" width="24" src="/rss/style/pics/ico_rss.gif"></a>'); 
+</script> 
+<!-- 
+<input type="text" size="8" alt="clrDlg" style="border:none;background:transparent;" readonly> 
+--> 
+<div id="colorpanel" style="position:absolute;display:none;width:253px;height:177px;"></div> 
+<div id="details" style='display:none;font-size:14px;width:400px;position:absolute;z-index:10000;background:#fff;border:1px solid #aaa' onclick='this.style.display="none";if(g("format"))g("format").style.display=""'></div> 
+</form> 
+</table> 
+<script src="/opac_lcl_chi/colorpicker.js"></script> 
+</div> 
+<div style="z-index:999;display:none;position:absolute;border:1px solid black" id=sug></div> 
+
+ 
+<!-- short-include-buttons  --> 
+<!-- publish section 
+  SET-NUMBER (6100)    = 002880 
+  SORT-SELECTED (6200) = 01---D02-- 
+  SHORT-FORMAT (6300)  = 998 
+  BOR-ID (6400)        = ALEPH 
+  Z303-NAME (6500)     =  
+ 
+  Z05-BASE (9000)      = CNBOK 
+  Z05-FIND-CODE (5000) = WRD 
+--> 
+<div id=operate> 
+<span id=label>排序：</span><select name="sort" onchange="if(this.value)window.location=this.value" id=sort> 
+<option value='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17468?func=short-sort&set_number=002880&sort_option=02---A01---D'>著者/年(降序)</option> 
+<option value='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17469?func=short-sort&set_number=002880&sort_option=01---D02---A'>年(降序)/著者</option> 
+<option value='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17470?func=short-sort&set_number=002880&sort_option=02---A03---A'>著者/题名</option> 
+<option value='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17471?func=short-sort&set_number=002880&sort_option=03---A01---D'>题名/年(降序)</option> 
+<option value='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17472?func=short-sort&set_number=002880&sort_option=01---D03---A'>年(降序)/题名</option> 
+</select> 
+<script> 
+if("01---D02--"=="02---A01--")g('sort').options[0].selected=true; 
+else if("01---D02--"=="01---D02--")g('sort').options[1].selected=true; 
+else if("01---D02--"=="02---A03--")g('sort').options[2].selected=true; 
+else if("01---D02--"=="03---A01--")g('sort').options[3].selected=true; 
+else if("01---D02--"=="01---D03--")g('sort').options[4].selected=true; 
+</script> 
+&nbsp;<span id=label>格式：</span><select name="format" onchange="if(this.value)window.location=this.value" id=format> 
+<option value="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17473?func=short-format&format=000">简洁视图</option> 
+<option value="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17474?func=short-format&format=998">封面视图</option> 
+<option value="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17475?func=short-format&format=950">详细格式</option> 
+<option value="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17476?func=short-format&format=951">题名著者</option> 
+<option value="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17477?func=short-format&format=952">仅题名</option> 
+</select> 
+<script> 
+if("998"=="000")g('format').options[0].selected=true; 
+else if("998"=="998")g('format').options[1].selected=true; 
+else if("998"=="950")g('format').options[2].selected=true; 
+else if("998"=="951")g('format').options[3].selected=true; 
+else if("998"=="952")g('format').options[4].selected=true; 
+</script> 
+&nbsp;<span onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">选中记录</a><div id=options style="display:none"> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17478?func=short-mail-0" title="Save/Mail" class="blue">保存/邮寄</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17479?func=short-sub" title="Create Subset" class="blue">创建子集</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17480?func=myshelf-add-sel-1" title="Add to My e-Shelf" class="blue">添加至电子书架</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17481?func=save-server-1" title="Save on Server" class="blue">保存到服务器</a> 
+</div></span> 
+&nbsp;<span onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">整合集合</a><div id=options style="display:none"> 
+<script> 
+function checkall(){ 
+        var Elements = document.getElementsByTagName("form"); 
+        var fname;var xform; 
+        for (var i=0;i<Elements.length;i++ ) { 
+                xform=Elements[i]; 
+                fname=xform.getAttribute("name"); 
+                if ( fname.match(/^XXX/) ) {xform.ckbox.checked=xform.ckbox.checked==true?false:true;select_record(xform);} 
+        } 
+} 
+</script> 
+<a href="#" class="blue" onclick="checkall()">全选/取消</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17482?func=short-rank" title="Rank" class="blue">相关度排序</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17483?func=short-refine" title="Refine" class="blue">二次检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17484?func=short-filter" title="Filter" class="blue">过滤</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17485?func=short-sdi" title="SDI" class="blue">定题服务请求</a> 
+</div></span> 
+&nbsp;<span id=advanced onmouseover="this.lastChild.style.display='';this.lastChild.style.left=this.offsetLeft+'px';this.lastChild.style.top=getPos(this).y+this.offsetHeight+'px';" onmouseout="this.lastChild.style.display='none'"> 
+<a class="blue" href="#">重新查询</a><div id=options style="display:none"> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17486?func=find-b-0" class="blue" title="通过关键词查找记录">简单检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17487?func=find-a-0" class="blue">多字段检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17488?func=file&file_name=find-m" class="blue">多库检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17489?func=find-d-0" class="blue">高级检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17490?func=find-c-0" class="blue">通用命令语言检索</a><br> 
+<a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17491?func=scan-list" class="blue">浏览</a><br> 
+</div></span> 
+&nbsp;<a id=cls href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17492?func=cat-list" class="blue" title="中图、科图分类法浏览">分类浏览</a> 
+&nbsp;<a id=cls href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17493?func=tag-list" class="blue" title="所有标签浏览">标签浏览</a> 
+
+</div> 
+ 
+<!-- short-include-2    --> 
+<!-- publish section 
+set-number: 002880 
+sort: 01---D02-- 
+format : 998 
+bor-id : ALEPH 
+bor-name :  
+z61-short-no-lines: 10 
+ 
+find-code: WRD 
+base : CNBOK 
+--> 
+ 
+<input type=hidden id=borid value="ALEPH"> 
+<input type=hidden id=borname value=""> 
+<div id=brief> 
+<div class="bubble" id="bubble2" style="display: none;" onmouseover="clearTimeout(tm);" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)"> 
+<div class="bubble-head"> 
+<div class="bubble-right" id="bubble_text2"> 
+</div> 
+<div style="clear: both;"></div> 
+</div> 
+<div class="bubble-foot"> 
+<div class="bubble-foot-right"></div> 
+<div class="bubble-foot-left"></div> 
+<div style="clear: both;"></div> 
+</div> 
+</div> 
+<script>var rateno=0;var rateurl="/cgi-bin/review_m.cgi?getrating=1";</script> 
+<table width=100%><tr><td valign=top style='border:1px solid #aaa;border-bottom:none'> 
+<div id=hitnum class=hitnum> 
+<div id=nav style="float:right"><script>var fcache=0;if(parseInt("     2745")>500)fcache=1;prnnavigate(parseInt("     2745"),        1,10,"http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17494?func=short-jump&jump=1")</script></div> 
+     记录         1 -       10 of      2745 (最大显示记录      1000 条) 
+</div> 
+ 
+
+<!-- filename: short-lcl-head --> 
+ 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 蔡元培&nbsp;,cai yuan pei&nbsp;,(1868-1940). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000001 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-100-24958-4 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002912577 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      2 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17495?func=full-set-set&set_number=002880&set_entry=000001&format=999>1</A> 
+<form name=XXX000001 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17496?func=full-set-set&set_number=002880&set_entry=000001&format=999 id="NJL01002912577">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17497?func=full-set-set&set_number=002880&set_entry=000001&format=999 id="NJL01002912577"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-100-24958-4/cover"></a> 
+<!--<script>doclist["NJL01002912577"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-100-24958-4"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17498?func=full-set-set&set_number=002880&set_entry=000001&format=999>蔡元培论红楼梦</a> <script>fmt_issn("978-7-100-24958-4")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>蔡元培&nbsp;,cai yuan pei&nbsp;,(1868-1940).<td class=label1>索书号：<td class=content valign=top>I207.411/1581 
+<tr><td class=label1>出版社：<td class=content valign=top>商务印书馆<td class=label>年份：<td class=content valign=top>2025 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002912577";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17499?func=item-global&doc_library=NJL01&doc_number=002912577' onmouseover="clearTimeout(tm);hint('<tr><td class=libnname><A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17500?func=item-global&doc_library=NJL01&doc_number=002912577&year=&volume=&sub_library=MCBKL >中文图书借阅</A></td><td class=bookid>I207.411/1581<td class=holding>     1/     0</td><tr><td class=libnname><A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17501?func=item-global&doc_library=NJL01&doc_number=002912577&year=&volume=&sub_library=MCTBY >典藏书库(保存本)</A></td><td class=bookid>I207.411/1581<td class=holding>     1/     0</td>',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     2，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = ,(清)曹雪芹&nbsp;,cao xue qin. -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000002 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5225-4433-5 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002978393 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17502?func=full-set-set&set_number=002880&set_entry=000002&format=999>2</A> 
+<form name=XXX000002 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17503?func=full-set-set&set_number=002880&set_entry=000002&format=999 id="NJL01002978393">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17504?func=full-set-set&set_number=002880&set_entry=000002&format=999 id="NJL01002978393"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5225-4433-5/cover"></a> 
+<!--<script>doclist["NJL01002978393"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5225-4433-5"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17505?func=full-set-set&set_number=002880&set_entry=000002&format=999>红楼梦诗词&nbsp;中英双语</a> <script>fmt_issn("978-7-5225-4433-5")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>,(清)曹雪芹&nbsp;,cao xue qin.<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>九州出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002978393";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17506?func=item-global&doc_library=NJL01&doc_number=002978393' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = ,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715/1724-1763/1764). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000003 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-214-31041-5 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002942625 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17507?func=full-set-set&set_number=002880&set_entry=000003&format=999>3</A> 
+<form name=XXX000003 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17508?func=full-set-set&set_number=002880&set_entry=000003&format=999 id="NJL01002942625">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17509?func=full-set-set&set_number=002880&set_entry=000003&format=999 id="NJL01002942625"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-214-31041-5/cover"></a> 
+<!--<script>doclist["NJL01002942625"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-214-31041-5"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17510?func=full-set-set&set_number=002880&set_entry=000003&format=999>孙温绘全本红楼梦&nbsp;沉浸阅读版</a> <script>fmt_issn("978-7-214-31041-5")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715/1724-1763/1764).<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>江苏人民出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002942625";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17511?func=item-global&doc_library=NJL01&doc_number=002942625' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = ,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715?-1763?). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000004 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5236-1709-0 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002939331 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17512?func=full-set-set&set_number=002880&set_entry=000004&format=999>4</A> 
+<form name=XXX000004 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17513?func=full-set-set&set_number=002880&set_entry=000004&format=999 id="NJL01002939331">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17514?func=full-set-set&set_number=002880&set_entry=000004&format=999 id="NJL01002939331"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5236-1709-0/cover"></a> 
+<!--<script>doclist["NJL01002939331"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5236-1709-0"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17515?func=full-set-set&set_number=002880&set_entry=000004&format=999>红楼梦</a> <script>fmt_issn("978-7-5236-1709-0")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715?-1763?).<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>中国科学技术出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002939331";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17516?func=item-global&doc_library=NJL01&doc_number=002939331' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = ,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715/1724~1763/1764). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000005 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5561-4079-4 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002932204 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17517?func=full-set-set&set_number=002880&set_entry=000005&format=999>5</A> 
+<form name=XXX000005 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17518?func=full-set-set&set_number=002880&set_entry=000005&format=999 id="NJL01002932204">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17519?func=full-set-set&set_number=002880&set_entry=000005&format=999 id="NJL01002932204"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5561-4079-4/cover"></a> 
+<!--<script>doclist["NJL01002932204"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5561-4079-4"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17520?func=full-set-set&set_number=002880&set_entry=000005&format=999>《红楼梦》整本书阅读与检测</a> <script>fmt_issn("978-7-5561-4079-4")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>,(清)曹雪芹&nbsp;,cao xue qin&nbsp;,(1715/1724~1763/1764).<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>湖南人民出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002932204";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17521?func=item-global&doc_library=NJL01&doc_number=002932204' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 陈磊·混知教育研究院. -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000006 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5473-3056-2 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002960425 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17522?func=full-set-set&set_number=002880&set_entry=000006&format=999>6</A> 
+<form name=XXX000006 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17523?func=full-set-set&set_number=002880&set_entry=000006&format=999 id="NJL01002960425">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17524?func=full-set-set&set_number=002880&set_entry=000006&format=999 id="NJL01002960425"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5473-3056-2/cover"></a> 
+<!--<script>doclist["NJL01002960425"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5473-3056-2"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17525?func=full-set-set&set_number=002880&set_entry=000006&format=999>漫画四大名著随身学</a> <script>fmt_issn("978-7-5473-3056-2")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>陈磊·混知教育研究院.<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>东方出版中心<td class=label>年份：<td class=content valign=top>2026.6 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002960425";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17526?func=item-global&doc_library=NJL01&doc_number=002960425' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 戴敦邦&nbsp;,dai dun bang&nbsp;,(1938-). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000007 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5458-2458-2 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002939996 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17527?func=full-set-set&set_number=002880&set_entry=000007&format=999>7</A> 
+<form name=XXX000007 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17528?func=full-set-set&set_number=002880&set_entry=000007&format=999 id="NJL01002939996">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17529?func=full-set-set&set_number=002880&set_entry=000007&format=999 id="NJL01002939996"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5458-2458-2/cover"></a> 
+<!--<script>doclist["NJL01002939996"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5458-2458-2"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17530?func=full-set-set&set_number=002880&set_entry=000007&format=999>戴敦邦新绘《红楼梦》稿本&nbsp;画稿、眉批、札记</a> <script>fmt_issn("978-7-5458-2458-2")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>戴敦邦&nbsp;,dai dun bang&nbsp;,(1938-).<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>上海书店出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002939996";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17531?func=item-global&doc_library=NJL01&doc_number=002939996' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 董志新&nbsp;,dong zhi xin. -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000008 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-5748-0911-6 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002941186 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17532?func=full-set-set&set_number=002880&set_entry=000008&format=999>8</A> 
+<form name=XXX000008 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17533?func=full-set-set&set_number=002880&set_entry=000008&format=999 id="NJL01002941186">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17534?func=full-set-set&set_number=002880&set_entry=000008&format=999 id="NJL01002941186"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-5748-0911-6/cover"></a> 
+<!--<script>doclist["NJL01002941186"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-5748-0911-6"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17535?func=full-set-set&set_number=002880&set_entry=000008&format=999>何其芳红学述论</a> <script>fmt_issn("978-7-5748-0911-6")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>董志新&nbsp;,dong zhi xin.<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>安徽教育出版社<td class=label>年份：<td class=content valign=top>2026 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002941186";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17536?func=item-global&doc_library=NJL01&doc_number=002941186' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 段启明. -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000009 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-04-066668-7 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002989788 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17537?func=full-set-set&set_number=002880&set_entry=000009&format=999>9</A> 
+<form name=XXX000009 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17538?func=full-set-set&set_number=002880&set_entry=000009&format=999 id="NJL01002989788">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17539?func=full-set-set&set_number=002880&set_entry=000009&format=999 id="NJL01002989788"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-04-066668-7/cover"></a> 
+<!--<script>doclist["NJL01002989788"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-04-066668-7"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17540?func=full-set-set&set_number=002880&set_entry=000009&format=999>红楼梦艺术研究</a> <script>fmt_issn("978-7-04-066668-7")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>段启明.<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>高等教育出版社<td class=label>年份：<td class=content valign=top>2026.01 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002989788";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17541?func=item-global&doc_library=NJL01&doc_number=002989788' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-body--> 
+<!-- publish section 
+(0300) - (1100) = 段振离&nbsp;,(1939-). -   => www_tab_short_lcl.lng 
+For example: 
+SFX URL(1100)        = 
+SET-ENTRY (2000)     = 000010 
+ 
+Z13-ISBN-ISSN (3100) = 978-7-214-30909-9 
+SET-NUMBER (3200)    = 002880 
+DOC-NUMBER (3300)    = 002988275 
+Z05-BASE (3400)      = CNBOK 
+TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+<table class=items style="margin:5px 0"> 
+<tr><td class=col1 valign=top> 
+<A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17542?func=full-set-set&set_number=002880&set_entry=000010&format=999>10</A> 
+<form name=XXX000010 method=GET><input type=checkbox name=ckbox onClick="javascript:select_record(this.form);" onKeyPressed="javascript:select_record(this.form);"></form> 
+<!--<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17543?func=full-set-set&set_number=002880&set_entry=000010&format=999 id="NJL01002988275">--> 
+<td class=cover valign=top><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17544?func=full-set-set&set_number=002880&set_entry=000010&format=999 id="NJL01002988275"><img style="border: medium none;" src="http://www.bookcovers.cn/index.php?client=njlib&isbn=978-7-214-30909-9/cover"></a> 
+<!--<script>doclist["NJL01002988275"]=1;</script>--> 
+<!--<img src="/cgi-bin/isbn_cover.cgi?isbn=978-7-214-30909-9"></a>--> 
+<td class=col2> 
+<div class=itemtitle><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17545?func=full-set-set&set_number=002880&set_entry=000010&format=999>红楼游园一茶一味</a> <script>fmt_issn("978-7-214-30909-9")</script></div> 
+<table border="0" cellpadding="0" cellspacing="0"> 
+<tr><td class=label1>作者：<td class=content valign=top>段振离&nbsp;,(1939-).<td class=label1>索书号：<td class=content valign=top><BR> 
+<tr><td class=label1>出版社：<td class=content valign=top>江苏人民出版社<td class=label>年份：<td class=content valign=top>2026.01 
+<tr><td class=label>格式：<td class=content valign=top><script>dispfmt('BK')</script><td class=label>链接：<td class=meida rowspan=2 valign=top><br> 
+<tr><td class=label1><script>if(flag_review!=0&&flag_rating!=0)document.write('评级: ');</script><td class=content><script>rateno++;rateurl+="&docnum"+rateno+"=NJL01|002988275";document.write("<div id=rating"+rateno+"></div>");</script> 
+<td class=libs colspan=2 align=right> 
+<a href='http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17546?func=item-global&doc_library=NJL01&doc_number=002988275' onmouseover="clearTimeout(tm);hint('',this)" onmouseout="tm=setTimeout(function(){g('bubble2').style.display='none';},400)">馆藏复本:     0，已出借复本:     0</a> 
+</table> 
+ </table> 
+<hr class=itemsep size=1> 
+
+<!-- filename: short-lcl-tail --> 
+<script> 
+var lists=''; 
+for(var key in doclist)lists+=key+','; 
+w('<script src="'+lkbhost+'/cgi-bin/alkb.cgi?id='+lists+'"><\/script>'); 
+</script> 
+<img name="dummy_image" src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/empty.gif" alt="" width=0 height=0 border=0> 
+ 
+
+<!-- filename: short-tail --> 
+<!-- publish section 
+  REQUEST (1100) = WRD = ( 红楼梦 ) 
+  BASE    (9000) = NJL01 
+  Z13-ISBN-ISSN (3100) = 978-7-214-30909-9 
+  SET-NUMBER (3200)    = 002880 
+  DOC-NUMBER (3300)    = 002988275 
+  Z05-BASE (3400)      = CNBOK 
+  ACTIVE-LIB (4000)      = NJL01 
+  TOTAL-NUMBER-OF-ITEMS (3500) =      0 
+  TOTAL-NUMBER-OF-LOANED-ITEM (3600) =      0 
+--> 
+ 
+<td id=sides valign=top rowspan=2> 
+<div class=side> 
+<div id=userinfo class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">读者信息 >> 
+</div><div class=content>您好，<script>if(g("borname").value){w("<a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17547?func=bor-info>"+g("borname").value+"</a>");}else{w("匿名用户");}</script></div> 
+</div> 
+<div class=side> 
+<div id=userinfo class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">当前检索 >> 
+</div><div class=content>WRD = ( 红楼梦 )<br><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17548?func=history>检索历史</a></div> 
+</div> 
+ 
+<script> 
+var libcode="CNBOK"; 
+if(typeof facetcode =='undefined') facetcode={}; 
+function refine(type,word){location.href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17549?func=short-refine-exec&find_code="+(facetcode[type]||type)+"&request="+encodeURI(word)+"&local_base=CNBOK&set_number=002880&request_op=AND"; } 
+</script> 
+ 
+<div class=side id=kws> 
+<div id=kw class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">主题词 >> 
+</div><div class=content id=kwcon><center><img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/loading.gif"></center></div></div> 
+ 
+<div class=side id=facets> 
+<div id=facet class=sidehead onclick="this.nextSibling.style.display=this.nextSibling.style.display==''?'none':''">缩小范围 >> 
+</div><div class=content id=facetcon><center><img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/loading.gif"></center></div></div> 
+ 
+<tr><td id=navb height=20px class=hitnum style='border:1px solid #aaa;border-top:none'></td> 
+</table> 
+<script> 
+var reg=new RegExp("&tag=(.*)","i"); 
+if(reg.test(location.href)){ 
+      var arr=reg.exec(location.href); 
+      g('cclterm').value=decodeURI(arr[1]); 
+      g('find_code').options[g('find_code').length-1].selected=true; 
+}else{ 
+g('cclterm').value=parseccl('WRD = ( 红楼梦 )'); 
+g('navb').innerHTML=g('hitnum').innerHTML; 
+//g('rsslink').href+="WRD = ( 红楼梦 )"; 
+} 
+</script> 
+<style>#copyright{margin:10px 2px}body{padding-bottom:40px}</style> 
+<!-- filename: copyrights --> 
+<p id=copyright class="copyright"> 
+<a href=# onclick="return shiftlng('xng')">English Version</a><br> 
+&copy; Ex Libris China  2010 
+</p> 
+<script>if(self.location!=parent.location&&g('cclterm')){g('cclterm').value='';if(g('find_code'))g('find_code').options[0].selected=true;} 
+</script> 
+</div> 
+<script> 
+console.log("self.location=" + self.location); 
+console.log("parent.location" + parent.location); 
+if(self.location==parent.location){ 
+    var q='WRD = ( 红楼梦 )'; 
+    if(!fcache || q.match(/ (AND|OR|NOT) /i)){w("<script src='/cgi-bin/facet.cgi?db=NJL01&set=002880&lang=chi'><\/script>");} 
+    else{w("<script src=/cgi-bin/facet.cgi?db=NJL01&set=002880&lang=chi&q="+encodeURI(q)+"><\/script>");} 
+} 
+function showratings(json){ 
+          for (var i = 0; i < json['ratings'].length; i++) { 
+             g('rating'+json['ratings'][i]['num']).innerHTML=showrating(json['ratings'][i]['rating']) 
+     } 
+} 
+if(flag_review!=0&&flag_rating!=0)w('<script src="'+rateurl+'"><\/script>') 
+ 
+if(typeof flag_sfx!='undefined' && flag_sfx){ 
+lists='';for(var key in issns)lists+=key+','; 
+if(lists!='')w('<script src="/cgi-bin/asfx.cgi?issns='+lists+'"><\/script>'); 
+} 
+</script> 
+</body> 
+</html> 
+
+ 

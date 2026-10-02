@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from mcp_library_search.adapters import tianjin
+from mcp_library_search.aleph import client as aleph_client
 
 _FIX = Path(__file__).parent / "fixtures" / "tianjin"
 
@@ -29,12 +30,12 @@ def _stub_zxyh(monkeypatch, result=None, error=None):
 def test_search_tolerates_single_aleph_failure(monkeypatch):
     _stub_zxyh(monkeypatch)
 
-    def spy(req, timeout=20):
-        if "local_base=TJC01" in req.full_url:
+    def spy(url, config=None, timeout=20):
+        if "local_base=TJC01" in url:
             raise RuntimeError("天津图书馆请求失败：HTTP Error 500")
         return _load("find_tjl01.html")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     r = tianjin._Client().search("三体")
     assert r.success
     assert any(b.record_id.startswith("TJL01:") for b in r.books)
@@ -46,17 +47,17 @@ def test_search_tolerates_single_aleph_failure(monkeypatch):
 def test_search_all_sources_fail_raises(monkeypatch):
     _stub_zxyh(monkeypatch, error=RuntimeError("中新友好图书馆请求失败：reset"))
 
-    def spy(req, timeout=20):
+    def spy(url, config=None, timeout=20):
         raise RuntimeError("天津图书馆请求失败：HTTP Error 500")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     with pytest.raises(RuntimeError, match="天津"):
         tianjin._Client().search("三体")
 
 
 def test_get_holdings_secondary_failure_skipped(monkeypatch):
-    monkeypatch.setattr(tianjin, "_open",
-                        lambda req, timeout=20: _load("item_tjl01.html"))
+    monkeypatch.setattr(aleph_client, "get",
+                        lambda url, config=None, timeout=20: _load("item_tjl01.html"))
 
     def boom(cfg, book_id, only_available=True):
         raise RuntimeError("中新友好图书馆请求失败：reset")
@@ -69,10 +70,10 @@ def test_get_holdings_secondary_failure_skipped(monkeypatch):
 
 
 def test_get_holdings_primary_failure_raises(monkeypatch):
-    def spy(req, timeout=20):
+    def spy(url, config=None, timeout=20):
         raise RuntimeError("天津图书馆请求失败：HTTP Error 500")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     called = []
     monkeypatch.setattr(tianjin, "il_holdings",
                         lambda *a, **k: called.append(a) or [])
@@ -82,10 +83,10 @@ def test_get_holdings_primary_failure_raises(monkeypatch):
 
 
 def test_get_holdings_aleph_error_names_source(monkeypatch):
-    def spy(req, timeout=20):
+    def spy(url, config=None, timeout=20):
         raise RuntimeError("天津图书馆请求失败：HTTP Error 500")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     with pytest.raises(RuntimeError, match="天津市少年儿童图书馆"):
         tianjin._Client().get_holdings("TJC01:000000001")
 
@@ -93,11 +94,11 @@ def test_get_holdings_aleph_error_names_source(monkeypatch):
 def test_get_book_detail_first_member_wins(monkeypatch):
     urls = []
 
-    def spy(req, timeout=20):
-        urls.append(req.full_url)
+    def spy(url, config=None, timeout=20):
+        urls.append(url)
         return _load("detail_tjl01_sys.html")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     d = tianjin._Client().get_book_detail("ZXYH:217795+TJL01:000856840")
     # 复合 id 取优先级最高成员（TJL01），record_id 保留查询原样
     assert len(urls) == 1
@@ -108,8 +109,8 @@ def test_get_book_detail_first_member_wins(monkeypatch):
 
 def test_get_book_detail_sys_live_shape(monkeypatch):
     # 真网 SYS 单命中直出完整记录页（detail_tjl01_sys.html 为实抓样本）
-    monkeypatch.setattr(tianjin, "_open",
-                        lambda req, timeout=20: _load("detail_tjl01_sys.html"))
+    monkeypatch.setattr(aleph_client, "get",
+                        lambda url, config=None, timeout=20: _load("detail_tjl01_sys.html"))
     d = tianjin._Client().get_book_detail("TJL01:000856840")
     assert d.title == "三体"
     assert d.isbn == "978-7-5366-9293-0"
@@ -136,8 +137,8 @@ def test_get_book_detail_zxyh_routes_family(monkeypatch):
 
 
 def test_get_book_detail_missing_record_raises(monkeypatch):
-    monkeypatch.setattr(tianjin, "_open",
-                        lambda req, timeout=20: "<html><body></body></html>")
+    monkeypatch.setattr(aleph_client, "get",
+                        lambda url, config=None, timeout=20: "<html><body></body></html>")
     with pytest.raises(RuntimeError, match="未找到"):
         tianjin._Client().get_book_detail("TJL01:999999999")
 

@@ -1,0 +1,653 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!-- filename item-global-head-1 --> 
+<html> 
+<head> 
+<!-- filename: meta-tags V1.1r007 --> 
+ 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="Sun, 06 Nov 1994 08:49:37 GMT"> 
+<META HTTP-EQUIV="REFRESH" CONTENT="1200; URL=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17718?func=logout"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"> 
+ 
+<link rel="stylesheet" href="/opac_lcl_chi/exlchi.css" TYPE="text/css"> 
+<style> 
+.tabshead{background:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif) bottom repeat-x;} 
+.topbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif);} 
+.middlebar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-middle-bar.jpg);} 
+.bottombar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-bottom-bar.jpg);} 
+#feedbackbar,.feedbackbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-feedback.jpg);} 
+</style> 
+<script src="/opac_lcl_chi/param.js"></script> 
+<script>var tmp="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17719";</script> 
+<script src="/opac_lcl_chi/CHI.js"></script> 
+<script src="/opac_lcl_chi/exlchi.js"></script> 
+<script> 
+var icon_path="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/"; 
+function dispfmt(fmt){ 
+   if(fmtmap[fmt]){fmt=fmtmap[fmt];} 
+   if(fmt.match(/</)){fmt="XX";} 
+   document.write("<img src="+icon_path+"icon"+fmt+".gif> "+fmt); 
+} 
+document.onclick = function() {if(g('sug'))g('sug').style.display='none';} 
+</script> 
+<title>中文图书 - 馆藏</title> 
+<script language="Javascript"> 
+<!-- 
+  function open_window (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+ 
+  function open_window2 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window3 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window4 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window_ext (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function set_iframe_location(url,id){ 
+    eval('document.all.' + id).src = url; 
+  } 
+ 
+  function open_window_confirm (loc,frame) 
+  { 
+    self.name=frame; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function delete_win1 () 
+  { 
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+    w.close(); 
+  } 
+ 
+  function open_window_ill (loc) 
+  { 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+// --> 
+</script> 
+ 
+</head> 
+ 
+<body topmargin="0"> 
+<!-- filename: head-1-nobor --> 
+<script language="Javascript"> 
+<!-- 
+  function open_window (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+ 
+  function open_window2 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window3 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window4 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window_ext (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function set_iframe_location(url,id){ 
+    eval('document.all.' + id).src = url; 
+  } 
+ 
+  function open_window_confirm (loc,frame) 
+  { 
+    self.name=frame; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function delete_win1 () 
+  { 
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+    w.close(); 
+  } 
+ 
+  function open_window_ill (loc) 
+  { 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+// --> 
+</script> 
+ 
+<script language="javascript"> 
+<!-- 
+ function recommend_nobor(the_url){ 
+     var first_split = the_url.split("//"); 
+     var without_resource = first_split[1]; 
+     var second_split = without_resource.split(":"); 
+     var domain = second_split[0]; 
+ 
+     window.open("http://"+domain+":8118/apsm/recommend/recommend_nobor.jsp","_blank"); 
+} 
+//--> 
+</script> 
+<div id=header> 
+      <a href="/cgi-bin/sso_auth.cgi" class="blue" title="输入用户名和密码"> 
+      <!--  <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x1.jpg" align="absmiddle" style="border:0px">登录|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17720?func=find-b-0" title="返回检索首页" class="blue" > 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x2.jpg" align="absmiddle" style="border:0px"> 检索首页|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17721?func=bor-info" title="查看图书馆读者个人信息" class="blue"> 
+      <!--<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x3.jpg" align="absmiddle" style="border:0px">我的图书馆|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17722?func=option-show&func_param=DISPLAY-OPTION" class="blue" title="设置信息显示选项"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x4.jpg" align="absmiddle" style="border:0px">参数设置|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17723?func=short" class="blue" title="最近一次检索结果列表"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x5.jpg" align="absmiddle" style="border:0px">结果列表|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17724?func=history" class="blue" title="最近检索历史"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x6.jpg" align="absmiddle" style="border:0px">最近检索|</a> 
+    <!--  <a href="javascript:recommend_nobor('http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17725');"  class="blue" id=head_jg> --> 
+    <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17726?func=bor-info" title="读者荐购"  class="blue" id=head_jg> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x7.jpg" align="absmiddle" style="border:0px">读者荐购|</a><script>if(flag_recm==0)g('head_jg').style.display='none'</script> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17727?func=file&file_name=hotinfo" class="blue" title="热门信息" class="blue" target="_blank"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x8.jpg" align="absmiddle" style="border:0px">热门信息|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17728?func=myshelf-short-lcl" class="blue" title="查看保存在电子书架上的记录"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x9.jpg" align="absmiddle" style="border:0px">电子书架|</a> 
+      <a href="/help_cn/help.htm" class="blue" title="使用该系统的帮助" target="new"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x10.jpg" align="absmiddle" style="border:0px">帮助|</a> 
+</div> 
+<div id=idxlogo><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17729?func=find-b-0><img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a></div> 
+<div id=feedbackbar style="display:none;text-align:center">&nbsp;</div> 
+<script>if(g('feedbackbar').innerHTML.length>10){g('feedbackbar').style.display='';}</script> 
+<center> 
+<table width=99%> 
+ <tr> 
+
+  <td class=title colspan=2> 中文图书 - 馆藏 
+ <span style="float:right"><a href="javascript:window.history.back();"> 
+    <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-back.gif" 
+         border=0 
+         alt="返回前一页"></a> 
+  </div> 
+ </tr> 
+</table> 
+<hr> 
+<table width=99%> 
+
+<!-- filename: full-xxx-body --> 
+ <tr> 
+  <td class=td1> 
+    题名: &nbsp;蔡元培论红楼梦 : 专著<br> 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+  </td> 
+ </tr> 
+
+<!-- filename: full-xxx-body --> 
+ <tr> 
+  <td class=td1> 
+    作者: &nbsp;蔡元培. &nbsp;苗怀明. [256页 : 图，照片; 19cm]<br> 
+     
+     
+     
+     
+     
+     
+     
+     
+     
+  </td> 
+ </tr> 
+
+<!-- filename item-global-tail-1 --> 
+</table> 
+<hr> 
+
+<!-- filename: item-global-head-2 --> 
+<table border=0 cellspacing=2 width=100%> 
+<!-- 
+ <tr class=tr1> 
+  <th class="text3">&nbsp;</th> 
+  <th class="text3">描述</th> 
+ </tr> 
+--> 
+
+<!-- filename item-global-tail-2 --> 
+</table> 
+<hr> 
+
+<! filename: item-global-dropdown-menus-a --> 
+</table> 
+<table> 
+ <tr> 
+  <td class="text9" nowrap> 
+      点击链接("请求" 或者 "复印") 
+      为单册建立一个预约请求或复印请求。 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class="text9" nowrap> 
+      点击带下划线的应还日期， 
+      查看借阅此单册的读者的详细信息。 
+  </td> 
+ </tr> 
+</table> 
+<p> 
+<form method=get 
+      name=form1 
+      action="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17730"> 
+ 
+<input type="hidden" name=func value=item-global> 
+<input type="hidden" name=doc_library value=NJL01> 
+<input type="hidden" name=doc_number value=002912577> 
+<input type="hidden" name=type value=03> 
+ 
+<table> 
+ <tr> 
+
+<!-- item-global-dropdown-menus-b1 --> 
+  <td class="text3" 
+      nowrap 
+      valign=bottom> 
+      选择年份 
+  </td> 
+  <td> 
+    <select name=year> 
+      <option value=""> 全部</option> 
+      <option value=""> </option> 
+
+<!-- item-global-dropdown-menus-b4 --> 
+     </select> 
+  </td> 
+
+<!-- filename: item-global-dropdown-menus-b2 --> 
+  <td class="text3" nowrap>选择卷</td> 
+  <td> 
+     <select name=volume> 
+        <option value=""> 全部</option> 
+        <option value=""></option> 
+
+<!-- item-global-dropdown-menus-b4 --> 
+     </select> 
+  </td> 
+
+<!-- item-global-dropdown-menus-b3 --> 
+  <td class="text3" nowrap>选择分馆 
+  </td> 
+  <td> 
+    <select name=sub_library> 
+       <option value=""> 全部</option> 
+
+<!-- item-global-dropdown-menus-b --> 
+   <option value=MBKDB> 采编部（订购加工）</option> 
+
+<!-- item-global-dropdown-menus-b --> 
+   <option value=MCBKL SELECTED>中文图书借阅</option> 
+
+<!-- item-global-dropdown-menus-b --> 
+   <option value=MCTBY>典藏书库(保存本)</option> 
+
+<!-- item-global-dropdown-menus-b4 --> 
+     </select> 
+  </td> 
+
+<!-- filename: item-global-dropdown-menus-b5 --> 
+<td class="text3"> 
+   <input type="checkbox" name="no_loaned" value= "Y"            >隐藏已外借的单册 
+</td> 
+ 
+
+<!-- item-global-dropdown-menus-c --> 
+  <td> 
+     <input type="image" 
+            src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-go.gif" border=0 alt="Go"> 
+  </td> 
+ </tr> 
+</table> 
+</form> 
+ 
+
+<!-- item-global-prev-next --> 
+ 
+<table width="99%" border=0 cellspacing=2> 
+ <tr> 
+   <th colspan=7 align="left"><img src=http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-prev-page-dim.gif border=0 alt='No Previous Page'></th> 
+   <th colspan=7 align="right"><img src=http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-next-page-dim.gif border=0 alt='No Next Page'></th> 
+ </tr> 
+</table> 
+ 
+
+<!-- item-global-body-head --> 
+ 
+<p> 
+ 
+<table border=0 cellspacing=2 width=99%> 
+ <tr class=tr1> 
+  <th class="text3">&nbsp;</th> 
+  <th class="text3">描述</th> 
+  <th class="text3">单册状态</th> 
+  <th class="text3">应还日期</th> 
+<!--  <th class="text3">应还时间</th> --> 
+  <th class="text3">分馆</th> 
+  <th class="text3">馆藏地</th> 
+  <th class="text3">架位</th> 
+<!--  <th class="text3">页</th> --> 
+  <th class="text3">请求数</th> 
+<!--  <th class="text3">架位-2</th> --> 
+  <th class="text3">条码</th> 
+  <th class="text3">OPAC注释</th> 
+  <th class="text3">SFX</th> 
+ </tr> 
+
+<!--filename: item-global-body--> 
+ <tr> 
+  <td class=td1><A HREF=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17731?func=item-hold-request&doc_library=NJL50&adm_doc_number=003468805&item_sequence=000020&year=&volume=&sub_library=MCBKL&type=&no_loaned=N&start_rec_key=&end_rec_key=>预约</A><BR><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-17732?func=item-global-exp&doc_number=003468805&item_sequence=000020&sub_library=MCBKL>扩展</A><BR></td> 
+  <!--Description--> 
+  <td class=td1><br></td> 
+  <!--Loan status--> 
+  <td class=td1>中文图书外借本</td> 
+  <!--Due date--> 
+  <td class=td1>在架上</td> 
+  <!--Due hour--> 
+<!--  <td class=td1><br></td> --> 
+  <!--Sub-library--> 
+  <td class=td1 nowrap>中文图书借阅</td> 
+  <!--Collection--> 
+  <td class=td1 nowrap>中文图书借阅</td> 
+  <!--Location--> 
+  <td class=td1>I207.411/1581</td> 
+  <!--Pages--> 
+<!--  <td class=td1><br></td>--> 
+  <!--No Requests--> 
+  <td class=td1><br> </td> 
+  <!--Location-2--> 
+<!--  <td class=td1><br></td> --> 
+  <!--Barcode--> 
+  <td class=td1>Z2026022051</td> 
+  <!--note-opac--> 
+  <td class=td1><br></td> 
+  <!--SFX--> 
+  <td class=td1><br></td> 
+ </tr> 
+
+<!-- item-global-body-tail --> 
+ 
+</table> 
+ 
+
+<!-- item-global-prev-next --> 
+ 
+<table width="99%" border=0 cellspacing=2> 
+ <tr> 
+   <th colspan=7 align="left"><img src=http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-prev-page-dim.gif border=0 alt='No Previous Page'></th> 
+   <th colspan=7 align="right"><img src=http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-next-page-dim.gif border=0 alt='No Next Page'></th> 
+ </tr> 
+</table> 
+ 
+
+<!-- filename: item-global-tail --> 
+<!-- filename: copyrights --> 
+<p id=copyright class="copyright"> 
+<a href=# onclick="return shiftlng('xng')">English Version</a><br> 
+&copy; Ex Libris China  2010 
+</p> 
+<script>if(self.location!=parent.location&&g('cclterm')){g('cclterm').value='';if(g('find_code'))g('find_code').options[0].selected=true;} 
+</script> 
+</body> 
+</html> 
+
+ 

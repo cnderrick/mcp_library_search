@@ -5,6 +5,8 @@ il_search/il_holdings/il_detail 为模块级名字，测试直接 monkeypatch。
 from pathlib import Path
 
 from mcp_library_search.adapters import tianjin
+from mcp_library_search.aleph import Holding
+from mcp_library_search.aleph import client as aleph_client
 
 _FIX = Path(__file__).parent / "fixtures" / "tianjin"
 
@@ -14,12 +16,12 @@ def _load(name):
 
 
 def _mock_aleph(monkeypatch, default="find_tjl01.html", tjc01="find_tjc01.html"):
-    def spy(req, timeout=20):
-        if tjc01 and "local_base=TJC01" in req.full_url:
+    def spy(url, config=None, timeout=20):
+        if tjc01 and "local_base=TJC01" in url:
             return _load(tjc01)
         return _load(default)
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
 
 
 def _mock_zxyh_search(monkeypatch, result=None, error=None):
@@ -87,7 +89,7 @@ def test_get_holdings_zxyh_routes_to_interlib(monkeypatch):
     monkeypatch.setattr(tianjin, "il_holdings", spy)
     hs = tianjin._Client().get_holdings("ZXYH:217795")
     assert seen == [(tianjin._ZXYH, "217795")]
-    assert isinstance(hs[0], tianjin._Holding)
+    assert isinstance(hs[0], Holding)
     assert hs[0].library == "中新友好图书馆"
     assert hs[0].is_available() is False
     assert hs[0].due_date == "2024-09-15"
@@ -96,11 +98,11 @@ def test_get_holdings_zxyh_routes_to_interlib(monkeypatch):
 def test_get_holdings_aleph_fetches_item_global(monkeypatch):
     urls = []
 
-    def spy(req, timeout=20):
-        urls.append(req.full_url)
+    def spy(url, config=None, timeout=20):
+        urls.append(url)
         return _load("item_tjl01.html")
 
-    monkeypatch.setattr(tianjin, "_open", spy)
+    monkeypatch.setattr(aleph_client, "get", spy)
     hs = tianjin._Client().get_holdings("TJL01:002892667")
     assert "func=item-global" in urls[0]
     assert "doc_library=TJL01" in urls[0] and "doc_number=002892667" in urls[0]

@@ -58,6 +58,12 @@ adapters/__init__.py   _ADAPTERS 注册 tianjin、chongqing 两行
 
 不抽 ALEPH/InDigLib 家族（各只有一座城在用）；第二个同族城市出现时再抽，参照 interlib 先例。
 
+> **2026-10-02 落地**：条件已满足——南京图书馆（`opac.jslib.org.cn`，ALEPH `www_f_chi`）
+> 作为第二座 ALEPH 城市接入，触发本条：ALEPH 解析与 HTTP 上收为 `aleph/` 家族模块
+> （`client.py`/`parser.py`/`__init__.py`），`adapters/tianjin.py` 改为委托，行为不变
+> （本 spec 中 `tianjin._open` / `tianjin._parse_*` 等内部名随之迁到家族模块，天津各测试
+> 的注入点同步改指 `aleph.client.get`）。InDigLib 仍只有重庆一城在用，未抽。
+
 ## 天津适配器设计
 
 ### book_id 与源标识

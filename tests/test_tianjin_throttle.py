@@ -1,11 +1,12 @@
-"""天津限速器：注入时钟的 _Throttle 与 _open 的每 host 节流接线。
+"""ALEPH 家族限速器：注入时钟的 Throttle 与 client.get 的每 host 节流接线。
 
-验证码抛错路径已由 test_tianjin_search.py::test_captcha_page_raises 钉住
-（响应含「验证码」→ RuntimeError 含「天津」，不重试硬闯）。
+限速器已上收到 `aleph/client.py`（天津与南京图书馆共用），本文件跟着改指家族模块。
+验证码抛错路径已由 test_aleph_client.py::test_captcha_page_raises 钉住
+（响应含「验证码」→ RuntimeError 含馆名，不重试硬闯）。
 """
 import pytest
 
-from mcp_library_search.adapters import tianjin
+from mcp_library_search.aleph import client
 
 
 class _FakeTime:
@@ -25,14 +26,14 @@ class _FakeTime:
 
 def test_throttle_first_wait_never_sleeps():
     ft = _FakeTime()
-    th = tianjin._Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
+    th = client.Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
     th.wait()
     assert ft.slept == []
 
 
 def test_throttle_sleeps_deficit():
     ft = _FakeTime()
-    th = tianjin._Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
+    th = client.Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
     th.wait()
     ft.now += 1.0          # 只过了 1 秒 → 差 3 秒
     th.wait()
@@ -41,7 +42,7 @@ def test_throttle_sleeps_deficit():
 
 def test_throttle_no_sleep_when_interval_passed():
     ft = _FakeTime()
-    th = tianjin._Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
+    th = client.Throttle(4.0, clock=ft.clock, sleep=ft.sleep)
     th.wait()
     ft.now += 10.0         # 超过间隔 → 不睡
     th.wait()
@@ -49,9 +50,10 @@ def test_throttle_no_sleep_when_interval_passed():
 
 
 def test_per_host_throttle_instances(monkeypatch):
-    monkeypatch.setattr(tianjin, "_throttles", {})
-    a = tianjin._throttle_for("http://opacwh.tjl.tj.cn:8991/F?x=1")
-    b = tianjin._throttle_for("http://opacwh.tjl.tj.cn:8991/F?x=2")
-    c = tianjin._throttle_for("http://opacse.tjl.tj.cn:8991/F?x=1")
+    monkeypatch.setattr(client, "_throttles", {})
+    a = client.throttle_for("http://opacwh.tjl.tj.cn:8991/F?x=1", 4.0)
+    b = client.throttle_for("http://opacwh.tjl.tj.cn:8991/F?x=2", 4.0)
+    c = client.throttle_for("http://opacse.tjl.tj.cn:8991/F?x=1", 4.0)
     assert a is b          # 同 host 复用同一限速器
     assert a is not c      # 主馆与少儿馆是不同 host，各自计时
+

@@ -1,0 +1,594 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!-- filename: find-m --> 
+<html> 
+<head> 
+<!-- filename: meta-tags V1.1r007 --> 
+ 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="Sun, 06 Nov 1994 08:49:37 GMT"> 
+<META HTTP-EQUIV="REFRESH" CONTENT="1200; URL=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18139?func=logout"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"> 
+ 
+<link rel="stylesheet" href="/opac_lcl_chi/exlchi.css" TYPE="text/css"> 
+<style> 
+.tabshead{background:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif) bottom repeat-x;} 
+.topbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/tab_bg.gif);} 
+.middlebar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-middle-bar.jpg);} 
+.bottombar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-bottom-bar.jpg);} 
+#feedbackbar,.feedbackbar{background-image:url(http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-feedback.jpg);} 
+</style> 
+<script src="/opac_lcl_chi/param.js"></script> 
+<script>var tmp="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18140";</script> 
+<script src="/opac_lcl_chi/CHI.js"></script> 
+<script src="/opac_lcl_chi/exlchi.js"></script> 
+<script> 
+var icon_path="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/"; 
+function dispfmt(fmt){ 
+   if(fmtmap[fmt]){fmt=fmtmap[fmt];} 
+   if(fmt.match(/</)){fmt="XX";} 
+   document.write("<img src="+icon_path+"icon"+fmt+".gif> "+fmt); 
+} 
+document.onclick = function() {if(g('sug'))g('sug').style.display='none';} 
+</script> 
+<title>中文图书 - 多库检索</title> 
+</head> 
+<body topmargin="0" 
+      onload=window.document.form1.request.focus()> 
+<!-- filename: head-1-nobor --> 
+<script language="Javascript"> 
+<!-- 
+  function open_window (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+ 
+  function open_window2 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=100,width=500,scrollbars,resizable" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window3 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=400,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window4 (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+ 
+    var w = window.open ("", 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc, 
+                         "win1", 
+                         "height=150,width=450,scrollbars,resizable,top=200" 
+                         ); 
+    } 
+     w.focus(); 
+  } 
+ 
+ 
+  function open_window_ext (loc) 
+  { 
+    self.name="main"; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+     w.document.write("<html>\n"); 
+
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function set_iframe_location(url,id){ 
+    eval('document.all.' + id).src = url; 
+  } 
+ 
+  function open_window_confirm (loc,frame) 
+  { 
+    self.name=frame; 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+  function delete_win1 () 
+  { 
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable"); 
+    w.close(); 
+  } 
+ 
+  function open_window_ill (loc) 
+  { 
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){ 
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable"); 
+     w.document.write("<html>\n"); 
+     w.document.write('<body onLoad="window.location.href='); 
+     w.document.write("'" + loc + "';\n"); 
+     w.document.write('"'); 
+     w.document.write("</body>\n"); 
+     w.document.write("</html>\n"); 
+     w.document.close(); 
+    } else { 
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable"); 
+    } 
+    w.focus(); 
+  } 
+ 
+// --> 
+</script> 
+ 
+<script language="javascript"> 
+<!-- 
+ function recommend_nobor(the_url){ 
+     var first_split = the_url.split("//"); 
+     var without_resource = first_split[1]; 
+     var second_split = without_resource.split(":"); 
+     var domain = second_split[0]; 
+ 
+     window.open("http://"+domain+":8118/apsm/recommend/recommend_nobor.jsp","_blank"); 
+} 
+//--> 
+</script> 
+<div id=header> 
+      <a href="/cgi-bin/sso_auth.cgi" class="blue" title="输入用户名和密码"> 
+      <!--  <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x1.jpg" align="absmiddle" style="border:0px">登录|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18141?func=find-b-0" title="返回检索首页" class="blue" > 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x2.jpg" align="absmiddle" style="border:0px"> 检索首页|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18142?func=bor-info" title="查看图书馆读者个人信息" class="blue"> 
+      <!--<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x3.jpg" align="absmiddle" style="border:0px">我的图书馆|</a> --> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18143?func=option-show&func_param=DISPLAY-OPTION" class="blue" title="设置信息显示选项"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x4.jpg" align="absmiddle" style="border:0px">参数设置|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18144?func=short" class="blue" title="最近一次检索结果列表"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x5.jpg" align="absmiddle" style="border:0px">结果列表|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18145?func=history" class="blue" title="最近检索历史"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x6.jpg" align="absmiddle" style="border:0px">最近检索|</a> 
+    <!--  <a href="javascript:recommend_nobor('http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18146');"  class="blue" id=head_jg> --> 
+    <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18147?func=bor-info" title="读者荐购"  class="blue" id=head_jg> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x7.jpg" align="absmiddle" style="border:0px">读者荐购|</a><script>if(flag_recm==0)g('head_jg').style.display='none'</script> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18148?func=file&file_name=hotinfo" class="blue" title="热门信息" class="blue" target="_blank"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x8.jpg" align="absmiddle" style="border:0px">热门信息|</a> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18149?func=myshelf-short-lcl" class="blue" title="查看保存在电子书架上的记录"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x9.jpg" align="absmiddle" style="border:0px">电子书架|</a> 
+      <a href="/help_cn/help.htm" class="blue" title="使用该系统的帮助" target="new"> 
+      <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/x10.jpg" align="absmiddle" style="border:0px">帮助|</a> 
+</div> 
+<div id=idxlogo><a href=http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18150?func=find-b-0><img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/opac.jpg"></a></div> 
+<div id=feedbackbar style="display:none;text-align:center"><img src=http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-alert.gif border=0 alt='System Message'>&nbsp;库 WWBOK 不在 tab_base中.</div> 
+<script>if(g('feedbackbar').innerHTML.length>10){g('feedbackbar').style.display='';}</script> 
+<!-- find-include-buttons --> 
+<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0"> 
+ <tr> 
+  <td class="bar" width="20%" align="center" nowrap> 
+    &nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18151?func=find-b-0" 
+         title="基本检索" class="blue"> 
+         基本检索</a> 
+
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18152?func=find-a-0" 
+         title="多字段检索" class="blue"> 
+         多字段检索</a> 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18153?func=file&file_name=find-m" 
+         title="多库检索" class="blue"> 
+         多库检索</a> 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18154?func=find-d-0" 
+         title="高级检索" class="blue"> 
+         高级检索</a> 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18155?func=find-c-0" 
+      title="通用命令语言检索"class="blue"> 
+      通用命令语言检索</a> 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18156?func=cat-list" 
+      title="分类浏览"class="blue"> 
+      分类浏览</a> 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      &nbsp;|&nbsp; 
+  </td> 
+  <td class="bar" align="center" nowrap> 
+      <a href="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18157?func=tag-list" 
+      title="标签浏览"class="blue"> 
+      标签浏览</a> 
+  </td> 
+ 
+  <td class="bar" width="20%" align="center" nowrap> 
+    &nbsp; 
+  </td> 
+ </tr> 
+</table> 
+<br> 
+  <div class=title> 
+    多库检索 
+</div> 
+<form method=get 
+      name=form1 
+      action="http://opac.jslib.org.cn:80/F/RX5GG3MF4TI9LGGMGG2NRP4AAINSA3T7S1JAH9BUP4MTNRM54S-18158"> 
+<input type="hidden" name="func" value="find-m"> 
+<table cellspacing=2 border=0 width="100%"> 
+ <tr> 
+  <td class=td2 nowrap> 
+    输入检索词或词组 
+  </td> 
+  <td class=td2 id="small" colspan=2> 
+    <input size=40 name="request" value="红楼梦"> 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class=td2 width=20% valign=top nowrap>检索字段 
+  </td> 
+  <td class=td2 id="small" colspan=2> 
+<!-- filename: find-code-include-njl01 --> 
+    <select name=find_code> 
+<option value=WRD selected     >全部词</option> 
+<option value=WTI              >题名关键词</option> 
+<option value=TIT              >题名(精确匹配）</option> 
+<option value=WAU              >著者</option> 
+<option value=WSU              >主题词</option> 
+<option value=WPU              >出版者</option> 
+<option value=WPL              >出版地</option> 
+<option value=WSE              >丛编</option> 
+<option value=ISB              >ISBN</option> 
+<option value=ISS              >ISSN</option> 
+<option value=SNV              >国内订购号</option> 
+<option value=UBN              >统一书刊号</option> 
+<option value=CAL              >索书号</option> 
+<option value=CLC              >中图分类号</option> 
+<option value=WOC              >其他分类号</option> 
+<option value=SYS              >系统号</option> 
+</select> 
+ 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class=td2> 
+    词邻近? 
+  </td> 
+  <td class=td2 colspan=2> 
+    <input type="radio" name="adjacent" checked     VALUE="N" checked> 否 
+    <input type="radio" name="adjacent"             VALUE="Y"> 是 
+  </td> 
+ </tr> 
+    <td class=td2 colspan=3>选择数据库: 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class=td2>&nbsp;</td> 
+  <td class=td2 width=40% nowrap> 
+        <input type="checkbox" name=find_base 
+                     value="NJL01" checked         checked > 中文文献库 
+  </td> 
+  <td class=td2 nowrap width=40%> 
+        <input type="checkbox" name=find_base 
+                     value="NJL09"                 checked > 西文文献库 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class=td2>&nbsp;</td> 
+  <td class=td2 nowrap> 
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" name=find_base 
+                     value="CNBOK" checked        > 中文图书库 
+  </td> 
+  <td class=td2 nowrap> 
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" name=find_base 
+                     value="WWBOK" checked        > 西文图书库 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class=td2>&nbsp;</td> 
+  <td class=td2 nowrap> 
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" name=find_base 
+                     value="CNSER" checked        > 中文期刊库 
+  </td> 
+  <td class=td2 nowrap> 
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" name=find_base 
+                     value="WWSER"                > 西文期刊库 
+  </td> 
+ </tr> 
+<tr> 
+  <td class=td2>&nbsp;</td> 
+  <td class=td2 nowrap > 
+        <input type="checkbox" name=find_base 
+                     value="LCL52"                 checked>拟订书目库 
+  </td> 
+  <td class=td2 nowrap > 
+       &nbsp;&nbsp; <input type="checkbox" name=find_base 
+                     value="ZDMLK"                >征订目录库 
+  </td> 
+</tr> 
+<tr> 
+  <td class=td2>&nbsp;</td> 
+  <td class=td2 nowrap > 
+        <input type="checkbox" name=find_base 
+                     value="UCS01F"                  >国图联编中文文献库 
+
+  </td> 
+  <td class=td2 nowrap > 
+        <input type="checkbox" name=find_base 
+                     value="UCS09F"                  >国图联编外文文献库 
+  </td> 
+</tr> 
+ <tr> 
+  <td class=td2 colspan="3" nowrap> 
+        <input type="image" 
+               alt="确定" 
+               src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-go.gif" 
+               border=0> 
+ 
+         <a href="javascript:document.form1.reset();"> 
+           <img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-clear0.gif" border=0 alt="取消"></a> 
+  </td> 
+ </tr> 
+</table> 
+<hr> 
+<!-- filename: find-include-filter --> 
+<table cellspacing=2 border=0 width="100%"> 
+<tr><td class=title valign=top rowspan=3>检索限制: 
+ <tr> 
+  <td class="td2" id="small" width="8%" nowrap valign="top"> 
+      语言: 
+      <input type="hidden" name="filter_code_1" value="WLN"> 
+  </td> 
+  <td class="td2" id="small" valign="top"> 
+      <select name="filter_request_1"> 
+        <option value="">全部</option> 
+        <option value="CHI"              >中文</option> 
+        <option value="JPN"              >日语</option> 
+        <option value="ENG"              >英语</option> 
+        <option value="FRE"              >法语</option> 
+        <option value="GER"              >德语</option> 
+        <option value="RUS"              >俄语</option> 
+<!-- 
+        <option value="FRE"              >法语</option> 
+        <option value="GER"              >德语</option> 
+        <option value="RUS"              >俄语</option> 
+        <option value="JPN"              >日语</option> 
+        <option value="KOR"              >朝鲜语</option> 
+        <option value="ITA"              >意大利语</option> 
+        <option value="SPA"              >西班牙语</option> 
+        <option value="POR"              >葡萄牙语</option> 
+        <option value="ALA"              >阿拉伯语</option> 
+        <option value="HEB"              >希伯来语</option> 
+--> 
+      </select> 
+  </td> 
+  <td class="td2" id="small" width="8%" nowrap valign="top"> 
+      开始年份: 
+      <input type="hidden" name="filter_code_2" value="WYR"> 
+  </td> 
+  <td class="td2" id="small" valign="top"> 
+     <input type=text size=10 name="filter_request_2" value=""> 
+  </td> 
+  <td class="td2" id="small" width="8%" nowrap valign="top"> 
+     结束年份: 
+     <input type="hidden" name="filter_code_3" value="WYR"> 
+  </td> 
+  <td class="td2" id="small" valign="top"> 
+     <input type=text size=10 name="filter_request_3" value=""> 
+           <span>yyyy (当不使用起/止时，使用 ? 作截词)</span> 
+  </td> 
+ </tr> 
+ <tr> 
+  <td class="td2" id="small" valign="top"> 
+      资料类型: 
+      <input type="hidden" name="filter_code_4" value="WFM"> 
+  </td> 
+  <td class="td2" id="small" valign="top"> 
+      <select name="filter_request_4"> 
+        <option value="">全部</option> 
+        <option value="BK"             >图书</option> 
+        <option value="SE"             >报刊</option> 
+        <option value="AB"             >古籍</option> 
+        <option value="OT"             >音像资料</option> 
+        <option value="MU"             >乐谱</option> 
+        <option value="MP"             >地图</option> 
+        <option value="ER"             >电子资源</option> 
+      </select> 
+  </td> 
+  <td class="td2" id="small" valign="top"> 
+       分馆 
+       <input type="hidden" name="filter_code_5" value="WSL"> 
+  </td> 
+  <td class="td2" id="small" valign="top" colspan=3> 
+      <select name="filter_request_5"> 
+<!-- filename: sub-library-select --> 
+<option value="" ></option><option value=NJL50                > 南京图书馆管理库</option> 
+<option value=ZTSCF                > 虚拟中文图书采访</option> 
+<option value=ZQKCF                > 虚拟中文期刊采访</option> 
+<option value=ZWBCF                > 虚拟外文图书采访</option> 
+<option value=ZWSCF                > 虚拟外文期刊采访</option> 
+<option value=ZSTCF                > 虚拟中文多媒体采访</option> 
+<option value=ZWSCF                > 虚拟外文多媒体采访</option> 
+<option value=MSTBK                > 虚拟读服部典藏书库</option> 
+<option value=MBKDB                > 中文图书调配中心</option> 
+<option value=MSEDB                > 中文期刊调配中心</option> 
+<option value=MCTBY                > 典藏书库(保存本)</option> 
+<option value=MCBKL                > 中文图书借阅</option> 
+<option value=MFBKL                > 外文图书借阅</option> 
+<option value=MCSEL                > 中文期刊借阅</option> 
+<option value=MCGPL                > 外借随书光盘</option> 
+<option value=MCBKR                > 中文图书阅览</option> 
+<option value=MCSER                > 中文期刊阅览</option> 
+<option value=MREFE                > 中外文工具书阅览</option> 
+<option value=MFSER                > 外文期刊阅览</option> 
+<option value=MSEAR                > 文献检索</option> 
+<option value=MARTC                > 艺术图像资料中心</option> 
+
+<option value=MAZRR                > 专题文献阅览室</option> 
+<option value=MALOR                > 地方文献阅览室</option> 
+<option value=MAMGR                > 民国文献阅览室</option> 
+<option value=MGATR                > 港澳台文献阅览</option> 
+<option value=MGERM                > 德语资料区</option> 
+<option value=MKIDS                > 少儿书刊借阅</option> 
+<option value=MNEWS                > 报纸阅览</option> 
+<option value=MBLIR                > 视障人借阅</option> 
+<option value=MJSZJ                > 江苏作家作品馆</option> 
+<option value=MELEC                > 电子阅览室</option> 
+<option value=MSTWX                > 视听文献</option> 
+<option value=MSSRR                > 专家阅览室</option> 
+<option value=MANCI                > 历史文献书库</option> 
+<option value=MANRR                > 古籍阅览室</option> 
+<option value=MAEFE                > 历史文献工具书</option> 
+<option value=MFBKS                > 外文书典藏书库</option> 
+<option value=MFSES                > 外文刊典藏书库</option> 
+<option value=MSTSE                > 读服部典藏报刊库</option> 
+<option value=MSTBY                > 读服部典藏备用库</option> 
+<option value=MNTLD                > 南京图书馆流通服务点</option> 
+<option value=MCBKB                > 中文图书老馆闭架库</option> 
+<option value=MCSEB                > 中文期刊老馆闭架库</option> 
+<option value=ZBDGC                > 中文不定馆藏</option> 
+<option value=GBDGC                > 古籍不定馆藏</option> 
+<option value=ZYWYS                > 业务用书</option> 
+<option value=ZDHTS                > 待核图书</option> 
+<option value=MCBBY                > 中文图书外借备用库</option> 
+      </select> 
+  </td> 
+ </tr> 
+</table> 
+</form> 
+<hr> 
+<span class="text3"> 
+检索提示: 
+</span> 
+<p class="text1"> 
+<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-separator.gif" border="0" alt="Hint"> 
+如果选择"词邻近"，那么，当您输入词组 
+<em>computer programming</em> 系统将理解为您只检索 <em>computer</em>后紧接着 
+<em>programming</em>的记录。当记录超过xxx项时“词邻近”检索将不再提供服务。 
+<br><br> 
+<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-separator.gif" border="0" alt="Hint"> 
+系统不区分西文检索词的大、小写。例如，输入 
+ <em>computer</em> 将匹配出 <em>computer</em>, <em>Computer</em> 
+和<em>COMPUTER</em>. 
+<br><br> 
+<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-separator.gif" border="0" alt="Hint"> 
+您可以在检索式里使用AND和OR进行布尔逻辑运算。例如， 输入检索式<em>(heart OR cardiac) AND surgery</em> 
+将检索到包含<em>heart</em> 或者 <em>cardiac</em>并且 含有 <em>surgery</em> 的所有记录。 
+<br><br> 
+<img src="http://opac.jslib.org.cn:80/exlibris/aleph/u20_1/alephe/www_f_chi/icon/f-separator.gif" border="0" alt="Hint"> 
+可以使用字符 <em>?</em> 做为检索词的一部分进行匹配 。  例如，<em>gun?</em> 将检索到 <em>gun, guns, gunners, 
+gunnery, gunning,</em> 等。 再例如， <em>?&nbsp;ology</em> 将检索到 
+<em>anthropology, archaeology, psychology</em> 等。 <em>?</em> 号字符还用于检索不同的拼写方式。例如，<em>alumi?m</em> 
+将找到美国拼写方式的<em>aluminum,</em> 和英国拼写方式的<em>aluminium</em> 。 
+</p> 
+<!-- filename: copyrights --> 
+<p id=copyright class="copyright"> 
+<a href=# onclick="return shiftlng('xng')">English Version</a><br> 
+&copy; Ex Libris China  2010 
+</p> 
+<script>if(self.location!=parent.location&&g('cclterm')){g('cclterm').value='';if(g('find_code'))g('find_code').options[0].selected=true;} 
+</script> 
+</body> 
+</html> 
+ 
+
+ 
