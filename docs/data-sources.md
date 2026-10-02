@@ -29,7 +29,7 @@
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
 |  | 无锡（新吴区） | — | ⛔ 不通 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home | 图星 LibStar Find v3.2023.12（北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题） |
 | 辽宁省 | 大连 | `dalian` | ⚠️ 部分接入 | 超星入口 http://www.dl.superlib.net/ （搁置）；**在用入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录） | SirsiDynix iLink（`/uhtbin/cgisirsi/`，本仓库首见新家族，与成都不同家族不共享模块）；原超星入口 IP 白名单硬墙 | `adapters/dalian.py`（独立实现；ps token＋会话 cookie 每请求变、全程同 cookie jar，类重庆会话流程；节流 ≥4 秒/host）。⚠ 2026-10-02 实网验收：检索正常（空关键词对照=0 条）、**详情链路失败**（干净题名书目亦复现，疑 session/定位问题，待修） |
-| 山东省 | 青岛 | — | ⛔ 不通 | http://124.129.202.157/opac/index | 图创 Interlib（站点自报「青岛市公共图书馆联合目录」，26 馆联合，主馆馆码 QT） | 🔜 搁置：检索入口 `/opac/search` 被滑动验证码常态拦截（slideVerify，新会话首请求即触发，非限速型）；详情 `/opac/book/{id}` 与馆藏 `/opac/api/holding/{id}` 开放且家族 parser 零改动兼容，检索通道若可用即可快速接入 |
+| 山东省 | 青岛 | `qingdao` | ✅ 接入 | http://124.129.202.157/opac/index | 图创 Interlib（站点自报「青岛市公共图书馆联合目录」，26 馆联合含区级馆与城市书房，主馆馆码 QT） | `interlib/` 家族 ＋ `adapters/qingdao.py`（检索走站点内嵌 Solr 后端 `/opac/api/search`，`wt=json`＋`q`/`rows`/`page`，主站 HTML 检索页 `/opac/search` 仍被滑动验证码常态拦截；自带 ≥2 秒节流）；数据边界：Solr 默认只回有馆藏的书目、逐书目可借概况为空串 |
 | 四川省 | 成都 | `chengdu` | ✅ 接入 | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族 ＋ `adapters/chengdu.py`（`pro2018=True` 启用家族 pro2018 解析；自带 ≥2 秒节流） |
 | 浙江省 | 杭州 | `hangzhou` | ✅ 接入 | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/hangzhou.py`（双源合并，杭图 `HZ:`） |
 |  |  |  | ✅ 接入 | https://www.zjlib.cn/ （浙江图书馆，BFF 网关 `/bff-api/`） | 自研微服务（已确认；Nuxt 3＋Java/Spring＋ES，纯 JSON、无需鉴权；省级馆，6 馆区） | `adapters/_zjlib.py`（浙图 `ZJ:`，天津模式并入 `hangzhou`） |
@@ -71,9 +71,7 @@
 | 绍兴 | `pro2018=True`＋`pro2018_cite_author=True` | 搜索：结果容器 `<ul class="libBookUl"><li class="libBookLi">`；稳定 ID 取题名锚点 `bookDetail(<recno>,…)` 调用；`has_next` 仍可靠「下一页」锚点。详情：字段为「标签：值」行（`ISBN：/出版发行：/中图分类法：`等）。馆藏：单书 `GET /opac/api/holding/{recno}`；联合层书目（无本地单册）单书 GET 与批量 `POST /opac/api/holding/getHoldingsBybookrecnos` 均为空——属数据边界，检索页「在馆」计数即走该批量 POST。`tests/fixtures/shaoxing/NOTES.md`。 |
 | 合肥（皖图 `AH:` ＋ 市图 `HF:`） | 默认，另按 `_Source.ctx` 拼路径自建单源三原语（复用家族 client/parser） | 两源与穗杭完全同模板，唯一结构差异：**HF 应用上下文是 `/lib2` 非 `/opac`**（`/opac/*` 返回 nginx 500）；`InterlibConfig.ctx` 家族化提案未合入。tagTr 缺陷由合肥 AH 布局第三路独立实证，回归钉子 `test_ah_detail_author_not_clobbered_by_tag_row`。双源合并见「一城多源合并」。`tests/fixtures/hefei/NOTES.md`。 |
 | 中新友好（生态城，天津第三源） | `curlibcode=STC001` | 检索与详情必须带 `curlibcode`（缺详情参数直接 HTTP 500），馆藏 JSON 不需要；ISBN 在 `expressServiceTab` 兄弟节点上，家族 parser 以 `express_bookrecno` 后挂；`search_raw` 暴露内部 isbn 字段供归并（契约 `BookSummary` 不含 isbn）。 |
-
-同家族但未接入：青岛（站点自报「青岛市公共图书馆联合目录」，检索入口被滑动验证码常态拦截）——
-状态与依据见总览表。
+| 青岛 | 默认，**检索通道在适配器内改走站点内嵌 Solr** | 主站 HTML 检索页 `/opac/search` 被滑动验证码常态拦截（`slideVerify`，新会话首个检索请求即触发，非限速型；验证结果只落在当次浏览器会话），而站点内嵌的 Solr 后端 `GET /opac/api/search` 开放——检索原语改走该通道（`wt=json`，`q`＋`rows`＋`page`；服务端凭 `page` 自算 `start`，直传 `start` 被忽略），是本城相对广州基准的唯一结构差异。`docs[].id` 即 `bookrecno`，可直接用于详情与馆藏端点；详情无需 `curlibcode`，`/opac/book/{id}` 与 `/opac/api/holding/{id}` 与广州基准完全同构，家族 parser 零改动全字段解析。数据边界：服务端默认 `fq` 是硬编码状态白名单＋定位集合，自行追加 `fq` 会被整体覆盖，故结果默认只含有馆藏书目、`hasholding` 恒为 `y`（`availability_summary` 恒空串）；带连字符 ISBN 命中不了（同广州 marc），首搜为空时去连字符重试；自带 ≥2 秒节流。`tests/fixtures/qingdao/NOTES.md`。 |
 
 新接同族城市：`adapters/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 

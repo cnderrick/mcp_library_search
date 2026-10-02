@@ -14,6 +14,7 @@ from . import jiangyin
 from . import jinhua
 from . import nanjing
 from . import ningbo
+from . import qingdao
 from . import shanghai
 from . import shaoxing
 from . import shenzhen
@@ -32,6 +33,7 @@ _ADAPTERS = {
     "jinhua": jinhua,
     "nanjing": nanjing,
     "ningbo": ningbo,
+    "qingdao": qingdao,
     "shanghai": shanghai,
     "shaoxing": shaoxing,
     "shenzhen": shenzhen,
