@@ -129,6 +129,15 @@ _ENTRY = re.compile(
 )
 _TOTAL_PAGE = re.compile(r'id="totalPage"\s+value="(\d+)"')
 _RESULT_TITLE = "opac检索结果页"
+_DETAIL_TITLE = "书目详细页面"
+
+
+def _split_book_id(book_id):
+    """book_id 形如 "{metatable}:{metaid}"，拆成成对参数。同深圳口径。"""
+    table, _, rid = str(book_id).partition(":")
+    if not table or not rid:
+        raise RuntimeError(f"重庆图书馆：book_id 格式应为 metatable:metaid：{book_id}")
+    return table, rid
 
 
 def _is_result_page(text):
@@ -150,6 +159,41 @@ def _parse_search(text):
     ]
     m = _TOTAL_PAGE.search(text)
     return {"books": books, "total_pages": int(m.group(1)) if m else 1}
+
+
+def _field(pattern, text):
+    m = re.search(pattern, text, re.S)
+    return _clean(m.group(1)) if m else ""
+
+
+def _parse_detail(text):
+    """书目详细页面 → 书目字段 dict。详情页无索书号字段，call_number 恒为空串。"""
+    pub_raw = _field(r"<span>出版社:</span><a[^>]*>(.*?)</a>", text)
+    return {
+        "title": _field(r"<h4>(.*?)</h4>", text),
+        "author": _field(r"<span>著者:</span><a[^>]*>(.*?)</a>", text),
+        "publisher": _clean_publisher(pub_raw),
+        "publish_year": _year(pub_raw),
+        "isbn": _field(r"<span>ISBN/ISSN:</span><em>(.*?)</em>", text),
+        "call_number": "",
+        "summary": _field(r'<div id="tipbox"[^>]*>(.*?)</div>', text),
+    }
+
+
+# 馆藏信息 tab 的分馆名列表；单册状态源站不公开（GetAsset 匿名被登录拦截，见 NOTES.md）
+_HOLDING_BLOCK = re.compile(r"<!--馆藏信息开始-->(.*?)<!--馆藏信息结束-->", re.S)
+_LIBRARY = re.compile(r'class="first"[^>]*>(.*?)</a>', re.S)
+
+
+def _parse_holdings(text):
+    """书目详细页面 → 分馆级馆藏列表。无单册状态原值，一律保守 available=False。"""
+    m = _HOLDING_BLOCK.search(text)
+    if not m:
+        return []
+    return [
+        _Holding(library=_clean(name), available=False)
+        for name in _LIBRARY.findall(m.group(1))
+    ]
 
 
 class _Client:
@@ -207,6 +251,40 @@ class _Client:
             books=r["books"],
         )
 
+    def _fetch_detail(self, table, metaid):
+        _ensure_session()
+        url = (f"{_BASE}/InDigLib/frontV2/BookDetail.action"
+               f"?metaid={metaid}&metatable={table}")
+        text = _open(urllib.request.Request(url, headers=_HEADERS))
+        if _DETAIL_TITLE not in text:
+            # 会话失效：响应退回检索首页 → 重建会话重试一次
+            _reset_session()
+            _ensure_session()
+            text = _open(urllib.request.Request(url, headers=_HEADERS))
+            if _DETAIL_TITLE not in text:
+                raise RuntimeError("重庆图书馆：详情页获取失败（重复失败，可能会话无法建立）")
+        return text
+
+    def get_holdings(self, book_id):
+        table, rid = _split_book_id(book_id)
+        return _parse_holdings(self._fetch_detail(table, rid))
+
+    def get_book_detail(self, book_id):
+        table, rid = _split_book_id(book_id)
+        d = _parse_detail(self._fetch_detail(table, rid))
+        if not d["title"]:
+            raise RuntimeError(f"重庆图书馆：未找到该书详情：{book_id}")
+        return _Book(
+            record_id=book_id,
+            title=d["title"],
+            author=d["author"],
+            publisher=d["publisher"],
+            publish_year=d["publish_year"],
+            isbn=d["isbn"],
+            call_number=d["call_number"],
+            summary=d["summary"],
+        )
+
 
 _client = _Client()
 
@@ -235,4 +313,42 @@ def search_books(keyword: str, page: int = 1, limit: int = 20) -> SearchPage:
         "total_pages": stats.get("total_pages", 1),
         "has_next": stats.get("has_next", False),
         "books": books,
+    }
+
+
+def get_holdings(book_id: str, only_available: bool = True) -> list[Holding]:
+    """指定图书在哪些分馆有馆藏。源站不公开单册状态，全部保守按不可借展示。"""
+    holdings = _client.get_holdings(book_id) or []
+    kept = [h for h in holdings if (not only_available or h.is_available())]
+    items: list[Holding] = []
+    for h in kept:
+        available = h.is_available()
+        item: Holding = {
+            "library": h.library,
+            "location": h.location,
+            "call_number": h.call_number,
+            "status": h.status,
+            "available": available,
+            "due_date": getattr(h, "due_date", "") or "",
+        }
+        # 契约测试要求已借出且带单册 item_id 时查归还时间；重庆单册无 item_id，真网路径不会触发
+        if not available and getattr(h, "item_id", ""):
+            item["due_date"] = _client.get_return_date(h.item_id)
+        items.append(item)
+    items.sort(key=lambda h: (not h["available"], h["library"]))
+    return items
+
+
+def get_book_detail(book_id: str) -> BookDetail:
+    """指定图书的完整详情：书名、作者、出版社、出版年、ISBN、索书号、内容简介。"""
+    b = _client.get_book_detail(book_id)
+    return {
+        "book_id": book_id,
+        "title": b.title,
+        "author": b.author,
+        "publisher": b.publisher,
+        "publish_year": b.publish_year,
+        "isbn": b.isbn,
+        "call_number": b.call_number,
+        "summary": b.summary,
     }

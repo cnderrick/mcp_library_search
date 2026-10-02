@@ -56,6 +56,13 @@ simpleSearch（实抓验证：opacSearch 不接受这些参数）。
 
 ## 其它
 
+- 详情页**无索书号字段**（检索条目里有，如 I247.59/2376，详情页不显示），
+  `get_book_detail` 的 call_number 恒为空串。
+- POST 检索是否接受 `pageSize` 参数未实测（实抓只带 select1/text1，默认每页 20 条）；
+  Task 5 真网验证点：limit≠20 时条目数是否随之变化，被忽略则退回 20。
+- 翻页 GET 整串参数（pageNo/select1/text1/pageSize/lastSearchValue 等）取自结果页
+  分页链接原样，pageNo=2 的 GET 实抓未成功（当时按错误参数 page 抓的），Task 5 一并验证。
+
 - 未发现验证码机制（当天十余次请求未触发），限速仍按 spec 保守 3 秒。
 - `front/opac/Search!search.action`（云检索，opacType=cloud 分支）实测 200 但结果页
   无状态字段，不值得切换。
