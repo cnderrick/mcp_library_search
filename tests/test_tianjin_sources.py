@@ -95,15 +95,28 @@ def test_get_book_detail_first_member_wins(monkeypatch):
 
     def spy(req, timeout=20):
         urls.append(req.full_url)
-        return _load("detail_tjl01.html")
+        return _load("detail_tjl01_sys.html")
 
     monkeypatch.setattr(tianjin, "_open", spy)
-    d = tianjin._Client().get_book_detail("ZXYH:217795+TJL01:002892667")
+    d = tianjin._Client().get_book_detail("ZXYH:217795+TJL01:000856840")
     # 复合 id 取优先级最高成员（TJL01），record_id 保留查询原样
     assert len(urls) == 1
-    assert "func=full-set-set" in urls[0] and "doc_number=002892667" in urls[0]
-    assert d.record_id == "ZXYH:217795+TJL01:002892667"
-    assert "宇宙是巧合吗" in d.title
+    assert "find_code=SYS" in urls[0] and "request=000856840" in urls[0]
+    assert d.record_id == "ZXYH:217795+TJL01:000856840"
+    assert d.title == "三体" and d.author == "刘慈欣"
+
+
+def test_get_book_detail_sys_live_shape(monkeypatch):
+    # 真网 SYS 单命中直出完整记录页（detail_tjl01_sys.html 为实抓样本）
+    monkeypatch.setattr(tianjin, "_open",
+                        lambda req, timeout=20: _load("detail_tjl01_sys.html"))
+    d = tianjin._Client().get_book_detail("TJL01:000856840")
+    assert d.title == "三体"
+    assert d.isbn == "978-7-5366-9293-0"
+    assert d.call_number == "I247.55/235"
+    assert d.publisher == "重庆出版社"
+    # IMPRINT 原值无年份 → publish_year 空串，如实
+    assert d.publish_year == ""
 
 
 def test_get_book_detail_zxyh_routes_family(monkeypatch):

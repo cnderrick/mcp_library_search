@@ -135,7 +135,29 @@ find-b 表单的分馆下拉原值含：天津图书馆（复康路/海河园/�
 - get_holdings：首成员（目标源）失败报错（ALEPH 错误带馆名前缀），附属源失败
   跳过返回已查到部分；聚合序＝可借在前、馆名升序。
 - get_book_detail：复合 id 取优先级最高成员，record_id 保留查询原样；
-  ALEPH 详情走无会话直连 `F?func=full-set-set&doc_library=…&doc_number=…&format=999`
-  （页内 full-set-set 链接是 set_number 会话形态，直连形态待真网验证）。
+  ALEPH 详情走 **SYS 系统号检索**（`F?func=find-b&request={doc_number}&find_code=SYS`，
+  单命中直出完整记录页，无会话可用，真网实测 73893 字节样本 detail_tjl01_sys.html）；
+  无会话直连 `F?func=full-set-set&doc_library=…&doc_number=…&format=999` **不可用**
+  （响应无书目字段），页内 full-set-set 链接是 set_number 会话形态。
 - 天津馆藏不带 item_id：模块级 get_holdings 的归还日期补查分支真网永不触发
   （ALEPH 应还日期在单册页直取，ZXYH 在馆藏 JSON loanWorkMap）。
+
+## 真网验证记录（2026-10-02，解封后共约 10 个 ALEPH 请求，间隔 ≥6 秒）
+
+- `search_books("三体")`：total_results=213（TJL01 156 + TJC01 32 + ZXYH 25 三源合计，
+  ZXYH 本次给出了「检索到 25 条」——总数并非恒为 None，取决于检索词；两种形态代码均兼容）；
+  35 条＝TJL01 10 + TJC01 5 + ZXYH 20。TJC01 页内 10 条 brief 因同 ISBN 多卷集
+  源内去重只剩 5 条（如 978-7-5133-5380-9 重复 4 次）——归并口径的已接受取舍。
+- brief 条目「作者：」列真网原值即空（`<td class=content><BR>`），检索结果 author=""
+  如实；作者信息在详情/ISB 单命中完整记录页才有。
+- `search_books("9787536692930")`：三源各 1 条命中，归并成复合 id
+  `TJL01:000856840+TJC01:000178012+ZXYH:217795`，total_results=3，
+  字段取主馆完整记录页原值（三体/刘慈欣/重庆出版社；IMPRINT 无年份 → publish_year=""）。
+- `get_holdings(复合 id)`：52 条跨三源聚合（TJL01 全市通借网络约 47 条，含 16 区馆；
+  TJC01「天津少儿馆通借通还E」4 条；ZXYH 1 条），可借在前、馆名升序。
+  已借出行应还日期列＝日期（如 2026-10-23），归一化成功——借出行推定结构获真网证实。
+  词表外状态：分配中/编目中/物流中（两列同值，status 拼接已去重），保守不可借。
+- `get_book_detail(复合 id)`：取 TJL01 成员走 SYS 检索，三体/刘慈欣/重庆出版社/
+  I247.55/235/978-7-5366-9293-0，year 与 summary 空（页面无该数据，原值如实）。
+- 验证期间 IP 曾再次 401 封禁（用户浏览器手动解封后继续）；`_open` 已把 HTTP 401
+  映射为带「手动解封」指引的 _CaptchaError，穿透源级容错直达调用方。

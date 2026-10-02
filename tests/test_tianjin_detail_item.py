@@ -72,3 +72,17 @@ def test_parse_item_unknown_due_word_conservative():
     assert len(hs) == 1
     assert hs[0].is_available() is False
     assert "整理中" in hs[0].status
+
+
+def test_parse_item_same_value_columns_deduped():
+    # 真网实测：两列同值（分配中/编目中/物流中）→ status 只留一份，保守不可借
+    row = (
+        "<tr><!--Loan status--><td class=td1>分配中</td>"
+        "<!--Due date--><td class=td1>分配中</td>"
+        "<!--Sub-library--><td class=td1>宁河区图书馆图书借阅</td>"
+        "<!--Location--><td class=td1>I247.55 19</td></tr>"
+    )
+    hs = tianjin._parse_item_global(row)
+    assert hs[0].status == "分配中"
+    assert hs[0].is_available() is False
+    assert hs[0].due_date == ""

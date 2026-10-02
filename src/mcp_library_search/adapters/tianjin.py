@@ -306,7 +306,8 @@ def _parse_item_global(text):
         if date:
             status, due_date, available = loan, date, False
         else:
-            status = " ".join(x for x in (loan, due) if x)
+            # 两列同值（真网实测：分配中/编目中/物流中）拼接会重复，去重不丢原值
+            status = " ".join(dict.fromkeys(x for x in (loan, due) if x))
             due_date = ""
             available = any(w in due for w in _AVAIL_WORDS)
         holdings.append(_Holding(
@@ -464,7 +465,11 @@ class _Client:
             raise RuntimeError(f"{_SOURCES[source]['name']}馆藏查询失败：{e}") from e
 
     def get_book_detail(self, book_id):
-        """复合 id 取优先级最高成员的详情；record_id 保留查询原样。目标源失败如实报错。"""
+        """复合 id 取优先级最高成员的详情；record_id 保留查询原样。目标源失败如实报错。
+
+        ALEPH 详情走 SYS 系统号检索（单命中直出完整记录页，可无会话）；
+        页内 full-set-set 链接是 set_number 会话形态，直连不可用（真网实测）。
+        """
         source, rid = _split_book_id(book_id)[0]
         if source == "ZXYH":
             d = il_detail(_ZXYH, rid)
@@ -472,8 +477,8 @@ class _Client:
                          publisher=d["publisher"], publish_year=d["publish_year"],
                          isbn=d["isbn"], call_number=d["call_number"],
                          summary=d["summary"])
-        url = (f"{_SOURCES[source]['host']}/F?func=full-set-set"
-               f"&doc_library={source}&doc_number={rid}&format=999")
+        url = (f"{_SOURCES[source]['host']}/F?func=find-b&request={rid}"
+               f"&find_code=SYS&local_base={source}")
         try:
             text = _open(urllib.request.Request(url, headers=_HEADERS))
         except _CaptchaError:
