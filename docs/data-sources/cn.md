@@ -75,7 +75,7 @@
 |  | 常州 | — | ⛔ 不通 | http://www.czlib.net （常州市图书馆） | — | 2026-10-03 实测域名解析到 198.20.x.x 域名停放段、TCP 空响应，非馆方站点；近似域名 czlib.cn＝潮州市图书馆，亦非本市，未找到可用检索入口 |
 |  | 南通 | — | ⛔ 不通 | https://www.ntlib.org.cn （南通市图书馆） | — | 2026-10-03 实测 `www.ntlib.org.cn`（58.221.24.12）TLS 握手直接 EOF，裸 `ntlib.org.cn` 302 指回 www 形成循环；原登记 `www.ntlib.net` 落在 198.20.x.x 域名停放段，均无可用检索入口 |
 |  | 连云港 | — | 🔍 待核验 | https://4366ha.mh.chaoxing.com/entry/page/ck/peking_library （连云港市图书馆，超星智慧门户） | 超星智慧门户（wisweb／chaoxing 系） | 用户所给入口 `…/entry/global/offline` 实测显示「系统升级中」；门户页本身 HTTP 200，底层书目检索入口未侦察 |
-|  | 淮安 | — | 📋 计划 | https://findhastsg.pub.chaoxing.com （淮安市图书馆，含少儿馆、清江浦区馆） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `adapters/cn/wuxi.py` 协议可复用；`groupCode=100382`。检索须带 `groupcode` 头；待立项 |
+|  | 淮安 | `huaian` | ✅ 接入 | https://findhastsg.pub.chaoxing.com （淮安市图书馆，含少儿馆、清江浦区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `libstar/` 家族 + `adapters/cn/huaian.py`；`groupCode=100382`。检索须带 `Referer`＋`groupcode` 头；实抓「三体」3110 条 |
 |  | 盐城 | — | 📋 计划 | https://findyctsg.libsp.com （盐城市图书馆） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `adapters/cn/wuxi.py` 协议可复用；`groupCode=100026`。检索须带 `groupcode` 头；待立项 |
 |  | 镇江 | — | ⛔ 不通 | http://www.zjlib.net （镇江市图书馆） | — | — |
 |  | 泰州 | — | ⛔ 不通 | http://www.tzlib.com （泰州市图书馆） | — | 2026-10-03 实测域名解析到 198.20.x.x 域名停放段、TCP 空响应；原登记 www.tzlib.net 实为「滕州图书馆」（山东），tzlib.cn 实为「台州市图书馆」（浙江），均非本市，未找到可用检索入口 |
@@ -666,18 +666,18 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 家族模块 `libstar/`：`client.py`（HTTP 层＋`Referer`/`groupcode` 必需头＋节流）、
 `parser.py`（检索/详情/馆藏解析）、`__init__.py`（单实例三原语与 `LibStarConfig`）。
 成员：无锡市新吴区图书馆（`adapters/cn/wuxi.py`，单实例＋多源预留）、徐州
-（`adapters/cn/xuzhou.py`）。城市差异只允许以 `LibStarConfig` 带默认值的字段新增。
+（`adapters/cn/xuzhou.py`）、淮安（`adapters/cn/huaian.py`）。城市差异只允许以
+`LibStarConfig` 带默认值的字段新增。
 技术组件是图星 LibStar Find v3.2023.12（北京图星/超星集团），与图创 Interlib 是
 两家厂商，不共用代码；家族 client 节流 1 秒/host。
 
 **其余同款站点（2026-10-03 侦察，待接入）**：盐城 `https://findyctsg.libsp.com`
-（`groupCode=100026`）、淮安 `https://findhastsg.pub.chaoxing.com`（`groupCode=100382`，
-另有淮安市少儿馆与清江浦区等分馆）。与无锡新吴、徐州**同协议、同字段**（`POST
+（`groupCode=100026`）。与无锡新吴、徐州、淮安**同协议、同字段**（`POST
 /find/unify/search` 固定请求体；结果 `recordId/title/author/publisher/publishYear/
 isbn/physicalCount/onShelfCountI` 逐项同形；同样必须带 `groupcode` 头，缺则静默
 0 结果），接入只需在家族加配置与薄适配器。租户号可由 `POST /find/homePage/
 getGroupCode {mappingPath}` 查得（`data.groupCode`）。已调通实测：「三体」盐城
-857 条、淮安 3110 条（徐州 407 条已接入）。
+857 条（无锡 407、徐州 407、淮安 3110 均已接入）。
 
 > **`*.libsp.com` 是通配停放域**：`find<城>*.libsp.com` 之类任意子域都解析到
 > 198.20.x.x 停放页（回「新一代图书馆服务平台」），凭域名猜测判断可达性会误判——
@@ -721,8 +721,13 @@ getGroupCode {mappingPath}` 查得（`data.groupCode`）。已调通实测：「
   主馆无单册、仅鼓楼黄楼分馆 1 册）；状态词表多一态 `本馆归还: 正在上架`（保守判
   不可借）。详情接口 `errCode` 恒 `9000124`（`success:true`）是源站固定返回码，非
   错误。侦察结论见 `tests/fixtures/xuzhou/NOTES.md`。
+- **淮安（`huaian`）差异（均无需新 quirk）**：单实例、无多源归并；域名是
+  `*.chaoxing.com` 而非 `*.libsp.com`（同为图星系统，接入不受影响）；主馆分组可为空
+  （实抓 733596 主馆无单册、清江浦区馆 2 册均借出，且索引 `可借2` 与馆藏端点不一致，
+  两口径各自如实呈现）；状态词表同无锡（`在架`/`借出-应还日期:*`）。侦察结论见
+  `tests/fixtures/huaian/NOTES.md`。
 - 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/wuxi/NOTES.md`、
-  `tests/fixtures/xuzhou/NOTES.md`。
+  `tests/fixtures/xuzhou/NOTES.md`、`tests/fixtures/huaian/NOTES.md`。
 
 ## 超星智慧门户（宿迁、连云港）
 

@@ -10,6 +10,7 @@ from . import dalian
 from . import guangzhou
 from . import hangzhou
 from . import hefei
+from . import huaian
 from . import jiangyin
 from . import jinhua
 from . import nanjing
@@ -35,6 +36,7 @@ ADAPTERS = {
     "guangzhou": guangzhou,
     "hangzhou": hangzhou,
     "hefei": hefei,
+    "huaian": huaian,
     "jiangyin": jiangyin,
     "jinhua": jinhua,
     "nanjing": nanjing,
