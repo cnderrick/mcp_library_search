@@ -2,6 +2,8 @@
 
 各城市图书馆的线上入口、系统技术组件与接入要点。**新增城市先在总览表登记一行**，实现细节追加到对应小节。
 
+> 引用约定：本文与 `tests/fixtures/*/NOTES.md` 中出现的 `docs/team/research/*.md` 调研笔记为**本地存档**（`.git/info/exclude` 排除，不随仓库分发）；各笔记的关键结论均已照实摘录进本文对应条目与 NOTES.md，外部读者无需原文即可理解全部登记依据。
+
 ## 总览
 
 同一省份的城市排在一起，省份列只在该省首行填写（视觉上等同于合并单元格），新增城市时接在本省行之后。
@@ -9,7 +11,8 @@
 | 省份 | 城市 | 标识 | 线上图书馆入口 | 技术组件 | 适配层位置 |
 |---|---|---|---|---|---|
 | 上海市（直辖市） | 上海 | `shanghai` | https://vufind.library.sh.cn | VuFind（上海中心图书馆"一卡通"总分馆体系，900+ 网点） | `vendor/shanghai_library/` + `adapters/shanghai.py` |
-| 北京市（直辖市） | 北京 | — | 待调研 | Ex Libris Primo（初判） | 🔜 搁置：站点 WAF 拦截程序化访问 |
+| 北京市（直辖市） | 北京（首都图书馆） | — | https://primo.clcn.net.cn/ | Ex Libris Primo classic（整域名网宿 WAF：HTTP 200＋33KB JS 验证页，覆盖 80/443/1701 三端口与 `/primo_library/`、`/primaws/rest/`、`/PrimoWebServices/` 三类 API；主站 www.clcn.net.cn 与 bplisn.net.cn 均无独立检索后端，表单全部外链 Primo） | 🔜 搁置：WAF 拦截程序化访问、无替代入口（2026-10-01 初判，2026-10-02 复活调研复测确认无松动，见 `docs/team/research/2026-10-02-beijing-revival.md`） |
+|  | 北京（国家图书馆） | — | http://opac.nlc.cn/F/ | Ex Libris ALEPH 5.20（`Server: ALEPH/5.20`，与天津同款家族；会话 URL `/F/{BASE62_TOKEN}-{FUNC}` 同形态；检索码 NLC01/NLC09；仅 HTTP，HTTPS 不通） | 🔍 待定·有希望：首页首请求 200 可达（37KB 完整 HTML＋会话 token），但同 IP 连续请求触发 empty reply、需冷却 ≥20 秒；本次 find-b 表单页已拿到、find-m 结果页未走通。需立项做 ≥30 秒/请求的冷启动单次全流程稳定性验证，通过则可照天津 ALEPH 经验接入（拟 `NLC:` 前缀；国图属文旅部直属国家级馆，届时标识归 `beijing` 还是独立由用户定）。见 `docs/team/research/2026-10-02-beijing-revival.md` |
 | 天津市（直辖市） | 天津 | `tianjin` | http://opacwh.tjl.tj.cn:8991/F （主馆） | Ex Libris ALEPH 20.1 www_f_chi | `adapters/tianjin.py`（三源合并） |
 |  |  |  | http://opacse.tjl.tj.cn:8991/F （少儿馆） | 同款 ALEPH（独立 host 独立 base） |  |
 |  |  |  | http://sm.interlib.cn:8104 （中新友好） | 图创 Interlib（租户 STC001） |  |
@@ -18,19 +21,19 @@
 |  |  |  | https://opac.hflib.org.cn/lib2/ （合肥市图书馆；用户曾报「暂时无法打开」，2026-10-02 两轮实测均可达，抓取期偶发超时/TLS 重置重试即恢复，与广州偶发同款、非封禁） | 图创 Interlib（已确认，同模板；应用上下文是 `/lib2` 非 `/opac`，`/opac/*` 实测 nginx 500） |  |
 | 广东省 | 广州 | `guangzhou` | https://opac.gzlib.org.cn | 图创 Interlib | `interlib/` 家族 + `adapters/guangzhou.py` |
 |  | 深圳 | `shenzhen` | https://www.szlib.org.cn/opac/ | 图书馆之城自研 JSON API（后端 ILAS，167 馆统一平台） | `adapters/shenzhen.py`（独立实现） |
-| 江苏省 | 南京 | — | https://opac.jslib.org.cn/F/ | Ex Libris ALEPH（初判；外层 openresty 验证码墙） | 🔜 搁置：OPAC 首次访问即触发验证码墙（openresty 在 Nginx 层拦截、未到 ALEPH 应用层；非天津式限速墙，无法节流规避；主站 www.jslib.org.cn 正常 200，仅 OPAC 被拦。2026-10-02 实测 4 请求，见 `docs/team/research/2026-10-02-aleph-nanjing.md`） |
+| 江苏省 | 南京（南京图书馆/江苏省图） | — | https://opac.jslib.org.cn/F/ | Ex Libris ALEPH（外层 openresty 全局验证码墙） | 🔜 搁置：OPAC 首次访问即触发验证码墙（openresty 在 Nginx 层拦截、未到 ALEPH 应用层；非天津式限速墙，无法节流规避；主站正常 200，仅 OPAC 被拦）。2026-10-02 复活调研（7 请求）：主站「全省馆藏书目」指向 `gqcx.jstsg.org.cn/discover`——v0.app 生成的原型站（`demo-1/2/3` 假数据、后端需账户），非生产系统；省级「纸质文献统一检索」无公开入口；微信/移动端无公开 API；已接入 `nanjing`（uopac.jllib.cn，金陵＋12 区馆）**不含南图**。复测条件：gqcx 投产并开放匿名检索，或 OPAC 去墙（建议 2027 年初）。见 `docs/team/research/2026-10-02-aleph-nanjing-revival.md` |
 |  | 南京（金陵图书馆联合目录） | `nanjing` | http://uopac.jllib.cn/uopac/s/search.action （汇文「南京市公共图书馆书目全文检索」，金陵运营，覆盖金陵＋12 区馆） | 汇文 uopac 区域联合 OPAC（Struts2；金陵自研 PHP OPAC `opac.jllib.cn/opac/*` 整体登录墙不可用，勿当入口登记） | `adapters/nanjing.py`（独立实现，单源＝联合目录，原生数字 book_id 不加前缀；南图 ALEPH 将来解锁照天津模式加源合并） |
 |  | 扬州 | — | http://ytlmopac.cn:8080/uopac/s/search.action | 汇文 Libsys/uopac（Struts2，已确认） | 🔜 搁置：站点部署 JS AES 加密 Cookie 反爬（securitycam），所有路径仅返回 2.5KB JS 壳，需浏览器引擎或逆向才能接入（2026-10-02 调研，见 `docs/team/research/2026-10-02-uopac.md`） |
 |  | 江阴 | `jiangyin` | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/jiangyin.py` |
 |  | 无锡（新吴区） | — | http://wxxqlsp.xw.i-wnd.cn:8013/#/home | 图星 LibStar Find v3.2023.12（已确认；北京图星/超星系，300+ JSON API 端点） | 🔜 搁置：所有检索类端点返回 `errCode:9999`「系统访问中断」（下游 OPAC 不可达，服务端问题，2026-10-02 实测）；站点恢复后可再评估，见 `docs/team/research/2026-10-02-spa-nblib-xwnd-zjlib.md` |
-| 辽宁省 | 大连 | — | http://www.dl.superlib.net/ | 超星 Superlib 区域模式（已确认，读秀 SSO 体系） | 🔜 搁置：检索后端 `books.*` IP 白名单硬墙（302「不在ip范围内」，cookie/UA/Referer 均不可绕）＋读秀 SSO 登录墙；机构订阅模式与公开 OPAC 定位不兼容，超星区域模式全国馆大多同款（2026-10-02 调研，见 `docs/team/research/2026-10-02-superlib.md`） |
+| 辽宁省 | 大连 | `dalian`（拟） | 超星入口 http://www.dl.superlib.net/ （搁置）；**替代入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录，官网 www.dl-library.net.cn「馆藏资源」外链） | 超星 Superlib 区域模式（IP 白名单硬墙未变）；替代入口为 **SirsiDynix iLink**（`/uhtbin/cgisirsi/`，本仓库首见的新家族） | ✅ 复活调研成功·待接入拍板：三原语匿名可达——检索 POST 表单（searchdata1+srchfield1，「三体」题名实测 15+ 条）、详情/馆藏 HTML 内联；复杂度：ps token＋会话 cookie 每请求变、必须同 cookie jar（类重庆会话流程），全 HTML 无 JSON；与成都不同家族不能共享模块（2026-10-02 调研，见 `docs/team/research/2026-10-02-superlib-revival.md`） |
 | 山东省 | 青岛 | — | http://124.129.202.157/opac/index | 图创 Interlib（已确认；站点自报「青岛市公共图书馆联合目录」，26 馆联合，主馆馆码 QT） | 🔜 搁置：检索入口 `/opac/search` 被滑动验证码常态拦截（slideVerify，新会话首请求即触发，匿名与带会话均命中，非限速型）；详情 `/opac/book/{id}` 与馆藏 `/opac/api/holding/{id}` 开放且家族 parser 零改动兼容（实抓验证），检索通道若可用即可快速复活（2026-10-02 实测 9 请求，见 `tests/fixtures/qingdao/NOTES.md`） |
-| 四川省 | 成都 | — | https://www.ucdrs.cn/area/cdlib | 超星 UCDRS 联盟门户（已确认，与大连同家族：同一 jsarea.jsp 检索端点、同一 dxwritecookie 流程） | 🔜 搁置：同大连——IP 白名单硬墙＋读秀 SSO 登录墙；另主站 `www.cdclib.org` 被 Cloudflare 403（2026-10-02 调研，见 `docs/team/research/2026-10-02-superlib.md`） |
+| 四川省 | 成都 | `chengdu` | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；调研原话「汇文 Libsys Pro2018」有误——meta keywords 自报「opac, 图创, interlib」、页脚 © interlib.com.cn） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/chengdu.py`（搜索/详情 pro2018 模板解析适配器内本地实现，台州同款路径；自带 ≥2 秒节流） |
 | 浙江省 | 杭州 | `hangzhou` | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/hangzhou.py`（双源合并，杭图 `HZ:`） |
 |  |  |  | https://www.zjlib.cn/ （浙江图书馆，BFF 网关 `/bff-api/`） | 自研微服务（已确认；Nuxt 3＋Java/Spring＋ES，纯 JSON、无需鉴权；省级馆，6 馆区） | `adapters/_zjlib.py`（浙图 `ZJ:`，天津模式并入 `hangzhou`） |
-|  | 宁波 | — | https://opac.nblib.cn/999 | 图创 tcc-opac（已确认；Java/Spring，`/api/tcc-opac/999/…`，与 Interlib 不同产品线） | 🔜 暂缓：访客令牌可取（`getOpenApiAccessToken`→JWT）但 `bookSearch` 返回「系统异常」（站点维护中或参数形态未明，2026-10-02 实测）；待站点恢复再独立实现 `adapters/ningbo.py`，见 `docs/team/research/2026-10-02-spa-nblib-xwnd-zjlib.md` |
+|  | 宁波 | `ningbo` | https://opac.nblib.cn/999 | 图创 tcc-opac（已确认；Java/Spring＋Vue2 SPA，纯 JSON＋JWT 访客令牌，与 Interlib 不同产品线，不可复用家族） | `adapters/ningbo.py`（独立实现；真实检索端点为 `POST /search/` 尾斜杠形态——`bookSearch` 是开放平台端点、参数形态不同且长期「系统异常」，勿混用）；数据边界：聚合条目可能无本地书目（详情空属正常）、馆藏一页 500 册封顶 |
 |  | 温州 | `wenzhou` | https://opac3.wzlib.cn/opac/index | 图创 Interlib（已确认，与广州同模板；站点为温州市图书馆，全市总分馆 91 馆） | `interlib/` 家族 + `adapters/wenzhou.py` |
-|  | 绍兴 | — | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，但为 pro2018 模板代，与穗杭基准不同代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | 🔜 降级待调研：搜索/详情 HTML 与家族 parser 不兼容（实跑 0 条书/详情全空，实证存 `tests/fixtures/shaoxing/`）；单书 holding GET 恒空、联合目录取数条件待查；接入需立项家族 pro2018 解析分支——2026-10-02 用户拍板**暂不立项**（单城收益不动家族共享模块），发现更多 pro2018 城市再评估；同日台州实证 pro2018 解析可放适配器本地实现、不动家族模块（见台州小节），若重启绍兴可照此路径，但需先查清其联合目录 holding 取数。锚点图存档 `tests/fixtures/shaoxing/NOTES.md` |
+|  | 绍兴 | `shaoxing` | https://opac.sxlib.com/opac/index | 图创 Interlib（已确认，pro2018 模板代；「绍兴市公共图书馆联合目录」，主馆绍兴图书馆） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/shaoxing.py`（搜索/详情 pro2018 解析在适配器内本地实现，台州同款路径） |
 |  | 台州 | `taizhou` | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族（HTTP/检索参数/馆藏 JSON 原样复用）＋ `adapters/taizhou.py`（搜索/详情 pro2018 模板解析在适配器内本地实现） |
 |  | 金华 | `jinhua` | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（已确认；ILAS 系 HTML OPAC，Tomcat/JSP，与深圳的自研 JSON API 封装不同，不可复用） | `adapters/jinhua.py`（独立实现，HTML 解析，匿名全链路）；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
 
@@ -58,8 +61,8 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 - 江阴差异：与广州同模板、**零 quirk**（本地自建单租户，不需要 curlibcode）；HTTP 明文 + 9090 端口（base_url=`http://libopac.jylib.cn:9090`）；与杭州一样无「馆藏浏览」锚点；空结果页比杭州更干净（连 `bookDetail(` 函数定义都没有）；馆名两名并存原值照登——页内全称「江阴市图书馆」、libcodeMap[JYLIB] 译名「江阴图书馆」。
 - 温州差异：本地部署，curlibcode 默认空（首页 28 处 curlibcode 是模板 JS 的「限定所在馆」筛选逻辑）；首页 675KB 偏大是 91 馆/2555 地点筛选区全量服务端渲染，三端点与广州基准同构；部分书目有独立「索书号」行（data-sort=130，词表外不参与解析，call_number 维持取「中图分类法」，完整索书号以馆藏 JSON callno 为准）；「主要责任者」「内容提要」行是记录级可选，缺失则 author/summary 空串（数据边界）；主馆馆码 WT（温图市府路馆），纯电子书书目 holdingList 为空属正常。
 - 详情页 tagTr 污染缺陷已修复（2026-10-02，江阴/温州各自独立实证）：「标签」行左格是裸 `<td>` 无 leftTD，其值「没有标签」曾挂到上一个已消费标签名下（污染 author 或 call_number）——穗杭 fixture 恰有「次要责任者」行重置才从未触发，**任何家族城市缺责任者行的记录都会命中**。修复口径：`_finish_value` 标签与值一对一消费（消费即清空 `_label`），钉在 `tests/test_jiangyin_parser.py` 与 `tests/test_wenzhou_compat.py`。
-- 绍兴（`opac.sxlib.com`）确属家族但跑 **pro2018 模板代**，搜索/详情两个解析面与穗杭基准不兼容（`libBookUl`/`bkTxtTit` 结构，家族 parser 实跑 0 条书/详情全空），quirk 字段表达不了，接入需立项 parser 并行分支 + 查清联合目录 holding 取数（单书 GET 恒空，「在馆」计数走批量 POST `getHoldingsBybookrecnos`）——降级待调研，侦察存证与 pro2018 锚点图见 `tests/fixtures/shaoxing/NOTES.md`。
-- 台州是 **pro2018 新版模板变体的已接入实证**：HTTP 层/检索参数集/馆藏 JSON 与广州基准同构（家族原样复用），仅搜索/详情两页解析放 `adapters/taizhou.py` 本地（结构对齐家族 parser）——pro2018 城市**不必动家族共享模块**即可交付。家族化候选提案（未合入，patch 存档于台州交付报告）：`InterlibConfig.search_template/detail_template` 判别字段 + parser 并行分支；`InterlibConfig.ctx` 上下文路径字段（默认 `/opac`，合肥市图 `/lib2` 实证需要，目前 hefei.py 内本地实现单源三原语）——出现第二个同形态城市时再家族化，避免投机抽象。
+- 绍兴（`opac.sxlib.com`）确属家族但跑 **pro2018 模板代**，搜索/详情两个解析面与穗杭基准不兼容（`libBookUl`/`bkTxtTit` 结构）——**2026-10-02 已按台州同款「适配器本地解析」路径接入**（`adapters/shaoxing.py`，未动家族共享模块）；联合目录 holding 取数口径见 `tests/fixtures/shaoxing/NOTES.md`。
+- 台州是 **pro2018 新版模板变体的已接入实证**：HTTP 层/检索参数集/馆藏 JSON 与广州基准同构（家族原样复用），仅搜索/详情两页解析放 `adapters/taizhou.py` 本地（结构对齐家族 parser）——pro2018 城市**不必动家族共享模块**即可交付。家族化候选提案（未合入，patch 存档于台州交付报告）：`InterlibConfig.search_template/detail_template` 判别字段 + parser 并行分支；`InterlibConfig.ctx` 上下文路径字段（默认 `/opac`，合肥市图 `/lib2` 实证需要，目前 hefei.py 内本地实现单源三原语）——出现第二个同形态城市时再家族化，避免投机抽象。**2026-10-02 成都接入后该条件已满足**（pro2018 第二城，台州解析器对成都 fixture 零修改全兼容），家族化执行安排在 batch3/批 4 合并收口之后，避免与在制批次产生共享文件冲突。
 - 新接同族城市：`adapters/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/__init__.py` 注册 + 在本文件总览表登记。城市差异以带默认值的 `InterlibConfig` 字段（quirk）表达，默认值即广州行为。
 
 ## 深圳（自研 JSON API）
@@ -265,3 +268,22 @@ http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，**仅 HTTP**：443 证�
 - 侦察结论见 `tests/fixtures/nanjing/NOTES.md`（「钉死事实一/二」节）。**汇文 uopac
   防护逐站不同**：南京站无扬州站那套 JS AES 加密 Cookie（securitycam）反爬墙——同系统、
   不同站点、防护不同，将来评估其他汇文站点必须逐站实测，不能按系统家族推定。
+
+## 成都（Interlib pro2018 模板代，2026-10-02 接入）
+
+`adapters/chengdu.py`：成都市公共图书馆联合书目检索（主馆成都图书馆 CD101，联合目录跨
+成都平原经济区：成都辖区＋德阳/什邡/资阳/眉山等市县馆，libcodeMap 483 馆码）。原登记
+入口超星 ucdrs 因 IP 白名单硬墙搁置，本入口为馆方独立运营的图创 OPAC，与超星无关。
+
+- 定性：调研原话「汇文 Libsys Pro2018」有误，实抓指纹（meta keywords 自报「opac, 图创,
+  interlib」、页脚 © www.interlib.com.cn、静态资源 `/opac/media/pro2018/simple/`）确认为
+  图创 Interlib pro2018 模板代；证据链见 `tests/fixtures/chengdu/NOTES.md`。
+- HTTP 层、检索参数集、馆藏 JSON 与广州基准同构（家族原样复用）；搜索（libBookLi）/详情
+  （bkTxt）两页解析在适配器本地实现——台州解析器对成都 fixture 零修改全兼容，pro2018
+  同形态第二城，家族化提案条件已满足（见家族小节，执行排在批次收口后）。
+- 状态码语义与调研初判**相反**：holdStateMap 原值 `2→在馆`（可借）、`3→借出`（不可借），
+  家族词表判定无需新表；应还日期 loanWorkMap.returnDate 直取，远期/远逾期原值照登。
+- detail 的 `?return_fmt=json` 完整 MARC 为可选增强，未采用（HTML 详情已覆盖契约全字段）。
+- p1 首条 ebkType 显示「期刊」（其余 9 条「图书」），语义存疑，原值照登未采信
+  （NOTES 有记录）。
+- 字段侦察结论见 `tests/fixtures/chengdu/NOTES.md`。

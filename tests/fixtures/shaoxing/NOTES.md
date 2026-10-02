@@ -117,3 +117,64 @@ curl -sS -A "$UA" "https://opac.sxlib.com/opac/search?q=三体&searchType=standa
 curl -sS -A "$UA" "https://opac.sxlib.com/opac/book/1227282" -o detail.html
 curl -sS -A "$UA" "https://opac.sxlib.com/opac/api/holding/1227282?limitLibcodes=&isCluster=" -o holding.json
 ```
+
+---
+
+# 立项更新（2026-10-02 下午，batch3）：已接入 `adapters/shaoxing.py`
+
+用户拍板「待立项的先搞」，绍兴按**台州已实证路径**立项：pro2018 搜索/详情
+解析在适配器本地实现（不动家族共享模块），HTTP 层与馆藏层复用家族
+（`interlib.client.get` + `interlib.get_holdings`）。真网冒烟全链路通过。
+
+## 「holding 恒空」之谜已解（原「联合目录取数条件待查」关闭）
+
+不是接口坏，是**采样偏差**：《三体》1227282/1553034/1553036 是联合层书目、
+无本地单册——单书 GET 与批量 POST 对它们**都**返回空（holdingListMap 无键/
+holdingList 空，libcodeMap/localMap 字典仍全量）。换鲁迅类书目（q=鲁迅
+首页 5 个 id）批量 POST 全部有数据（1~3 条/书），单书 GET `879551` 也返回
+完整 holdingList 3 条＋holdStateMap（state 2=在馆）＋loanWorkMap——**家族
+参数形态（limitLibcodes=&isCluster=）实测可用**，`parse_holdings` 零改动
+解析成功（上虞图书馆/储藏外借·资料/localMap 翻译正常）。
+
+批量端点 `POST /opac/api/holding/getHoldingsBybookrecnos`（form 体
+`bookrecnos=id1,id2,`，响应 `holdingListMap/localMap/libcodeMap/
+libcodeDeferDateMap`，**无 holdStateMap**）是搜索页「在馆」计数的异步来源，
+适配器不依赖它，仅存档为取数条件证据（batch_luxun.json）。
+
+## pro2018 解析锚点（台州同款全部实证，差异两处）
+
+- 搜索页与台州**逐锚点同款**：`schResNumIn`（「检索结果共有<i>203</i>条」）、
+  JS `totalPage: 21`/`currentPage: 1`、`libBookLi`/`libBookDetNm`/
+  `libBkDetTit`（责任者/出版信息标签）、`bookDetail(数字` id、封面 img
+  `isbn=`/`bookrecno=` 属性（各 10 处）、空页 `notFindFt`——台州
+  `_SearchParser` 逻辑原样适用（本地复制，共享模块化建议见交付报告）。
+- 详情页同为 bkTxt 模板（`bkTxtTit`/`bkTxtLeft`/`bkTxtRight`、li 标签：
+  ISBN/出版发行/价格/载体形态/主题词/中图分类法/相关资源），差异：
+  1. **无「主要责任者」「内容提要」标签行**（两份实抓记录均缺）→ 责任者从
+     引文块 `div.sendToConIn` 兜底：「刘慈欣著.三体.重庆出版社,2010.11.」
+     取首个句点前段（原值照登含「著/编」）；summary 恒空串（数据边界，
+     server 工具文案已声明）。
+  2. 中图分类法值可能只剩「版次：」空壳（《三体》记录）→ call_number 空串
+     照实；《鲁迅：1881--1936》记录有 K825.6。
+
+## 新增 fixture（2026-10-02 下午实抓，共 7 请求，间隔 ≥2.5s）
+
+| 文件 | 来源 | 说明 |
+|---|---|---|
+| `search_luxun_p1.html` | `GET /opac/search?q=鲁迅&…` | numFound 8523，10 条，id 60599 起 |
+| `search_empty.html` | `GET /opac/search?q=azbycxq不存在xyz&…` | notFindFt 空页锚点，无 schResNumIn |
+| `detail_879551.html` | `GET /opac/book/879551` | 《鲁迅：1881--1936》北京鲁迅博物馆编，文物出版社 1977.3，K825.6 |
+| `holding_879551.json` | `GET /opac/api/holding/879551?limitLibcodes=&isCluster=` | 家族参数形态，holdingList 3 条全在馆（上虞） |
+| `batch_luxun.json` | `POST /opac/api/holding/getHoldingsBybookrecnos`（form bookrecnos=5 ids） | holdingListMap 每书 1~3 条，取数条件证据 |
+
+请求清单：批量 POST ×2（三体 3 id 空、鲁迅 5 id 有数据）、单书 GET ×2
+（1227282 复核空、879551 有数据）、搜索 ×2（鲁迅、空检索）、详情 ×1
+（879551）。加上适配器真网冒烟 4 请求（search 三体/detail 1227282/
+holdings 879551/holdings 1227282），下午共约 11 请求，全部只读，未触发风控。
+
+## 冒烟结果（适配器真网实跑）
+
+`search_books("三体", limit=5)` → total=203/5 条/41 页；
+`get_book_detail("1227282")` → 三体/刘慈欣著/重庆出版社/2010/
+978-7-229-03093-3/call_number 空/summary 空；`get_holdings("879551")` →
+3 条上虞图书馆在馆；`get_holdings("1227282")` → 0 条（联合层边界）。
