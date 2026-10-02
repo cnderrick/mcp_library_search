@@ -25,6 +25,11 @@ SEARCH_EMPTY = open(_FIXTURES + "search_solr_empty.json", encoding="utf-8").read
 DETAIL = open(_FIXTURES + "detail.html", encoding="utf-8").read()
 HOLDING = open(_FIXTURES + "holding.json", encoding="utf-8").read()
 
+# 越界页样本：numFound=143 但 docs 为空（服务端不报错，实抓验证）
+_SANTI = json.loads(SEARCH_SANTI)
+SEARCH_OUT_OF_RANGE = json.dumps(
+    {**_SANTI, "response": {**_SANTI["response"], "docs": []}}, ensure_ascii=False)
+
 # 在 autouse 关断前捕获真节流函数引用（monkeypatch 只换模块属性，不换本引用）
 _REAL_THROTTLE = qingdao._throttle
 
@@ -148,6 +153,44 @@ def test_search_retries_isbn_without_hyphens(monkeypatch):
     assert page["books"]
 
 
+def test_throttle_runs_before_every_http_request(monkeypatch):
+    # ISBN 重试会发第二次请求：节流必须按「每次请求」生效，不能只在原语入口节流一次
+    ticks = []
+    monkeypatch.setattr(qingdao, "_throttle", lambda: ticks.append(1))
+    calls = _patch_get(monkeypatch, [SEARCH_EMPTY, SEARCH_ONE])
+    qingdao.search_books("978-7-80628-555-3")
+    assert len(calls) == 2
+    assert len(ticks) == 2
+
+
+def test_hyphenated_isbn_not_retried_when_results_exist_elsewhere(monkeypatch):
+    # 越界页 docs 为空但 numFound>0：关键词本身有命中，不该再白发一次去连字符请求
+    calls = _patch_get(monkeypatch, [SEARCH_OUT_OF_RANGE])
+    page = qingdao.search_books("978-7-5366-9293-0", page=99, limit=10)
+    assert len(calls) == 1
+    assert page["books"] == []
+    assert page["total_results"] == 143
+    assert page["has_next"] is False
+
+
+def test_search_clamps_page_zero_to_served_page(monkeypatch):
+    # 服务端把 page=0 当 1 服务，适配器按实际服务的页回填，否则 has_next 会指向重复页
+    calls = _patch_get(monkeypatch, [SEARCH_SANTI])
+    page = qingdao.search_books("三体", page=0, limit=10)
+    assert calls[0][1]["page"] == 1
+    assert page["page"] == 1
+    assert page["has_next"] is True
+
+
+def test_search_clamps_limit_zero(monkeypatch):
+    # limit<=0 不能产出「total_results=143 但 total_pages=0」这种自相矛盾的分页
+    calls = _patch_get(monkeypatch, [SEARCH_SANTI])
+    page = qingdao.search_books("三体", limit=0)
+    assert calls[0][1]["rows"] == 1
+    assert page["total_results"] == 143
+    assert page["total_pages"] == 143
+
+
 def test_search_bad_json_raises_with_library_name(monkeypatch):
     _patch_get(monkeypatch, ["<html>opac验证</html>"])
     with pytest.raises(RuntimeError, match="青岛市公共图书馆联合目录"):
@@ -158,6 +201,17 @@ def test_search_missing_response_key_raises(monkeypatch):
     # 接口形态漂移或被中间层替换时，「解析不到」不得静默降级成 0 条结果
     _patch_get(monkeypatch, ['{"responseHeader": {"status": 0, "QTime": 3}}'])
     with pytest.raises(RuntimeError, match="缺少 response"):
+        qingdao.search_books("三体")
+
+
+def test_search_solr_error_surfaces_upstream_msg(monkeypatch):
+    # Solr 查询出错同样只返回 responseHeader＋error：把上游 msg 带出来，
+    # 免得把「查询本身有问题」误报成「接口形态变了」
+    _patch_get(monkeypatch, [
+        '{"responseHeader": {"status": 400, "QTime": 1},'
+        ' "error": {"msg": "undefined field xyz", "code": 400}}',
+    ])
+    with pytest.raises(RuntimeError, match="undefined field xyz"):
         qingdao.search_books("三体")
 
 

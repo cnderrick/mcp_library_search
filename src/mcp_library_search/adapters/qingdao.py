@@ -84,7 +84,13 @@ def _parse_solr(payload):
     `error`），抛错而非静默降级成 0 条结果。
     """
     if not isinstance(payload, dict) or "response" not in payload:
-        raise RuntimeError(f"{_CONFIG.name_cn}：检索响应缺少 response（接口可能变更）")
+        detail = ""
+        if isinstance(payload, dict) and isinstance(payload.get("error"), dict):
+            # Solr 查询出错（如关键词触到未定义字段）同样只有 responseHeader＋error：
+            # 把上游 msg 带出来，别把「查询本身有问题」报成「接口形态变了」
+            detail = f"：{_clean(payload['error'].get('msg'))}"
+        raise RuntimeError(
+            f"{_CONFIG.name_cn}：检索响应缺少 response（Solr 查询出错或接口变更）{detail}")
     resp = payload.get("response") or {}
     try:
         total = int(resp.get("numFound") or 0)
@@ -108,7 +114,21 @@ def _parse_solr(payload):
     return {"books": books, "total_results": total}
 
 
+def _positive_int(value, default):
+    """入参归一为 ≥1 的整数；非法值取默认值。
+
+    服务端对 `page=0` 按 1 服务、`rows` 无下限：按实际服务语义归一，免得回填出
+    自相矛盾的分页（`page=0` 会让 `has_next` 指向重复页；`limit=0` 会让
+    `total_results` 非 0 而 `total_pages` 为 0）。
+    """
+    try:
+        return max(1, int(value))
+    except (TypeError, ValueError):
+        return default
+
+
 def _search_once(keyword, page, limit):
+    _throttle()  # 按「每次 HTTP 请求」节流：去连字符重试会发第二次请求
     params = {"q": str(keyword or ""), "rows": limit, "page": page, "wt": "json"}
     body = interlib.client.get(_CONFIG, "/opac/api/search", params)
     try:
@@ -133,9 +153,12 @@ def _search_raw(keyword, page=1, limit=20):
 
     镜像家族 `search_raw` 语义：带连字符的 ISBN 在 Solr 检索下同样命中不了
     （真网实测，同广州 marc 检索），首搜为空且关键词含连字符时去连字符重试一次。
+
+    判据用 `total_results == 0` 而非家族的空 `books`：Solr 越界页同样返回空
+    `docs`（`numFound` 不变、不报错），此时关键词本身有命中，重试是白发一次请求。
     """
     r = _search_once(keyword, page, limit)
-    if not r["books"] and "-" in str(keyword or ""):
+    if r["total_results"] == 0 and "-" in str(keyword or ""):
         retry = _search_once(str(keyword).replace("-", ""), page, limit)
         if retry["books"]:
             r = retry
@@ -165,7 +188,10 @@ class _Client:
     """把家族解析返回值包装成契约测试期望的 attribute 对象形态。"""
 
     def search(self, keyword, page=1, limit=20):
-        _throttle()
+        # 按服务端实际语义归一分页入参（page 下限 1、rows 下限 1），
+        # 保证回填的 page 就是真正被服务的那一页；节流在 _search_once 内按请求计
+        page = _positive_int(page, 1)
+        limit = _positive_int(limit, 20)
         r = _search_raw(keyword, page=page, limit=limit)
         return SimpleNamespace(
             success=True,
