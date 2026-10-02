@@ -19,7 +19,9 @@ catkey 本身不可检索（GENERAL 检索 catkey 实测 0 命中）。因此 bo
 get_book_detail / get_holdings 用题名（TI 字段）重检索命中列表、按 catkey 定位序号、
 再 POST VIEW^N 取详情页。题名是列表页原值拼串（「题名＋资料类型＋版本＋责任者＋语种」），
 整串即便是短语检索也 0 命中，故按候选梯度下发：短语截断题名 → 裸截断题名 → 裸整串
-（实测《船舶结构与设备》短语截断题名命中 24 条、目标在第 1 位；见 NOTES）。
+（实测《船舶结构与设备》短语截断题名命中 24 条、目标在第 1 位；见 NOTES）。题名短的候选
+（如《上瘾》）命中可到数十条、目标落在第 2 页起，故候选内逐页翻找 catkey（≤5 页）；
+**VIEW^N 的 N 是命中集全局序号**（第 2 页第 1 位＝21），页内序号需加页偏移。
 
 数据边界：匿名「馆藏显示」页只到**索书号级**（分馆 + 索书号 + 复本数 + 馆藏类型 +
 馆藏位置），无单册条码、无应还日期 → due_date 恒空串。可借口径保守：copy_info
@@ -45,6 +47,7 @@ _UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 _HEADERS = {"User-Agent": _UA}
 _THROTTLE = 4.0  # 秒/host；iLink 会话敏感，从严限速
 _PAGE_SIZE = 20  # 源站固定每页 20 条（first_hit/last_hit），无每页条数参数
+_DETAIL_MAX_PAGES = 5  # 详情定位翻页上限（每页 20 条 → 最多扫 100 条命中）
 
 # srchfield1 下拉实抓取值（无 ISBN 选项）：
 _SRCHFIELD_GENERAL = "GENERAL^SUBJECT^GENERAL^^所有字段"  # 通用检索；ISBN 形态也走这个
@@ -113,10 +116,11 @@ _TITLE_TYPE_MARK = re.compile(r"\s+(?:专著|期刊|会议录|学位论文|电�
 
 
 def _title_variants(title):
-    """题名重检索候选梯度：短语截断题名（首选）→ 裸截断题名 → 裸整串。
+    """题名重检索候选梯度：短语截断题名（首选）→ 裸截断题名 → 裸整串 → 短语首段 → 裸首段。
 
     列表页题名是拼串，源站短语索引只认题名主体——整串即便短语检索实测也 0 命中；
     截断题名若含罗马数字等非索引字符，短语会 0 命中，故用裸词兜底（逐字 AND）。
+    老记录无「 专著」等资料类型分隔词（如「上瘾 辛卉著 陈毓华著」），再退到首个空格段。
     """
     t = str(title or "").strip()
     if not t:
@@ -125,6 +129,9 @@ def _title_variants(title):
     out = [_phrase(short), short]
     if t != short:
         out.append(t)
+    head = t.split(" ")[0].strip()
+    if head and head not in (short, t):
+        out += [_phrase(head), head]
     return out
 
 
@@ -160,6 +167,22 @@ def _hitlist_action(text):
     if not m:
         m = re.search(r'<form[^>]*action="([^"]+)"[^>]*name="hitlist"', text or "", re.I)
     return m.group(1) if m else ""
+
+
+def _hitlist_range(text):
+    """结果页 hitlist 表单里的 first_hit/last_hit（当前页命中区间），缺省 1/20。
+
+    翻页后区间随页变（第 2 页＝21/40），VIEW^N 的 N 是**当前页内**序号，
+    故必须原样回传当前页区间，否则定位到别页的记录上。
+    """
+    t = text or ""
+    out = []
+    for field in ("first_hit", "last_hit"):
+        m = re.search(r'name="' + field + r'"[^>]*value="(\d+)"', t) \
+            or re.search(r'value="(\d+)"[^>]*name="' + field + r'"', t)
+        out.append(int(m.group(1)) if m else 0)
+    first, last = out
+    return (first or 1, last or first + _PAGE_SIZE - 1)
 
 
 def _abs(url):
@@ -388,13 +411,18 @@ class _Client:
         })
 
     def _view(self, result_page, position):
-        """从结果页解析 hitlist action → POST VIEW^{position}=详细资料 取详情页。"""
+        """从结果页解析 hitlist action → POST VIEW^{position}=详细资料 取详情页。
+
+        **position 是命中集的全局序号**（跨页累计，第 2 页第 1 位＝21），不是页内序号——
+        实测页内序号会取到别页记录上；first_hit/last_hit 按当前页表单原值回传（不影响 N）。
+        """
         action = _hitlist_action(result_page)
         if not action:
             return ""
+        first, last = _hitlist_range(result_page)
         return self._post(action, {
-            "first_hit": "1",
-            "last_hit": str(_PAGE_SIZE),
+            "first_hit": str(first),
+            "last_hit": str(last),
             "form_type": "",
             f"VIEW^{position}": "详细资料",
         })
@@ -441,7 +469,7 @@ class _Client:
             books=_parse_hits(text),
         )
 
-    # ---- 详情/馆藏共用：题名候选梯度重检索 → catkey 定位 → VIEW^N ----
+    # ---- 详情/馆藏共用：题名候选梯度重检索 → catkey 定位（可翻页）→ VIEW^N ----
     def _detail_attempt(self, ckey, title):
         for query in _title_variants(title):
             text = self._search_once(query, _SRCHFIELD_TITLE)
@@ -449,12 +477,22 @@ class _Client:
                 if _is_entry_page(text):
                     return None  # 会话失效：交给上层重建后再试
                 continue  # 源站拒答该候选（含非索引字符回 Error 页）→ 换下一个候选
-            pos = _find_ckey_position(text, ckey)
-            if pos is None:
-                continue  # 该候选没把目标 catkey 带回 → 换下一个候选
-            detail = self._view(text, pos)
-            if _is_detail_page(detail):
-                return detail
+            # 命中多于首页时逐页找 catkey（题名短的候选常把目标排到后面几页）
+            pages = min(_DETAIL_MAX_PAGES,
+                        max(1, math.ceil(_parse_total(text) / _PAGE_SIZE)))
+            for page in range(1, pages + 1):
+                if page > 1:
+                    jumped = self._jump(text, page)
+                    if not _is_result_page(jumped):
+                        break  # 翻页失败：换下一个候选
+                    text = jumped
+                pos = _find_ckey_position(text, ckey)   # 页内序号
+                if pos is None:
+                    continue  # 该页没有目标 → 继续翻页
+                # VIEW^N 取全局序号（跨页累计），页内序号需加页偏移
+                detail = self._view(text, (page - 1) * _PAGE_SIZE + pos)
+                if _is_detail_page(detail):
+                    return detail
         return None
 
     def _fetch_detail(self, ckey, title):

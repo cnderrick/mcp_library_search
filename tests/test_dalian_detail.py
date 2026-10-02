@@ -5,6 +5,7 @@ mock 点为模块级 `_open`：按请求内容路由（GET→入口、VIEW POST�
 单测严禁触网。
 """
 from pathlib import Path
+import urllib.parse
 
 import pytest
 
@@ -16,6 +17,7 @@ _ENTRY = (_FIX / "entry_raw.html").read_text(encoding="utf-8")
 _SEARCH = (_FIX / "search.html").read_text(encoding="utf-8")
 _EMPTY = (_FIX / "search_empty.html").read_text(encoding="utf-8")
 _ERROR = (_FIX / "error_message.html").read_text(encoding="utf-8")
+_P2 = (_FIX / "search_p2.html").read_text(encoding="utf-8")
 _DETAIL = (_FIX / "detail.html").read_text(encoding="utf-8")
 _LOCATED = (_FIX / "detail_located.html").read_text(encoding="utf-8")
 
@@ -111,6 +113,54 @@ def test_detail_ladder_skips_rejected_phrase_candidate(monkeypatch):
     bodies = [c[1].decode() for c in calls if c[1] and "searchdata1=" in c[1].decode()]
     assert len(bodies) == 2 and "%22" in bodies[0] and "%22" not in bodies[1]
     assert d["title"] == "三体 Ⅲ 死神永生 专著 典藏版 刘慈欣著"
+    validate_book_detail(d)
+
+
+def test_detail_relocates_on_second_page(monkeypatch):
+    # 题名短的候选命中多于首页时逐页翻找（实测《上瘾》56 条、目标在第 2 页第 11 位）；
+    # VIEW^N 的 N 是全局序号（跨页累计），第 2 页第 1 位＝21
+    calls = []
+    page2 = dalian._parse_hits(_P2)[0]
+
+    def spy(req, timeout=25):
+        calls.append((req.full_url, req.data))
+        if req.data is None:
+            return _ENTRY
+        body = req.data.decode()
+        if "VIEW%5E" in body:
+            return _DETAIL
+        if "JUMP%5E" in body:
+            return _P2
+        return _SEARCH
+
+    monkeypatch.setattr(dalian, "_open", spy)
+    d = dalian.get_book_detail(page2.record_id)
+    view = [c[1].decode() for c in calls if c[1] and "VIEW%5E" in c[1].decode()]
+    assert len(view) == 1
+    assert "VIEW%5E21=" in view[0]                     # 第 2 页第 1 位 → 全局 21
+    assert "first_hit=21" in view[0] and "last_hit=40" in view[0]
+    assert d["book_id"] == page2.record_id
+
+
+def test_detail_ladder_uses_title_head_without_marker(monkeypatch):
+    # 老记录题名无「 专著」等资料类型词（如「上瘾 辛卉著 陈毓华著」）→ 退到首个空格段
+    calls = []
+
+    def spy(req, timeout=25):
+        calls.append((req.full_url, req.data))
+        if req.data is None:
+            return _ENTRY
+        body = req.data.decode()
+        if "VIEW%5E" in body:
+            return _DETAIL
+        return _EMPTY if "辛卉" in urllib.parse.unquote_plus(body) else _SEARCH
+
+    monkeypatch.setattr(dalian, "_open", spy)
+    d = dalian.get_book_detail("3305715:上瘾 辛卉著 陈毓华著 shang yin")
+    bodies = [c[1].decode() for c in calls if c[1] and "searchdata1=" in c[1].decode()]
+    assert len(bodies) == 3                                    # 整串短语/整串裸词均 0 命中
+    assert bodies[2].startswith("searchdata1=%22%E4%B8%8A%E7%98%BE%22")  # 退到短语「上瘾」
+    assert any("VIEW%5E3" in c[1].decode() for c in calls if c[1])
     validate_book_detail(d)
 
 
