@@ -1,7 +1,7 @@
 """江阴适配器测试：config 正确、委托 interlib 家族、契约缝生效。
 
-江阴暂未注册进 _ADAPTERS（注册由协调者统一处理），tests/test_adapter_contract.py
-盖不到它，所以本文件按同款形态自断言输出结构对齐 base.py TypedDict。
+江阴已注册进 _ADAPTERS（tests/test_adapter_contract.py 覆盖它）；本文件的
+输出结构自断言保留，作为城市级的补充钉子（2026-10-02 验收后更新说明）。
 """
 from types import SimpleNamespace
 from unittest.mock import Mock

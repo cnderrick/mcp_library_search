@@ -1,0 +1,67 @@
+"""独立验收测试：2026-10-02 批量城市接入（QA 侧钉子，全离线不打真网）。
+
+验收依据：docs/data-sources.md 总览表＋AGENTS.md 铁律。本文件钉的是
+「注册表 ↔ server.py 文案 ↔ data-sources.md 登记」三方一致性——任何一侧
+单独增删城市或改口径而另两侧没跟上，这里直接红。行为级验收（tagTr 修复、
+杭州裸 id 垫片、双源归并）已由 test_jiangyin_parser / test_wenzhou_compat /
+test_hefei_parse / test_hangzhou_merge / test_hefei_merge 各自钉住，不在此重复。
+"""
+from pathlib import Path
+
+from mcp_library_search import adapters, server
+
+_DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources.md"
+
+# 本批交付后的完整注册面：既有 6 城＋新增 6 标识（hangzhou 重构不减既有）
+_EXPECTED = [
+    "chongqing", "guangzhou", "hangzhou", "hefei", "jiangyin", "jinhua",
+    "nanjing", "shanghai", "shenzhen", "taizhou", "tianjin", "wenzhou",
+]
+
+
+def test_registry_has_exactly_twelve_identifiers():
+    assert sorted(adapters._ADAPTERS) == _EXPECTED
+
+
+def test_every_adapter_module_has_module_level_client():
+    # AGENTS.md 铁律：契约测试的模块级 _client 是适配器形态的硬契约
+    missing = [name for name, mod in adapters._ADAPTERS.items()
+               if not hasattr(mod, "_client")]
+    assert missing == []
+
+
+def test_search_docstring_lists_every_registered_city():
+    doc = server.search_books.__doc__
+    absent = [city for city in _EXPECTED if city not in doc]
+    assert absent == []
+
+
+def test_search_docstring_data_boundaries_match_docs():
+    # 与 data-sources.md 各城小节口径一致（2026-10-02 验收基准）
+    doc = server.search_books.__doc__
+    assert "limit 不生效" in doc                 # 南京：每页固定 20 条
+    assert "双源合并" in doc                      # 杭州／合肥
+    assert "三源合并" in doc                      # 天津
+    assert "保守按不可借展示" in doc               # 重庆：状态原值照登
+
+
+def test_availability_docstring_due_date_boundaries():
+    doc = server.find_book_availability.__doc__
+    # 浙图（hangzhou 双源之一）与金华：借出无应还日期＝数据边界非故障
+    assert "浙江图书馆源" in doc and "金华源" in doc
+    assert "due_date 为空串属数据边界" in doc
+    # 重庆保守口径（0.3.0 已上线文案）未被本批改动
+    assert "only_available=True 恒为空" in doc
+
+
+def test_detail_docstring_nanjing_call_number_boundary():
+    doc = server.get_book_detail.__doc__
+    assert "南京数据源详情页无索书号字段" in doc
+    assert "call_number 为空串" in doc
+
+
+def test_data_sources_registers_every_adapter():
+    # 总览表以反引号标识登记每个已接入城市（AGENTS.md：新城市先在此登记）
+    text = _DOCS.read_text(encoding="utf-8")
+    absent = [city for city in _EXPECTED if f"`{city}`" not in text]
+    assert absent == []

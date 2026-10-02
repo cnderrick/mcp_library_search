@@ -55,7 +55,7 @@ vendor 组件 shanghai-library-book-search-python（Apache-2.0），细节与本
 - 应还日期：借出单册在 `loanWorkMap[barcode].returnDate`（epoch 毫秒，按 UTC+8 解释，与馆方系统时区一致），退回单册 `loan` 字段保守提取。
 - 可借分类：`is_available_status` 状态词表——命中不可借词优先，命中可借词次之，都不中**保守判不可借**（未识别状态不让读者白跑）。
 - 杭州差异（quirk）：与广州同模板（详情页 JS 甚至带广州分支函数）；「馆藏浏览」锚点缺失（用「馆藏地点」）；空结果页含 `bookDetail(` 的 JS 函数定义，解析必须按 `bookDetail(数字` 匹配，不能裸数出现次数。
-- 江阴差异：与广州同模板、**零 quirk**（本地自建单租户，不需要 curlibcode）；HTTP 明文 + 9090 端口（base_url=`http://libopac.jylib.cn:9090`）；与杭州一样无「馆藏浏览」锚点；空结果页比杭州更干净（连 `bookDetail(` 函数定义都没有）；馆名两名并存原值照登——页内全称「江阴市图书馆」、libcodeMap[JYLIB] 译名「江阴图书馆」。
+- 江阴差异：与广州同模板、**零 quirk**（本地自建单租户，不需要 curlibcode）；HTTP 明文 + 9090 端口（base_url=`http://libopac.jylib.cn:9090`）；与杭州一样无「馆藏浏览」锚点；空结果页比杭州更干净（连 `bookDetail(` 函数定义都没有）；馆名两名并存原值照登——页内全称「江阴市图书馆」、libcodeMap[JYLIB] 译名「江阴图书馆」；网点含农家书屋等 24H 服务点（libcodeMap 实证，`tests/fixtures/jiangyin/NOTES.md`）。
 - 温州差异：本地部署，curlibcode 默认空（首页 28 处 curlibcode 是模板 JS 的「限定所在馆」筛选逻辑）；首页 675KB 偏大是 91 馆/2555 地点筛选区全量服务端渲染，三端点与广州基准同构；部分书目有独立「索书号」行（data-sort=130，词表外不参与解析，call_number 维持取「中图分类法」，完整索书号以馆藏 JSON callno 为准）；「主要责任者」「内容提要」行是记录级可选，缺失则 author/summary 空串（数据边界）；主馆馆码 WT（温图市府路馆），纯电子书书目 holdingList 为空属正常。
 - 详情页 tagTr 污染缺陷已修复（2026-10-02，江阴/温州各自独立实证）：「标签」行左格是裸 `<td>` 无 leftTD，其值「没有标签」曾挂到上一个已消费标签名下（污染 author 或 call_number）——穗杭 fixture 恰有「次要责任者」行重置才从未触发，**任何家族城市缺责任者行的记录都会命中**。修复口径：`_finish_value` 标签与值一对一消费（消费即清空 `_label`），钉在 `tests/test_jiangyin_parser.py` 与 `tests/test_wenzhou_compat.py`。
 - 绍兴（`opac.sxlib.com`）确属家族但跑 **pro2018 模板代**，搜索/详情两个解析面与穗杭基准不兼容（`libBookUl`/`bkTxtTit` 结构，家族 parser 实跑 0 条书/详情全空），quirk 字段表达不了，接入需立项 parser 并行分支 + 查清联合目录 holding 取数（单书 GET 恒空，「在馆」计数走批量 POST `getHoldingsBybookrecnos`）——降级待调研，侦察存证与 pro2018 锚点图见 `tests/fixtures/shaoxing/NOTES.md`。
