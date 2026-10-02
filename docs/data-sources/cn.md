@@ -69,7 +69,7 @@
 |  | 江阴 | `jiangyin` | ✅ 接入 | http://libopac.jylib.cn:9090/opac/index | 图创 Interlib（已确认，与广州同模板、零 quirk，自建单租户） | `interlib/` 家族 + `adapters/cn/jiangyin.py` |
 |  | 无锡 | `wuxi` | ✅ 接入 | http://wxxqlsp.xw.i-wnd.cn:8013/#/home （新吴区图书馆，单馆） | 图星 LibStar Find v3.2023.12（北京图星/超星系，JSON API） | `adapters/cn/wuxi.py`；市图书馆源按天津口径预留（源码 `WXST`，未接入）。**两处必需请求头缺一不可：`Referer`（任意值即可，缺失时全部内容端点回 `errCode:9999`「系统访问中断」，极易误判为服务端故障）与 `groupcode: 800507`（缺失则 HTTP 200 但静默 0 结果）** |
 |  |  | — | ⛔ 不通 | http://222.191.248.124:8088/opac/book_cart.php （无锡市图书馆旧 OPAC） | — | 2026-10-03 实测 8088 端口空响应、同 IP 80 端口仅 Tomcat 默认 404；官网 www.wxlib.cn 仍指向该 8088 旧 OPAC，暂无可用检索入口，市图源 `WXST` 继续搁置 |
-|  | 苏州 | — | 📋 计划 | https://reader.szlib.com/opac/index （苏州图书馆，页标题「检索系统」） | 图创 Interlib（已确认：页内自报图创／interlib、`/opac/media/*`、`curlibcode`、`bookrecno`；2026-10-03 实抓「三体」232 条、24 页） | `interlib/` 家族原语可直接复用；待立项 |
+|  | 苏州 | `suzhou` | ✅ 接入 | https://reader.szlib.com/opac/index （苏州图书馆，页标题「检索系统」，全市集群目录） | 图创 Interlib（已确认：页内自报图创／interlib、`/opac/media/*`、`bookrecno`；2026-10-03 实抓「三体」232 条、24 页） | `interlib/` 家族 + `adapters/cn/suzhou.py`（默认模板零 quirk，不需要 `curlibcode`） |
 |  |  | — | 🔍 待核验 | http://opac.sdll.cn:8088/opac （苏州工业园区图书馆） | — | — |
 |  | 徐州 | — | 📋 计划 | https://findxz.libsp.com （徐州市图书馆，同名多分馆含鼓楼区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `adapters/cn/wuxi.py` 协议可复用；`groupCode=3203001001`（与主馆 libCode 同）。检索须带 `Referer`＋`groupcode` 头，缺 `groupcode` 静默 0 结果；待立项 |
 |  | 常州 | — | ⛔ 不通 | http://www.czlib.net （常州市图书馆） | — | 2026-10-03 实测域名解析到 198.20.x.x 域名停放段、TCP 空响应，非馆方站点；近似域名 czlib.cn＝潮州市图书馆，亦非本市，未找到可用检索入口 |
@@ -415,6 +415,7 @@
 | 合肥（皖图 `AH:` ＋ 市图 `HF:`） | 默认，另按 `_Source.ctx` 拼路径自建单源三原语（复用家族 client/parser） | 两源与穗杭完全同模板，唯一结构差异：**HF 应用上下文是 `/lib2` 非 `/opac`**（`/opac/*` 返回 nginx 500）；`InterlibConfig.ctx` 家族化提案未合入。tagTr 缺陷由合肥 AH 布局第三路独立实证，回归钉子 `test_ah_detail_author_not_clobbered_by_tag_row`。双源合并见「一城多源合并」。`tests/fixtures/hefei/NOTES.md`。 |
 | 中新友好（生态城，天津第三源） | `curlibcode=STC001` | 检索与详情必须带 `curlibcode`（缺详情参数直接 HTTP 500），馆藏 JSON 不需要；ISBN 在 `expressServiceTab` 兄弟节点上，家族 parser 以 `express_bookrecno` 后挂；`search_raw` 暴露内部 isbn 字段供归并（契约 `BookSummary` 不含 isbn）。 |
 | 青岛 | 默认，**检索通道在适配器内改走站点内嵌 Solr** | 主站 HTML 检索页 `/opac/search` 被滑动验证码常态拦截（`slideVerify`，新会话首个检索请求即触发，非限速型；验证结果只落在当次浏览器会话），而站点内嵌的 Solr 后端 `GET /opac/api/search` 开放——检索原语改走该通道（`wt=json`，`q`＋`rows`＋`page`；服务端凭 `page` 自算 `start`，直传 `start` 被忽略），是本城相对广州基准的唯一结构差异。`docs[].id` 即 `bookrecno`，可直接用于详情与馆藏端点；详情无需 `curlibcode`，`/opac/book/{id}` 与 `/opac/api/holding/{id}` 与广州基准完全同构，家族 parser 零改动全字段解析。数据边界：服务端默认 `fq` 是硬编码状态白名单＋定位集合，自行追加 `fq` 会被整体覆盖，故结果默认只含有馆藏书目、`hasholding` 恒为 `y`（`availability_summary` 恒空串）；带连字符 ISBN 命中不了（同广州 marc），首搜为空时去连字符重试；自带 ≥2 秒节流。`tests/fixtures/qingdao/NOTES.md`。 |
+| 苏州 | 默认（零 quirk，不需要 `curlibcode`） | `https://reader.szlib.com`，默认（非 pro2018）模板；检索/详情/馆藏裸参数均通，无需 `curlibcode`。详情页内嵌馆藏请求带 `jsessionid`＋`isCluster=false`，但家族 `isCluster=`（空）实测同样返回完整 holdingList、不依赖会话，故不新增字段。libcodeMap 仅 4 项（`ST=苏图`、`999=中心馆`、`zd=职大分馆`、`GS=姑苏区分馆`，馆名译名缩写「苏图」原值照登）、localMap 250 项。部分书目 `holdingList` 为空但 maps 齐全，属记录级数据事实（无实体单册），返回空馆藏列表正确。tagTr stale-label 缺陷在苏州记录上未触发。`tests/fixtures/suzhou/NOTES.md`。 |
 
 新接同族城市：`adapters/cn/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/cn/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 

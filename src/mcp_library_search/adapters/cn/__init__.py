@@ -18,6 +18,7 @@ from . import qingdao
 from . import shanghai
 from . import shaoxing
 from . import shenzhen
+from . import suzhou
 from . import taizhou
 from . import tianjin
 from . import wenzhou
@@ -41,6 +42,7 @@ ADAPTERS = {
     "shanghai": shanghai,
     "shaoxing": shaoxing,
     "shenzhen": shenzhen,
+    "suzhou": suzhou,
     "taizhou": taizhou,
     "tianjin": tianjin,
     "wenzhou": wenzhou,

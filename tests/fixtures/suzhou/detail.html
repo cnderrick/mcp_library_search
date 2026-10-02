@@ -1,0 +1,5285 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+		
+		<script type="text/javascript">
+			var $$opac_bookcover = "https://book-resource.dataesb.com/websearch/metares";
+			var ctx = "/opac";
+		</script>
+
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></link>
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/js-one.six.two.min.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" type="text/javascript" ></script>
+<script>
+    /*加载失败切换本地js库方法*/
+    if (!window.jQuery) {
+        console.log("加载js失败，切换路径");
+        document.write('<script src=\"/opac/media/js/jquery/js-one.six.two.min.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54\" type=\"text/javascript\"><\/script>');
+    }
+</script>
+
+
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-6.1.0/highcharts.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-6.1.0/themes/grid.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/common/colldata-1.1215.full.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" charset="utf-8"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script>
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		<script>
+			// 初始化 SDK
+			var sensors = window['TcDataCollectWebSDK'];
+			var initAppid = 'P2JS0512001';
+			
+			
+			
+			
+
+			sensors.init({
+				app_id: initAppid,
+				show_log: true,   // 是否打印日志信息
+				heatmap: {
+					/**
+					 * 1. 默认 $WebClick 只采集 a，button，input ，textarea 四个 dom 元素的点击事件。
+					 * 2. default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭。
+					 */
+					clickmap:'default',
+
+					// 配置不采集元素点击事件 true:采集   false:不采集
+					collect_element: function(element_target){
+						return !$(element_target).is("INPUT");
+					},
+
+					// default 表示开启，自动采集 $WebStay 事件，滚屏是触发，但页面停留必须过4秒后（可自定义）；可以设置 'not_collect' 表示关闭。
+					scroll_notice_map:'not_collect',
+					// 设置有效停留时长， 毫秒，默认是4000毫秒
+					scroll_delay_time: 6000
+				},
+				preset_properties: {
+					//是否采集 $url 页面地址作为公共属性，默认值 false
+					url: true,
+					//是否采集 $title 页面标题作为公共属性，默认值 false
+					title: true,
+				}
+			});
+
+            // 设置之后，SDK 就会自动收集页面浏览事件($pageview), 默认是关闭的
+            sensors.quick('autoTrack')
+
+			// 手动调用, 用户自定义埋点
+			function trackSearch(word) {
+				sensors.track('OpacSearch', {
+					KeyWord: word
+				});
+			}
+
+			function trackLogin(rdid) {
+				sensors.login(rdid, function () {
+
+				});
+			}
+
+			function trackLogout() {
+				sensors.logout(false);
+
+			}
+
+		</script>
+		<script type="text/javascript">
+            (function() {
+                var jtlog = document.createElement('script');
+                jtlog.type = 'text/javascript';
+                jtlog.async = true;
+                jtlog.src = 'https://jtlog.jiatu.cloud/jtlog-receiver/js/autotrack.js?project=stopac&token=5db637cb-4b5d-4462-97fe-97c8fcaf704b';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(jtlog, s);
+            })();
+        </script>
+		
+		
+			
+				
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+                
+				</script>
+			
+			
+		
+		<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+
+		<script type="text/javascript" src="/opac/media/js/common/charts.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" type="image/vnd.microsoft.icon" /> 
+		<title></title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/js-ui-one.eight.onesix.custom.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/js-ui-one.eight.onesix.custom.min.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="referrer" content="same-origin" />
+
+    
+    
+        <meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, 三体：图像小说, 苏州图书馆" />
+   
+
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+
+
+
+
+</style>
+<script>
+	(function () {
+		var script = document.createElement("script")
+		script.type = "text/javascript";
+		script.src = "/opac/media/js/common/aiSupport.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+		
+		
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(script, s);
+	})();
+</script>
+
+<script type="text/javascript">
+	function logout(){
+		trackLogout();
+		location.href="/opac/reader/logout;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+	}
+	
+	$(document).ready(function(){
+		
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.newpub".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.bookSpecial".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.recommend".length*4+24;
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar"
+		
+			
+			
+			
+		
+>
+	<div class="navbar_bd" >
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+							
+								
+								
+								
+								
+									检索
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/advance;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											高级检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+							
+								
+								
+								
+								
+									书目浏览
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/cls;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/sci;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											科图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/newpub/cls;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+							
+								
+								
+								
+								
+									新书通报
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/newpub/cls;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类查看
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/newpub/sci;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											科图分类查看
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/bookSpecial;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+							
+								
+								
+								
+								
+									图书专题
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommend/getAllHistoryRecommendList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+							
+								
+								
+								
+								
+									图书荐购
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+
+				<!-- 开始是给广少图用的东西 -->
+				
+
+
+
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!--
+			<img src="/opac/media/images/lang.png;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				
+					
+					<span id="readerLogin" ><a  href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">登录</a></span>
+				
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+
+			
+				
+					<a href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+
+    
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" href="/opac/media/style/default/space.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" rel="stylesheet" />
+<style type="text/css">
+	#showVisitedCountDiv{
+		text-align:right;
+		padding-right:20px;
+		margin-top:26px;
+	}
+</style>
+<script type="text/javascript">
+<!--
+$(function() {
+	var $navPageBaseURL = $("#navPageBaseURL").text();
+	if($navPageBaseURL != "") {
+		$("#reSearchButton").show();
+	}
+	
+	if("1" == "1")
+	{
+		if("false" == "true")
+		{
+			$("#baseSearchForm select[name='searchWay']").val("");
+			return;
+		}
+		if("false"=="true")
+		{
+			$("#baseSearchForm select[name='searchWay']").val("");
+			return;
+		}
+		$("#baseSearchForm select[name='searchWay']").val("title");
+	}
+});
+function reSearch() {
+	var qword = $("#q").val();
+	
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	var $navPageBaseURL = $("#navPageBaseURL").text();
+	var q = encodeURIComponent($("#q").val());
+	if(q == "") {
+		alert("请输入检索词.");
+		return;
+	}
+	q = "marc:" + q;
+	var baseURL = "/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?";
+	var targetURL = baseURL + $navPageBaseURL + "&research.q=" + q;
+	document.location.href = targetURL;
+}
+//显示计数
+$(function() {
+	
+});
+function showVisitedCount(count){
+	var countStr = new String(count);
+	while(countStr.length < 8) {
+		countStr = "0" + countStr;
+	}
+	var len = countStr.length;
+	var result = "访问量：<span style='letter-spacing:3px;color:#00BB00;height:10px;' >"+countStr+"</span>";
+	$("#showVisitedCountDiv").html(result);
+	$("#showVisitedCountDiv").fadeIn(1000);
+}
+$(function() {
+	/*
+	$("#baseSearchForm").submit(function() {
+		var searchWay = $("#baseSearchForm select[name='searchWay']").val();
+		if(searchWay == "callno") {
+			$(this).append(
+				$("<input/>").attr("name", "sortWay").attr("type", "hidden").val("callno_sort"))
+				.append(
+				$("<input/>").attr("name", "sortOrder").attr("type", "hidden").val("asc"));
+		}
+	});
+	*/
+});
+//2026.6.9 增加百度统计
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?d01f28a05acccf669d22d7e35a700a28";
+	// hm.src = "https://hm.baidu.com/hm.js?9514f5f7f25d3d3b7f36addfd1ec256b";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+})();
+function baseSearch() {
+	var qword = $("#q").val();
+	
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	var q = encodeURIComponent($("#q").val());
+	if(q == "") {
+		alert("请输入检索词.");
+		return;
+	}
+	//q = "marc:" + q;
+	trackSearch(q);
+	var baseURL = "/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?";
+	var targetURL = baseURL + "&q=" + q;
+    
+	
+		var $searchWay = $("#baseSearchForm select[name='searchWay']");
+		if ($searchWay != null){
+			var searchWay = $searchWay.val();
+			targetURL = targetURL+"&searchWay="+searchWay;
+			if(searchWay == "callno") {
+				targetURL += "&sortWay=callno_sort";
+				targetURL += "&sortOrder=asc";
+			}
+		}
+	
+	if(targetURL.indexOf("sortWay") < 0){
+		var sortWay = "";
+		var sortOrder = "";
+		if(sortWay != ""){
+			targetURL = targetURL + "&sortWay=" + sortWay;
+		}
+		if(sortOrder != ""){
+			targetURL = targetURL + "&sortOrder=" + sortOrder;
+		}
+	}
+	var $scWay = $("#baseSearchForm select[name='scWay']");
+	targetURL += "&scWay="+$scWay.val();
+	
+			targetURL += "&hasholding=1";
+	
+	
+	
+    	var cirlibs = $.cookie("searcher_libcode");
+    	if(cirlibs){
+    	    var libArray = cirlibs.split("[]");
+    	    for (var i in libArray){
+                targetURL += "&curlibcode="+libArray[i];
+            }
+        }
+	
+	targetURL += "&searchSource=reader";
+	if($("#navPageBaseURL").text().indexOf("view=express")!=-1){
+		targetURL += "&view=express";
+		var locals = "";
+		var codeArrays = locals.split(",");
+		for (index in codeArrays) {
+			if(codeArrays[index]!=""){
+				targetURL += "&curlocal="+codeArrays[index];
+			}
+		}         
+	}else if ($("#navPageBaseURL").text().indexOf("view=reserveloan")!=-1) {
+		targetURL += "&view=reserveloan";	//如果是网上预借页面则加上view=reserveloan标识
+	}
+	
+	var curlocalconfig = $.cookie("localConfig");
+	var ipLimit = "";//没有根据ip限定馆藏地的时候才用这个cookie，不然有可能会导致拼接的地址过长
+	if(curlocalconfig != null && curlocalconfig != "" && ipLimit != "1"){
+		var values = curlocalconfig.split(",");     
+		for(var i = 0; i<values.length; i++){
+			targetURL += "&curlocal=" + values[i];    
+		}             
+	} 
+	document.location.href = targetURL;
+}
+$(document).ready(function(){
+	$("#baseSearchForm").submit(function(){
+		return false;   
+	});     
+	
+	
+
+	
+});
+//-->
+</script>
+
+<div id="page_header">
+	<div id="page_nav">
+		
+		<form id="baseSearchForm" action="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" method="get">
+		
+					<input type="hidden" name="hasholding" id="hasholding" value="1"/> 
+		  
+		
+	    
+		<div class="logo"><a href="/opac/index;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"><img src="/opac/media/images/logo.png;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"
+			
+			
+			
+			
+			/></a></div>
+		
+		<div class="page_nav_search">
+				<input type="hidden" name="rows" value="" />
+				
+					
+				
+				
+				<div style="display: none;" >
+					<select name="scWay"  class="search_select">
+						<option value="prefixMatch">前方一致</option>
+						<option value="dim" selected="selected">模糊检索</option>
+						<option value="full">精确检索</option>
+					</select>
+				</div>
+				
+				
+				<div>
+					<select name="searchWay" class="search_select"
+							
+					>
+						<option value="" selected="selected">任意词</option>
+						<option value="title">题名</option>
+						<option value="title200a">正题名</option>
+						
+						
+						<option value="isbn">ISBN/ISSN</option>
+						<option value="author">著者</option>
+						<option value="subject">主题词</option>
+						<option value="class">分类号</option>
+						
+						
+							<option value="ctrlno">控制号</option>
+							<option value="orderno">订购号</option>
+						
+						<option value="publisher">出版社</option>
+						
+						<option value="callno">索书号</option>
+						
+					</select>
+				</div>
+				
+				
+					
+					      
+						<div class="search_input"
+								
+						>
+							
+							
+								<input type="text" id="q" name="q" value="" onkeydown="if(event.keyCode==13) baseSearch();" size="50" placeholder=""/>
+							
+						</div>
+					
+				
+				<input type="button" class="search_button"
+						
+					   value="检索"  onclick="baseSearch()"/>
+			<input type="button" class="search_result_button"
+				   style="display:none;" id="reSearchButton" value="在结果中检索" onclick="reSearch()" />
+				
+					<input type="button" name="advance_search" id="advanceSearchButton" class="advance_search_button"
+							
+						   value="高级检索" onclick="window.location='/opac/index/advance;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54'"/>
+				
+				
+			<a  href="https://www.szlib.com/dzzx.html?id=0&showAIDialog=true" target="_blank" style="float: right;margin-right: 80px;"><img style="height: 50px;width: 50px;" src="/opac/media/images/szlibaizs.png;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></a>
+
+		</div>
+		</form>
+		
+		<div id="showVisitedCountDiv"></div>
+	</div>
+</div>
+			<div id="page_content">
+				
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- dojo style -->
+<link rel="stylesheet" href="/opac/media/js/dojo-release-1.8.14/dojo/resources/dojo.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+<link rel="stylesheet" href="/opac/media/js/dojo-release-1.8.14/dgrid/css/dgrid.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54">
+
+<script>
+	document.title = "图书详情";
+</script>
+
+
+<!--是否开启畅想之星单点登录-->
+
+
+
+
+
+
+
+
+
+<!-- 加载排架号解析方法文件 -->
+<script type="text/javascript" src="/opac/media/js/common/convertShelfnoFunctions.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+
+
+
+<!-- 这一段代码是用来判断需要加载什么语言的信息文件 -->
+
+
+
+
+<style type="text/css">
+<!--
+#topDiv {
+}
+#toolBar {
+	float: right;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+#leftDiv {
+	float: left;
+	width: 20%;
+	margin-left:10px;
+}
+#rightDiv {
+	float: right;
+	width: 75%;
+	margin-bottom: 15px;
+}
+#fontcolor{
+	color: red;
+}
+.relatedResources a{
+	float: left;
+	margin-right: 10px;
+}
+#bookInfoTable {
+	width: 100%;
+	font-size: 11pt;
+}
+#bookInfoTable .leftTD {
+	width: 15%;
+}
+#bookInfoTable .rightTD {
+	border-bottom: 1px solid #ccc;
+}
+#contentTab {
+	clear:both;
+	margin:5px auto;
+	width:99%;
+	border:1px solid #ccc;
+	font-size: 11pt;
+}
+#addComment{
+	width:700px;
+	height:230px;
+	margin:10px auto;
+}
+#addComment table{
+	font-size:10pt;
+	color:#333333;
+	background-color:#EEEEEE;
+}
+#addComment table td{
+	padding:5px 3px;
+	background-color:#FFFFFF;
+}
+#addComment ul,#addComment ul li{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	width:450px;
+}
+#addComment ul li{
+	line-height:25px;
+	height:25px;
+}
+#addComment input[type="text"]{
+	width:500px;
+	height:20px;
+	line-height:20px;
+	font-size:15px;
+	font-weight:bold;
+	border:1px #888888 solid;
+}
+#addComment textarea{
+	width:500px;
+	height:100px;
+	border:1px #888888 solid;
+}
+#addComment input[type="button"],#addComment input[type="reset"]{
+	width:80px;
+	height:30px;
+	border:none;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	background-image:url("/opac/media/images/nav-bg.gif;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54");
+}
+#score_li img{
+	cursor:pointer;
+}
+.bookcover_img {
+	border: none;
+	width: 160px;
+
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-box-shadow:1px 1px 5px #333333;
+	-webkit-box-shadow:1px 1px 5px #333333;
+	box-shadow: 1px 1px 5px #333333;
+}
+.hide {
+	display: none;
+}
+
+.dojoxGridMasterHeader{
+	font-size:11pt !important;
+}
+.dojoxGridView{
+	font-size:11pt !important;
+}
+.dojoxGridCell{
+	word-break:break-all !important;
+}
+
+#holdingDescription {
+	font-size:14px;
+}
+#holdingDescription ol{
+	list-style-type: none;
+}
+#holdingDescription li{
+	text-align: center;
+}
+#bookTrial{
+	font-size: 15px;
+}
+#loanTrendContainer{
+	margin:15px 0;
+	width:100%;
+	clear:both;
+	height:150px;
+}
+
+.field-state {
+	width: 140px;
+}
+.field-state1 {
+
+	width: 40px;
+}
+.field-state2 {
+
+	width: 75px;
+}
+.field-returnDate {
+	width: 102px;
+}
+.field-cirtype {
+	width: 85px;
+}
+.field-volInfo {
+	width: 70px;
+}
+.field-totalLoanNum {
+	width: 80px;
+}
+.field-totalRenewNum {
+	width: 70px;
+}
+
+.dgrid-navigation .dgrid-page-link {
+	padding: 0 10px!important;
+}
+.dgrid-no-data, .dgrid-loading {
+    color: #aaa!important;
+    font-size: 3em!important;
+    padding: 3em!important;
+    text-align: center!important;
+}
+.ui-widget-content {
+	border: 0px;
+}
+.dgrid-cell {
+	word-break:break-all !important;
+}
+#holdingGrid .ui-state-default,
+#holdingGrid .ui-widget-content .ui-state-default,
+#holdingGrid .ui-widget-header .ui-state-default {
+border-style:none;
+font-weight: normal;
+color: #555555;
+}
+#holdingGrid .ui-widget-header {
+	border-style:none;
+}
+
+.boxdiv{
+	    clear: both;
+   		margin: 5px auto;
+   		padding-top:5px ;
+   		padding-bottom:10px;
+  		width: 98%;
+}
+.hrClass{
+	border: 0.7px solid #ccc;
+	width: 99%;
+}
+.boxdiv_title{
+	font-size: 25px;
+	color:rgb(17,17,17) ;
+	margin-left: 10px;
+}
+.boxTable{/* 调整与整个div与左边的边距 */
+	margin: 20px 0px 15px 50px;
+}
+.boxContent{
+	width: 175px;
+	display: block;
+	margin-right: 8px;
+	float:left;
+}
+.title{
+	color: #0066c0;
+}
+a.aHover:hover{
+	text-decoration: underline;
+	color: rgb(196,85,0);
+}
+
+.alwaysLoanDiv{
+	width: 49%;
+	float: left;
+}
+.eleBookDiv{
+	width: 50%;
+	float: left;
+}
+.bottom{
+	margin-bottom: 10px;
+}
+.alwaysLoan{
+	float:left;
+	display: inline-block;
+}
+.plus{
+	float: left;
+	font-size:25px ;
+	color: #767676 ;
+	margin:47px 15px 0px 15px;
+}
+.authorAndTitle{
+	clear: both;
+}
+.sizeColor{
+	font-size: 15px;
+	font-family:serif;
+	color: rgb(64,64,64);
+	margin-right: 10px;
+}
+.author{
+	font-size: 14px;
+	font-family:serif;
+	color: rgb(64,64,64);
+	clear: right;
+}
+.reservationDiv,.prelendDiv{
+    position: relative;
+}
+
+#reservationTip{
+    display: none;
+	font-size: 12px;
+    width:240px;
+    padding: 4px 6px;
+    position: absolute;
+    top:-36px;
+    left:-80px;
+    background-color: #FFF;
+    border:1px solid #BBB;
+    border-radius: 2px;
+}
+#prelendTip{
+	display: none;
+	font-size: 12px;
+	width:120px;
+	padding: 4px 6px;
+	position: absolute;
+	top:-36px;
+	left:-20px;
+	background-color: #FFF;
+	border:1px solid #BBB;
+	border-radius: 2px;
+}
+
+
+</style>
+
+<script type="text/javascript">
+
+
+function bookDetail(bookrecno){
+	var url = "/opac/book/"+bookrecno+"";
+	window.location.href=url;
+}
+$(function(){
+	<!--厦门馆对接蓝博图封面，所以不调此方法-->
+	
+		loadBookcovers("P2JS0512001");
+	
+});
+
+//温州图书馆获取电子书资源
+function getebook() {
+	var isbn = "978-7-5753-0280-7";
+	var title = '三体：图像小说';
+	$.ajax({
+		type:"get",
+		url:"/opac/ebook/wz/getEBookList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data:{
+			"title" : title,
+			"isbn" : isbn
+		},
+		success:function (data) {
+			if(data.ebookList !== null && data.ebookList !== undefined && data.ebookList.length > 0){
+				var ebookList = data.ebookList;
+				var innerHTML = "";
+				for(var i = 0;i < ebookList.length;i++){
+					var id = ebookList[i].sourceID;
+					if (id === "cx"){
+						innerHTML += '<a style="margin-right: 30px" href="'+ ebookList[i].url +'">畅想之星资源</a>';
+					}else if (id === "afd"){
+						innerHTML += '<a style="margin-right: 30px" href="'+ ebookList[i].url +'">阿法迪资源</a>';
+					}
+				}
+				$("#ebook").html(innerHTML);
+			}else {
+				$("#ebook").html("<span>未找到电子资源</span>");
+			}
+		}
+	})
+}
+
+//温州图书馆获取同名电子书资源
+function getSameNameEbook() {
+	var title = '三体：图像小说';
+	$.ajax({
+		type:"get",
+		url:"/opac/ebook/wz/getSameNameEBookList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data:{
+			"title" : title
+		},
+		success:function (data) {
+			if(data.ebookList !== null && data.ebookList !== undefined && data.ebookList.length > 0){
+				var ebookList = data.ebookList;
+				var innerHTML = '<ul>';
+				for(var i = 0;i < ebookList.length;i++){
+					var flag = ebookList[i].sourceID;
+					var id = ebookList[i].id;
+					innerHTML += '<div onmouseover="imgin('+ id +')" onmouseout="imgout('+ id +')"><li><a style="margin-right: 30px" id="ebook_'+ id + '" href="'+ ebookList[i].url + '" >' + ebookList[i].title + '</a>';
+                    if (ebookList[i].sourceID === "afd"){
+                        innerHTML += '<div id="ebookimg_' + id + '" style="display: none;"><img id="ebookimg_' + id + '" style="height: 200px;" src="' + ebookList[i].qrCode + '"/></li></div>';
+                    }else{
+                    	var qrCodeUrl = ebookList[i].qrCode;
+                        var qrCode = "/opac/ebook/getCxQRCode?qrcode="+ qrCodeUrl +"";
+						innerHTML += '<div id="ebookimg_' + id + '" style="display: none;"><img id="ebookimg_' + id + '" style="height: 200px;" src="' + qrCode + '"/></li></div>';
+                    }
+				}
+				innerHTML += '</ul>';
+				$("#SameNamebook").html(innerHTML);
+				
+			}else {
+				$("#SameNamebook").html("<span>未找到电子资源</span>");
+			}
+		}
+	})
+}
+
+//温州图书馆获取推荐电子书资源
+function getRecommendEbook(page,size) {
+
+	var title = '三体：图像小说';
+	$.ajax({
+		type:"get",
+		url:"/opac/ebook/wz/getRecommendEBookList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data:{
+			"title" : title,
+			"page" : page,
+			"size" : 6
+		},
+		success:function (data) {
+			if(data.ebookList !== null && data.ebookList !== undefined && data.ebookList.length > 0){
+				var ebookList = data.ebookList;
+				$("#recommendebook").html("");
+				var resultPage = data.page;
+				resultPage += 1;
+				var innerHTML = "";
+				for(var i = 0;i < ebookList.length;i++){
+					var id = ebookList[i].sourceID;
+					innerHTML += '<a style="margin-right: 30px" href="'+ ebookList[i].url +'">'+ ebookList[i].title +'</a>';
+				}
+				innerHTML += '<a href="javascript:void(0);" onclick="getRecommendEbook('+ resultPage + ','+ size +')">换一批</a>'
+				$("#recommendebook").html(innerHTML);
+			}else {
+				$("#recommendebook").html("<span>未找到电子资源</span>");
+			}
+		}
+	})
+}
+
+function imgin(id) {
+	$("#ebookimg_"+id).css("display", "block");
+}
+
+function imgout(id) {
+	$("#ebookimg_"+id).css("display", "none");
+}
+
+
+//三亚市图书馆调用接口获取精彩试读内容
+function bookTrial(isbn,bookName,author,publishing) {
+	$.ajax({
+		type:"get",
+		url:"/opac/book/getBookTrial;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data:{
+			"isbn" : isbn,
+			"bookName" : bookName,
+			"author" : author,
+			"piblishing" : publishing
+		},
+		success:function(data){
+			if(data.bookTrial !== "" && data.bookTrial !== undefined){
+				var bookTrial = data.bookTrial;
+				$("#bookTrial").html(bookTrial);
+			}
+		}
+	});
+}
+function getRdid() {
+	var rdid = "";
+	
+	return rdid;
+}
+
+function reservationToy(bookrecno) {
+    var rdid = getRdid();
+    if (rdid == "") {
+        alert('请先登录!');
+        window.location.href = "/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?returnUrl=" + window.location.href;
+        return;
+    }
+    var libcode = $("#reservationLibcodeByToy").val();
+    if (libcode == "") {
+        alert('请选择一个分馆!');
+        return;
+    }
+    var rdlib = "";
+    var href = '/opac/reservation/canReservationToy/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' + libcode + '/' + bookrecno;
+    document.location.href = href;
+}
+//预约
+function reservationBook(bookrecno) {
+	var rdid = getRdid();
+	if(rdid == "") {
+		
+			alert('请先登录!');
+		
+		window.location.href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?returnUrl="+encodeURIComponent(encodeURIComponent(window.location.href));
+		return;
+	}
+	var libcode = $("#reservationLibcode").val();
+	if(libcode == "") {
+		alert('请选择一个分馆!');
+		return;
+	}
+
+	var rdlib = "";
+	//本馆读者
+	if(rdlib==libcode){
+        var href = '/opac/reservation/canReservationList/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' + libcode + '/' + bookrecno;
+		document.location.href = href;
+	}else{
+		//非本馆读者需要判断分馆是否允许进行馆际预约
+		$.ajax({
+			type:"get",
+			url:"/opac/reservation/isLibCanGlobalReserve/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"+libcode,
+			dataType:"json",
+			success:function(data){
+				if(data){
+					document.location.href = '/opac/reservation/canReservationList/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' +
+					libcode + '/' + bookrecno;
+				}else{
+					alert('您选择的分馆不允许外馆读者预约');
+				}
+			}
+		});
+	}
+}
+//预借
+function prelendBook(bookrecno) {
+	var rdid = getRdid();
+	if(rdid == "") {
+		
+			alert('请先登录!');
+		
+		
+			
+			
+		window.location.href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?returnUrl="+encodeURIComponent(encodeURIComponent(window.location.href));
+			
+		
+		return;
+	}
+	var libcode = $("#prelendLibcode").val();
+	if(libcode == "") {
+		alert('请选择一个分馆!');
+		return;
+	}
+	//浦东图书馆预借处理
+	var globalLibraryCode = "P2JS0512001";
+	if(globalLibraryCode == "P3SH021069") {/**
+		var rdlib = "";//读者所属馆
+		var flag = true;
+		$("#prelendLibcode option").each(function (){
+            var slcCode = $(this).val();
+            //如果开户馆中有馆藏，则不能在这预借
+            if(slcCode==rdlib){
+            	flag = false;
+            	alert('您不能在这里预借这个书目');
+                return false;
+            }
+         });
+		if(!flag){
+			return;
+		}**/
+	}
+	var param = "";
+	if(param!=""&&param.split(",").length==1){
+		param = "?curlibcode="+param;
+	}else{
+	    param = "";
+    }
+	document.location.href = '/opac/prelend/canPrelendList/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' +
+		libcode + '/' + bookrecno + param;
+}
+
+var bookListId="";
+var bookItemStr ="";
+//书单保存
+function saveItemsToBookList() {
+	var rdid = getRdid();
+	if(rdid == "") {
+		alert('请先登录!');
+		return;
+	}
+	bookListId = $("#bookLists").val();
+	bookItemStr = "1006489923";
+	if(bookItemStr == "") {
+		alert('请选择图书.');
+		return;
+	}
+	if($("#bookLists").val()=="")
+	{
+		newBookListDialog();
+		return;
+	}
+	addBookItems();
+}
+function newBookListDialog() {
+	$("#newBookListDialog").dialog("open");
+	clearNewBookList();
+}
+function openReservationDialog(){
+	var bookrecno = '1006489923';
+	var rdid = getRdid();
+	if(rdid == "") {
+		
+		alert('请先登录!');
+		
+		window.location.href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?returnUrl="+encodeURIComponent(encodeURIComponent(window.location.href));
+		return;
+	}
+	var libcode = $("#reservationLibcode").val();
+	if(libcode == "") {
+		alert('请选择一个分馆!');
+		return;
+	}
+
+	var href = '/opac/reservation/canReservationList/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' + libcode + '/' + bookrecno+"?simp=1";
+	$("#preContent").attr("src", href);
+	$("#prelendDialog").dialog("open");
+}
+function openPrelendDialog(){
+	var bookrecno = '1006489923';
+	var rdid = getRdid();
+	if(rdid == "") {
+		
+		alert('请先登录!');
+		
+		window.location.href="/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?returnUrl="+encodeURIComponent(encodeURIComponent(window.location.href));
+		return;
+	}
+	var libcode = $("#reservationLibcode").val();
+	if(libcode == "") {
+		alert('请选择一个分馆!');
+		return;
+	}
+
+	var param = "";
+	if(param!=""&&param.split(",").length==1){
+		param = "?curlibcode="+param+"&simp=1";
+	}else{
+		param = "?simp=1";
+	}
+	var href = '/opac/prelend/canPrelendList/;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54' + libcode + '/' + bookrecno + param;
+
+	$("#preContent").attr("src", href);
+	/*$("#preContent").load(href,function(response, status, xhr){
+		$("#prelendDialog").dialog("open");
+	});*/
+	$("#prelendDialog").dialog("open");
+
+}
+//把添加这一块单独提取出来，可能多个地方会用到
+function addBookItems()
+{
+	$.ajax({
+		type: "post",
+		url: "/opac/booklistitem/save;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data: {
+			"bookListId": bookListId,
+			"bookListItems": bookItemStr
+		},
+		dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+		success: function(xml){
+			showSaveBookListItemResult(xml);
+		}
+	});
+}
+function newBookList(){
+	if($("#new_listName").val()=="")
+	{
+		alert("书单名称不能为空！");
+		return;
+	}
+	$.ajax({
+		type:"post",
+		url:"/opac/booklist/save;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data:{
+			"listName": $("#new_listName").val(),
+			"description": $("#new_description").val(),
+			"privacy": $("#newBookListDialog input[name='new_privacy']:checked").val()
+		},
+		dataType:"xml",
+		success:function(xml){
+			showNewBookListResult(xml);
+		}
+	});
+}
+function showNewBookListResult(data){
+	var state=$(data).find("state").text();
+	if(state=="2")
+	{
+		if(confirm("你已创建过了相同名称的书单，是否直接保存进该书单！"))
+		{
+			bookListId=$(data).find("bookListId").text();
+			addBookItems();
+		}
+		$("#newBookListDialog").dialog("close");
+		clearNewBookList();
+	}
+	else if(state=="1")
+	{
+		bookListId=$(data).find("bookListId").text();
+		$("#bookLists").append("<option value='"+bookListId+"'>"+$("#new_listName").val()+"</option>");
+		addBookItems();
+		$("#newBookListDialog").dialog("close");
+		clearNewBookList();
+	}
+	else
+	{
+		alert("创建书单或者加入书单失败！");
+	}
+}
+function clearNewBookList()
+{
+	$("#new_listName").attr("value","");
+	$("#new_description").attr("value","");
+	
+		$("#newBookListDialog input[name='new_privacy']").eq(0).attr("checked","checked");
+	
+}
+function showSaveBookListItemResult(data) {
+	var state = $(data).find("state").text();
+	if(state == "1") {
+		alert("保存成功!");
+	} else {
+		alert("保存失败!");
+	}
+}
+//根据全局图书馆ID选择各馆对应的排架号规则解析方法解析排架号
+function convertShelfno(shelfno) {
+	var globalLibraryCode = "P2JS0512001";
+	if(globalLibraryCode == "P2GD020003") {
+		return convertShelfnoForGuangzhou(shelfno);
+	} else if(globalLibraryCode == "P1HBE027004") {
+		return convertShelfnoForHubeiProvince(shelfno);
+	} else if(globalLibraryCode == "P4FJ0595013") {
+		return convertShelfnoForJinJiang(shelfno);
+	}else if(globalLibraryCode == "P2JS0510052"){
+		return convertShelfnoForYiXing(shelfno);
+	}else if(globalLibraryCode == "P4GX0770111"){
+		return convertShelfnoForShangSiXian(shelfno);
+	}
+	return shelfno;
+}
+
+
+function localDataLimit(data){
+	var showLocal = $.cookie("showLocal");//用于限定显示的馆藏地点
+	
+	if(showLocal!=null&&showLocal!=""){
+		holdingList = data.holdingList;
+		var holdingData = new Array();
+		for(var i=0;i<holdingList.length;i++){
+			if(holdingList[i].curlocal==showLocal) {
+				holdingData.push(holdingList[i]);
+			}
+		}
+		data.holdingList = holdingData;
+	}
+}
+
+
+
+$(function() {
+	var limitCurlocalForBarcodeLocationUrl="";
+	var limitCurlocalForBarcodeLocationUrls=limitCurlocalForBarcodeLocationUrl.split(",");
+	var backupData;
+
+	var grid,store;
+	require([
+		"dojo/_base/declare",
+		"dojo/query",
+		"dojo/dom",
+		"dojo/dom-attr",
+		"dojo/dom-construct",
+		"dojo/request",
+		"dojo/store/Memory",
+		"dojo/data/ObjectStore",
+		"dgrid/OnDemandGrid",
+		"dgrid/Grid",
+		"dgrid/extensions/Pagination",
+		"dojo/date/locale",
+		"dojo/_base/xhr"
+	], function (declare, query, dom, domAttr, domConstruct,
+			request, Memory, ObjectStore, OnDemandGrid, Grid, Pagination, dateLocale, xhr) {
+		//南山教育局图书馆需求加的问号后面的内容
+		request("/opac/api/holding/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?limitLibcodes=&isCluster=false", {
+			handleAs: "json"
+		}).then(function (data) {
+			
+			localDataLimit(data);//读取cookie中的馆藏地限定并过滤数据
+			backupData=data;
+			var isChangeCurLoacl = "0";
+			var isShowMemoinfoOrShelfno = "0";
+			var showShelfnoLoactionUrl = "";
+			var libraryCode = "P2JS0512001";
+			var loanWorkMap = data.loanWorkMap;
+			var libcodeMap = data.libcodeMap;
+			var localMap = {};
+			localMap = data.localMap;
+
+			var holdStateMap = data.holdStateMap;
+			var pBCtypeMap = data.pBCtypeMap;
+			var barcodeLocationUrlMap = data.barcodeLocationUrlMap;
+			var libLocalNavigatorMap = data.libLocalNavigatorMap;
+			var libcodeDeferDateMap = data.libcodeDeferDateMap;
+			// Once the response is received, build an in-memory store with the data
+			store = new Memory({ data: data.holdingList });
+			//var dataStore = new ObjectStore({objectStore: store});
+			// Create a Grid instance using Pagination, referencing the store
+			//var grid = new OnDemandGrid({
+			grid = new (declare([Grid]))({
+				//collection: store,
+				columns: [
+
+					{ label: '索书号', field: "callno", id: "callno"},
+					
+						
+						
+						
+						
+							{ label: '条码号', field: "barcode", id: "barcode",
+							renderCell: function(object, node, value, options) {
+								var barcode = object.barcode;
+								var curlib = object.curlib;
+								var state = object.state;
+								var shelfno= object.shelfno;
+								var param = barcode;
+								if(libraryCode=="EHLJ0459004"){
+                                    param = object.callno;
+								}
+								var barcodeLocationUrl = barcodeLocationUrlMap[curlib];
+								
+								var isShowBarcodeLocationUrl=false;
+								if (limitCurlocalForBarcodeLocationUrl != undefined && limitCurlocalForBarcodeLocationUrl != null && limitCurlocalForBarcodeLocationUrl != "") {
+									for (var i = 0; i < limitCurlocalForBarcodeLocationUrls.length; i++) {
+										if (limitCurlocalForBarcodeLocationUrls[i] == object.curlocal) {
+											isShowBarcodeLocationUrl = true;
+										}
+									}
+								} else {
+									isShowBarcodeLocationUrl = true;
+								}
+								if ((state == '2' || state == '10') && isShowBarcodeLocationUrl && barcodeLocationUrl != undefined
+										&& barcodeLocationUrl != null && barcodeLocationUrl != "" && libraryCode != "P4FJ0595013"
+										&& libraryCode != "U1JX0796017" && libraryCode != "P2YN0879038"
+										&& libraryCode != "U2GX0772077" && libraryCode != "U2GZQ0851111"
+										&& libraryCode != "C2XJ0991060" && libraryCode != 'U1YN0871004') {
+									//只有在在馆的状态下并且该分馆配置了条码定位链接才显示
+									var desc = "";
+									if (libraryCode == "U2BJ010032") {
+										desc = "架位导航 ";
+									}
+									var imgSrc = '/opac/media/images/rfid.png;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54';
+									value.innerHTML = barcode + "<a target='_blank' href='"
+										+ barcodeLocationUrl + param
+										+ "'><img id='"+barcode+"' name='rfid' src='" + imgSrc + "' border='0' />"+desc+"</a>";
+									if(libraryCode == "P2GD020003"&&object.orglib!="YT"||libraryCode=="P2GD020011"&&(shelfno==null || shelfno=="")){
+										value.innerHTML = barcode;
+									}
+									if(libraryCode == "U1GD0759052"){
+                                        value.innerHTML = barcode;
+									}
+									if(libraryCode == "U2AH0551065"){
+										value.innerHTML = barcode;
+									}
+								} else {
+									value.innerHTML = barcode;
+								}
+							}
+						},
+						
+					
+					
+					
+					{
+						label: '馆藏状态',
+						field: "state",id: "state",
+						width: "140px",
+						renderCell: function(object, node, value, options) {
+							var state = object.state;
+							var curlib = object.curlib;
+							var orglib = object.orglib;
+							var regdate = object.regdate;
+							var curlibDeferDays = libcodeDeferDateMap[curlib];
+							if(state==2){
+								//显示借书易的按钮
+								$("#bookLoanEasilly").show();
+							}
+							var cellContent = "";
+							//加载所在馆限制列表
+							if($("option[value="+state+"]","#limitHoldStateSelect").length==0){
+								domConstruct.create("option", { innerHTML: holdStateMap[state].stateName, value: state },
+										limitHoldStateSelect);
+							}
+							if(libraryCode == "EZJ0571002"){
+								if (state == 0){
+									if (curlib == orglib){
+										cellContent = "上架中";
+									}else{
+										cellContent = "流通上架中";
+									}
+								}else {
+									cellContent = holdStateMap[state].stateName;
+								}
+							}else {
+								cellContent = holdStateMap[state].stateName;
+							}
+							value.innerHTML = cellContent;
+							if(libraryCode == "U1GD0759052"){
+								if(state == 2){ //在馆
+									value.innerHTML += " <button onclick='openPrelendDialog()'>预借</button>";
+								}else if(state ==3){ //借出
+									value.innerHTML += " <button onclick='openReservationDialog()'>预约</button>";
+								}
+							}
+						}
+					},
+
+					{ label: '应还时间', field: "returnDate", id: "returnDate", width: "90px",
+						get: function(item) {
+							var barcode = item.barcode;
+							var loanWork = loanWorkMap[barcode];
+							if(loanWork != null) {
+								var returnDate = loanWork.returnDate;
+                                //判断是否IE浏览器，ie要将-换成/
+                                if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                                    if("string"==typeof(returnDate)){
+                                        returnDate = returnDate.replace(/-/g,'\/');
+                                    }
+                                }
+								var returnDateStr =
+									dateLocale.format(new Date(returnDate),
+										{selector:'date', datePattern:'yyyy-MM-dd'});
+								return returnDateStr;
+							} else {
+								return "";
+							}
+						}
+					},
+
+					
+                    
+					
+					{ label: '文献所属馆', field: "orglib", id: "orglib",
+						get: function(item) {
+							var orglib = item.orglib;
+							return libcodeMap[orglib];
+						}
+					},
+					
+                    
+					{ label: '所在馆', field: "curlib", id: "curlib",
+						 
+						
+						
+						get: function(item) {
+							var curlib = item.curlib;
+							//加载所在馆限制列表
+							if($("option[value="+curlib+"]","#limitCurlibSelect").length==0){
+								domConstruct.create("option", { innerHTML: libcodeMap[curlib], value: curlib },
+										limitCurlibSelect);
+							}
+							return libcodeMap[curlib];
+						}
+						
+						
+
+					},
+                    
+					
+					
+					
+                    
+					{ label: '所在馆位置', field: "curlocal", id: "curlocal",
+                    
+                    
+						
+							
+							
+								get: function(item) {
+									var curlocal = item.curlocal;
+									var barcode = item.barcode;
+									var key = "";
+									if (isChangeCurLoacl==1){
+										key = barcode;
+										var tempValue = localMap[key];
+										if(tempValue == undefined || tempValue == null || tempValue == "") {
+											key = curlocal;
+										}
+									}else{
+										key = curlocal;
+									}
+									return localMap[key];
+								}
+							
+						
+					},
+
+					{ label: '详细位置', field: "barcode",
+						get: function(item) {
+							var res="";
+							if(item.state==0||item.state==2||item.state==7||item.state==10){
+							$.ajax({
+								async: false,
+								type: "GET",
+								url: "/opac/jsp_tiles/book/getShelfNo.jsp;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+								data: {"b":item.barcode},
+								dataType: "text",
+								success: function(text){
+								res=text;
+								}
+							});
+							};
+							return res;
+						}
+					},
+					{ label: '流通类型', field: "cirtype", id: "cirtype", width: "85px",
+						get: function(item) {
+							var cirtype = item.cirtype;
+							if(cirtype==null)return "";
+							return pBCtypeMap[cirtype].name;
+						}
+					},
+					{ label: '卷册信息', field: "volInfo", id: "volInfo", width: "70px" },
+					{ label: '借阅次数', field: "totalLoanNum", id: "totalLoanNum", width: "75px" },
+					{ label: '续借次数', field: "totalRenewNum", id: "totalRenewNum", width: "70px" }
+					
+
+					
+					//湖南工业大学或后台配置指定显示入藏时间
+					
+
+					//厦门图书馆添加个导航
+					
+
+					//桂林图书馆添加个导航
+					
+					
+
+				],
+				loadingMessage: "loading...",
+				noDataMessage: "no results"
+			}, "holdingGrid");
+			
+			grid.renderArray(data.holdingList);
+			//grid.startup();
+			if (isChangeCurLoacl==1){
+				setCurLocalForDataStore(grid, store, localMap);
+			}
+			if(isShowMemoinfoOrShelfno==1){
+				setShelfForDataStore();
+			}
+			//海恒接口(判断是否有架位导航图)
+			if(libraryCode == "P2GD020003"){
+				$("img[name='rfid']").each(function(i){
+					var rfidUrl = $(this).parent().attr("href");
+					rfidUrl = rfidUrl.substring(0,rfidUrl.lastIndexOf('/'))+"/getshelfno?callback=showRfidCover&barcode="+$(this).attr("id");
+					$.ajax({
+						type: "GET",
+						url: rfidUrl,
+						dataType: "jsonp",
+						jsonp: "showRfidCover"
+					});
+				});
+			}
+			
+
+			//加载默认选中的分馆
+			var selectedLib = "";
+			if(selectedLib&&selectedLib.split(",").length==1){
+				$("#limitCurlibSelect").find("option[value='"+selectedLib+"']").attr("selected",true);
+				handleCurlocalSelect();
+				setHoldingQuery();
+			}
+			
+		});
+		var limitCurlibSelect = dom.byId("limitCurlibSelect");
+		var limitCurlocalSelect = dom.byId("limitCurlocalSelect");
+		var limitHoldStateSelect = dom.byId("limitHoldStateSelect");
+		var limitRegnoSelect = dom.byId("limitRegnoSelect");
+		var libcode2LocalMap = null;
+		//先加载分馆->List[馆藏地点]
+		xhr.get({
+			url: "/opac/api/libcode2localMap;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+			handleAs: "json"
+		}).then(function(data){
+			libcode2LocalMap = data;
+			//加载数据完毕后去掉disabled属性
+			domAttr.remove(limitCurlibSelect, "disabled");
+			domAttr.remove(limitCurlocalSelect, "disabled");
+			domAttr.remove(limitHoldStateSelect, "disabled");
+			
+		});
+		function setHoldingQuery() {
+			var curlib = query("#limitCurlibSelect")[0].value;
+			var curlocal = query("#limitCurlocalSelect")[0].value;
+			var holdState = query("#limitHoldStateSelect")[0].value;
+
+			var holdingList=backupData.holdingList;
+			var holdingData = new Array();
+			for(var i=0;i<holdingList.length;i++){
+				if(curlib != "*"&&holdingList[i].curlib!=curlib) {
+					continue;
+				}
+				if(curlocal != "*"&&holdingList[i].curlocal!=curlocal){
+					continue;
+				}
+				if(holdState != "*"&&holdingList[i].state!=holdState) {
+					continue;
+				}
+				
+
+				holdingData.push(holdingList[i]);
+			}
+			if(holdingData.length>0){
+				grid.refresh();
+				grid.renderArray(holdingData);
+			}
+		}
+		function handleCurlocalSelect() {
+			domConstruct.empty(limitCurlocalSelect);
+			var curlib = limitCurlibSelect.value;
+			if(curlib == "*") {
+				domConstruct.create("option", { innerHTML: "请先选择所在馆", value: "*" },
+						limitCurlocalSelect);
+			} else {
+				domConstruct.create("option", { innerHTML: "所有所在馆藏地点", value: "*" },
+						limitCurlocalSelect);
+			}
+			var curlocalList = libcode2LocalMap[curlib];
+			for(var index in curlocalList) {
+				var curlocal = curlocalList[index];
+				var localcode = curlocal["localcode"];
+				var name = curlocal["name"];
+
+				
+				var holdingList=backupData.holdingList;
+				for(var i=0;i<holdingList.length;i++){
+					if(holdingList[i].curlib==curlib && holdingList[i].curlocal==localcode && $("#limitCurlocalSelect option[value="+localcode+"]").length==0){
+						domConstruct.create("option", { innerHTML: name, value: localcode }, limitCurlocalSelect);
+						break;
+					}
+				}
+
+
+			}
+
+			$("#holdingGrid > .ui-state-default").removeClass("ui-state-default");
+		}
+		query("#limitCurlibSelect").on("change", function(evt) {
+			handleCurlocalSelect();
+			setHoldingQuery();
+		});
+		query("#limitCurlocalSelect").on("change", function(evt) {
+			setHoldingQuery();
+		});
+		query("#limitHoldStateSelect").on("change", function(evt) {
+			setHoldingQuery();
+		});
+		query("#limitRegnoSelect").on("change", function(evt) {
+			setHoldingQuery();
+		});
+
+	});
+
+});
+
+//海恒接口(判断是否有架位导航图)
+function showRfidCover(data){
+	for (var key in data)
+    {
+    	if(data[key] == '0'){
+	   	 $("img[id='"+key+"']").hide();
+    	}
+    }
+}
+//--------通过http请求修改shelfno
+function setShelfForDataStore(){
+	//设置请求请求参数
+	var getShelfByBarcodeUrl = "";
+	if(getShelfByBarcodeUrl == null || getShelfByBarcodeUrl == "") return false;
+	var splitTerm = ",";
+	var barcodes = "";
+	store.query().forEach(function(holding){
+		var barcode = holding.barcode;
+		if(barcode != undefined && barcode != "") {
+			barcodes += barcode + splitTerm;
+		}
+	});
+	if(barcodes != undefined && barcodes != ""){
+		barcodes = barcodes.substring(0,barcodes.length-1);
+	}
+
+	$.ajax({
+		type: "GET",
+		url: getShelfByBarcodeUrl+"?barcode="+barcodes,
+		dataType: "jsonp",
+	    jsonp: "callback",
+	    success: function(data){
+	    	callback(data);
+	    }
+	});
+}
+function callback(data){
+	if (data != null){
+		var holdingData = new Array();
+		store.query().forEach(function(holding){
+			var barcode = holding.barcode;
+			if(barcode != undefined && barcode != "") {
+				holding.shelfno = data[0][barcode];
+			}
+			holdingData.push(holding);
+		});
+		if(holdingData.length>0){
+			grid.refresh();
+			grid.renderArray(holdingData);
+		}
+	}
+}
+
+//------add 厦门馆通过webservice修改curLocal---------
+function setCurLocalForDataStore(grid, store, localMap){
+	//设置请求webservice参数
+	var splitTerm = "~m~";
+	var barcodes = "";
+	store.query().forEach(function(holding){
+		var barcode = holding.barcode;
+		if(barcode != undefined && barcode != "") {
+			barcodes += barcode + splitTerm;
+		}
+	});
+	//ajax请求
+	$.ajax({
+		type: "GET",
+		url: "/opac/book/getCurLocalXiaMen;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data: {
+			"cmdACT":"getBookLocation",
+			"barcodes":barcodes
+		},
+		dataType: "xml",//这里要用xml,如果用html,则在IE下无法解析这个数据
+		success: function(xml){
+			insertLocations(xml);
+		}
+	});
+	//用返回值设置dataStore
+	function insertLocations(data) {
+		var records = $(data).find("record");
+		$(records).each(function(i){
+			var barcode = $.trim($(this).find("barcode").text());
+			var location = $.trim($(this).find("location").text());
+			if(location != ""){
+				location = decodeURIComponent(location);
+				store.query({"barcode":barcode}).forEach(function(holding){
+					localMap[barcode]=location;
+				});
+			}
+		});
+		grid.refresh();
+		grid.renderArray(store.query());
+	}
+}
+//------end add---------
+//加载时进行初始化
+$(document).ready(function(){
+	var isEnableAddTag = "1";
+	//如果不允许添加标签，则不显示标签那一行
+	if (isEnableAddTag != 1) {
+		$("#tagTr").css("display","none");
+	} else {
+		var tagListByCurrentRd = "";
+		//需要在多于一个的情况下添加空格，当到达最后一个时，不必添加空格（因为空格是在前面加的）
+		
+	}
+	$("input[name='tagName']").val(tagListByCurrentRd);
+	$("#newBookListDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 510,
+		buttons:[{
+					text:"新增并加入书单",
+					click:function(){
+						newBookList();
+					}
+				 }
+		 		]
+	});
+	$("#prelendDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 900,
+		height:600,
+		resizable:false
+	});
+
+	
+
+	
+
+	
+
+	
+});
+
+function checkEbook(json){
+	if (json.str == '1') {
+		$("#cxContainer").show();
+	}
+}
+//当读者输入修改标签名后，判断该标签名是否已存在，如果存在，则为该标签名添加背景
+function changeTagNames(){
+	var tagNameArr = $("input[name='tagName']").val().split(" ");
+	$("#commonTags").find("label").each(function(){
+		for (index in tagNameArr) {
+			//如果当前的标签名中与已存在的标签名相同，则高亮该标签名
+			if (tagNameArr[index] == $(this).html()) {
+				$(this).addClass("highlight_tag");
+			} else {
+				$(this).removeClass("highlight_tag");
+			}
+		}
+	});
+}
+
+/*
+ * 点击某一个已存在的标签时，将其添加到当前添加的标签处，并高亮它
+ * 再点击时从当前编辑框中删除该标签
+ */
+function clickToAddTag(currentComp){
+	var $parent = $(currentComp).parents("label:first");
+	var tagName = $(currentComp).html();
+	var tagNames = $("input[name='tagName']").val();
+	var newTagNames = "";
+	//如果原来输入框中已存在标签，则需要判断当前点击的标签名是否已添加
+	//如果添加，则点击时移除该标签，否则，则添加到输入框中
+	//如果输入框中不存在标签，则直接添加，并高亮
+	if (tagNames != ""){
+		var tagNameArr = tagNames.split(" ");
+		var exist = false;
+		for (index in tagNameArr) {
+			if (tagNameArr[index] == tagName) {
+				$parent.removeClass("highlight_tag");
+				exist = true;
+			}
+		}
+		//如果不存在该标签，则添加到输入框中
+		if (!exist) {
+			//不存在标签的情况下，直接取得原来的标签，把新增的标签加到后面
+			$parent.addClass("highlight_tag");
+			newTagNames = tagNames;
+			if (newTagNames != "") {
+				newTagNames += " ";
+			}
+			newTagNames += tagName;
+		} else {
+			//如果存在标签，则把当前存在的标签排除，把剩余的标签重新添加到输入框中
+			for (index in tagNameArr) {
+				if (tagNameArr[index] == tagName) {
+					continue;
+				}
+				if (newTagNames != "") {
+					newTagNames += " ";
+				}
+				newTagNames += tagNameArr[index]
+			}
+		}
+	} else {
+		$parent.addClass("highlight_tag");
+		newTagNames += tagName;
+	}
+	$("input[name='tagName']").val(newTagNames);
+}
+
+//为当前图书添加标签
+function addBookTag(){
+	var checking = checkLogin();
+	if(!checking){
+		return;
+	}
+	var $tagNameInput = $("input[name='tagName']");
+	//原始值，用于当用户当取消的时候恢复值
+	var originalTagNames = $tagNameInput.val();
+	var commonTags = $("#commonTags").html();
+	//用于判断标签是否显示过
+	var displayJson = eval("({})");
+	$("#editDialog").dialog({
+		modal:true,
+		title:"添加标签",
+		width:"400px",
+		buttons:[{
+			text:"确定",
+			click:function(){
+				$.ajax({
+					type:"post",
+					url:"/opac/tag/addBookToTag;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+					data:{"tagNames":$tagNameInput.val(),"bookrecno":"1006489923"},
+					success:function(){
+						//点击确定后，把原来的该读者的标签移除，添加新的标签
+						$("#tagTd").find("label").remove();
+						var tagNames = $tagNameInput.val();
+						var tagNameArr = tagNames.split(" ");
+						var $insertPos = $("#tagTd").find("input");
+						tagNames = "";
+						//记录当前的标签数目
+						var count = 0;
+						for (index in tagNameArr) {
+							if (tagNameArr[index] != "") {
+								//如果当前要显示的标签并没有重复的，则直接显示，否则只显示一个。
+								if (!displayJson[tagNameArr[index]]) {
+									displayJson[tagNameArr[index]] = true;
+									count ++;
+									//如果是多于一个，则需要用空格来分割
+									if (count > 1){
+										tagNames += " "+tagNameArr[index];
+									} else {
+										tagNames += tagNameArr[index];
+									}
+									$("<label class='highlight_tag'><a href='/"+getContextPath()+"/tag/publicTagBookList/"+tagNameArr[index]+"'" +
+											" target='_self'>"+tagNameArr[index]+"</a></label>").insertBefore($insertPos);
+								}
+							}
+						}
+						$tagNameInput.val(tagNames);
+						$("#editDialog").dialog("close");
+					},
+					error:function(){
+						alert("后台发生错误!");
+					}
+				});
+			}
+		},{
+			text:"取消",
+			click:function(){
+				$tagNameInput.val(originalTagNames);
+				$("#commonTags").html(commonTags);
+				$(this).dialog("close");
+			}
+		},{
+			text:"删除",
+			click:function(){
+				if (confirm("确定要删除您添加的此书的标签")){
+					$.ajax({
+						type:"post",
+						url:"/opac/tag/deleteBookFromTag;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+						data:{"bookrecno":"1006489923"},
+						success:function(){
+							//点击确定后，把原来的该读者的标签移除，添加新的标签
+							$("#tagTd").find("label").remove();
+							
+								$("<label>没有标签</label>").insertBefore($("#tagTd").find("input"));
+							
+							$("#editDialog").find("input[name='tagName']").val("");
+							$("#commonTags").find("label").removeClass("highlight_tag");
+							$("#editDialog").dialog("close");
+						},
+						error:function(){
+							alert("后台发生错误!");
+						}
+					});
+				}
+			}
+		}]
+	});
+}
+function addPrivateCollection()
+{
+	var checking = checkLogin();
+	if(checking){
+		$.ajax({
+			type:"post",
+			url:"/opac/privateCollection/add/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+			success:function(result){
+				alert(result);
+			},
+			error:function(){
+				alert("后台发生错误!");
+			}
+		});
+	}
+}
+function downloadAccessories(data){
+	
+	
+	
+}
+function openBoyun(data){
+	var isbn = getISBN();
+	if (isbn != null && isbn != ""){
+		window.open(data);
+	}
+}
+function getISBN(){
+	var isbn="978-7-5753-0280-7";
+	if(isbn==null){
+		isbn="";
+	}
+	return isbn;
+}
+//添加馆藏描述
+$(document).ready(function(){
+	$("#toPrintOnlineBtn").click(function(){
+		var bookRecno = 1006489923;
+		$.ajax({
+			url : "/opac/api/book/saveBookIdList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+			type : "POST",
+			data : {
+				"bookRecno" : bookRecno
+			}
+		}).done(function(result){
+			switch(result) {
+			case 1 :
+				if(confirm("添加成功,是否转到清单列表;")) {
+					top.location.href="/opac/book/showPrintBooks;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+				}
+				break ;
+			case 2 :
+				if(confirm("你已经添加过这本书了,是否转到清单列表;")) {
+					top.location.href="/opac/book/showPrintBooks;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54";
+				}
+				break;
+			case 3 :
+				alert("添加失败,每次最多只能输出50本图书的信息！");
+			}
+		});
+	});
+	$("#bookLoanEasilly").click(function(){
+		//check reader
+		loginTo("/opac/reader/expressLoan/list;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?bookrecno=1006489923");
+	});
+});
+
+$(document).ready(function(){
+	var bookrecno = "1006489923";
+	$.ajax({
+		type: "GET",
+		url: "/opac/book/currentReservationCount;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",
+		data: {
+			"bookrecnos": 1006489923
+		},
+		dataType: "json",
+		success: function(data){
+			var count = data[bookrecno];
+			$(".reservation_count").html('预约登记人次（'+count+"）");
+			$(".reservation_count").show();
+		}
+	});
+});
+
+
+//如果是期刊就调用期刊接口的期刊封面
+
+
+function nextone(step){
+	var target = "";
+	if(step==-1){
+		target = '/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?&view=json&return_fmt=json&page=-1';
+		step = "-1";
+	}else if(step==1){
+		target = '/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?&view=json&return_fmt=json&page=1';
+		step = "1";
+	}
+	$.ajax({
+		type: "GET",
+		url: target,
+		dataType: "json",
+		success: function(data){
+				if (data && data.nextBookrecno) {
+					var value = data.nextBookrecno;
+					if (value) {
+						var base = encodeURIComponent("");
+						var url = "/opac/book/"+value+"?index="+step+"&base="+base+"";
+						window.location.href = url;
+					} else {
+						alert("没有记录!");
+					}
+				}
+		}
+	});
+
+}
+//-->
+</script>
+
+
+
+
+<div id="prelendDialog" class="hide">
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" id="preContent" scrolling="yes" width="100%" height="100%"></iframe>
+</div>
+<div id="newBookListDialog" class="hide" title="新增书单">
+	<table align="center" cellspacing="5">
+		<tr>
+			<td width="100px" align="right">名称:</td>
+			<td>
+				<input type="text" name="new_listName" id="new_listName" style="width:350px;height:20px;border:1px #888888 solid;"/>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">描述:</td>
+			<td>
+				<textarea name="new_description" id="new_description" style="width:350px;height:70px;border:1px #888888 solid; "></textarea>
+			</td>
+		</tr>
+		<tr id="publicBookListTag">
+			<td align="right">公开/私有:</td>
+			<td>
+				<input type="radio" name="new_privacy" value="1" />公开
+				<input type="radio" name="new_privacy" value="0" checked="checked"/>私有
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="editDialog" >
+	<span><em>标签:</em><input type="text" name="tagName" onchange="changeTagNames()"/></span>
+	<span style="display:block;font-size:14px;">用空格间隔多个标签,如:小说 文学 余秋雨</span>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/js-ui-one.eight.onesix.custom.css;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/js-ui-one.eight.onesix.custom.min.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"></script>
+<style type="text/css">
+body,h2{margin:0 ; padding:0;}
+#faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+#faqdiv{position:absolute;width:400px; left:50%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #fff solid; padding:1px; padding-bottom: 30px}
+#faqdiv h2{ height:25px; font-size:14px; background-color:#C4C4C4 ; position:relative; padding-left:10px; line-height:25px;}
+#faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+#faqdiv .form{padding:10px;}
+
+.form li{ clear:left; }
+</style>
+<script>
+
+$(document).ready(function(){
+	$("#loginDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 350,
+		resizable:false,
+		//height: 'auto',
+		open: function(){
+			$("#loginFrame").attr("src",'/opac/reader/login;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?loginFlag=dialog');
+		},
+	 	close: function() {
+	 		$('#rdPasswd').val("");
+	 		$("#loginmsg").html("");
+		},
+		show: {
+ 			effect: "blind",
+ 			duration: 1000
+ 		}
+	});
+});
+
+//检查是否登录
+function loginTo(toPage){
+	$("#toPageUrl").val(toPage);
+	var res =false;
+	$.ajax({
+		type:'get',
+		dataType:'json',
+		async : false,
+		url:'/opac/reader/getReaderInfo;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?return_fmt=json',
+		success:function(data){
+			if(data.reader==null||data.reader=='undefined'){
+				$("#loginDialog").dialog("open");
+				
+					
+					
+						$("#loginDialog").dialog("open");
+					
+				
+			}else{
+		 		if(toPage!=""){
+		 			window.location.href = toPage;
+		 		}
+				res = true;
+			}
+		},
+		error: function(){
+			
+				
+				
+					$("#loginDialog").dialog("open");
+				
+			
+		}
+	});
+	return res;
+}
+function checkLogin(){
+	return loginTo("");
+}
+</script>
+<input type="hidden" id="reader" name="reader" value=""/>
+<input type="hidden" id="data" name="data" />
+<input type="hidden" id="toPageUrl" name="toPageUrl" />
+<!-- <div id="faqbg"></div>-->
+	<div id="loginDialog" class="hide" title="登录我的图书馆" align="center" valign="top">
+	<iframe id="loginFrame" name="loginFrame" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+	</div>
+	
+
+
+
+
+<div id="contentDiv" style="font-size:14px;">
+<div id="toolBar">
+	<span>
+		保存至书单:
+		<select name="bookLists" id="bookLists">
+			<option value="">创建新书单</option>
+			
+		</select>
+		<input type="button" value="保存"
+			class="button" onclick="saveItemsToBookList()" />
+	</span>
+	
+	<span>
+		<input type="button" class="button" value="添加临时书单" id="toPrintOnlineBtn" />
+	</span>
+	
+	<span><input type="button" class="button" value="加入书架" onclick="addPrivateCollection()"/></span>
+	
+	<span><input type="button" class="button" value="添加标签" onclick="addBookTag()"/></span>
+	
+</div>
+<div id="topDiv">
+<div id="leftDiv">
+	
+	
+
+	
+		<div style="padding-top:20px;">
+		
+			
+			
+			
+			
+				
+					
+					
+					
+					
+						<img id="bookcover_img" class="bookcover_img" src="/opac/media/images/book-default-small.gif;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"
+							 onerror="this.src='/opac/media/images/book-default-small.gif;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54'";
+							 isbn="978-7-5753-0280-7" bookrecno="1006489923"
+						/>
+					
+				
+			
+		
+		
+	</div>
+	
+</div><!-- end of leftDiv -->
+<div id="rightDiv" >
+<table id="bookInfoTable">
+<tr data-sort="0">
+	<td colspan="2">
+		<h2>三体：图像小说</h2>
+	</td>
+</tr>
+<!-- 选择判断CNMARC和USMARC -->
+
+
+	<!-- CNMARC的情况下 -->
+	
+	
+	
+	
+	
+	
+		<tr data-sort="40">
+			<td align="left" class="leftTD">
+				<div align="left">
+					题名/责任者:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					
+					<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=title&q=%E4%B8%89%E4%BD%93">
+							三体
+					</a>
+				
+				
+				
+				/
+刘慈欣原著
+				, 
+吴青松，三体宇宙编绘
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+		
+		
+		<tr data-sort="10">
+			<td class="leftTD">
+				<div align="left">
+					ISBN:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+978-7-5753-0280-7
+				
+				
+				
+				
+					价格：
+CNY88.00
+				
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="80">
+			<td class="leftTD">
+				<div align="left">
+					语种:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				
+				汉语
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="60">
+			<td class="leftTD">
+				<div align="left">
+					载体形态:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					
+					
+					174页
+				
+				
+				;
+					
+					
+					26cm
+				
+				
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="50">
+			<td class="leftTD">
+				<div align="left">
+					出版发行:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				
+				
+					南京
+				
+				:
+                    
+					
+                    <a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=publisher&q=%E8%AF%91%E6%9E%97%E5%87%BA%E7%89%88%E7%A4%BE">
+                            译林出版社</a>,
+2025
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="70">
+			<td class="leftTD">
+				<div align="left">
+					内容提要:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					
+本书改编自科幻巨著《三体》，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。<br/>
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="90">
+			<td class="leftTD">
+				<div align="left">
+					主题词:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+					
+					<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&q=%E6%BC%AB%E7%94%BB">
+							漫画
+					</a>
+				
+					
+					<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&q=%E8%BF%9E%E7%8E%AF%E7%94%BB">
+							连环画
+					</a>
+				
+					
+					<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&q=%E4%B8%AD%E5%9B%BD">
+							中国
+					</a>
+				
+					
+					<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&q=%E7%8E%B0%E4%BB%A3">
+							现代
+					</a>
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		<tr data-sort="100">
+			<td class="leftTD">
+				<div align="left">
+					
+						
+						中图分类法
+					:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+I247.55
+				
+				版次：
+5
+				
+			</td>
+		</tr>
+		
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+        
+		
+			
+			
+		
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+		<tr data-sort="30">
+			<td class="leftTD">
+				<div align="left">
+					主要责任者:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				
+				<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=author&q=%E5%88%98%E6%85%88%E6%AC%A3">
+					 
+刘慈欣
+				</a>
+				
+				
+原著
+			</td>
+		</tr>
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+		<tr data-sort="110">
+			<td class="leftTD">
+				<div align="left">
+					次要责任者:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				
+				<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=author&q=%E5%90%B4%E9%9D%92%E6%9D%BE">
+					 
+吴青松
+				</a>
+				
+				
+编绘
+			</td>
+		</tr>
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<tr data-sort="62">
+			<td class="leftTD">
+				<div align="left">
+					附注:
+				</div>
+			</td>
+			<td class="rightTD"><!--  td300="300" -->
+				
+					
+其他题名:图像小说<br/>
+				
+			</td>
+		</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+		<tr data-sort="121">
+			<td class="leftTD">
+				<div align="left">
+					次要团体责任者:
+				</div>
+			</td>
+			<td class="rightTD">
+				
+				<a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=author&q=%E4%B8%89%E4%BD%93%E5%AE%87%E5%AE%99">
+					
+三体宇宙
+				</a>
+				
+编绘
+			</td>
+		</tr>
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	
+	
+	
+	
+	
+        
+	
+	
+	
+	
+	
+	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+		
+
+
+	
+	
+	
+	
+<!-- CNMARC结束 -->
+
+
+
+
+
+	<!-- 这下面是CNMARC,USMARC等全部都显示的共有部分 -->
+	<!-- 豆瓣内容简介和著者简介移动到下面的tab统一显示 -->
+	<!--tr id="doubanSummaryTR" style="display:none;">
+		<td class="leftTD" valign="top">豆瓣内容简介:</td>
+		<td class="rightTD" id="doubanSummary"></td>
+	</tr>
+	<tr id="doubanAuthorIntroTR" style="display:none;">
+		<td class="leftTD" valign="top">豆瓣著者简介:</td>
+		<td class="rightTD" id="doubanAuthorIntro"></td>
+	</tr-->
+	<tr id="tagTr" data-sort="98">
+		<td>
+			<div align="left">标签:</div>
+		</td>
+		<td class="rightTD" id="tagTd">
+			
+				
+				
+					<label>没有标签</label>
+				
+			
+		</td>
+	</tr>
+
+	
+
+	
+	<!-- 东莞与博云随书附盘 -->
+	<tr id="bookAccessories" style="display:none" data-sort="161">
+		<td class='leftTD'>
+			<div align='left'>随书附盘：</div>
+		</td>
+		<td>
+			<div id="boyun_accessories"></div>
+		</td>
+	</tr>
+	<!-- 海大畅想之星随书光盘 -->
+	
+
+	<!-- Cadal电子图书链接 -->
+	
+	
+	
+	
+	<!-- 夏图超星电子书链接 -->
+	
+
+	
+		<tr id="cxContainer">
+
+		</tr>
+	
+	
+	<!-- 相关主题 -->
+	
+    <tr data-sort="150">
+		<td class="leftTD">
+			<div align="left">相关主题:</div>
+		</td>
+		<td class="rightTD">
+			
+				<div class="book_detial_related_subject"  ><a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&scWay=dim&q=%E7%A7%91%E5%AD%A6%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4%E2%94%80%E4%B8%AD%E7%AF%87%E2%94%80%E4%B8%AD%E5%9B%BD%E2%94%80%E5%BD%93%E4%BB%A3" target="_blank">科学幻想小说─中篇─中国─当代</a></div>
+			
+				<div class="book_detial_related_subject"  ><a href="/opac/search;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?searchWay=subject&scWay=dim&q=%E7%A7%91%E5%AD%A6%E5%B9%BB%E6%83%B3%E5%B0%8F%E8%AF%B4%E2%94%80%E9%95%BF%E7%AF%87%E2%94%80%E4%B8%AD%E5%9B%BD%E2%94%80%E5%BD%93%E4%BB%A3" target="_blank">科学幻想小说─长篇─中国─当代</a></div>
+			
+			
+		</td>
+    </tr>
+	
+	<!-- 相关资源链接 -->
+	
+		
+			<tr data-sort="160">
+		<td>
+			<div align="left">相关资源:</div>
+		</td>
+		<td class="rightTD" id="resourceLink_id">
+			
+			
+			<!-- 超星图书连接按钮 -->
+			
+			<!-- 海口经济学院e图链接按钮  根据全局图书馆ID判断是否打开-->
+			
+		
+				
+				
+				
+				
+
+			
+				
+				
+					<span>
+					<a href="http://www.douban.com/subject_search?search_text=三体：图像小说" target="_blank" title="去douban豆瓣查看相关书评">
+						
+						<img height="25px" src="/opac/resourcelink/icon/3;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+						
+						
+					</a>
+					</span>
+				
+			
+		
+				
+				
+				
+				
+
+			
+				
+				
+					<span>
+					<a href="http://worldcat.org/search?q=三体：图像小说" target="_blank" title="worldcate搜索">
+						
+						<img height="25px" src="/opac/resourcelink/icon/2;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+						
+						
+					</a>
+					</span>
+				
+			
+		
+				
+				
+				
+				
+
+			
+				
+				
+					<span>
+					<a href="http://www.google.cn/search?q=三体：图像小说" target="_blank" title="去google搜索图书">
+						
+						<img height="25px" src="/opac/resourcelink/icon/1;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+						
+						
+					</a>
+					</span>
+				
+			
+		
+				
+				
+				
+				
+
+			
+				
+				
+					<span>
+					<a href="http://book.baidu.com/s?tn=baidubook&ie=utf-8&sr=&ct=2097152&si=book.baidu.com&z=&f=8&wd=三体：图像小说" target="_blank" title="到百度书库搜索">
+						
+						<img height="25px" src="/opac/resourcelink/icon/5;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+						
+						
+					</a>
+					</span>
+				
+			
+		
+				
+				
+				
+				
+
+			
+				
+				
+					<span>
+					<a href="http://search.cnki.net/search.aspx?q=三体：图像小说" target="_blank" title="CNKI Search Beta">
+						
+						<img height="25px" src="/opac/resourcelink/icon/4;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" />
+						
+						
+					</a>
+					</span>
+				
+			
+		
+		</td>
+	</tr>
+		
+	
+	
+			
+	
+	
+	
+	
+
+	
+</table>
+
+
+	<div>
+        <dl style="display: none;width:100%;" id="ebookdetailbtn" class="booklist">
+            <dt style="width:15%;float:left;">电子书链接: </dt>
+            <dd id="ebookdetail"></dd>
+        </dl>
+        
+        <dl style="display: none;width:100%;" id="bookanEbook" class="booklist">
+            <dt style="width:15%;float:left;">博看期刊链接: </dt>
+            <dd><a id="bookanUrl" href="#">三体：图像小说</a></dd>
+        </dl>
+ 	</div>
+	
+	<div style="width:auto; height:auto;float: right;">
+		
+	</div>
+</div><!-- end of rightDiv -->
+</div>
+
+<!-- 浙江图书馆 图书推荐 -->
+<!-- end 浙江图书馆 图书推荐  -->
+<!-- 显示借阅趋势图 -->
+
+
+<div id="contentTab">
+	<ul>
+		<li><a href="#holding">馆藏信息</a></li>
+		
+				
+		
+			<!-- 否则当做图书处理 -->
+			
+				<li><a href="#bookOrderDiv">预订信息</a></li>
+			
+			
+		
+		
+		<!-- 这下面是图书和期刊都有的 -->
+		
+			<li><a href="#bookMarcDiv">marc信息</a></li>
+		
+		
+		
+			
+			<li class="hide" id="book_catalog_978-7-5753-0280-7"><a href="#bookCatalog">图书目录</a></li>
+			
+			
+			<li class="hide" id="book_preview_978-7-5753-0280-7"><a href="#bookPreview">试读信息</a></li>
+			
+			
+			<li class="hide" id="book_summary_978-7-5753-0280-7"><a href="#bookContentSummary">内容简介</a></li>
+			
+			
+			<li class="hide" id="book_authorIntroduction_978-7-5753-0280-7"><a href="#bookAuthorIntroduction">著者简介</a></li>
+			
+		
+		
+			<li><a href="#addComment">发表评论</a></li>
+			<li><a href="#commentList">查看评论</a></li>
+		
+		
+	</ul>
+	<div id="holding" style="min-width:600px;min-height:400px;">
+		限定所在馆:
+		<!-- TODO 下面的select不能用data-dojo-type="dijit.form.Select",否则on绑定不了事件 -->
+		<select id="limitCurlibSelect" disabled="disabled">
+			<option value="*">所有所在馆</option>
+		</select>
+		限定所在馆藏地点:
+		<select id="limitCurlocalSelect" disabled="disabled">
+			<option value="*">所有所在馆藏地点</option>
+			
+		</select>
+		
+		
+			限定馆藏状态:
+			<select id="limitHoldStateSelect" disabled="disabled">
+				<option value="*">所有馆藏状态</option>
+			</select>
+		
+		
+		<span class="reservation_count" ></span>
+		
+			
+
+		
+
+		
+
+        
+
+
+
+
+		
+		<div class="claro" id="holdingGrid"></div>
+	</div>
+	
+	
+	
+		<!-- 否则当做图书处理 -->
+		
+		<div id="bookOrderDiv">
+			<iframe id="bookOrderIFrame" width="100%" frameborder="0"></iframe>
+		</div>
+		
+        
+	
+	
+	<!-- 这下面是图书和期刊都有的 -->
+	<!-- 贵州图书馆不显示marc信息 -->
+	
+	<div id="bookMarcDiv" >
+		<pre>HEA|  |00954nam0 2200265   450 
+001|  |012022160566
+005|  |20250303095527.1
+010|  |▼a978-7-5753-0280-7▼dCNY88.00
+100|  |▼a20250108d2025    em y0chiy0       ea
+101|0 |▼achi
+102|  |▼aCN▼b320000
+105|  |▼aa   t   000yy
+106|  |▼ar
+200|1 |▼a三体▼e图像小说▼f刘慈欣原著▼g吴青松，三体宇宙编绘▼-
+   |  |9san ti
+210|  |▼a南京▼c译林出版社▼d2025
+215|  |▼a174页▼d26cm
+300|  |▼a其他题名:图像小说
+330|  |▼a本书改编自科幻巨著《三体》，讲述了地球人类文明和三体文明-
+   |  |的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。-
+517|1 |▼a图像小说
+606|0 |▼a漫画▼x连环画▼y中国▼z现代▼9man hua
+690|  |▼aI247.55▼v5
+701| 0|▼a刘慈欣▼4原著▼9liu ci xin
+702| 0|▼a吴青松▼4编绘▼9wu qing song
+712|02|▼a三体宇宙▼4编绘▼9san ti yu zhou
+801| 0|▼aCN▼bST▼c20250303
+</pre>
+	</div>
+	
+	
+	<div id="doubanReviewDiv"></div>
+	
+		
+		<div id="bookCatalog"></div>
+		
+		
+		<div id="bookPreview"></div>
+		
+		
+		<div id="bookContentSummary"></div>
+		
+		
+		<div id="bookAuthorIntroduction"></div>
+		
+	
+	
+	<div id="addComment">
+		<div id="comment_content">
+		<form method="post" id="bookReview">
+			<table width="100%">
+				<tr><td width="20%" align="right">题名：</td><td><input type="text" name="title" id="title_id"/></td></tr>
+				<tr>
+					<td align="right" style="padding-top:10px;">推荐等级：</td>
+					<td>
+						<ul style="margin:0px;padding:0px;">
+							<li style="width:200px;float:left;" id="score_li">
+								<img src="/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" id="score_1" onmouseover="onmouseoverBookScore(1)" onmouseout="onmouseoutBookScore()" onclick="onclickBookScore(1)"/><img src="/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" id="score_2" onmouseover="onmouseoverBookScore(2)" onmouseout="onmouseoutBookScore()" onclick="onclickBookScore(2)"/><img src="/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" id="score_3" onmouseover="onmouseoverBookScore(3)" onmouseout="onmouseoutBookScore()" onclick="onclickBookScore(3)"/><img src="/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" id="score_4" onmouseover="onmouseoverBookScore(4)" onmouseout="onmouseoutBookScore()" onclick="onclickBookScore(4)"/><img src="/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54" id="score_5" onmouseover="onmouseoverBookScore(5)" onmouseout="onmouseoutBookScore()" onclick="onclickBookScore(5)"/>
+							</li>
+							<li id="score" style="width:auto;float:left;color:red;font-weight:bold;">请评分</li>
+						</ul>
+					</td>
+				</tr>
+				<tr><td align="right" valign="top">内容：</td><td valign="top"><textarea name="content" id="content_id"></textarea></td></tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input type="button" value="发表" onclick="addBookCommend()"/>&nbsp;&nbsp;
+						<input type="reset" value="重写" id="reset_id"/>
+						<input type="hidden" name="bookrecno" value="1006489923">
+						<input type="hidden" name="rate" id="rate_id" value=""/>
+					</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+	<div id="commentList">
+		<iframe width="100%" height="500px" style="margin:0;padding:0 ;" scrolling="auto" frameborder="0" src="/opac/book/bookCommendList;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?page=1&rows=5&bookrecno=1006489923"></iframe>
+	</div>
+	
+	<!-- 馆藏描述 -->
+	<div id="holdingDescription">
+<!-- 		<ol></ol> -->
+		
+			
+		
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+<!--
+var global_score=0;
+function onmouseoverBookScore(scoreNum)
+{
+	$("#score").html("");
+	for(var i=1;i<=scoreNum;i++)
+	{
+		$("#score_"+i).attr("src","/opac/media/images/commend2.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54");
+	}
+	for(var i=scoreNum+1;i<=5;i++)
+	{
+		$("#score_"+i).attr("src","/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54");
+	}
+}
+function onmouseoutBookScore()
+{
+	$("#score").html("");
+	var part_score=global_score;
+	if(global_score==0)
+	{
+		$("#score").html("请评分");
+	}
+	for(var i=1;i<=part_score;i++)
+	{
+		$("#score_"+i).attr("src","/opac/media/images/commend2.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54");
+	}
+	for(var i=part_score+1;i<=5;i++)
+	{
+		$("#score_"+i).attr("src","/opac/media/images/commend1.jpg;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54");
+	}
+}
+function onclickBookScore(scoreNum)
+{
+	global_score=scoreNum;
+	$("#score").html("");
+	$("#rate_id").attr("value",scoreNum);
+}
+$(function(){
+	$("#contentTab").tabs({
+		select: function(event, ui) {
+			//alert(ui.tab + "\n" + ui.panel + "\n" + ui.panel.id);
+			if(ui.panel.id == "bookOrderDiv") {
+				//var url = $.data(ui.tab, "src");
+				var url = $("#bookOrderIFrame").attr("src");
+				if(!url) {
+					url = '/opac/book/order/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54';
+					$("#bookOrderIFrame").attr("src", url);
+				}
+			} else if(ui.panel.id == "seriesOrderDiv") {
+				//var url = $.data(ui.tab, "src");
+				var url = $("#seriesOrderIFrame").attr("src");
+				if(!url) {
+					url = '/opac/series/order/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54';
+					$("#seriesOrderIFrame").attr("src", url);
+				}
+			} else if(ui.panel.id == "seriesCurrentOrderDiv") {
+				//var url = $.data(ui.tab, "src");
+				var url = $("#seriesCurrentOrderIFrame").attr("src");
+				if(!url) {
+					url = '/opac/series/currentissue/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54';
+					$("#seriesCurrentOrderIFrame").attr("src", url);
+				}
+			} else if(ui.panel.id == "seriesBindDiv") {
+				//var url = $.data(ui.tab, "src");
+				var url = $("#seriesBindIFrame").attr("src");
+				if(!url) {
+					url = '/opac/series/bind/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54';
+					$("#seriesBindIFrame").attr("src", url);
+				}
+			} else if(ui.panel.id == "doubanReviewDiv") {
+				showDoubanReview();
+			} else if(ui.panel.id == "bookCatalog") {
+				showBookAllMetaInfo();
+			} else if(ui.panel.id == "bookPreview") {
+				showBookAllMetaInfo();
+			} else if(ui.panel.id == "bookContentSummary") {
+				showBookAllMetaInfo();
+			} else if(ui.panel.id == "bookAuthorIntroduction") {
+				showBookAllMetaInfo();
+			} else if(ui.panel.id == "addComment"){
+				if("" == "" || ""==null)
+				{
+					window.location="/opac/reader/login?returnUrl="+window.location.href+"";
+					return false;
+				}
+				$("#comment_content").show();
+				if($("#content_tip")!=null)
+				{
+					$("#content_tip").remove();
+				}
+			}else if(ui.panel.id == "virtualBookshelfDiv"){
+				var url = $("#virtualBookshelfIFrame").attr("src");
+				if(!url) {
+					url = '/opac/api/virtualBookshelf;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54?bookrecno=1006489923&holding=2';
+					$("#virtualBookshelfIFrame").attr("src", url);
+				}
+			}
+		}
+	});
+});
+var GLOBAL_BASE_API_URL = "http://api.interlib.com.cn:6699/interes";
+function showAllBookMetaInfoTab(data) {
+	$.each(data, function(i) {
+		var isbn = data[i].isbn;
+		var isCatalogEmpty = data[i].isCatalogEmpty;
+		var isPreviewEmpty = data[i].isPreviewEmpty;
+		var isSummaryEmpty = data[i].isSummaryEmpty;
+		var isAuthorIntroduction = data[i].isAuthorIntroductionEmpty;
+		if(!isCatalogEmpty) {
+			$("#book_catalog_" + isbn).show();
+		}
+		if(!isPreviewEmpty) {
+			$("#book_preview_" + isbn).show();
+		}
+		if(!isSummaryEmpty) {
+			$("#book_summary_" + isbn).show();
+		}
+		if(!isAuthorIntroduction) {
+			$("#book_authorIntroduction_" + isbn).show();
+		}
+	});
+}
+//只加载一次全部信息
+var GLOBAL_LOADED_ALL_BOOK_META = false;
+//图书目录信息,图书试读信息,图书内容简介,图书著者简介
+function showBookAllMetaInfo() {
+	if($.cookie("configouternet")!="false"){
+		if(!GLOBAL_LOADED_ALL_BOOK_META) {
+			GLOBAL_LOADED_ALL_BOOK_META = true;
+			//getBookAllMetaInfo();
+		}
+	}
+}
+function getBookAllMetaInfo() {
+	var isbn = "978-7-5753-0280-7";
+	//isbn = "9787308090957";
+	if($.trim(isbn) == "") {
+		return;
+	}
+	var globalLibraryCode = "P2JS0512001";
+	var strURL = GLOBAL_BASE_API_URL + "/api/book/isbn/"+isbn+"/?glc="+globalLibraryCode+"&returnType=json" + 
+	             "&callback=insertAllBookMetaInfo&jsoncallback=?";
+	$.getJSON(strURL, {});
+}
+function insertAllBookMetaInfo(json) {
+	if(json.result == undefined || json.result == null || json.result.length == 0) {
+		showDoubanSubject();
+		return;
+	}
+	var bookCatalog = json.result.catalog;
+	var previewUrl = trimToEmpty(json.result.previewUrl);
+	var previewContent = json.result.previewContent;
+	var summary = trimToEmpty(json.result.summary);
+	var authorIntroduction = trimToEmpty(json.result.authorIntroduction);
+	$("#bookCatalog").html(bookCatalog);
+	if(previewUrl != "") {
+		var previewBlock = "<p><a href='" + previewUrl + "' target='_blank'>" + 
+			"<span style='color:blue;'>"+'查看全部试读信息'+"</span></a></p>" + 
+			"<br/>" + previewContent;
+		$("#bookPreview").html(previewBlock);
+	}
+	if(summary != "") {
+		$("#bookContentSummary").html(summary);
+	}
+	if(authorIntroduction != null) {
+		$("#bookAuthorIntroduction").html(authorIntroduction);
+	}
+	if(summary == "" || authorIntroduction == "") {
+		//showDoubanSubject();
+		//这里不单独做处理了,保持和书目检索结果列表一致,统一获取中心平台数据显示
+	}
+}
+function trimToEmpty(str) {
+	if(str == undefined || str == null) {
+		return "";
+	}
+	return $.trim(str);
+}
+//豆瓣书评
+function showDoubanReview() {
+	if($.cookie("configouternet")=="false"){
+		return;
+	}
+	var isbn = "978-7-5753-0280-7";
+	if($.trim(isbn) == "") {
+		return;
+	}
+	var strURL = "http://api.douban.com/book/subject/isbn/"+isbn+"/reviews?alt=xd" + 
+	             "&callback=insertDoubanReview&jsoncallback=?";
+	$.getJSON(strURL, {});
+}
+//添加书评
+function addBookCommend()
+{
+	var param=$("#bookReview").serialize();
+	if(document.getElementById("title_id").value=="")
+	{
+		alert('标题不能为空!');
+		return;
+	}
+	if(document.getElementById("rate_id").value=="")
+	{
+		alert('请为图书评分！');
+		return;
+	}
+	if(document.getElementById("content_id").value=="")
+	{
+		alert('评论内容不能为空!');
+		return;
+	}
+	$.post("/opac/book/addBookCommend;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54",param,function(result){
+		$("#comment_content").hide(); 
+		if(result=="true")
+		{
+			$("#reset_id").click();
+			$("#addComment").append("<div id='content_tip' style='width:500px;height:50px;line-height:50px;font-size:16px;color:#333333;font-weight:bold;border:1px solid #AAAAAA;text-align:center;margin-top:100px;'>"+'添加评论成功，等待工作人员审核中!'+"</div>");
+		}
+		else if(result=="false")
+		{
+			$("#addComment").append("<div id='content_tip'>"+"添加评论失败!"+"</div>");
+		}
+	});
+	
+}
+function insertDoubanReview(json) {
+	var dbcon = '';
+    if (json.entry.length > 0) {
+        for (var i = 0; i < json.entry.length; i++) {
+            var entry = json.entry[i];
+            var dbauthor = entry.author.name.$t;
+            var dblink = entry.link[1]["@href"];
+            var dbdate = entry.updated.$t;
+            //"updated":{"$t":"2009-03-05T19:58:21+08:00"}
+            var tmp = dbdate.replace("T", " ");
+            dbdate = tmp.replace(/\+.*/, "");
+            var dbtitle = entry.title.$t;
+            var dbreview = entry.summary.$t;
+            if (i == 5) {
+                dbcon += '<div id="dbhide" style="display:none">';
+            }
+            var hr = (i==(json.entry.length-1))?'':'<hr size="1" noshade="noshade" style="border:1px #cccccc dashed;"/>';
+            dbcon += '<div style="margin:7px 5px 7px 5px;padding:0">' + 
+      						'<a target="_blank" href="' + dblink + '">' + dbtitle + '</a> &nbsp ' + 
+      						'<span style="margin-left:35px">' + dbauthor + ' <i>(' + dbdate + ')</i></span>' + 
+      						'<p style="margin:5px 0 6px 0">' + dbreview + '</p>' + 
+      						hr + 
+        			 '</div>';
+        }
+        if (i >= 5) {
+			dbcon += '</div>' + '<div style="float:right;cursor:pointer" onclick="moreOrLessDoubanReview(this)">' 
+			+ "全部显示" + '</div>';
+        }
+        $("#doubanReviewDiv").html(
+        	'<fieldset style="-moz-border-radius:8px;"><legend><b><a href="http://www.douban.com" target="_blank">' 
+        	+ "豆瓣书评" + '</a></b></legend>' + dbcon + '</fieldset>');
+    }else{
+    	noDoubanReview();
+    }
+}
+function noDoubanReview() {
+	var dbcon = '<div style="margin:7px 5px 7px 5px;padding:0">' + 
+				'没有书评' + 
+				'</div>';
+  	$("#doubanReviewDiv").html('<fieldset style="-moz-border-radius:8px;"><legend><b><a href="http://www.douban.com" target="_blank">' + 
+  			"豆瓣书评" + '</a></b></legend>' + dbcon + '</fieldset>');
+}
+function moreOrLessDoubanReview(obj) {
+	if($("#dbhide").css("display") == "none") {
+		$("#dbhide").show();
+		$(obj).html("折叠显示");
+	} else {
+		$("#dbhide").hide();
+		$(obj).html("全部显示");
+	}
+}
+//douban著者摘要,内容摘要
+$(function(){
+	//TODO 暂时不从豆瓣api直接取了
+	//showDoubanSubject();
+});
+function showDoubanSubject() {
+	var isbn = "978-7-5753-0280-7";
+	if(trimToEmpty(isbn) == "") {
+		return;
+	}
+	var strURL = "http://api.douban.com/book/subject/isbn/" + isbn + 
+		"?alt=xd&callback=insertDoubanSubject&jsoncallback=?";
+	$.getJSON(strURL, {});
+}
+function insertDoubanSubject(json) {
+	var summary = "";
+	var authorIntro = "";
+	if(json["summary"] != undefined || json["summary"] != null) {
+		summary = json["summary"]["$t"];
+	}
+	if(json["db:attribute"].length > 0) {
+		for (var i = 0; i < json["db:attribute"].length; i++) {
+			var attr = json["db:attribute"][i];
+			var name = attr["@name"];
+			if(name == "author-intro"){
+				authorIntro = attr["$t"];
+			}
+		}
+	}
+	summary = trimToEmpty(summary);
+	authorIntro = trimToEmpty(authorIntro);
+	if(summary != ""){
+		$("#bookContentSummary").html(summary);
+	}
+	if(authorIntro != ""){
+		$("#bookAuthorIntroduction").html(authorIntro);
+	}
+}
+
+function showMoreRelateSubject(){
+	$(".book_detial_related_subject").show();
+}
+//hotbook用的点击率
+$(function(){
+	var bookrecno = "1006489923";
+	$.ajax({
+		type: "get",
+		url: '/opac/hotbook/1006489923;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54',
+		data: {
+			"classno": 'I247.55',
+			"booktype": '1'
+		},
+		dataType: "xml",
+		success: function(xml){
+		}
+	});
+});
+
+
+
+
+//博云光盘附件
+
+
+
+$(function () {
+	
+})
+
+	//添加超星按钮（由一个iframe加载）
+	$(function(){
+		
+	});
+//海大畅想之星随书光盘
+//湖大畅想之星随书光盘
+$(function() {
+
+ 
+
+
+});
+
+$(document).ready(function(){
+	$("#shareResource").hover(function(){
+		$(".shareto_div_01").slideDown(500);
+		$(".shareto_div_01").show();
+	},function(){
+		
+		$(".shareto_div_01").slideUp(100);
+		$(".shareto_div_01").hide();
+	});
+	
+	
+	
+	
+	
+});
+
+
+
+function share_to(m) {
+	
+	
+
+	var globalurl = "http://reader.szlib.com"+"/book/1006489923";
+	var title = encodeURI('三体：图像小说');
+	if (m == "tsina") {
+		window.open("http://v.t.sina.com.cn/share/share.php?url="+globalurl+"&title="+title);	
+	} else if (m == "tqq"){
+		window.open("http://v.t.qq.com/share/share.php?url="+globalurl+"&site="+globalurl+"&title="+title);
+	} else if (m == "douban"){
+		window.open("http://www.douban.com/recommend/?url="+globalurl+"&title="+title+"&v=1&n=1");
+	} else if (m == "t163"){
+		var link = "http://reader.szlib.com";
+		var source = encodeURI("苏州图书馆");
+		window.open("http://t.163.com/article/user/checkLogin.do?link="+encodeURI(globalurl)+"&source="+source+"&togImg=false&info="+title+"  "+globalurl);
+	} else if (m == "qzone"){
+		window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+encodeURI(globalurl)+"&title="+title);
+	}else if(m == "renren"){
+		$.getScript("http://widget.renren.com/js/rrshare.js").done(function(){
+			var rrShareParam = {
+				resourceUrl : window.location.href,	//分享的资源Url
+				//srcUrl : '',	//分享的资源来源Url,默认为header中的Referer,如果分享失败可以调整此值为resourceUrl试试
+				pic : $('img[bookrecno="1006489923"]').attr('src'),		//分享的主题图片Url
+				title : '三体：图像小说',		//分享的标题
+				description : '刘慈欣原著.三体：图像小说.译林出版社,2025.'//分享的详细描述
+			};
+			rrShareOnclick(rrShareParam);
+		});
+	}
+}
+
+/*var logRec = true;		//是否记录日志
+$(function() {
+    //信息推送
+    $.getScript("http://api.interlib.com.cn:8586/InterlibCommonService/media/centerservice.js").done(function(){
+        var baseParam = "booktype=1&title=三体：图像小说"+
+            "&subject=漫画&isbn=978-7-5753-0280-7&classno=I247.55&bookrecno=1006489923&searchKeyword=";
+
+        
+        
+
+        try {
+            if (logRec) {
+                pushResultData(2,"P2JS0512001",baseParam);
+                showAD();
+            }
+
+            logRec = true;
+        } catch (e) {
+            //console.error(e);
+        }
+    });
+});*/
+
+//延迟加载的内容
+$(window).load(function(){
+	setTimeout(function(){
+		/*applicationScope['GLOBAL_SYSTEMOPTIONS_MAP']['GLOBAL_LIBRARY_CODE'] == 'P4JS0512007' or*/
+		
+		
+		
+		
+		//自动获取图书元数据信息是否存在的标识
+		if($.cookie("configouternet")=="false"){
+			return;
+		}
+		var globalLibraryCode = "P2JS0512001";
+		var isbn = "978-7-5753-0280-7";
+		if($.trim(isbn) != "") {
+			var strURL = GLOBAL_BASE_API_URL + "/api/bookmetadatastatus?glc="+globalLibraryCode+"&isbns="+isbn+"&returnType=json" + 
+		    	"&callback=showAllBookMetaInfoTab&jsoncallback=?";
+			//$.getJSON(strURL, {});
+		}
+		
+		
+		var script = "http://data.libtop.com/scripts/xopac/208.js".split(",");
+		for(var sL=0;sL<script.length;sL++){
+			$.getScript(script[sL]);
+		}
+		
+		
+		
+		var url = "";
+		
+		
+		
+		
+		
+		
+        var urlprefix = "";
+        
+        
+        
+		
+        if(url!=""){
+            $.ajax({
+                url:url,
+                type:'get',
+                dataType:'jsonp',
+                jsonpCallback:'resData'
+            }).done(function(data){
+                $(".bd-tianjin-defaultebook").hide();
+                if(data.str=="0"){
+                    $("#bd_bookcover_url").show();//汇雅电子书
+                    $("#bd_bookcover_url").attr("href",urlprefix+data.bookurl);
+                }else{
+                    $(".bd-tianjin-ebook").show();//读秀电子书或没有相关电子书
+                }
+            }).fail(function() {
+                //console.log('请求服务器超时！'+url);
+            });
+        }
+		
+		
+		
+		if(globalLibraryCode=="P2ZJ0577023"||globalLibraryCode=="U1YN0871003"
+				||globalLibraryCode=="P2ZJ0577016"||globalLibraryCode=="P2ZJ0575024"
+				||globalLibraryCode=="P2SD0532010"||globalLibraryCode=="P2SXJ0351007"){
+			$.getScript("http://www.cxstar.com/basedata/format/Release/aspx/js/hkopac.js");
+		}
+		if(globalLibraryCode=="P2SXJ0351007"){
+			$.getScript("http://218.26.168.244:8081/bookcd/format/Release/aspx/schoolInterface/InterLib/interface.js");
+		}
+		if(globalLibraryCode=="P1LN024018"){
+			$.getScript("http://www.bj.cxstar.cn/bookcd/format/Release/aspx/schoolInterface/InterLib/interface.js");
+		}
+		
+		
+	}, 1000);
+});
+//-->
+
+
+</script>
+<script src="/opac/media/js/dojo-release-1.8.14/dojo/dojo.js;jsessionid=F0AC71F7E3D8A15D8DE4326F74270A54"
+        data-dojo-config="async: true"></script>
+
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function(){
+		
+		
+	});
+</script>
+<div id="page_footer" >
+	
+		
+	
+		
+			<div class="page_footer_bd" >
+				
+					
+						<span>© 2005－<script>document.write(new Date().getFullYear());</script> www.interlib.com.cn, all rights reserved</span>
+					
+				
+				<span class="fcenter"></span>
+				<span class="fright">
+		
+		
+		
+					
+						<!--a href="#">隐私声明</a-->
+					
+			
+		</span>
+			</div>
+			
+		
+	
+</div>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+		
+	</body>
+</html>
