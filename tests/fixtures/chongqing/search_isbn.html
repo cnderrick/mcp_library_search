@@ -1,0 +1,1153 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script type="text/javascript">
+	function toTargat(url,value){
+		var url = url + encodeURI(value);
+		window.open(url,"_blank");
+	}
+</script>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<base href="http://222.177.237.197:8080/InDigLib/">
+
+	<title>opac检索结果页</title>
+
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="css/home.css?v=123">
+	<style type="text/css">
+		body {
+			width: 100%;
+			color: #7f8284;
+			font-size: 13px;
+		}
+		a:visited {
+			color: #404243;
+			text-decoration: none;
+		}
+		a:link {
+			color: #404243;
+			text-decoration: none;
+		}
+		.searbox .second .shuru:focus {
+			border-style:solid;
+			border-color: #ff5943;
+			box-shadow: 0 0 5px #ff5943;
+			outline:none;
+		}
+
+		.login_dlk {
+			width:910px;
+		}
+		.clear {
+			clear: both;
+		}
+		.center {
+			margin: 0px auto;
+		}
+		#nav li {
+			display: inline;
+			margin: 7px;
+		}
+
+		#nav span div {
+			display: none;
+			position: absolute;
+			height: auto;
+			background-color: #F9F9F9;
+			border: 1px solid #DDD;
+			text-align: center;
+			width: 80px;
+		}
+
+		#nav span div a {
+			font-weight: normal;
+			display: block;
+			text-align: center;
+		}
+
+		#nav img {
+			transform: translateY(10px);
+		}
+
+		#nav span:hover div {
+			display: block;
+			transform: translateX(-1px);
+		}
+
+		#header {
+			width: 100%;
+			text-align: right;
+			font-size: 13px;
+			height:150px;
+			margin-left:-50px;
+		}
+
+		#nav text {
+			margin: 7px;
+		}
+
+		#more:hover {
+			background-color: #F9F9F9;
+			border-color: #DDD;
+			color: black;
+		}
+
+		c {
+			display: inline-block;
+			color: #999;
+			font-size: 12px;
+		}
+
+		a {
+			color: #555;
+		}
+
+		d {
+			display: inline-block;
+			transform: translateY(-15px);
+			margin: 0px 10px 0px 10px;
+		}
+
+		body {
+			margin: 0px auto;
+		}
+
+		#content {
+			padding-bottom: 60px;
+			position: absolute;
+			left: 50%;
+			margin-left: -168px;
+			top: 20%;
+		}
+
+		#content img {
+			margin-bottom: 30px;
+			position: relative;
+		}
+
+		.searbox input {
+			height: 30px;
+			float: left;
+			width: 510px;
+			border: 1px solid #999;
+			padding-left: 5px;
+			background-size: 30px;
+		}
+		.searbox {
+			position: absolute;
+			left: 40.5%;
+			margin-left: -308px;
+			top: 10%;
+			margin-top: -205px;
+		}
+
+		.searbox button {
+			background-color: #398bfb;
+			color: #FFF;
+			width: 90px;
+			height: 34px;
+			float: left;
+			border: 1px solid #398bfb;
+		}
+
+		.searbox button:hover {
+			background-color: #37F;
+			box-shadow: 3px 3px 0px 0px #EEE;
+		}
+
+		#more {
+			background-color: #398bfb;
+			line-height: 35px;
+			display: inline-block;
+			color: white;
+			width: 80px;
+			height: 35px;
+			text-align: center;
+			border: 1px solid #398bfb;
+		}
+
+		#footer {
+			clear: both;
+			display: block;
+			text-align: center;
+			margin: -10px auto;
+			position: absolute;
+			bottom: 100px;
+			width: 100%;
+			transform: translateY(40px);
+		}
+
+		#qrcode-text1 #qrcode-text2 {
+			transform: translateY(15px);
+		}
+
+		.searbox .second {
+			/*height: 350px;*/
+		}
+
+		.searbox .search_select {
+			color: #333;
+			height: 42px;
+			font: 16px/42px "微软雅黑";
+			border: 1px solid #999999;
+			padding: 2px;
+			width: 118px;
+			background-color: #fff;
+			position:absolute;
+			top:149px;
+			left:0;
+			right:0;
+			outline:none;
+		}
+
+		.searbox .second .shuru {
+			width: 739px;
+			height: 40px;
+			border: 1px solid #999999;
+			position: absolute;
+			left: 135px;
+			top: 152px;
+			text-indent: 10px;
+			font: 16px/40px "微软雅黑";
+		}
+
+		.searbox .second .s_btn {
+			width: 100px;
+			height: 42px;
+			color: #FFFFFF;
+			border: 0;
+			position: absolute;
+			top: 152px;
+			left:878px;
+			font-size: 17px;
+			background: #712c1d;
+			border-bottom: 1px solid #712c1d;
+			cursor: pointer;
+			text-align: center;
+		}
+
+		.searbox .second .gaosear {
+			position: absolute;
+			top:151px;
+			left: 880px;
+			bottom: 0px;
+			right: 0px;
+			background: #ff5943;
+			width: 100px;
+			height: 42px;
+			color: #FFFFFF;
+			border: none;
+			cursor: pointer;
+			font-size: 18px;
+			border-radius:2px;
+		}
+		.login_con {
+			display: inline-block;
+			background: url(images/con2.png) no-repeat;
+			height: 19px;
+			line-height: 19px;
+			padding-left: 31px;
+		}
+		.login_con1 {
+			display: inline-block;
+			background: url(images/con1.png) no-repeat;
+			height: 19px;
+			line-height: 19px;
+			padding-left: 31px;
+		}
+		.boxful{
+			width:980px;
+			height:60px;
+			margin:0 auto;
+			margin-bottom:-4px;
+		}
+
+
+
+
+		.searbox .selectBox{
+			color: #333;
+			height: 36px;
+			font: 16px/36px "微软雅黑";
+			border: 1px solid #999999;
+			padding: 2px;
+			width: 118px;
+			background-color: #fff;
+			outline: none;
+			position: absolute;
+			top: 152px;
+			left: 0;
+			right: 0;
+			z-index:2;
+		}
+		.inputCase{
+			position: relative;
+			width: 118px;
+			height: 38px;
+			line-height:38px;
+			box-sizing: border-box;
+		}
+		.inputCase input.imitationSelect{
+			width: 118px;
+			height: 38px;
+			line-height:38px;
+			box-sizing: border-box;
+			border: 1px solid #fff;
+			display: block;
+			text-indent: 20px;
+			cursor:pointer;
+			font-size:16px;
+		}
+		.selectUl{
+			width:120px;
+			display: none;
+			padding: 0;
+			margin: 0;
+			border-bottom: 1px solid #ccc;
+			border-left: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			background:#fff;
+			margin-top:3px;
+			margin-left:-2px;
+		}
+		.selectUl li{
+			height: 36px;
+			line-height: 36px;
+			list-style: none;
+			text-indent: 20px;
+			border-bottom: 1px solid #ccc;transition: all .5s ease 0s;
+
+		}
+		.selectUl li:hover{
+			background: #ddd;
+		}
+		.selectUl li:last-child{
+			border-bottom: 0 none;
+		}
+		.caret-down{
+			width:20px;
+			height:20px;
+			position:absolute;
+			top:10px;
+			left:90px;
+		}
+		.searbox input:focus{
+			outline:none;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery.switchable.min.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/js/common.js" ></script>
+	<script type="text/javascript" src="js/common/map.js"></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/common.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/searchList.js" ></script>
+	<script type="text/javascript" src="js/opacRandom/opacRandom.js"></script>
+	<script>
+		function cloudQuery(){
+			var wsOpacIpWAN = $('#wsOpacIpWAN').val();
+			var wsOpacPortWAN = $('#wsOpacPortWAN').val();
+			var wsOpacIpLAN = $('#wsOpacIpLAN').val();
+			var wsOpacPortLAN = $('#wsOpacPortLAN').val();
+			var wsOpacName = $('#wsOpacName').val();
+			var checkNetworkFlag = false;
+
+			// 默认访问外网
+			$('#wsOpacIp').val(wsOpacIpWAN);
+			$('#wsOpacPort').val(wsOpacPortWAN);
+
+			//var wsOpacIp = $('#wsOpacIp').val();
+			//var wsOpacPort = $('#wsOpacPort').val();
+			//var wsOpacName = $('#wsOpacName').val();
+			// 默认访问内网
+			//$('#wsOpacIp').val(wsOpacIpLAN);
+			//$('#wsOpacPort').val(wsOpacPortLAN);
+			var url = "http://"+wsOpacIpWAN+":"+wsOpacPortWAN+"/"+wsOpacName+"/front/opac/TestNetwork.action";
+			$.ajax({
+				type: "post",
+				url: url,
+				async : false,
+				dataType: "jsonp",
+				jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+				timeout: 2000,
+				success: function (data) {
+					$('#wsOpacIp').val(wsOpacIpWAN);
+					$('#wsOpacPort').val(wsOpacPortWAN);
+				},
+				error: function () {
+					$('#wsOpacIp').val(wsOpacIpLAN);
+					$('#wsOpacPort').val(wsOpacPortLAN);
+				}
+			});
+			setTimeout(function(){
+				var wsOpacIp = $('#wsOpacIp').val();
+				var wsOpacPort = $('#wsOpacPort').val();
+				var wsOpacName = $('#wsOpacName').val();
+				var url = "http://"+wsOpacIp+":"+wsOpacPort+"/"+wsOpacName+"/front/opac/Search!search.action";
+
+				var select1 = $('#select1').val();
+				var text1 = $('#text1').val();
+				var select2 = $('#select2').val();
+				var text2 = $('#text2').val();
+				var select3 = $('#select3').val();
+				var text3 = $('#text3').val();
+				var format = $('#format').val();
+				var pageSize = $('#pageSize').val();
+				var hasAsset = $('#hasAsset').val();
+				var occur2 = $('#occur2').val();
+				var occur3 = $('#occur3').val();
+				var startPublishTime = $('#startPublishTime').val();
+				var endPublishTime = $('#endPublishTime').val();
+				var maxShowCount = $('#maxShowCount').val();
+				var hitCount = $('#hitCount').val();
+				var queryOrder = $('#queryOrder').val();
+				var videoType = $('#videoType').val();
+				text1 = encodeURI(text1);
+
+				if(select1=='pubdate'){
+					select1 = 'publishtime';
+				}else if(select1=='publisher'){
+					select1 = 'publishname';
+				}
+
+				url += "?format="+format+"&pageSize="+pageSize+"&hasAsset="+hasAsset+"&occur2="+occur2+"&occur3="+occur3+"&startPublishTime="+startPublishTime+"&endPublishTime="+endPublishTime+"&maxShowCount="+maxShowCount+"&hitCount="+hitCount+"&queryOrder="+queryOrder+"&videoType="+videoType+"&select1="+select1+"&text1="+text1+"&select2="+select2+"&text2="+text2+"&select3="+select3+"&text3="+text3;
+				$('#iframe').attr('src',url);
+
+				//客户端table页屏蔽 
+				$('.left_wrap').hide();
+				$('.main_wrap').hide();
+
+				//修改样式
+				$('#a1').addClass("item item-cur");
+				$('#a2').removeClass("item item-cur");
+				$('#a2').addClass("item");
+
+			},300)
+		}
+		function localQuery(){
+			$('#resform').attr('action', 'OpacMarcSearchSolr!simpleSearch.action');
+			$('#resform').submit();
+		}
+		$(function(){
+			var login_hid = '';
+			document.getElementById("login_hid").value = login_hid
+			//取消默认 云端 TODO
+			/*		if ($('#changeFlag').val()=='true') {
+                        cloudQuery();
+                    }*/
+
+			/*window.addEventListener('message',function(e){ 
+				$('#cloudNumber').html('');
+				$('#cloudNumber').append(e.data.number);
+				setCookie('number',e.data.number);
+			});*/
+			if (window.attachEvent) {
+				window.attachEvent("onmessage",function(e){
+					$('#cloudNumber').html('');
+					$('#cloudNumber').append(e.data);
+					setCookie('number',e.data);
+				});
+			} else if (window.addEventListener) {
+				window.addEventListener('message',function(e){
+					$('#cloudNumber').html('');
+					$('#cloudNumber').append(e.data);
+					setCookie('number',e.data);
+				});
+			}
+			if($('#changeFlag').val()=='true'){
+				$('#cloudNumber').append('');
+			}else{
+				$('#cloudNumber').append('');
+				$('#cloudNumber').append(getCookie('number'));
+			}
+			/*
+			搜索框搜索内容复现
+			var temp = $('#text1').val();
+			$('#textTitle').val(temp);
+			$('#textTitle').focus();
+			*/
+
+			$(".selectBox .imitationSelect").on("click",function(){
+				$(this).parent().next().toggle();//ul弹窗展开
+				$(this).next().toggleClass("fa-caret-up")//点击input选择适合，小图标动态切换
+				if (event.stopPropagation) {
+					// 针对 Mozilla 和 Opera   
+					event.stopPropagation();
+				}else if (window.event) {
+					// 针对 IE   
+					window.event.cancelBubble = true;
+				}   /*阻止事件传播，事件从点击的元素出发，向外（window）传播，
+					如果不写个阻止事件，会导致下面的document点击函数一起执行，导致显示失败*/
+			});
+			$(".selectUl li").click(function(event){
+				$(this).addClass("actived_li").siblings().removeClass("actived_li");//点击当前的添加。actived_li这个类；其他的移除这个类名
+				var oliName = $(this).attr("oliName");//定义一个name属性，获取点击的元素属性赋值到当前，方便动态化传值
+				var oliId = $(this).attr("oliId");//定义一个id属性，获取点击的元素属性赋值到当前，方便动态化传值
+				$(this).parent().prev().children().val(oliName); //把当前点击的name赋值到显示的input的val里面
+				$(this).parent().prev().children().attr("oliName",oliName);//把当前点击的oliName赋值到显示的input的oliName里面
+				$(this).parent().prev().children().attr("oliId",oliId);//把当前点击的oliId赋值到显示的input的oliId里面
+				$('#selectValue').val(oliId);
+			});
+			$(document).click(function(event){
+				$(".selectUl").hide();//当点击空白处，隐藏ul弹窗
+			});
+		})
+		//写cookies，一个小时过期 
+		function setCookie(name, value) {
+			var exp = new Date();
+			exp.setTime(exp.getTime() + 60 * 60 * 1000);
+			document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+		}
+		//读取cookies 
+		function getCookie(name) {
+			var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+			if (arr = document.cookie.match(reg))
+
+				return unescape(arr[2]);
+			else
+				return null;
+		}
+		function submitForm(){
+			$('#ComplexSearch').submit();
+		}
+		function highSearch(){
+			window.location.href = "Index!search.action";
+		}
+	</script>
+</head>
+
+<body>
+<input type='hidden' id='changeFlag' value=""/>
+<input type='hidden' id='select1' value="isbn"/>
+<input type='hidden' id='text1' value="9787508687193"/>
+<input type='hidden' id='select2' value=""/>
+<input type='hidden' id='text2' value=""/>
+<input type='hidden' id='select3' value=""/>
+<input type='hidden' id='text3' value=""/>
+<input type='hidden' id='format' value=""/>
+<input type='hidden' id='pageSize' value="20"/>
+<input type='hidden' id='hasAsset' value="false"/>
+<input type='hidden' id='occur2' value=""/>
+<input type='hidden' id='occur3' value=""/>
+<input type='hidden' id='startPublishTime' value=""/>
+<input type='hidden' id='endPublishTime' value=""/>
+<input type='hidden' id='maxShowCount' value="0"/>
+<input type='hidden' id='hitCount' value="0"/>
+<input type='hidden' id='queryOrder' value="1"/>
+<input type='hidden' id='videoType' value=""/>
+
+<input type="hidden" name="wsOpacIp" id="wsOpacIp"/>
+<input type="hidden" name="wsOpacPort" id="wsOpacPort" />
+<input type="hidden" name="wsOpacName" value="DLibsCloud" id="wsOpacName"/>
+
+<input type="hidden" name="wsOpacIpWAN" value="222.177.237.199" id="wsOpacIpWAN"/>
+<input type="hidden" name="wsOpacPortWAN" value="8092" id="wsOpacPortWAN"/>
+<input type="hidden" name="wsOpacIpLAN" value="172.20.0.131" id="wsOpacIpLAN"/>
+<input type="hidden" name="wsOpacPortLAN" value="8092" id="wsOpacPortLAN"/>
+
+<input type="hidden" id="login_hid"/>
+
+<div class="boxful">
+	<form id="ComplexSearch" name="ComplexSearch" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post" class="searbox">
+		<input type='hidden' name='changeFlag' value='true' />
+		<input type='hidden' id='selectValue' name='select1' value='title' />
+		<div class="second">
+			<!--<select name="select1" id="select1" class="search_select">
+                <option value="all">任意词</option>
+                <option value="author">作者</option>
+                <option value="title" selected="selected">题名</option>
+                <option value="ctrlno">控制号</option>
+                <option value="pubdate">出版年</option>
+                <option value="subject">主题</option>
+                <option value="isbn">ISBN</option>
+                <option value="callno">索取号</option>
+                <option value="classno">分类号</option>
+                <option value="publisher">出版社</option>
+            </select>-->
+			<div class="selectBox">
+				<div class="inputCase">
+					<input class="imitationSelect" id='select1_id' type="text" oulName="" oulId="" value="题名" readonly/>
+					<span class="caret-down"><img src="images/selebom.png" /></span>
+				</div>
+				<ul class="selectUl">
+					<li oliName="任意词" oliId="all" class="actived_li">任意词</li>
+					<li oliName="作者" oliId="author">作者</li>
+					<li oliName="题名" oliId="title">题名</li>
+					<li oliName="附注" oliId="notes">附注</li>
+					<li oliName="从编" oliId="series">从编</li>
+					<li oliName="控制号" oliId="ctrlno">控制号</li>
+					<li oliName="出版年" oliId="pubdate">出版年</li>
+					<li oliName="主题" oliId="subject">主题</li>
+					<li oliName="ISBN" oliId="ISBN">ISBN</li>
+					<li oliName="索取号" oliId="callno">索取号</li>
+					<li oliName="分类号" oliId="classno">分类号</li>
+					<li oliName="出版社" oliId="publisher">出版社</li>
+					<li oliName="套书名" oliId="notes">套书名</li>
+					<li oliName="丛编名" oliId="series">丛编名</li>
+					<li oliName="语种" oliId="lang">语种</li>
+				</ul>
+			</div>
+
+			<input id="textTitle" name="text1" value="9787508687193" type="text" class="shuru" onkeydown="if(event.keyCode==13){submitForm()}"/>
+			<input type="button" class="s_btn" onClick="submitForm();" value="搜 索" />
+		</div>
+	</form>
+
+
+
+</div>
+
+<div class="big_wrap">
+	<div class="tab" js-tab="1">
+		<div class="tab-title">
+			<a id='a1' href="javascript:; "onclick="cloudQuery()" class="item">通借通还馆藏(<span id='cloudNumber'></span>)</a>
+			<a id='a2' href="javascript:;" onclick="localQuery()" class="item item-cur">本馆馆藏(1)</a>
+		</div>
+	</div>
+	<div class="left_wrap">
+		<!-- <div class="head_title">本馆</div>
+		
+			<div class="search_area">
+    			<form id="reSearchForm" name="reSearchForm" method="post">
+					<span>
+						<select name="select1" id="select1">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn" selected="selected">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title">题名</option>
+    <option value="notes">套书名</option>
+    <option value="series">丛编名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="publisher">出版社</option>
+    <option value="pubdate">出版年</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+					</span>
+					<span>
+						<input id="text1" name="text1" type="text" class="search_input" onkeydown="if(event.keyCode==13) reSearch()" />
+						<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+						<input type="hidden" name="dataType" value="" id="dataType"/>
+						<input type="hidden" name="sublib" value="" id="sublib"/>
+					</span>
+					<span class="y_btn" id="reSearch">重新搜索</span>
+					<span class="g_btn" id="seSearch">在结果中搜索</span>
+				</form>
+
+
+
+			</div>
+		 	-->
+		<div class="left_nav">
+			
+				<div class="title">所属馆</div>
+				<ul name="face">
+					
+						
+							<li><a href="#" onclick="facetSearch('sublib','CQL');return false;" >重庆图书馆</a><em>(1)</em></li>
+						
+						
+					
+				</ul>
+			
+				<div class="title">文献类型</div>
+				<ul name="face">
+					
+						
+							<li><a href="#" onclick="facetSearch('datatype','001');return false;" >图书</a><em>(1)</em></li>
+						
+						
+					
+				</ul>
+			
+				<div class="title">著者</div>
+				<ul name="face">
+					
+						
+						
+							<li ><a href="#" onclick="facetSearch('author','兴晨主编');return false;" >兴晨主编</a><em>(1)</em></li>
+						
+					
+				</ul>
+			
+				<div class="title">出版日期</div>
+				<ul name="face">
+					
+						
+						
+							<li ><a href="#" onclick="facetSearch('publishtime','2018');return false;" >2018</a><em>(1)</em></li>
+						
+					
+				</ul>
+			
+				<div class="title">分类</div>
+				<ul name="face">
+					
+						
+							<li><a href="#" onclick="facetSearch('classnostatistic','K');return false;" >K 历史、地理</a><em>(1)</em></li>
+						
+						
+					
+				</ul>
+			
+		</div>
+
+		<div class="bottom_bg"></div>
+	</div>
+
+	<div class="main_wrap">
+		<div class="key_info">
+			<div class="sort_box">
+				<span>排序方式：</span>
+				
+				<select name="queryOrder" id="queryOrderSelect" style="width:auto">
+    <option value="1" selected="selected">匹配度      - 降序</option>
+    <option value="2">匹配度      - 升序</option>
+    <option value="3">出版时间 - 降序</option>
+    <option value="4">出版时间 - 升序</option>
+    <option value="5">馆藏总数 - 降序</option>
+    <option value="6">馆藏总数 - 升序</option>
+
+
+</select>
+
+
+			</div>
+			共有<b>1</b>条记录，检索时间：<em>0.005</em>秒
+		</div>
+		<form id="resform" name="form1" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post">
+			
+
+<script type="text/javascript">
+		function checkTurn(which){
+			var $which = $(which);
+			var $pageNo = $which.parent().parent().find("#pageNo");
+
+			var pageNo = $.trim($pageNo.val());
+			var totalPage = $.trim($('#totalPage').val());
+			   if(pageNo==""){
+			       alert("请输入需要跳转到的页号！！！");
+			       $pageNo.select();
+			       return false;
+			   }else if(!isNumber(pageNo)){
+				   alert('输入页码必须为正整数！！！');
+				   $pageNo.select();
+				   return false;
+			   }else if(Number(pageNo)>Number(totalPage)){
+				   alert("页号不能大于总页数！！！");
+			       $pageNo.select();
+			       return false;
+			   }
+			   return true;
+		}
+		function isNumber(str){
+			var   r   =   /^\+?[1-9][0-9]*$/;　
+			return r.test(str);
+		}
+</script>
+<div class="page_wrap">
+	<div class="page_bar" >
+		<input type="hidden" id="totalPage" value="1"/>
+		
+		
+			<span class="list_type02" disabled title="图表显示"></span>
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=isbn&select2=&select3=&text1=9787508687193&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=isbnFIELD_SPLITVALUE_SPLIT9787508687193&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib="><span class="list_type01" title="列表显示"></span></a>
+		
+		
+		   
+			<span class="pre_btn" disabled>首页</span>
+		
+		
+		
+			<span class="pre_btn" disabled>上一页</span>
+		
+		
+		
+			<span class="pre_btn" disabled>下一页</span>
+		
+		
+		
+			<span class="pre_btn" disabled>尾页</span>
+		
+		
+		<span class="text_num"><input id="pageNo" name="pageNo" type="text" class="text_list"/></span>
+		<button type="submit" class="next_btn" onclick="return checkTurn(this)">跳转</button>
+	</div>
+	<!--<span>共<b>1</b>页</span>-->
+	<span><b>1/1</b>页 </span>
+</div>
+
+			<input type="hidden" name="select1" value="isbn" id="resform_select1"/>
+			<input type="hidden" name="select2" value="" id="resform_select2"/>
+			<input type="hidden" name="select3" value="" id="resform_select3"/>
+			<input type="hidden" name="text1" value="9787508687193" id="resform_text1"/>
+			<input type="hidden" name="text2" value="" id="resform_text2"/>
+			<input type="hidden" name="text3" value="" id="resform_text3"/>
+			<input type="hidden" name="occur1" value="" id="resform_occur1"/>
+			<input type="hidden" name="occur2" value="" id="resform_occur2"/>
+			<input type="hidden" name="occur3" value="" id="resform_occur3"/>
+			<input type="hidden" name="lastSearchValue" value="isbnFIELD_SPLITVALUE_SPLIT9787508687193" id="resform_lastSearchValue"/>
+			<input type="hidden" name="startPublishTime" value="" id="resform_startPublishTime"/>
+			<input type="hidden" name="endPublishTime" value="" id="resform_endPublishTime"/>
+			<input type="hidden" name="videoType" value="" id="resform_videoType"/>
+			<input type="hidden" name="listType" value="div" id="resform_listType"/>
+			<input type="hidden" name="queryOrder" value="1" id="resform_queryOrder"/>
+			<input type="hidden" name="hasAsset" value="false" id="resform_hasAsset"/>
+			<input type="hidden" name="format" value="" id="resform_format"/>
+			<input type="hidden" name="dataType" value="" id="resform_dataType"/>
+			<input type="hidden" name="sublib" value="" id="resform_sublib"/>
+			<input type="hidden" name="pageSize" value="20" id="resform_pageSize"/>
+			<input type="hidden" name="changeFlag" value="false" id="resform_changeFlag"/>
+		</form>
+
+
+
+
+
+		<form id="cloudSearch" name="form1" method="post">
+			<input type="hidden" name="loginName" value="" id="cloudSearch_loginName"/>
+			<input type="hidden" name="password" value="" id="cloudSearch_password"/>
+			<input type="hidden" name="cardno" value="" id="cloudSearch_cardno"/>
+			<input type="hidden" name="format" value="" id="cloudSearch_format"/>
+			<input type="hidden" name="pageSize" value="" id="cloudSearch_pageSize"/>
+			<input type="hidden" name="hasAsset" value="" id="cloudSearch_hasAsset"/>
+			<input type="hidden" name="occur2" value="" id="cloudSearch_occur2"/>
+			<input type="hidden" name="occur3" value="" id="cloudSearch_occur3"/>
+			<input type="hidden" name="startPublishTime" value="" id="cloudSearch_startPublishTime"/>
+			<input type="hidden" name="endPublishTime" value="" id="cloudSearch_endPublishTime"/>
+			<input type="hidden" name="maxShowCount" value="" id="cloudSearch_maxShowCount"/>
+			<input type="hidden" name="hitCount" value="" id="cloudSearch_hitCount"/>
+			<input type="hidden" name="queryOrder" value="" id="cloudSearch_queryOrder"/>
+			<input type="hidden" name="videoType" value="" id="cloudSearch_videoType"/>
+			<input type="hidden" name="select1" value="" id="cloudSearch_select1"/>
+			<input type="hidden" name="text1" value="" id="cloudSearch_text1"/>
+			<input type="hidden" name="select2" value="" id="cloudSearch_select2"/>
+			<input type="hidden" name="text2" value="" id="cloudSearch_text2"/>
+			<input type="hidden" name="select3" value="" id="cloudSearch_select3"/>
+			<input type="hidden" name="text3" value="" id="cloudSearch_text3"/>
+		</form>
+
+
+
+
+		
+		
+			<!--单条list_item开始-->
+			
+				<div class="list_item">
+					<!--
+						<div class="tips">
+							<p><span>馆藏总数：</span><b>0</b>本</p>
+						</div>
+					
+					--><div class="pic">
+					<a href="frontV2/BookDetail.action?metaid=2313420&metatable=i_biblios" target="hot_books">
+						<!-- <iframe  name="fmimg" id="i_biblios2313420iframe" height="122px" width="94px" name="uFrame"
+								src="http://book1.duxiu.com/opaclink.jsp?isbn=9787508687193&bname=上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生&author=兴晨主编&publisher=+北京:中信出版集团股份有限公司 ,2018&year=&type=1&dom=book1&pictype=b&util=112&enc=B1F8C6AC29E34A80C5F42C62A780FF30"" width="100%" height="100%" scrolling=no frameborder="0">
+							</iframe>	
+							 -->
+						<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" height="120" width="90" alt="" />
+					</a>
+				</div>
+					<div class="info">
+						<h4>
+							<b><a href="frontV2/BookDetail.action?metaid=2313420&metatable=i_biblios&showAsset=true" target="hot_books">上瘾 · 1 · 选择一座城市，选择一种人生&nbsp; </a> </b>
+						</h4>
+						<p>
+							<span><a href="/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=author&text1=兴晨主编">兴晨主编&nbsp;</a></span>
+							<span>北京:中信出版集团股份有限公司 ,2018&nbsp;</span>
+							<span>K919.1/79/(1)&nbsp;</span>
+						</p>
+						<p>
+							<a target='_blank' rel='noopener noreferrer' href="http://search.dangdang.com/search_pub.php?key=上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生"><span class="dang_icon" title="当当图书"></span></a>
+							<a target='_blank' rel='noopener noreferrer' href="https://search.jd.com/Search?keyword=上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>
+							<a target='_blank' rel='noopener noreferrer' onclick="toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生')"><span class="amazon_icon" title="亚马逊图书"></span></a>
+						</p>
+						<p>
+							<a target='_blank' rel='noopener noreferrer' class="icon" href="http://www.douban.com/search?q=上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生" ><img src="frontFaceV2/opac/images/douban.gif" /></a>
+							<a target='_blank' rel='noopener noreferrer' class="icon" href="http://search.cnki.net/search.aspx?q=上瘾 &middot; 1 &middot; 选择一座城市，选择一种人生"><img src="frontFaceV2/opac/images/niki.gif" /></a>
+						</p>
+					</div>
+
+					<div class="tabs_box">
+						<ul>
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-0" metatable="i_biblios" metaid="2313420" onclick="">详细信息</a></li>
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-0" metatable="i_biblios" metaid="2313420" onclick="">记到信息</a></li> -->
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_biblios" metaid="2313420" title="收藏"></span>
+						</ul>
+
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-0-0"  href="#sub_con-0-0" onclick="return false" metas="i_biblios-2313420">重庆图书馆</a></li>
+									
+								</ul>
+
+								<div class="list_sub_con">
+									
+										<div class="sub_con" id="sub_con-0-0"></div>
+									
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-0">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+			
+			<!--单条list_item结束-->
+		
+		
+
+	</div>
+	<div>
+		<div class="clear"></div>
+		<form id="seSearchForm" name="seSearchForm" action="/InDigLib/OpacMarcSearch!simpleSearch.action" method="post">
+			<input type="hidden" name="select1" value="isbn" id="seSearchForm_select1"/>
+			<input type="hidden" name="select2" value="" id="select2"/>
+			<input type="hidden" name="select3" value="" id="select3"/>
+			<input type="hidden" name="text1" value="9787508687193" id="text1"/>
+			<input type="hidden" name="text2" value="" id="text2"/>
+			<input type="hidden" name="text3" value="" id="text3"/>
+			<input type="hidden" name="occur1" value="" id="occur1"/>
+			<input type="hidden" name="occur2" value="" id="occur2"/>
+			<input type="hidden" name="occur3" value="" id="occur3"/>
+			<input type="hidden" name="lastSearchValue" value="isbnFIELD_SPLITVALUE_SPLIT9787508687193" id="lastSearchValue"/>
+			<input type="hidden" name="startPublishTime" value="" id="startPublishTime"/>
+			<input type="hidden" name="endPublishTime" value="" id="endPublishTime"/>
+			<input type="hidden" name="videoType" value="" id="videoType"/>
+			<input type="hidden" name="listType" value="div" id="listType"/>
+			<input type="hidden" name="queryOrder" value="1" id="queryOrder"/>
+			<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+			<input type="hidden" name="showAsset" value="true" id="showAsset"/>
+			<input type="hidden" name="format" value="" id="format"/>
+			<input type="hidden" name="dataType" value="" id="dataType"/>
+			<input type="hidden" name="sublib" value="" id="sublib"/>
+			<input type="hidden" name="pageSize" value="20" id="pageSize"/>
+			<input type="hidden" name="second" value="true" id="second"/>
+			<input type="hidden" name="fieldName" value="" id="fieldName"/>
+			<input type="hidden" name="fieldValue" value="" id="fieldValue"/>
+		</form>
+
+
+
+		<form id="faSearchForm" name="faSearchForm" action="/InDigLib/OpacMarcSearch!simpleSearch.action" method="post">
+		</form>
+
+
+
+		<input type="hidden" name="positionIsShow" value="0" id="positionIsShow"/>
+		<input type="hidden" name="collectionLocalShiftnoIsShow" value="1" id="collectionLocalShiftnoIsShow"/>
+		<input type="hidden" name="localNotesIsShow" value="0" id="localNotesIsShow"/>
+		<iframe id='iframe' name="hot_books" src="" width="100%" height="800px" allowtransparency="true" scrolling="auto" frameborder="0" ></iframe>
+</body>
+</html>

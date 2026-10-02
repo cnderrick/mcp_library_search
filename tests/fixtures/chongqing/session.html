@@ -1,0 +1,135 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <base href="http://222.177.237.197:8080/InDigLib/">
+    
+    <title>opac查询页</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/home.css">
+
+    <script type="text/javascript" src="js/ajax/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="js/ajax/jquery-migrate-3.4.1.js"></script>
+	<script type="text/javascript" src="js/jquery.switchable.min.js" ></script>
+	<script type="text/javascript" src="js/all.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/js/common.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/search.js" ></script>
+  </head>
+  
+  <body>
+    <div class="box">
+    	<form id="ComplexSearch" name="ComplexSearch" action="http://222.177.237.197:8080/InDigLib/frontV2/;jsessionid=1D3ED61C84CF81DEFFB08151CFA7138A" method="post">
+		<div class="content">
+			<dl>
+			<dt>
+				<select name="select1" id="select1" class="search_select">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title" selected="selected">题名</option>
+    <option value="notes">套书名</option>
+    <option value="series">丛编名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="publisher">出版社</option>
+    <option value="pubdate">出版年</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+			</dt>
+			<dd>
+				<input id="text1" name="text1" type="text" class="search_input" onkeydown="if(event.keyCode==13){submitForm()}"/><span class="search_btn02" onclick="submitForm()"></span>
+				<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+				<!-- <input type="hidden" id="opacTypeHidden" name="opacTypeHidden" value="cloud" /> -->
+				<input type="hidden" id="opacType" name="opacType" value="local" />
+				<input type="hidden" name="changeFlag" value="true" id="ComplexSearch_changeFlag"/>
+			</dd>
+			
+			</dl>
+			
+			
+			
+			<div id="search_option">
+				<div class="option_title"><span></span>查询说明</div>
+					<div class="option_con">
+					<dl>
+						<dd class="w460">
+							<p>
+								<b>·</b>如：按题名查询："三体"
+							</p>
+							<p>
+								<b>·</b>或 按作者查询："刘慈欣"
+							</p>
+							<p>
+								<b>·</b>可以查找到作家"刘慈欣"编著的《三体》这本书。 
+							</p>
+						</dd>
+					</dl>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		</form>
+
+
+
+		<div class="bottom_bg"></div>
+	</div>
+	<input type="hidden" name="wsOpacIp" id="wsOpacIp"/>
+	<input type="hidden" name="wsOpacPort" id="wsOpacPort" />
+	<input type="hidden" name="wsOpacName" value="DLibsCloud" id="wsOpacName"/>
+	
+	<input type="hidden" name="wsOpacIpWAN" value="222.177.237.199" id="wsOpacIpWAN"/>
+	<input type="hidden" name="wsOpacPortWAN" value="8092" id="wsOpacPortWAN"/>
+	<input type="hidden" name="wsOpacIpLAN" value="172.20.0.131" id="wsOpacIpLAN"/>
+	<input type="hidden" name="wsOpacPortLAN" value="8092" id="wsOpacPortLAN"/>
+	
+	<script language="javascript" type="text/javascript">
+		var wsOpacIpWAN = $('#wsOpacIpWAN').val();
+		var wsOpacPortWAN = $('#wsOpacPortWAN').val();
+		var wsOpacIpLAN = $('#wsOpacIpLAN').val();
+		var wsOpacPortLAN = $('#wsOpacPortLAN').val();
+		var wsOpacName = $('#wsOpacName').val();
+		var checkNetworkFlag = false;
+
+		// 默认访问内网
+		$('#wsOpacIp').val(wsOpacIpLAN);
+		$('#wsOpacPort').val(wsOpacPortLAN);
+		var url = "http://"+wsOpacIpWAN+":"+wsOpacPortWAN+"/"+wsOpacName+"/front/opac/TestNetwork.action";
+        $.ajax({
+             type: "post",
+             url: url,
+             dataType: "jsonp",
+             jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+             timeout: 2000, 
+             success: function (data) {
+             	 $('#wsOpacIp').val(wsOpacIpWAN);
+    			 $('#wsOpacPort').val(wsOpacPortWAN);
+             },
+             error: function () {
+                $('#wsOpacIp').val(wsOpacIpLAN);
+     		    $('#wsOpacPort').val(wsOpacPortLAN);
+             }
+        });
+		
+		
+	</script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<base href="http://222.177.237.197:8080/InDigLib/"/>
+    	<title></title>
+		<link type="text/css" rel="shortcut icon" href="favicon.ico"/>
+		<link type="text/css" rel="stylesheet" href="css/login/login-five.css" />
+		
+		<script type="text/javascript" src="js/ajax/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery.reveal.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery.md5.js"></script>
+		<script type="text/javascript">
+	
+			//window.location.href="frontV2/SearchIndex.action";
+		
+			var $loginName;
+			var $password;
+			var $loginForm;
+			
+			function formSubmit(){
+				if($.trim($loginName.val())==''){
+					showErrorMessage('用户名不能为空！！！');
+					$loginName.focus();
+					return false;
+				}
+				if($.trim($password.val())==''){
+					showErrorMessage('密码不能为空！！！');
+					$password.focus();
+					return false;
+				}
+				if($("#jcaptcha_hid").val()=="true" && $.trim($("#jcaptcha_val").val())==''){
+					showErrorMessage('验证码不能为空！！！');
+					$("#jcaptcha_val").focus();
+					return false;
+				}
+				var md5Password =$.md5($password.val()); 
+				$password.val(md5Password);
+				$loginForm.submit();
+			}
+			
+			function formReset(){
+				$loginName.val('');
+				$password.val('');
+				$loginName.focus();
+			}
+			
+			$(function(){
+				var errorMessage = $('#errorMessage').html();
+				if(errorMessage!=''){
+					showErrorMessage(errorMessage);
+				}
+				
+				if(window!=top){
+			      window.top.location = "Login!index.action";
+			  	}
+				$loginName = $('#loginName');
+				$password = $('#password');
+				$loginForm =$('#loginForm');
+				$loginName.focus();
+				$loginName.select();
+				
+				var params = {
+					random:Math.random()
+				};
+				$.ajax( {
+					url : 'Login!validityLogin.action',
+					type : 'post',
+					data : params,
+					asyn : true,
+					dataType : 'json',
+					timeout : 60000,
+					error : function() {
+						
+					},
+					success : function(data) {
+						var useJcaptcha = data.useJcaptcha;
+						$("#jcaptcha_hid").val(useJcaptcha);
+						if(useJcaptcha!="true"){
+							$("#jcaptcha_lbl").remove();
+						}
+						//$("#font_msg").html(data.message);
+						//$("#font_msg").attr("title", "过期后将不允许在登录业务系统中!");
+						if(data.message!="" && data.message!=null){
+							$('#tipMessage').html(data.message);
+							$('#tipModal').reveal($(this).data());
+						}
+						$("#systemName").html(data.systemName);
+						document.title = data.systemName;
+					}
+				});
+				
+				$("img[id='jcaptcha']").bind('click', function() {
+					//编辑访问路径，d避免提及url一样，浏览器不重新求其，返回缓存中内容
+					this.src = 'jcaptcha?d=' + new Date().getTime();
+				});
+			});
+			
+			// 弹出操作框
+			function createDialog() {
+			    $('body').append('<div id="msgInfo"></div>');
+			    $('#msgInfo').dialog({
+			        autoOpen: false,
+			        bgiframe: true,
+			        title: "系统提示",
+			        width: 500,
+			        height: 200,
+			        modal: true,
+			        buttons: {
+			            '关闭': function() {
+			                $(this).dialog('close');
+			            }
+			        }
+			    });
+			}
+
+			function showErrorMessage(message){
+				$('#userLabel').hide();
+				$('#errorDiv').show();
+				$('#errorMessage').html(message);
+			}
+		</script>
+	</head>
+	<body>
+       <div class="samebox" id="samebox">
+		<div class="header">
+			<a href="#" onclick="return false;">
+	        	  <!--<span>重庆图书馆大数据服务平台</span>-->
+               <span id="systemName"></span>
+	        </a>
+		</div>
+		
+        <div class="waibox">
+	        <div class="box1">
+				<div class="aw-login-box">
+					<div class="mod-body clearfix">
+						<div class="content pull-left">
+							<div class="topbox">
+								<div class="topleft"><img src="images/login/login_logo.png" /></div>
+								<div class="topleftbot"><img src="images/login/login_name.png" /></div>
+							</div>
+						</div>
+		
+						<div class="side-bar pull-left">
+							<h1 id='userLabel'>用户登录<em>User Login</em></h1>
+							<div id="errorDiv" class="error" style="display:none;"><span class="iconero"></span><span id="errorMessage"></span></div>
+	            			<form action="Login!login.action" name="loginForm" id="loginForm" method="post" class="login_form">
+								<ul>
+									<li><input name="loginName" id="loginName" value="" type="text" onkeydown="if(event.keyCode==13) $('#password').select();" autofocus="autofocus" class="text" />
+										<span href="#" class="icon user"></span>
+									</li>
+									<li>
+										<input name="password" id="password" type="password" autocomplete="off" onkeydown="if(event.keyCode==13) formSubmit()" class="text"/>
+										<span href="#" class="icon lock"></span>
+									</li>
+									<li id="jcaptcha_lbl">
+										<input type="text" id='jcaptcha_val' name='jcaptcha' onkeydown="if(event.keyCode==13) formSubmit()" class="text"/>
+		                              	<img src="jcaptcha" id="jcaptcha" width="120px" height="60px" class="icon_nzm" />
+									</li>
+								</ul>
+								<input type="hidden" id="jcaptcha_hid" name="useJcaptcha" ></input>
+							</form>
+		                    <a href="javascript:;" class="btn btn-large btn-primary" onclick="formSubmit();return false;">登录</a>
+		                    
+		                    <div id="tipModal" class="reveal-modal">
+			                    <h2>系统提示</h2>
+			                    <p id="tipMessage"></p>
+			                    <a class="close-reveal-modal">&#215;</a>
+			                </div>
+		                    
+						</div>
+		                
+		               <div class="erfot">温馨提示：请使用IE8或IE11兼容模式的浏览器登录本平台</div>
+		
+					</div>
+				</div>
+	        </div>
+        </div>
+        
+        <!--底部-->
+		<div class="foot">
+			<div class="copyright">深圳市文华数图信息咨询有限公司 版权所有</div>
+			</div>
+        </div>
+	</body>
+
+</html>
