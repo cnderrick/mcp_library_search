@@ -114,24 +114,24 @@
 |  | 菏泽 | — | ⛔ 不通 | http://www.hzlib.net （菏泽市图书馆） | — | — |
 | 四川省 | 成都 | `chengdu` | ✅ 接入 | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族 ＋ `adapters/cn/chengdu.py`（`pro2018=True` 启用家族 pro2018 解析；自带 ≥2 秒节流） |
 |  | 自贡 | — | ❓ 缺失 | — | — | — |
-|  | 攀枝花 | — | ⏳ 等待确认 | http://www.pzhlib.com.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 攀枝花 | — | 🔍 待核验 | http://www.pzhlib.com.cn （攀枝花市图书馆） | 图创 Interlib（站内 interlibSSO／ifs/search） | 2026-10-03 首页标题「攀枝花市图书馆网站」；OPAC 候选 host http://125.66.234.132:8180（本网络 8180 不可达，待换网复测） |
 |  | 泸州 | — | ❓ 缺失 | — | — | — |
-|  | 德阳 | — | ⏳ 等待确认 | http://www.deyanglib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 绵阳 | — | ⏳ 等待确认 | http://www.mylib.net （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 广元 | — | ⏳ 等待确认 | http://www.gyslib.org.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 德阳 | — | 🔍 待核验 | http://www.deyanglib.cn （德阳市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 首页标题「德阳市图书馆」，wisweb＋chaoxing 变量；OPAC 未侦察 |
+|  | 绵阳 | — | ⛔ 不通 | http://www.mylib.net （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.16（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
+|  | 广元 | — | 🔍 待核验 | http://www.gyslib.org.cn （广元市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 首页标题「广元市图书馆」；OPAC 未侦察 |
 |  | 遂宁 | — | ❓ 缺失 | — | — | — |
-|  | 内江 | — | ⏳ 等待确认 | http://www.scnjlib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 内江 | — | ⏳ 等待确认 | http://www.scnjlib.cn （外源候选） | — | 2026-10-03 探测 DNS→61.188.216.37，TCP 可达但 HTTP 空响应（非 198.20 停放段），入口待确认 |
 |  | 乐山 | — | ❓ 缺失 | — | — | — |
-|  | 南充 | — | ⏳ 等待确认 | http://www.ncstsg.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 眉山 | — | ⏳ 等待确认 | http://www.mslib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 宜宾 | — | ⏳ 等待确认 | http://ybslib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 南充 | — | ⛔ 不通 | http://www.ncstsg.cn （外源候选，域名不存在） | — | 2026-10-03 DNS 无解析（NXDOMAIN），非馆方站点 |
+|  | 眉山 | — | 🔍 待核验 | http://www.mslib.cn （眉山市图书馆） | 超星系（站内有 cxstar／sslibrary） | 2026-10-03 首页标题「眉山市图书馆」；:9001/msss 不可达、bookCity.html 404，OPAC 待侦 |
+|  | 宜宾 | — | 🔍 待核验 | http://ybslib.cn （宜宾市图书馆） | 自研 Nuxt（待侦） | 2026-10-03 首页标题「宜宾市图书馆」；OPAC 未侦察 |
 |  | 广安 | — | ❓ 缺失 | — | — | — |
-|  | 达州 | — | ⏳ 等待确认 | http://www.dzslib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 雅安 | — | ⏳ 等待确认 | http://www.yaanlib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 巴中 | — | ⏳ 等待确认 | http://www.bzslib.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 资阳 | — | ⏳ 等待确认 | http://www.zyslib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 达州 | — | 🔍 待核验 | https://www.dzslib.cn （达州市图书馆） | 自研 Vue SPA（待侦） | 2026-10-03 首页标题「达州市图书馆」，Vue SPA；OPAC 未侦察；与广元同 IP 124.243.227.8 |
+|  | 雅安 | — | ⛔ 不通 | http://www.yaanlib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.17（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
+|  | 巴中 | — | 🔍 待核验 | https://www.bzslib.cn （巴中市图书馆） | 帝国CMS 门户 | 2026-10-03 首页标题「巴中市图书馆」；站内有 opac/馆藏字样，入口待侦 |
+|  | 资阳 | — | ⛔ 不通 | http://www.zyslib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.18（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 阿坝 | — | ❓ 缺失 | — | — | — |
-|  | 甘孜 | — | ⏳ 等待确认 | http://www.gzzlib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 甘孜 | — | ⛔ 不通 | http://www.gzzlib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.19（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 凉山 | — | ❓ 缺失 | — | — | — |
 | 浙江省 | 杭州 | `hangzhou` | ✅ 接入 | https://my1.zjhzlib.cn （杭州图书馆） | 图创 Interlib（与广州同模板） | `interlib/` 家族 ＋ `adapters/cn/hangzhou.py`（双源合并，杭图 `HZ:`） |
 |  |  |  | ✅ 接入 | https://www.zjlib.cn/ （浙江图书馆，BFF 网关 `/bff-api/`） | 自研微服务（已确认；Nuxt 3＋Java/Spring＋ES，纯 JSON、无需鉴权；省级馆，6 馆区） | `adapters/cn/_zjlib.py`（浙图 `ZJ:`，天津模式并入 `hangzhou`） |
@@ -213,7 +213,7 @@
 |  | 宜春 | — | ⛔ 不通 | http://www.yclib.net （宜春市图书馆） | — | — |
 |  | 抚州 | — | ⛔ 不通 | http://www.fzlib.net （抚州市图书馆） | — | — |
 |  | 上饶 | — | ⛔ 不通 | http://www.srlib.net （上饶市图书馆） | — | — |
-|  | 景德镇 | — | ⏳ 等待确认 | http://www.jdzstsg.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 景德镇 | — | ⛔ 不通 | http://www.jdzstsg.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.20（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 | 河南省 | 郑州 | `henan_prov` | ✅ 接入 | http://218.28.6.78:8081/ILASOPAC/Index?target=0 （河南省图书馆） | UILAS 知识检索平台（老版 HTML OPAC） | `uilas/` 家族 + `adapters/cn/henan_prov.py`；实抓「三体」57 条 |
 |  |  | — | 🔍 待核验 | http://123.15.53.180:62280/client/default （郑州图书馆） | 未知（"Home Room" 系统，Vue，含登录） | 2026-10-03 实测入口可达但疑似需登录，检索接口未侦察 |
 |  | 开封 | — | ⛔ 不通 | http://www.kflib.net （开封市图书馆） | — | — |
@@ -245,7 +245,7 @@
 |  | 随州 | — | ⛔ 不通 | http://www.szlib.net （随州市图书馆） | — | — |
 |  | 恩施 | — | ⛔ 不通 | http://www.eslib.net （恩施州图书馆） | — | — |
 |  | 黄石 | — | ❓ 缺失 | — | — | — |
-|  | 宜昌 | — | ⏳ 等待确认 | http://www.yclibrary.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 宜昌 | — | 🔍 待核验 | https://www.yclibrary.cn （宜昌市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 首页标题「宜昌市图书馆」；OPAC 未侦察 |
 | 湖南省 | 长沙 | `hunan_prov` | ✅ 接入 | https://opac.library.hn.cn/opac/ （湖南图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/hunan_prov.py`；实抓「三体」176 条 |
 |  |  | — | ⛔ 不通 | https://opac.changshalib.cn/opac/ （长沙图书馆） | 图创 Interlib | 2026-10-03 实测：`/opac/index`、`/opac/search`、`/opac/api/search` 全部 HTTP 403（整站 WAF 拦截程序化访问，带 cookie/Referer 亦 403），无可用入口 |
 |  | 株洲 | `zhuzhou` | ✅ 接入 | http://218.75.211.12:8899/opac/index （株洲市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/zhuzhou.py`；实抓「三体」222 条 |
@@ -263,15 +263,15 @@
 |  | 湘西 | — | ⛔ 不通 | http://www.xxlib.net （湘西州图书馆） | — | — |
 | 海南省 | 海口 | `haikou` | ✅ 接入 | http://221.11.163.25:5656/opac/index （海口市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/haikou.py`；实抓「三体」18 条。海南省图书馆 www.hilib.com 仍不通 |
 |  |  | — | 🔍 待核验 | http://www.haikoulib.cn （海口图书馆） | — | — |
-|  | 三亚 | — | ⏳ 等待确认 | http://www.sanyalib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 三亚 | — | ⛔ 不通 | http://www.sanyalib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.21（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 三沙 | — | ❓ 缺失 | — | — | — |
 |  | 儋州 | — | ❓ 缺失 | — | — | — |
 | 贵州省 | 贵阳 | — | ⛔ 不通 | https://ilas.gzlib.com.cn/opac/index （贵州省图书馆） | 图创 Interlib | 2026-10-03 实测：`/opac/index` HTTP 200，但 `/opac/search`（任意参数）恒 HTTP 500、`/opac/api/search` 亦 500——检索后端故障，暂不可用 |
 |  |  | — | ⛔ 不通 | https://www.gylib.org.cn/entry （贵阳市图书馆） | — | 用户述需登录；2026-10-03 实测入口为登录/门户页，无可匿名检索的书目 OPAC |
-|  | 六盘水 | — | ⏳ 等待确认 | http://www.lpslib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 六盘水 | — | ⛔ 不通 | http://www.lpslib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.22（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 遵义 | — | ❓ 缺失 | — | — | — |
-|  | 安顺 | — | ⏳ 等待确认 | http://www.asstsg.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
-|  | 毕节 | — | ⏳ 等待确认 | http://www.bijlib.com （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 安顺 | — | ⛔ 不通 | http://www.asstsg.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.23（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
+|  | 毕节 | — | ⛔ 不通 | http://www.bijlib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.24（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 铜仁 | — | ❓ 缺失 | — | — | — |
 |  | 黔西南 | — | ❓ 缺失 | — | — | — |
 |  | 黔东南 | — | ❓ 缺失 | — | — | — |
@@ -279,10 +279,10 @@
 | 云南省 | 昆明 | — | 🔍 待核验 | http://metalsp.ynlib.cn:3006/ （云南省图书馆 MetaLSP 发现系统） | MetaLSP 发现系统 | 2026-10-03 实测入口 HTTP 200「MetaLSP发现系统」；底层书目接口未侦察 |
 |  |  | — | ⛔ 不通 | http://ilasweb.kmlib.yn.cn/ （昆明市图书馆） | — | 2026-10-03 实测：域名无法解析（DNS 失败），入口待寻 |
 |  | 曲靖 | — | ❓ 缺失 | — | — | — |
-|  | 玉溪 | — | ⏳ 等待确认 | http://www.yxstsg.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 玉溪 | — | ⛔ 不通 | http://www.yxstsg.cn （外源候选，域名不存在） | — | 2026-10-03 DNS 无解析（NXDOMAIN），非馆方站点 |
 |  | 保山 | — | ❓ 缺失 | — | — | — |
 |  | 昭通 | — | ❓ 缺失 | — | — | — |
-|  | 丽江 | — | ⏳ 等待确认 | http://www.ljstsg.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 丽江 | — | 📋 计划 | https://www.ljstsg.cn/opac/ （丽江市图书馆） | 图创 Interlib（已确认：/opac/ 标题「检索系统」、页内 interlib／opac/api） | 2026-10-03 OPAC 已定位、HTTP 200（148KB）；首页 https://www.ljstsg.cn。可立项接入 |
 |  | 普洱 | — | ❓ 缺失 | — | — | — |
 |  | 临沧 | — | ❓ 缺失 | — | — | — |
 |  | 楚雄 | — | ❓ 缺失 | — | — | — |
@@ -306,10 +306,10 @@
 |  | 商洛 | — | ⛔ 不通 | https://shangluo.superlib.libsou.com/ | 超星（superlib/libsou） | 2026-10-03 实测：站点为超星发现页、无书目 OPAC 检索入口（用户亦述「没查询入口」） |
 | 甘肃省 | 兰州 | — | 🔍 待核验 | https://www.gslib.com.cn （甘肃省图书馆） | — | — |
 |  |  | `lanzhou` | ✅ 接入 | http://36.137.50.135:8082/#/index （兰州市图书馆） | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/lanzhou.py`；实抓「三体」521 条 |
-|  | 嘉峪关 | — | ⏳ 等待确认 | http://jygslib.com.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 嘉峪关 | — | 🔍 待核验 | http://jygslib.com.cn （嘉峪关市图书馆） | 自研 Vue SPA（页标题仅「门户网站」） | 2026-10-03 入口可达(200)但页面无馆名、弱证；static/config.js 404，身份与 OPAC 待另行确证 |
 |  | 金昌 | — | ❓ 缺失 | — | — | — |
 |  | 白银 | — | ❓ 缺失 | — | — | — |
-|  | 天水 | — | ⏳ 等待确认 | http://www.gstslib.com.cn （外源候选） | — | 2026-10-03 外部提供候选入口，真伪与 OPAC 待核验 |
+|  | 天水 | — | ⏳ 等待确认 | http://www.gstslib.com.cn （外源候选） | — | 2026-10-03 探测 DNS→125.74.52.173，TCP 可达但 HTTP 空响应，入口待确认 |
 |  | 武威 | — | ❓ 缺失 | — | — | — |
 |  | 张掖 | — | ❓ 缺失 | — | — | — |
 |  | 平凉 | — | ❓ 缺失 | — | — | — |
