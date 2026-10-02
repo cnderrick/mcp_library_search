@@ -72,11 +72,20 @@ def _throttle_for(url):
 
 
 def _open(req, timeout=20):
-    """HTTP 入口：CookieJar 会话（set_number 绑定会话）+ 每 host 节流，返回 UTF-8 文本。"""
+    """HTTP 入口：CookieJar 会话（set_number 绑定会话）+ 每 host 节流，返回 UTF-8 文本。
+
+    HTTP 401＝IP 被验证码墙封禁：抛 _CaptchaError 给出手动解封提示，不重试硬闯。
+    """
     _throttle_for(req.full_url).wait()
     try:
         with _opener.open(req, timeout=timeout) as resp:
             return resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        if e.code == 401:
+            raise _CaptchaError(
+                "天津图书馆：IP 被验证码墙封禁（HTTP 401），请在浏览器打开 "
+                "http://opacwh.tjl.tj.cn:8991 输入验证码手动解封后重试") from e
+        raise RuntimeError(f"天津图书馆请求失败：{e}") from e
     except (urllib.error.URLError, OSError) as e:
         raise RuntimeError(f"天津图书馆请求失败：{e}") from e
 
@@ -88,7 +97,9 @@ class _CaptchaError(RuntimeError):
 def _check_captcha(text):
     """验证码墙：立即抛错，不重试硬闯（按 IP 封，硬闯只会延长封禁）。"""
     if "验证码" in text:
-        raise _CaptchaError("天津图书馆：检索过于频繁触发验证码，请稍后再试")
+        raise _CaptchaError(
+            "天津图书馆：检索过于频繁触发验证码，请在浏览器打开 OPAC "
+            "输入验证码手动解封后重试")
 
 
 def _looks_like_isbn(keyword):
@@ -425,6 +436,8 @@ class _Client:
         for i, (source, rid) in enumerate(_split_book_id(book_id)):
             try:
                 holdings.extend(self._holdings_for(source, rid))
+            except _CaptchaError:
+                raise  # 封禁信号穿透聚合，不被附属源跳过逻辑静默
             except RuntimeError:
                 if i == 0:
                     raise
@@ -445,6 +458,8 @@ class _Client:
         try:
             text = _open(urllib.request.Request(url, headers=_HEADERS))
             return _parse_item_global(text)
+        except _CaptchaError:
+            raise  # 封禁提示原样穿透，不加馆名包装
         except RuntimeError as e:
             raise RuntimeError(f"{_SOURCES[source]['name']}馆藏查询失败：{e}") from e
 
@@ -461,6 +476,8 @@ class _Client:
                f"&doc_library={source}&doc_number={rid}&format=999")
         try:
             text = _open(urllib.request.Request(url, headers=_HEADERS))
+        except _CaptchaError:
+            raise  # 封禁提示原样穿透，不加馆名包装
         except RuntimeError as e:
             raise RuntimeError(f"{_SOURCES[source]['name']}详情查询失败：{e}") from e
         _check_captcha(text)

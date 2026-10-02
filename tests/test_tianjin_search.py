@@ -2,6 +2,8 @@
 
 mock 点为模块级 `_open(req, timeout)`；fixture 结论见 tests/fixtures/tianjin/NOTES.md。
 """
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -117,3 +119,40 @@ def test_captcha_page_raises(monkeypatch):
         raise AssertionError("验证码页应抛 RuntimeError")
     except RuntimeError as e:
         assert "天津" in str(e)
+
+
+class _Boom401:
+    def open(self, req, timeout=20):
+        raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized", None, None)
+
+
+def test_http_401_raises_manual_unblock_hint(monkeypatch):
+    # 401＝IP 被验证码墙封禁：错误必须给出「浏览器手动解封」的可操作提示
+    monkeypatch.setattr(tianjin, "_opener", _Boom401())
+    req = urllib.request.Request("http://opacwh.tjl.tj.cn:8991/F?x=1")
+    with pytest.raises(RuntimeError) as ei:
+        tianjin._open(req)
+    msg = str(ei.value)
+    assert "401" in msg and "解封" in msg and "天津" in msg
+
+
+def test_search_401_punches_through_source_tolerance(monkeypatch):
+    # 一个源 401，另一源健康：封禁信号仍要上抛提示，不静默降级成部分结果
+    def spy(req, timeout=20):
+        if "local_base=TJL01" in req.full_url:
+            raise tianjin._CaptchaError("天津图书馆：IP 被验证码墙封禁（HTTP 401），请手动解封")
+        return _load("find_tjc01.html")
+
+    monkeypatch.setattr(tianjin, "_open", spy)
+    with pytest.raises(RuntimeError, match="解封"):
+        tianjin._Client().search("三体")
+
+
+def test_get_holdings_401_preserves_hint(monkeypatch):
+    # 馆藏包装错误不得吞掉封禁提示（_CaptchaError 原样穿透，不加馆名前缀包装）
+    def spy(req, timeout=20):
+        raise tianjin._CaptchaError("天津图书馆：IP 被验证码墙封禁（HTTP 401），请手动解封")
+
+    monkeypatch.setattr(tianjin, "_open", spy)
+    with pytest.raises(RuntimeError, match="解封"):
+        tianjin._Client().get_holdings("TJL01:002892667+ZXYH:217795")
