@@ -35,16 +35,44 @@ _PAGE_SIZE = 10   # ALEPH brief 每页固定 10 条，short-jump 按记录偏移
 
 _jar = CookieJar()
 _opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(_jar))
-_last_request = 0.0
+
+
+class _Throttle:
+    """最小间隔限速器：距上次 wait() 不足 interval 时睡足差值。
+
+    clock/sleep 可注入供单测；真网默认 time.monotonic/time.sleep。
+    """
+
+    def __init__(self, interval, clock=time.monotonic, sleep=time.sleep):
+        self.interval = interval
+        self._clock = clock
+        self._sleep = sleep
+        self._last = None
+
+    def wait(self):
+        now = self._clock()
+        if self._last is not None:
+            deficit = self.interval - (now - self._last)
+            if deficit > 0:
+                self._sleep(deficit)
+                now = self._clock()
+        self._last = now
+
+
+# 每 host 一个限速器：主馆与少儿馆是两台服务器，各自计时互不拖累
+_throttles = {}
+
+
+def _throttle_for(url):
+    host = urllib.parse.urlsplit(url).netloc
+    if host not in _throttles:
+        _throttles[host] = _Throttle(_THROTTLE)
+    return _throttles[host]
 
 
 def _open(req, timeout=20):
-    """HTTP 入口：CookieJar 会话（set_number 绑定会话）+ 节流，返回 UTF-8 文本。"""
-    global _last_request
-    wait = _THROTTLE - (time.monotonic() - _last_request)
-    if wait > 0:
-        time.sleep(wait)
-    _last_request = time.monotonic()
+    """HTTP 入口：CookieJar 会话（set_number 绑定会话）+ 每 host 节流，返回 UTF-8 文本。"""
+    _throttle_for(req.full_url).wait()
     try:
         with _opener.open(req, timeout=timeout) as resp:
             return resp.read().decode("utf-8", errors="replace")
