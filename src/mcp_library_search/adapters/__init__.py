@@ -11,6 +11,7 @@ from . import jiangyin
 from . import shanghai
 from . import shenzhen
 from . import tianjin
+from . import wenzhou
 
 _ADAPTERS = {
     "chongqing": chongqing,
@@ -20,6 +21,7 @@ _ADAPTERS = {
     "shanghai": shanghai,
     "shenzhen": shenzhen,
     "tianjin": tianjin,
+    "wenzhou": wenzhou,
 }
 
 _SUPPORTED = "、".join(sorted(_ADAPTERS))
