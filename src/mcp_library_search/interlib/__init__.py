@@ -103,8 +103,13 @@ def get_holdings(cfg: InterlibConfig, book_id: str, only_available: bool = True)
 
 
 def get_book_detail(cfg: InterlibConfig, book_id: str) -> BookDetail:
-    """指定书目的完整介绍（ISBN、索书号、内容简介）。失败抛 RuntimeError。"""
-    html = client.get(cfg, f"/opac/book/{book_id}")
+    """指定书目的完整介绍（ISBN、索书号、内容简介）。失败抛 RuntimeError。
+
+    多租户云托管馆（curlibcode 非空）详情 URL 必须带该参数，否则 HTTP 500
+    （ZXYH 实测，见 tests/fixtures/tianjin/NOTES.md）。
+    """
+    params = {"curlibcode": cfg.curlibcode} if cfg.curlibcode else None
+    html = client.get(cfg, f"/opac/book/{book_id}", params)
     d = parser.parse_detail(html)
     if not d["title"]:
         raise RuntimeError(f"{cfg.name_cn}：未找到该书详情：{book_id}")

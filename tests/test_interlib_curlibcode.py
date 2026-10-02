@@ -38,3 +38,41 @@ def test_search_omits_curlibcode_by_default(monkeypatch):
     monkeypatch.setattr(_client, "get", spy)
     search_books(cfg, "三体")
     assert "curlibcode" not in seen[0]
+
+
+# 详情 URL 同样需要 curlibcode：ZXYH 实测 /opac/book/{recno} 不带该参数返回 HTTP 500
+# （tests/fixtures/tianjin/NOTES.md），穗杭不带则正常。
+_DETAIL_HTML = (Path(__file__).parent / "fixtures" / "guangzhou"
+                / "detail.html").read_text(encoding="utf-8")
+
+
+def test_detail_sends_curlibcode_when_configured(monkeypatch):
+    from mcp_library_search.interlib import get_book_detail
+
+    seen = []
+
+    def spy(cfg, path, params=None):
+        seen.append((path, params))
+        return _DETAIL_HTML
+
+    monkeypatch.setattr(_client, "get", spy)
+    get_book_detail(_CFG, "217795")
+    assert seen[0][0] == "/opac/book/217795"
+    assert seen[0][1] == {"curlibcode": "STC001"}
+
+
+def test_detail_omits_curlibcode_by_default(monkeypatch):
+    from mcp_library_search.interlib import get_book_detail
+
+    seen = []
+    cfg = InterlibConfig(city="guangzhou", name_cn="广州图书馆",
+                         base_url="https://opac.gzlib.org.cn")
+
+    def spy(cfg, path, params=None):
+        seen.append((path, params))
+        return _DETAIL_HTML
+
+    monkeypatch.setattr(_client, "get", spy)
+    get_book_detail(cfg, "123")
+    assert seen[0][0] == "/opac/book/123"
+    assert seen[0][1] is None
