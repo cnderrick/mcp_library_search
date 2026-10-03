@@ -12,7 +12,7 @@
 
 同一省份的城市排在一起，省份列只在该省首行填写（视觉上等同于合并单元格），新增城市时接在本省行之后。同一城市的多座馆（省馆＋市馆等）接在该城行之后，城市列只在该城首行填写，具体馆名随入口地址注明。表序分三段：直辖市在前、省居中、自治区殿后。
 
-总览含两批补入的未接入城市：一批自《全国公共图书馆OPAC查询地址清单》照登（城市与馆名原样），另一批按**地级行政区名册**补全（地级市＋自治州＋地区＋盟；只登城市名，入口缺失）。两批的标识、技术组件、适配层均留空待侦察。部分条目存在清单本身的张冠李戴（同一域名被安到多座城市），未作改写，以实测结果为准。
+登记的行政粒度：二级行政单位默认指**地级市＋市辖区＋县级单位**（自治州／地区／盟同理），粒度最小到县；检索按「县级命中优先返回，未命中再上溯地级市」解析。总览含两批补入的未接入城市：一批自《全国公共图书馆OPAC查询地址清单》照登（城市与馆名原样），另一批按**地级行政区名册**补全（地级市＋自治州＋地区＋盟；只登城市名，入口缺失）。两批的标识、技术组件、适配层均留空待侦察。部分条目存在清单本身的张冠李戴（同一域名被安到多座城市），未作改写，以实测结果为准。
 
 状态列标识：✅ 接入＝全链路实网跑通；⚠️ 部分接入＝链路有环节待修；⛔ 不通＝站点侧拦截、不可达，或实测已被域名停放/无关站点占用；🚧 攻关＝已侦察、待攻克；📋 计划＝可接入、待立项；🔍 待核验＝首页实测可达、OPAC 未侦察；⏳ 等待确认＝外部提供候选入口、页面真伪未核验；❓ 缺失＝名册内城市尚无任何登记（入口缺失）。
 
@@ -141,6 +141,7 @@
 |  | 台州 | `taizhou` | ✅ 接入 | https://opac.tzlib.cn:8182/opac/index | 图创 Interlib（已确认，pro2018 新版模板变体；台州市图书馆，浙江地级市馆，含 S1 线地铁站等全市通借网点） | `interlib/` 家族 ＋ `adapters/cn/taizhou.py`（`pro2018=True` 启用家族 pro2018 解析） |
 |  | 金华 | `jinhua` | ✅ 接入 | http://202.101.180.43/ILASOPAC/Index?target=0 | UILAS 知识检索平台（ILAS 系 HTML OPAC，Tomcat/JSP） | `uilas/` 家族 + `adapters/cn/jinhua.py`；数据边界：借出无应还日期、裸 IP 仅 HTTP（443 证书过期）、详情页最大 870KB |
 |  | 湖州 | — | ⛔ 不通 | https://www.hztsg.com/Cloud/Module/Index/index.html （湖州市图书馆） | — | 2026-10-03 实测：`www.hztsg.com` 解析到 **198.20.1.102 域名停放段**，80/443 端口均连接超时无响应字节；原登记 `www.hzlib.net` 亦不通。无可用检索入口 |
+|  | 德清（县） | — | 📋 计划 | http://opac.dqlib.com.cn/opac/index （德清县图书馆，湖州市辖） | 图创 Interlib（`/opac/api/search` 已确认） | 2026-10-03 县级馆（湖州德清）；HTML 检索页被「opac验证」拦，`/opac/api/search` 匿名返回「三体」JSON，可走 api 通道接入 |
 |  | 嘉兴 | — | ⛔ 不通 | http://www.jxlib.net （嘉兴市图书馆） | — | — |
 |  | 舟山 | `zhoushan` | ✅ 接入 | https://opac.zsodl.cn/Index?target=0 | UILAS 知识检索平台（与金华同款） | `uilas/` 家族 + `adapters/cn/zhoushan.py`；旧式 TLS quirk（只支持静态 RSA kx 套件，需显式放行，见家族章） |
 |  | 衢州 | — | ⛔ 不通 | http://www.qzlib.net （衢州市图书馆） | — | — |
@@ -305,21 +306,21 @@
 |  | 榆林 | `yulin` | ✅ 接入 | https://www.yulinlib.org.cn/opac/#/index | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/yulin.py`（Referer 须 `/opac/`）；实抓「三体」16 条 |
 |  | 安康 | `ankang` | ✅ 接入 | http://219.145.206.134:8082/opac/index | 图创 Interlib（pro2018 模板） | `interlib/` 家族 + `adapters/cn/ankang.py`（`pro2018=True`、`api_detail=True`；详情页 HTML 被源站截断，改走 `/api/book/{}`）；实抓「三体」161 条 |
 |  | 商洛 | — | ⛔ 不通 | https://shangluo.superlib.libsou.com/ | 超星（superlib/libsou） | 2026-10-03 实测：站点为超星发现页、无书目 OPAC 检索入口（用户亦述「没查询入口」） |
-| 甘肃省 | 兰州 | — | 🔍 待核验 | http://search.gslib.com.cn/uhtbin/cgisirsi/ （甘肃省图书馆 iLink） | SirsiDynix iLink（同大连 ykt 家族） | 2026-10-03 用户提供：iLink OPAC（页标题「iLink」），限省馆口径；页面含登录表单、ps token 会话地址，检索流程待侦察 |
+| 甘肃省 | 兰州 | — | 🔍 待核验 | http://search.gslib.com.cn/uhtbin/cgisirsi/ （甘肃省图书馆 iLink，仅查馆别＝省馆） | SirsiDynix iLink（同大连 ykt 家族） | 2026-10-03 入口 200 可达（页标题「iLink」；`ps=` token 会话地址、表单外链 `cgisirsi`）；JS 驱动，检索/详情/馆藏流程待侦察 |
 |  |  | `lanzhou` | ✅ 接入 | http://36.137.50.135:8082/#/index （兰州市图书馆） | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/lanzhou.py`；实抓「三体」521 条 |
 |  | 嘉峪关 | — | 🔍 待核验 | http://jygslib.com.cn （嘉峪关市图书馆） | 自研 Vue SPA（页标题仅「门户网站」） | 2026-10-03 入口可达(200)但页面无馆名、弱证；static/config.js 404，身份与 OPAC 待另行确证 |
 |  | 金昌 | — | ⛔ 不通 | http://www.jctsg.com/ （金昌市图书馆） | — | 2026-10-03 解析至 198.20.2.53（域名停放段）、TCP 空响应 |
 |  | 白银 | — | ⛔ 不通 | http://www.byslib.com/ （白银市图书馆） | — | 2026-10-03 解析至 198.20.2.54（域名停放段）、TCP 空响应 |
 |  | 天水 | — | ⛔ 不通 | http://www.gstslib.com.cn （外源候选） | — | 2026-10-03 用户实测打不开；本机探测 DNS→125.74.52.173、TCP 可达但 HTTP 空响应，无可匿名检索入口 |
-|  | 武威 | — | 🔍 待核验 | http://117.156.117.23:8083/CustCount/index （武威市图书馆） | 自研（CustCount） | 2026-10-03 入口 200 但页面全白（仅 JS 初始化），检索系统待侦察 |
+|  | 武威 | — | ⛔ 不通 | http://117.156.117.23:8083/CustCount/index （武威市图书馆） | — | 2026-10-03 入口 200 但页面全白（用户确认），无可匿名检索入口 |
 |  | 张掖 | — | ❓ 缺失 | — | — | — |
 |  | 平凉 | — | ⛔ 不通 | http://www.plslib.com/ （平凉市图书馆） | — | 2026-10-03 解析至 198.20.2.56（域名停放段）、TCP 空响应 |
 |  | 酒泉 | — | ❓ 缺失 | — | — | — |
 |  | 庆阳 | — | ❓ 缺失 | — | — | — |
 |  | 定西 | — | ❓ 缺失 | — | — | — |
-|  | 陇南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | 图创？/iLink | 2026-10-03 用户述用甘肃省图书馆 OPAC＋馆别过滤查询，待侦察 |
+|  | 陇南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | SirsiDynix iLink | 2026-10-03 无独立入口；用甘肃省图书馆 iLink OPAC 按馆别过滤查询，与省馆共用同一系统，待侦察 |
 |  | 临夏 | — | ❓ 缺失 | — | — | — |
-|  | 甘南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | 图创？/iLink | 2026-10-03 同上，待侦察 |
+|  | 甘南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | SirsiDynix iLink | 2026-10-03 无独立入口；用甘肃省图书馆 iLink OPAC 按馆别过滤查询，与省馆共用同一系统，待侦察 |
 | 青海省 | 西宁 | — | ⛔ 不通 | http://www.qhlib.org （青海省图书馆） | — | — |
 |  |  | — | 🔍 待核验 | https://www.xnlib.cn/ （西宁市图书馆） | 门户站 | 2026-10-03 实测门户页 HTTP 200（3.7KB），底层书目 OPAC 未侦察 |
 |  | 海东 | — | 🔍 待核验 | https://hdtsg.cn/index.aspx （海东市图书馆） | 自研 ASP.NET（含 BibliographySearch.aspx） | 2026-10-03 入口/查询页 200，站内 `/BibliographySearch.aspx`、`/ClassifySearch.aspx` 书目检索页待侦察 |
