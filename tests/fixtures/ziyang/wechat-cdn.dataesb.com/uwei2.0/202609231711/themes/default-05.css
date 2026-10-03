@@ -1,0 +1,144 @@
+/* 通用版 */
+
+:root {
+    /* 颜色表--------------------------------------------------- */
+    /* 主题色 */
+    --theme-color: #00C291;
+    /* 主题色辅助色 */
+    --auxiliary-color2: #249276;
+    --auxiliary-color3: #007e5f;
+    --auxiliary-color4: #38E1B6;
+    --auxiliary-color5: #65E1c2;
+    /* 橙色/辅助色 */
+    --match-color: #f5b95b;
+    --match-auxiliary-color1: #b89661;
+    --match-auxiliary-color2: #9f6d1e;
+    --match-auxiliary-color3: #facc84;
+    --match-auxiliary-color4: #fad8a4;
+    --match-auxiliary-color5: #A65F11;
+
+    /* 红色/警示色 */
+    --match1-color: #f7604a;
+    --match1-auxiliary-color1: #B96558;
+    --match1-auxiliary-color2: #A12b18;
+    --match1-auxiliary-color3: #fb8977;
+    --match1-auxiliary-color4: #fba79a;
+    /* 通用背景色 */
+    --common-bg1: #ebeef3;
+    --common-bg2: #f5f6f8;
+    --common-bg3: #e1e4eb;
+    --common-bg4: #f8f8f8;
+    --common-bg5: #f2f3f5;
+    /* 文字颜色 */
+    /* 通用 */
+    --common-color1: #898d9f;
+    --common-color2: #464855;
+    --common-color3: #545663;
+    --common-color5: #9e9eb0;
+    --common-color6: #babcc2;
+    --common-color7: #30313b;
+    --common-color8: #a2a4a8;
+    --common-color9: #020202;
+    --common-color10: #6b6f81;
+  --common-color11:#9696b0;
+
+    /* 颜色表结束 */
+    /* -->透明色 */
+    --code-bg: rgba(0, 194, 145, .08);
+    --common-opacity-bg1: rgba(0, 0, 0, 0.16);
+    --common-opacity-bg2: rgba(43, 174, 104, 0.2);
+    --common-opacity-bg3: rgba(107, 111, 129, 0.08);
+    --common-opacity-bg4: rgba(247, 96, 74, 0.08);
+    /* 个人中心 */
+    --personal-bg: rgba(0, 194, 145, .88);
+    /* 筛选背景 */
+    --bg-sel-active: rgba(0, 194, 145, 0.08);
+    /* 读者证 */
+    --card_new_bg: rgba(0, 194, 145, .1);
+    /* 渐变颜色--------------------------------- */
+    /* 提交状态渐变-------------------- */
+    --status-theme: linear-gradient(180deg, var(--auxiliary-color4), var(--theme-color));
+    --status-theme-err: linear-gradient(180deg, var(--match1-auxiliary-color3), var(--match1-color));
+    --status-theme-match: linear-gradient(180deg, var(--match-auxiliary-color3), var( --match-color));
+    /* 状态结束----------------------------- */
+    /* 快速导航背景 */
+    --fun1_nav_bg: linear-gradient(-45deg, var(--theme-color), var(--auxiliary-color4));
+    --fun2_nav_bg: linear-gradient(-45deg, #FF9933, #FFB870);
+    --fun3_nav_bg: linear-gradient(-45deg, #F57945, #FFA270);
+    --fun4_nav_bg: linear-gradient(-45deg, #6370F2, #919BF2);
+      /* 适老化首页背景色*/
+      --elderFun1_nav_bg: linear-gradient(-45deg, #00B88A, #27CDA3, #27CDA3);
+      --elderFun2_nav_bg:  linear-gradient(-45deg, #FC8E20, #FFA245);
+      --elderFun3_nav_bg:  linear-gradient(-45deg, #F4723A, #FF9257);
+      --elderFun4_nav_bg:  linear-gradient(-45deg, #6370F2, #7E8BF8);
+    /* 读者证状态*/
+    --card_status_yes: linear-gradient(180deg, #FFD7AC, #FFCA90);
+    --card_status_no: linear-gradient(0deg, rgba(255, 255, 255, 0.8), #FFFFFF);
+    /* common */
+    --common-lg-bg: linear-gradient(0deg, var(--theme-color), var(--auxiliary-color4));
+    --common-lg-bg1: linear-gradient(0deg, #efefef, #f5f6f8);
+    --common-lg-bg3: linear-gradient(180deg, var(--auxiliary-color4), var(--theme-color));
+    --common-lg-bg4: linear-gradient(180deg, var(--theme-color), rgba(0, 194, 145, 0));
+    /* 书籍详情 */
+    --common-lg-bg5: linear-gradient( 90deg, rgba(107, 111, 129, 0.08), rgba(107, 111, 129, 0));
+    --common-lg-bg6:linear-gradient(0deg, rgba(255, 255, 255, 0) 80%, var(--theme-color) 100%);
+    /* 成都猜你喜欢详情按钮 */
+    --chengdu-love-btn: linear-gradient(0deg, #2bae68, #5dd796);
+    --love-btn: rgba(43, 174, 104, 0.2);
+    /* ----------------------阴影---------------------- */
+    /* 首页金刚区(快速导航)阴影 */
+    --fun1_shadow: rgba(0, 193, 145, 0.24);
+    --fun2_shadow: rgba(235, 159, 37, 0.24);
+    --fun3_shadow: rgba(245, 121, 69, 0.24);
+    --fun4_shadow: rgba(99, 112, 241, 0.24);
+    --fun_list_shadow: rgba(0, 194, 145, 0.04);
+    --card-status_shadow: rgba(36, 146, 118, 0.24);
+    --cert-h-icon-r: rgba(0, 0, 0, 0.16);
+    /* common */
+    /* 主题色----------- */
+    --common_shadow: rgba(0, 194, 145, 0.24);
+    --common_shadow3: rgba(0, 194, 145, 0.4);
+    --common_shadow4: rgba(0, 194, 145, 0.12);
+    /* 辅助色------------- */
+    --common_shadow1: rgba(245, 185, 91, 0.24);
+    --common_shadow2: rgba(247, 96, 74, 0.24);
+    --common_shadow5: rgba(245, 185, 91, 0.12);
+    --common_shadow6: rgba(137, 141, 159, 0.12);
+    /* 办证提交状态 */
+    --card-status-warn-shadow: rgba(245, 185, 91, 0.24);
+    --card-status-err-shadow: rgba(247, 96, 74, 0.24);
+    /* 图片 -> */
+    /*  首页-->个人中心--> 金刚区 */
+    --fun1_bg: url('../../themes/default-05/icon_first.png');
+    --fun2_bg: url('../../themes/default-05/icon_second.png');
+    --fun3_bg: url('../../themes/default-05/icon_third.png');
+    --fun4_bg: url('../../themes/default-05/icon_fourth.png');
+    /* 读者证挂失 */
+    --reportCard-title-icon: url('../../themes/default-05/icon_lost.png');
+    --card_null_card: url('../../themes/default-05/null_card.png');
+    /* 通用读者证卡片------------------- */
+    --card_active_bg: url('../../themes/default-05/img_card_cover.png');
+    --card_empty_bg: url('../../themes/default-05/img_card_empty.png');
+    /* 待缴，代缴 */
+    --pay_icon: url('../../themes/default-05/img_coin.png');
+    /* 缴费 */
+    --pay_i_icon: url('../../themes/default-05/-s-img_coin.png');
+    /* 首页漂浮导航 */
+    --nav_img: url('../../themes/default-05/icon_leyers.png');
+    /* 读者证绑定页面 */
+    --bind-t-bg: url('../../themes/default-05/bind_card_bg.png');
+    /* 图书封面默认 */
+    --no-cover-bg: url('../../themes/default-05/img_empty_cover.png');
+    /* 底部图标 */
+    --bottom-smile: url('../../themes/default-05/icon_bottom_smile.png');
+    /* 读者借阅排行 */
+    --Ranking-background: url('../../themes/default-05/img_top-background.png');
+    /* 图书借阅排行 */
+    --Ranking-book-background: url('../../themes/default-05/img_book-background.png');
+    /* 公告----------------------- */
+    --left-icon: url('../../themes/default-05/left.png');
+    --center-icon: url('../../themes/default-05/center.png');
+    --right-icon: url('../../themes/default-05/right.png');
+/*    退证*/
+    --back-icon: url('../../themes/default-05/img_coiin.png');
+}

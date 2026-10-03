@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="IE=edge" http-equiv="X-UA-Compatible"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"><meta name="referrer" content="no-referrer"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/favicon.ico" rel="icon"><link rel="stylesheet" id="style" href=""><script src="https://wechat-uwei-icon.oss-cn-guangzhou.aliyuncs.com/icons/uwei-common.js"></script><script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script><title>uwei 加载中...</title><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/css/chunk-vendors.6ec9c428.css" rel="preload" as="style"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/css/index.4bdbb14b.css" rel="preload" as="style"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/js/chunk-vendors.0d29bc4c.js" rel="preload" as="script"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/js/index.8fece70b.js" rel="preload" as="script"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/css/chunk-vendors.6ec9c428.css" rel="stylesheet"><link href="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/css/index.4bdbb14b.css" rel="stylesheet"></head><body><div id="app"></div><span id=""></span><span id="cnzz_stat_icon_1279346813" style="display: none"></span><script type="text/javascript" src="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/js/chunk-vendors.0d29bc4c.js"></script><script type="text/javascript" src="https://wechat-cdn.dataesb.com/uwei2.0/202609231711/static/js/index.8fece70b.js"></script></body><script type="text/javascript">// html获取不到main入口的配置，需要用es5语法兼容低版本
+    window.onload = function() {
+
+      var cnzzScript = document.createElement("script");
+      cnzzScript.src = "https://s9.cnzz.com/z_stat.php?id=1279346813";
+      cnzzScript.type = "text/javascript";
+      document.querySelector("#cnzz_stat_icon_1279346813").appendChild(cnzzScript);
+    };
+    (function() {
+      var src = "https://cdn.bootcss.com/eruda/1.5.4/eruda.min.js";
+      if (!/eruda=true/.test(window.location)) {
+        return;
+      }
+      var script = document.createElement("script");
+      script.src = src;
+      document.head.appendChild(script);
+      var init = document.createElement("script");
+      init.innerHTML = "function startEruda(){setTimeout(function(){if(eruda){eruda.init();}else{startEruda();}}, 1000);}; startEruda(); ";
+      document.head.appendChild(init);
+    })();</script><script>var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e2414b7cc2d1365c1c053c921fbb4de3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();</script><script>(function() {
+      if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        handleFontSize();
+      } else {
+        if (document.addEventListener) {
+          document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+        } else if (document.attachEvent) {
+          document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+          document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+        }
+      }
+      function handleFontSize() {
+        // 设置网页字体为默认大小
+        WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
+        // 重写设置网页字体大小的事件
+        WeixinJSBridge.on("menu:setfont", function() {
+          WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
+        });
+      }
+    })();</script></html>
