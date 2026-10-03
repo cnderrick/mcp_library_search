@@ -31,6 +31,8 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 #   太原走内嵌 Solr、大庆上下文为根路径）、枣庄（新版 UILAS REST）、
 #   乐山（图创 Interlib pro2018，省图联合目录 f_curlibcode=LS，验证码墙抛
 #   CaptchaError 不破解，同天津 ALEPH 口径）
+# ＋郑州（2026-10-03 用户提供可访问入口；SirsiDynix Enterprise/VSE，本仓库首见
+#   新家族，抽出 sirsi_ent/ 共享模块）
 _EXPECTED = [
     "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
     "chongqing", "chuxiong", "dalian", "daqing", "dehong", "deqing", "dezhou",
@@ -42,12 +44,12 @@ _EXPECTED = [
     "quanzhou", "qujing", "shaanxi", "shanghai", "shaoxing", "shenzhen",
     "suzhou", "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
     "wuhai", "wuhan", "wuxi", "xian", "xianyang", "xiaogan", "xishuangbanna",
-    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zaozhuang", "zhoukou",
-    "zhoushan", "zhuzhou", "zibo", "zunyi",
+    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zaozhuang", "zhengzhou",
+    "zhoukou", "zhoushan", "zhuzhou", "zibo", "zunyi",
 ]
 
 
-def test_registry_has_exactly_seventy_six_identifiers():
+def test_registry_has_exactly_seventy_seven_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

@@ -20,7 +20,8 @@ lijiang（丽江，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆�
 来宾（laibin）。第三批（均图创 Interlib）：黄石、遵义、黔东南州、黔南州、曲靖、
 临沧、楚雄州、红河州、德宏州、怒江州、德清县、西双版纳州（德清/西双版纳检索走内嵌 Solr）、
 太原（检索走内嵌 Solr）、武汉、大庆（上下文为根路径）、枣庄（新版 UILAS REST）、
-乐山（借四川省图联合目录过滤，检索页为验证码墙、未过码抛 CaptchaError）。
+乐山（借四川省图联合目录过滤，检索页为验证码墙、未过码抛 CaptchaError）、
+郑州（SirsiDynix Enterprise 服务端渲染）。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -92,6 +93,8 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     daqing（大庆市图书馆，应用上下文为根路径）、zaozhuang（枣庄市图书馆，新版 UILAS REST）、
     leshan（乐山市图书馆，借四川省图书馆联合目录按 f_curlibcode=LS 过滤；检索页为
     滑动验证码墙且无内嵌 Solr，未过码时抛 CaptchaError 不破解，同天津 ALEPH 口径）、
+    zhengzhou（郑州图书馆，SirsiDynix Enterprise 服务端渲染；每页固定 12 条，limit
+    不生效；检索列表 publisher/publish_year 为空串属数据边界）、
     lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
     jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、

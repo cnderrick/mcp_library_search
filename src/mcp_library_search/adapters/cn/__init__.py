@@ -75,6 +75,7 @@ from . import yangjiang
 from . import yangzhou
 from . import yulin
 from . import zaozhuang
+from . import zhengzhou
 from . import zhoukou
 from . import zhoushan
 from . import zhuzhou
@@ -155,6 +156,7 @@ ADAPTERS = {
     "yangzhou": yangzhou,
     "yulin": yulin,
     "zaozhuang": zaozhuang,
+    "zhengzhou": zhengzhou,
     "zhoukou": zhoukou,
     "zhoushan": zhoushan,
     "zhuzhou": zhuzhou,

@@ -216,7 +216,7 @@
 |  | 上饶 | — | ⛔ 不通 | http://www.srlib.net （上饶市图书馆） | — | — |
 |  | 景德镇 | — | ⛔ 不通 | http://www.jdzstsg.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.20（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 | 河南省 | 郑州 | `henan_prov` | ✅ 接入 | http://218.28.6.78:8081/ILASOPAC/Index?target=0 （河南省图书馆） | UILAS 知识检索平台（老版 HTML OPAC） | `uilas/` 家族 + `adapters/cn/henan_prov.py`；实抓「三体」57 条 |
-|  |  | — | 📋 计划 | http://123.15.53.180:62280/client/zh_CN/default/? （郑州图书馆；页标题「Home Room」） | SirsiDynix Enterprise/VSE（Tapestry 服务端渲染，`com_sirsi_ent_widgets`；本仓库首见新家族） | 2026-10-03 复测：`/opac/index` 是 404，正确入口为 `/client/zh_CN/default/`；检索 `GET /client/zh_CN/default/search/results?qu=三体` 返回服务端渲染结果页（410KB）。本仓库尚无 Enterprise 家族，检索/详情/馆藏解析与 `_client` 形态需单独侦察，未随本批接入 |
+|  |  | `zhengzhou` | ✅ 接入 | http://123.15.53.180:62280/client/zh_CN/default/ （郑州图书馆；页标题「Home Room」） | SirsiDynix Enterprise/VSE（Portfolio 4.3／Tapestry 5.3.3 服务端渲染，`com_sirsi_ent_widgets`；本仓库首见新家族） | `sirsi_ent/` 家族 + `adapters/cn/zhengzhou.py`；检索 `{ctx}/search/results`（HTML）、详情 `{ctx}/search/detailnonmodal`、馆藏＝内联单册表＋`loadavailability` JSON；实抓「三体」23312 条 |
 |  | 开封 | — | ⛔ 不通 | http://www.kflib.net （开封市图书馆） | — | — |
 |  | 洛阳 | — | ⛔ 不通 | http://www.lylib.net （洛阳市图书馆） | — | — |
 |  | 平顶山 | — | ⛔ 不通 | http://www.pdslib.net （平顶山市图书馆） | — | — |
@@ -832,6 +832,32 @@ Tomcat/JSP），全链路匿名零 cookie。
   日期内嵌）与无锡/徐州/淮安一致。侦察结论见 `tests/fixtures/yancheng/NOTES.md`。
 - 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/{wuxi,xuzhou,huaian,
   yancheng}/NOTES.md`。
+
+## SirsiDynix Enterprise/VSE（郑州）
+
+家族模块 `sirsi_ent/`（`client.py` HTTP 层＋会话 CookieJar＋1 秒/host 节流、
+`parser.py` 三种解析、`__init__.py` 三原语与 `SirsiEntConfig`），成员：郑州图书馆
+（`adapters/cn/zhengzhou.py`）。与 SirsiDynix iLink（大连）是同厂商不同代、不共享
+代码；本站点是 **Enterprise/Portfolio 4.3**（Tapestry 5.3.3 服务端渲染），非 JSON 系。
+
+- **入口**：`http://123.15.53.180:62280/client/zh_CN/default/`（`zh_CN` 语言、
+  `default` 皮肤）。登记的 `/opac/index` 是 404，勿用。
+- **检索**：`GET {ctx}/search/results?qu=&te=ILS`（HTML）。条目 `book_id`＝隐藏域
+  `id="daN"` 的实体 URI `ent://SD_ILS/<lib>/<id>`；题名/著者/ISBN 各有锚点。
+  **每页固定 12 条，`limit` 不生效**；翻页 `rw=(page-1)*12`；总数「N 找到结果」，
+  0 结果时该锚点缺失、由 `no_results_wrapper` 判 0。检索页不渲染出版社/出版年。
+- **详情**：`GET {ctx}/search/detailnonmodal?d=&te=ILS&ps=300`（HTML）。**`d` 参数
+  quirk**：须 `quote(实体) + "%7EILS%7E0%7E0"`（Tapestry 只认带 `~ILS~0~<n>` 后缀
+  的形态，缺后缀回「未预料错误」）。字段在 `displayElementLabel X_label` 对
+  `displayElementText X`：`INITIAL_TITLE_SRCH`/`INITIAL_AUTHOR_SRCH`/`ISBN`/
+  `PUBLICATION_INFO`（「城市, 出版社 年 …」）/`GENERAL_NOTE`（提要）。
+- **馆藏**：详情页内联单册表（资料类型/条形码/排架号/状态）＋异步 `loadavailability`
+  JSON。**该端点必须带 `X-Requested-With: XMLHttpRequest`**，缺头回 Tapestry
+  「未预料错误」页（错误摘要里反而打印 JSON）。JSON `strings[i]` 是单册 `ids[i]` 的
+  状态列原值：**可借时为馆藏地点名**，**不可借时为状态词**（`到期 YY-M-D`/
+  `在馆际调拨中`）。故命中不可借词判不可借（`到期` 顺带提应还日期），否则视为可借、
+  该串作 `library`（源站未拆「分馆/地点」两栏，`location` 空串）。
+- 侦察结论见 `tests/fixtures/zhengzhou/NOTES.md`。
 
 ## 超星智慧门户（宿迁、连云港）
 

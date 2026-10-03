@@ -84,6 +84,7 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 大庆 | `daqing` | ✅ 已接入 | 大庆市图书馆（图创 Interlib，应用上下文为根路径） |
 | 枣庄 | `zaozhuang` | ✅ 已接入 | 枣庄市图书馆（新版 UILAS REST 平台） |
 | 乐山 | `leshan` | ✅ 已接入 | 乐山市图书馆（借四川省图书馆联合目录过滤；检索页为验证码墙，未过码时提示在浏览器手动解封） |
+| 郑州 | `zhengzhou` | ✅ 已接入 | 郑州图书馆（SirsiDynix Enterprise/VSE，服务端渲染；每页固定 12 条） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装
