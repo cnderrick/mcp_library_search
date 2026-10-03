@@ -261,12 +261,13 @@ def parse_solr(payload: dict, name: str = "") -> dict:
         ym = _YEAR_RE.search(pub)
         books.append({
             "book_id": book_id,
-            "title": _clean(doc.get("title_meta")),
-            "author": _clean(doc.get("author_meta")),
-            "publisher": _clean(doc.get("publisher_meta")),
+            # Solr 字段可为 null（德清实测 isbn_meta/pubdate_meta 均有 null），统一按空串处理
+            "title": _clean(doc.get("title_meta") or ""),
+            "author": _clean(doc.get("author_meta") or ""),
+            "publisher": _clean(doc.get("publisher_meta") or ""),
             "publish_year": ym.group(0) if ym else "",
             "availability_summary": "",
-            "isbn": _clean(doc.get("isbn_meta")),
+            "isbn": _clean(doc.get("isbn_meta") or ""),
         })
     return {"books": books, "total_results": total}
 

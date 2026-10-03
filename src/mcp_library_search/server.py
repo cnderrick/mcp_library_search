@@ -16,7 +16,9 @@ lijiang（丽江，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆�
 阳江、淄博、德州、周口、泉州、通辽、河源、黑龙江省图书馆（heilongjiang）、长春、
 唐山、包头、乌海、呼和浩特、潮州（以上图创 Interlib，其中唐山/包头/乌海/呼和浩特/
 潮州/黑龙江/长春检索页有滑动验证码改走内嵌 Solr）、兰州（lanzhou）、江门（jiangmen，
-新版 UILAS REST）、河南省图书馆（henan_prov，老版 UILAS）。
+新版 UILAS REST）、河南省图书馆（henan_prov，老版 UILAS）、
+来宾（laibin）。第三批（均图创 Interlib）：黄石、遵义、黔东南州、黔南州、曲靖、
+临沧、楚雄州、红河州、德宏州、怒江州、德清县、西双版纳州（德清/西双版纳检索走内嵌 Solr）。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -80,6 +82,10 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     tongliao（通辽）、heyuan（河源）、heilongjiang（黑龙江省图书馆）、
     changchun（长春）、tangshan（唐山）、baotou（包头）、wuhai（乌海）、
     huhehaote（呼和浩特）、chaozhou（潮州）、laibin（来宾市图书馆）（以上图创 Interlib，馆藏到单册级）、
+    第三批：huangshi（黄石）、zunyi（遵义）、qiandongnan（黔东南州）、qiannan（黔南州）、
+    qujing（曲靖）、lincang（临沧）、chuxiong（楚雄州）、honghe（红河州）、dehong（德宏州）、
+    nujiang（怒江州）、deqing（德清县）、xishuangbanna（西双版纳州）（以上图创 Interlib，
+    馆藏到单册级；德清/西双版纳检索走内嵌 Solr）、
     lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
     jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、

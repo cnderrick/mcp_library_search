@@ -1,0 +1,7684 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></link>
+		
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery-1.6.2.min.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/highcharts.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/themes/grid.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript">
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		
+		
+			
+				<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+				</script>
+			
+			
+		
+		
+		<script type="text/javascript" src="/opac/media/js/common/charts.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css;jsessionid=9589F5576EF17D7020BD1D576FBE265A" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico;jsessionid=9589F5576EF17D7020BD1D576FBE265A" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico;jsessionid=9589F5576EF17D7020BD1D576FBE265A" type="image/vnd.microsoft.icon" /> 
+		<title>检索</title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 临沧市图书馆" />
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A"></script>
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.space".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.register".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.newpub".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.recommended".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.publicNotice".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.publicTag".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.bookSpecial".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.recommend".length*4+24;
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin;jsessionid=9589F5576EF17D7020BD1D576FBE265A";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login;jsessionid=9589F5576EF17D7020BD1D576FBE265A";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar">
+	<div class="navbar_bd">
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								检索
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/index/advance;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								高级检索
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								书目浏览
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/browse/cls;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								中图分类浏览
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/browse/sci;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								科图分类浏览
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/space;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								我的图书馆
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/register;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								网上办证
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/newpub/cls;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								新书通报
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/newpub/cls;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								中图分类查看
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/newpub/sci;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								科图分类查看
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommended;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								精品图书
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/publicNotice/reservationInLib;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								信息公告
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/publicNotice/reservationInLib;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								全馆预约到馆通知
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/publicNotice/bookOverdue;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								全馆图书催还通知
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/publicNotice/prelendInform;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								全馆预借到馆通知
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/tag/publicTagList;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								所有标签
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/bookSpecial;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								图书专题
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommend/getAllHistoryRecommendList;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+							
+							
+							
+							
+								图书荐购
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/recommend/getAllHistoryRecommendList;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								历史荐购
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/recommend/custom;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								读者荐购
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/recommend/recommendBookList/list;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								征订书目
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+				
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+				
+				<!-- 开始是给广少图用的东西 -->
+				
+				
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login;jsessionid=9589F5576EF17D7020BD1D576FBE265A">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!-- 
+			<img src="/opac/media/images/lang.png;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login;jsessionid=9589F5576EF17D7020BD1D576FBE265A">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+			
+			
+				
+					<a href="/opac/reader/login;jsessionid=9589F5576EF17D7020BD1D576FBE265A">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_header">
+	<div id="page_nav">
+		<!-- 
+		<div class="logo">
+			<a href="/opac/index;jsessionid=9589F5576EF17D7020BD1D576FBE265A">
+				<img src="/opac/media/images/logo.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" />
+			</a>
+		</div>
+		 -->
+	</div>
+</div>
+			<div id="page_content">
+				
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+<script type="text/javascript">
+
+var cookieFlag = false;
+$(document).ready(function(){
+	document.onkeydown = dynamicAddRecnoSelectOption;
+	
+});
+
+function dynamicAddRecnoSelectOption(e){
+	e = e || window.event;
+	if(e.keyCode==188&&e.ctrlKey&&e.shiftKey){
+		$("#opacConfouternet").show();
+	}
+
+	if(e.keyCode==190&&e.ctrlKey&&e.shiftKey){ 
+		$("#localConfig").show();   
+	}
+	
+	if(e.keyCode==186&&e.ctrlKey){
+		$("#opacConfSetTable").show();
+	}
+}
+$(function(){
+	if($.cookie("libnameset") == "true"){
+		$("input:checkbox[name='curlibcode']").each(function(i){
+			//var tmpText = $.trim($(this).val());
+			if($(this).attr("value") == $.cookie("showLibcode")){
+				$(this).attr("checked", "checked");
+				cookieFlag = true;
+			}
+		});
+	}
+});
+
+
+
+<!--
+$(function(){
+	$("#q").focus();
+});
+
+$(function(){
+	if($.cookie("configouternet") == "false"){
+		$("#Conouternet").attr("checked", "checked");
+	}
+});
+function configouternet(){
+	var expireTime = 3650;
+	if($("#Conouternet").attr("checked") == "checked"){
+		$.cookie("configouternet", "false", {expires:expireTime, path:'/'});
+	}else{
+		$.cookie("configouternet", "true", {expires:expireTime, path:'/'});
+	}
+}
+
+//点击显示分馆等选择后重新设置高度
+function setHeight(){
+	$("#page_footer").height(20);
+	$("#page_footer").css("top",$("#searchDiv").height() + $("#navbar").height() + $("#searchTips").height());
+}
+
+function selectAllLibcodes(obj) {
+	if(obj.checked) {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", true);
+	} else {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+	}
+}
+function showMoreOptions() {
+	var searchDivHidden = $("#searchDivHidden");
+	if(searchDivHidden.css("display") == "none") {
+		searchDivHidden.show("slow");
+	} else {
+		searchDivHidden.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showLibraries() {
+	var libraries = $("#libraries");
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showBookTypes() {
+	var libraries = $("#bookTypesHidden");
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function searchByHotKeyword(hotSearchKeyword) {
+	$("#q").val(hotSearchKeyword);
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}
+    
+	$("#searchForm").submit();
+}
+function search(view) {
+	$("#view").val(view);
+	var total = $('input:checkbox[name="curlibcode"]').size();
+	var checkNum = $('input:checkbox[name="curlibcode"]:checked').size();
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}  
+	if(total == checkNum){
+		$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+	}else{
+		if(checkNum>50){
+			alert("所选分馆不能超过50个");
+			return;
+		}
+	}
+	var qword = $("#q").val();
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+
+	
+	$("#searchForm").submit();
+}
+
+function gotoAdvancedSearch() {
+	document.location.href = '/opac/index/advance;jsessionid=9589F5576EF17D7020BD1D576FBE265A';
+}
+
+
+function displayRememberMe(){
+	var searchDivHidden = $("#searchDivHidden");
+	var libraries = $("#libraries");
+	var bookTypes = $("#bookTypesHidden");
+	var rememberMe = $("#remember");
+	if(libraries.is(":hidden")&& bookTypes.is(":hidden")&& searchDivHidden.is(":hidden")) {
+		rememberMe.hide("slow");
+	}else{
+		rememberMe.show("slow");
+	}
+}
+
+function rememberMe(){
+     
+	var searchWay = $('select[name=searchWay]').val();
+	var booktype = $('input:radio[name="booktype"]:checked').val();
+	var marcformat = $('input:radio[name="marcformat"]:checked').val();
+	var scWay = $('input:radio[name="scWay"]:checked').val();
+	var sortWay = $('select[name=sortWay]').val();
+	var sortOrder = $('select[name=sortOrder]').val();
+	var startPubdate = $('select[name=startPubdate]').val();
+	var endPubdate = $('select[name=endPubdate]').val();
+	var rows = $('select[name=rows]').val();
+	var hasholding = $('input:checkbox[name="hasholding"]:checked').val();
+	var curlibcode = $('input:checkbox[name="curlibcode"]:checked');
+	var libCodeValue=";";
+
+    for(var i =0 ;i<curlibcode.length;i++){
+    	libCodeValue = libCodeValue+curlibcode[i].value+";";
+    }
+	setCookie("searchWay",searchWay);
+	setCookie("booktype",booktype);
+	setCookie("marcformat",marcformat);
+	setCookie("scWay",scWay);
+	setCookie("sortWay",sortWay);
+	setCookie("sortOrder",sortOrder);
+	setCookie("startPubdate",startPubdate);
+	setCookie("endPubdate",endPubdate);
+	setCookie("rows",rows);
+	setCookie("hasholding",hasholding);
+// 	setCookie("curlibcode",libCodeValue);
+	$.cookie("showLibcode", libCodeValue, {expires:7,path:'/'});
+}
+
+function setCookie(cookieName,cookieValue){
+	$.cookie(cookieName,cookieValue,{ expires: 7, path: '/' });
+}
+function localLimit(){
+	setCookie("localConfig",$('input:radio[name="curlocal"]:checked').val());
+}
+function readCookies(){
+	var searchWay =$.cookie("searchWay");
+	var booktype =$.cookie("booktype");
+	var marcformat =$.cookie("marcformat");
+	var scWay =$.cookie("scWay");
+	var sortWay =$.cookie("sortWay");
+	var sortOrder =$.cookie("sortOrder");
+	var startPubdate =$.cookie("startPubdate");
+	var endPubdate =$.cookie("endPubdate");
+	var rows =$.cookie("rows");
+	var hasholding =$.cookie("hasholding");
+	var curlibcode =$.cookie("showLibcode");
+	var curlocalconfig = $.cookie("localConfig");
+	var showlocalname = "";
+	var localcode = "";
+	var showLocal = $.cookie("showLocal");
+	if(localcode!=""){
+		showLocal = localcode;
+		$.cookie("localConfig", localcode, {expires:3650, path:'/'});
+		$.cookie("showLocal", localcode, {expires:3650, path:'/'});
+		//设置分馆名称
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibcode", localcode, {expires:3650, path:'/'});
+		if(showlocalname==""){
+			var libname = "";
+			if(""!=""){
+				libname = $('input:checkbox[name="curlibcode"][value=""]').parent().text();
+			}else{
+				libname = $("#content .libName").text();
+			}
+			showlocalname = libname+" - "+
+			$('input:checkbox[name="curlocal"][value="'+localcode+'"]').parent().text();
+		}
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	if(showlocalname!=""){
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	if(showLocal!=null&&showLocal!=""||localcode!=""){ 
+		var checker = "";
+		if(localcode!=""||curlocalconfig != null && curlocalconfig != ""&&showLocal==$.cookie("localConfig")){
+			checker = 'checked="checked"';
+		}else{
+			selElement($('input:radio[name="curlocal"]'),"","radio");
+		}
+		$("#limitlocal").append(
+				'<input type="radio" name="curlocal" onchange="localLimit()" value="'+showLocal+'" '+checker+' />'
+				+$("#cCurlocal_"+showLocal).parent().text());
+		$("#localLimit").show();
+	} 
+	selElement($('select[name=searchWay] option'),searchWay,"select");
+	selElement($('input:radio[name="booktype"]'),booktype,"radio");
+	selElement($('input:radio[name="marcformat"]'),marcformat,"radio");
+	selElement($('input:radio[name="scWay"]'),scWay,"radio");
+	selElement($('select[name=sortWay] option'),sortWay,"select");
+	selElement($('select[name=sortOrder] option'),sortOrder,"select");
+	selElement($('select[name=startPubdate] option'),startPubdate,"select");
+	selElement($('select[name=endPubdate] option'),endPubdate,"select");
+	selElement($('select[name=rows] option'),rows,"select");
+	selElement($('input:checkbox[name="hasholding"]'),hasholding,"checkbox");
+	
+	var clc = $('input:checkbox[name="curlibcode"]');
+	if(curlibcode!=null&&curlibcode!=";"){
+		for(var i = 0 ; i<clc.length;i++){
+			if(curlibcode.indexOf(clc[i].value)> 0 ){
+				clc[i].checked=true;
+				cookieFlag = true;
+			}
+		}
+	}
+	
+	if(!cookieFlag){
+		var lib = "";
+		if(lib!=""){
+			var flag = true;
+			for(var i = 0 ; i<clc.length;i++){
+				if(lib.indexOf(clc[i].value)!=-1 ){
+					clc[i].checked=true;
+					cookieFlag = true;
+					if(flag){
+						$.cookie("libnameset", "true", {expires:3650, path:'/'});
+						$.cookie("showLibcode", clc[i].value, {expires:3650, path:'/'});
+						$.cookie("showLibname", clc[i].nextSibling.nodeValue, {expires:3650, path:'/'});
+						flag = false;
+					}
+				}
+			}
+		}else{
+			
+		}
+
+	}
+}
+
+function selElement(obj,value,type){
+	
+	for(var i = 0 ;i<obj.length;i++){
+		
+		if(obj[i].value==value){
+			if(type=="select"){
+				obj[i].selected =true;
+			}else{
+				obj[i].checked=true;
+			}
+			break;
+		}
+	}
+
+}
+
+$(function(){
+	
+	return;
+	
+	$("#q").autocomplete({
+		source: '/opac/hotsearch/suggest;jsessionid=9589F5576EF17D7020BD1D576FBE265A',
+		focus: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			return false;
+		},
+		select: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			search("");
+			return false;
+		}
+	}).data("autocomplete")._renderItem = function(ul, item) {
+		return $("<li style='position:relative;font-size:12px;'></li>").data("item.autocomplete", item)
+			.append("<a>" + 
+						"" + item.searchKey + "" + 
+						"<cite style='position:absolute;right:10px;top:2px;color:#888;'>" + "检索次数" + ": " + 
+							item.count + 
+						"</cite>" + 
+					"</a>")
+			.appendTo(ul);
+	};
+});
+$(function() {
+	$("#searchForm select[name='searchWay']").bind("change", function(e) {
+		if($(this).val() == "callno") {
+			$("#searchForm select[name='sortWay']").val("callno_sort");
+			$("#searchForm select[name='sortOrder']").val("asc");
+		}
+	});
+	
+	$("#localConfig input[name='curlocal']").bind("change", function(e) {
+		var expireTime = 3650;
+		if($(this).attr("checked") == 'checked'){
+			$("#tabs-4 input[type='checkbox']").attr("checked",false); 
+			$(this).attr("checked",true);              
+		}else{
+			$(this).attr("checked",false);   
+		}  
+		var curlocals = $('input:checkbox[name="curlocal"]:checked');
+		var value = "";   
+		if(curlocals.length < 1){
+			$.cookie("localConfig", "", {expires:expireTime, path:'/'});
+		}else{        
+			$(curlocals.each(function(i){
+				value += ","+$(this).val();           
+			}));             
+			value = value.substring(1, value.length);  
+		}           
+		$.cookie("localConfig", value, {expires:expireTime, path:'/'});
+	});
+});
+$(document).ready(function(){
+	$("select[name='sortWay']").val("score");
+});
+
+//-->
+</script>
+
+
+	
+		<script type="text/javascript" src="/opac/media/js/custominfo/search_zh.js;jsessionid=9589F5576EF17D7020BD1D576FBE265A" ></script>
+	
+	
+
+<script type="text/javascript">
+//从JS文件中直接取得检索提示信息
+$(document).ready(function(){
+// 	var tips = "";
+// 	for (var i = 0; i < searchTips.length; i ++) {
+// 		tips += searchTips[i];
+// 	}
+// 	$("#searchTips ol").append(tips);
+// 	$("#searchTitle").html(searchTitle);
+	if("1" == "1")
+	{
+		$("#searchForm select[name='searchWay']").val("title");
+	}
+	readCookies();
+});
+$(function() {
+	var libnameset = $.cookie("libnameset");
+	var showLibcode = $.cookie("showLibcode");
+	var showLibname = $.cookie("showLibname");
+	if(libnameset == "true" && showLibcode != "" && showLibname != "") {
+		$("#content .libName").html(showLibname);
+	}
+});
+
+function eBookSearch(){
+	var value = $("#q").val();
+	
+	//敏感词汇
+	if(bannedHashSet.contains(value)){
+	 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+	 	   return;
+	}
+	
+	if(""==value){
+		 alert("请输入检索词");
+	 	 return;
+	}
+	
+	var searchAddress = "" ;
+	
+	//http://sso.cdclib.org/ifs/search 测试
+	window.location.href=searchAddress+"?autoSubmit=true&resourceGroupName=全部资源&searchValue="+value;
+}
+
+	if ("0" == '1') {
+		$(function(){
+			var timer;	//定时切换显示第一条
+		    var scroll = function(){
+		    	timer = setInterval(function(){
+		    		if($("#marqueeContext li").length <= 1){	//数量太少不做循环
+		    			 return;
+		    		}
+		    		$("#marqueeContext li").css("display","none");
+		    		$("#marqueeContext").append($("#marqueeContext li:first"));
+		    		$("#marqueeContext li:first").fadeIn(100);
+		    		$("#marqueeContext li:first").css("display","block");
+		    	},2000);
+		    }
+			/* 
+			var url = "/opac/ranking/bookHotRank/json";
+			$.get(url,'',function(data){
+				var urlContent = "";
+				for (var i = 0; i < data.length; i++) {
+					var bookLink = "/opac/book/"+data[i].biblios.bookrecno;
+					urlContent = urlContent + "<li style='display:none'><a target='_blank' href='"+bookLink+"'>"+data[i].biblios.title+"</li></a>";
+					if(i >= 10){	//10条之内就算啦
+						break;
+					}
+				}
+				$("#marqueeContext").html(urlContent); 
+				*/
+
+			//第一条显示
+		    $("#marqueeContext li:first").css("display","block");
+		    scroll();
+		    
+		    $("#marqueeContext li").mouseover(function(){
+		    	clearInterval(timer);
+		    });
+		    $("#marqueeContext li").mouseout(function(){
+		    	scroll();
+		    });
+		});
+	}
+
+</script>
+
+<div id="content">
+	<div class="libName">
+		临沧市图书馆
+	</div>
+	<div id="searchDiv">
+	<form name="searchForm" id="searchForm" action="search" method="get">
+		<div>
+			<!--检索途径:-->
+			<select name="searchWay" class="search_select search_width">
+				<option value="" selected="selected">任意词</option>
+				<option value="title">题名</option>
+				<option value="title200a">正题名</option>
+				<option value="isbn">ISBN/ISSN</option>
+				<option value="author">著者</option>
+				<option value="subject">主题词</option>
+				<option value="class">分类号</option>
+				<option value="ctrlno">控制号</option>
+				<option value="orderno">订购号</option>
+				<option value="publisher">出版社</option>
+				<option value="callno">索书号</option>
+			</select>
+			<!--检索词:-->
+			<div class="search_input search_input_width" ><input type="text" id="q" name="q" onkeydown="if(event.keyCode==13)search('');" placeholder=""/></div>
+
+			
+				<input type="button" class="search_button" name="searchButton" value="检索" onclick="search('')" />
+			
+			<!-- 如果显示集群检索菜单，则不显示高级检索按钮，而显示集群检索按钮 -->
+			
+				   
+					
+						
+						
+						
+						
+							
+								
+								
+									<input type="button" name="advancedSearch" class="advance_search_button" value="高级检索" onclick="gotoAdvancedSearch()" />
+								
+							
+						
+						
+					
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+				   
+					
+				
+			
+				   
+					
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+					
+				
+			
+				   
+					
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+				
+			
+				   
+					
+				
+			
+				
+			
+				
+			
+				
+			
+				   
+					
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+					
+			<input type="hidden" name="searchSource" value="reader" />
+		</div>
+		
+		<div class="hot">
+			热门词:
+			
+				<a href="javascript:searchByHotKeyword('革命伉俪邓炳荣和杨宝槐')">
+				革命伉俪邓炳荣和杨宝槐
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('魔戒')">
+				魔戒
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('高山之上')">
+				高山之上
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('课堂评估')">
+				课堂评估
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('口岸')">
+				口岸
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('和星星交朋友')">
+				和星星交朋友
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('東也圭无')">
+				東也圭无
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('仙剑奇侠传')">
+				仙剑奇侠传
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('民俗')">
+				民俗
+				</a>|
+			
+			<a href="/opac/hotsearch;jsessionid=9589F5576EF17D7020BD1D576FBE265A">更多..</a>
+		</div>
+		
+
+		
+		
+		<div class="search_more">
+		<a href="javascript:showBookTypes()">显示文献类型</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="javascript:showMoreOptions()">显示更多选项</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="javascript:showLibraries()">
+		
+			
+			
+				限定分馆检索
+			
+		
+		</a>
+		</div>
+		<div class="booktypes" id="bookTypesHidden" style="display:none;">
+			<!--文献类型:-->
+			
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='1' />
+				<img src="/opac/booktypeicon/1;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/1.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" /-->
+				图书
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='2' />
+				<img src="/opac/booktypeicon/2;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/2.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" /-->
+				期刊
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='3' />
+				<img src="/opac/booktypeicon/3;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/3.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" /-->
+				非书资料
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='4' />
+				<img src="/opac/booktypeicon/4;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/4.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" /-->
+				古籍
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='5' />
+				<img src="/opac/booktypeicon/5;jsessionid=9589F5576EF17D7020BD1D576FBE265A" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/5.gif;jsessionid=9589F5576EF17D7020BD1D576FBE265A" /-->
+				玩具
+				</label>
+				
+			
+			<label>
+				<input type="radio" name="booktype" value="" checked="checked"/>
+				所有
+			</label>
+		</div>
+		
+		<div id="searchDivHidden"  class="search_hidden" style="display:none;">
+			<div>
+				检索方式:
+				<label>
+					<input type="radio" name="scWay" value="prefixMatch" />
+					前方一致
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="dim"  checked="checked"/>
+					模糊检索
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="full" />
+					精确检索
+				</label>
+			</div>
+			
+			<div>
+				语言种类:
+				<label>
+					<input type="radio" name="marcformat" value="CNMARC" />
+					中文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="USMARC" />
+					西文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="" checked="checked" />
+					全部
+				</label>
+			</div>
+			
+			<div class="search_hidden">
+				排序选项:
+				<select name="sortWay">
+					<option value="score" selected="selected" >匹配度</option>
+					<option value="pubdate_sort" >出版日期</option>
+					<option value="subject_sort" >主题词</option>
+					<option value="title_sort" >题名</option>
+					<option value="author_sort" >著者</option>
+					<option value="callno_sort" >索书号</option>
+					<option value="pinyin_sort" >题名拼音</option>
+					<option value="loannum_sort" >借阅次数</option>
+					<option value="renewnum_sort" >续借次数</option>
+					<option value="title200Weight" >题名权重</option>
+					<option value="title200aWeight" >正题名权重</option>
+					<option value="title200h" >卷册号</option>
+				</select>
+				排序方式:
+				<select name="sortOrder">
+					<option value="desc">降序排列</option>
+					<option value="asc">升序排列</option>
+				</select>
+				出版时间:
+				<select name="startPubdate">
+					<option value="" selected="selected">出版年</option>
+					
+					<option value="2026">2026</option>
+					
+					<option value="2025">2025</option>
+					
+					<option value="2024">2024</option>
+					
+					<option value="2023">2023</option>
+					
+					<option value="2022">2022</option>
+					
+					<option value="2021">2021</option>
+					
+					<option value="2020">2020</option>
+					
+					<option value="2019">2019</option>
+					
+					<option value="2018">2018</option>
+					
+					<option value="2017">2017</option>
+					
+					<option value="2016">2016</option>
+					
+					<option value="2015">2015</option>
+					
+					<option value="2014">2014</option>
+					
+					<option value="2013">2013</option>
+					
+					<option value="2012">2012</option>
+					
+					<option value="2011">2011</option>
+					
+					<option value="2010">2010</option>
+					
+					<option value="2009">2009</option>
+					
+					<option value="2008">2008</option>
+					
+					<option value="2007">2007</option>
+					
+					<option value="2006">2006</option>
+					
+					<option value="2005">2005</option>
+					
+					<option value="2004">2004</option>
+					
+					<option value="2003">2003</option>
+					
+					<option value="2002">2002</option>
+					
+					<option value="2001">2001</option>
+					
+					<option value="2000">2000</option>
+					
+					<option value="1999">1999</option>
+					
+					<option value="1998">1998</option>
+					
+					<option value="1997">1997</option>
+					
+					<option value="1996">1996</option>
+					
+					<option value="1995">1995</option>
+					
+					<option value="1994">1994</option>
+					
+					<option value="1993">1993</option>
+					
+					<option value="1992">1992</option>
+					
+					<option value="1991">1991</option>
+					
+					<option value="1990">1990</option>
+					
+					<option value="1989">1989</option>
+					
+					<option value="1988">1988</option>
+					
+					<option value="1987">1987</option>
+					
+					<option value="1986">1986</option>
+					
+					<option value="1985">1985</option>
+					
+					<option value="1984">1984</option>
+					
+					<option value="1983">1983</option>
+					
+					<option value="1982">1982</option>
+					
+					<option value="1981">1981</option>
+					
+					<option value="1980">1980</option>
+					
+					<option value="1979">1979</option>
+					
+					<option value="1978">1978</option>
+					
+					<option value="1977">1977</option>
+					
+					<option value="1976">1976</option>
+					
+					<option value="1975">1975</option>
+					
+					<option value="1974">1974</option>
+					
+					<option value="1973">1973</option>
+					
+					<option value="1972">1972</option>
+					
+					<option value="1971">1971</option>
+					
+					<option value="1970">1970</option>
+					
+					<option value="1969">1969</option>
+					
+					<option value="1968">1968</option>
+					
+					<option value="1967">1967</option>
+					
+					<option value="1966">1966</option>
+					
+					<option value="1965">1965</option>
+					
+					<option value="1964">1964</option>
+					
+					<option value="1963">1963</option>
+					
+					<option value="1962">1962</option>
+					
+					<option value="1961">1961</option>
+					
+					<option value="1960">1960</option>
+					
+					<option value="1959">1959</option>
+					
+					<option value="1958">1958</option>
+					
+					<option value="1957">1957</option>
+					
+					<option value="1956">1956</option>
+					
+					<option value="1955">1955</option>
+					
+					<option value="1954">1954</option>
+					
+					<option value="1953">1953</option>
+					
+					<option value="1952">1952</option>
+					
+					<option value="1951">1951</option>
+					
+					<option value="1950">1950</option>
+					
+					<option value="1949">1949</option>
+					
+					<option value="1948">1948</option>
+					
+					<option value="1947">1947</option>
+					
+					<option value="1946">1946</option>
+					
+					<option value="1945">1945</option>
+					
+					<option value="1944">1944</option>
+					
+					<option value="1943">1943</option>
+					
+					<option value="1942">1942</option>
+					
+					<option value="1941">1941</option>
+					
+					<option value="1940">1940</option>
+					
+					<option value="1939">1939</option>
+					
+					<option value="1938">1938</option>
+					
+					<option value="1937">1937</option>
+					
+					<option value="1936">1936</option>
+					
+					<option value="1935">1935</option>
+					
+					<option value="1934">1934</option>
+					
+					<option value="1933">1933</option>
+					
+					<option value="1932">1932</option>
+					
+					<option value="1931">1931</option>
+					
+					<option value="1930">1930</option>
+					
+					<option value="1929">1929</option>
+					
+					<option value="1928">1928</option>
+					
+					<option value="1927">1927</option>
+					
+					<option value="1926">1926</option>
+					
+					<option value="1925">1925</option>
+					
+					<option value="1924">1924</option>
+					
+					<option value="1923">1923</option>
+					
+					<option value="1922">1922</option>
+					
+					<option value="1921">1921</option>
+					
+					<option value="1920">1920</option>
+					
+					<option value="1919">1919</option>
+					
+					<option value="1918">1918</option>
+					
+					<option value="1917">1917</option>
+					
+					<option value="1916">1916</option>
+					
+					<option value="1915">1915</option>
+					
+					<option value="1914">1914</option>
+					
+					<option value="1913">1913</option>
+					
+					<option value="1912">1912</option>
+					
+					<option value="1911">1911</option>
+					
+					<option value="1910">1910</option>
+					
+					<option value="1909">1909</option>
+					
+					<option value="1908">1908</option>
+					
+					<option value="1907">1907</option>
+					
+					<option value="1906">1906</option>
+					
+					<option value="1905">1905</option>
+					
+					<option value="1904">1904</option>
+					
+					<option value="1903">1903</option>
+					
+					<option value="1902">1902</option>
+					
+					<option value="1901">1901</option>
+					
+					<option value="1900">1900</option>
+					
+				</select>
+				至
+				<select name="endPubdate">
+					<option value="" selected="selected">出版年</option>
+					
+					<option value="2026">2026</option>
+					
+					<option value="2025">2025</option>
+					
+					<option value="2024">2024</option>
+					
+					<option value="2023">2023</option>
+					
+					<option value="2022">2022</option>
+					
+					<option value="2021">2021</option>
+					
+					<option value="2020">2020</option>
+					
+					<option value="2019">2019</option>
+					
+					<option value="2018">2018</option>
+					
+					<option value="2017">2017</option>
+					
+					<option value="2016">2016</option>
+					
+					<option value="2015">2015</option>
+					
+					<option value="2014">2014</option>
+					
+					<option value="2013">2013</option>
+					
+					<option value="2012">2012</option>
+					
+					<option value="2011">2011</option>
+					
+					<option value="2010">2010</option>
+					
+					<option value="2009">2009</option>
+					
+					<option value="2008">2008</option>
+					
+					<option value="2007">2007</option>
+					
+					<option value="2006">2006</option>
+					
+					<option value="2005">2005</option>
+					
+					<option value="2004">2004</option>
+					
+					<option value="2003">2003</option>
+					
+					<option value="2002">2002</option>
+					
+					<option value="2001">2001</option>
+					
+					<option value="2000">2000</option>
+					
+					<option value="1999">1999</option>
+					
+					<option value="1998">1998</option>
+					
+					<option value="1997">1997</option>
+					
+					<option value="1996">1996</option>
+					
+					<option value="1995">1995</option>
+					
+					<option value="1994">1994</option>
+					
+					<option value="1993">1993</option>
+					
+					<option value="1992">1992</option>
+					
+					<option value="1991">1991</option>
+					
+					<option value="1990">1990</option>
+					
+					<option value="1989">1989</option>
+					
+					<option value="1988">1988</option>
+					
+					<option value="1987">1987</option>
+					
+					<option value="1986">1986</option>
+					
+					<option value="1985">1985</option>
+					
+					<option value="1984">1984</option>
+					
+					<option value="1983">1983</option>
+					
+					<option value="1982">1982</option>
+					
+					<option value="1981">1981</option>
+					
+					<option value="1980">1980</option>
+					
+					<option value="1979">1979</option>
+					
+					<option value="1978">1978</option>
+					
+					<option value="1977">1977</option>
+					
+					<option value="1976">1976</option>
+					
+					<option value="1975">1975</option>
+					
+					<option value="1974">1974</option>
+					
+					<option value="1973">1973</option>
+					
+					<option value="1972">1972</option>
+					
+					<option value="1971">1971</option>
+					
+					<option value="1970">1970</option>
+					
+					<option value="1969">1969</option>
+					
+					<option value="1968">1968</option>
+					
+					<option value="1967">1967</option>
+					
+					<option value="1966">1966</option>
+					
+					<option value="1965">1965</option>
+					
+					<option value="1964">1964</option>
+					
+					<option value="1963">1963</option>
+					
+					<option value="1962">1962</option>
+					
+					<option value="1961">1961</option>
+					
+					<option value="1960">1960</option>
+					
+					<option value="1959">1959</option>
+					
+					<option value="1958">1958</option>
+					
+					<option value="1957">1957</option>
+					
+					<option value="1956">1956</option>
+					
+					<option value="1955">1955</option>
+					
+					<option value="1954">1954</option>
+					
+					<option value="1953">1953</option>
+					
+					<option value="1952">1952</option>
+					
+					<option value="1951">1951</option>
+					
+					<option value="1950">1950</option>
+					
+					<option value="1949">1949</option>
+					
+					<option value="1948">1948</option>
+					
+					<option value="1947">1947</option>
+					
+					<option value="1946">1946</option>
+					
+					<option value="1945">1945</option>
+					
+					<option value="1944">1944</option>
+					
+					<option value="1943">1943</option>
+					
+					<option value="1942">1942</option>
+					
+					<option value="1941">1941</option>
+					
+					<option value="1940">1940</option>
+					
+					<option value="1939">1939</option>
+					
+					<option value="1938">1938</option>
+					
+					<option value="1937">1937</option>
+					
+					<option value="1936">1936</option>
+					
+					<option value="1935">1935</option>
+					
+					<option value="1934">1934</option>
+					
+					<option value="1933">1933</option>
+					
+					<option value="1932">1932</option>
+					
+					<option value="1931">1931</option>
+					
+					<option value="1930">1930</option>
+					
+					<option value="1929">1929</option>
+					
+					<option value="1928">1928</option>
+					
+					<option value="1927">1927</option>
+					
+					<option value="1926">1926</option>
+					
+					<option value="1925">1925</option>
+					
+					<option value="1924">1924</option>
+					
+					<option value="1923">1923</option>
+					
+					<option value="1922">1922</option>
+					
+					<option value="1921">1921</option>
+					
+					<option value="1920">1920</option>
+					
+					<option value="1919">1919</option>
+					
+					<option value="1918">1918</option>
+					
+					<option value="1917">1917</option>
+					
+					<option value="1916">1916</option>
+					
+					<option value="1915">1915</option>
+					
+					<option value="1914">1914</option>
+					
+					<option value="1913">1913</option>
+					
+					<option value="1912">1912</option>
+					
+					<option value="1911">1911</option>
+					
+					<option value="1910">1910</option>
+					
+					<option value="1909">1909</option>
+					
+					<option value="1908">1908</option>
+					
+					<option value="1907">1907</option>
+					
+					<option value="1906">1906</option>
+					
+					<option value="1905">1905</option>
+					
+					<option value="1904">1904</option>
+					
+					<option value="1903">1903</option>
+					
+					<option value="1902">1902</option>
+					
+					<option value="1901">1901</option>
+					
+					<option value="1900">1900</option>
+					
+				</select>
+			</div>
+			<div class="search_hidden">
+				每页显示行数:
+				<select name="rows">
+					<option value="10" selected="selected">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+					<option value="30">30</option>
+					<option value="35">35</option>
+					<option value="40">40</option>
+					<option value="45">45</option>
+					<option value="50">50</option>
+				</select>
+				<span >
+					<label>
+					<input type="checkbox" name="hasholding" id="hasholding" value="1" 
+						
+							checked="checked"
+						
+					/>
+					只输出有馆藏的记录
+					</label>
+				</span>
+			</div>
+		</div>
+		<div id="libraries" style="display:none;" class="search_hidden">
+			
+					
+					
+						分馆选择:
+					
+			
+			<label>
+				<input type="checkbox" onclick="selectAllLibcodes(this)" />
+				全选
+			</label>
+			<table id="libcodeTable" width="100%">
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_HQGLQ" />
+								华侨管理区分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_ZKTSG" />
+								镇康县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_FQTSG" />
+								凤庆县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_YXTSG" />
+								云县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_SJTSG" />
+								双江自治县图书馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_LXTSG" />
+								临翔区图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_CYTSG" />
+								沧源县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_GMTSG" />
+								耿马自治县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_YB" />
+								涌宝镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_MC" />
+								木场乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_BH" />
+								班洪乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MD" />
+								孟定镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_GDZ" />
+								郭大寨分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_XW" />
+								小湾镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_DS" />
+								大寺乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_YP" />
+								营盘镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_AH" />
+								爱华镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_FW" />
+								凤尾镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_CF" />
+								茶房乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_NS" />
+								南伞镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_MH" />
+								忙怀乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_MD" />
+								勐堆乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_XF" />
+								幸福镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_MB" />
+								忙丙乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_JS" />
+								军赛乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_DD" />
+								德党镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_DZ" />
+								大寨镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_XMT" />
+								小勐统镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_LS" />
+								栗树乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_MBX" />
+								勐板乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_MM" />
+								勐勐镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_DXS" />
+								大雪山乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_SH" />
+								沙河乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_YLX" />
+								亚练乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_WML" />
+								乌木龙乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_BB" />
+								邦丙乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_MN" />
+								忙糯乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_DW" />
+								大文乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_MKHQNC" />
+								勐库华侨农场分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_GM" />
+								耿马镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_PCX" />
+								平村乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MS" />
+								勐撒镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MY" />
+								勐永镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_MPJD" />
+								忙畔街道分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MDNC" />
+								孟定农场管委会分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_NMX" />
+								南美乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="999" />
+								中心馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LCST" />
+								临沧市图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LC_YDTSG" />
+								永德县图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_LS" />
+								鲁史镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_MK" />
+								勐库镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_DS" />
+								大山乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_QN" />
+								圈内乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_YJ" />
+								腰街乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_LD" />
+								洛党镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_XS" />
+								雪山镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_FS" />
+								凤山镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_SL" />
+								诗礼乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_MY" />
+								勐佑镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_XH" />
+								新华乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="SJ_SJNCGLQFG" />
+								双江农场
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="ZK_MP" />
+								勐捧镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_YK" />
+								永康镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_ML" />
+								茂兰镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_MW" />
+								漫湾镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_XJ" />
+								晓街乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_CGX" />
+								崇岗乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_DCSX" />
+								大朝山西镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_MD" />
+								勐董镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_MYD" />
+								蚂蚁堆乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_HP" />
+								贺派乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_MTX" />
+								马台乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MJ" />
+								勐简乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_BDX" />
+								邦东乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MH" />
+								芒洪乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_SPS" />
+								四排山分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_ZDX" />
+								章驮乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_DX" />
+								大兴乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_BSZ" />
+								博尚镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GM_MSNC" />
+								勐撒农场管委会分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="LX_FXJD" />
+								凤翔街道分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_MSNC" />
+								勐省农场分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_YS" />
+								岩帅镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_MS" />
+								勐省镇分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_DJ" />
+								单甲乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_NL" />
+								糯良乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_ML" />
+								勐来乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_MJ" />
+								勐角乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_BL" />
+								班老乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="CY_MK" />
+								芒卡镇分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="FQ_SCH" />
+								三岔河分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YD_BKX" />
+								班卡乡分馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="YX_HQ" />
+								后箐乡分馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+			</table>
+		</div>
+		<div id="localLimit" style="margin-top: 15px;display:none;">
+			限定所在馆藏地点:
+			<label id="limitlocal">
+			</label>
+			<label>
+				<input type="radio" name="curlocal" onchange="localLimit()" checked="unchecked" value="" />
+				全部
+			</label>
+		</div>
+		<div id="remember" style="margin-top: 15px;display:none;">
+		  <span><input type="checkbox" id="rememberMe" />
+					记住我的选择</span></div>
+		<!-- 检索提示框 -->
+		<div id="opacConfSetTable" style="display: none;">
+			OPAC参数设置<br/>
+			<a href="/opac/configLibName;jsessionid=9589F5576EF17D7020BD1D576FBE265A">分馆名显示自定义设置</a>
+		</div>
+		<!-- 外网资源统一配置  -->
+		<div id="opacConfouternet" style="display: none;">
+			<input type="checkbox" value="1" id="Conouternet" name="Conouternet" onclick="configouternet()"/>关闭外网资源通道
+		</div>
+		<div id="localConfig" style="display: none;">
+			<table width="100%">
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZBBFWD" type="checkbox" name="curlocal"  value="LX_BSZBBFWD" />
+								临翔区博尚镇邦别村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZBMSQFWD" type="checkbox" name="curlocal"  value="GMX_GMZBMSQFWD" />
+								耿马县耿马镇白马社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-BHXWHZ" type="checkbox" name="curlocal"  value="CYX-BHXWHZ" />
+								沧源佤族自治县班洪乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZXNMFWD" type="checkbox" name="curlocal"  value="LX_BSZXNMFWD" />
+								 临翔区博尚镇小那么村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMNX" type="checkbox" name="curlocal"  value="SJMNX" />
+								双江忙糯乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXMHCFWD" type="checkbox" name="curlocal"  value="GMX_MHXMHCFWD" />
+								耿马县芒洪乡芒洪村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SLDFWX" type="checkbox" name="curlocal"  value="LXQ_SLDFWX" />
+								临翔区四楼地方文献
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZWHCFWD" type="checkbox" name="curlocal"  value="LX_BSZWHCFWD" />
+								临翔区博尚镇完海村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-BLXWHZ" type="checkbox" name="curlocal"  value="CYX-BLXWHZ" />
+								沧源佤族自治县班老乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXWHZ" type="checkbox" name="curlocal"  value="GMX_DXXWHZ" />
+								耿马县大兴乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WYC-FWD" type="checkbox" name="curlocal"  value="WYC-FWD" />
+								永康镇弯腰村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXLCCFWD" type="checkbox" name="curlocal"  value="GMX_MJXLCCFWD" />
+								耿马县勐简乡老厂村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXMJCFWD" type="checkbox" name="curlocal"  value="GMX_MJXMJCFWD" />
+								耿马县勐简乡勐简村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDNPSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDNPSQFWD" />
+								临翔区凤翔街道南屏社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YX_AHZGC" type="checkbox" name="curlocal"  value="YX_AHZGC" />
+								云县爱华镇书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX-DFWX" type="checkbox" name="curlocal"  value="GMX-DFWX" />
+								耿马县图书馆地方文献室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMMZ" type="checkbox" name="curlocal"  value="SJMMZ" />
+								双江勐勐镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCXPCCFWD" type="checkbox" name="curlocal"  value="LXQ_PCXPCCFWD" />
+								临翔区平村乡平村村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZWXCFWD" type="checkbox" name="curlocal"  value="LX_BSZWXCFWD" />
+								临翔区博尚镇完贤村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXWHZ" type="checkbox" name="curlocal"  value="GMX_HPXWHZ" />
+								耿马县贺派乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZHhCFWD" type="checkbox" name="curlocal"  value="GMX_MDZHhCFWD" />
+								耿马县孟定镇罕宏村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG" type="checkbox" name="curlocal"  value="FQX_TSG" />
+								凤庆县图书馆外借室1
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZMZCFWD" type="checkbox" name="curlocal"  value="LX_BSZMZCFWD" />
+								临翔区博尚镇勐准村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LCS_JCBZFWZX" type="checkbox" name="curlocal"  value="LCS_JCBZFWZX" />
+								(我馆代加工)临沧市留置中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MNNC-FWD14" type="checkbox" name="curlocal"  value="MNNC-FWD14" />
+								永康镇忙南糯村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CGXMBC-FWD" type="checkbox" name="curlocal"  value="CGXMBC-FWD" />
+								崇岗乡忙蚌村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXBANGHCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXBANGHCFWD" />
+								临翔区蚂蚁堆乡邦海村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSMWCFWD" type="checkbox" name="curlocal"  value="GMX_SPSMWCFWD" />
+								耿马县四排山芒翁村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ-CJYXCSY" type="checkbox" name="curlocal"  value="LXQ-CJYXCSY" />
+								沧江园广场城市书房
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJDWX2" type="checkbox" name="curlocal"  value="SJDWX2" />
+								双江大文乡千信村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGCGC" type="checkbox" name="curlocal"  value="MPZ_MPZFGCGC" />
+								镇康县勐捧镇岔沟村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJDWX1" type="checkbox" name="curlocal"  value="SJDWX1" />
+								双江大文乡大梁子村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZGDSQFWD" type="checkbox" name="curlocal"  value="GMX_GMZGDSQFWD" />
+								耿马县耿马镇甘东社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_MWSK" type="checkbox" name="curlocal"  value="CYX_MWSK" />
+								沧源县图书馆盲文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXQUANHCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXQUANHCFWD" />
+								临翔区马台乡全河村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_JSX_CKCFWD" type="checkbox" name="curlocal"  value="JSX_CKCFWD" />
+								镇康县军赛乡彩靠村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YDX_LDTSWD" type="checkbox" name="curlocal"  value="YDX_LDTSWD" />
+								永德县流动图书网点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGYZTC" type="checkbox" name="curlocal"  value="MPZ_MPZFGYZTC" />
+								镇康县勐捧镇岩子头村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZJPCFWD" type="checkbox" name="curlocal"  value="GMX_MDZJPCFWD" />
+								耿马县孟定镇尖坪村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LCST-WHSL" type="checkbox" name="curlocal"  value="LCST-WHSL" />
+								临沧市馆 文化沙龙（二楼）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGMBC" type="checkbox" name="curlocal"  value="MPZ_MPZFGMBC" />
+								镇康县勐捧镇忙丙村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDWHZ" type="checkbox" name="curlocal"  value="LXQ_ZDWHZ" />
+								临翔区章驮文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BSZWHZ" type="checkbox" name="curlocal"  value="LXQ_BSZWHZ" />
+								临翔区博尚镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDNXQSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDNXQSQFWD" />
+								临翔区凤翔街道南信桥社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YDX_ELDFWXS" type="checkbox" name="curlocal"  value="YDX_ELDFWXS" />
+								永德县二楼地方文献室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDNXCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDNXCFWD" />
+								临翔区凤翔街道南信村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXWYFWD" type="checkbox" name="curlocal"  value="LXQ_QNXWYFWD" />
+								临翔区圈内乡文远村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXKSFWD" type="checkbox" name="curlocal"  value="LXQ_QNXKSFWD" />
+								临翔区圈内乡昆赛村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_NMXDYCFWD" type="checkbox" name="curlocal"  value="LXQ_NMXDYCFWD" />
+								临翔区南美乡多依村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_BKYLS" type="checkbox" name="curlocal"  value="BKYLS" />
+								临沧市馆    报刊阅览室（一楼）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_DSXFG" type="checkbox" name="curlocal"  value="FQ_DSXFG" />
+								凤庆县大寺乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MSZWHZ" type="checkbox" name="curlocal"  value="CYX-MSZWHZ" />
+								沧源佤族自治县勐省镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDNCXDSQFWD" type="checkbox" name="curlocal"  value="GMX_MDNCXDSQFWD" />
+								耿马县孟定农场小岛社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXPHCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXPHCFWD" />
+								临翔区马台乡平河村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDZGSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDZGSQFWD" />
+								临翔区凤翔街道章嘎社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDSFCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDSFCFWD" />
+								临翔区凤翔街道石房村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CGX-TSS" type="checkbox" name="curlocal"  value="CGX-TSS" />
+								永德县崇岗乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YKC-FWD" type="checkbox" name="curlocal"  value="YKC-FWD" />
+								永康镇永康村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MDZWHZ" type="checkbox" name="curlocal"  value="CYX-MDZWHZ" />
+								沧源佤族自治县勐董镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZZHCFWD" type="checkbox" name="curlocal"  value="GMX_MDZZHCFWD" />
+								耿马县孟定镇遮哈村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HQGLQDWJMXZFWD" type="checkbox" name="curlocal"  value="GMX_HQGLQDWJMXZFWD" />
+								耿马县华侨管理区华侨第五居民小组服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZFXCFWD" type="checkbox" name="curlocal"  value="GMX_GMZFXCFWD" />
+								耿马县耿马镇复兴村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DXSMZC-FWD" type="checkbox" name="curlocal"  value="DXSMZC-FWD" />
+								大雪山勐旨村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXCHBCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXCHBCFWD" />
+								临翔区章驮乡采花坝村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDZSCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDZSCFWD" />
+								临翔区凤翔街道中山村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YDX_YLSK" type="checkbox" name="curlocal"  value="YDX_YLSK" />
+								永德县一楼书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_JSX_CLCFWD" type="checkbox" name="curlocal"  value="JSX_CLCFWD" />
+								镇康县军赛乡岔路村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXAYCFWD" type="checkbox" name="curlocal"  value="GMX_MHXAYCFWD" />
+								耿马县芒洪乡安雅村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZCGSQFWD" type="checkbox" name="curlocal"  value="GMX_MDZCGSQFWD" />
+								耿马县孟定镇城关社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDNCYYSQFWD" type="checkbox" name="curlocal"  value="GMX_MDNCYYSQFWD" />
+								耿马县孟定农场云阳社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_JSX_JSCFWD" type="checkbox" name="curlocal"  value="JSX_JSCFWD" />
+								镇康县军赛乡军赛村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WML-TSS" type="checkbox" name="curlocal"  value="WML-TSS" />
+								永德县乌木龙乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG9" type="checkbox" name="curlocal"  value="LC_YXTSG9" />
+								云县爱华镇新云州社区
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZQSCFWD" type="checkbox" name="curlocal"  value="GMX_MDZQSCFWD" />
+								耿马县孟定镇邱山村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MJXWHZ" type="checkbox" name="curlocal"  value="CYX-MJXWHZ" />
+								沧源佤族自治县勐角乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZCGCFWD" type="checkbox" name="curlocal"  value="GMX_MDZCGCFWD" />
+								耿马县孟定镇崇岗村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG2" type="checkbox" name="curlocal"  value="LC_YXTSG2" />
+								云县图书馆少儿书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG1" type="checkbox" name="curlocal"  value="LC_YXTSG1" />
+								云县图书馆二中分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG4" type="checkbox" name="curlocal"  value="LC_YXTSG4" />
+								云县图书馆资料室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG3" type="checkbox" name="curlocal"  value="LC_YXTSG3" />
+								云县图书馆地方文献
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG6" type="checkbox" name="curlocal"  value="LC_YXTSG6" />
+								云县图书馆盲文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG5" type="checkbox" name="curlocal"  value="LC_YXTSG5" />
+								云县图书馆古籍室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG8" type="checkbox" name="curlocal"  value="LC_YXTSG8" />
+								云县爱华镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_XHXFG" type="checkbox" name="curlocal"  value="FQ_XHXFG" />
+								凤庆县新华乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG7" type="checkbox" name="curlocal"  value="LC_YXTSG7" />
+								云县图书馆馆藏室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG16" type="checkbox" name="curlocal"  value="LC_YXTSG16" />
+								云县晓街乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG17" type="checkbox" name="curlocal"  value="LC_YXTSG17" />
+								云县漫湾镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_ELTSS" type="checkbox" name="curlocal"  value="ZKX_ELTSS" />
+								镇康县图书馆二楼图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG14" type="checkbox" name="curlocal"  value="LC_YXTSG14" />
+								云县涌宝镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG15" type="checkbox" name="curlocal"  value="LC_YXTSG15" />
+								云县栗树乡分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG12" type="checkbox" name="curlocal"  value="LC_YXTSG12" />
+								云县茶房乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG13" type="checkbox" name="curlocal"  value="LC_YXTSG13" />
+								云县后箐乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG10" type="checkbox" name="curlocal"  value="LC_YXTSG10" />
+								云县大朝山西镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FWZ_RHCFWD" type="checkbox" name="curlocal"  value="FWZ_RHCFWD" />
+								镇康县凤尾镇仁和村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG11" type="checkbox" name="curlocal"  value="LC_YXTSG11" />
+								云县大寨镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZHYLS" type="checkbox" name="curlocal"  value="ZHYLS" />
+								临沧市馆   综合阅览室（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG18" type="checkbox" name="curlocal"  value="LC_YXTSG18" />
+								云县忙怀乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXMQCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXMQCFWD" />
+								临翔区蚂蚁堆乡曼启村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG19" type="checkbox" name="curlocal"  value="LC_YXTSG19" />
+								云县幸福镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXDZCFWD" type="checkbox" name="curlocal"  value="GMX_MJXDZCFWD" />
+								耿马县勐简乡大寨村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-NLXWHZ" type="checkbox" name="curlocal"  value="CYX-NLXWHZ" />
+								沧源佤族自治县糯良乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFG" type="checkbox" name="curlocal"  value="NSZ_NSZFG" />
+								镇康县图书馆南伞镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZQSHFWD" type="checkbox" name="curlocal"  value="GMX_MDZQSHFWD" />
+								耿马县孟定镇清水河服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG20" type="checkbox" name="curlocal"  value="LC_YXTSG20" />
+								云县茂兰镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGYPC" type="checkbox" name="curlocal"  value="NSZ_NSZFGYPC" />
+								镇康县南伞镇营盘村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJX_WJS" type="checkbox" name="curlocal"  value="SJX_WJS" />
+								双江县图书馆外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_PTTSK" type="checkbox" name="curlocal"  value="PTTSK" />
+								临沧市馆  普通图书库（停用）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG25" type="checkbox" name="curlocal"  value="LC_YXTSG25" />
+								云县县委党校流动图书服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJSHX" type="checkbox" name="curlocal"  value="SJSHX" />
+								双江沙河乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_NMXPJCFWD" type="checkbox" name="curlocal"  value="LXQ_NMXPJCFWD" />
+								临翔区南美乡坡脚村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG21" type="checkbox" name="curlocal"  value="LC_YXTSG21" />
+								云县茂兰镇安乐村分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LCSJCY" type="checkbox" name="curlocal"  value="LCSJCY" />
+								(我馆代加工)临沧市馆  检察院分馆（永久）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG22" type="checkbox" name="curlocal"  value="LC_YXTSG22" />
+								云县漫湾镇昔宜村分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YTC-FWD05" type="checkbox" name="curlocal"  value="YTC-FWD05" />
+								永康镇鸭塘村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG23" type="checkbox" name="curlocal"  value="LC_YXTSG23" />
+								云县妇幼保健院分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GKS" type="checkbox" name="curlocal"  value="GKS" />
+								临沧市馆  二楼过刊室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG24" type="checkbox" name="curlocal"  value="LC_YXTSG24" />
+								希望之星阅读专柜
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZXHCFWD" type="checkbox" name="curlocal"  value="GMX_MYZXHCFWD" />
+								耿马县勐永镇新和村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDJZPCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDJZPCFWD" />
+								临翔区凤翔街道竹蓬村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGNSC" type="checkbox" name="curlocal"  value="NSZ_NSZFGNSC" />
+								镇康县南伞镇南伞村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_MWSK" type="checkbox" name="curlocal"  value="ZKX_MWSK" />
+								镇康县图书馆盲文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_LSZFG" type="checkbox" name="curlocal"  value="FQ_LSZFG" />
+								凤庆县鲁史镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZYQFWD" type="checkbox" name="curlocal"  value="LX_BSZYQFWD" />
+								临翔区博尚镇永泉服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCXMYFWD" type="checkbox" name="curlocal"  value="LXQ_PCXMYFWD" />
+								临翔区平村乡忙丫村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSBKCFWD" type="checkbox" name="curlocal"  value="GMX_SPSBKCFWD" />
+								耿马县四排山班康村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZSSBCFWD" type="checkbox" name="curlocal"  value="GMX_MDZSSBCFWD" />
+								耿马县孟定镇色树坝服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDWHSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDWHSQFWD" />
+								临翔区凤翔街道文华社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDNCWHZ" type="checkbox" name="curlocal"  value="GMX_MDNCWHZ" />
+								耿马县孟定农场文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_FYSCBW" type="checkbox" name="curlocal"  value="CYX_FYSCBW" />
+								沧源县图书馆非印刷出版物
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZBSFWD" type="checkbox" name="curlocal"  value="LX_BSZBSFWD" />
+								临翔区博尚镇博尚社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZMyCFWD" type="checkbox" name="curlocal"  value="GMX_MYZMyCFWD" />
+								耿马县勐永镇勐永村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSMGCFWD" type="checkbox" name="curlocal"  value="GMX_SPSMGCFWD" />
+								耿马县四排山芒关村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZBLCFWD" type="checkbox" name="curlocal"  value="GMX_MSZBLCFWD" />
+								耿马县勐撒镇丙令村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZXCCFWD" type="checkbox" name="curlocal"  value="GMX_GMZXCCFWD" />
+								耿马县耿马镇新城村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MZSWDCFWD" type="checkbox" name="curlocal"  value="GMX_MZSWDCFWD" />
+								耿马县勐撒镇翁达村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FWZ_FWSQFWD" type="checkbox" name="curlocal"  value="FWZ_FWSQFWD" />
+								镇康县凤尾镇凤尾社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZMTFWD" type="checkbox" name="curlocal"  value="LX_BSZMTFWD" />
+								临翔区博尚镇勐托村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXMWCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXMWCFWD" />
+								临翔区章驮乡勐旺村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LCS_CSSF" type="checkbox" name="curlocal"  value="LCS_CSSF" />
+								城市书房
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFGTCC" type="checkbox" name="curlocal"  value="MDX_MDXFGTCC" />
+								镇康县勐堆乡铜厂村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_ELXKS" type="checkbox" name="curlocal"  value="GMX_ELXKS" />
+								耿马县二楼现刊室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDMJSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDMJSQFWD" />
+								临翔区凤翔街道忙角社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGXCSQ" type="checkbox" name="curlocal"  value="NSZ_NSZFGXCSQ" />
+								镇康县南伞镇新城社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXMNCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXMNCFWD" />
+								临翔区蚂蚁堆乡忙糯村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZHKCFWD" type="checkbox" name="curlocal"  value="GMX_MSZHKCFWD" />
+								耿马县勐撒镇户肯村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSNCFCSQFWD" type="checkbox" name="curlocal"  value="GMX_MSNCFCSQFWD" />
+								耿马县勐撒农场分场社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_STC-FWD02" type="checkbox" name="curlocal"  value="STC-FWD02" />
+								永康镇送吐村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WDCFWD" type="checkbox" name="curlocal"  value="WDCFWD" />
+								沧源翁丁村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_HZC-FWD07" type="checkbox" name="curlocal"  value="HZC-FWD07" />
+								永康镇海转村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_RSTC-WFD11" type="checkbox" name="curlocal"  value="RSTC-WFD11" />
+								永康镇热水塘村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_WJSTS" type="checkbox" name="curlocal"  value="LXQ_WJSTS" />
+								临翔区外借室图书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJX_LTTS" type="checkbox" name="curlocal"  value="SJX_LTTS" />
+								双江县流通图书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZJXCFWD" type="checkbox" name="curlocal"  value="GMX_MDZJXCFWD" />
+								耿马县孟定镇景信村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WJZD-TSS" type="checkbox" name="curlocal"  value="WJZD-TSS" />
+								永德县武警中队图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_NMXNHCFWD" type="checkbox" name="curlocal"  value="LXQ_NMXNHCFWD" />
+								临翔区南美乡南华村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMMZ1" type="checkbox" name="curlocal"  value="SJMMZ1" />
+								双江千福村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMMZ2" type="checkbox" name="curlocal"  value="SJMMZ2" />
+								双江解放二组服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZDSJCFWD" type="checkbox" name="curlocal"  value="GMX_MDZDSJCFWD" />
+								耿马县孟定镇大水井村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DXSX-TSS" type="checkbox" name="curlocal"  value="DXSX-TSS" />
+								永德县大雪山乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDWHZ" type="checkbox" name="curlocal"  value="LXQ_MYDWHZ" />
+								临翔区蚂蚁堆文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZBBCFWD" type="checkbox" name="curlocal"  value="GMX_MSZBBCFWD" />
+								耿马县勐撒镇班必村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXBBCFWD" type="checkbox" name="curlocal"  value="GMX_DXXBBCFWD" />
+								耿马县大兴乡班坝村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXXBFWD" type="checkbox" name="curlocal"  value="LXQ_QNXXBFWD" />
+								临翔区圈内乡细博村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXMDCFWD" type="checkbox" name="curlocal"  value="GMX_HPXMDCFWD" />
+								耿马县贺派乡芒底村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_SLSK" type="checkbox" name="curlocal"  value="ZKX_SLSK" />
+								镇康县图书馆三楼书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDNBCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDNBCFWD" />
+								临翔区凤翔街道南本村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZMMCFWD" type="checkbox" name="curlocal"  value="GMX_MDZMMCFWD" />
+								耿马县孟定镇芒美村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZCZDCFWD" type="checkbox" name="curlocal"  value="GMX_GMZCZDCFWD" />
+								耿马县耿马镇菜籽地村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_LDZFG" type="checkbox" name="curlocal"  value="FQX_LDZFG" />
+								凤庆县洛党镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXWHZ" type="checkbox" name="curlocal"  value="LXQ_BDXWHZ" />
+								临翔区邦东乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXZMZFWD" type="checkbox" name="curlocal"  value="GMX_HPXZMZFWD" />
+								耿马县贺派乡者卖组服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXWPCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXWPCFWD" />
+								临翔区邦东乡卫平村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXLPCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXLPCFWD" />
+								临翔区章驮乡龙平村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZMMCFWD" type="checkbox" name="curlocal"  value="GMX_MSZMMCFWD" />
+								耿马县勐撒镇芒茂村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_WJSQK" type="checkbox" name="curlocal"  value="LXQ_WJSQK" />
+								临翔区外借室期刊
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDYLSQ" type="checkbox" name="curlocal"  value="LXQ_MPJDYLSQ" />
+								临翔区忙畔街道玉龙社区
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SLRDFYZL" type="checkbox" name="curlocal"  value="LXQ_SLRDFYZL" />
+								临翔区四楼人大复印资料
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXMYDCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXMYDCFWD" />
+								临翔区蚂蚁堆乡蚂蚁堆村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXTFCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXTFCFWD" />
+								临翔区章驮乡塘房村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXXMCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXXMCFWD" />
+								临翔区蚂蚁堆乡新民村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZXCSQFWD" type="checkbox" name="curlocal"  value="GMX_MDZXCSQFWD" />
+								耿马县孟定镇下城社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZJSCFWD" type="checkbox" name="curlocal"  value="GMX_MDZJSCFWD" />
+								耿马县孟定镇尖山村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HQGLQWHZ" type="checkbox" name="curlocal"  value="GMX_HQGLQWHZ" />
+								耿马县华侨管理区文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFGBDC" type="checkbox" name="curlocal"  value="MDX_MDXFGBDC" />
+								镇康县勐堆乡帮东村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WMLC-FWD" type="checkbox" name="curlocal"  value="WMLC-FWD" />
+								乌木龙乡乌木龙村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_GDZXFG" type="checkbox" name="curlocal"  value="FQ_GDZXFG" />
+								凤庆县郭大寨乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSNCLLSQFWD" type="checkbox" name="curlocal"  value="GMX_MSNCLLSQFWD" />
+								耿马县勐撒农场洛凌社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZBGFWD" type="checkbox" name="curlocal"  value="LX_BSZBGFWD" />
+								临翔区博尚镇邦公村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXBAIHCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXBAIHCFWD" />
+								临翔区蚂蚁堆乡白河村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZQMKCFWD" type="checkbox" name="curlocal"  value="GMX_MSZQMKCFWD" />
+								耿马县勐撒镇箐门口村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZNBCFWD" type="checkbox" name="curlocal"  value="GMX_GMZNBCFWD" />
+								耿马县耿马镇弄巴村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LDTSS" type="checkbox" name="curlocal"  value="LDTSS" />
+								临沧市馆  流动图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDMPSQFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDMPSQFWD" />
+								临翔区忙畔街道忙畔社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXYLCFWD" type="checkbox" name="curlocal"  value="GMX_DXXYLCFWD" />
+								耿马县大兴乡岩榴村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDCHCFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDCHCFWD" />
+								临翔区忙畔街道岔河村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_ELYLS" type="checkbox" name="curlocal"  value="ZKX_ELYLS" />
+								镇康县图书馆二楼阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDWWSQFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDWWSQFWD" />
+								临翔区忙畔街道文伟社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDWCCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDWCCFWD" />
+								临翔区凤翔街道五村村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YDX_ELZHYLS" type="checkbox" name="curlocal"  value="YDX_ELZHYLS" />
+								永德县二楼综合阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXNNCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXNNCFWD" />
+								临翔区马台乡南糯村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDJXBCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDJXBCFWD" />
+								临翔区凤翔街道昔本村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZYPCFWD" type="checkbox" name="curlocal"  value="GMX_GMZYPCFWD" />
+								耿马县耿马镇允捧村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_BK-TSS" type="checkbox" name="curlocal"  value="BK-TSS" />
+								永德县班卡乡图书室（有误）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXNECFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXNECFWD" />
+								临翔区蚂蚁堆乡糯恩村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXXZCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXXZCFWD" />
+								临翔区章驮乡新寨村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZWHZ" type="checkbox" name="curlocal"  value="GMX_GMZWHZ" />
+								耿马县耿马镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DDC-FWD03" type="checkbox" name="curlocal"  value="DDC-FWD03" />
+								永康镇端德村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YX_MWZGC" type="checkbox" name="curlocal"  value="YX_MWZGC" />
+								云县漫湾镇馆藏地点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_FSZFSSQ" type="checkbox" name="curlocal"  value="FQX_FSZFSSQ" />
+								凤山社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_SCHZFG" type="checkbox" name="curlocal"  value="FQ_SCHZFG" />
+								凤庆县三岔河镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXMTCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXMTCFWD" />
+								临翔区马台乡马台村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FWZ_XSJCFWD" type="checkbox" name="curlocal"  value="FWZ_XSJCFWD" />
+								镇康县凤尾镇小水井村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXNXCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXNXCFWD" />
+								临翔区马台乡那杏村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MLCFWD" type="checkbox" name="curlocal"  value="MLCFWD" />
+								沧源勐来村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJ_MM" type="checkbox" name="curlocal"  value="SJ_MM" />
+								00
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_SLDFWXS" type="checkbox" name="curlocal"  value="ZKX_SLDFWXS" />
+								镇康县图书馆三楼地方文献室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZGMLCFWD" type="checkbox" name="curlocal"  value="GMX_MYZGMLCFWD" />
+								耿马县勐永镇光木林村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MLC-FWD06" type="checkbox" name="curlocal"  value="MLC-FWD06" />
+								永康镇忙腊村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_MYZMYCFWD" type="checkbox" name="curlocal"  value="FQ_MYZMYCFWD" />
+								凤庆县勐佑镇勐佑村回溯建库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZWHZ" type="checkbox" name="curlocal"  value="GMX_MDZWHZ" />
+								耿马县孟定镇文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_MYZFG" type="checkbox" name="curlocal"  value="FQ_MYZFG" />
+								凤庆县勐佑镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SLGJ" type="checkbox" name="curlocal"  value="LXQ_SLGJ" />
+								临翔区四楼古籍
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZHYFWD" type="checkbox" name="curlocal"  value="LX_BSZHYFWD" />
+								临翔区博尚镇户有村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MLC-FWD04" type="checkbox" name="curlocal"  value="MLC-FWD04" />
+								永康镇忙捞村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZSTZFWD" type="checkbox" name="curlocal"  value="GMX_MDZSTZFWD" />
+								耿马县孟定镇山头寨服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MBX_MBXFG" type="checkbox" name="curlocal"  value="MBX_MBXFG" />
+								镇康县图书馆忙丙乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXDGCFWD" type="checkbox" name="curlocal"  value="LXQ_QNXDGCFWD" />
+								临翔区圈内乡斗阁村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDTPSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDTPSQFWD" />
+								临翔区凤翔街道塘平社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXWHZ" type="checkbox" name="curlocal"  value="LXQ_QNXWHZ" />
+								临翔区圈内乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMNX1" type="checkbox" name="curlocal"  value="SJMNX1" />
+								双江邦界村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMNX2" type="checkbox" name="curlocal"  value="SJMNX2" />
+								双江小坝子村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_STZYK" type="checkbox" name="curlocal"  value="STZYK" />
+								临沧市馆  视听资源库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSSFDCFWD" type="checkbox" name="curlocal"  value="GMX_SPSSFDCFWD" />
+								耿马县四排山石佛洞村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJBBX" type="checkbox" name="curlocal"  value="SJBBX" />
+								双江邦丙乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFGMDC" type="checkbox" name="curlocal"  value="MDX_MDXFGMDC" />
+								镇康县勐堆乡勐堆村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YX_CFXSK" type="checkbox" name="curlocal"  value="YX_CFXSK" />
+								云县茶房分馆馆藏书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDWHZ" type="checkbox" name="curlocal"  value="LXQ_FXJDWHZ" />
+								临翔区凤翔街道文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ELJSK" type="checkbox" name="curlocal"  value="LXQ_ELJSK" />
+								临翔区二楼旧书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MLC-FWD12" type="checkbox" name="curlocal"  value="MLC-FWD12" />
+								永康镇忙笼村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXXHBCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXXHBCFWD" />
+								临翔区蚂蚁堆乡小河边村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ELXSK" type="checkbox" name="curlocal"  value="LXQ_ELXSK" />
+								临翔区二楼新书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMKZ" type="checkbox" name="curlocal"  value="SJMKZ" />
+								双江勐库镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZNGFWD" type="checkbox" name="curlocal"  value="LX_BSZNGFWD" />
+								临翔区博尚镇那戈村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXBMCWFD" type="checkbox" name="curlocal"  value="LXQ_ZDXBMCWFD" />
+								临翔区章驼乡邦卖村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXZZCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXZZCFWD" />
+								临翔区邦东乡璋珍村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDMZCFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDMZCFWD" />
+								临翔区忙畔街道明子村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSWHZ" type="checkbox" name="curlocal"  value="GMX_SPSWHZ" />
+								耿马县四排山文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MKZWHZ" type="checkbox" name="curlocal"  value="CYX-MKZWHZ" />
+								沧源佤族自治县芒卡镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_TSRQYL" type="checkbox" name="curlocal"  value="TSRQYL" />
+								临沧市馆  特殊人群阅览室（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXQINGHCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXQINGHCFWD" />
+								临翔区马台乡清河村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJHQNC" type="checkbox" name="curlocal"  value="SJHQNC" />
+								双江勐库华侨农场文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXQNCFWD" type="checkbox" name="curlocal"  value="LXQ_QNXQNCFWD" />
+								临翔区圈内乡圈内村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXDXCFWD" type="checkbox" name="curlocal"  value="GMX_DXXDXCFWD" />
+								耿马县大兴乡大兴村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZBTSQFWD" type="checkbox" name="curlocal"  value="GMX_GMZBTSQFWD" />
+								耿马县耿马镇白塔社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXWNFWD" type="checkbox" name="curlocal"  value="LXQ_QNXWNFWD" />
+								临翔区圈内乡文宁村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXHPCFWD" type="checkbox" name="curlocal"  value="GMX_HPXHPCFWD" />
+								耿马县贺派乡贺派村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SLXBZ" type="checkbox" name="curlocal"  value="LXQ_SLXBZ" />
+								临翔区三楼下报纸
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_YLWJSQK" type="checkbox" name="curlocal"  value="LXQ_YLWJSQK" />
+								临翔区一楼外借室期刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_YLETYLS" type="checkbox" name="curlocal"  value="LXQ_YLETYLS" />
+								临翔区一楼儿童阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZMBCFWD" type="checkbox" name="curlocal"  value="GMX_GMZMBCFWD" />
+								耿马县耿马镇芒蚌村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZYLCFWD" type="checkbox" name="curlocal"  value="GMX_GMZYLCFWD" />
+								耿马县耿马镇允楞村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DDZ-TSS" type="checkbox" name="curlocal"  value="DDZ-TSS" />
+								永德县德党镇图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_YPZFG" type="checkbox" name="curlocal"  value="FQ_YPZFG" />
+								凤庆县营盘镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_LDZHFC" type="checkbox" name="curlocal"  value="FQX_LDZHFC" />
+								凤庆厚丰村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZHXCFWD" type="checkbox" name="curlocal"  value="GMX_MDZHXCFWD" />
+								耿马县孟定镇河西村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DSX-TSS" type="checkbox" name="curlocal"  value="DSX-TSS" />
+								永德县大山乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FWZ_FWZFG" type="checkbox" name="curlocal"  value="FWZ_FWZFG" />
+								镇康县图书馆凤尾镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_XWZFG" type="checkbox" name="curlocal"  value="FQ_XWZFG" />
+								凤庆县小湾镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXYSCFWD" type="checkbox" name="curlocal"  value="GMX_DXXYSCFWD" />
+								耿马县大兴乡永胜村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDQZSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDQZSQFWD" />
+								临翔区凤翔街道圈掌社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFGBKC" type="checkbox" name="curlocal"  value="MDX_MDXFGBKC" />
+								镇康县勐堆乡蚌孔村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGHUYC" type="checkbox" name="curlocal"  value="NSZ_NSZFGHUYC" />
+								镇康县南伞镇户育村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXMCCFWD" type="checkbox" name="curlocal"  value="GMX_MHXMCCFWD" />
+								耿马县芒洪乡马厂村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXLYCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXLYCFWD" />
+								临翔区马台乡琅琊村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXHPCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXHPCFWD" />
+								临翔区邦东乡和平村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDNCGLHSQFWD" type="checkbox" name="curlocal"  value="GMX_MDNCGLHSQFWD" />
+								耿马县孟定农场姑老河社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXXLCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXXLCFWD" />
+								临翔区蚂蚁堆乡杏勒村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDBJCFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDBJCFWD" />
+								临翔区忙畔街道丙简村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJBBX1" type="checkbox" name="curlocal"  value="SJBBX1" />
+								双江邦丙乡邦况村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJBBX2" type="checkbox" name="curlocal"  value="SJBBX2" />
+								双江邦丙乡忙安村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZHDGSQFWD" type="checkbox" name="curlocal"  value="GMX_MYZHDGSQFWD" />
+								耿马县勐永镇河底岗社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSLZZFWD" type="checkbox" name="curlocal"  value="GMX_SPSLZZFWD" />
+								耿马县四排山梁子寨服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SXYZFG" type="checkbox" name="curlocal"  value="LXQ_SXYZFG" />
+								临翔区图书馆书香驿站分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJX_CKTS" type="checkbox" name="curlocal"  value="SJX_CKTS" />
+								双江县仓库图书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_BJSK" type="checkbox" name="curlocal"  value="CYX_BJSK" />
+								沧源县图书馆闭架书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_LDZLDC" type="checkbox" name="curlocal"  value="FQX_LDZLDC" />
+								凤庆洛党村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDCYSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDCYSQFWD" />
+								临翔区凤翔街道菜园社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZXZCFWD" type="checkbox" name="curlocal"  value="GMX_MDZXZCFWD" />
+								耿马县孟定镇新寨村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZWHZ" type="checkbox" name="curlocal"  value="GMX_MSZWHZ" />
+								耿马县勐撒镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_BKX-TSS" type="checkbox" name="curlocal"  value="BKX-TSS" />
+								永德县班卡乡图书室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZDLCFWD" type="checkbox" name="curlocal"  value="GMX_MDZDLCFWD" />
+								耿马县孟定镇得龙村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_LXQZD" type="checkbox" name="curlocal"  value="LXQ_LXQZD" />
+								临翔区中队
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZMZCFWD" type="checkbox" name="curlocal"  value="GMX_MSZMZCFWD" />
+								耿马县勐撒镇芒枕村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDJFSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDJFSQFWD" />
+								临翔区凤翔街道锦凤社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXWHZ" type="checkbox" name="curlocal"  value="GMX_MHXWHZ" />
+								耿马县芒洪乡文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXTJCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXTJCFWD" />
+								临翔区马台乡唐家村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-DJXWHZ" type="checkbox" name="curlocal"  value="CYX-DJXWHZ" />
+								沧源佤族自治县单甲乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ-NMXNMCFWD" type="checkbox" name="curlocal"  value="LXQ-NMXNMCFWD" />
+								临翔区南美乡南美村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BSZMBFWD" type="checkbox" name="curlocal"  value="LXQ_BSZMBFWD" />
+								临翔区博尚镇幕布服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_XMTZ-TSS" type="checkbox" name="curlocal"  value="XMTZ-TSS" />
+								永德县小勐统图书室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YKZ-TSS" type="checkbox" name="curlocal"  value="YKZ-TSS" />
+								永德县永康镇图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXWHZ" type="checkbox" name="curlocal"  value="LXQ_MTXWHZ" />
+								临翔区马台乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZMLCFWD" type="checkbox" name="curlocal"  value="GMX_MYZMLCFWD" />
+								耿马县勐永镇芒来村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXLYCFWD" type="checkbox" name="curlocal"  value="GMX_HPXLYCFWD" />
+								耿马县贺派乡落阳村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZHHCFWD" type="checkbox" name="curlocal"  value="GMX_MDZHHCFWD" />
+								耿马县孟定镇贺海村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZMGCFWD" type="checkbox" name="curlocal"  value="GMX_GMZMGCFWD" />
+								耿马县耿马镇芒国村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HQGLQHQSQFWD" type="checkbox" name="curlocal"  value="GMX_HQGLQHQSQFWD" />
+								耿马县华侨管理区华侨社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZBLCFWD" type="checkbox" name="curlocal"  value="GMX_MYZBLCFWD" />
+								耿马县勐永镇帮令村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXYSCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXYSCFWD" />
+								临翔区蚂蚁堆乡一水村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZTJCFWD" type="checkbox" name="curlocal"  value="GMX_GMZTJCFWD" />
+								耿马县耿马镇团结村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXMFYCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXMFYCFWD" />
+								临翔区蚂蚁堆乡马峰腰村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_XCSY" type="checkbox" name="curlocal"  value="LC_XCSY" />
+								临沧乡愁书院
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZDNMFWD" type="checkbox" name="curlocal"  value="LX_BSZDNMFWD" />
+								临翔区博尚镇大那么村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCXHLCFWD" type="checkbox" name="curlocal"  value="LXQ_PCXHLCFWD" />
+								临翔区平村乡换良村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_QKSK" type="checkbox" name="curlocal"  value="CYX_QKSK" />
+								沧源县图书馆期刊书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSGNCFWD" type="checkbox" name="curlocal"  value="GMX_SPSGNCFWD" />
+								耿马县四排山关弄村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SEYLS" type="checkbox" name="curlocal"  value="SEYLS" />
+								临沧市馆  少儿阅览室（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDHTSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDHTSQFWD" />
+								临翔区凤翔街道海棠社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YLX-TSS" type="checkbox" name="curlocal"  value="YLX-TSS" />
+								永德县亚练乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZBMHFWD" type="checkbox" name="curlocal"  value="LX_BSZBMHFWD" />
+								临翔区博尚镇坝密河村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJD" type="checkbox" name="curlocal"  value="LXQ_MPJD" />
+								临翔区忙畔街道文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MKC-FWD" type="checkbox" name="curlocal"  value="MKC-FWD" />
+								永康镇忙况村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DSSQ-FWD" type="checkbox" name="curlocal"  value="DSSQ-FWD" />
+								德顺社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MTXPZCFWD" type="checkbox" name="curlocal"  value="LXQ_MTXPZCFWD" />
+								临翔区马台乡平掌村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXZDCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXZDCFWD" />
+								临翔区章驮乡章驮村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCXNYFWD" type="checkbox" name="curlocal"  value="LXQ_PCXNYFWD" />
+								临翔区平村乡那玉村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG1" type="checkbox" name="curlocal"  value="FQX_TSG1" />
+								凤庆县图书馆外借室2
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZJSFWD" type="checkbox" name="curlocal"  value="LX_BSZJSFWD" />
+								临翔区博尚镇夹山村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CGWX-FWD" type="checkbox" name="curlocal"  value="CGWX-FWD" />
+								永德县城关完小服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZMACFWD" type="checkbox" name="curlocal"  value="GMX_MDZMACFWD" />
+								耿马县孟定镇芒艾村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG4" type="checkbox" name="curlocal"  value="FQX_TSG4" />
+								凤庆县图书馆测试库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG5" type="checkbox" name="curlocal"  value="FQX_TSG5" />
+								凤庆县图书馆外借室3
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXTSCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXTSCFWD" />
+								临翔区邦东乡团山村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG2" type="checkbox" name="curlocal"  value="FQX_TSG2" />
+								凤庆县三楼地方文献室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_QKYLS" type="checkbox" name="curlocal"  value="QKYLS" />
+								临沧市馆  报刊库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_TSG3" type="checkbox" name="curlocal"  value="FQX_TSG3" />
+								凤庆县二楼期刊室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MLXWHZ" type="checkbox" name="curlocal"  value="CYX-MLXWHZ" />
+								沧源佤族自治县勐来乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXBFCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXBFCFWD" />
+								临翔区章驮乡邦福村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SLGKS" type="checkbox" name="curlocal"  value="GMX_SLGKS" />
+								耿马县三楼过刊室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGHZBC" type="checkbox" name="curlocal"  value="MPZ_MPZFGHZBC" />
+								镇康县勐捧镇蒿子坝村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXNSHFWD" type="checkbox" name="curlocal"  value="LXQ_QNXNSHFWD" />
+								临翔区圈内乡南赛河村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MCX_MCXFG" type="checkbox" name="curlocal"  value="MCX_MCXFG" />
+								镇康县图书馆木场乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LCZX" type="checkbox" name="curlocal"  value="LCZX" />
+								临沧市政协委员书柜
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZMYCFWD" type="checkbox" name="curlocal"  value="GMX_MYZMYCFWD" />
+								耿马县勐永镇芒佑村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DJTSS" type="checkbox" name="curlocal"  value="DJTSS" />
+								临沧市馆  党建图书室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SK" type="checkbox" name="curlocal"  value="SK" />
+								临沧市馆  书库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXBWCFWD" type="checkbox" name="curlocal"  value="GMX_MJXBWCFWD" />
+								耿马县勐简乡班望村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_TCWX" type="checkbox" name="curlocal"  value="TCWX" />
+								临沧市馆  特藏库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJX_CKQK" type="checkbox" name="curlocal"  value="SJX_CKQK" />
+								双江县仓库期刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSNCWHZ" type="checkbox" name="curlocal"  value="GMX_MSNCWHZ" />
+								耿马县勐撒农场文化站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXMHCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXMHCFWD" />
+								临翔区蚂蚁堆乡曼毫村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YDX_YLGKS" type="checkbox" name="curlocal"  value="YDX_YLGKS" />
+								永德县一楼过刊室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_WJJDEZDFG" type="checkbox" name="curlocal"  value="GMX_WJJDEZDFG" />
+								耿马县图书馆武警机动二中队分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCXYPFWD" type="checkbox" name="curlocal"  value="LXQ_PCXYPFWD" />
+								临翔区平村乡永平村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXYMZCFWD" type="checkbox" name="curlocal"  value="GMX_MJXYMZCFWD" />
+								耿马县勐简乡迎门寨村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_PCWHZ" type="checkbox" name="curlocal"  value="LXQ_PCWHZ" />
+								临翔区平村乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXNAFWD" type="checkbox" name="curlocal"  value="LXQ_QNXNAFWD" />
+								临翔区圈内乡宁安村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXKQCFWD" type="checkbox" name="curlocal"  value="GMX_MHXKQCFWD" />
+								耿马县芒洪乡科且村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJDWX" type="checkbox" name="curlocal"  value="SJDWX" />
+								双江大文乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJSHX2" type="checkbox" name="curlocal"  value="SJSHX2" />
+								双江允甸社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJSHX1" type="checkbox" name="curlocal"  value="SJSHX1" />
+								双江忙开村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXBDCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXBDCFWD" />
+								临翔区邦东乡邦东村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_WJGMZDFG" type="checkbox" name="curlocal"  value="GMX_WJGMZDFG" />
+								耿马县图书馆武警耿马中队分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGNSBC" type="checkbox" name="curlocal"  value="MPZ_MPZFGNSBC" />
+								镇康县勐捧镇南梳坝村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_FSZFG" type="checkbox" name="curlocal"  value="FQX_FSZFG" />
+								凤庆县凤山镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_NMXWHZ" type="checkbox" name="curlocal"  value="LXQ_NMXWHZ" />
+								临翔区南美乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJSJNC" type="checkbox" name="curlocal"  value="SJSJNC" />
+								双江农场管委会文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZMNCFWD" type="checkbox" name="curlocal"  value="GMX_MYZMNCFWD" />
+								耿马县勐永镇芒糯村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MBCLJTSG" type="checkbox" name="curlocal"  value="LXQ_MBCLJTSG" />
+								临翔区幕布村旅居流动图书馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_KJSK" type="checkbox" name="curlocal"  value="CYX_KJSK" />
+								沧源县图书馆开架书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZYHCFWD" type="checkbox" name="curlocal"  value="LX_BSZYHCFWD" />
+								临翔区博尚镇永和村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZMSCFWD" type="checkbox" name="curlocal"  value="GMX_MDZMSCFWD" />
+								耿马县孟定镇芒撒村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZNZFWD" type="checkbox" name="curlocal"  value="LX_BSZNZFWD" />
+								临翔区博尚镇那招村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YASQ-FWD" type="checkbox" name="curlocal"  value="YASQ-FWD" />
+								永安社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MHXXLCFWD" type="checkbox" name="curlocal"  value="GMX_MHXXLCFWD" />
+								耿马县芒洪乡新联村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXBNCFWD" type="checkbox" name="curlocal"  value="GMX_HPXBNCFWD" />
+								耿马县贺派乡崩弄村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SLTSS" type="checkbox" name="curlocal"  value="GMX_SLTSS" />
+								耿马县三楼图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXBMCFWD" type="checkbox" name="curlocal"  value="GMX_HPXBMCFWD" />
+								耿马县贺派乡班卖村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MBX-TSS" type="checkbox" name="curlocal"  value="MBX-TSS" />
+								永德县勐板乡图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LX_BSZWZFWD" type="checkbox" name="curlocal"  value="LX_BSZWZFWD" />
+								临翔区博尚镇弯子村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXMKCFWD" type="checkbox" name="curlocal"  value="GMX_HPXMKCFWD" />
+								耿马县贺派乡芒抗村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DFWXW" type="checkbox" name="curlocal"  value="DFWXW" />
+								临沧市馆  地方文献
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_DFWXSK" type="checkbox" name="curlocal"  value="CYX_DFWXSK" />
+								沧源县图书馆地方文献书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXBHCFWD" type="checkbox" name="curlocal"  value="LXQ_QNXBHCFWD" />
+								临翔区圈内乡坝胡村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZBXCFWD" type="checkbox" name="curlocal"  value="GMX_MDZBXCFWD" />
+								耿马县孟定镇班幸村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDSQFWD" type="checkbox" name="curlocal"  value="MDSQFWD" />
+								沧源勐董社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ELSBZ" type="checkbox" name="curlocal"  value="LXQ_ELSBZ" />
+								临翔区二楼上报纸
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_FSZCS" type="checkbox" name="curlocal"  value="FQX_FSZCS" />
+								凤山镇测试库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZWHZ" type="checkbox" name="curlocal"  value="GMX_MYZWHZ" />
+								耿马县勐永镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGDSSQ" type="checkbox" name="curlocal"  value="NSZ_NSZFGDSSQ" />
+								镇康县南伞镇德胜社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LC_YXTSG" type="checkbox" name="curlocal"  value="LC_YXTSG" />
+								云县图书馆外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMKZ1" type="checkbox" name="curlocal"  value="SJMKZ1" />
+								双江亥公村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_SJMKZ2" type="checkbox" name="curlocal"  value="SJMKZ2" />
+								双江忙那村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_PSTS" type="checkbox" name="curlocal"  value="PSTS" />
+								破损下架图书(书库)
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSDPCFWD" type="checkbox" name="curlocal"  value="GMX_SPSDPCFWD" />
+								耿马县四排山东坡村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_ZDXHYCFWD" type="checkbox" name="curlocal"  value="LXQ_ZDXHYCFWD" />
+								临翔区章驮乡户远村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_YX_XJXSK" type="checkbox" name="curlocal"  value="YX_XJXSK" />
+								云县晓街乡书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WWHZYK" type="checkbox" name="curlocal"  value="WWHZYK" />
+								临沧市馆  佤文化资源库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDQHSQFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDQHSQFWD" />
+								临翔区忙畔街道青华社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX_SRSK" type="checkbox" name="curlocal"  value="CYX_SRSK" />
+								沧源县图书馆少儿书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MPJDMLSQFWD" type="checkbox" name="curlocal"  value="LXQ_MPJDMLSQFWD" />
+								临翔区忙畔街道忙令社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_XSZFG" type="checkbox" name="curlocal"  value="FQ_XSZFG" />
+								凤庆县雪山镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_FSZASC" type="checkbox" name="curlocal"  value="FQX_FSZASC" />
+								凤庆安石村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGBYC" type="checkbox" name="curlocal"  value="NSZ_NSZFGBYC" />
+								镇康县南伞镇白岩村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFGZWC" type="checkbox" name="curlocal"  value="MDX_MDXFGZWC" />
+								镇康县勐堆乡竹瓦村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZLYCFWD" type="checkbox" name="curlocal"  value="GMX_MSZLYCFWD" />
+								耿马县勐撒镇琅琊村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZSHYCFWD" type="checkbox" name="curlocal"  value="GMX_GMZSHYCFWD" />
+								耿马县耿马镇石灰窑村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXMGCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXMGCFWD" />
+								临翔区邦东乡曼岗村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXGJZFWD" type="checkbox" name="curlocal"  value="GMX_DXXGJZFWD" />
+								耿马县大兴乡龚家寨服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDJFSQ" type="checkbox" name="curlocal"  value="LXQ_FXJDJFSQ" />
+								临翔区凤翔街道锦凤社区
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGSGLC" type="checkbox" name="curlocal"  value="MPZ_MPZFGSGLC" />
+								镇康县勐捧镇酸格林村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_SPSLZCFWD" type="checkbox" name="curlocal"  value="GMX_SPSLZCFWD" />
+								耿马县四排山老寨村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_ZKX_YLSK" type="checkbox" name="curlocal"  value="ZKX_YLSK" />
+								镇康县图书馆一楼书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFG" type="checkbox" name="curlocal"  value="MPZ_MPZFG" />
+								镇康县图书馆勐捧镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BDXBBCFWD" type="checkbox" name="curlocal"  value="LXQ_BDXBBCFWD" />
+								临翔区邦东乡邦包村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXZNCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXZNCFWD" />
+								临翔区蚂蚁堆乡遮奈村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXTYFWD" type="checkbox" name="curlocal"  value="LXQ_QNXTYFWD" />
+								临翔区圈内乡炭窑村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_HPXSPCFWD" type="checkbox" name="curlocal"  value="GMX_HPXSPCFWD" />
+								耿马县贺派乡水平村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_BSZWYCFWD" type="checkbox" name="curlocal"  value="LXQ_BSZWYCFWD" />
+								临翔区博尚镇碗窑村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDZPSQFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDZPSQFWD" />
+								临翔区凤翔街道中平社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-MSNCWHZ" type="checkbox" name="curlocal"  value="CYX-MSNCWHZ" />
+								沧源佤族自治县勐省农场文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQX_XCSY" type="checkbox" name="curlocal"  value="FQX_XCSY" />
+								凤庆乡愁书院网点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_JSX_JSXFG" type="checkbox" name="curlocal"  value="JSX_JSXFG" />
+								镇康县图书馆军赛乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MDX_MDXFG" type="checkbox" name="curlocal"  value="MDX_MDXFG" />
+								镇康县图书馆勐堆乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_SLXFG" type="checkbox" name="curlocal"  value="FQ_SLXFG" />
+								凤庆县诗礼乡分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_DXXDHKCFWD" type="checkbox" name="curlocal"  value="GMX_DXXDHKCFWD" />
+								耿马县大兴乡大户肯村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGTBC" type="checkbox" name="curlocal"  value="NSZ_NSZFGTBC" />
+								镇康县南伞镇田坝村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MSZCZCFWD" type="checkbox" name="curlocal"  value="GMX_MSZCZCFWD" />
+								耿马县勐撒镇城子村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_ELTSS" type="checkbox" name="curlocal"  value="GMX_ELTSS" />
+								耿马县二楼图书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_MPZ_MPZFGBBZC" type="checkbox" name="curlocal"  value="MPZ_MPZFGBBZC" />
+								镇康县勐捧镇包包寨村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYX-YSZWHZ" type="checkbox" name="curlocal"  value="CYX-YSZWHZ" />
+								沧源佤族自治县岩帅镇文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_MYDXBGCFWD" type="checkbox" name="curlocal"  value="LXQ_MYDXBGCFWD" />
+								临翔区蚂蚁堆乡邦谷村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_FXJDXCCFWD" type="checkbox" name="curlocal"  value="LXQ_FXJDXCCFWD" />
+								临翔区凤翔街道新村村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_QNXXMFWD" type="checkbox" name="curlocal"  value="LXQ_QNXXMFWD" />
+								临翔区圈内乡昔木村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_CYC-FWD10" type="checkbox" name="curlocal"  value="CYC-FWD10" />
+								永康镇朝阳村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_TMFG" type="checkbox" name="curlocal"  value="GMX_TMFG" />
+								耿马自治县图书馆甜蜜分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_NSZ_NSZFGHYC" type="checkbox" name="curlocal"  value="NSZ_NSZFGHYC" />
+								镇康县南伞镇红岩村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MYZXZLCFWD" type="checkbox" name="curlocal"  value="GMX_MYZXZLCFWD" />
+								耿马县勐永镇香竹林村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_SLSQK" type="checkbox" name="curlocal"  value="LXQ_SLSQK" />
+								临翔区三楼上期刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZNECFWD" type="checkbox" name="curlocal"  value="GMX_MDZNECFWD" />
+								耿马县孟定镇糯峨村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_GMZNMNCFWD" type="checkbox" name="curlocal"  value="GMX_GMZNMNCFWD" />
+								耿马县耿马镇南木弄村服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_FQ_YJXFG" type="checkbox" name="curlocal"  value="FQ_YJXFG" />
+								凤庆县腰街乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_YLCJRYLS" type="checkbox" name="curlocal"  value="LXQ_YLCJRYLS" />
+								临翔区一楼残疾人阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MJXWHZ" type="checkbox" name="curlocal"  value="GMX_MJXWHZ" />
+								耿马县勐简乡文化站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GMX_MDZXBCFWD" type="checkbox" name="curlocal"  value="GMX_MDZXBCFWD" />
+								耿马县孟定镇下坝村服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_LXQ_YLWJSTS" type="checkbox" name="curlocal"  value="LXQ_YLWJSTS" />
+								临翔区一楼外借室图书
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+			</table>
+		</div> 
+		
+			
+			
+				<div id="searchTips" class="tips" style="padding:5px;width:650px;">
+<!-- 				<h3 id="searchTitle"></h3> -->
+<!-- 				<ol></ol> -->
+					<h3 id="searchTitle">书目查询提示</h3><ol><li>读者可以在此查询本馆的图书、期刊、古籍、多媒体等信息。检索 方式可以多个条件组配，并可实现区域图书馆群各分馆的书目联合检索。</li><li>字符中有<b>空格</b>系统自动分词，如需要检索包含空格的字符串，请前后加上<b>双引号</b>（半角），如： “Elements of Information Theory”。</li><li>点“详细信息”后若无馆藏信息时为已订购还未到馆的图书。</li></ol>
+				</div>
+			
+		
+		
+		
+		
+	</form>
+	</div>
+	
+		
+</div>
+
+<style>
+	.funcSpan{
+		display: inline-block;margin:0px 10px;width:13%;height:100px;
+		border:1px solid rgb(229,229,229);
+		text-align: center;vertical-align: middle;line-height: 100px;
+	}
+	.funDiv{
+		margin:0px auto;padding:50px 0px;width:80%;
+	}
+	.funDiv a:hover{
+		color:red;
+	}
+	.swiper-wrapper {
+		margin-left: -530px;
+	}
+	.boxdiv{
+		clear: both;margin: 5px auto;padding-top:5px ;padding-bottom:10px;width: 98%;
+	} 
+	.boxdiv_title{
+		font-size: 25px;color:rgb(17,17,17) ;margin-left: 10px;
+	}
+	.boxTable{
+		margin: 10px 0px 30px 20px;
+	}
+	.boxContent{
+		width: 175px; display: block; margin-right: 20px;float:left;
+	}
+	a.aHover:hover{
+		text-decoration: underline;color: rgb(196,85,0);
+	}
+	.swiper-container {
+        width: 85%;
+        height: 220px;
+        margin: 20px auto;
+    }
+    .swiper-slide {
+    	height: 200px;
+        text-align: right;
+        font-size: 14px;
+        width: 170px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+</style>
+
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_footer">
+	<div class="page_footer_bd">
+		
+		<span>© 2005－2014 www.interlib.com.cn, all rights reserved</span>
+		
+		<span class="fcenter"></span>
+		<span class="fright">
+		
+		
+		
+		<a href="#">隐私声明</a>
+		
+		</span>
+	</div>
+	
+</div>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+	</body>
+</html>

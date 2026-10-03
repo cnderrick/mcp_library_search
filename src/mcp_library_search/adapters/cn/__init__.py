@@ -11,7 +11,10 @@ from . import changchun
 from . import chaozhou
 from . import chengdu
 from . import chongqing
+from . import chuxiong
 from . import dalian
+from . import dehong
+from . import deqing
 from . import dezhou
 from . import eerduosi
 from . import fujian_prov
@@ -23,7 +26,9 @@ from . import hefei
 from . import heilongjiang
 from . import henan_prov
 from . import heyuan
+from . import honghe
 from . import huaian
+from . import huangshi
 from . import huhehaote
 from . import hunan_prov
 from . import jiangmen
@@ -34,11 +39,16 @@ from . import jinhua
 from . import laibin
 from . import lanzhou
 from . import lijiang
+from . import lincang
 from . import lishui
 from . import nanjing
 from . import ningbo
+from . import nujiang
+from . import qiandongnan
+from . import qiannan
 from . import qingdao
 from . import quanzhou
+from . import qujing
 from . import shaanxi
 from . import shanghai
 from . import shaoxing
@@ -54,6 +64,7 @@ from . import wuxi
 from . import xian
 from . import xianyang
 from . import xiaogan
+from . import xishuangbanna
 from . import xuzhou
 from . import yancheng
 from . import yangjiang
@@ -63,6 +74,7 @@ from . import zhoukou
 from . import zhoushan
 from . import zhuzhou
 from . import zibo
+from . import zunyi
 
 NAME = "中国"
 
@@ -74,7 +86,10 @@ ADAPTERS = {
     "chaozhou": chaozhou,
     "chengdu": chengdu,
     "chongqing": chongqing,
+    "chuxiong": chuxiong,
     "dalian": dalian,
+    "dehong": dehong,
+    "deqing": deqing,
     "dezhou": dezhou,
     "eerduosi": eerduosi,
     "fujian_prov": fujian_prov,
@@ -86,7 +101,9 @@ ADAPTERS = {
     "heilongjiang": heilongjiang,
     "henan_prov": henan_prov,
     "heyuan": heyuan,
+    "honghe": honghe,
     "huaian": huaian,
+    "huangshi": huangshi,
     "huhehaote": huhehaote,
     "hunan_prov": hunan_prov,
     "jiangmen": jiangmen,
@@ -97,11 +114,16 @@ ADAPTERS = {
     "laibin": laibin,
     "lanzhou": lanzhou,
     "lijiang": lijiang,
+    "lincang": lincang,
     "lishui": lishui,
     "nanjing": nanjing,
     "ningbo": ningbo,
+    "nujiang": nujiang,
+    "qiandongnan": qiandongnan,
+    "qiannan": qiannan,
     "qingdao": qingdao,
     "quanzhou": quanzhou,
+    "qujing": qujing,
     "shaanxi": shaanxi,
     "shanghai": shanghai,
     "shaoxing": shaoxing,
@@ -117,6 +139,7 @@ ADAPTERS = {
     "xian": xian,
     "xianyang": xianyang,
     "xiaogan": xiaogan,
+    "xishuangbanna": xishuangbanna,
     "xuzhou": xuzhou,
     "yancheng": yancheng,
     "yangjiang": yangjiang,
@@ -126,4 +149,5 @@ ADAPTERS = {
     "zhoushan": zhoushan,
     "zhuzhou": zhuzhou,
     "zibo": zibo,
+    "zunyi": zunyi,
 }

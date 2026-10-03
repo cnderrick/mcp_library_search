@@ -67,6 +67,18 @@ MCP server：查询城市图书馆的馆藏与可借状态——回答"这本书
 | 鄂尔多斯 | `eerduosi` | ✅ 已接入 | 鄂尔多斯市图书馆（图创 tcc-opac） |
 | 丽江 | `lijiang` | ✅ 已接入 | 丽江市图书馆全市联合目录（图创 Interlib，含古城区/玉龙/宁蒗/华坪等分馆） |
 | 来宾 | `laibin` | ✅ 已接入 | 来宾市图书馆全市联合目录（图创 Interlib，含各镇/县分馆） |
+| 黄石 | `huangshi` | ✅ 已接入 | 黄石市图书馆（图创 Interlib） |
+| 遵义 | `zunyi` | ✅ 已接入 | 遵义市图书馆（图创 Interlib） |
+| 黔东南 | `qiandongnan` | ✅ 已接入 | 黔东南州图书馆（图创 Interlib，含乡镇分馆与城市书房） |
+| 黔南 | `qiannan` | ✅ 已接入 | 黔南州图书馆（图创 Interlib） |
+| 曲靖 | `qujing` | ✅ 已接入 | 曲靖市图书馆（图创 Interlib） |
+| 临沧 | `lincang` | ✅ 已接入 | 临沧市图书馆（图创 Interlib，含区县馆与乡镇分馆） |
+| 楚雄 | `chuxiong` | ✅ 已接入 | 楚雄州图书馆（图创 Interlib） |
+| 红河 | `honghe` | ✅ 已接入 | 红河州图书馆（图创 Interlib） |
+| 德宏 | `dehong` | ✅ 已接入 | 德宏州图书馆（图创 Interlib） |
+| 怒江 | `nujiang` | ✅ 已接入 | 怒江州图书馆（图创 Interlib） |
+| 德清 | `deqing` | ✅ 已接入 | 德清县图书馆（图创 Interlib，检索走内嵌 Solr） |
+| 西双版纳 | `xishuangbanna` | ✅ 已接入 | 西双版纳州图书馆（图创 Interlib，检索走内嵌 Solr） |
 | 更多城市 | — | 欢迎提需求或贡献适配器 | 北京等因站点侧限制暂未接入，详见 docs/data-sources/README.md |
 
 ## 安装

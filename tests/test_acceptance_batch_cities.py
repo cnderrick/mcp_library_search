@@ -25,21 +25,25 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋陕西批量：西安/咸阳/宝鸡/安康（Interlib，新增 ctx/api_detail quirk）、
 #   汉中（LibStar 家族新增配置）、陕西省图书馆/榆林（抽出新版 UILAS REST 家族）
 # ＋来宾（2026-10-03 立项城市落地，图创 Interlib 默认模板＋api_detail）
+# ＋第三批 12 城（2026-10-03 立项城市落地，均图创 Interlib＋api_detail；德清/
+#   西双版纳 HTML 检索页被拦改走内嵌 Solr）
 _EXPECTED = [
     "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
-    "chongqing", "dalian", "dezhou", "eerduosi", "fujian_prov", "guangzhou",
-    "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
-    "heyuan", "huaian", "huhehaote", "hunan_prov", "jiangmen", "jiangyin",
-    "jinan", "jingmen", "jinhua", "laibin", "lanzhou", "lijiang", "lishui", "nanjing",
-    "ningbo", "qingdao", "quanzhou", "shaanxi", "shanghai", "shaoxing",
-    "shenzhen", "suzhou", "taizhou", "tangshan", "tianjin", "tongliao",
-    "wenzhou", "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xuzhou",
-    "yancheng", "yangjiang", "yangzhou", "yulin", "zhoukou", "zhoushan",
-    "zhuzhou", "zibo",
+    "chongqing", "chuxiong", "dalian", "dehong", "deqing", "dezhou",
+    "eerduosi", "fujian_prov", "guangzhou", "haikou", "hangzhou",
+    "hanzhong", "hefei", "heilongjiang", "henan_prov", "heyuan", "honghe",
+    "huaian", "huangshi", "huhehaote", "hunan_prov", "jiangmen", "jiangyin", "jinan",
+    "jingmen", "jinhua", "laibin", "lanzhou", "lijiang", "lincang", "lishui",
+    "nanjing", "ningbo", "nujiang", "qiandongnan", "qiannan", "qingdao",
+    "quanzhou", "qujing", "shaanxi", "shanghai", "shaoxing", "shenzhen",
+    "suzhou", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
+    "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xishuangbanna",
+    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zhoukou",
+    "zhoushan", "zhuzhou", "zibo", "zunyi",
 ]
 
 
-def test_registry_has_exactly_fifty_nine_identifiers():
+def test_registry_has_exactly_seventy_one_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED
