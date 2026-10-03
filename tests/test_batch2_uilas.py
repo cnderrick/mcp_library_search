@@ -14,6 +14,7 @@ FIXTURES = Path(__file__).parent / "fixtures"
 REST_CASES = [
     ("lanzhou", 521, "483939", "三体 ：死神永生", "978-7-229-03093-3"),
     ("jiangmen", 367, "9560678", "三体", "978-7-5366-9293-0"),
+    ("zaozhuang", 7, "900060939", "三体：图像小说", "978-7-5753-0280-7"),
 ]
 
 
@@ -56,7 +57,7 @@ def test_henan_prov_uilas_html():
 
 
 def test_adapter_configs():
-    from mcp_library_search.adapters.cn import henan_prov, jiangmen, lanzhou
+    from mcp_library_search.adapters.cn import henan_prov, jiangmen, lanzhou, zaozhuang
     from mcp_library_search.uilas import UilasConfig
     from mcp_library_search.uilas_rest import UilasRestConfig
     assert lanzhou._CONFIG == UilasRestConfig(
@@ -65,6 +66,9 @@ def test_adapter_configs():
     assert jiangmen._CONFIG == UilasRestConfig(
         city="jiangmen", name_cn="江门市图书馆",
         base_url="http://125.93.12.202:9188", referer="http://125.93.12.202:9188/")
+    assert zaozhuang._CONFIG == UilasRestConfig(
+        city="zaozhuang", name_cn="枣庄市图书馆",
+        base_url="http://60.214.100.211:8082", referer="http://60.214.100.211:8082/")
     assert henan_prov._CONFIG == UilasConfig(
         city="henan_prov", name_cn="河南省图书馆",
         base_url="http://218.28.6.78:8081/ILASOPAC")

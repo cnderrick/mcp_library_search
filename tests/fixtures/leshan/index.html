@@ -1,0 +1,392 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<title>四川省图书馆书目检索系统</title>
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/reset_pc.css;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/public.css;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/index.css;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/css" media="all">
+	
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/theme/;jsessionid=6A050AB091B07123E792E87A6AC2DC4BthemeTwo.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/css/theme/;jsessionid=6A050AB091B07123E792E87A6AC2DC4BthemeTwo.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/opac/media/pro2018/simple/css/popCon.css;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/css" media="all">
+	<!-- jQuery UI 依赖 -->
+	<script>$.uiBackCompat = true;</script> <!-- 关键：启用旧版API兼容 -->
+	<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery/jquery-ui-1.14.1.css;jsessionid=6A050AB091B07123E792E87A6AC2DC4B">
+	<script type="text/javascript" src="/opac/media/js/jquery/jquery-ui-1.14.1.min.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B"></script>
+</head>
+<style>
+.scSearch{
+	background: rgb(240,248,252);
+}
+.scVertLine{
+	margin-left: 20px;
+	margin-top: 18px;
+	height: 40px;
+	background: rgba(255,255,255,.2);
+	width: 1px;
+}
+.hSearchBtn {
+	color: #0074dc;
+	background: none;
+	padding: 0;
+	margin-left: 25px;
+}
+	.homeCss{
+		width: 1010px;
+		display: flex;
+		justify-content: center;
+	}
+	.hdScondMenu2{
+		width: 210px;
+		top: 78px;
+		margin-left: -105px;
+	}
+	.navInLink{
+		color:white;
+	}
+	.navInLi a:hover { color: #0C0C0C; }
+	.sctopLog{
+		width: 240px;
+		margin-top: 20px;
+	}
+	.scBottom {
+		position: absolute;
+		left: 38%;
+		top: 710px;
+	}
+	.footer {
+		flex-direction: row;
+		display: flex;
+		color: #727272;
+		width: 350px;
+	}
+.navArea{
+	border-bottom: unset;
+}
+.footer div{
+	flex: 1;
+}
+.scButton{
+	padding: 16px 30px;
+	background: rgb(16, 130, 200);
+	border: 1px solid rgb(16, 130, 200);
+	color: white;
+	font-size: 16px;
+	margin-left: 10px;
+}
+.shop_screen{
+	margin-left: 90px;
+}
+.layui-regionContent ul li:nth-child(2){
+	float: inherit;
+	width: 120px;
+}
+</style>
+<body class="bgWhite" style="background: rgb(240,248,252);">
+
+<div style="background: rgb(16, 130, 200);" class="headerArea  bHeadArea thBHeadArea">
+	<div class="navArea">
+		<!--四川顶部行-->
+		<div class="wrap homeCss" style="width: 100%;margin: 0px;">
+				<div class="gfLogoArea disInlineBk" style="margin-left: 10px; background: transparent;">
+					
+						
+						
+							<img  src='/opac/faq/getImage/1;jsessionid=6A050AB091B07123E792E87A6AC2DC4B' alt="scLogo">
+						
+					
+
+					
+				</div>
+			<div class="disInlineBk" style="margin-left: 690px;">
+				<ul class="navInUl">
+						<li class="navInLi">
+							<a href="/opac/index;jsessionid=6A050AB091B07123E792E87A6AC2DC4B?type=simple" class="navInLink">首页</a>
+						</li>
+							<li class="navInLi">
+								<a href="/opac/recommend/custom;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" class="navInLink">荐购图书</a>
+							</li>
+							<li class="navInLi">
+								<a href="/opac/reader/space;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" class="navInLink">个人图书馆</a>
+							</li>
+							<li class="navInLi">
+								<ul class="hdScondMenu">
+									<li class="hdScondLi">
+										<a href="/opac/hotsearch;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" class="hdScondLink">热门检索词</a>
+									</li>
+								</ul>
+							</li>
+				</ul>
+			</div>
+			<div class="scVertLine headIcon mobileHide"></div>
+			<div class="navRt">
+
+					<i class="headLine"></i>
+					<div class="peropArea disInlineBk">
+						<div class="perIconArea loginBtn" style="color:#fff;">
+							<i class="disInlineBk loginIcon"></i>
+							<span>
+							
+								
+									登录
+								
+								
+							
+						</span>
+						</div>
+							<div class="perOpCon">
+								<i class="upSan"></i>
+								<ul class="perOpUl" style="width: 135px">
+									<li style="display: none">
+										<a href="javascript:void(0);" class="mesOpnBtn">
+											<i class="perOpIcon perMes"></i>
+											<span>消息</span>
+											<span class="perMesNum">10</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opac/privateCollection/privateCollectionList;jsessionid=6A050AB091B07123E792E87A6AC2DC4B">
+											<i class="perOpIcon perLike"></i>
+											<span>收藏</span>
+										</a>
+									</li>
+									<li>
+										<a href="/opac/reader/logout;jsessionid=6A050AB091B07123E792E87A6AC2DC4B">
+											<i class="perOpIcon perOut"></i>
+											<span>退出</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+					</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="searchOut overHide scSearch">
+	<form name="searchForm" id="searchForm" action="search" method="get">
+		<div class="wrap">
+			<div class="searchCon"
+				 style="margin-top: 60px;width: 85%;margin-left:170px;">
+				<div class="searchTabBd">
+					<div class="disInlineBk searchLeft" style="width: 60%;">
+						<div class="searchType disInlineBk">
+							<div class="choseType">
+								<span class="choseFont doubChoseFont">题名</span>
+								<i class="searDown"></i>
+							</div>
+							<ul class="searchTypeUl">
+								<li><a href="javascript:changeSearchWay('');">
+											任意词
+								</a></li>
+								<li class="sTypeCur"><a href="javascript:changeSearchWay('title');">题名</a></li>
+								<li><a href="javascript:changeSearchWay('title200a');">正题名</a></li>
+								<li><a href="javascript:changeSearchWay('isbn');">ISBN/ISSN</a></li>
+								<li><a href="javascript:changeSearchWay('author');">著者</a></li>
+								<li><a href="javascript:changeSearchWay('subject');">主题词</a></li>
+								<li><a href="javascript:changeSearchWay('class');">分类号</a></li>
+								<li><a href="javascript:changeSearchWay('orderno');">订购号</a></li>
+								<li><a href="javascript:changeSearchWay('publisher');">出版社</a></li>
+								<li><a href="javascript:changeSearchWay('callno');">索书号</a></li>
+							</ul>
+						</div>
+						<div class="disInlineBk overHide searchIn">
+							<i class="disInlineBk searchIcon"></i>
+							<div class="disInlineBk searchInp">
+								<input type="text" id="q" name="q" class="searchInpIn"
+									   onkeypress="if(event.keyCode==13){searchIndexBtn.click();return false;}"
+										
+											
+												placeholder="输入图书检索关键字"
+											
+											
+										
+								/>
+								<input type="hidden" name="searchWay" id="searchWay" value="title" />
+								<input type="hidden" name="searchSource" value="reader" />
+								<input type="hidden" id="view" name="view" value="" />
+								<input type="hidden" id="scWay" name="scWay" value="dim" />
+								<input type="hidden" id="federatedResource" name="resource" value="全部资源" />
+							</div>
+						</div>
+
+					</div>
+					<div class="disInlineBk searchRight">
+								<a href="javascript:search('')" class="disInlineBk searchBtn" style="background: rgb(16, 130, 200);"><span style="color:white;">本馆检索</span></a>
+						<button class="scButton" type="button" onclick="search('search_result_iframe')">跨馆检索</button>
+					</div>
+				</div>
+				
+					<div class="hotWordArea">
+						热门词：
+						
+							
+							<a href="javascript:searchByHotKeyword('我的第二大脑')">
+									我的第二大脑
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('万历十五年')">
+									万历十五年
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('978-7-111-56817-9')">
+									978-7-111-56817-9
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('夜幕之下')">
+									夜幕之下
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('我不是戏神')">
+									我不是戏神
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('一流大学图书馆治理能力现代化的探索与实践')">
+									一流大学图书馆治理能力现代化的探索与实践
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('我与地坛')">
+									我与地坛
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('十日终焉')">
+									十日终焉
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('龙族')">
+									龙族
+							</a>
+						
+							
+							<a href="javascript:searchByHotKeyword('惊封')">
+									惊封
+							</a>
+						
+					</div>
+				
+			</div>
+
+			<div class="scLibImg"></div>
+
+		</div>
+	</form>
+</div>
+		<div class="scBottom">
+			<div class="footer">
+				<div>版权所有：四川省图书馆</div>
+				<div><a style="color:#727272;" href="https://beian.miit.gov.cn/">蜀ICP备12007587号</a></div>
+			</div>
+		</div>
+</div>
+
+<!-- 登录弹出框 -->
+<div class="loginPopArea">
+	<div class="popMask" style="z-index:2;"></div>
+	<div class="popIn loginPopIn" >
+		<a href="javascript:void(0)" class="popDel"></a>
+		<input type="hidden" id="reader" name="reader" value=""/>
+		<input type="hidden" id="data" name="data" />
+		<input type="hidden" id="toPageUrl" name="toPageUrl" />
+		<div id="loginDialog" class="loginPInCon" style="height: 337px;" title="登录我的图书馆" align="center" valign="top">
+			<iframe id="loginFrame" name="loginFrame" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
+		</div>
+	</div>
+</div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/jquery-3.7.1.min.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/javascript" ></script>
+<script src="/opac/media/js/jquery/jquery-migrate-3.5.0.min.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/javascript" ></script>
+<script src="/opac/media/pro2018/simple/js/placeholderfriend.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/javascript" charset="utf-8"></script>
+<script src="/opac/media/pro2018/simple/js/index.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/opac/media/js/common/banned.js;jsessionid=6A050AB091B07123E792E87A6AC2DC4B"></script>
+<script>
+	$(document).ready(function(){
+		//检查是否登录
+		
+		$(".loginBtn").bind("click",function(){
+			$("#loginFrame").attr("src",'/opac/reader/login;jsessionid=6A050AB091B07123E792E87A6AC2DC4B?loginFlag=dialog');
+		});
+		$(".loginBtn").click(function(){
+			$(".loginPopArea").show();
+			$('html,body').addClass('overHide');
+		});
+		$(".popDel").bind("click",function(){
+			$('#rdPasswd').val("");
+			$("#loginmsg").html("");
+			$(".loginPopArea").hide();
+			$('html,body').removeClass('overHide');
+		});
+		
+		
+		
+			
+			
+		
+
+		
+	});
+
+	function changeSearchWay(op){
+		$("#searchWay").val(op);
+	}
+	function searchByHotKeyword(hotSearchKeyword) {
+		$("#q").val(hotSearchKeyword);
+		$('#allLib').val('');
+		$("#searchForm").submit();
+	}
+
+	function search(view) {
+		if(view=="search_result_iframe"){
+			alert("系统建设中");
+		}else{
+			$("#view").val(view);
+			var qword = $("#q").val();
+			if(qword!=""&&bannedHashSet.contains(qword)){
+				alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+				return;
+			}
+			$('#allLib').val('');
+			$("#searchForm").submit();
+		}
+	}
+	//高级搜索
+	function gotoAdvancedSearch() {
+		document.location.href = '/opac/index/advance;jsessionid=6A050AB091B07123E792E87A6AC2DC4B';
+	}
+</script>
+</body>
+</html>

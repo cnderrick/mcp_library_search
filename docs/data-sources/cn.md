@@ -99,7 +99,7 @@
 |  | 济南 | — | ⛔ 不通 | http://www.sdlib.com （山东省图书馆） | — | — |
 |  |  | `jinan` | ✅ 接入 | https://www.jnlib.net.cn:8087/999 （济南市图书馆） | 图创 tcc-opac（与宁波同款，见 tcc-opac 家族章） | `tccopac/` 家族 + `adapters/cn/jinan.py`；实抓「三体」96 条 |
 |  | 淄博 | `zibo` | ✅ 接入 | http://zblib.org.cn:458/opac/index （淄博市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/zibo.py`；实抓「三体」61 条 |
-|  | 枣庄 | — | 📋 计划 | http://60.214.100.211:8082/#/index （枣庄市图书馆） | 新版 UILAS（ILAS REST 平台，页标题「UILAS知识检索平台」） | 2026-10-03 用户提供；同 `uilas_rest/` 家族（兰州/榆林/陕西省图），可立项接入 |
+|  | 枣庄 | `zaozhuang` | ✅ 接入 | http://60.214.100.211:8082/#/index （枣庄市图书馆） | 新版 UILAS（ILAS REST 平台，页标题「UILAS知识检索平台」） | `uilas_rest/` 家族 + `adapters/cn/zaozhuang.py`；实抓「三体」7 条 |
 |  | 东营 | — | ⛔ 不通 | http://www.dylib.net （东营市图书馆） | — | — |
 |  | 烟台 | — | ⛔ 不通 | http://www.ytlib.net （烟台市图书馆） | — | — |
 |  | 潍坊 | — | ⛔ 不通 | http://www.wflib.net （潍坊市图书馆） | — | — |
@@ -121,7 +121,7 @@
 |  | 广元 | — | 🔍 待核验 | http://www.gyslib.org.cn （广元市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 首页标题「广元市图书馆」；OPAC 未侦察 |
 |  | 遂宁 | — | ❓ 缺失 | — | — | — |
 |  | 内江 | — | ⛔ 不通 | http://www.scnjlib.cn （内江市图书馆） | — | 2026-10-03 用户实测入口可达但需登录，无可匿名检索的书目 OPAC；本机探测 HTTP 空响应（DNS→61.188.216.37，非 198.20 停放段） |
-|  | 乐山 | — | 🚧 攻关 | http://opac.sclib.cn:8088/opac/search?q=&f_curlibcode=LS （四川省图书馆联合目录，按 `f_curlibcode=LS` 过滤乐山） | 系统待定（页标题「四川省图书馆书目检索系统」，非 Interlib、无 `/opac/api/search`） | 2026-10-03 用户提供：借四川省图 OPAC 过滤乐山馆。实测 `/opac/index` 200，但 `/opac/search`（任意参数）触发「opac验证」页、程序化被拦；需破解验证后可用 |
+|  | 乐山 | `leshan` | ⚠️ 部分接入 | http://opac.sclib.cn:8088/opac/index （四川省图书馆联合目录，按 `f_curlibcode=LS` 过滤乐山馆） | 图创 Interlib **pro2018**（页标题「四川省图书馆书目检索系统」，媒体路径 `/opac/media/pro2018/`） | `interlib/` 家族 + `adapters/cn/leshan.py`（`pro2018=True`＋`api_detail=True`＋`f_curlibcode="LS"`＋`captcha=True`）。实测 `/opac/search` 恒返「opac验证」滑动验证码页、无内嵌 Solr（`/opac/api/search` 404）；按天津 ALEPH 口径**不破解**验证码，家族 `client.check_captcha` 命中即抛 `CaptchaError`（带人工过码指引）。详情/馆藏 `/opac/api/book|holding` 匿名可通（实抓 recno 3681673、馆藏 3 条） |
 |  | 南充 | — | ⛔ 不通 | http://www.ncstsg.cn （外源候选，域名不存在） | — | 2026-10-03 DNS 无解析（NXDOMAIN），非馆方站点 |
 |  | 眉山 | — | 🔍 待核验 | http://www.mslib.cn （眉山市图书馆） | 超星系（站内有 cxstar／sslibrary） | 2026-10-03 首页标题「眉山市图书馆」；:9001/msss 不可达、bookCity.html 404，OPAC 待侦 |
 |  | 宜宾 | — | 🔍 待核验 | http://ybslib.cn （宜宾市图书馆） | 自研 Nuxt（待侦） | 2026-10-03 首页标题「宜宾市图书馆」；OPAC 未侦察 |
@@ -159,7 +159,7 @@
 |  | 衡水 | — | ⛔ 不通 | http://www.hslib.net （衡水市图书馆） | — | — |
 |  | 邢台 | — | ⛔ 不通 | http://www.xtlib.net （邢台市图书馆） | — | — |
 | 山西省 | 太原 | — | 🔍 待核验 | https://lib.sx.cn （山西省图书馆） | — | — |
-|  |  | — | 📋 计划 | http://opac.tylib.org.cn/opac/index （太原市图书馆） | 图创 Interlib（已确认） | 2026-10-03 用户提供；页标题「检索系统」、页内 interlib／opac/api，可立项接入 |
+|  |  | `taiyuan` | ✅ 接入 | http://opac.tylib.org.cn/opac/index （太原市图书馆） | 图创 Interlib（默认模板；HTML 检索页为「opac验证」滑动验证码，检索改走内嵌 Solr） | `interlib/` 家族 + `adapters/cn/taiyuan.py`（`api_detail=True`＋`solr_search=True`）；实抓「三体」179 条 |
 |  | 大同 | — | ⛔ 不通 | http://www.dtlib.net （大同市图书馆） | — | — |
 |  | 长治 | — | ⛔ 不通 | http://www.czlib.net （长治市图书馆） | — | — |
 |  | 晋城 | — | ⛔ 不通 | http://www.jclib.net （晋城市图书馆） | — | — |
@@ -185,7 +185,7 @@
 |  | 鸡西 | — | ⛔ 不通 | http://www.jxlib.net （鸡西市图书馆） | — | — |
 |  | 鹤岗 | — | ⛔ 不通 | http://www.hglib.net （鹤岗市图书馆） | — | — |
 |  | 双鸭山 | — | ⛔ 不通 | http://www.syslib.net （双鸭山市图书馆） | — | — |
-|  | 大庆 | — | 📋 计划 | http://111.43.226.77:8091/opac/index （大庆市图书馆） | 图创 Interlib（已确认） | 2026-10-03 用户提供；页标题「检索系统」、页内 interlib，可立项接入 |
+|  | 大庆 | `daqing` | ✅ 接入 | http://111.43.226.77:8091/ （大庆市图书馆；应用上下文为根路径，`/opac/*` 全 404） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/daqing.py`（`ctx=""`＋`api_detail=True`）；实抓「三体」29 条 |
 |  | 伊春 | — | ⛔ 不通 | http://www.yclib.net （伊春市图书馆） | — | — |
 |  | 佳木斯 | — | ⛔ 不通 | http://www.jmslib.net （佳木斯市图书馆） | — | — |
 |  | 七台河 | — | ⛔ 不通 | http://www.qthlib.net （七台河市图书馆） | — | — |
@@ -216,7 +216,7 @@
 |  | 上饶 | — | ⛔ 不通 | http://www.srlib.net （上饶市图书馆） | — | — |
 |  | 景德镇 | — | ⛔ 不通 | http://www.jdzstsg.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.20（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 | 河南省 | 郑州 | `henan_prov` | ✅ 接入 | http://218.28.6.78:8081/ILASOPAC/Index?target=0 （河南省图书馆） | UILAS 知识检索平台（老版 HTML OPAC） | `uilas/` 家族 + `adapters/cn/henan_prov.py`；实抓「三体」57 条 |
-|  |  | — | 📋 计划 | http://123.15.53.180:62280/client/zh_CN/default/? （郑州图书馆） | SirsiDynix Enterprise（页内 `com_sirsi_ent_widgets`，本仓库首见新家族，VSE Discovery） | 2026-10-03 用户确认可直接访问；JS 前端发现层，检索/详情接口待按 Enterprise 家族侦察接入 |
+|  |  | — | 📋 计划 | http://123.15.53.180:62280/client/zh_CN/default/? （郑州图书馆；页标题「Home Room」） | SirsiDynix Enterprise/VSE（Tapestry 服务端渲染，`com_sirsi_ent_widgets`；本仓库首见新家族） | 2026-10-03 复测：`/opac/index` 是 404，正确入口为 `/client/zh_CN/default/`；检索 `GET /client/zh_CN/default/search/results?qu=三体` 返回服务端渲染结果页（410KB）。本仓库尚无 Enterprise 家族，检索/详情/馆藏解析与 `_client` 形态需单独侦察，未随本批接入 |
 |  | 开封 | — | ⛔ 不通 | http://www.kflib.net （开封市图书馆） | — | — |
 |  | 洛阳 | — | ⛔ 不通 | http://www.lylib.net （洛阳市图书馆） | — | — |
 |  | 平顶山 | — | ⛔ 不通 | http://www.pdslib.net （平顶山市图书馆） | — | — |
@@ -234,7 +234,7 @@
 |  | 周口 | `zhoukou` | ✅ 接入 | http://222.136.172.30:8079/opac/index （周口市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/zhoukou.py`；实抓「三体」20 条 |
 |  | 驻马店 | — | ⛔ 不通 | http://www.zmdlib.net （驻马店市图书馆） | — | — |
 | 湖北省 | 武汉 | — | 🔍 待核验 | https://www.library.hb.cn （湖北省图书馆） | — | — |
-|  |  | — | 📋 计划 | https://opac.whlib.org.cn/opac/index （武汉图书馆） | 图创 Interlib（已确认） | 2026-10-03 用户提供；页标题「检索系统」、页内 interlib／opac/api，可立项接入 |
+|  |  | `wuhan` | ✅ 接入 | https://opac.whlib.org.cn/opac/index （武汉图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/wuhan.py`（`api_detail=True`）；实抓「三体」263 条 |
 |  | 十堰 | — | ⛔ 不通 | http://www.sylib.net （十堰市图书馆） | — | — |
 |  | 襄阳 | — | ⛔ 不通 | http://www.xylib.net （襄阳市图书馆） | — | — |
 |  | 鄂州 | — | ⛔ 不通 | http://www.ezlib.net （鄂州市图书馆） | — | — |
@@ -264,7 +264,7 @@
 |  | 湘西 | — | ⛔ 不通 | http://www.xxlib.net （湘西州图书馆） | — | — |
 | 海南省 | 海口 | `haikou` | ✅ 接入 | http://221.11.163.25:5656/opac/index （海口市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/haikou.py`；实抓「三体」18 条。海南省图书馆 www.hilib.com 仍不通 |
 |  |  | — | ⛔ 不通 | https://www.ucdrs.cn/area/hilib （海南省图书馆） | 超星 ucdrs 门户 | 2026-10-03 为超星 ucdrs 区域页、需登录，非匿名 OPAC（检索后跳 gdlink 404）；原 www.hilib.com 亦不通 |
-|  |  | — | 📋 计划 | http://221.11.163.25:5656/opac/index （海口图书馆，与已接入的海口市图同一 Interlib 实例 `haikou`） | 图创 Interlib | 2026-10-03 用户提供此 Interlib 入口，与已接入 `haikou` 同 host 同源；如为同一馆可并入（另有官网 www.haikoulib.cn） |
+|  |  | ✅ 接入（并入 `haikou`） | http://221.11.163.25:5656/opac/index （海口图书馆，与已接入的海口市图同一 Interlib 实例 `haikou`） | 图创 Interlib | 2026-10-03 用户提供此 Interlib 入口，实测与已接入 `haikou` 同 host 同源（同一实例，「三体」同为 18 条），无需新适配器，用 `city=haikou` 即可（另有官网 www.haikoulib.cn） |
 |  | 三亚 | — | ⛔ 不通 | http://www.sanyalib.com （外源候选，实测域名停放） | — | 2026-10-03 解析至 198.20.2.21（域名停放段，与同批 .16–.24 连续）、TCP 空响应，非馆方站点 |
 |  | 三沙 | — | ❓ 缺失 | — | — | — |
 |  | 儋州 | — | ❓ 缺失 | — | — | — |
@@ -457,6 +457,22 @@ Solr 后端 `GET /api/search` 开放且不经验证码（与青岛同通道）�
 各城实抓总量与首条见对应 `tests/fixtures/<city>/NOTES.md`。该批暴露的家族问题：
 HTML 检索页命中数 > 0 时「下一页」锚点恒渲染（末页也 `has_next=True`，以
 `total_pages` 为准）；德清 Solr 文档含 null 字段，`parse_solr` 已按空串修复。
+
+**第四批成员（2026-10-03，均 `api_detail=True`）**：太原 `taiyuan`（HTML 检索页是
+「opac验证」，`solr_search=True`）、武汉 `wuhan`（HTML 检索页直连）、大庆 `daqing`
+（**应用上下文是根路径 `ctx=""`**：`/opac/*` 全 404，正确为 `/`＋`/search`＋`/api/*`）、
+乐山 `leshan`（**pro2018** 模板，借四川省图书馆联合目录按 `f_curlibcode="LS"` 过滤；
+检索页为「opac验证」滑动验证码墙且无内嵌 Solr，见下「captcha quirk」）。各城实抓
+总量与首条见对应 `tests/fixtures/<city>/NOTES.md`。新增 quirk 字段：`ctx=""`（大庆）、
+`f_curlibcode`（乐山检索过滤）。
+
+**`captcha` quirk（2026-10-03，乐山）**：检索页是滑动验证码墙（「opac验证」页，
+`slideVerify`＋`/opac/captcha/verification`）时，**按天津 ALEPH 家族同一口径不破解**
+——`InterlibConfig.captcha=True` 令家族 HTTP 层在检索返回后调用
+`client.check_captcha`，命中「opac验证」即抛 `CaptchaError`（带人工过码指引，
+指向 `{base_url}{ctx}/index`），穿透源级容错直达调用方，不静默返回空结果。
+同类型（Interlib 带验证码）站点统一不攻克：能用内嵌 Solr 的走 `solr_search`，
+无 Solr 的（乐山）抛 `CaptchaError`。
 
 新接同族城市：`adapters/cn/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/cn/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 

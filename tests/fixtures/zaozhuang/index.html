@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UILAS知识检索平台</title>
+    <style type="text/css">body, html {
+  width: 100%;
+  height: 100%;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+.thebg {
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.theUA {
+  width: 50%;
+  min-width: 800px;
+  flex-shrink: 0;
+  z-index: 99;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 8%;
+}
+.imgleft {
+  width: 60%;
+  margin-bottom: 8%;
+  text-align: center;
+}
+.imgleft img {
+  width: 90%;
+  vertical-align: middle;
+}
+.theUA .a {
+  color: #0072c6;
+}
+.theUA a:hover {
+  color: #004d8c;
+}
+.theUA .h1 {
+  font-size: 32px;
+  line-height: 80px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.theUA .h2 {
+  font-size: 20px;
+  line-height: 1.5em;
+  font-weight: 100;
+  margin: 10px 0;
+}
+.theUA .p {
+  margin-bottom: 10px;
+  line-height: 1.5em;
+}
+.theUA .hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid rgb(62, 139, 240,0.3);
+}
+.theUA .span {
+  display: block;
+  font-size: 12px;
+  line-height: 12px;
+}
+.theUA .warning {
+  font-size: 16px;
+  color: red;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.theUA .clean {
+  clear: both;
+}
+.theUA .browser {
+  padding: 10px 10px;
+}
+.theUA .browser li {
+  width: 200px;
+  margin-top: 30px;
+  height: 34px;
+  line-height: 22px;
+  float: left;
+  list-style: none;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+.theUA .browser li img {
+  width: 35px;
+  margin-right: 5px;
+}</style>
+    <style>#ieTip {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  display: none;
+  z-index: 99999999;
+}</style>
+    <script>
+      var isIE = navigator.userAgent.indexOf("MSIE") > -1 || navigator.userAgent.indexOf("Trident") > -1;
+      window.onload = function(){
+        if(isIE){
+          document.getElementById('ieTip').style.display = 'block'
+          // window.location.href='./public/ie2.html'
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-7974e9be.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vue-router-48d6f87e.js">
+    <link rel="modulepreload" crossorigin href="/assets/button-ad1304ff.js">
+    <link rel="modulepreload" crossorigin href="/assets/index-721ce598.js">
+    <link rel="modulepreload" crossorigin href="/assets/icon-813ea8a4.js">
+    <link rel="modulepreload" crossorigin href="/assets/vuex.esm-bundler-3f1ee305.js">
+    <link rel="modulepreload" crossorigin href="/assets/result-36e15f2e.js">
+    <link rel="modulepreload" crossorigin href="/assets/index-f95faf90.js">
+    <link rel="modulepreload" crossorigin href="/assets/index-fa9a894d.js">
+    <link rel="modulepreload" crossorigin href="/assets/index-c879af65.js">
+    <link rel="modulepreload" crossorigin href="/assets/index-1a4bdd65.js">
+    <link rel="stylesheet" href="/assets/button-643bfd77.css">
+    <link rel="stylesheet" href="/assets/icon-57a696b1.css">
+    <link rel="stylesheet" href="/assets/result-63cbed02.css">
+    <link rel="stylesheet" href="/assets/index-8004a296.css">
+    <link rel="stylesheet" href="/assets/index-37912574.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="ieTip">
+      <!-- <iframe style="width: 100%;height: 100%;" src="./public/ie.html" frameborder="0"></iframe> -->
+      <div class="thebg">
+        <div class="imgleft"><img class="bgimg" src="./ieIcon.svg" alt=""></div>
+        <div class='theUA'>
+          <h1 class='h1'>请升级您的浏览器，以便我们更好的为您提供服务！</h1>
+          <p class='p'>您正在使用 Internet Explorer 或使用该内核的浏览器。微软官方已于2022年6月5日终止IE浏览器的维护，为了让您获得更好的产品体验，请升级您的浏览器</p>
+          <p class='p'>推荐使用以下浏览器的最新版本。如果您的电脑已有以下浏览器的最新版本则直接使用该浏览器访问即可。</span> </p>
+          <p style="color:red">注：若使用360等双核浏览器打开本网站，请设置浏览器为极速模式。</p>
+          <ul class='browser'>
+            <li class='browser-chrome'><img src="./chrome-logo.svg" alt=""><a class='a' href='https://www.google.cn/chrome/browser/desktop/index.html?hl=zh-CN&standalone=1'>谷歌浏览器<span class='span'>Google Chrome</span></a></li>
+            <li class='browser-firefox'><img src="./firefox-logo.svg" alt=""><a class='a' href='https://www.mozilla.org/zh-CN/firefox/new/'>火狐浏览器<span class='span'>Mozilla Firefox</span></a></li>
+            <li class='browser-Edge'><img src="./edge-logo.png" alt=""><a class='a' href='https://www.microsoft.com/zh-cn/edge/download?form=MA13FJ'>Edge 浏览器<span class='span'>Microsoft Edge</span></a></li>
+            <li class="browser-360"><img src="./360-logo.png" alt=""><a class='a' href="http://se.360.cn/">360安全浏览器<span class='span'>360 Chrome</span></a></li>
+            <div class="clean"></div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>

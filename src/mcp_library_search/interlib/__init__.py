@@ -31,9 +31,11 @@ class InterlibConfig:
     curlibcode: str = ""  # 多租户云托管馆按馆过滤（如 STC001），默认空 = 穗杭不带该参数
     pro2018: bool = False          # 搜索/详情为 pro2018 模板代（台州/成都/绍兴），默认 False = 广州基准
     pro2018_cite_author: bool = False  # pro2018 详情以引文块首句兜底责任者（绍兴实证），默认关
-    ctx: str = "/opac"             # 应用上下文路径（西安 `/opac3`），默认广州基准 `/opac`
+    ctx: str = "/opac"             # 应用上下文路径（西安 `/opac3`、大庆根路径 `""`），默认广州基准 `/opac`
     api_detail: bool = False       # 详情改走 `/api/book/{recno}` JSON（安康详情页 HTML 被源站截断），默认 False = HTML 详情页
     solr_search: bool = False      # 检索改走站点内嵌 Solr `/api/search`（青岛及一批带滑动验证码的站点），默认 False = HTML 检索页
+    f_curlibcode: str = ""         # 检索按 `f_curlibcode` 过滤（乐山借省图联合目录过滤乐山馆），默认空 = 不过滤
+    captcha: bool = False          # 检索页为滑动验证码墙（乐山）：命中「opac验证」抛 CaptchaError，不破解
 
 
 def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> dict:
@@ -64,7 +66,11 @@ def _search_once(cfg: InterlibConfig, keyword: str, page: int, limit: int) -> di
     }
     if cfg.curlibcode:
         params["curlibcode"] = cfg.curlibcode
+    if cfg.f_curlibcode:
+        params["f_curlibcode"] = cfg.f_curlibcode
     html = client.get(cfg, f"{cfg.ctx}/search", params)
+    if cfg.captcha:
+        client.check_captcha(html, cfg)  # 验证码墙：抛 CaptchaError，不静默返回空结果
     parse = parser.parse_search_pro2018 if cfg.pro2018 else parser.parse_search
     return parse(html)
 

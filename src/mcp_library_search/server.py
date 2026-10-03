@@ -18,7 +18,9 @@ lijiang（丽江，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆�
 潮州/黑龙江/长春检索页有滑动验证码改走内嵌 Solr）、兰州（lanzhou）、江门（jiangmen，
 新版 UILAS REST）、河南省图书馆（henan_prov，老版 UILAS）、
 来宾（laibin）。第三批（均图创 Interlib）：黄石、遵义、黔东南州、黔南州、曲靖、
-临沧、楚雄州、红河州、德宏州、怒江州、德清县、西双版纳州（德清/西双版纳检索走内嵌 Solr）。
+临沧、楚雄州、红河州、德宏州、怒江州、德清县、西双版纳州（德清/西双版纳检索走内嵌 Solr）、
+太原（检索走内嵌 Solr）、武汉、大庆（上下文为根路径）、枣庄（新版 UILAS REST）、
+乐山（借四川省图联合目录过滤，检索页为验证码墙、未过码抛 CaptchaError）。
 tool 与具体城市解耦：先用 search_books 按关键字查到 book_id，
 再用它调用 find_book_availability（哪些馆有）或 get_book_detail（完整介绍）。
 """
@@ -86,6 +88,10 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     qujing（曲靖）、lincang（临沧）、chuxiong（楚雄州）、honghe（红河州）、dehong（德宏州）、
     nujiang（怒江州）、deqing（德清县）、xishuangbanna（西双版纳州）（以上图创 Interlib，
     馆藏到单册级；德清/西双版纳检索走内嵌 Solr）、
+    第四批：taiyuan（太原市图书馆，检索走内嵌 Solr）、wuhan（武汉图书馆）、
+    daqing（大庆市图书馆，应用上下文为根路径）、zaozhuang（枣庄市图书馆，新版 UILAS REST）、
+    leshan（乐山市图书馆，借四川省图书馆联合目录按 f_curlibcode=LS 过滤；检索页为
+    滑动验证码墙且无内嵌 Solr，未过码时抛 CaptchaError 不破解，同天津 ALEPH 口径）、
     lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
     jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、

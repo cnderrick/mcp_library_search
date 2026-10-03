@@ -27,23 +27,27 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋来宾（2026-10-03 立项城市落地，图创 Interlib 默认模板＋api_detail）
 # ＋第三批 12 城（2026-10-03 立项城市落地，均图创 Interlib＋api_detail；德清/
 #   西双版纳 HTML 检索页被拦改走内嵌 Solr）
+# ＋第四批 5 城（2026-10-03 立项城市落地）：太原/武汉/大庆（图创 Interlib，
+#   太原走内嵌 Solr、大庆上下文为根路径）、枣庄（新版 UILAS REST）、
+#   乐山（图创 Interlib pro2018，省图联合目录 f_curlibcode=LS，验证码墙抛
+#   CaptchaError 不破解，同天津 ALEPH 口径）
 _EXPECTED = [
     "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
-    "chongqing", "chuxiong", "dalian", "dehong", "deqing", "dezhou",
+    "chongqing", "chuxiong", "dalian", "daqing", "dehong", "deqing", "dezhou",
     "eerduosi", "fujian_prov", "guangzhou", "haikou", "hangzhou",
     "hanzhong", "hefei", "heilongjiang", "henan_prov", "heyuan", "honghe",
     "huaian", "huangshi", "huhehaote", "hunan_prov", "jiangmen", "jiangyin", "jinan",
-    "jingmen", "jinhua", "laibin", "lanzhou", "lijiang", "lincang", "lishui",
+    "jingmen", "jinhua", "laibin", "lanzhou", "leshan", "lijiang", "lincang", "lishui",
     "nanjing", "ningbo", "nujiang", "qiandongnan", "qiannan", "qingdao",
     "quanzhou", "qujing", "shaanxi", "shanghai", "shaoxing", "shenzhen",
-    "suzhou", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
-    "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xishuangbanna",
-    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zhoukou",
+    "suzhou", "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
+    "wuhai", "wuhan", "wuxi", "xian", "xianyang", "xiaogan", "xishuangbanna",
+    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zaozhuang", "zhoukou",
     "zhoushan", "zhuzhou", "zibo", "zunyi",
 ]
 
 
-def test_registry_has_exactly_seventy_one_identifiers():
+def test_registry_has_exactly_seventy_six_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

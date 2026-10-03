@@ -13,6 +13,7 @@ from . import chengdu
 from . import chongqing
 from . import chuxiong
 from . import dalian
+from . import daqing
 from . import dehong
 from . import deqing
 from . import dezhou
@@ -38,6 +39,7 @@ from . import jingmen
 from . import jinhua
 from . import laibin
 from . import lanzhou
+from . import leshan
 from . import lijiang
 from . import lincang
 from . import lishui
@@ -54,12 +56,14 @@ from . import shanghai
 from . import shaoxing
 from . import shenzhen
 from . import suzhou
+from . import taiyuan
 from . import taizhou
 from . import tangshan
 from . import tianjin
 from . import tongliao
 from . import wenzhou
 from . import wuhai
+from . import wuhan
 from . import wuxi
 from . import xian
 from . import xianyang
@@ -70,6 +74,7 @@ from . import yancheng
 from . import yangjiang
 from . import yangzhou
 from . import yulin
+from . import zaozhuang
 from . import zhoukou
 from . import zhoushan
 from . import zhuzhou
@@ -88,6 +93,7 @@ ADAPTERS = {
     "chongqing": chongqing,
     "chuxiong": chuxiong,
     "dalian": dalian,
+    "daqing": daqing,
     "dehong": dehong,
     "deqing": deqing,
     "dezhou": dezhou,
@@ -113,6 +119,7 @@ ADAPTERS = {
     "jinhua": jinhua,
     "laibin": laibin,
     "lanzhou": lanzhou,
+    "leshan": leshan,
     "lijiang": lijiang,
     "lincang": lincang,
     "lishui": lishui,
@@ -129,12 +136,14 @@ ADAPTERS = {
     "shaoxing": shaoxing,
     "shenzhen": shenzhen,
     "suzhou": suzhou,
+    "taiyuan": taiyuan,
     "taizhou": taizhou,
     "tangshan": tangshan,
     "tianjin": tianjin,
     "tongliao": tongliao,
     "wenzhou": wenzhou,
     "wuhai": wuhai,
+    "wuhan": wuhan,
     "wuxi": wuxi,
     "xian": xian,
     "xianyang": xianyang,
@@ -145,6 +154,7 @@ ADAPTERS = {
     "yangjiang": yangjiang,
     "yangzhou": yangzhou,
     "yulin": yulin,
+    "zaozhuang": zaozhuang,
     "zhoukou": zhoukou,
     "zhoushan": zhoushan,
     "zhuzhou": zhuzhou,
