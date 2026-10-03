@@ -33,7 +33,7 @@
 | 重庆市（直辖市） | 重庆 | `chongqing` | ✅ 接入 | — | http://222.177.237.197:8080/InDigLib/frontV2/SearchIndex!simple.action?opacType=local | InDigLib 集群数字图书馆（Struts2+Solr） | `adapters/cn/chongqing.py`（独立实现） |
 | 安徽省 | 合肥 | `hefei` | ✅ 接入 | — | https://opac.ahlib.com/opac/index （安徽省图书馆） | 图创 Interlib（已确认，与穗杭完全同模板） | `interlib/` 家族 + `adapters/cn/hefei.py`（双源合并：皖图 `AH:` ＋ 市图 `HF:`，天津口径） |
 |  |  |  | ✅ 接入 | — | https://opac.hflib.org.cn/lib2/ （合肥市图书馆） | 图创 Interlib（已确认，同模板；应用上下文是 `/lib2` 非 `/opac`，`/opac/*` 返回 nginx 500） |  |
-|  | 芜湖 | — | 📋 计划 | — | https://ilas.whstsg.org.cn:18086/ILASOPAC/ （芜湖市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | 2026-10-03 用户提供入口；旧登记 www.whlib.net 未核实，以实测为准 |
+|  | 芜湖 | `wuhu` | ✅ 接入 | — | https://ilas.whstsg.org.cn:18086/ILASOPAC/ （芜湖市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | `uilas/` 家族 + `adapters/cn/wuhu.py`；HTTPS 默认 TLS 可通（非舟山式静态 RSA 套件）；实抓「三体」143 条 |
 |  | 蚌埠 | — | 📋 计划 | — | http://58.242.164.105:8090/999 （蚌埠市图书馆） | 疑图创 tcc-opac（入口以 `/999` 结尾，同宁波/济南形态，待实抓） | 2026-10-03 用户提供入口；旧登记 www.bblib.net 未核实 |
 |  | 淮南 | — | ⛔ 不通 | — | http://www.hnlib.net （淮南市图书馆） | — | — |
 |  | 马鞍山 | — | ⛔ 不通 | — | https://www.maslib.com.cn/ （马鞍山市图书馆） | — | 2026-10-03 用户实测官网首页全白、看不到内容，无可匿名检索入口；旧登记 www.maslib.net 未核实 |
@@ -44,7 +44,7 @@
 |  | 滁州 | — | ⛔ 不通 | — | https://mfindczslib.libsp.com/#/Home （滁州市图书馆） | 图星 LibStar Find（SPA） | 2026-10-03 用户述不通；旧登记 www.czlib.net 未核实 |
 |  | 阜阳 | — | ⛔ 不通 | — | http://www.fylib.net （阜阳市图书馆） | — | — |
 |  | 宿州 | — | ⛔ 不通 | — | https://szs.lblib.vip/websearch.asp （宿州市图书馆） | 疑汇文 Libsys（`websearch.asp`，待核验） | 2026-10-03 用户述 OPAC 不通；旧登记 www.szlib.net 未核实 |
-|  | 六安 | — | 📋 计划 | — | http://60.173.147.75:8081/ILASOPAC/Index?target=0 （六安市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | 2026-10-03 用户提供入口；旧登记 www.lalib.net 未核实 |
+|  | 六安 | `luan` | ✅ 接入 | — | http://60.173.147.75:8081/ILASOPAC/Index?target=0 （六安市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | `uilas/` 家族 + `adapters/cn/luan.py`；实抓「三体」33 条 |
 |  | 亳州 | — | ⛔ 不通 | — | http://www.bzlib.net （亳州市图书馆） | — | — |
 |  | 池州 | — | ⛔ 不通 | — | http://www.czlib.net （池州市图书馆） | — | — |
 |  | 宣城 | — | ⛔ 不通 | — | http://www.xclib.net （宣城市图书馆） | — | — |
@@ -183,7 +183,7 @@
 |  | 吉林 | — | ⛔ 不通 | — | http://www.jllib.net （吉林市图书馆） | — | — |
 |  | 四平 | `siping` | ✅ 接入 | — | http://111.26.111.223:8081/opac/index （四平市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/siping.py`（`api_detail=True`）；实抓「三体」19 条 |
 |  | 辽源 | — | ⛔ 不通 | — | http://www.lylib.net （辽源市图书馆） | — | — |
-|  | 通化 | — | 📋 计划 | — | https://m.thslib.cn:3888/ILASOPAC/Index?target=0 （通化市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | 2026-10-03 用户提供入口；旧登记 www.thlib.net 未核实 |
+|  | 通化 | `tonghua` | ✅ 接入 | — | https://m.thslib.cn:3888/ILASOPAC/Index?target=0 （通化市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | `uilas/` 家族 + `adapters/cn/tonghua.py`；HTTPS 默认 TLS 可通；实抓「三体」10 条 |
 |  | 白山 | — | 🕳️ 无入口 | — | http://m.bsstsg.net/ （白山市图书馆） | — | 2026-10-03 用户实测未找到查询入口；旧登记 www.bslib.net 未核实 |
 |  | 松原 | — | ⛔ 不通 | — | http://www.sylib.net （松原市图书馆） | — | — |
 |  | 白城 | — | 🕳️ 无入口 | — | — （白城市图书馆） | — | 2026-10-03 用户述未找到官网；旧登记 www.bclib.net 未核实 |
@@ -212,7 +212,7 @@
 |  | 龙岩 | — | ⛔ 不通 | — | http://opac.lytsg.com:8082/opac/index （龙岩市图书馆） | — | 2026-10-03 本批实抓：域名 `opac.lytsg.com` 解析至 198.20.0.182（域名停放段）、8082 端口连接超时零字节，非馆方站点；无可用检索入口 |
 |  | 宁德 | `ningde` | ✅ 接入 | — | http://220.161.205.210:82/opac/index （宁德市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/ningde.py`（`api_detail=True`）；实抓「三体」23 条（首条为简编记录、无馆藏，详情/馆藏 fixture 取同页 58950） |
 | 江西省 | 南昌 | — | ⛔ 不通 | — | https://www.jxlibrary.net （江西省图书馆） | — | — |
-|  |  | — | 📋 计划 | — | http://uopac.nclib.net:8086/Index?target=0 （南昌市图书馆） | UILAS 知识检索平台（`Index?target=0`；域名含 uopac，待实抓核验） | 2026-10-03 用户提供入口；旧登记 www.nclib.net 未核实 |
+|  |  | — | ⛔ 不通 | — | http://uopac.nclib.net:8086/Index?target=0 （南昌市图书馆） | — | 2026-10-03 本批实抓：`uopac.nclib.net` 解析至 198.20.3.17（域名停放段），8086 端口 TCP 可连但 HTTP 零字节超时，非馆方站点；旧登记 www.nclib.net 未核实，无可用检索入口 |
 |  | 萍乡 | — | ⛔ 不通 | — | http://www.pxlib.cn/ （萍乡市图书馆） | — | 2026-10-03 用户述调用搜索失败，无可匿名检索入口；旧登记 www.pxlib.net 未核实 |
 |  | 九江 | — | ⚠️ 障碍 | — | https://www.jjlib.cn/ （九江市图书馆） | — | 2026-10-03 用户述检索限制在图书馆内 IP，站外不可用；旧登记 www.jjlib.net 未核实 |
 |  | 新余 | — | 🕳️ 无入口 | — | — （新余市图书馆） | — | 2026-10-03 用户述没有找到官网；旧登记 www.xylib.net 未核实 |
@@ -277,7 +277,7 @@
 |  | 三沙 | — | ❓ 缺失 | — | — | — | — |
 |  | 儋州 | — | ❓ 缺失 | — | — | — | — |
 | 贵州省 | 贵阳 | — | ⛔ 不通 | — | https://ilas.gzlib.com.cn/opac/index （贵州省图书馆） | 图创 Interlib | 2026-10-03 实测：`/opac/index` HTTP 200，但 `/opac/search`（任意参数）恒 HTTP 500、`/opac/api/search` 亦 500——检索后端故障，暂不可用 |
-|  |  | — | 📋 计划 | — | http://218.201.254.11/Index?target=0 （贵阳市图书馆） | UILAS 知识检索平台（`Index?target=0`，老版 ILAS HTML OPAC） | 2026-10-03 用户提供「贵阳」入口，按市馆登记（若实为省图再改隶）；旧登记 www.gylib.org.cn 为登录墙，弃用 |
+|  |  | `guiyang` | ✅ 接入 | — | http://218.201.254.11/Index?target=0 （贵阳市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | `uilas/` 家族 + `adapters/cn/guiyang.py`；应用上下文为根路径（无 `/ILASOPAC` 前缀）；实抓「三体」80 条 |
 |  | 六盘水 | `liupanshui` | ✅ 接入 | — | http://111.85.91.253:8088/opac/index （六盘水市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/liupanshui.py`（`api_detail=True`）；实抓「三体」11 条 |
 |  | 遵义 | `zunyi` | ✅ 接入 | — | http://opac.zylib.cn:82/opac/index （遵义市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/zunyi.py`（`api_detail=True`）；实抓「三体」43 条 |
 |  | 安顺 | `anshun` | ✅ 接入 | — | http://119.1.160.3:8082/opac/ （安顺市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/anshun.py`（`api_detail=True`）；实抓「三体」15 条（检索首条 53072 无馆藏，详情/馆藏实例取同页 22100） |
@@ -802,12 +802,15 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
   **`VIEW^N` 的 N 是命中集全局序号**（第 2 页第 1 位＝21），不是页内序号。
 - 会话失效（跳回入口页形态）重建一次再试，仍失败抛错；源站回 Error 页不算会话失效，换候选继续。
 
-## UILAS 家族（金华、舟山）
+## UILAS 家族（老版 ILAS HTML OPAC：金华、舟山、河南省图、芜湖、六安、通化、贵阳）
 
 家族模块 `uilas/`：`client.py`（HTTP 层＋4 秒/host 节流＋可选旧式 TLS 兜底）、
 `parser.py`（检索结果页／详情页／内联馆藏表解析）、`__init__.py`（三原语与
 `UilasConfig`）。成员：金华市图书馆（`adapters/cn/jinhua.py`）、舟山市图书馆
-（`adapters/cn/zhoushan.py`）、河南省图书馆（`adapters/cn/henan_prov.py`）。城市差异只允许以 `UilasConfig` 带默认值的字段
+（`adapters/cn/zhoushan.py`）、河南省图书馆（`adapters/cn/henan_prov.py`）、
+芜湖市图书馆（`adapters/cn/wuhu.py`）、六安市图书馆（`adapters/cn/luan.py`）、
+通化市图书馆（`adapters/cn/tonghua.py`）、贵阳市图书馆（`adapters/cn/guiyang.py`）。
+城市差异只允许以 `UilasConfig` 带默认值的字段
 （quirk）新增，默认值即金华行为。UILAS 知识检索平台（ILAS 系 HTML OPAC，
 Tomcat/JSP），全链路匿名零 cookie。
 
@@ -834,10 +837,24 @@ Tomcat/JSP），全链路匿名零 cookie。
   `SSLV3_ALERT_HANDSHAKE_FAILURE`（curl/LibreSSL 可通、Python 不可）。配置
   `UilasConfig.ssl_ciphers="AES256-GCM-SHA384:AES128-GCM-SHA256"`，家族 HTTP 层用
   `set_ciphers()` 显式放行并按串缓存 opener；金华是裸 IP 纯 HTTP，不受影响。
-- **各城差异**：金华入口 http://202.101.180.43/ILASOPAC/Index?target=0（裸 IP，
-  **仅 HTTP**：443 证书已过期）；舟山入口 https://opac.zsodl.cn/Index?target=0（HTTPS，
-  带上述 TLS quirk）。两城页面结构逐项同构，家族 parser 零改动。
-- 字段侦察与出入清单见 `tests/fixtures/jinhua/NOTES.md`、`tests/fixtures/zhoushan/NOTES.md`。
+- **各城差异**：见下表（默认值即金华行为，差异以 `UilasConfig` 字段表达）。
+- 字段侦察与出入清单见 `tests/fixtures/{jinhua,zhoushan,henan_prov,wuhu,luan,tonghua,
+  guiyang}/NOTES.md`。
+
+成员城市差异（2026-10-03 回填）：
+
+| 成员 | 家族配置 | 差异与数据边界 |
+|---|---|---|
+| 金华（基准） | 默认 | 裸 IP **仅 HTTP**（443 证书已过期）；入口 `/ILASOPAC/Index?target=0`。结构事实基准（`tests/fixtures/jinhua/NOTES.md`）。 |
+| 舟山 | 默认＋`ssl_ciphers="AES256-GCM-SHA384:AES128-GCM-SHA256"` | HTTPS；**旧式 TLS quirk**——只支持静态 RSA kx 套件，OpenSSL 3.5 默认密码列表停用它们，须显式放行（见上）。入口 `/Index?target=0`。 |
+| 河南省图书馆 `henan_prov` | 默认 | 裸 IP 纯 HTTP；入口 `/ILASOPAC/Index?target=0`；实抓「三体」57 条。 |
+| 芜湖 `wuhu` | 默认 | HTTPS（端口 18086，入口 `/ILASOPAC/`），**默认 TLS 上下文可握手**（非舟山式静态 RSA 套件；照舟山下发 `ssl_ciphers` 反而握手失败）；实抓「三体」143 条、8 页。 |
+| 六安 `luan` | 默认 | 裸 IP 纯 HTTP（入口 `/ILASOPAC/Index?target=0`）；实抓「三体」33 条。 |
+| 通化 `tonghua` | 默认 | HTTPS（端口 3888），默认 TLS 可握手；结果条目 recno 走 `recno=` 链接兜底（家族 `_RECNO_LINK`）；实抓「三体」10 条。 |
+| 贵阳 `guiyang` | 默认 | **应用上下文为根路径**（入口 `/Index?target=0`，无 `/ILASOPAC` 前缀），家族按 `base_url` 拼路径天然兼容，无需新 quirk；实抓「三体」80 条。 |
+
+> 本批实测：芜湖、通化虽为 HTTPS，但均支持现代（ECDHE）密码套件，**不是**舟山式
+> 「只支持静态 RSA kx」站点——判据以实抓响应为准，勿仅凭 HTTPS 就套 `ssl_ciphers`。
 
 ## 新版 UILAS REST（陕西省图书馆、榆林）
 

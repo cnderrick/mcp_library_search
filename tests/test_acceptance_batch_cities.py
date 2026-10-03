@@ -50,22 +50,25 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 #   （图创 Interlib 默认模板＋api_detail，福州为福州地区图书馆联合检索平台）；
 #   三亚（实抓为图创 tcc-opac，复用 tccopac/ 家族）；同批梧州（198.20.2.213 停放段）、
 #   攀枝花（候选 OPAC host 8180 不可达、官网无书目接口）、长沙（整站 WAF 403）改判不通、不接入
+# ＋第九批 4 城（2026-10-03 立项城市落地，均老版 UILAS HTML OPAC，复用 uilas/ 家族）：
+#   芜湖/六安/通化/贵阳（贵阳应用上下文为根路径）；同批南昌（uopac.nclib.net→
+#   198.20.3.17 停放段、HTTP 零字节超时）改判不通、不接入
 _EXPECTED = [
     "ankang", "anqing", "anshun", "baoji", "baotou", "bijie", "changchun", "chaozhou",
     "chengdu", "chongqing", "chuxiong", "dalian", "daqing", "dehong",
     "deqing", "dezhou", "dongying", "eerduosi", "enshi", "ezhou",
-    "fujian_prov", "fuzhou", "guangzhou", "guilin",
+    "fujian_prov", "fuzhou", "guangzhou", "guilin", "guiyang",
     "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
     "heyuan", "honghe", "huaian", "huanggang", "huangshi", "hubei_prov",
     "huhehaote", "hulunbuir", "hunan_prov",
     "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen", "jingzhou", "jinhua",
     "laibin", "lanzhou", "leshan", "liaocheng", "lijiang", "lincang",
-    "linyi", "lishui", "liupanshui", "maoming", "mudanjiang", "nanjing", "ningbo", "ningde",
+    "linyi", "lishui", "liupanshui", "luan", "maoming", "mudanjiang", "nanjing", "ningbo", "ningde",
     "nujiang", "puning", "qiandongnan", "qiannan", "qingdao", "qiqihar",
     "quanzhou", "qujing", "rizhao", "sanming", "sanya", "shaanxi", "shanghai",
     "shaoxing", "shenzhen", "shijiazhuang", "shiyan", "siping", "suzhou", "taian",
-    "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "tongling",
-    "weifang", "wenzhou", "wuhai", "wuhan", "wuxi", "xian", "xiangtan",
+    "taiyuan", "taizhou", "tangshan", "tianjin", "tonghua", "tongliao", "tongling",
+    "weifang", "wenzhou", "wuhai", "wuhan", "wuhu", "wuxi", "xian", "xiangtan",
     "xianyang", "xiaogan", "xinzhou", "xishuangbanna", "xuzhou", "yancheng",
     "yangjiang", "yangzhou", "yantai", "yueyang", "yulin", "zaozhuang",
     "zhangjiajie", "zhengzhou",

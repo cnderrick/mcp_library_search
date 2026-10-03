@@ -28,6 +28,7 @@ from . import fujian_prov
 from . import fuzhou
 from . import guangzhou
 from . import guilin
+from . import guiyang
 from . import haikou
 from . import hangzhou
 from . import hanzhong
@@ -59,6 +60,7 @@ from . import lincang
 from . import linyi
 from . import lishui
 from . import liupanshui
+from . import luan
 from . import maoming
 from . import mudanjiang
 from . import nanjing
@@ -88,12 +90,14 @@ from . import taiyuan
 from . import taizhou
 from . import tangshan
 from . import tianjin
+from . import tonghua
 from . import tongliao
 from . import tongling
 from . import weifang
 from . import wenzhou
 from . import wuhai
 from . import wuhan
+from . import wuhu
 from . import wuxi
 from . import xian
 from . import xiangtan
@@ -145,6 +149,7 @@ ADAPTERS = {
     "fuzhou": fuzhou,
     "guangzhou": guangzhou,
     "guilin": guilin,
+    "guiyang": guiyang,
     "haikou": haikou,
     "hangzhou": hangzhou,
     "hanzhong": hanzhong,
@@ -176,6 +181,7 @@ ADAPTERS = {
     "linyi": linyi,
     "lishui": lishui,
     "liupanshui": liupanshui,
+    "luan": luan,
     "maoming": maoming,
     "mudanjiang": mudanjiang,
     "nanjing": nanjing,
@@ -205,12 +211,14 @@ ADAPTERS = {
     "taizhou": taizhou,
     "tangshan": tangshan,
     "tianjin": tianjin,
+    "tonghua": tonghua,
     "tongliao": tongliao,
     "tongling": tongling,
     "weifang": weifang,
     "wenzhou": wenzhou,
     "wuhai": wuhai,
     "wuhan": wuhan,
+    "wuhu": wuhu,
     "wuxi": wuxi,
     "xian": xian,
     "xiangtan": xiangtan,

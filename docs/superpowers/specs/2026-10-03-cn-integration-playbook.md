@@ -95,8 +95,20 @@
   且 SearchKey 双重 URL 编码；`book_id` 是裸 recno。
 - 旧式 TLS（只支持静态 RSA kx 套件）→ `UilasConfig.ssl_ciphers="AES256-GCM-SHA384:AES128-GCM-SHA256"`
   （舟山实证，OpenSSL 3.5 默认不通）。
-- 成员差异表在 `cn.md`「UILAS 家族（金华、舟山）」章。
+- 成员差异表在 `cn.md`「UILAS 家族」章。
 - 适配器照 `adapters/cn/jinhua.py`／`zhoushan.py`。
+- **回填（2026-10-03 第九批：芜湖/六安/通化/贵阳）**：
+  - **HTTPS ≠ 旧式 TLS**：芜湖（`ilas.whstsg.org.cn:18086`）、通化（`m.thslib.cn:3888`）
+    均为 HTTPS，但**支持现代（ECDHE）套件，Python 默认 TLS 上下文即可握手**；若照舟山
+    误配 `ssl_ciphers` 反而 `SSLV3_ALERT_HANDSHAKE_FAILURE`。判据以实抓为准，勿仅凭
+    HTTPS 就套 `ssl_ciphers`。
+  - **应用上下文可为根路径**：贵阳入口 `http://218.201.254.11/Index?target=0`
+    （`base_url` 不含 `/ILASOPAC`）——家族按 `base_url + "/NTRdrBookRetr.do"` 拼路径
+    天然兼容，**无需新 quirk**。
+  - **结果 recno 锚点形态可变**：通化条目同时有 `bookItemCheckbox` 与 `recno=` 链接，
+    家族 `parse_search` 的 `_RECNO_LINK`（`recno=(\d+)`）兜底命中，无需扩展 quirk。
+  - **域名含 `uopac` 未必是 UILAS**：南昌 `uopac.nclib.net:8086` 解析至 198.20.3.17
+    （域名停放段），TCP 可连但 HTTP 零字节超时 → ⛔ 不通，非馆方站点（勿在家族里试探）。
 
 ### 3.3 新版 UILAS REST（`uilas_rest/`）
 
@@ -235,13 +247,13 @@
 
 ### 4.4 UILAS 老版家族（5 城）
 
-| 城市 | 馆名 | 标识 | base_url | 入口 |
-|---|---|---|---|---|
-| 芜湖 | 芜湖市图书馆 | `wuhu` | https://ilas.whstsg.org.cn:18086 | /ILASOPAC/ |
-| 六安 | 六安市图书馆 | `luan` | http://60.173.147.75:8081 | /ILASOPAC/Index?target=0 |
-| 通化 | 通化市图书馆 | `tonghua` | https://m.thslib.cn:3888 | /ILASOPAC/Index?target=0 |
-| 南昌 | 南昌市图书馆 | `nanchang` | http://uopac.nclib.net:8086 | /Index?target=0 |
-| 贵阳 | 贵阳市图书馆 | `guiyang` | http://218.201.254.11 | /Index?target=0 |
+| 城市 | 馆名 | 标识 | base_url | 入口 | 实抓／quirk 结论（2026-10-03 回填） |
+|---|---|---|---|---|---|
+| 芜湖 | 芜湖市图书馆 | `wuhu` | https://ilas.whstsg.org.cn:18086 | /ILASOPAC/ | ✅「三体」143 条；quirk 无（HTTPS 默认 TLS 可通，**勿**套 `ssl_ciphers`） |
+| 六安 | 六安市图书馆 | `luan` | http://60.173.147.75:8081 | /ILASOPAC/Index?target=0 | ✅「三体」33 条；quirk 无（裸 IP 纯 HTTP） |
+| 通化 | 通化市图书馆 | `tonghua` | https://m.thslib.cn:3888 | /ILASOPAC/Index?target=0 | ✅「三体」10 条；quirk 无（HTTPS 默认 TLS 可通；recno 走 `_RECNO_LINK` 兜底） |
+| 南昌 | 南昌市图书馆 | `nanchang` | http://uopac.nclib.net:8086 | /Index?target=0 | ⛔ 不通：域名解析至 198.20.3.17 停放段、HTTP 零字节超时，不接入 |
+| 贵阳 | 贵阳市图书馆 | `guiyang` | http://218.201.254.11 | /Index?target=0 | ✅「三体」80 条；quirk 无（应用上下文为**根路径**，无需 `/ILASOPAC`） |
 
 ### 4.5 图星 LibStar Find（2 城）
 

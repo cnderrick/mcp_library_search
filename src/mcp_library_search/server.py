@@ -121,6 +121,10 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     guilin（广西壮族自治区桂林图书馆）、fuzhou（福州市图书馆，福州地区图书馆
     联合检索平台），以上馆藏到单册级、详情走 /api/book 接口；
     sanya（三亚市图书馆，图创 tcc-opac 纯 JSON 访客令牌，馆藏到单册级）。
+    第九批（老版 UILAS HTML OPAC，uilas 家族）：wuhu（芜湖市图书馆）、
+    luan（六安市图书馆）、tonghua（通化市图书馆）、guiyang（贵阳市图书馆，
+    应用上下文为根路径），以上馆藏到单册级；同批 nanchang（南昌市图书馆）实测
+    域名落停放段、HTTP 零字节超时，改判不通、不接入。
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
