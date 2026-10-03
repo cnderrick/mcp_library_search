@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="same-origin"><meta name="referrer" content="no-referrer"><link rel="icon" href="/opac/favicon.ico"><script src="/opac/js/tc-colldata.min.js" charset="utf-8"></script><title>图书馆</title><link href="/opac/static/css/chunk-vendors.3ed3f19f.css" rel="stylesheet"><link href="/opac/static/css/app.0ee83b3c.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but opac-remould doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><script>const OPAC__clientID = JSON.parse(localStorage.getItem('OPAC__clientID'))
+    console.log(OPAC__clientID)
+    if (OPAC__clientID.value) {
+      // 埋点初始化
+      var sensors = window.TcDataCollectWebSDK
+      sensors.init({
+        client_id: OPAC__clientID.value, // client_id动态获取
+        server_url:'https://www.data380.com/sa.gif',
+        show_log: true, // 是否打印日志信息
+        heatmap: {
+          // default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭
+          clickmap: 'default'
+        },
+        preset_properties: {
+          url: true, // 是否采集 $url 页面地址作为公共属性，默认值 false
+          title: true // 是否采集 $title 页面标题作为公共属性，默认值 false
+        }
+      })
+      // 设置之后，SDK 就会自动收集页面浏览事件($pageview), 默认关闭
+      sensors.quick('autoTrack');
+    }</script><div id="app"></div><script src="/opac/static/js/chunk-vendors.587bb783.js"></script><script src="/opac/static/js/app.d31c2e6c.js"></script></body></html>

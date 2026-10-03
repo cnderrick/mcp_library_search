@@ -1,0 +1,6195 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+		<script type="text/javascript">
+			var $$opac_bookcover = "http://book-resource.dataesb.com/websearch/metares";
+		</script>
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css"></link>
+		
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/highcharts.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/themes/grid.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/colldata-1.1215.full.js" charset="utf-8"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js"></script>
+		<script>
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		<script>
+			// 初始化 SDK
+			var sensors = window['TcDataCollectWebSDK'];
+			sensors.init({
+				app_id: '88765b9a8a54a6b3d526ddaf78by2123',   // 公司内部opac
+				show_log: true,   // 是否打印日志信息
+				heatmap: {
+					/**
+					 * 1. 默认 $WebClick 只采集 a，button，input ，textarea 四个 dom 元素的点击事件。
+					 * 2. default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭。
+					 */
+					clickmap:'default',
+
+					// 配置不采集元素点击事件 true:采集   false:不采集
+					collect_element: function(element_target){
+						return !$(element_target).is("INPUT");
+					},
+
+					// default 表示开启，自动采集 $WebStay 事件，滚屏是触发，但页面停留必须过4秒后（可自定义）；可以设置 'not_collect' 表示关闭。
+					scroll_notice_map:'not_collect',
+					// 设置有效停留时长， 毫秒，默认是4000毫秒
+					scroll_delay_time: 6000
+				},
+				preset_properties: {
+					//是否采集 $url 页面地址作为公共属性，默认值 false
+					url: true,
+					//是否采集 $title 页面标题作为公共属性，默认值 false
+					title: true,
+				}
+			});
+
+            // 设置之后，SDK 就会自动收集页面浏览事件($pageview), 默认是关闭的
+            sensors.quick('autoTrack')
+
+			// 手动调用, 用户自定义埋点
+			function trackSearch(word) {
+				sensors.track('OpacSearch', {
+					KeyWord: word
+				});
+			}
+
+			function trackLogin(rdid) {
+				sensors.login(rdid, function () {
+
+				});
+			}
+
+			function trackLogout() {
+				sensors.logout(false);
+
+			}
+
+		</script>
+		
+		
+			
+				
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+                
+				</script>
+			
+			
+		
+		<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js"></script>
+
+		<script type="text/javascript" src="/opac/media/js/common/charts.js"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<title>检索系统</title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js"></script>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="referrer" content="same-origin" />
+
+    
+    
+        <meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 广西区域图书馆集群" />
+    
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js"></script>
+
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+	function logout(){
+		trackLogout();
+		location.href="/opac/reader/logout";
+	}
+	
+	$(document).ready(function(){
+		
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.space".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.recommended".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.publicNotice".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.publicTag".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.bookSpecial".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar"
+		
+			
+			
+			
+		
+>
+	<div class="navbar_bd" >
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index">
+							
+								
+								
+								
+								
+									检索
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/advance">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											高级检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/integration">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											集群检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls">
+							
+								
+								
+								
+								
+									书目浏览
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/cls">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/sci">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											科图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/space">
+							
+								
+								
+								
+								
+									我的图书馆
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommended">
+							
+								
+								
+								
+								
+									精品图书
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/publicNotice/reservationInLib">
+							
+								
+								
+								
+								
+									信息公告
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/reservationInLib">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆预约到馆通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/bookOverdue">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆图书催还通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/prelendInform">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆预借到馆通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/tag/publicTagList">
+							
+								
+								
+								
+								
+									所有标签
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/bookSpecial">
+							
+								
+								
+								
+								
+									图书专题
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+
+				<!-- 开始是给广少图用的东西 -->
+				
+				
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!--
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				
+					
+					<span id="readerLogin"><a  href="/opac/reader/login">登录</a></span>
+				
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+
+			
+				
+					<a href="/opac/reader/login">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+
+    
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_header">
+	<div id="page_nav">
+		<!-- 
+		<div class="logo">
+			<a href="/opac/index">
+				<img src="/opac/media/images/logo.gif" />
+			</a>
+		</div>
+		 -->
+	</div>
+</div>
+			<div id="page_content">
+				
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/custominfo/libcodeURL.js "></script>
+
+
+
+
+
+
+<script type="text/javascript">
+	document.title = "检索";
+	var cookieFlag = false;
+$(document).ready(function(){
+    //设置JS调用getI18nMsg方法获取的国际化标签
+    i18nMessages['search.result.integration.library']="集群图书馆";
+    //加载集群馆选项
+    loadIntegratedLibraries('');
+	document.onkeydown = dynamicAddRecnoSelectOption;
+	
+});
+
+function dynamicAddRecnoSelectOption(e){
+	e = e || window.event;
+	if(e.keyCode==188&&e.ctrlKey&&e.shiftKey){
+		$("#opacConfouternet").show();
+	}
+
+	if(e.keyCode==190&&e.ctrlKey&&e.shiftKey){ 
+		$("#localConfig").show();   
+	}
+	
+	if(e.keyCode==186&&e.ctrlKey){
+		$("#opacConfSetTable").show();
+	}
+}
+$(function(){
+	if($.cookie("libnameset") == "true"){
+		$("input:checkbox[name='curlibcode']").each(function(i){
+			//var tmpText = $.trim($(this).val());
+			if($(this).attr("value") == $.cookie("showLibcode")){
+				$(this).attr("checked", "checked");
+				cookieFlag = true;
+			}
+		});
+	}
+});
+
+
+$(function(){
+	$("#q").focus();
+});
+
+$(function(){
+	if($.cookie("configouternet") == "false"){
+		$("#Conouternet").attr("checked", "checked");
+	}
+});
+function configouternet(){
+	var expireTime = 3650;
+	if($("#Conouternet").attr("checked") == "checked"){
+		$.cookie("configouternet", "false", {expires:expireTime, path:'/'});
+	}else{
+		$.cookie("configouternet", "true", {expires:expireTime, path:'/'});
+	}
+}
+
+//点击显示分馆等选择后重新设置高度
+function setHeight(){
+	$("#page_footer").height(20);
+	$("#page_footer").css("top",$("#searchDiv").height() + $("#navbar").height() + $("#searchTips").height());
+}
+
+function selectAllLibcodes(obj) {
+	if(obj.checked) {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", true);
+	} else {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+	}
+}
+function showMoreOptions() {
+	var searchDivHidden = $("#searchDivHidden");
+	if(searchDivHidden.css("display") == "none") {
+		searchDivHidden.show("slow");
+	} else {
+		searchDivHidden.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showLibraries() {
+	var libraries = $("#libraries");
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showCirTypeDiv() {
+	var cirTypeDiv = $("#cirTypeDiv");
+	if(cirTypeDiv.css("display") == "none") {
+		cirTypeDiv.show("slow");
+	} else {
+		cirTypeDiv.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showBookLimits(id) {
+	var libraries = $(id);
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function searchByHotKeyword(hotSearchKeyword) {
+	$("#q").val(hotSearchKeyword);
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}
+    
+    search("");
+}
+function search(view) {
+	$("#view").val(view);
+	var total = $('input:checkbox[name="curlibcode"]').size();
+	var checkNum = $('input:checkbox[name="curlibcode"]:checked').size();
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}
+    
+        
+        
+            if(total == checkNum){
+                $("#libcodeTable input[name='curlibcode']").attr("checked", false);
+            }else{
+                if(checkNum>50){
+                    alert("所选分馆不能超过50个");
+                    return;
+                }
+            }
+        
+    
+	var qword = $("#q").val();
+	trackSearch(qword);
+	
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+	
+	
+	var integrationLib = $("input[name='integrationCode']:checked").val();
+	if(integrationLib){
+        $("#searchForm").attr("target","_blank");
+        $("#searchForm").attr('action',integrationMap[integrationLib] + "/search");
+		$("#isCluster").val(integrationLib);
+    }else{
+        $("#searchForm").attr("target","");
+        $("#searchForm").attr('action',"/opac/search");
+    }
+	
+	
+	$("#searchForm").submit();
+}
+
+function gotoAdvancedSearch() {
+	document.location.href = '/opac/index/advance';
+}
+
+
+function displayRememberMe(){
+	var searchDivHidden = $("#searchDivHidden");
+	var libraries = $("#libraries");
+	var bookTypes = $("#bookTypesHidden");
+	var cirTypeDiv = $("#cirTypeDiv");
+	var rememberMe = $("#remember");
+	if(libraries.is(":hidden")&& bookTypes.is(":hidden")&& searchDivHidden.is(":hidden") && cirTypeDiv.is(":hidden")) {
+		rememberMe.hide("slow");
+	}else{
+		rememberMe.show("slow");
+	}
+}
+
+function rememberMe(){
+     
+	var searchWay = $('select[name=searchWay]').val();
+	var booktype = $('input:radio[name="booktype"]:checked').val();
+	var marcformat = $('input:radio[name="marcformat"]:checked').val();
+	var scWay = $('input:radio[name="scWay"]:checked').val();
+	var sortWay = $('select[name=sortWay]').val();
+	var sortOrder = $('select[name=sortOrder]').val();
+	var startPubdate = $('select[name=startPubdate]').val();
+	var endPubdate = $('select[name=endPubdate]').val();
+	var rows = $('select[name=rows]').val();
+	var hasholding = $('input:checkbox[name="hasholding"]:checked').val();
+	var curlibcode = $('input:checkbox[name="curlibcode"]:checked');
+	var libCodeValue=";";
+
+    for(var i =0 ;i<curlibcode.length;i++){
+    	libCodeValue = libCodeValue + curlibcode[i].value+";";
+    }
+
+    //分馆+分馆地址选择
+    var curlibcodeGT = $('input[name="curlibcodeGT"]').val();
+	if (!isEmpty(curlibcodeGT)) {
+        curlibcodeGT = curlibcodeGT.replaceAll(",", ";");
+        libCodeValue = libCodeValue + curlibcodeGT
+	}
+	var f_curlocal = $('input[name="f_curlocal"]').val();
+	if (!isEmpty(f_curlocal)) {
+        setCookie("f_curlocal",f_curlocal);
+	}
+
+
+	setCookie("searchWay",searchWay);
+	setCookie("booktype",booktype);
+	setCookie("marcformat",marcformat);
+	setCookie("scWay",scWay);
+	setCookie("sortWay",sortWay);
+	setCookie("sortOrder",sortOrder);
+	setCookie("startPubdate",startPubdate);
+	setCookie("endPubdate",endPubdate);
+	setCookie("rows",rows);
+	setCookie("hasholding",hasholding);
+// 	setCookie("curlibcode",libCodeValue);
+	$.cookie("showLibcode", libCodeValue, {expires:7,path:'/'});
+}
+
+function setCookie(cookieName,cookieValue){
+	$.cookie(cookieName,cookieValue,{ expires: 7, path: '/' });
+}
+function localLimit(){
+	setCookie("localConfig",$('input:radio[name="curlocal"]:checked').val());
+}
+function readCookies(){
+	var searchWay =$.cookie("searchWay");
+	var booktype =$.cookie("booktype");
+	var marcformat =$.cookie("marcformat");
+	var scWay =$.cookie("scWay");
+	var sortWay =$.cookie("sortWay");
+	var sortOrder =$.cookie("sortOrder");
+	var startPubdate =$.cookie("startPubdate");
+	var endPubdate =$.cookie("endPubdate");
+	var rows =$.cookie("rows");
+	var hasholding =$.cookie("hasholding");
+	var curlibcode =$.cookie("showLibcode");
+	var curlocalconfig = $.cookie("localConfig");
+	var showlocalname = "";
+	var localcode = "";
+	var showLocal = $.cookie("showLocal");
+	if(localcode!=""){
+		/*if(localcode.indexOf(",")>0){
+			var codes = localcode.split(",");
+			for(var i=0;i<codes.length;i++){
+				$('input:checkbox[name="curlocal"][value="'+codes[i]+'"]').attr("checked","checked");
+			}
+		}else{
+			$('input:checkbox[name="curlocal"][value="'+localcode+'"]').attr("checked","checked");
+		}*/
+		showLocal = localcode;
+		$.cookie("localConfig", localcode, {expires:3650, path:'/'});
+		$.cookie("showLocal", localcode, {expires:3650, path:'/'});
+		//设置分馆名称
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibcode", localcode, {expires:3650, path:'/'});
+		if(showlocalname==""){
+			var libname = "";
+			if(""!=""){
+				libname = $('input:checkbox[name="curlibcode"][value=""]').parent().text();
+			}else{
+				libname = $("#content .libName").text();
+			}
+			showlocalname = libname+" - "+
+			$('input:checkbox[name="curlocal"][value="'+localcode+'"]').parent().text();
+		}
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	if(showlocalname!=""){
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	/*if(showLocal!=null&&showLocal!=""||localcode!=""){
+		var checker = "";
+		if(localcode!=""||curlocalconfig != null && curlocalconfig != ""&&showLocal==$.cookie("localConfig")){
+			checker = 'checked="checked"';
+		}else{
+			selElement($('input:radio[name="curlocal"]'),"","radio");
+		}
+		$("#limitlocal").append(
+				'<input type="radio" name="curlocal" onchange="localLimit()" value="'+showLocal+'" '+checker+' />'
+				+$("#cCurlocal_"+showLocal).parent().text());
+		$("#localLimit").show();
+	}*/
+	selElement($('select[name=searchWay] option'),searchWay,"select");
+	selElement($('input:radio[name="booktype"]'),booktype,"radio");
+	selElement($('input:radio[name="marcformat"]'),marcformat,"radio");
+	selElement($('input:radio[name="scWay"]'),scWay,"radio");
+	selElement($('select[name=sortWay] option'),sortWay,"select");
+	selElement($('select[name=sortOrder] option'),sortOrder,"select");
+	selElement($('select[name=startPubdate] option'),startPubdate,"select");
+	selElement($('select[name=endPubdate] option'),endPubdate,"select");
+	selElement($('select[name=rows] option'),rows,"select");
+	selElement($('input:checkbox[name="hasholding"]'),hasholding,"checkbox");
+	
+	var clc = $('input:checkbox[name="curlibcode"]');
+	if(curlibcode!=null&&curlibcode!=";"){
+		for(var i = 0 ; i<clc.length;i++){
+			if($.inArray("clc[i].value", curlibcode.split(",")) >= 0 ){
+				clc[i].checked=true;
+				cookieFlag = true;
+			}
+		}
+	}
+	
+	if(!cookieFlag){
+		var lib = "";
+		if(lib!=""){
+			var flag = true;
+			for(var i = 0 ; i<clc.length;i++){
+				if($.inArray(clc[i].value, lib.split(","))!=-1 ){
+					clc[i].checked=true;
+					cookieFlag = true;
+					if(flag){
+						$.cookie("libnameset", "true", {expires:3650, path:'/'});
+						$.cookie("showLibcode", clc[i].value, {expires:3650, path:'/'});
+						$.cookie("showLibname", clc[i].nextSibling.nodeValue, {expires:3650, path:'/'});
+						flag = false;
+					}
+				}
+			}
+		}else{
+			
+
+			
+		}
+
+	}
+}
+
+function selElement(obj,value,type){
+	
+	for(var i = 0 ;i<obj.length;i++){
+		
+		if(obj[i].value==value){
+			if(type=="select"){
+				obj[i].selected =true;
+			}else{
+				obj[i].checked=true;
+			}
+			break;
+		}
+	}
+
+}
+
+$(function(){
+	
+	return;
+	
+	$("#q").autocomplete({
+		source: '/opac/hotsearch/suggest',
+		focus: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			return false;
+		},
+		select: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			search("");
+			return false;
+		}
+	}).data("autocomplete")._renderItem = function(ul, item) {
+		return $("<li style='position:relative;font-size:12px;'></li>").data("item.autocomplete", item)
+			.append("<a>" + 
+						"" + item.searchKey + "" + 
+						"<cite style='position:absolute;right:10px;top:2px;color:#888;'>" + "检索次数" + ": " + 
+							item.count + 
+						"</cite>" + 
+					"</a>")
+			.appendTo(ul);
+	};
+});
+$(function() {
+	$("#searchForm select[name='searchWay']").bind("change", function(e) {
+		if($(this).val() == "callno") {
+			$("#searchForm select[name='sortWay']").val("callno_sort");
+			$("#searchForm select[name='sortOrder']").val("asc");
+		}
+	});
+	
+	$("#localConfig input[name='curlocal']").bind("change", function(e) {
+		var expireTime = 3650;
+		if($(this).attr("checked") == 'checked'){
+			$("#tabs-4 input[type='checkbox']").attr("checked",false); 
+			$(this).attr("checked",true);              
+		}else{
+			$(this).attr("checked",false);   
+		}  
+		var curlocals = $('input:checkbox[name="curlocal"]:checked');
+		var value = "";   
+		if(curlocals.length < 1){
+			$.cookie("localConfig", "", {expires:expireTime, path:'/'});
+		}else{        
+			$(curlocals.each(function(i){
+				value += ","+$(this).val();           
+			}));             
+			value = value.substring(1, value.length);  
+		}           
+		$.cookie("localConfig", value, {expires:expireTime, path:'/'});
+	});
+});
+$(document).ready(function(){
+	$("select[name='sortWay']").val("score");
+
+	
+});
+
+
+</script>
+
+<script type="text/javascript">
+//从JS文件中直接取得检索提示信息
+$(document).ready(function(){
+	if("1" == "1")
+	{
+		$("#searchForm select[name='searchWay']").val("title");
+	}
+	readCookies();
+	$("#scWaySelect").change(function(){
+		var val = $(this).val();
+		$("input[name='scWay'][value='"+val+"']").click();
+	});
+	$("input[name='scWay']").click(function(){
+		var val = $(this).val();
+		$("#scWaySelect").val(val);
+	});
+	
+});
+$(function() {
+	var libnameset = $.cookie("libnameset");
+	var showLibcode = $.cookie("showLibcode");
+	var showLibname = $.cookie("showLibname");
+	if(libnameset == "true" && showLibcode != "" && showLibname != "" && "".indexOf(",") < 0) {
+		$("#content .libName").html(showLibname);
+	}
+});
+
+function eBookSearch(){
+	var value = $("#q").val();
+	
+	//敏感词汇
+	
+	if(bannedHashSet.contains(value)){
+	 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+	 	   return;
+	}
+	
+	
+	if(""==value){
+		 alert("请输入检索词");
+	 	 return;
+	}
+	
+	var searchAddress = "" ;
+	
+	//http://sso.cdclib.org/ifs/search 测试
+	window.location.href=searchAddress+"?autoSubmit=true&resourceGroupName=全部资源&searchValue="+value;
+}
+
+	if ("0" == '1') {
+		$(function(){
+			var timer;	//定时切换显示第一条
+		    var scroll = function(){
+		    	timer = setInterval(function(){
+		    		if($("#marqueeContext li").length <= 1){	//数量太少不做循环
+		    			 return;
+		    		}
+		    		$("#marqueeContext li").css("display","none");
+		    		$("#marqueeContext").append($("#marqueeContext li:first"));
+		    		$("#marqueeContext li:first").fadeIn(100);
+		    		$("#marqueeContext li:first").css("display","block");
+		    	},2000);
+		    }
+
+			//第一条显示
+		    $("#marqueeContext li:first").css("display","block");
+		    scroll();
+		    
+		    $("#marqueeContext li").mouseover(function(){
+		    	clearInterval(timer);
+		    });
+		    $("#marqueeContext li").mouseout(function(){
+		    	scroll();
+		    });
+		});
+	}
+
+</script>
+
+<div id="content"
+	
+>
+	<div class="libName"
+			
+	>
+		
+			
+			
+			
+			
+			
+				广西区域图书馆集群
+			
+		
+	</div>
+	
+	<div id="searchDiv"
+			
+	>
+	<form name="searchForm" id="searchForm" action="search" method="get">
+		<div >
+			<!--检索途径:-->
+			<select name="searchWay" class="search_select search_width"
+				
+			>
+				<option value="" selected="selected">任意词</option>
+				<option value="title">题名</option>
+				<option value="title200a">正题名</option>
+				
+				
+				<option value="isbn">ISBN/ISSN</option>
+				<option value="author">著者</option>
+				<option value="subject">主题词</option>
+				<option value="class">分类号</option>
+				
+				
+					<option value="ctrlno">控制号</option>
+					<option value="orderno">订购号</option>
+				
+				<option value="publisher">出版社</option>
+				
+				<option value="callno">索书号</option>
+			</select>
+			<!--检索词:-->
+			<div class="search_input search_input_width"
+				
+				
+			>
+				
+				
+					<input type="text" id="q" name="q" onkeydown="if(event.keyCode==13)search('');" placeholder=""
+					
+					/>
+				
+			</div>
+
+			
+
+			<input type="button"
+					
+				   class="search_button" name="searchButton" value="检索"
+					
+						
+							onclick="search('')"
+						
+						
+					
+			/>
+			
+				<input type="button"
+						
+					   name="advancedSearch" class="advance_search_button" value="高级检索" onclick="gotoAdvancedSearch()" />
+			
+
+			
+
+			
+			<input type="hidden" name="searchSource" value="reader" />
+		</div>
+		
+		
+		
+		<div class="hot">
+			热门词:
+			
+				<a href="javascript:searchByHotKeyword('哈利波特')">
+				哈利波特
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('龙族')">
+				龙族
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('窄门')">
+				窄门
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('米吴科学大冒险')">
+				米吴科学大冒险
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('法医秦明')">
+				法医秦明
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('特种兵学校')">
+				特种兵学校
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('非暴力沟通')">
+				非暴力沟通
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('文革')">
+				文革
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('父与子')">
+				父与子
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('明朝那些事')">
+				明朝那些事
+				</a>|
+			
+			<a href="/opac/hotsearch">更多..</a>
+		</div>
+		
+		
+
+		
+
+		
+		
+		<div class="search_more" >
+		<a href="javascript:showBookLimits('#bookTypesHidden')">显示文献类型</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		
+		<a id="showLibrary" href="javascript:showLibraries()">
+		
+			
+			
+				限定分馆/馆藏检索
+			
+		
+		</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a id="showCirType" href="javascript:showCirTypeDiv()">
+			限定文献流通类型检索
+		</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="javascript:showMoreOptions()">显示更多选项</a>
+		</div>
+		
+		<div class="booktypes" id="bookTypesHidden" style="display:none;">
+			<!--文献类型:-->
+			
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='1' />
+				<img src="/opac/booktypeicon/1" class="booktypeIcon" />
+				<!--img src="/opac/1.gif" /-->
+				图书
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='2' />
+				<img src="/opac/booktypeicon/2" class="booktypeIcon" />
+				<!--img src="/opac/2.gif" /-->
+				期刊
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='3' />
+				<img src="/opac/booktypeicon/3" class="booktypeIcon" />
+				<!--img src="/opac/3.gif" /-->
+				非书资料
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='4' />
+				<img src="/opac/booktypeicon/4" class="booktypeIcon" />
+				<!--img src="/opac/4.gif" /-->
+				古籍书目
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='5' />
+				<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+				<!--img src="/opac/5.gif" /-->
+				地方资料
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='6' />
+				<img src="/opac/booktypeicon/6" class="booktypeIcon" />
+				<!--img src="/opac/6.gif" /-->
+				技术标准
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='7' />
+				<img src="/opac/booktypeicon/7" class="booktypeIcon" />
+				<!--img src="/opac/7.gif" /-->
+				实用技术
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='8' />
+				<img src="/opac/booktypeicon/8" class="booktypeIcon" />
+				<!--img src="/opac/8.gif" /-->
+				音像资料
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='9' />
+				<img src="/opac/booktypeicon/9" class="booktypeIcon" />
+				<!--img src="/opac/9.gif" /-->
+				民国书目
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='10' />
+				<img src="/opac/booktypeicon/10" class="booktypeIcon" />
+				<!--img src="/opac/10.gif" /-->
+				少儿图书
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='11' />
+				<img src="/opac/booktypeicon/11" class="booktypeIcon" />
+				<!--img src="/opac/11.gif" /-->
+				少儿期刊
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="checkbox" name="booktype" value='12' />
+				<img src="/opac/booktypeicon/12" class="booktypeIcon" />
+				<!--img src="/opac/12.gif" /-->
+				玩具
+				</label>
+				
+			
+		</div>
+
+		
+		
+		<div id="searchDivHidden"  class="search_hidden" style="display:none;">
+			<div>
+				检索方式:
+				<label>
+					<input type="radio" name="scWay" value="full"
+						
+					/>
+					精确检索
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="prefixMatch" />
+					前方一致
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="dim"
+						 checked="checked"
+					/>
+					模糊检索
+				</label>
+			</div>
+			
+			<div>
+				语言种类:
+				<label>
+					<input type="radio" name="marcformat" value="CNMARC" />
+					中文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="USMARC" />
+					西文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="" checked="checked" />
+					全部
+				</label>
+			</div>
+			
+			<div class="search_hidden">
+				排序选项:
+				<select name="sortWay">
+					<option value="score" selected="selected" >匹配度</option>
+					<option value="pubdate_sort" >出版日期</option>
+					<option value="subject_sort" >主题词</option>
+					<option value="title_sort" >题名</option>
+					<option value="author_sort" >著者</option>
+					<option value="callno_sort" >索书号</option>
+					<option value="pinyin_sort" >题名拼音</option>
+					<option value="loannum_sort" >借阅次数</option>
+					<option value="renewnum_sort" >续借次数</option>
+					<option value="title200Weight" >题名权重</option>
+					<option value="title200aWeight" >正题名权重</option>
+					<option value="title200h" >卷册号</option>
+				</select>
+				排序方式:
+				<select name="sortOrder">
+					<option value="desc">降序排列</option>
+					<option value="asc">升序排列</option>
+				</select>
+                
+                    
+                    
+                        出版时间:
+                        <select name="startPubdate">
+                            <option value="" selected="selected">出版年</option>
+                            
+                                <option value="2026">2026</option>
+                            
+                                <option value="2025">2025</option>
+                            
+                                <option value="2024">2024</option>
+                            
+                                <option value="2023">2023</option>
+                            
+                                <option value="2022">2022</option>
+                            
+                                <option value="2021">2021</option>
+                            
+                                <option value="2020">2020</option>
+                            
+                                <option value="2019">2019</option>
+                            
+                                <option value="2018">2018</option>
+                            
+                                <option value="2017">2017</option>
+                            
+                                <option value="2016">2016</option>
+                            
+                                <option value="2015">2015</option>
+                            
+                                <option value="2014">2014</option>
+                            
+                                <option value="2013">2013</option>
+                            
+                                <option value="2012">2012</option>
+                            
+                                <option value="2011">2011</option>
+                            
+                                <option value="2010">2010</option>
+                            
+                                <option value="2009">2009</option>
+                            
+                                <option value="2008">2008</option>
+                            
+                                <option value="2007">2007</option>
+                            
+                                <option value="2006">2006</option>
+                            
+                                <option value="2005">2005</option>
+                            
+                                <option value="2004">2004</option>
+                            
+                                <option value="2003">2003</option>
+                            
+                                <option value="2002">2002</option>
+                            
+                                <option value="2001">2001</option>
+                            
+                                <option value="2000">2000</option>
+                            
+                                <option value="1999">1999</option>
+                            
+                                <option value="1998">1998</option>
+                            
+                                <option value="1997">1997</option>
+                            
+                                <option value="1996">1996</option>
+                            
+                                <option value="1995">1995</option>
+                            
+                                <option value="1994">1994</option>
+                            
+                                <option value="1993">1993</option>
+                            
+                                <option value="1992">1992</option>
+                            
+                                <option value="1991">1991</option>
+                            
+                                <option value="1990">1990</option>
+                            
+                                <option value="1989">1989</option>
+                            
+                                <option value="1988">1988</option>
+                            
+                                <option value="1987">1987</option>
+                            
+                                <option value="1986">1986</option>
+                            
+                                <option value="1985">1985</option>
+                            
+                                <option value="1984">1984</option>
+                            
+                                <option value="1983">1983</option>
+                            
+                                <option value="1982">1982</option>
+                            
+                                <option value="1981">1981</option>
+                            
+                                <option value="1980">1980</option>
+                            
+                                <option value="1979">1979</option>
+                            
+                                <option value="1978">1978</option>
+                            
+                                <option value="1977">1977</option>
+                            
+                                <option value="1976">1976</option>
+                            
+                                <option value="1975">1975</option>
+                            
+                                <option value="1974">1974</option>
+                            
+                                <option value="1973">1973</option>
+                            
+                                <option value="1972">1972</option>
+                            
+                                <option value="1971">1971</option>
+                            
+                                <option value="1970">1970</option>
+                            
+                                <option value="1969">1969</option>
+                            
+                                <option value="1968">1968</option>
+                            
+                                <option value="1967">1967</option>
+                            
+                                <option value="1966">1966</option>
+                            
+                                <option value="1965">1965</option>
+                            
+                                <option value="1964">1964</option>
+                            
+                                <option value="1963">1963</option>
+                            
+                                <option value="1962">1962</option>
+                            
+                                <option value="1961">1961</option>
+                            
+                                <option value="1960">1960</option>
+                            
+                                <option value="1959">1959</option>
+                            
+                                <option value="1958">1958</option>
+                            
+                                <option value="1957">1957</option>
+                            
+                                <option value="1956">1956</option>
+                            
+                                <option value="1955">1955</option>
+                            
+                                <option value="1954">1954</option>
+                            
+                                <option value="1953">1953</option>
+                            
+                                <option value="1952">1952</option>
+                            
+                                <option value="1951">1951</option>
+                            
+                                <option value="1950">1950</option>
+                            
+                                <option value="1949">1949</option>
+                            
+                                <option value="1948">1948</option>
+                            
+                                <option value="1947">1947</option>
+                            
+                                <option value="1946">1946</option>
+                            
+                                <option value="1945">1945</option>
+                            
+                                <option value="1944">1944</option>
+                            
+                                <option value="1943">1943</option>
+                            
+                                <option value="1942">1942</option>
+                            
+                                <option value="1941">1941</option>
+                            
+                                <option value="1940">1940</option>
+                            
+                                <option value="1939">1939</option>
+                            
+                                <option value="1938">1938</option>
+                            
+                                <option value="1937">1937</option>
+                            
+                                <option value="1936">1936</option>
+                            
+                                <option value="1935">1935</option>
+                            
+                                <option value="1934">1934</option>
+                            
+                                <option value="1933">1933</option>
+                            
+                                <option value="1932">1932</option>
+                            
+                                <option value="1931">1931</option>
+                            
+                                <option value="1930">1930</option>
+                            
+                                <option value="1929">1929</option>
+                            
+                                <option value="1928">1928</option>
+                            
+                                <option value="1927">1927</option>
+                            
+                                <option value="1926">1926</option>
+                            
+                                <option value="1925">1925</option>
+                            
+                                <option value="1924">1924</option>
+                            
+                                <option value="1923">1923</option>
+                            
+                                <option value="1922">1922</option>
+                            
+                                <option value="1921">1921</option>
+                            
+                                <option value="1920">1920</option>
+                            
+                                <option value="1919">1919</option>
+                            
+                                <option value="1918">1918</option>
+                            
+                                <option value="1917">1917</option>
+                            
+                                <option value="1916">1916</option>
+                            
+                                <option value="1915">1915</option>
+                            
+                                <option value="1914">1914</option>
+                            
+                                <option value="1913">1913</option>
+                            
+                                <option value="1912">1912</option>
+                            
+                                <option value="1911">1911</option>
+                            
+                                <option value="1910">1910</option>
+                            
+                                <option value="1909">1909</option>
+                            
+                                <option value="1908">1908</option>
+                            
+                                <option value="1907">1907</option>
+                            
+                                <option value="1906">1906</option>
+                            
+                                <option value="1905">1905</option>
+                            
+                                <option value="1904">1904</option>
+                            
+                                <option value="1903">1903</option>
+                            
+                                <option value="1902">1902</option>
+                            
+                                <option value="1901">1901</option>
+                            
+                                <option value="1900">1900</option>
+                            
+                                <option value="1899">1899</option>
+                            
+                                <option value="1898">1898</option>
+                            
+                                <option value="1897">1897</option>
+                            
+                                <option value="1896">1896</option>
+                            
+                                <option value="1895">1895</option>
+                            
+                                <option value="1894">1894</option>
+                            
+                                <option value="1893">1893</option>
+                            
+                                <option value="1892">1892</option>
+                            
+                                <option value="1891">1891</option>
+                            
+                                <option value="1890">1890</option>
+                            
+                                <option value="1889">1889</option>
+                            
+                                <option value="1888">1888</option>
+                            
+                                <option value="1887">1887</option>
+                            
+                                <option value="1886">1886</option>
+                            
+                                <option value="1885">1885</option>
+                            
+                                <option value="1884">1884</option>
+                            
+                                <option value="1883">1883</option>
+                            
+                                <option value="1882">1882</option>
+                            
+                                <option value="1881">1881</option>
+                            
+                                <option value="1880">1880</option>
+                            
+                                <option value="1879">1879</option>
+                            
+                                <option value="1878">1878</option>
+                            
+                                <option value="1877">1877</option>
+                            
+                                <option value="1876">1876</option>
+                            
+                                <option value="1875">1875</option>
+                            
+                                <option value="1874">1874</option>
+                            
+                                <option value="1873">1873</option>
+                            
+                                <option value="1872">1872</option>
+                            
+                                <option value="1871">1871</option>
+                            
+                                <option value="1870">1870</option>
+                            
+                                <option value="1869">1869</option>
+                            
+                                <option value="1868">1868</option>
+                            
+                                <option value="1867">1867</option>
+                            
+                                <option value="1866">1866</option>
+                            
+                                <option value="1865">1865</option>
+                            
+                                <option value="1864">1864</option>
+                            
+                                <option value="1863">1863</option>
+                            
+                                <option value="1862">1862</option>
+                            
+                                <option value="1861">1861</option>
+                            
+                                <option value="1860">1860</option>
+                            
+                                <option value="1859">1859</option>
+                            
+                                <option value="1858">1858</option>
+                            
+                                <option value="1857">1857</option>
+                            
+                                <option value="1856">1856</option>
+                            
+                                <option value="1855">1855</option>
+                            
+                                <option value="1854">1854</option>
+                            
+                                <option value="1853">1853</option>
+                            
+                                <option value="1852">1852</option>
+                            
+                                <option value="1851">1851</option>
+                            
+                                <option value="1850">1850</option>
+                            
+                                <option value="1849">1849</option>
+                            
+                                <option value="1848">1848</option>
+                            
+                                <option value="1847">1847</option>
+                            
+                                <option value="1846">1846</option>
+                            
+                                <option value="1845">1845</option>
+                            
+                                <option value="1844">1844</option>
+                            
+                                <option value="1843">1843</option>
+                            
+                                <option value="1842">1842</option>
+                            
+                                <option value="1841">1841</option>
+                            
+                                <option value="1840">1840</option>
+                            
+                                <option value="1839">1839</option>
+                            
+                                <option value="1838">1838</option>
+                            
+                                <option value="1837">1837</option>
+                            
+                                <option value="1836">1836</option>
+                            
+                                <option value="1835">1835</option>
+                            
+                                <option value="1834">1834</option>
+                            
+                                <option value="1833">1833</option>
+                            
+                                <option value="1832">1832</option>
+                            
+                                <option value="1831">1831</option>
+                            
+                                <option value="1830">1830</option>
+                            
+                                <option value="1829">1829</option>
+                            
+                                <option value="1828">1828</option>
+                            
+                                <option value="1827">1827</option>
+                            
+                                <option value="1826">1826</option>
+                            
+                                <option value="1825">1825</option>
+                            
+                                <option value="1824">1824</option>
+                            
+                                <option value="1823">1823</option>
+                            
+                                <option value="1822">1822</option>
+                            
+                                <option value="1821">1821</option>
+                            
+                                <option value="1820">1820</option>
+                            
+                                <option value="1819">1819</option>
+                            
+                                <option value="1818">1818</option>
+                            
+                                <option value="1817">1817</option>
+                            
+                                <option value="1816">1816</option>
+                            
+                                <option value="1815">1815</option>
+                            
+                                <option value="1814">1814</option>
+                            
+                                <option value="1813">1813</option>
+                            
+                                <option value="1812">1812</option>
+                            
+                                <option value="1811">1811</option>
+                            
+                                <option value="1810">1810</option>
+                            
+                                <option value="1809">1809</option>
+                            
+                                <option value="1808">1808</option>
+                            
+                                <option value="1807">1807</option>
+                            
+                                <option value="1806">1806</option>
+                            
+                                <option value="1805">1805</option>
+                            
+                                <option value="1804">1804</option>
+                            
+                                <option value="1803">1803</option>
+                            
+                                <option value="1802">1802</option>
+                            
+                                <option value="1801">1801</option>
+                            
+                                <option value="1800">1800</option>
+                            
+                        </select>
+                        至
+                        <select name="endPubdate">
+                            <option value="" selected="selected">出版年</option>
+                            
+                                <option value="2026">2026</option>
+                            
+                                <option value="2025">2025</option>
+                            
+                                <option value="2024">2024</option>
+                            
+                                <option value="2023">2023</option>
+                            
+                                <option value="2022">2022</option>
+                            
+                                <option value="2021">2021</option>
+                            
+                                <option value="2020">2020</option>
+                            
+                                <option value="2019">2019</option>
+                            
+                                <option value="2018">2018</option>
+                            
+                                <option value="2017">2017</option>
+                            
+                                <option value="2016">2016</option>
+                            
+                                <option value="2015">2015</option>
+                            
+                                <option value="2014">2014</option>
+                            
+                                <option value="2013">2013</option>
+                            
+                                <option value="2012">2012</option>
+                            
+                                <option value="2011">2011</option>
+                            
+                                <option value="2010">2010</option>
+                            
+                                <option value="2009">2009</option>
+                            
+                                <option value="2008">2008</option>
+                            
+                                <option value="2007">2007</option>
+                            
+                                <option value="2006">2006</option>
+                            
+                                <option value="2005">2005</option>
+                            
+                                <option value="2004">2004</option>
+                            
+                                <option value="2003">2003</option>
+                            
+                                <option value="2002">2002</option>
+                            
+                                <option value="2001">2001</option>
+                            
+                                <option value="2000">2000</option>
+                            
+                                <option value="1999">1999</option>
+                            
+                                <option value="1998">1998</option>
+                            
+                                <option value="1997">1997</option>
+                            
+                                <option value="1996">1996</option>
+                            
+                                <option value="1995">1995</option>
+                            
+                                <option value="1994">1994</option>
+                            
+                                <option value="1993">1993</option>
+                            
+                                <option value="1992">1992</option>
+                            
+                                <option value="1991">1991</option>
+                            
+                                <option value="1990">1990</option>
+                            
+                                <option value="1989">1989</option>
+                            
+                                <option value="1988">1988</option>
+                            
+                                <option value="1987">1987</option>
+                            
+                                <option value="1986">1986</option>
+                            
+                                <option value="1985">1985</option>
+                            
+                                <option value="1984">1984</option>
+                            
+                                <option value="1983">1983</option>
+                            
+                                <option value="1982">1982</option>
+                            
+                                <option value="1981">1981</option>
+                            
+                                <option value="1980">1980</option>
+                            
+                                <option value="1979">1979</option>
+                            
+                                <option value="1978">1978</option>
+                            
+                                <option value="1977">1977</option>
+                            
+                                <option value="1976">1976</option>
+                            
+                                <option value="1975">1975</option>
+                            
+                                <option value="1974">1974</option>
+                            
+                                <option value="1973">1973</option>
+                            
+                                <option value="1972">1972</option>
+                            
+                                <option value="1971">1971</option>
+                            
+                                <option value="1970">1970</option>
+                            
+                                <option value="1969">1969</option>
+                            
+                                <option value="1968">1968</option>
+                            
+                                <option value="1967">1967</option>
+                            
+                                <option value="1966">1966</option>
+                            
+                                <option value="1965">1965</option>
+                            
+                                <option value="1964">1964</option>
+                            
+                                <option value="1963">1963</option>
+                            
+                                <option value="1962">1962</option>
+                            
+                                <option value="1961">1961</option>
+                            
+                                <option value="1960">1960</option>
+                            
+                                <option value="1959">1959</option>
+                            
+                                <option value="1958">1958</option>
+                            
+                                <option value="1957">1957</option>
+                            
+                                <option value="1956">1956</option>
+                            
+                                <option value="1955">1955</option>
+                            
+                                <option value="1954">1954</option>
+                            
+                                <option value="1953">1953</option>
+                            
+                                <option value="1952">1952</option>
+                            
+                                <option value="1951">1951</option>
+                            
+                                <option value="1950">1950</option>
+                            
+                                <option value="1949">1949</option>
+                            
+                                <option value="1948">1948</option>
+                            
+                                <option value="1947">1947</option>
+                            
+                                <option value="1946">1946</option>
+                            
+                                <option value="1945">1945</option>
+                            
+                                <option value="1944">1944</option>
+                            
+                                <option value="1943">1943</option>
+                            
+                                <option value="1942">1942</option>
+                            
+                                <option value="1941">1941</option>
+                            
+                                <option value="1940">1940</option>
+                            
+                                <option value="1939">1939</option>
+                            
+                                <option value="1938">1938</option>
+                            
+                                <option value="1937">1937</option>
+                            
+                                <option value="1936">1936</option>
+                            
+                                <option value="1935">1935</option>
+                            
+                                <option value="1934">1934</option>
+                            
+                                <option value="1933">1933</option>
+                            
+                                <option value="1932">1932</option>
+                            
+                                <option value="1931">1931</option>
+                            
+                                <option value="1930">1930</option>
+                            
+                                <option value="1929">1929</option>
+                            
+                                <option value="1928">1928</option>
+                            
+                                <option value="1927">1927</option>
+                            
+                                <option value="1926">1926</option>
+                            
+                                <option value="1925">1925</option>
+                            
+                                <option value="1924">1924</option>
+                            
+                                <option value="1923">1923</option>
+                            
+                                <option value="1922">1922</option>
+                            
+                                <option value="1921">1921</option>
+                            
+                                <option value="1920">1920</option>
+                            
+                                <option value="1919">1919</option>
+                            
+                                <option value="1918">1918</option>
+                            
+                                <option value="1917">1917</option>
+                            
+                                <option value="1916">1916</option>
+                            
+                                <option value="1915">1915</option>
+                            
+                                <option value="1914">1914</option>
+                            
+                                <option value="1913">1913</option>
+                            
+                                <option value="1912">1912</option>
+                            
+                                <option value="1911">1911</option>
+                            
+                                <option value="1910">1910</option>
+                            
+                                <option value="1909">1909</option>
+                            
+                                <option value="1908">1908</option>
+                            
+                                <option value="1907">1907</option>
+                            
+                                <option value="1906">1906</option>
+                            
+                                <option value="1905">1905</option>
+                            
+                                <option value="1904">1904</option>
+                            
+                                <option value="1903">1903</option>
+                            
+                                <option value="1902">1902</option>
+                            
+                                <option value="1901">1901</option>
+                            
+                                <option value="1900">1900</option>
+                            
+                                <option value="1899">1899</option>
+                            
+                                <option value="1898">1898</option>
+                            
+                                <option value="1897">1897</option>
+                            
+                                <option value="1896">1896</option>
+                            
+                                <option value="1895">1895</option>
+                            
+                                <option value="1894">1894</option>
+                            
+                                <option value="1893">1893</option>
+                            
+                                <option value="1892">1892</option>
+                            
+                                <option value="1891">1891</option>
+                            
+                                <option value="1890">1890</option>
+                            
+                                <option value="1889">1889</option>
+                            
+                                <option value="1888">1888</option>
+                            
+                                <option value="1887">1887</option>
+                            
+                                <option value="1886">1886</option>
+                            
+                                <option value="1885">1885</option>
+                            
+                                <option value="1884">1884</option>
+                            
+                                <option value="1883">1883</option>
+                            
+                                <option value="1882">1882</option>
+                            
+                                <option value="1881">1881</option>
+                            
+                                <option value="1880">1880</option>
+                            
+                                <option value="1879">1879</option>
+                            
+                                <option value="1878">1878</option>
+                            
+                                <option value="1877">1877</option>
+                            
+                                <option value="1876">1876</option>
+                            
+                                <option value="1875">1875</option>
+                            
+                                <option value="1874">1874</option>
+                            
+                                <option value="1873">1873</option>
+                            
+                                <option value="1872">1872</option>
+                            
+                                <option value="1871">1871</option>
+                            
+                                <option value="1870">1870</option>
+                            
+                                <option value="1869">1869</option>
+                            
+                                <option value="1868">1868</option>
+                            
+                                <option value="1867">1867</option>
+                            
+                                <option value="1866">1866</option>
+                            
+                                <option value="1865">1865</option>
+                            
+                                <option value="1864">1864</option>
+                            
+                                <option value="1863">1863</option>
+                            
+                                <option value="1862">1862</option>
+                            
+                                <option value="1861">1861</option>
+                            
+                                <option value="1860">1860</option>
+                            
+                                <option value="1859">1859</option>
+                            
+                                <option value="1858">1858</option>
+                            
+                                <option value="1857">1857</option>
+                            
+                                <option value="1856">1856</option>
+                            
+                                <option value="1855">1855</option>
+                            
+                                <option value="1854">1854</option>
+                            
+                                <option value="1853">1853</option>
+                            
+                                <option value="1852">1852</option>
+                            
+                                <option value="1851">1851</option>
+                            
+                                <option value="1850">1850</option>
+                            
+                                <option value="1849">1849</option>
+                            
+                                <option value="1848">1848</option>
+                            
+                                <option value="1847">1847</option>
+                            
+                                <option value="1846">1846</option>
+                            
+                                <option value="1845">1845</option>
+                            
+                                <option value="1844">1844</option>
+                            
+                                <option value="1843">1843</option>
+                            
+                                <option value="1842">1842</option>
+                            
+                                <option value="1841">1841</option>
+                            
+                                <option value="1840">1840</option>
+                            
+                                <option value="1839">1839</option>
+                            
+                                <option value="1838">1838</option>
+                            
+                                <option value="1837">1837</option>
+                            
+                                <option value="1836">1836</option>
+                            
+                                <option value="1835">1835</option>
+                            
+                                <option value="1834">1834</option>
+                            
+                                <option value="1833">1833</option>
+                            
+                                <option value="1832">1832</option>
+                            
+                                <option value="1831">1831</option>
+                            
+                                <option value="1830">1830</option>
+                            
+                                <option value="1829">1829</option>
+                            
+                                <option value="1828">1828</option>
+                            
+                                <option value="1827">1827</option>
+                            
+                                <option value="1826">1826</option>
+                            
+                                <option value="1825">1825</option>
+                            
+                                <option value="1824">1824</option>
+                            
+                                <option value="1823">1823</option>
+                            
+                                <option value="1822">1822</option>
+                            
+                                <option value="1821">1821</option>
+                            
+                                <option value="1820">1820</option>
+                            
+                                <option value="1819">1819</option>
+                            
+                                <option value="1818">1818</option>
+                            
+                                <option value="1817">1817</option>
+                            
+                                <option value="1816">1816</option>
+                            
+                                <option value="1815">1815</option>
+                            
+                                <option value="1814">1814</option>
+                            
+                                <option value="1813">1813</option>
+                            
+                                <option value="1812">1812</option>
+                            
+                                <option value="1811">1811</option>
+                            
+                                <option value="1810">1810</option>
+                            
+                                <option value="1809">1809</option>
+                            
+                                <option value="1808">1808</option>
+                            
+                                <option value="1807">1807</option>
+                            
+                                <option value="1806">1806</option>
+                            
+                                <option value="1805">1805</option>
+                            
+                                <option value="1804">1804</option>
+                            
+                                <option value="1803">1803</option>
+                            
+                                <option value="1802">1802</option>
+                            
+                                <option value="1801">1801</option>
+                            
+                                <option value="1800">1800</option>
+                            
+                        </select>
+                    
+                
+			</div>
+			<div class="search_hidden">
+				每页显示行数:
+				<select name="rows">
+					<option value="10" selected="selected">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+					<option value="30">30</option>
+					<option value="35">35</option>
+					<option value="40">40</option>
+					<option value="45">45</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+				<span >
+					<label>
+					<input type="checkbox" name="hasholding" id="hasholding" value="1" 
+						
+							checked="checked"
+						
+					/>
+					只输出有馆藏的记录
+					</label>
+				</span>
+			</div>
+		</div>
+		<div id="libraries" style="display:none;" class="search_hidden">
+
+
+
+
+
+						<style>
+							.xm-select-lib {
+
+							}
+							.xm-select-libcode, .xm-select-local {
+								width: 322px;
+								float: left;
+							}
+							.clear {
+								clear: both;
+							}
+							.xm-select-local {
+								margin-left: 20px;
+							}
+						</style>
+						<script type="text/javascript" src="/opac/media/lib/xm-select/xm-select.js"></script>
+						<div class="xm-select-lib">
+							<div id="s-libcodes" class="xm-select-libcode"></div>
+							<div id="s-local" class="xm-select-local"></div>
+							<div class="clear"></div>
+						</div>
+
+						<script type="application/javascript">
+							var all_local = new Array();
+
+                            var f_curlocal  = $.cookie("f_curlocal");
+                            var f_initVal = new Array();
+                            if(f_curlocal != null) {
+                                f_initVal = f_curlocal.split(",");
+                            }
+
+                            var localSelected = xmSelect.render({
+                                el: '#s-local',
+                                tips: '分馆所在地址选择',
+                                filterable: true,
+								initValue: f_initVal,
+                                name: 'f_curlocal',
+                                prop: {
+                                    name: 'name',
+                                    value: 'localcode'
+                                },
+                                data: []
+                            });
+
+							$.ajax({
+                                type: 'POST',
+							    url: '/opac/json/localList/all',
+								dataType: 'json',
+								success: function(data) {
+                                    all_local = data;
+								},
+                                error: function(textStatus){
+                                    console.log(textStatus);
+                                    alert("网络异常。");
+                                }
+							});
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/opac/api/libcodes',
+                                dataType: 'json',
+                                success: function(data) {
+                                    renderToLibcodeSelected('s-libcodes', data);
+                                },
+                                error: function(textStatus){
+                                    console.log(textStatus);
+                                    alert("网络异常。");
+                                }
+                            });
+
+                            function renderToLibcodeSelected(el, resultData) {
+                                var initVal = new Array();
+                                	var curlibcode  = $.cookie("showLibcode");
+                                	if(curlibcode != null && curlibcode != ";") {
+                                	    curlibcode = curlibcode.substring(1);
+                                	    initVal = curlibcode.split(';');
+                                    } else {
+                                        initVal = ['GT'];
+                                    }
+                                	updateLocalData(initVal);
+                                var libcodeSelected = xmSelect.render({
+                                    el: '#' + el,
+                                    tips: '分馆选择',
+                                    filterable: true,
+									name: 'curlibcodeGT',
+                                    initValue: initVal,
+                                    prop: {
+                                        name: 'simpleName',
+                                        value: 'libcode'
+                                    },
+                                    data: resultData,
+                                    on: function(data) {
+                                        var arr = data.arr;
+                                        var filterData = arr.map(function(item, index, array){
+                                            return item.libcode;
+                                        });
+                                        console.log(filterData)
+                                        updateLocalData(filterData);
+                                    }
+                                });
+                            }
+
+                            function updateLocalData(filterData) {
+								var data = all_local.filter(function(item, index, array) {
+								    var libcode = item.libcode;
+								    return filterData.includes(libcode);
+								})
+                                localSelected.update({
+                                    data: data
+								})
+							}
+
+						</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		
+		<div id="cirTypeDiv" style="display:none;" class="booktypes">
+			
+		</div>
+		<div id="remember" style="margin-top: 15px;display:none;">
+		  <span><input type="checkbox" id="rememberMe" />
+					记住我的选择</span></div>
+		<!-- 检索提示框 -->
+		<div id="opacConfSetTable" style="display: none;">
+			OPAC参数设置<br/>
+			<a href="/opac/configLibName">分馆名显示自定义设置</a>
+		</div>
+		<!-- 外网资源统一配置  -->
+		<div id="opacConfouternet" style="display: none;">
+			<input type="checkbox" value="1" id="Conouternet" name="Conouternet" onclick="configouternet()"/>关闭外网资源通道
+		</div>
+		<div id="localConfig" style="display: none;">
+			<table width="100%">
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D020" type="checkbox" name="curlocal"  value="GLLIB_D020" />
+								总馆民国库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D021" type="checkbox" name="curlocal"  value="GLLIB_D021" />
+								安新期刊保存库（自科）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D024" type="checkbox" name="curlocal"  value="GLLIB_D024" />
+								总馆方志馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D023" type="checkbox" name="curlocal"  value="GLLIB_D023" />
+								安新综合阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D026" type="checkbox" name="curlocal"  value="GLLIB_D026" />
+								总馆地方文献库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D025" type="checkbox" name="curlocal"  value="GLLIB_D025" />
+								总馆家谱馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_XJTS" type="checkbox" name="curlocal"  value="GLLG_XJTS" />
+								临桂下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS_WJS" type="checkbox" name="curlocal"  value="GLYS_WJS" />
+								外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-XRFG" type="checkbox" name="curlocal"  value="GLLP-XRFG" />
+								荔浦市图书馆修仁分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_999" type="checkbox" name="curlocal"  value="GLQZ_999" />
+								全州馆际点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_TC" type="checkbox" name="curlocal"  value="GLLIB_TC" />
+								桂林馆中文特藏库(临时)
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_XJTS" type="checkbox" name="curlocal"  value="GLPL_XJTS" />
+								平乐下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_SHARE" type="checkbox" name="curlocal"  value="GLZY_SHARE" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D028" type="checkbox" name="curlocal"  value="GLLIB_D028" />
+								总馆古籍二库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D027" type="checkbox" name="curlocal"  value="GLLIB_D027" />
+								总馆地方文献阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D029" type="checkbox" name="curlocal"  value="GLLIB_D029" />
+								总馆古籍一库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GPLP-YE" type="checkbox" name="curlocal"  value="GPLP-YE" />
+								公园馆幼儿外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_TS" type="checkbox" name="curlocal"  value="GLLIB_TS" />
+								数据缺失暂存库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_BC" type="checkbox" name="curlocal"  value="GLLIB_BC" />
+								总馆地方文献库（藏）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS_SHAO" type="checkbox" name="curlocal"  value="GLYS_SHAO" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D011" type="checkbox" name="curlocal"  value="GLLIB_D011" />
+								安新期刊保存库（外借过刊）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D010" type="checkbox" name="curlocal"  value="GLLIB_D010" />
+								总馆密集库（外借）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D012" type="checkbox" name="curlocal"  value="GLLIB_D012" />
+								安新期刊保存库（社科）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D014" type="checkbox" name="curlocal"  value="GLLIB_D014" />
+								安新中文图书备用一库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_999" type="checkbox" name="curlocal"  value="GLLC_999" />
+								灵川馆际点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-YZYDSYZ" type="checkbox" name="curlocal"  value="GLLP-YZYDSYZ" />
+								荔浦市图书馆银子岩读书驿站
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_BK1" type="checkbox" name="curlocal"  value="GLQZ_BK1" />
+								报库1
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GPLP-GK" type="checkbox" name="curlocal"  value="GPLP-GK" />
+								总馆过刊外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D017" type="checkbox" name="curlocal"  value="GLLIB_D017" />
+								榕湖中文图书借阅处
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D019" type="checkbox" name="curlocal"  value="GLLIB_D019" />
+								榕湖中文图书备用书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D018" type="checkbox" name="curlocal"  value="GLLIB_D018" />
+								榕湖报刊借阅处
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_BK2" type="checkbox" name="curlocal"  value="GLQZ_BK2" />
+								报库2
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_MRZG" type="checkbox" name="curlocal"  value="GLLIB_MRZG" />
+								总馆地方文献库（名人专柜）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D042" type="checkbox" name="curlocal"  value="GLLIB_D042" />
+								下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D041" type="checkbox" name="curlocal"  value="GLLIB_D041" />
+								普通图书回溯临时书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_QKSK" type="checkbox" name="curlocal"  value="GLLIB_QKSK" />
+								总馆密集库（社科刊）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D044" type="checkbox" name="curlocal"  value="GLLIB_D044" />
+								安新一楼社科
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D043" type="checkbox" name="curlocal"  value="GLLIB_D043" />
+								安新一楼自科
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D045" type="checkbox" name="curlocal"  value="GLLIB_D045" />
+								临桂借阅备用库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_MXZ" type="checkbox" name="curlocal"  value="GLZY_MXZ" />
+								梅溪镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_EN" type="checkbox" name="curlocal"  value="GLLIB_EN" />
+								安新综合库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_SHARE" type="checkbox" name="curlocal"  value="GLYF_SHARE" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_GLX" type="checkbox" name="curlocal"  value="GLZY_GLX" />
+								瓜里乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D040" type="checkbox" name="curlocal"  value="GLLIB_D040" />
+								安新中文图书备用三库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP_XJTS" type="checkbox" name="curlocal"  value="GLLP_XJTS" />
+								荔浦下架图书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_CK" type="checkbox" name="curlocal"  value="GLQZ_CK" />
+								仓库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-CC" type="checkbox" name="curlocal"  value="GLLP-CC" />
+								荔浦市图书馆茶城分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_999" type="checkbox" name="curlocal"  value="GLXA_999" />
+								兴安馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D031" type="checkbox" name="curlocal"  value="GLLIB_D031" />
+								总馆盲人阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_098" type="checkbox" name="curlocal"  value="GLSE_098" />
+								汽车图书馆S
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D030" type="checkbox" name="curlocal"  value="GLLIB_D030" />
+								总馆古籍阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D033" type="checkbox" name="curlocal"  value="GLLIB_D033" />
+								临桂待上架
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D032" type="checkbox" name="curlocal"  value="GLLIB_D032" />
+								总馆旅游阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D035" type="checkbox" name="curlocal"  value="GLLIB_D035" />
+								共享借阅库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D034" type="checkbox" name="curlocal"  value="GLLIB_D034" />
+								榕湖待上架
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D037" type="checkbox" name="curlocal"  value="GLLIB_D037" />
+								总馆民国库（内部库）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D036" type="checkbox" name="curlocal"  value="GLLIB_D036" />
+								总馆共享借阅库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_5" type="checkbox" name="curlocal"  value="GLYF_5" />
+								永福县图书馆政协委员书屋流通点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_099" type="checkbox" name="curlocal"  value="GLSE_099" />
+								总馆流通点备用库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-DF" type="checkbox" name="curlocal"  value="GLLP-DF" />
+								总馆地方文献室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D039" type="checkbox" name="curlocal"  value="GLLIB_D039" />
+								安新中文图书备用二库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D038" type="checkbox" name="curlocal"  value="GLLIB_D038" />
+								安新综合库（共享库）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_XJTS" type="checkbox" name="curlocal"  value="GLGC_XJTS" />
+								恭城下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_006" type="checkbox" name="curlocal"  value="GLSE_006" />
+								总馆低幼阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_YLS" type="checkbox" name="curlocal"  value="GLQZ_YLS" />
+								阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_005" type="checkbox" name="curlocal"  value="GLGY_005" />
+								武警中队
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_005" type="checkbox" name="curlocal"  value="GLSE_005" />
+								馆际还书点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_999" type="checkbox" name="curlocal"  value="GLGC_999" />
+								恭城馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_004" type="checkbox" name="curlocal"  value="GLGY_004" />
+								报刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_004" type="checkbox" name="curlocal"  value="GLSE_004" />
+								榕湖幼儿阅览活动室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_003" type="checkbox" name="curlocal"  value="GLSE_003" />
+								总馆少儿阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_003" type="checkbox" name="curlocal"  value="GLGY_003" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_002" type="checkbox" name="curlocal"  value="GLSE_002" />
+								榕湖少儿书刊借阅处
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_002" type="checkbox" name="curlocal"  value="GLGY_002" />
+								提存库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_001" type="checkbox" name="curlocal"  value="GLSE_001" />
+								榕湖少儿图书备用库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_001" type="checkbox" name="curlocal"  value="GLGY_001" />
+								流通库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-ZW-2" type="checkbox" name="curlocal"  value="GLLP-ZW-2" />
+								总馆一楼藏书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_003" type="checkbox" name="curlocal"  value="GLYF_003" />
+								报刊库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_004" type="checkbox" name="curlocal"  value="GLYF_004" />
+								报刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS_XJTS" type="checkbox" name="curlocal"  value="GLYS_XJTS" />
+								阳朔下架图书
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_001" type="checkbox" name="curlocal"  value="GLYF_001" />
+								中文图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_009" type="checkbox" name="curlocal"  value="GLSE_009" />
+								榕湖待上架
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_002" type="checkbox" name="curlocal"  value="GLYF_002" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_008" type="checkbox" name="curlocal"  value="GLSE_008" />
+								临桂待上架
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_005" type="checkbox" name="curlocal"  value="GLYF_005" />
+								永福地方文献库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_003" type="checkbox" name="curlocal"  value="GLLS_003" />
+								地方文献库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_004" type="checkbox" name="curlocal"  value="GLLS_004" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_ZFZ" type="checkbox" name="curlocal"  value="GLZY_ZFZ" />
+								中锋镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_001" type="checkbox" name="curlocal"  value="GLLS_001" />
+								普通书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_002" type="checkbox" name="curlocal"  value="GLLS_002" />
+								报刊库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_117" type="checkbox" name="curlocal"  value="GLSE_117" />
+								漓心文化空间(锦府)馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_116" type="checkbox" name="curlocal"  value="GLSE_116" />
+								漓心文化空间(郡府)馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_115" type="checkbox" name="curlocal"  value="GLSE_115" />
+								民生银行象鼻山馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_114" type="checkbox" name="curlocal"  value="GLSE_114" />
+								社山桥社区馆外服务点（少儿）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_113" type="checkbox" name="curlocal"  value="GLSE_113" />
+								民生银行城北支行服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_112" type="checkbox" name="curlocal"  value="GLSE_112" />
+								华为合作区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_111" type="checkbox" name="curlocal"  value="GLSE_111" />
+								遇龙河服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_110" type="checkbox" name="curlocal"  value="GLSE_110" />
+								龙胜书香壮寨阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_004" type="checkbox" name="curlocal"  value="GLXA_004" />
+								少儿阅览
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-LCZFG" type="checkbox" name="curlocal"  value="GLLP-LCZFG" />
+								荔城镇分馆（鱼花塘）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_003" type="checkbox" name="curlocal"  value="GLXA_003" />
+								报刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_002" type="checkbox" name="curlocal"  value="GLXA_002" />
+								提存
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_118" type="checkbox" name="curlocal"  value="GLSE_118" />
+								银海社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_001" type="checkbox" name="curlocal"  value="GLXA_001" />
+								流通
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_DF" type="checkbox" name="curlocal"  value="GLQZ_DF" />
+								地方文献库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_106" type="checkbox" name="curlocal"  value="GLSE_106" />
+								大圩江璟酒店服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_105" type="checkbox" name="curlocal"  value="GLSE_105" />
+								尊神庙服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_104" type="checkbox" name="curlocal"  value="GLSE_104" />
+								悉尼蓝湾红色家园
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_103" type="checkbox" name="curlocal"  value="GLSE_103" />
+								奥创园休闲阅读吧
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_102" type="checkbox" name="curlocal"  value="GLSE_102" />
+								奥创园新时代阅读厅
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_101" type="checkbox" name="curlocal"  value="GLSE_101" />
+								将军桥小学服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_109" type="checkbox" name="curlocal"  value="GLSE_109" />
+								行致书房服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_108" type="checkbox" name="curlocal"  value="GLSE_108" />
+								三千漓服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_107" type="checkbox" name="curlocal"  value="GLSE_107" />
+								千家洞服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_QKWJ" type="checkbox" name="curlocal"  value="GLLIB_QKWJ" />
+								总馆报刊阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_GKK" type="checkbox" name="curlocal"  value="GLPL_GKK" />
+								过刊库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D992" type="checkbox" name="curlocal"  value="GLLIB_D992" />
+								榕湖盲人外借点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D991" type="checkbox" name="curlocal"  value="GLLIB_D991" />
+								临桂盲人外借点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D993" type="checkbox" name="curlocal"  value="GLLIB_D993" />
+								安新盲人外借点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG013" type="checkbox" name="curlocal"  value="GLLG013" />
+								临桂文史馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_999" type="checkbox" name="curlocal"  value="GLLG_999" />
+								临桂区馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_XJTS" type="checkbox" name="curlocal"  value="GLYF_XJTS" />
+								永福下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_GTGX" type="checkbox" name="curlocal"  value="GLLG_GTGX" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_LT" type="checkbox" name="curlocal"  value="GLPL_LT" />
+								书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_SEYLS" type="checkbox" name="curlocal"  value="GLQZ_SEYLS" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_MRWLS" type="checkbox" name="curlocal"  value="GLQZ_MRWLS" />
+								盲人读者阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D995" type="checkbox" name="curlocal"  value="GLLIB_D995" />
+								桂林新馆馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D997" type="checkbox" name="curlocal"  value="GLLIB_D997" />
+								安新馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D999" type="checkbox" name="curlocal"  value="GLLIB_D999" />
+								榕湖馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_031" type="checkbox" name="curlocal"  value="GLGC_031" />
+								复兴文库专架
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_002" type="checkbox" name="curlocal"  value="GLLG_002" />
+								期刊库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_001" type="checkbox" name="curlocal"  value="GLLG_001" />
+								中文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_004" type="checkbox" name="curlocal"  value="GLLG_004" />
+								少儿库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_003" type="checkbox" name="curlocal"  value="GLLG_003" />
+								地方文献
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_006" type="checkbox" name="curlocal"  value="GLLG_006" />
+								工具书
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_005" type="checkbox" name="curlocal"  value="GLLG_005" />
+								报刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_008" type="checkbox" name="curlocal"  value="GLLG_008" />
+								政务公开
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_007" type="checkbox" name="curlocal"  value="GLLG_007" />
+								电子阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_009" type="checkbox" name="curlocal"  value="GLLG_009" />
+								馆藏报纸
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_ZHYLS" type="checkbox" name="curlocal"  value="GLPL_ZHYLS" />
+								综合阅览室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-LCSY" type="checkbox" name="curlocal"  value="GLLP-LCSY" />
+								大发分馆荔城书苑
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP_999" type="checkbox" name="curlocal"  value="GLLP_999" />
+								荔浦馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_ZHYLS" type="checkbox" name="curlocal"  value="GLQZ_ZHYLS" />
+								成人综合阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_XJTS" type="checkbox" name="curlocal"  value="GLLS_XJTS" />
+								龙胜下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_030" type="checkbox" name="curlocal"  value="GLGC_030" />
+								绘本专架
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D097" type="checkbox" name="curlocal"  value="GLLIB_D097" />
+								汽车图书馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_011" type="checkbox" name="curlocal"  value="GLLG_011" />
+								特藏库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_010" type="checkbox" name="curlocal"  value="GLLG_010" />
+								音像资源
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D099" type="checkbox" name="curlocal"  value="GLLIB_D099" />
+								馆外流通点备用库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_012" type="checkbox" name="curlocal"  value="GLLG_012" />
+								武警临桂中队
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D098" type="checkbox" name="curlocal"  value="GLLIB_D098" />
+								桂图书屋
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_XS" type="checkbox" name="curlocal"  value="GLQZ_XS" />
+								新书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-DZZL" type="checkbox" name="curlocal"  value="GLLP-DZZL" />
+								总馆一楼藏书室留言购书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLJD_001" type="checkbox" name="curlocal"  value="GLJD_001" />
+								机电学校图书馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_KJZXS" type="checkbox" name="curlocal"  value="GLPL_KJZXS" />
+								科技咨询室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_010" type="checkbox" name="curlocal"  value="GLGC_010" />
+								嘉会镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GPLP-SE" type="checkbox" name="curlocal"  value="GPLP-SE" />
+								公园馆少儿外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_012" type="checkbox" name="curlocal"  value="GLGC_012" />
+								国图共享图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-AGZY" type="checkbox" name="curlocal"  value="GLLP-AGZY" />
+								公园馆爱国主义
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_011" type="checkbox" name="curlocal"  value="GLGC_011" />
+								莲花镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_014" type="checkbox" name="curlocal"  value="GLGC_014" />
+								西岭镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_TSJY1" type="checkbox" name="curlocal"  value="GLLIB_TSJY1" />
+								总馆中文图书借阅区（文、史）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_013" type="checkbox" name="curlocal"  value="GLGC_013" />
+								恭城县文化馆服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_TSJY2" type="checkbox" name="curlocal"  value="GLLIB_TSJY2" />
+								总馆中文图书借阅区
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_XJTS" type="checkbox" name="curlocal"  value="GLXA_XJTS" />
+								兴安下架图书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_016" type="checkbox" name="curlocal"  value="GLGC_016" />
+								观音乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_TSJY3" type="checkbox" name="curlocal"  value="GLLIB_TSJY3" />
+								总馆中央阅读大厅
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_015" type="checkbox" name="curlocal"  value="GLGC_015" />
+								栗木镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_018" type="checkbox" name="curlocal"  value="GLGC_018" />
+								恭城镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_017" type="checkbox" name="curlocal"  value="GLGC_017" />
+								平安镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_999" type="checkbox" name="curlocal"  value="GLZY_999" />
+								资源馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS_SHARE" type="checkbox" name="curlocal"  value="GLYS_SHARE" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_ZYZ" type="checkbox" name="curlocal"  value="GLZY_ZYZ" />
+								资源镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_021" type="checkbox" name="curlocal"  value="GLGC_021" />
+								图书外借室（四）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLSE_010" type="checkbox" name="curlocal"  value="GLSE_010" />
+								少儿内部库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_020" type="checkbox" name="curlocal"  value="GLGC_020" />
+								三江乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_023" type="checkbox" name="curlocal"  value="GLGC_023" />
+								恭城民族高中服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP_SHARE" type="checkbox" name="curlocal"  value="GLLP_SHARE" />
+								总馆国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_022" type="checkbox" name="curlocal"  value="GLGC_022" />
+								恭城瑶族博物馆服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_XJTS" type="checkbox" name="curlocal"  value="GLZY_XJTS" />
+								资源下架图书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_025" type="checkbox" name="curlocal"  value="GLGC_025" />
+								局党支部读书角
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_024" type="checkbox" name="curlocal"  value="GLGC_024" />
+								地方文献室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_XJTS" type="checkbox" name="curlocal"  value="GLQZ_XJTS" />
+								全州下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_027" type="checkbox" name="curlocal"  value="GLGC_027" />
+								推荐书架
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_026" type="checkbox" name="curlocal"  value="GLGC_026" />
+								武警恭城中队分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_029" type="checkbox" name="curlocal"  value="GLGC_029" />
+								少儿外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_XJTS" type="checkbox" name="curlocal"  value="GLGY_XJTS" />
+								灌阳下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_028" type="checkbox" name="curlocal"  value="GLGC_028" />
+								图书外借室（一）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY_999" type="checkbox" name="curlocal"  value="GLGY_999" />
+								灌阳馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_101" type="checkbox" name="curlocal"  value="GLXA_101" />
+								漓江书屋
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_JYS" type="checkbox" name="curlocal"  value="GLZY_JYS" />
+								图书借阅室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_QKZK" type="checkbox" name="curlocal"  value="GLLIB_QKZK" />
+								总馆密集库（自科刊）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_LDC" type="checkbox" name="curlocal"  value="GLZY_LDC" />
+								图书流动车
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D101" type="checkbox" name="curlocal"  value="GLLIB_D101" />
+								开放式采购临时库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D100" type="checkbox" name="curlocal"  value="GLLIB_D100" />
+								市直机关流通点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D103" type="checkbox" name="curlocal"  value="GLLIB_D103" />
+								西城社区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D102" type="checkbox" name="curlocal"  value="GLLIB_D102" />
+								象山街道服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P09" type="checkbox" name="curlocal"  value="GLDX_P09" />
+								图书学习屋（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_026" type="checkbox" name="curlocal"  value="GLLC_026" />
+								石刻拓片库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P08" type="checkbox" name="curlocal"  value="GLDX_P08" />
+								报刊阅览室（一楼）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_025" type="checkbox" name="curlocal"  value="GLLC_025" />
+								海洋乡分馆001
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P07" type="checkbox" name="curlocal"  value="GLDX_P07" />
+								期刊书库（一楼1-20）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_028" type="checkbox" name="curlocal"  value="GLLC_028" />
+								连环画库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P06" type="checkbox" name="curlocal"  value="GLDX_P06" />
+								教材库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_027" type="checkbox" name="curlocal"  value="GLLC_027" />
+								灵田镇长岗岭山边水边书屋
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P01" type="checkbox" name="curlocal"  value="GLDX_P01" />
+								图书书库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_022" type="checkbox" name="curlocal"  value="GLLC_022" />
+								国图共享图书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P05" type="checkbox" name="curlocal"  value="GLDX_P05" />
+								期刊书库（一楼1-1）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_021" type="checkbox" name="curlocal"  value="GLLC_021" />
+								灵田镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA_SHARE" type="checkbox" name="curlocal"  value="GLXA_SHARE" />
+								国图共享书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P04" type="checkbox" name="curlocal"  value="GLDX_P04" />
+								密集架书库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_024" type="checkbox" name="curlocal"  value="GLLC_024" />
+								广场阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P03" type="checkbox" name="curlocal"  value="GLDX_P03" />
+								捐赠书库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P02" type="checkbox" name="curlocal"  value="GLDX_P02" />
+								工具书书库（一楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_SHARE" type="checkbox" name="curlocal"  value="GLPL_SHARE" />
+								国图共享书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_023" type="checkbox" name="curlocal"  value="GLLC_023" />
+								工会农商行阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D105" type="checkbox" name="curlocal"  value="GLLIB_D105" />
+								奥创园休闲阅读吧
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D104" type="checkbox" name="curlocal"  value="GLLIB_D104" />
+								奥创园新时代悦读厅
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D107" type="checkbox" name="curlocal"  value="GLLIB_D107" />
+								桂林市第二看守所
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D106" type="checkbox" name="curlocal"  value="GLLIB_D106" />
+								悉尼蓝湾红色家园
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D109" type="checkbox" name="curlocal"  value="GLLIB_D109" />
+								桂林市叠彩区党群服务中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D108" type="checkbox" name="curlocal"  value="GLLIB_D108" />
+								龙胜书香壮寨阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_DTX" type="checkbox" name="curlocal"  value="GLZY_DTX" />
+								东田苗族乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_001" type="checkbox" name="curlocal"  value="GLGC_001" />
+								图书外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_003" type="checkbox" name="curlocal"  value="GLGC_003" />
+								图书外借室（二）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_JYX2" type="checkbox" name="curlocal"  value="GLQZ_JYX2" />
+								第二借阅室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_002" type="checkbox" name="curlocal"  value="GLGC_002" />
+								期刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_005" type="checkbox" name="curlocal"  value="GLGC_005" />
+								地方文献室、工具书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_004" type="checkbox" name="curlocal"  value="GLGC_004" />
+								临时库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_JYX1" type="checkbox" name="curlocal"  value="GLQZ_JYX1" />
+								第一借阅室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_007" type="checkbox" name="curlocal"  value="GLGC_007" />
+								图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_HKX" type="checkbox" name="curlocal"  value="GLZY_HKX" />
+								河口瑶族乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_006" type="checkbox" name="curlocal"  value="GLGC_006" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_009" type="checkbox" name="curlocal"  value="GLGC_009" />
+								龙虎乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGC_008" type="checkbox" name="curlocal"  value="GLGC_008" />
+								图书外借室（三）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P12" type="checkbox" name="curlocal"  value="GLDX_P12" />
+								地方文献书库（二楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P11" type="checkbox" name="curlocal"  value="GLDX_P11" />
+								期刊书库（二楼2-10）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P10" type="checkbox" name="curlocal"  value="GLDX_P10" />
+								期刊书库（二楼2-8）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P16" type="checkbox" name="curlocal"  value="GLDX_P16" />
+								智能图书柜（宿舍区）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P15" type="checkbox" name="curlocal"  value="GLDX_P15" />
+								密集架书库（三楼）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P14" type="checkbox" name="curlocal"  value="GLDX_P14" />
+								报纸收藏室（三楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_YLS" type="checkbox" name="curlocal"  value="GLZY_YLS" />
+								报刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_P13" type="checkbox" name="curlocal"  value="GLDX_P13" />
+								电子文献室（二楼）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLDX_XJTS" type="checkbox" name="curlocal"  value="GLDX_XJTS" />
+								党校下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLS_999" type="checkbox" name="curlocal"  value="GLLS_999" />
+								龙胜馆际点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYF_999" type="checkbox" name="curlocal"  value="GLYF_999" />
+								永福馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-ZW" type="checkbox" name="curlocal"  value="GLLP-ZW" />
+								总馆二楼藏书室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D121" type="checkbox" name="curlocal"  value="GLLIB_D121" />
+								华为合作区服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLG_101" type="checkbox" name="curlocal"  value="GLLG_101" />
+								会仙分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D120" type="checkbox" name="curlocal"  value="GLLIB_D120" />
+								遇龙河服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D123" type="checkbox" name="curlocal"  value="GLLIB_D123" />
+								社山桥社区馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D002" type="checkbox" name="curlocal"  value="GLLIB_D002" />
+								桂图期刊库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_SEYLS" type="checkbox" name="curlocal"  value="GLPL_SEYLS" />
+								少儿阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_LsX" type="checkbox" name="curlocal"  value="GLZY_LsX" />
+								两水苗族乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D122" type="checkbox" name="curlocal"  value="GLLIB_D122" />
+								民生银行城北支行服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D001" type="checkbox" name="curlocal"  value="GLLIB_D001" />
+								安新基藏库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D004" type="checkbox" name="curlocal"  value="GLLIB_D004" />
+								辅导部资料室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D125" type="checkbox" name="curlocal"  value="GLLIB_D125" />
+								漓心文化空间(郡府)馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-LJSY" type="checkbox" name="curlocal"  value="GLLP-LJSY" />
+								荔浦市图书馆荔江书苑
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D003" type="checkbox" name="curlocal"  value="GLLIB_D003" />
+								总馆密集库（报纸）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D124" type="checkbox" name="curlocal"  value="GLLIB_D124" />
+								民生银行象鼻山馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_004" type="checkbox" name="curlocal"  value="GLLC_004" />
+								电子阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-GY" type="checkbox" name="curlocal"  value="GLLP-GY" />
+								公园馆国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_003" type="checkbox" name="curlocal"  value="GLLC_003" />
+								报刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_006" type="checkbox" name="curlocal"  value="GLLC_006" />
+								书香府邸分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_005" type="checkbox" name="curlocal"  value="GLLC_005" />
+								报刊资料室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_007" type="checkbox" name="curlocal"  value="GLLC_007" />
+								九龙社区分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS SK" type="checkbox" name="curlocal"  value="GLYS SK" />
+								书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLP-GT" type="checkbox" name="curlocal"  value="GLLP-GT" />
+								大发分馆国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_999" type="checkbox" name="curlocal"  value="GLPL_999" />
+								平乐馆际点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_XJTS" type="checkbox" name="curlocal"  value="GLLC_XJTS" />
+								灵川下架图书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_TSYLS" type="checkbox" name="curlocal"  value="GLQZ_TSYLS" />
+								特色阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLXA-005" type="checkbox" name="curlocal"  value="GLXA-005" />
+								乐满地书屋
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_002" type="checkbox" name="curlocal"  value="GLLC_002" />
+								少儿书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_001" type="checkbox" name="curlocal"  value="GLLC_001" />
+								图书总库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D006" type="checkbox" name="curlocal"  value="GLLIB_D006" />
+								总馆创意空间
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D127" type="checkbox" name="curlocal"  value="GLLIB_D127" />
+								桂林航院
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D005" type="checkbox" name="curlocal"  value="GLLIB_D005" />
+								总馆地方音像库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D126" type="checkbox" name="curlocal"  value="GLLIB_D126" />
+								漓心文化空间(锦府)馆外服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D129" type="checkbox" name="curlocal"  value="GLLIB_D129" />
+								银海社区服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D008" type="checkbox" name="curlocal"  value="GLLIB_D008" />
+								安新中文图书备用一库（文、史）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D007" type="checkbox" name="curlocal"  value="GLLIB_D007" />
+								总馆三楼自修区
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D128" type="checkbox" name="curlocal"  value="GLLIB_D128" />
+								总馆一楼阅读角
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D009" type="checkbox" name="curlocal"  value="GLLIB_D009" />
+								总馆旧平装库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D110" type="checkbox" name="curlocal"  value="GLLIB_D110" />
+								桂林市警备区
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS-WZA" type="checkbox" name="curlocal"  value="GLYS-WZA" />
+								无障碍阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D112" type="checkbox" name="curlocal"  value="GLLIB_D112" />
+								龙胜万人界阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D111" type="checkbox" name="curlocal"  value="GLLIB_D111" />
+								奥林匹克人才公寓服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D114" type="checkbox" name="curlocal"  value="GLLIB_D114" />
+								大圩江璟酒店服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D113" type="checkbox" name="curlocal"  value="GLLIB_D113" />
+								尊神庙服务点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_015" type="checkbox" name="curlocal"  value="GLLC_015" />
+								兰田乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-010" type="checkbox" name="curlocal"  value="GLGY-010" />
+								灌阳镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_014" type="checkbox" name="curlocal"  value="GLLC_014" />
+								九屋镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-011" type="checkbox" name="curlocal"  value="GLGY-011" />
+								洞井瑶族乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_017" type="checkbox" name="curlocal"  value="GLLC_017" />
+								大圩镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-012" type="checkbox" name="curlocal"  value="GLGY-012" />
+								黄关镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_016" type="checkbox" name="curlocal"  value="GLLC_016" />
+								定江镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_019" type="checkbox" name="curlocal"  value="GLLC_019" />
+								大境乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-013" type="checkbox" name="curlocal"  value="GLGY-013" />
+								观音阁乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-014" type="checkbox" name="curlocal"  value="GLGY-014" />
+								新街镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_018" type="checkbox" name="curlocal"  value="GLLC_018" />
+								潮田乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-015" type="checkbox" name="curlocal"  value="GLGY-015" />
+								文市中学阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-016" type="checkbox" name="curlocal"  value="GLGY-016" />
+								国图共享书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-006" type="checkbox" name="curlocal"  value="GLGY-006" />
+								文市镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-007" type="checkbox" name="curlocal"  value="GLGY-007" />
+								水车镇分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-008" type="checkbox" name="curlocal"  value="GLGY-008" />
+								新圩镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLYS_999" type="checkbox" name="curlocal"  value="GLYS_999" />
+								阳朔馆际点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLGY-009" type="checkbox" name="curlocal"  value="GLGY-009" />
+								西山瑶族乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_011" type="checkbox" name="curlocal"  value="GLLC_011" />
+								三街镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLZY_ZLS" type="checkbox" name="curlocal"  value="GLZY_ZLS" />
+								资料室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_010" type="checkbox" name="curlocal"  value="GLLC_010" />
+								灵川镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLPL_DF" type="checkbox" name="curlocal"  value="GLPL_DF" />
+								地方文献室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_013" type="checkbox" name="curlocal"  value="GLLC_013" />
+								公平乡分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLC_012" type="checkbox" name="curlocal"  value="GLLC_012" />
+								潭下镇分馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLQZ_GTGS" type="checkbox" name="curlocal"  value="GLQZ_GTGS" />
+								国图共享书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D116" type="checkbox" name="curlocal"  value="GLLIB_D116" />
+								三千漓服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D115" type="checkbox" name="curlocal"  value="GLLIB_D115" />
+								千家洞服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D118" type="checkbox" name="curlocal"  value="GLLIB_D118" />
+								95795部队服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D117" type="checkbox" name="curlocal"  value="GLLIB_D117" />
+								行致书房服务点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_D119" type="checkbox" name="curlocal"  value="GLLIB_D119" />
+								桂林市政协阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_GLLIB_YX" type="checkbox" name="curlocal"  value="GLLIB_YX" />
+								总馆信息学习中心
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+			</table>
+		</div> 
+		
+			
+			
+				<div id="searchTips" class="tips" style="padding:5px;width:650px;">
+<!-- 				<h3 id="searchTitle"></h3> -->
+<!-- 				<ol></ol> -->
+					<h3 id="searchTitle">书目查询提示</h3><ol><li>读者可以在此查询本馆的图书、期刊、古籍、多媒体等信息。检索 方式可以多个条件组配，并可实现区域图书馆群各分馆的书目联合检索。</li><li>字符中有<b>空格</b>系统自动分词，如需要检索包含空格的字符串，请前后加上<b>双引号</b>（半角），如： “Elements of Information Theory”。</li><li>点“详细信息”后若无馆藏信息时为已订购还未到馆的图书。</li></ol>
+				</div>
+			
+		
+		
+		
+		
+	</form>
+	</div>
+
+
+
+</div>
+
+<style>
+	.funDiv a:hover{
+		color:red;
+	}
+	.boxContent{
+		width: 175px; display: block; margin-right: 20px;float:left;
+	}
+	a.aHover:hover{
+		text-decoration: underline;color: rgb(196,85,0);
+	}
+</style>
+
+<script type="application/javascript">
+	
+	
+	
+	
+</script>
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		<div id="page_footer"  >
+			
+				
+				
+				
+					<div class="page_footer_bd">
+						
+							
+								<span>© 2005－<script>document.write(new Date().getFullYear());</script> www.interlib.com.cn, all rights reserved</span>
+							
+						
+						<span class="fcenter">
+					<a href='http://www.gxgllib.org.cn'>广西桂林图书馆</a>
+</span>
+						<span class="fright">
+		
+			<a target="_blank" href="http://www.interlib.com.cn/tcsoft/web/information.do?actionCmd=column&id=63">关于</a>
+		
+		
+			<a target="_blank" href="http://www.interlib.com.cn">联系我们</a>
+		
+		
+			<a target="_blank" href="http://www.interlib.com.cn/tcsoft/web/information.do?actionCmd=column&id=62">帮助</a>
+		
+		
+			<a href="#">隐私声明</a>
+		
+		
+		</span>
+					</div>
+					
+				
+			
+		</div>
+	
+
+
+<script>
+	$(document).ready(function(){
+		
+	})
+</script>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+		
+	</body>
+</html>

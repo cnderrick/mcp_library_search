@@ -66,6 +66,18 @@
   - **域名停放前置排除**：`base_url` 域名解析到 `198.20.0.x` 域名停放段
     （晋中 `lib.jzstsg.com`→198.20.0.174、莆田 `opac.ptslib.com`→198.20.0.177 实证）→
     非馆方站点，直接判 ⛔ 不通，不必再探 `/opac/*`。
+  - **停放段复核（2026-10-03 第八批）**：并非所有 `198.20.x.x` 都是停放——本批 fuzhou
+    （`opcs.fzlib.org`→198.20.2.211）、sanya（`opac.sanyalib.com`→198.20.2.212）虽落在
+    该段，但返回真实馆方服务（福州为真实 Interlib、三亚为 tcc-opac）；wuzhou
+    （`www.wztsg.com`→198.20.2.213）则 82 端口连接超时零字节。故**判据以实抓响应为准**
+    （页标题／meta keywords／接口是否可用），不单凭 IP 段一票否决；已知停放页表现为
+    通用出售/跳转页或无响应（198.20.0.174/.177 等）。旧批 fuzhou 所记「198.20.2.5 停放段」
+    已随域内 IP 变化失效，须重抓复核。
+  - **误标为 Interlib 的 tcc-opac 城（三亚实证，2026-10-03）**：入口形如 `/opac/<SEG>`
+    但返回 `opac-remould` Vue SPA（页标题「图书馆」、`/opac/static/js/app.*.js`，SPA 挂在
+    `/opac/` 下），JS 里出现 `/api/tcc-opac`、`/system/user/getOpenApiAccessToken`、
+    `/search/`、`/service/biblios/getbyid` → **实为 tcc-opac，转 3.5 家族**，不要在
+    Interlib 里试探/新增 quirk。
   - 应用为**更新的 jishen 模板**（页标题「书目检索」、`solrpagination.js`、表单 POST
     `booklist.jsp`，`/opac/search` 404）→ **非家族模板，不接入**，回报主线程归入新分支
     （清远 `qingyuan` 实证）。
@@ -108,13 +120,22 @@
 
 ### 3.5 tcc-opac（`tccopac/`）
 
-- 家族模块 `src/mcp_library_search/tccopac/`；配置 `TccOpacConfig`。
-- 入口形如 `{host}/…/999`（宁波/济南/鄂尔多斯）；纯 JSON＋JWT 访客令牌
-  （`POST /system/user/getOpenApiAccessToken` 匿名即发，过期自动重取）。
+- 家族模块 `src/mcp_library_search/tccopac/`；配置 `TccOpacConfig`
+  （`city`/`name_cn`/`base_url`/`referer` 四项，暂无其它 quirk）。
+- 成员已含：宁波/济南/鄂尔多斯，**2026-10-03 增三亚 `sanya`**。
+- 入口形如 `{host}/…/999`（宁波/济南/鄂尔多斯）；三亚是 `opac-remould` Vue SPA 挂
+  `/opac/<SEG>`、真实 API 前缀 `/api/tcc-opac/<SEG>`，SEG 取自前端 JS 常量
+  （三亚 `["SY","YCSTQG"]`，默认 `SY`）。**判据**：JS 出现 `/api/tcc-opac`、
+  `/system/user/getOpenApiAccessToken`、`/search/`、`/service/biblios/getbyid` 即成。
+- 纯 JSON＋JWT 访客令牌（`POST /system/user/getOpenApiAccessToken` 匿名即发，
+  过期自动重取）。
 - 检索 `POST /search/`（**尾斜杠**，`hasholding=1`＝只看有馆藏）；详情
   `POST /service/biblios/getbyid`；馆藏 `POST /service/hold/pagelist`。
 - 滑块风控 `code ∈ {43001,-1,-402}` → 停手抛错，不硬闯。
-- 适配器照 `adapters/cn/ningbo.py`／`jinan.py`。
+- 数据边界：检索条目 `availability_summary` 恒空串；`biblios.shelfno` 为 null 时
+  `call_number` 空串（`classno` 分类号不冒充索书号）。**源站可偶发 TLS/读超时**
+  （三亚实抓令牌、getbyid 均出现过，重试即通），家族 timeout 30 秒止损、业务请求不重试。
+- 适配器照 `adapters/cn/ningbo.py`／`jinan.py`／`sanya.py`。
 
 ### 3.6 InDigLib（重庆，独立实现，无共享家族）
 

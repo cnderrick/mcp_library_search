@@ -6,8 +6,10 @@ get_book_detail 三个原语（返回结构对齐 adapters/base.py 的 TypedDict
 """
 from . import ankang
 from . import anqing
+from . import anshun
 from . import baoji
 from . import baotou
+from . import bijie
 from . import changchun
 from . import chaozhou
 from . import chengdu
@@ -23,7 +25,9 @@ from . import eerduosi
 from . import enshi
 from . import ezhou
 from . import fujian_prov
+from . import fuzhou
 from . import guangzhou
+from . import guilin
 from . import haikou
 from . import hangzhou
 from . import hanzhong
@@ -37,6 +41,7 @@ from . import huanggang
 from . import huangshi
 from . import hubei_prov
 from . import huhehaote
+from . import hulunbuir
 from . import hunan_prov
 from . import jiangmen
 from . import jiangyin
@@ -53,6 +58,7 @@ from . import lijiang
 from . import lincang
 from . import linyi
 from . import lishui
+from . import liupanshui
 from . import maoming
 from . import mudanjiang
 from . import nanjing
@@ -68,6 +74,7 @@ from . import quanzhou
 from . import qujing
 from . import rizhao
 from . import sanming
+from . import sanya
 from . import shaanxi
 from . import shanghai
 from . import shaoxing
@@ -116,8 +123,10 @@ NAME = "中国"
 ADAPTERS = {
     "ankang": ankang,
     "anqing": anqing,
+    "anshun": anshun,
     "baoji": baoji,
     "baotou": baotou,
+    "bijie": bijie,
     "changchun": changchun,
     "chaozhou": chaozhou,
     "chengdu": chengdu,
@@ -133,7 +142,9 @@ ADAPTERS = {
     "enshi": enshi,
     "ezhou": ezhou,
     "fujian_prov": fujian_prov,
+    "fuzhou": fuzhou,
     "guangzhou": guangzhou,
+    "guilin": guilin,
     "haikou": haikou,
     "hangzhou": hangzhou,
     "hanzhong": hanzhong,
@@ -147,6 +158,7 @@ ADAPTERS = {
     "huangshi": huangshi,
     "hubei_prov": hubei_prov,
     "huhehaote": huhehaote,
+    "hulunbuir": hulunbuir,
     "hunan_prov": hunan_prov,
     "jiangmen": jiangmen,
     "jiangyin": jiangyin,
@@ -163,6 +175,7 @@ ADAPTERS = {
     "lincang": lincang,
     "linyi": linyi,
     "lishui": lishui,
+    "liupanshui": liupanshui,
     "maoming": maoming,
     "mudanjiang": mudanjiang,
     "nanjing": nanjing,
@@ -178,6 +191,7 @@ ADAPTERS = {
     "qujing": qujing,
     "rizhao": rizhao,
     "sanming": sanming,
+    "sanya": sanya,
     "shaanxi": shaanxi,
     "shanghai": shanghai,
     "shaoxing": shaoxing,

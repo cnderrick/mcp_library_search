@@ -122,7 +122,7 @@
 | 四川省 | 成都 | `chengdu` | ✅ 接入 | — | https://opac.cdclib.cn/opac/index （成都市公共图书馆联合书目检索；原超星入口 books.gdlink.net.cn IP 白名单硬墙仍搁置） | 图创 Interlib（已确认，pro2018 模板代 simple 皮肤；meta keywords 自报图创 interlib） | `interlib/` 家族 ＋ `adapters/cn/chengdu.py`（`pro2018=True` 启用家族 pro2018 解析；自带 ≥2 秒节流） |
 |  |  | — | ⚠️ 障碍 | 验证码 | http://opac.sclib.cn:8088/opac/ （四川省图书馆） | 图创 Interlib **pro2018**（同一联合目录实例） | 2026-10-03 用户提供入口并提示有验证码；检索页为「opac验证」滑动验证码墙，按既定口径不处理（不破解验证码）→ ⚠️ 障碍，无可匿名检索入口；详情/馆藏匿名可通（同乐山）。绵阳 `tenant=MY`、雅安 `tenant=YA` 同此实例 |
 |  | 自贡 | — | ❓ 缺失 | — | — | — | — |
-|  | 攀枝花 | — | 📋 计划 | — | http://www.pzhlib.com.cn （攀枝花市图书馆） | 图创 Interlib（站内 interlibSSO／ifs/search） | 2026-10-03 首页标题「攀枝花市图书馆网站」；OPAC 候选 host http://125.66.234.132:8180（本网络 8180 不可达，待换网复测） |
+|  | 攀枝花 | — | ⛔ 不通 | — | http://www.pzhlib.com.cn （攀枝花市图书馆） | 图创 Interlib（站内 interlibSSO／ifs/search） | 2026-10-03 本批复核：官网（CMS 门户）可达，但站内 `/ifs/search`、`/interlibSSO/main/`、`/opac/*` 在 80 端口均 404；候选 OPAC host `http://125.66.234.132:8180`（与官网同 IP）8180 端口连接超时零字节，本网络仍不可达。建议换网络复测 8180 后再判是否接入 |
 |  | 泸州 | — | ❓ 缺失 | — | — | — | — |
 |  | 德阳 | — | 📋 计划 | — | http://www.deyanglib.cn （德阳市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 首页标题「德阳市图书馆」，wisweb＋chaoxing 变量；OPAC 未侦察 |
 |  | 绵阳 | — | 📋 计划 | 验证码 | http://opac.sclib.cn:8088/opac/?tenant=MY （绵阳市图书馆，借四川省图书馆联合目录租户参数 `tenant=MY`） | 图创 Interlib pro2018（四川省图同一实例） | 2026-10-03 用户提供租户参数入口；旧候选 www.mylib.net 为 198.20.2.16 停放段；检索受省图验证码墙限制，待立项评估（同乐山口径） |
@@ -202,7 +202,7 @@
 |  | 绥化 | — | ⛔ 不通 | — | http://www.shlib.net （绥化市图书馆） | — | — |
 |  | 大兴安岭 | — | ⛔ 不通 | — | http://www.dxallib.net （大兴安岭地区图书馆） | — | — |
 | 福建省 | 福州 | `fujian_prov` | ✅ 接入 | — | https://opac.fjlib.net/opac/index （福建省图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/fujian_prov.py`；实抓「三体」127 条 |
-|  |  | — | 📋 计划 | — | https://opcs.fzlib.org:8082/opac/index （福州市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口，未标注异常，可计划接入（以本批最新数据为准） |
+|  |  | `fuzhou` | ✅ 接入 | — | https://opcs.fzlib.org:8082/opac/index （福州市图书馆） | 图创 Interlib（已确认；福州地区图书馆联合检索平台） | `interlib/` 家族 + `adapters/cn/fuzhou.py`（`api_detail=True`）；实抓「三体」138 条。旧批判「TLS 失败／停放段」已不成立：本批实抓可达（域名现解析至 198.20.2.211，但为真实馆方 OPAC，非停放页） |
 |  | 厦门 | — | ⚠️ 障碍 | 验证码 | https://interweb.xmlib.net:8821/opac/index （厦门市图书馆） | 图创 Interlib（入口形态，待实抓） | 2026-10-03 用户提供入口并提示有验证码、会被拦截；旧登记 www.xmlib.net 未核实 |
 |  | 莆田 | — | ⛔ 不通 | — | https://opac.ptslib.com:8888/opac/ （莆田市图书馆） | — | 2026-10-03 本批实抓：域名 `opac.ptslib.com` 解析至 198.20.0.177（域名停放段）、8888 端口 TLS 握手/连接超时，非馆方站点；无可用检索入口 |
 |  | 三明 | `sanming` | ✅ 接入 | — | http://opac.fjsmlib.cn:6999/opac/index （三明市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/sanming.py`（`api_detail=True`）；实抓「三体」71 条 |
@@ -256,7 +256,7 @@
 |  | 黄石 | `huangshi` | ✅ 接入 | — | http://61.184.117.12:8081/opac/index （黄石市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/huangshi.py`（`api_detail=True`）；实抓「三体」54 条 |
 |  | 宜昌 | — | ⛔ 不通 | — | https://www.yclibrary.cn （宜昌市图书馆） | 超星智慧门户（wisweb／chaoxing） | 2026-10-03 用户述页面全白；实测仅 2.5KB 超星门户壳，无书目检索入口 |
 | 湖南省 | 长沙 | `hunan_prov` | ✅ 接入 | — | https://opac.library.hn.cn/opac/ （湖南图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/hunan_prov.py`；实抓「三体」176 条 |
-|  |  | — | 📋 计划 | — | https://opac.changshalib.cn/index （长沙图书馆） | 图创 Interlib | 2026-10-03 用户提供入口，未标注异常，可计划接入（以本批最新数据为准） |
+|  |  | — | ⛔ 不通 | — | https://opac.changshalib.cn/index （长沙图书馆） | 图创 Interlib（整站 WAF 应用层拦截） | 2026-10-03 本批复核：`/index` 返回 200 但 `/opac/search`（任意参数）恒 HTTP 403「网站防护系统」；旧批即判整站 WAF 403，复核结论一致，无可用检索入口 |
 |  | 株洲 | `zhuzhou` | ✅ 接入 | — | http://218.75.211.12:8899/opac/index （株洲市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/zhuzhou.py`；实抓「三体」222 条 |
 |  | 湘潭 | `xiangtan` | ✅ 接入 | — | http://220.170.15.29:8099/opac/index （湘潭市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/xiangtan.py`（`api_detail=True`）；实抓「三体」88 条 |
 |  | 衡阳 | — | 📋 计划 | — | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action （衡阳市图书馆） | InDigLib 集群数字图书馆（同重庆家族） | 2026-10-03 用户提供入口；旧登记 www.hylib.net 未核实 |
@@ -273,15 +273,15 @@
 | 海南省 | 海口 | `haikou` | ✅ 接入 | — | http://221.11.163.25:5656/opac/index （海口市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/haikou.py`；实抓「三体」18 条。海南省图书馆 www.hilib.com 仍不通 |
 |  |  | — | ⛔ 不通 | — | https://www.ucdrs.cn/area/hilib （海南省图书馆） | 超星 ucdrs 门户 | 2026-10-03 为超星 ucdrs 区域页、需登录，非匿名 OPAC（检索后跳 gdlink 404）；原 www.hilib.com 亦不通 |
 |  |  | — | ✅ 接入（并入 `haikou`） | — | http://221.11.163.25:5656/opac/index （海口图书馆，与已接入的海口市图同一 Interlib 实例 `haikou`） | 图创 Interlib | 2026-10-03 用户提供此 Interlib 入口，实测与已接入 `haikou` 同 host 同源（同一实例，「三体」同为 18 条），无需新适配器，用 `city=haikou` 即可（另有官网 www.haikoulib.cn） |
-|  | 三亚 | — | 📋 计划 | — | https://opac.sanyalib.com:8888/opac/SY （三亚市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧候选 www.sanyalib.com 为 198.20.2.21 停放段 |
+|  | 三亚 | `sanya` | ✅ 接入 | — | https://opac.sanyalib.com:8888/opac/SY （三亚市图书馆） | 图创 **tcc-opac**（实抓：SPA 壳 `/opac/SY` ＋ 纯 JSON 后端 `/api/tcc-opac/SY/*` ＋ JWT 访客令牌，非 Interlib 产品线） | `tccopac/` 家族 + `adapters/cn/sanya.py`；实抓「三体」49 条（内置 ≥4 秒节流；源站偶发读超时，重试即通） |
 |  | 三沙 | — | ❓ 缺失 | — | — | — | — |
 |  | 儋州 | — | ❓ 缺失 | — | — | — | — |
 | 贵州省 | 贵阳 | — | ⛔ 不通 | — | https://ilas.gzlib.com.cn/opac/index （贵州省图书馆） | 图创 Interlib | 2026-10-03 实测：`/opac/index` HTTP 200，但 `/opac/search`（任意参数）恒 HTTP 500、`/opac/api/search` 亦 500——检索后端故障，暂不可用 |
 |  |  | — | 📋 计划 | — | http://218.201.254.11/Index?target=0 （贵阳市图书馆） | UILAS 知识检索平台（`Index?target=0`，老版 ILAS HTML OPAC） | 2026-10-03 用户提供「贵阳」入口，按市馆登记（若实为省图再改隶）；旧登记 www.gylib.org.cn 为登录墙，弃用 |
-|  | 六盘水 | — | 📋 计划 | — | http://111.85.91.253:8088/opac/index （六盘水市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧候选 www.lpslib.com 为 198.20.2.22 停放段 |
+|  | 六盘水 | `liupanshui` | ✅ 接入 | — | http://111.85.91.253:8088/opac/index （六盘水市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/liupanshui.py`（`api_detail=True`）；实抓「三体」11 条 |
 |  | 遵义 | `zunyi` | ✅ 接入 | — | http://opac.zylib.cn:82/opac/index （遵义市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/zunyi.py`（`api_detail=True`）；实抓「三体」43 条 |
-|  | 安顺 | — | 📋 计划 | — | http://119.1.160.3:8082/opac/ （安顺市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧候选 www.asstsg.com 为 198.20.2.23 停放段 |
-|  | 毕节 | — | 📋 计划 | — | http://220.172.207.114:8001/opac/ （毕节市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧候选 www.bijlib.com 为 198.20.2.24 停放段 |
+|  | 安顺 | `anshun` | ✅ 接入 | — | http://119.1.160.3:8082/opac/ （安顺市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/anshun.py`（`api_detail=True`）；实抓「三体」15 条（检索首条 53072 无馆藏，详情/馆藏实例取同页 22100） |
+|  | 毕节 | `bijie` | ✅ 接入 | — | http://220.172.207.114:8001/opac/ （毕节市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/bijie.py`（`api_detail=True`）；实抓「三体」31 条 |
 |  | 铜仁 | — | ❓ 缺失 | — | — | — | — |
 |  | 黔西南 | — | ❓ 缺失 | — | — | — | — |
 |  | 黔东南 | `qiandongnan` | ✅ 接入 | — | http://111.124.33.40:8088/opac/index （黔东南州图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/qiandongnan.py`（`api_detail=True`）；实抓「三体」77 条 |
@@ -350,7 +350,7 @@
 |  | 赤峰 | — | 🕳️ 无入口 | — | — （赤峰市图书馆） | — | 2026-10-03 用户述没有找到官网；旧登记 www.cflib.net 未核实 |
 |  | 通辽 | `tongliao` | ✅ 接入 | — | http://60.31.181.203:8088/opac/ （通辽市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/tongliao.py`；实抓「三体」11 条 |
 |  | 鄂尔多斯 | `eerduosi` | ✅ 接入 | — | http://1.183.72.92:8089/ordoslib （鄂尔多斯市图书馆） | 图创 tcc-opac（与宁波同款） | `tccopac/` 家族 + `adapters/cn/eerduosi.py`；实抓「三体」253 条 |
-|  | 呼伦贝尔 | — | 📋 计划 | — | https://interlib.hlbewl.cn/opac/index （呼伦贝尔市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧登记 www.hlbrlib.net 未核实 |
+|  | 呼伦贝尔 | `hulunbuir` | ✅ 接入 | — | https://interlib.hlbewl.cn/opac/index （呼伦贝尔市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/hulunbuir.py`（`api_detail=True`）；实抓「三体」71 条 |
 |  | 巴彦淖尔 | — | 🕳️ 无入口 | — | https://byne.futlib.com/index.php （巴彦淖尔市图书馆） | — | 2026-10-03 用户实测站点可达但没找到搜索入口；旧登记 www.bynrlib.net 未核实 |
 |  | 乌兰察布 | — | ⛔ 不通 | — | http://58.18.107.6:18080/opac/search （乌兰察布市图书馆） | 图创 Interlib（待定） | 2026-10-03 实测：连接被重置（RemoteDisconnected），用户述不通；入口待寻 |
 |  | 乌海 | `wuhai` | ✅ 接入 | — | http://1.24.223.177:8085/opac/index （乌海市图书馆） | 图创 Interlib（Solr 检索） | `interlib/` 家族 + `adapters/cn/wuhai.py`；实抓「三体」75 条 |
@@ -359,9 +359,9 @@
 |  | 阿拉善盟 | — | ❓ 缺失 | — | — | — | — |
 | 广西壮族自治区 | 南宁 | — | 📋 计划 | — | https://opac.gxlib.org.cn/#/home （广西壮族自治区图书馆） | 新版 UILAS（待定，疑似） | 2026-10-03 实测：TLS 握手 EOF（OpenSSL 3.5 与 LibreSSL 均失败），需进一步侦察 |
 |  |  | — | 📋 计划 | — | https://book.nnlib.com.cn/dss-portal/ （南宁市图书馆） | 未知（dss-portal） | 2026-10-03 实测入口 HTTP 200（Vue 壳），检索接口未侦察 |
-|  | 桂林 | — | 📋 计划 | — | https://opac.gxgllib.org.cn/opac/index （广西壮族自治区桂林图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧登记 www.gll-gx.org.cn 未核实 |
+|  | 桂林 | `guilin` | ✅ 接入 | — | https://opac.gxgllib.org.cn/opac/index （广西壮族自治区桂林图书馆） | 图创 Interlib（默认模板；meta keywords 自报「广西区域图书馆集群」，全自治区域联合目录） | `interlib/` 家族 + `adapters/cn/guilin.py`（`api_detail=True`）；实抓「三体」122 条（检索首条 1900005326 无馆藏，详情/馆藏实例取同页 1902562793） |
 |  | 柳州 | — | ⛔ 不通 | — | http://opac.lzlib.org.cn/opac/ （柳州市图书馆） | 图创 Interlib（入口形态，待实抓） | 2026-10-03 用户述 403 被拦；旧登记 www.lzlib.net 未核实 |
-|  | 梧州 | — | 📋 计划 | — | http://www.wztsg.com:82/opac/ （梧州市图书馆） | 图创 Interlib（待实抓） | 2026-10-03 用户提供入口；旧登记 www.wzlib.net 未核实 |
+|  | 梧州 | — | ⛔ 不通 | — | http://www.wztsg.com:82/opac/ （梧州市图书馆） | — | 2026-10-03 本批实抓：`www.wztsg.com` 解析至 198.20.2.213（域名停放段）、82 端口连接超时零字节，非馆方站点；无可用检索入口 |
 |  | 北海 | — | ⛔ 不通 | — | http://www.bhlib.cn:8080/opac/index （北海市图书馆） | 图创 Interlib（入口形态，待实抓） | 2026-10-03 用户述 403 被拦；旧登记 www.bhlib.net 未核实 |
 |  | 防城港 | — | ⛔ 不通 | — | https://fcglib.org.cn/ （防城港市图书馆） | — | 2026-10-03 用户述不通；旧登记 www.fcglib.net 未核实 |
 |  | 钦州 | — | ⛔ 不通 | — | http://124.227.1.121:2365/opac/ （钦州市图书馆） | 图创 Interlib（入口形态，待实抓） | 2026-10-03 用户述 403 被拦；旧登记 www.qzlib.net 未核实 |
@@ -467,6 +467,12 @@
 | 岳阳 | `api_detail=True` | 默认模板；馆藏含「岳阳市图书馆」「岳阳县图书馆」。`tests/fixtures/yueyang/NOTES.md`。 |
 | 张家界 | `api_detail=True` | 默认模板；馆藏挂「张家界学院图书馆」（联合目录口径）。`tests/fixtures/zhangjiajie/NOTES.md`。 |
 | 湖北省图书馆 `hubei_prov` | `api_detail=True`＋`captcha=True` | 默认模板；检索页「opac验证」且内嵌 Solr 被 bot 检测拦（连接重置/403），无程序化检索通道，命中即抛 `CaptchaError`（同乐山/揭阳口径）；详情/馆藏匿名可通，recno 自首页推荐位 `/opac/recommend/recommendBookList/list` 取得。与 `wuhan`（武汉图书馆）非同一馆。`tests/fixtures/hubei_prov/NOTES.md`。 |
+| 福州 `fuzhou` | `api_detail=True` | 默认模板；福州地区图书馆联合检索平台（meta keywords 自报），实抓「三体」138 条。旧批判「TLS 失败／停放段」已不成立，域名现解析至 198.20.2.211 但为真实馆方 OPAC。`tests/fixtures/fuzhou/NOTES.md`。 |
+| 六盘水 `liupanshui` | `api_detail=True` | 默认模板；实抓「三体」11 条。`tests/fixtures/liupanshui/NOTES.md`。 |
+| 安顺 `anshun` | `api_detail=True` | 默认模板；检索首条 53072 无馆藏，详情/馆藏实例取同页 22100（《三体》）。`tests/fixtures/anshun/NOTES.md`。 |
+| 毕节 `bijie` | `api_detail=True` | 默认模板；实抓「三体」31 条。`tests/fixtures/bijie/NOTES.md`。 |
+| 呼伦贝尔 `hulunbuir` | `api_detail=True` | 默认模板；实抓「三体」71 条。`tests/fixtures/hulunbuir/NOTES.md`。 |
+| 桂林 `guilin` | `api_detail=True` | 默认模板；meta keywords 自报「广西区域图书馆集群」（全自治区域联合目录），实抓「三体」122 条（检索首条 1900005326 无馆藏，详情/馆藏实例取同页 1902562793）。`tests/fixtures/guilin/NOTES.md`。 |
 
 **`api_detail` quirk（2026-10-03）**：`/api/book/{recno}`（各 Interlib 站点均提供）
 返回 `{biblios:{title,author,publisher,pubdate,isbn,classNo,summary,…}, holdings:[…]}`
@@ -542,6 +548,20 @@ HTML 检索页命中数 > 0 时「下一页」锚点恒渲染（末页也 `has_n
 开封 `kaifeng`（`221.176.156.243:8089`）入口可达但为老版 **GLIS** 模板（页标题
 「图书检索系统」、GB2312、检索走 GET `jdjsjg.jsp`，`/opac/search` 与 `/opac/api/*`
 均 404），非家族默认/pro2018 模板，暂不接入、待主线程归入新家族分支（同清远口径）。
+
+**第八批成员（2026-10-03，图创 Interlib，均默认模板＋`api_detail=True`）**：福州
+`fuzhou`（福州地区图书馆联合检索平台；旧批判「TLS 失败／停放段」经复核不成立，域名现
+解析至 198.20.2.211 但为真实馆方 OPAC）、六盘水 `liupanshui`、安顺 `anshun`、毕节
+`bijie`、呼伦贝尔 `hulunbuir`、桂林 `guilin`（meta keywords 自报「广西区域图书馆集群」，
+全自治区域联合目录）。六城 `/opac/search` HTML 直连可用（默认模板 `bookmeta`）、无验证码，
+详情/馆藏走 `/api/book`、`/api/holding`，家族零解析改动；各城实抓总量与首条见对应
+`tests/fixtures/<city>/NOTES.md`。同批**三亚 `sanya`** 实抓发现并非 Interlib，而是图创
+**tcc-opac**（SPA 壳 `/opac/SY` ＋ 纯 JSON 后端 `/api/tcc-opac/SY/*` ＋ JWT 访客令牌，
+与宁波/济南/鄂尔多斯同产品线），已用 `tccopac/` 家族接入（见该家族章）。同批计划中的
+梧州 `wuzhou`（`www.wztsg.com`→198.20.2.213 停放段、82 端口连接超时）、长沙 `changsha`
+（整站 WAF，`/opac/search` 恒 HTTP 403「网站防护系统」）改判 ⛔ 不通、不接入；
+攀枝花 `panzhihua`（候选 OPAC host `125.66.234.132:8180` 本网络仍不可达、官网 CMS 无书目接口）
+暂按 ⛔ 不通登记，建议换网复测后再判。
 
 **`captcha` quirk（2026-10-03，乐山）**：检索页是滑动验证码墙（「opac验证」页，
 `slideVerify`＋`/opac/captcha/verification`）时，**按天津 ALEPH 家族同一口径不破解**
@@ -694,12 +714,13 @@ securitycam 墙。将来评估其他汇文站点必须逐站实测，不能按�
   location＝`local_name` 原值；status＝`state_name` 原值（缺失回退 state 码），
   词表（2=在馆/3=借出/9=锁定/16=馆内阅览/33=已通还…）外保守不可借。
 
-## tcc-opac 家族（宁波、济南、鄂尔多斯）
+## tcc-opac 家族（宁波、济南、鄂尔多斯、三亚）
 
 家族模块 `tccopac/`：`client.py`（HTTP 层＋4 秒/host 节流＋访客令牌缓存）、
 `parser.py`（检索/详情/馆藏 JSON 解析）、`__init__.py`（三原语与 `TccOpacConfig`）。
 成员：宁波市图书馆（`adapters/cn/ningbo.py`）、济南市图书馆（`adapters/cn/jinan.py`）、
-鄂尔多斯市图书馆（`adapters/cn/eerduosi.py`）。tcc-opac 与 Interlib 是不同产品线，
+鄂尔多斯市图书馆（`adapters/cn/eerduosi.py`）、三亚市图书馆（`adapters/cn/sanya.py`）。
+tcc-opac 与 Interlib 是不同产品线，
 不可复用 `interlib/` 家族。城市差异只允许以带默认值的 `TccOpacConfig` 字段新增。
 base_url 形态 `{host}/api/tcc-opac/{首段路径}`（前端 `getBaseUrl()` 逆向）。
 纯 JSON ＋ JWT 访客令牌（`POST /system/user/getOpenApiAccessToken` 匿名即发，
@@ -722,6 +743,13 @@ base_url 形态 `{host}/api/tcc-opac/{首段路径}`（前端 `getBaseUrl()` 逆
   （详情「数据不存在」/馆藏 0 条），它们属「无馆藏」子集，`hasholding=1` 不返回；有馆藏
   条目字段已富化，「无馆藏」子集的 publisher/pubdate 常为空串；老书目出版项
   可能缺失（出版年兜底取 100$a）；`classno` 是分类号不作索书号，单册完整索书号在馆藏 `callno`。
+
+- **三亚 `sanya` 差异（2026-10-03，无需新 quirk）**：入口 SPA 壳
+  `https://opac.sanyalib.com:8888/opac/SY`（Vue；`/opac/SY` 由 SPA 消费，真实 API 前缀
+  `/api/tcc-opac/SY`）；库段取自前端 JS 常量（`["SY","YCSTQG"]`，默认 `SY`）。三原语与
+  宁波逐项同构，固定 `hasholding=1`；实抓「三体」49 条（首条《三体漫画．起源》）。源站
+  偶发 TLS/读超时（令牌端点亦曾超时，重试即通），家族 30 秒 timeout 止损。侦察结论见
+  `tests/fixtures/sanya/NOTES.md`。
 
 ## InDigLib（重庆）
 

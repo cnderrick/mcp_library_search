@@ -116,6 +116,11 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     hubei_prov（湖北省图书馆，检索页「opac验证」且内嵌 Solr 被 bot 检测拦，
     未过码时抛 CaptchaError 不破解，详情/馆藏匿名可通，同乐山/揭阳口径），
     以上馆藏到单册级、详情走 /api/book 接口。
+    第八批（图创 Interlib）：anshun（安顺市图书馆）、bijie（毕节市图书馆）、
+    liupanshui（六盘水市图书馆）、hulunbuir（呼伦贝尔市图书馆）、
+    guilin（广西壮族自治区桂林图书馆）、fuzhou（福州市图书馆，福州地区图书馆
+    联合检索平台），以上馆藏到单册级、详情走 /api/book 接口；
+    sanya（三亚市图书馆，图创 tcc-opac 纯 JSON 访客令牌，馆藏到单册级）。
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，

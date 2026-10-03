@@ -46,19 +46,23 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 #   captcha=True 抛 CaptchaError，详情/馆藏匿名可通，同乐山/揭阳口径）；
 #   同批龙岩（opac.lytsg.com→198.20.0.182 停放段）改判不通、开封为老版 GLIS
 #   （jdjsjg.jsp，无 /opac/search、无 /opac/api/*）非家族模板，均不接入
+# ＋第八批 7 城（2026-10-03 立项城市落地）：安顺/毕节/六盘水/桂林/呼伦贝尔/福州
+#   （图创 Interlib 默认模板＋api_detail，福州为福州地区图书馆联合检索平台）；
+#   三亚（实抓为图创 tcc-opac，复用 tccopac/ 家族）；同批梧州（198.20.2.213 停放段）、
+#   攀枝花（候选 OPAC host 8180 不可达、官网无书目接口）、长沙（整站 WAF 403）改判不通、不接入
 _EXPECTED = [
-    "ankang", "anqing", "baoji", "baotou", "changchun", "chaozhou",
+    "ankang", "anqing", "anshun", "baoji", "baotou", "bijie", "changchun", "chaozhou",
     "chengdu", "chongqing", "chuxiong", "dalian", "daqing", "dehong",
     "deqing", "dezhou", "dongying", "eerduosi", "enshi", "ezhou",
-    "fujian_prov", "guangzhou",
+    "fujian_prov", "fuzhou", "guangzhou", "guilin",
     "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
     "heyuan", "honghe", "huaian", "huanggang", "huangshi", "hubei_prov",
-    "huhehaote", "hunan_prov",
+    "huhehaote", "hulunbuir", "hunan_prov",
     "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen", "jingzhou", "jinhua",
     "laibin", "lanzhou", "leshan", "liaocheng", "lijiang", "lincang",
-    "linyi", "lishui", "maoming", "mudanjiang", "nanjing", "ningbo", "ningde",
+    "linyi", "lishui", "liupanshui", "maoming", "mudanjiang", "nanjing", "ningbo", "ningde",
     "nujiang", "puning", "qiandongnan", "qiannan", "qingdao", "qiqihar",
-    "quanzhou", "qujing", "rizhao", "sanming", "shaanxi", "shanghai",
+    "quanzhou", "qujing", "rizhao", "sanming", "sanya", "shaanxi", "shanghai",
     "shaoxing", "shenzhen", "shijiazhuang", "shiyan", "siping", "suzhou", "taian",
     "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "tongling",
     "weifang", "wenzhou", "wuhai", "wuhan", "wuxi", "xian", "xiangtan",
