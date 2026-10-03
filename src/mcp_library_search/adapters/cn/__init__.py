@@ -43,10 +43,13 @@ from . import jinhua
 from . import laibin
 from . import lanzhou
 from . import leshan
+from . import liaocheng
 from . import lijiang
 from . import lincang
+from . import linyi
 from . import lishui
 from . import maoming
+from . import mudanjiang
 from . import nanjing
 from . import ningbo
 from . import nujiang
@@ -54,13 +57,19 @@ from . import puning
 from . import qiandongnan
 from . import qiannan
 from . import qingdao
+from . import qiqihar
 from . import quanzhou
 from . import qujing
+from . import rizhao
+from . import sanming
 from . import shaanxi
 from . import shanghai
 from . import shaoxing
 from . import shenzhen
+from . import shijiazhuang
+from . import siping
 from . import suzhou
+from . import taian
 from . import taiyuan
 from . import taizhou
 from . import tangshan
@@ -75,6 +84,7 @@ from . import wuxi
 from . import xian
 from . import xianyang
 from . import xiaogan
+from . import xinzhou
 from . import xishuangbanna
 from . import xuzhou
 from . import yancheng
@@ -133,10 +143,13 @@ ADAPTERS = {
     "laibin": laibin,
     "lanzhou": lanzhou,
     "leshan": leshan,
+    "liaocheng": liaocheng,
     "lijiang": lijiang,
     "lincang": lincang,
+    "linyi": linyi,
     "lishui": lishui,
     "maoming": maoming,
+    "mudanjiang": mudanjiang,
     "nanjing": nanjing,
     "ningbo": ningbo,
     "nujiang": nujiang,
@@ -144,13 +157,19 @@ ADAPTERS = {
     "qiandongnan": qiandongnan,
     "qiannan": qiannan,
     "qingdao": qingdao,
+    "qiqihar": qiqihar,
     "quanzhou": quanzhou,
     "qujing": qujing,
+    "rizhao": rizhao,
+    "sanming": sanming,
     "shaanxi": shaanxi,
     "shanghai": shanghai,
     "shaoxing": shaoxing,
     "shenzhen": shenzhen,
+    "shijiazhuang": shijiazhuang,
+    "siping": siping,
     "suzhou": suzhou,
+    "taian": taian,
     "taiyuan": taiyuan,
     "taizhou": taizhou,
     "tangshan": tangshan,
@@ -165,6 +184,7 @@ ADAPTERS = {
     "xian": xian,
     "xianyang": xianyang,
     "xiaogan": xiaogan,
+    "xinzhou": xinzhou,
     "xishuangbanna": xishuangbanna,
     "xuzhou": xuzhou,
     "yancheng": yancheng,

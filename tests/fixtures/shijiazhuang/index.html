@@ -1,0 +1,6960 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+		<script type="text/javascript">
+			var $$opac_bookcover = "";
+		</script>
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css"></link>
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/js-one.six.two.min.js" type="text/javascript" ></script>
+<script>
+    /*加载失败切换本地js库方法*/
+    if (!window.jQuery) {
+        console.log("加载js失败，切换路径");
+        document.write('<script src=\"/opac/media/js/jquery/js-one.six.two.min.js\" type=\"text/javascript\"><\/script>');
+    }
+</script>
+
+
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/highcharts.js"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/themes/grid.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/colldata-1.1215.full.js" charset="utf-8"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js"></script>
+		<script>
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		<script>
+			// 初始化 SDK
+			var sensors = window['TcDataCollectWebSDK'];
+			var initAppid = 'P2HBJ0311012';
+			
+			
+			
+			
+
+			sensors.init({
+				app_id: initAppid,
+				show_log: true,   // 是否打印日志信息
+				heatmap: {
+					/**
+					 * 1. 默认 $WebClick 只采集 a，button，input ，textarea 四个 dom 元素的点击事件。
+					 * 2. default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭。
+					 */
+					clickmap:'default',
+
+					// 配置不采集元素点击事件 true:采集   false:不采集
+					collect_element: function(element_target){
+						return !$(element_target).is("INPUT");
+					},
+
+					// default 表示开启，自动采集 $WebStay 事件，滚屏是触发，但页面停留必须过4秒后（可自定义）；可以设置 'not_collect' 表示关闭。
+					scroll_notice_map:'not_collect',
+					// 设置有效停留时长， 毫秒，默认是4000毫秒
+					scroll_delay_time: 6000
+				},
+				preset_properties: {
+					//是否采集 $url 页面地址作为公共属性，默认值 false
+					url: true,
+					//是否采集 $title 页面标题作为公共属性，默认值 false
+					title: true,
+				}
+			});
+
+            // 设置之后，SDK 就会自动收集页面浏览事件($pageview), 默认是关闭的
+            sensors.quick('autoTrack')
+
+			// 手动调用, 用户自定义埋点
+			function trackSearch(word) {
+				sensors.track('OpacSearch', {
+					KeyWord: word
+				});
+			}
+
+			function trackLogin(rdid) {
+				sensors.login(rdid, function () {
+
+				});
+			}
+
+			function trackLogout() {
+				sensors.logout(false);
+
+			}
+
+		</script>
+		
+		
+			
+				
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+                
+				</script>
+			
+			
+		
+		<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js"></script>
+
+		<script type="text/javascript" src="/opac/media/js/common/charts.js"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico" type="image/vnd.microsoft.icon" /> 
+		<title>检索系统</title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/js-ui-one.eight.onesix.custom.css"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/js-ui-one.eight.onesix.custom.min.js"></script>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="referrer" content="same-origin" />
+
+    
+    
+        <meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 石家庄市图书馆" />
+   
+
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js"></script>
+
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+	function logout(){
+		trackLogout();
+		location.href="/opac/reader/logout";
+	}
+	
+	$(document).ready(function(){
+		
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.space".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.register".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.newpub".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.recommended".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.publicNotice".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.publicTag".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.bookSpecial".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.recommend".length*4+24;
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar"
+		
+			
+			
+			
+		
+>
+	<div class="navbar_bd" >
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index">
+							
+								
+								
+								
+								
+									检索
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/index/advance">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											高级检索
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls">
+							
+								
+								
+								
+								
+									书目浏览
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/cls">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/browse/sci">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											科图分类浏览
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/space">
+							
+								
+								
+								
+								
+									我的图书馆
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/register">
+							
+								
+								
+								
+								
+									网上办证
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/newpub/cls">
+							
+								
+								
+								
+								
+									新书通报
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/newpub/cls">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											中图分类查看
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/newpub/sci">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											科图分类查看
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommended">
+							
+								
+								
+								
+								
+									精品图书
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/publicNotice/reservationInLib">
+							
+								
+								
+								
+								
+									信息公告
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/reservationInLib">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆预约到馆通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/bookOverdue">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆图书催还通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/publicNotice/prelendInform">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											全馆预借到馆通知
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/tag/publicTagList">
+							
+								
+								
+								
+								
+									所有标签
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/bookSpecial">
+							
+								
+								
+								
+								
+									图书专题
+								
+							
+							</a>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommend/getAllHistoryRecommendList">
+							
+								
+								
+								
+								
+									图书荐购
+								
+							
+							</a>
+						
+						<ul >
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/recommend/getAllHistoryRecommendList">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											历史荐购
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/recommend/custom">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											读者荐购
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						
+						<li>
+							
+								
+								
+								
+									<a href="/opac/recommend/recommendBookList/list">
+										<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+										
+											征订书目
+										
+										
+									</a>
+								
+							
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+
+				<!-- 开始是给广少图用的东西 -->
+				
+
+
+
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!--
+			<img src="/opac/media/images/lang.png" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				
+					
+					<span id="readerLogin" ><a  href="/opac/reader/login">登录</a></span>
+				
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+
+			
+				
+					<a href="/opac/reader/login">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+
+    
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_header">
+	<div id="page_nav">
+		<!-- 
+		<div class="logo">
+			<a href="/opac/index">
+				<img src="/opac/media/images/logo.gif" />
+			</a>
+		</div>
+		 -->
+	</div>
+</div>
+			<div id="page_content">
+				
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/custominfo/libcodeURL.js "></script>
+
+
+
+
+
+
+<script type="text/javascript">
+	document.title = "检索";
+	var cookieFlag = false;
+	$(document).ready(function(){
+		//设置JS调用getI18nMsg方法获取的国际化标签
+		i18nMessages['search.result.integration.library']="集群图书馆";
+		//加载集群馆选项
+		loadIntegratedLibraries('');
+		document.onkeydown = dynamicAddRecnoSelectOption;
+		
+	});
+
+	function dynamicAddRecnoSelectOption(e){
+		e = e || window.event;
+		if(e.keyCode==188&&e.ctrlKey&&e.shiftKey){
+			$("#opacConfouternet").show();
+		}
+
+		if(e.keyCode==190&&e.ctrlKey&&e.shiftKey){
+			$("#localConfig").show();
+		}
+
+		if(e.keyCode==186&&e.ctrlKey){
+			$("#opacConfSetTable").show();
+		}
+	}
+	$(function(){
+		if($.cookie("libnameset") == "true"){
+			$("input:checkbox[name='curlibcode']").each(function(i){
+				//var tmpText = $.trim($(this).val());
+				if($(this).attr("value") == $.cookie("showLibcode")){
+					$(this).attr("checked", "checked");
+					cookieFlag = true;
+				}
+			});
+		}
+	});
+
+
+	$(function(){
+		$("#q").focus();
+	});
+
+	$(function(){
+		if($.cookie("configouternet") == "false"){
+			$("#Conouternet").attr("checked", "checked");
+		}
+	});
+	function configouternet(){
+		var expireTime = 3650;
+		if($("#Conouternet").attr("checked") == "checked"){
+			$.cookie("configouternet", "false", {expires:expireTime, path:'/'});
+		}else{
+			$.cookie("configouternet", "true", {expires:expireTime, path:'/'});
+		}
+	}
+
+	//点击显示分馆等选择后重新设置高度
+	function setHeight(){
+		$("#page_footer").height(20);
+		$("#page_footer").css("top",$("#searchDiv").height() + $("#navbar").height() + $("#searchTips").height());
+	}
+
+	function selectAllLibcodes(obj) {
+		if(obj.checked) {
+			$("#libcodeTable input[name='curlibcode']").attr("checked", true);
+		} else {
+			$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+		}
+	}
+	function showMoreOptions() {
+		var searchDivHidden = $("#searchDivHidden");
+		if(searchDivHidden.css("display") == "none") {
+			searchDivHidden.show("slow");
+		} else {
+			searchDivHidden.hide("slow");
+		}
+		displayRememberMe();
+		setTimeout(setHeight,1000);
+	}
+	function showLibraries() {
+		var libraries = $("#libraries");
+		if(libraries.css("display") == "none") {
+			libraries.show("slow");
+		} else {
+			libraries.hide("slow");
+		}
+		displayRememberMe();
+		setTimeout(setHeight,1000);
+	}
+	function showCirTypeDiv() {
+		var cirTypeDiv = $("#cirTypeDiv");
+		if(cirTypeDiv.css("display") == "none") {
+			cirTypeDiv.show("slow");
+		} else {
+			cirTypeDiv.hide("slow");
+		}
+		displayRememberMe();
+		setTimeout(setHeight,1000);
+	}
+	function showBookLimits(id) {
+		var libraries = $(id);
+		if(libraries.css("display") == "none") {
+			libraries.show("slow");
+		} else {
+			libraries.hide("slow");
+		}
+		displayRememberMe();
+		setTimeout(setHeight,1000);
+	}
+	function searchByHotKeyword(hotSearchKeyword) {
+		$("#q").val(hotSearchKeyword);
+		if($("#rememberMe").attr("checked")=="checked"){
+			rememberMe();
+		}
+		
+		search("");
+	}
+	function search(view) {
+		$("#view").val(view);
+		var total = $('input:checkbox[name="curlibcode"]').size();
+		var checkNum = $('input:checkbox[name="curlibcode"]:checked').size();
+		if($("#rememberMe").attr("checked")=="checked"){
+			rememberMe();
+		}
+		
+		
+		
+		if(total == checkNum){
+			$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+		}else{
+			if(checkNum>50){
+				alert("所选分馆不能超过50个");
+				return;
+			}
+		}
+		
+		
+		var qword = $("#q").val();
+		trackSearch(qword);
+		
+		if(qword!=""&&bannedHashSet.contains(qword)){
+			alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+			return;
+		}
+		
+		
+		var integrationLib = $("input[name='integrationCode']:checked").val();
+		if(integrationLib){
+			$("#searchForm").attr("target","_blank");
+			$("#searchForm").attr('action',integrationMap[integrationLib] + "/search");
+			$("#isCluster").val(integrationLib);
+		}else{
+			$("#searchForm").attr("target","");
+			$("#searchForm").attr('action',"/opac/search");
+		}
+		
+		
+		$("#searchForm").submit();
+	}
+
+	function gotoAdvancedSearch() {
+		document.location.href = '/opac/index/advance';
+	}
+
+
+	function displayRememberMe(){
+		var searchDivHidden = $("#searchDivHidden");
+		var libraries = $("#libraries");
+		var bookTypes = $("#bookTypesHidden");
+		var cirTypeDiv = $("#cirTypeDiv");
+		var rememberMe = $("#remember");
+		if(libraries.is(":hidden")&& bookTypes.is(":hidden")&& searchDivHidden.is(":hidden") && cirTypeDiv.is(":hidden")) {
+			rememberMe.hide("slow");
+		}else{
+			rememberMe.show("slow");
+		}
+	}
+
+	function rememberMe(){
+
+		var searchWay = $('select[name=searchWay]').val();
+		var booktype = $('input:radio[name="booktype"]:checked').val();
+		var marcformat = $('input:radio[name="marcformat"]:checked').val();
+		var scWay = $('input:radio[name="scWay"]:checked').val();
+		var sortWay = $('select[name=sortWay]').val();
+		var sortOrder = $('select[name=sortOrder]').val();
+		var startPubdate = $('select[name=startPubdate]').val();
+		var endPubdate = $('select[name=endPubdate]').val();
+		var rows = $('select[name=rows]').val();
+		var hasholding = $('input:checkbox[name="hasholding"]:checked').val();
+		var curlibcode = $('input:checkbox[name="curlibcode"]:checked');
+		var libCodeValue=";";
+
+		for(var i =0 ;i<curlibcode.length;i++){
+			libCodeValue = libCodeValue + curlibcode[i].value+";";
+		}
+
+		//分馆+分馆地址选择
+		var curlibcodeGT = $('input[name="curlibcodeGT"]').val();
+		if (!isEmpty(curlibcodeGT)) {
+			curlibcodeGT = curlibcodeGT.replaceAll(",", ";");
+			libCodeValue = libCodeValue + curlibcodeGT
+		}
+		var f_curlocal = $('input[name="f_curlocal"]').val();
+		if (!isEmpty(f_curlocal)) {
+			setCookie("f_curlocal",f_curlocal);
+		}
+
+
+		setCookie("searchWay",searchWay);
+		setCookie("booktype",booktype);
+		setCookie("marcformat",marcformat);
+		setCookie("scWay",scWay);
+		setCookie("sortWay",sortWay);
+		setCookie("sortOrder",sortOrder);
+		setCookie("startPubdate",startPubdate);
+		setCookie("endPubdate",endPubdate);
+		setCookie("rows",rows);
+		setCookie("hasholding",hasholding);
+// 	setCookie("curlibcode",libCodeValue);
+		$.cookie("showLibcode", libCodeValue, {expires:7,path:'/'});
+	}
+
+	function setCookie(cookieName,cookieValue){
+		$.cookie(cookieName,cookieValue,{ expires: 7, path: '/' });
+	}
+	function localLimit(){
+		setCookie("localConfig",$('input:radio[name="curlocal"]:checked').val());
+	}
+	var expireTime = 3650;
+	function readCookies(){
+		var searchWay =$.cookie("searchWay");
+		var booktype =$.cookie("booktype");
+		var marcformat =$.cookie("marcformat");
+		var scWay =$.cookie("scWay");
+		var sortWay =$.cookie("sortWay");
+		var sortOrder =$.cookie("sortOrder");
+		var startPubdate =$.cookie("startPubdate");
+		var endPubdate =$.cookie("endPubdate");
+		var rows =$.cookie("rows");
+		var hasholding =$.cookie("hasholding");
+		var curlibcode =$.cookie("showLibcode");
+		var curlocalconfig = $.cookie("localConfig");
+		var showlocalname = "";
+		var localcode = "";
+		var showLocal = $.cookie("showLocal");
+		if(localcode!=""){
+			/*if(localcode.indexOf(",")>0){
+                var codes = localcode.split(",");
+                for(var i=0;i<codes.length;i++){
+                    $('input:checkbox[name="curlocal"][value="'+codes[i]+'"]').attr("checked","checked");
+                }
+            }else{
+                $('input:checkbox[name="curlocal"][value="'+localcode+'"]').attr("checked","checked");
+            }*/
+			showLocal = localcode;
+			$.cookie("localConfig", localcode, {expires:3650, path:'/'});
+			$.cookie("showLocal", localcode, {expires:3650, path:'/'});
+			//设置分馆名称
+			$.cookie("libnameset", "true", {expires:3650, path:'/'});
+			//$.cookie("showLibcode", localcode, {expires:3650, path:'/'});
+			if(showlocalname==""){
+				var libname = "";
+				if(""!=""){
+					libname = $('input:checkbox[name="curlibcode"][value=""]').parent().text();
+				}else{
+					libname = $("#content .libName").text();
+				}
+				showlocalname = libname+" - "+
+						$('input:checkbox[name="curlocal"][value="'+localcode+'"]').parent().text();
+			}
+			$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+		}
+		if(showlocalname!=""){
+			$.cookie("libnameset", "true", {expires:3650, path:'/'});
+			$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+		}
+		/*if(showLocal!=null&&showLocal!=""||localcode!=""){
+            var checker = "";
+            if(localcode!=""||curlocalconfig != null && curlocalconfig != ""&&showLocal==$.cookie("localConfig")){
+                checker = 'checked="checked"';
+            }else{
+                selElement($('input:radio[name="curlocal"]'),"","radio");
+            }
+            $("#limitlocal").append(
+                    '<input type="radio" name="curlocal" onchange="localLimit()" value="'+showLocal+'" '+checker+' />'
+                    +$("#cCurlocal_"+showLocal).parent().text());
+            $("#localLimit").show();
+        }*/
+		selElement($('select[name=searchWay] option'),searchWay,"select");
+		selElement($('input:radio[name="booktype"]'),booktype,"radio");
+		selElement($('input:radio[name="marcformat"]'),marcformat,"radio");
+		selElement($('input:radio[name="scWay"]'),scWay,"radio");
+		selElement($('select[name=sortWay] option'),sortWay,"select");
+		selElement($('select[name=sortOrder] option'),sortOrder,"select");
+		selElement($('select[name=startPubdate] option'),startPubdate,"select");
+		selElement($('select[name=endPubdate] option'),endPubdate,"select");
+		selElement($('select[name=rows] option'),rows,"select");
+		selElement($('input:checkbox[name="hasholding"]'),hasholding,"checkbox");
+
+		var clc = $('input:checkbox[name="curlibcode"]');
+		if(curlibcode!=null&&curlibcode!=";"){
+			for(var i = 0 ; i<clc.length;i++){
+				if($.inArray("clc[i].value", curlibcode.split(",")) >= 0 ){
+					clc[i].checked=true;
+					cookieFlag = true;
+				}
+			}
+		}
+
+		if(!cookieFlag){
+			var lib = "";
+			if(lib!=""){
+				var flag = true;
+				for(var i = 0 ; i<clc.length;i++){
+					if($.inArray(clc[i].value, lib.split(","))!=-1 ){
+						clc[i].checked=true;
+						cookieFlag = true;
+						if(flag){
+							$.cookie("libnameset", "true", {expires:3650, path:'/'});
+							//$.cookie("showLibcode", clc[i].value, {expires:3650, path:'/'});
+							$.cookie("showLibname", clc[i].nextSibling.nodeValue, {expires:3650, path:'/'});
+							flag = false;
+						}
+					}
+				}
+			}else{
+				
+
+				
+			}
+
+		}
+	}
+
+	function selElement(obj,value,type){
+
+		for(var i = 0 ;i<obj.length;i++){
+
+			if(obj[i].value==value){
+				if(type=="select"){
+					obj[i].selected =true;
+				}else{
+					obj[i].checked=true;
+				}
+				break;
+			}
+		}
+
+	}
+
+	$(function(){
+		
+		return;
+		
+		$("#q").autocomplete({
+			source: '/opac/hotsearch/suggest',
+			focus: function(event, ui) {
+				$("#q").val(ui.item.searchKey);
+				return false;
+			},
+			select: function(event, ui) {
+				$("#q").val(ui.item.searchKey);
+				search("");
+				return false;
+			}
+		}).data("autocomplete")._renderItem = function(ul, item) {
+			return $("<li style='position:relative;font-size:12px;'></li>").data("item.autocomplete", item)
+					.append("<a>" +
+							"" + item.searchKey + "" +
+							"<cite style='position:absolute;right:10px;top:2px;color:#888;'>" + "检索次数" + ": " +
+							item.count +
+							"</cite>" +
+							"</a>")
+					.appendTo(ul);
+		};
+	});
+	$(function() {
+		$("#searchForm select[name='searchWay']").bind("change", function(e) {
+			if($(this).val() == "callno") {
+				$("#searchForm select[name='sortWay']").val("callno_sort");
+				$("#searchForm select[name='sortOrder']").val("asc");
+			}
+		});
+
+		$("#localConfig input[name='curlocal']").bind("change", function(e) {
+			var expireTime = 3650;
+			if($(this).attr("checked") == 'checked'){
+				$("#tabs-4 input[type='checkbox']").attr("checked",false);
+				$(this).attr("checked",true);
+			}else{
+				$(this).attr("checked",false);
+			}
+			var curlocals = $('input:checkbox[name="curlocal"]:checked');
+			var value = "";
+			if(curlocals.length < 1){
+				$.cookie("localConfig", "", {expires:expireTime, path:'/'});
+			}else{
+				$(curlocals.each(function(i){
+					value += ","+$(this).val();
+				}));
+				value = value.substring(1, value.length);
+			}
+			$.cookie("localConfig", value, {expires:expireTime, path:'/'});
+		});
+	});
+	$(document).ready(function(){
+		$("select[name='sortWay']").val("score");
+
+
+	});
+	
+
+</script>
+
+<script type="text/javascript">
+	//从JS文件中直接取得检索提示信息
+	$(document).ready(function(){
+		if("1" == "1")
+		{
+			$("#searchForm select[name='searchWay']").val("title");
+		}
+		readCookies();
+		$("#scWaySelect").change(function(){
+			var val = $(this).val();
+			$("input[name='scWay'][value='"+val+"']").click();
+		});
+		$("input[name='scWay']").click(function(){
+			var val = $(this).val();
+			$("#scWaySelect").val(val);
+		});
+		
+	});
+	$(function() {
+		var libnameset = $.cookie("libnameset");
+		var showLibcode = $.cookie("showLibcode");
+		var showLibname = $.cookie("showLibname");
+		if(libnameset == "true" && showLibcode != "" && showLibname != "" && "".indexOf(",") < 0) {
+			$("#content .libName").html(showLibname);
+		}
+	});
+
+	function eBookSearch(){
+		var value = $("#q").val();
+
+		//敏感词汇
+		
+		if(bannedHashSet.contains(value)){
+			alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+			return;
+		}
+		
+
+		if(""==value){
+			alert("请输入检索词");
+			return;
+		}
+
+		var searchAddress = "" ;
+
+		//http://sso.cdclib.org/ifs/search 测试
+		window.location.href=searchAddress+"?fromType=&allsw=&bCon=&field=1&sw="+value;
+	}
+
+	if ("0" == '1') {
+		$(function(){
+			var timer;	//定时切换显示第一条
+			var scroll = function(){
+				timer = setInterval(function(){
+					if($("#marqueeContext li").length <= 1){	//数量太少不做循环
+						return;
+					}
+					$("#marqueeContext li").css("display","none");
+					$("#marqueeContext").append($("#marqueeContext li:first"));
+					$("#marqueeContext li:first").fadeIn(100);
+					$("#marqueeContext li:first").css("display","block");
+				},2000);
+			}
+
+			//第一条显示
+			$("#marqueeContext li:first").css("display","block");
+			scroll();
+
+			$("#marqueeContext li").mouseover(function(){
+				clearInterval(timer);
+			});
+			$("#marqueeContext li").mouseout(function(){
+				scroll();
+			});
+		});
+	}
+
+</script>
+
+<div id="content"
+		
+>
+	<div class="libName"
+			
+	>
+		
+			
+			
+			
+			
+			
+			
+				石家庄市图书馆
+			
+		
+	</div>
+
+
+
+
+	
+	<div id="searchDiv"
+			
+	>
+		<form name="searchForm" id="searchForm" action="search" method="get">
+			<div >
+				<!--检索途径:-->
+				<select name="searchWay" class="search_select search_width"
+						
+				>
+					<option value="" selected="selected">任意词</option>
+					<option value="title">题名</option>
+					<option value="title200a">正题名</option>
+					
+					
+					<option value="isbn">ISBN/ISSN</option>
+					<option value="author">著者</option>
+					<option value="subject">主题词</option>
+					<option value="class">分类号</option>
+					
+					
+						<option value="ctrlno">控制号</option>
+						<option value="orderno">订购号</option>
+					
+					<option value="publisher">出版社</option>
+					
+					<option value="callno">索书号</option>
+					
+				</select>
+				<!--检索词:-->
+				<div class="search_input search_input_width"
+						
+						
+				>
+					
+					
+						<input type="text" id="q" name="q" onkeydown="if(event.keyCode==13)search('');" placeholder=""
+								
+						/>
+					
+				</div>
+
+				
+
+				<input type="button"
+			
+						
+					   class="search_button" name="searchButton" value="检索"
+			
+				
+						
+							
+								onclick="search('')"
+							
+							
+						
+				/>
+				
+
+
+							
+								<input type="button"
+								
+								name="advancedSearch" class="advance_search_button" value="高级检索" onclick="gotoAdvancedSearch()" />
+							
+					
+
+				
+
+				
+
+				
+				<input type="hidden" name="searchSource" value="reader" />
+			</div>
+			
+			
+				
+					<div class="hot">
+						热门词:
+						
+							<a href="javascript:searchByHotKeyword('哈利波特')">
+									哈利波特
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('大中华寻宝记')">
+									大中华寻宝记
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('如果历史是一群喵')">
+									如果历史是一群喵
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('心理学')">
+									心理学
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('寻宝记')">
+									寻宝记
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('鲁班书密码')">
+									鲁班书密码
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('法医秦明')">
+									法医秦明
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('闲')">
+									闲
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('活着')">
+									活着
+							</a>|
+						
+							<a href="javascript:searchByHotKeyword('西游记')">
+									西游记
+							</a>|
+						
+						<a href="/opac/hotsearch">更多..</a>
+					</div>
+				
+			
+
+			
+
+			
+
+			<div class="search_more" >
+				<a href="javascript:showBookLimits('#bookTypesHidden')">显示文献类型</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				
+				<a id="showLibrary" href="javascript:showLibraries()">
+					
+						
+						
+							限定分馆/馆藏检索
+						
+					
+				</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a id="showCirType" href="javascript:showCirTypeDiv()">
+					限定文献流通类型检索
+				</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="javascript:showMoreOptions()">显示更多选项</a>
+			</div>
+			
+			<div class="booktypes" id="bookTypesHidden" style="display:none;">
+				<!--文献类型:-->
+				
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='1' />
+							<img src="/opac/booktypeicon/1" class="booktypeIcon" />
+							<!--img src="/opac/1.gif" /-->
+							书籍
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='2' />
+							<img src="/opac/booktypeicon/2" class="booktypeIcon" />
+							<!--img src="/opac/2.gif" /-->
+							期刊
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='3' />
+							<img src="/opac/booktypeicon/3" class="booktypeIcon" />
+							<!--img src="/opac/3.gif" /-->
+							非书资料
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='4' />
+							<img src="/opac/booktypeicon/4" class="booktypeIcon" />
+							<!--img src="/opac/4.gif" /-->
+							古籍
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='5' />
+							<img src="/opac/booktypeicon/5" class="booktypeIcon" />
+							<!--img src="/opac/5.gif" /-->
+							玩具
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='6' />
+							<img src="/opac/booktypeicon/6" class="booktypeIcon" />
+							<!--img src="/opac/6.gif" /-->
+							少儿图书
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='7' />
+							<img src="/opac/booktypeicon/7" class="booktypeIcon" />
+							<!--img src="/opac/7.gif" /-->
+							少儿期刊
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='8' />
+							<img src="/opac/booktypeicon/8" class="booktypeIcon" />
+							<!--img src="/opac/8.gif" /-->
+							少儿西文
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='9' />
+							<img src="/opac/booktypeicon/9" class="booktypeIcon" />
+							<!--img src="/opac/9.gif" /-->
+							中文图书
+						</label>
+					
+				
+					
+					
+						<label>
+							<input type="checkbox" name="booktype" value='10' />
+							<img src="/opac/booktypeicon/10" class="booktypeIcon" />
+							<!--img src="/opac/10.gif" /-->
+							报纸
+						</label>
+					
+				
+			</div>
+
+			
+
+			<div id="searchDivHidden"  class="search_hidden" style="display:none;">
+				<div>
+					检索方式:
+					<label>
+						<input type="radio" name="scWay" value="full"
+								
+						/>
+						精确检索
+					</label>
+					<label>
+						<input type="radio" name="scWay" value="prefixMatch" />
+						前方一致
+					</label>
+					<label>
+						<input type="radio" name="scWay" value="dim"
+								 checked="checked"
+						/>
+						模糊检索
+					</label>
+				</div>
+				
+					<div>
+						语言种类:
+						<label>
+							<input type="radio" name="marcformat" value="CNMARC" />
+							中文
+						</label>
+						<label>
+							<input type="radio" name="marcformat" value="USMARC" />
+							西文
+						</label>
+						<label>
+							<input type="radio" name="marcformat" value="" checked="checked" />
+							全部
+						</label>
+					</div>
+				
+				<div class="search_hidden">
+					排序选项:
+					<select name="sortWay">
+						<option value="score" selected="selected" >匹配度</option>
+						<option value="pubdate_sort" >出版日期</option>
+						<option value="subject_sort" >主题词</option>
+						<option value="title_sort" >题名</option>
+						<option value="author_sort" >著者</option>
+						<option value="callno_sort" >索书号</option>
+						<option value="pinyin_sort" >题名拼音</option>
+						<option value="loannum_sort" >借阅次数</option>
+						<option value="renewnum_sort" >续借次数</option>
+						<option value="title200Weight" >题名权重</option>
+						<option value="title200aWeight" >正题名权重</option>
+						<option value="title200h" >卷册号</option>
+					</select>
+					排序方式:
+					<select name="sortOrder">
+						<option value="desc">降序排列</option>
+						<option value="asc">升序排列</option>
+					</select>
+					
+						
+						
+							出版时间:
+							<select name="startPubdate">
+								<option value="" selected="selected">出版年</option>
+								
+									<option value="2026">2026</option>
+								
+									<option value="2025">2025</option>
+								
+									<option value="2024">2024</option>
+								
+									<option value="2023">2023</option>
+								
+									<option value="2022">2022</option>
+								
+									<option value="2021">2021</option>
+								
+									<option value="2020">2020</option>
+								
+									<option value="2019">2019</option>
+								
+									<option value="2018">2018</option>
+								
+									<option value="2017">2017</option>
+								
+									<option value="2016">2016</option>
+								
+									<option value="2015">2015</option>
+								
+									<option value="2014">2014</option>
+								
+									<option value="2013">2013</option>
+								
+									<option value="2012">2012</option>
+								
+									<option value="2011">2011</option>
+								
+									<option value="2010">2010</option>
+								
+									<option value="2009">2009</option>
+								
+									<option value="2008">2008</option>
+								
+									<option value="2007">2007</option>
+								
+									<option value="2006">2006</option>
+								
+									<option value="2005">2005</option>
+								
+									<option value="2004">2004</option>
+								
+									<option value="2003">2003</option>
+								
+									<option value="2002">2002</option>
+								
+									<option value="2001">2001</option>
+								
+									<option value="2000">2000</option>
+								
+									<option value="1999">1999</option>
+								
+									<option value="1998">1998</option>
+								
+									<option value="1997">1997</option>
+								
+									<option value="1996">1996</option>
+								
+									<option value="1995">1995</option>
+								
+									<option value="1994">1994</option>
+								
+									<option value="1993">1993</option>
+								
+									<option value="1992">1992</option>
+								
+									<option value="1991">1991</option>
+								
+									<option value="1990">1990</option>
+								
+									<option value="1989">1989</option>
+								
+									<option value="1988">1988</option>
+								
+									<option value="1987">1987</option>
+								
+									<option value="1986">1986</option>
+								
+									<option value="1985">1985</option>
+								
+									<option value="1984">1984</option>
+								
+									<option value="1983">1983</option>
+								
+									<option value="1982">1982</option>
+								
+									<option value="1981">1981</option>
+								
+									<option value="1980">1980</option>
+								
+									<option value="1979">1979</option>
+								
+									<option value="1978">1978</option>
+								
+									<option value="1977">1977</option>
+								
+									<option value="1976">1976</option>
+								
+									<option value="1975">1975</option>
+								
+									<option value="1974">1974</option>
+								
+									<option value="1973">1973</option>
+								
+									<option value="1972">1972</option>
+								
+									<option value="1971">1971</option>
+								
+									<option value="1970">1970</option>
+								
+									<option value="1969">1969</option>
+								
+									<option value="1968">1968</option>
+								
+									<option value="1967">1967</option>
+								
+									<option value="1966">1966</option>
+								
+									<option value="1965">1965</option>
+								
+									<option value="1964">1964</option>
+								
+									<option value="1963">1963</option>
+								
+									<option value="1962">1962</option>
+								
+									<option value="1961">1961</option>
+								
+									<option value="1960">1960</option>
+								
+									<option value="1959">1959</option>
+								
+									<option value="1958">1958</option>
+								
+									<option value="1957">1957</option>
+								
+									<option value="1956">1956</option>
+								
+									<option value="1955">1955</option>
+								
+									<option value="1954">1954</option>
+								
+									<option value="1953">1953</option>
+								
+									<option value="1952">1952</option>
+								
+									<option value="1951">1951</option>
+								
+									<option value="1950">1950</option>
+								
+									<option value="1949">1949</option>
+								
+									<option value="1948">1948</option>
+								
+									<option value="1947">1947</option>
+								
+									<option value="1946">1946</option>
+								
+									<option value="1945">1945</option>
+								
+									<option value="1944">1944</option>
+								
+									<option value="1943">1943</option>
+								
+									<option value="1942">1942</option>
+								
+									<option value="1941">1941</option>
+								
+									<option value="1940">1940</option>
+								
+									<option value="1939">1939</option>
+								
+									<option value="1938">1938</option>
+								
+									<option value="1937">1937</option>
+								
+									<option value="1936">1936</option>
+								
+									<option value="1935">1935</option>
+								
+									<option value="1934">1934</option>
+								
+									<option value="1933">1933</option>
+								
+									<option value="1932">1932</option>
+								
+									<option value="1931">1931</option>
+								
+									<option value="1930">1930</option>
+								
+									<option value="1929">1929</option>
+								
+									<option value="1928">1928</option>
+								
+									<option value="1927">1927</option>
+								
+									<option value="1926">1926</option>
+								
+									<option value="1925">1925</option>
+								
+									<option value="1924">1924</option>
+								
+									<option value="1923">1923</option>
+								
+									<option value="1922">1922</option>
+								
+									<option value="1921">1921</option>
+								
+									<option value="1920">1920</option>
+								
+									<option value="1919">1919</option>
+								
+									<option value="1918">1918</option>
+								
+									<option value="1917">1917</option>
+								
+									<option value="1916">1916</option>
+								
+									<option value="1915">1915</option>
+								
+									<option value="1914">1914</option>
+								
+									<option value="1913">1913</option>
+								
+									<option value="1912">1912</option>
+								
+									<option value="1911">1911</option>
+								
+									<option value="1910">1910</option>
+								
+									<option value="1909">1909</option>
+								
+									<option value="1908">1908</option>
+								
+									<option value="1907">1907</option>
+								
+									<option value="1906">1906</option>
+								
+									<option value="1905">1905</option>
+								
+									<option value="1904">1904</option>
+								
+									<option value="1903">1903</option>
+								
+									<option value="1902">1902</option>
+								
+									<option value="1901">1901</option>
+								
+									<option value="1900">1900</option>
+								
+									<option value="1899">1899</option>
+								
+									<option value="1898">1898</option>
+								
+									<option value="1897">1897</option>
+								
+									<option value="1896">1896</option>
+								
+									<option value="1895">1895</option>
+								
+									<option value="1894">1894</option>
+								
+									<option value="1893">1893</option>
+								
+									<option value="1892">1892</option>
+								
+									<option value="1891">1891</option>
+								
+									<option value="1890">1890</option>
+								
+									<option value="1889">1889</option>
+								
+									<option value="1888">1888</option>
+								
+									<option value="1887">1887</option>
+								
+									<option value="1886">1886</option>
+								
+									<option value="1885">1885</option>
+								
+									<option value="1884">1884</option>
+								
+									<option value="1883">1883</option>
+								
+									<option value="1882">1882</option>
+								
+									<option value="1881">1881</option>
+								
+									<option value="1880">1880</option>
+								
+									<option value="1879">1879</option>
+								
+									<option value="1878">1878</option>
+								
+									<option value="1877">1877</option>
+								
+									<option value="1876">1876</option>
+								
+									<option value="1875">1875</option>
+								
+									<option value="1874">1874</option>
+								
+									<option value="1873">1873</option>
+								
+									<option value="1872">1872</option>
+								
+									<option value="1871">1871</option>
+								
+									<option value="1870">1870</option>
+								
+									<option value="1869">1869</option>
+								
+									<option value="1868">1868</option>
+								
+									<option value="1867">1867</option>
+								
+									<option value="1866">1866</option>
+								
+									<option value="1865">1865</option>
+								
+									<option value="1864">1864</option>
+								
+									<option value="1863">1863</option>
+								
+									<option value="1862">1862</option>
+								
+									<option value="1861">1861</option>
+								
+									<option value="1860">1860</option>
+								
+									<option value="1859">1859</option>
+								
+									<option value="1858">1858</option>
+								
+									<option value="1857">1857</option>
+								
+									<option value="1856">1856</option>
+								
+									<option value="1855">1855</option>
+								
+									<option value="1854">1854</option>
+								
+									<option value="1853">1853</option>
+								
+									<option value="1852">1852</option>
+								
+									<option value="1851">1851</option>
+								
+									<option value="1850">1850</option>
+								
+									<option value="1849">1849</option>
+								
+									<option value="1848">1848</option>
+								
+									<option value="1847">1847</option>
+								
+									<option value="1846">1846</option>
+								
+									<option value="1845">1845</option>
+								
+									<option value="1844">1844</option>
+								
+									<option value="1843">1843</option>
+								
+									<option value="1842">1842</option>
+								
+									<option value="1841">1841</option>
+								
+									<option value="1840">1840</option>
+								
+									<option value="1839">1839</option>
+								
+									<option value="1838">1838</option>
+								
+									<option value="1837">1837</option>
+								
+									<option value="1836">1836</option>
+								
+									<option value="1835">1835</option>
+								
+									<option value="1834">1834</option>
+								
+									<option value="1833">1833</option>
+								
+									<option value="1832">1832</option>
+								
+									<option value="1831">1831</option>
+								
+									<option value="1830">1830</option>
+								
+									<option value="1829">1829</option>
+								
+									<option value="1828">1828</option>
+								
+									<option value="1827">1827</option>
+								
+									<option value="1826">1826</option>
+								
+									<option value="1825">1825</option>
+								
+									<option value="1824">1824</option>
+								
+									<option value="1823">1823</option>
+								
+									<option value="1822">1822</option>
+								
+									<option value="1821">1821</option>
+								
+									<option value="1820">1820</option>
+								
+									<option value="1819">1819</option>
+								
+									<option value="1818">1818</option>
+								
+									<option value="1817">1817</option>
+								
+									<option value="1816">1816</option>
+								
+									<option value="1815">1815</option>
+								
+									<option value="1814">1814</option>
+								
+									<option value="1813">1813</option>
+								
+									<option value="1812">1812</option>
+								
+									<option value="1811">1811</option>
+								
+									<option value="1810">1810</option>
+								
+									<option value="1809">1809</option>
+								
+									<option value="1808">1808</option>
+								
+									<option value="1807">1807</option>
+								
+									<option value="1806">1806</option>
+								
+									<option value="1805">1805</option>
+								
+									<option value="1804">1804</option>
+								
+									<option value="1803">1803</option>
+								
+									<option value="1802">1802</option>
+								
+									<option value="1801">1801</option>
+								
+									<option value="1800">1800</option>
+								
+							</select>
+							至
+							<select name="endPubdate">
+								<option value="" selected="selected">出版年</option>
+								
+									<option value="2026">2026</option>
+								
+									<option value="2025">2025</option>
+								
+									<option value="2024">2024</option>
+								
+									<option value="2023">2023</option>
+								
+									<option value="2022">2022</option>
+								
+									<option value="2021">2021</option>
+								
+									<option value="2020">2020</option>
+								
+									<option value="2019">2019</option>
+								
+									<option value="2018">2018</option>
+								
+									<option value="2017">2017</option>
+								
+									<option value="2016">2016</option>
+								
+									<option value="2015">2015</option>
+								
+									<option value="2014">2014</option>
+								
+									<option value="2013">2013</option>
+								
+									<option value="2012">2012</option>
+								
+									<option value="2011">2011</option>
+								
+									<option value="2010">2010</option>
+								
+									<option value="2009">2009</option>
+								
+									<option value="2008">2008</option>
+								
+									<option value="2007">2007</option>
+								
+									<option value="2006">2006</option>
+								
+									<option value="2005">2005</option>
+								
+									<option value="2004">2004</option>
+								
+									<option value="2003">2003</option>
+								
+									<option value="2002">2002</option>
+								
+									<option value="2001">2001</option>
+								
+									<option value="2000">2000</option>
+								
+									<option value="1999">1999</option>
+								
+									<option value="1998">1998</option>
+								
+									<option value="1997">1997</option>
+								
+									<option value="1996">1996</option>
+								
+									<option value="1995">1995</option>
+								
+									<option value="1994">1994</option>
+								
+									<option value="1993">1993</option>
+								
+									<option value="1992">1992</option>
+								
+									<option value="1991">1991</option>
+								
+									<option value="1990">1990</option>
+								
+									<option value="1989">1989</option>
+								
+									<option value="1988">1988</option>
+								
+									<option value="1987">1987</option>
+								
+									<option value="1986">1986</option>
+								
+									<option value="1985">1985</option>
+								
+									<option value="1984">1984</option>
+								
+									<option value="1983">1983</option>
+								
+									<option value="1982">1982</option>
+								
+									<option value="1981">1981</option>
+								
+									<option value="1980">1980</option>
+								
+									<option value="1979">1979</option>
+								
+									<option value="1978">1978</option>
+								
+									<option value="1977">1977</option>
+								
+									<option value="1976">1976</option>
+								
+									<option value="1975">1975</option>
+								
+									<option value="1974">1974</option>
+								
+									<option value="1973">1973</option>
+								
+									<option value="1972">1972</option>
+								
+									<option value="1971">1971</option>
+								
+									<option value="1970">1970</option>
+								
+									<option value="1969">1969</option>
+								
+									<option value="1968">1968</option>
+								
+									<option value="1967">1967</option>
+								
+									<option value="1966">1966</option>
+								
+									<option value="1965">1965</option>
+								
+									<option value="1964">1964</option>
+								
+									<option value="1963">1963</option>
+								
+									<option value="1962">1962</option>
+								
+									<option value="1961">1961</option>
+								
+									<option value="1960">1960</option>
+								
+									<option value="1959">1959</option>
+								
+									<option value="1958">1958</option>
+								
+									<option value="1957">1957</option>
+								
+									<option value="1956">1956</option>
+								
+									<option value="1955">1955</option>
+								
+									<option value="1954">1954</option>
+								
+									<option value="1953">1953</option>
+								
+									<option value="1952">1952</option>
+								
+									<option value="1951">1951</option>
+								
+									<option value="1950">1950</option>
+								
+									<option value="1949">1949</option>
+								
+									<option value="1948">1948</option>
+								
+									<option value="1947">1947</option>
+								
+									<option value="1946">1946</option>
+								
+									<option value="1945">1945</option>
+								
+									<option value="1944">1944</option>
+								
+									<option value="1943">1943</option>
+								
+									<option value="1942">1942</option>
+								
+									<option value="1941">1941</option>
+								
+									<option value="1940">1940</option>
+								
+									<option value="1939">1939</option>
+								
+									<option value="1938">1938</option>
+								
+									<option value="1937">1937</option>
+								
+									<option value="1936">1936</option>
+								
+									<option value="1935">1935</option>
+								
+									<option value="1934">1934</option>
+								
+									<option value="1933">1933</option>
+								
+									<option value="1932">1932</option>
+								
+									<option value="1931">1931</option>
+								
+									<option value="1930">1930</option>
+								
+									<option value="1929">1929</option>
+								
+									<option value="1928">1928</option>
+								
+									<option value="1927">1927</option>
+								
+									<option value="1926">1926</option>
+								
+									<option value="1925">1925</option>
+								
+									<option value="1924">1924</option>
+								
+									<option value="1923">1923</option>
+								
+									<option value="1922">1922</option>
+								
+									<option value="1921">1921</option>
+								
+									<option value="1920">1920</option>
+								
+									<option value="1919">1919</option>
+								
+									<option value="1918">1918</option>
+								
+									<option value="1917">1917</option>
+								
+									<option value="1916">1916</option>
+								
+									<option value="1915">1915</option>
+								
+									<option value="1914">1914</option>
+								
+									<option value="1913">1913</option>
+								
+									<option value="1912">1912</option>
+								
+									<option value="1911">1911</option>
+								
+									<option value="1910">1910</option>
+								
+									<option value="1909">1909</option>
+								
+									<option value="1908">1908</option>
+								
+									<option value="1907">1907</option>
+								
+									<option value="1906">1906</option>
+								
+									<option value="1905">1905</option>
+								
+									<option value="1904">1904</option>
+								
+									<option value="1903">1903</option>
+								
+									<option value="1902">1902</option>
+								
+									<option value="1901">1901</option>
+								
+									<option value="1900">1900</option>
+								
+									<option value="1899">1899</option>
+								
+									<option value="1898">1898</option>
+								
+									<option value="1897">1897</option>
+								
+									<option value="1896">1896</option>
+								
+									<option value="1895">1895</option>
+								
+									<option value="1894">1894</option>
+								
+									<option value="1893">1893</option>
+								
+									<option value="1892">1892</option>
+								
+									<option value="1891">1891</option>
+								
+									<option value="1890">1890</option>
+								
+									<option value="1889">1889</option>
+								
+									<option value="1888">1888</option>
+								
+									<option value="1887">1887</option>
+								
+									<option value="1886">1886</option>
+								
+									<option value="1885">1885</option>
+								
+									<option value="1884">1884</option>
+								
+									<option value="1883">1883</option>
+								
+									<option value="1882">1882</option>
+								
+									<option value="1881">1881</option>
+								
+									<option value="1880">1880</option>
+								
+									<option value="1879">1879</option>
+								
+									<option value="1878">1878</option>
+								
+									<option value="1877">1877</option>
+								
+									<option value="1876">1876</option>
+								
+									<option value="1875">1875</option>
+								
+									<option value="1874">1874</option>
+								
+									<option value="1873">1873</option>
+								
+									<option value="1872">1872</option>
+								
+									<option value="1871">1871</option>
+								
+									<option value="1870">1870</option>
+								
+									<option value="1869">1869</option>
+								
+									<option value="1868">1868</option>
+								
+									<option value="1867">1867</option>
+								
+									<option value="1866">1866</option>
+								
+									<option value="1865">1865</option>
+								
+									<option value="1864">1864</option>
+								
+									<option value="1863">1863</option>
+								
+									<option value="1862">1862</option>
+								
+									<option value="1861">1861</option>
+								
+									<option value="1860">1860</option>
+								
+									<option value="1859">1859</option>
+								
+									<option value="1858">1858</option>
+								
+									<option value="1857">1857</option>
+								
+									<option value="1856">1856</option>
+								
+									<option value="1855">1855</option>
+								
+									<option value="1854">1854</option>
+								
+									<option value="1853">1853</option>
+								
+									<option value="1852">1852</option>
+								
+									<option value="1851">1851</option>
+								
+									<option value="1850">1850</option>
+								
+									<option value="1849">1849</option>
+								
+									<option value="1848">1848</option>
+								
+									<option value="1847">1847</option>
+								
+									<option value="1846">1846</option>
+								
+									<option value="1845">1845</option>
+								
+									<option value="1844">1844</option>
+								
+									<option value="1843">1843</option>
+								
+									<option value="1842">1842</option>
+								
+									<option value="1841">1841</option>
+								
+									<option value="1840">1840</option>
+								
+									<option value="1839">1839</option>
+								
+									<option value="1838">1838</option>
+								
+									<option value="1837">1837</option>
+								
+									<option value="1836">1836</option>
+								
+									<option value="1835">1835</option>
+								
+									<option value="1834">1834</option>
+								
+									<option value="1833">1833</option>
+								
+									<option value="1832">1832</option>
+								
+									<option value="1831">1831</option>
+								
+									<option value="1830">1830</option>
+								
+									<option value="1829">1829</option>
+								
+									<option value="1828">1828</option>
+								
+									<option value="1827">1827</option>
+								
+									<option value="1826">1826</option>
+								
+									<option value="1825">1825</option>
+								
+									<option value="1824">1824</option>
+								
+									<option value="1823">1823</option>
+								
+									<option value="1822">1822</option>
+								
+									<option value="1821">1821</option>
+								
+									<option value="1820">1820</option>
+								
+									<option value="1819">1819</option>
+								
+									<option value="1818">1818</option>
+								
+									<option value="1817">1817</option>
+								
+									<option value="1816">1816</option>
+								
+									<option value="1815">1815</option>
+								
+									<option value="1814">1814</option>
+								
+									<option value="1813">1813</option>
+								
+									<option value="1812">1812</option>
+								
+									<option value="1811">1811</option>
+								
+									<option value="1810">1810</option>
+								
+									<option value="1809">1809</option>
+								
+									<option value="1808">1808</option>
+								
+									<option value="1807">1807</option>
+								
+									<option value="1806">1806</option>
+								
+									<option value="1805">1805</option>
+								
+									<option value="1804">1804</option>
+								
+									<option value="1803">1803</option>
+								
+									<option value="1802">1802</option>
+								
+									<option value="1801">1801</option>
+								
+									<option value="1800">1800</option>
+								
+							</select>
+						
+					
+				</div>
+				<div class="search_hidden">
+					每页显示行数:
+					<select name="rows">
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+						<option value="35">35</option>
+						<option value="40">40</option>
+						<option value="45">45</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+					<span >
+					<label>
+					<input type="checkbox" name="hasholding" id="hasholding" value="1"
+							
+								checked="checked"
+							
+					/>
+					只输出有馆藏的记录
+					</label>
+				</span>
+				</div>
+			</div>
+			<div id="libraries"
+					
+						
+						style="display:none;"
+						
+				 class="search_hidden">
+				
+				
+				
+				
+				
+				<style>
+					.xm-select-lib {
+
+					}
+					.xm-select-libcode, .xm-select-local {
+						width: 322px;
+						float: left;
+					}
+					.clear {
+						clear: both;
+					}
+					.xm-select-local {
+						margin-left: 20px;
+					}
+				</style>
+				<script type="text/javascript" src="/opac/media/lib/xm-select/xm-select.js"></script>
+				<!--限定分馆/馆藏检索 -->
+				<div class="xm-select-lib">
+					<div id="s-libcodes" class="xm-select-libcode"></div>
+					<div id="s-local" class="xm-select-local"></div>
+					<div class="clear"></div>
+				</div>
+
+			
+
+				<script type="application/javascript">
+
+					var showLibname = $.cookie("showLibname");
+					if(showLibname != "" && showLibname != null){
+						$("#content .libName").html(showLibname);
+					}
+					var all_local = new Array();
+
+					var f_initVal = new Array();
+					var showLocal  = $.cookie("showLocal");
+					if(showLocal!="" && showLocal != null) {
+						f_initVal = showLocal.split(",");
+					} else {
+						var	f_curlocal = [''];
+						if(f_curlocal!="" && f_curlocal != null){
+							f_initVal =f_curlocal;
+							$.cookie("showLocal", f_curlocal, {expires:expireTime, path:'/'});
+						}
+					}
+					var localSelected = xmSelect.render({
+						el: '#s-local',
+						tips: '分馆所在地址选择',
+						filterable: true,
+						initValue: f_initVal,
+						name: 'f_curlocal',
+						prop: {
+							name: 'name',
+							value: 'localcode'
+						},
+						data: []
+					});
+
+					$.ajax({
+						type: 'POST',
+						url: '/opac/json/localList/all',
+						dataType: 'json',
+						success: function(data) {
+							all_local = data;
+						},
+						error: function(textStatus){
+							console.log(textStatus);
+							alert("网络异常。");
+						}
+					});
+
+					$.ajax({
+						type: 'POST',
+						url: '/opac/api/libcodes',
+						dataType: 'json',
+						success: function(data) {
+							renderToLibcodeSelected('s-libcodes', data);
+						},
+						error: function(textStatus){
+							console.log(textStatus);
+							alert("网络异常。");
+						}
+					});
+
+					<!--限定分馆/馆藏检索 -->
+					function renderToLibcodeSelected(el, resultData) {
+						var initVal = new Array();
+						var curlibcode  = $.cookie("showLibcode");
+						if(curlibcode!="" && curlibcode != null) {
+							let list = curlibcode.split(",");
+							showLibraries();
+							initVal = list;
+						} else {
+							var lib = [''];
+							if(lib!="" && lib != null){
+								showLibraries();
+								initVal = lib;
+								$.cookie("showLibcode", lib, {expires:expireTime, path:'/'});
+								$.cookie("showLibname", '', {expires:expireTime, path:'/'});
+							}else {
+								initVal = ['GT'];
+							}
+						}
+						updateLocalData(initVal);
+						var libcodeSelected = xmSelect.render({
+							el: '#' + el,
+							tips: '分馆选择',
+							filterable: true,
+							name: 'curlibcodeGT',
+							initValue: initVal,
+							prop: {
+								name: 'simpleName',
+								value: 'libcode'
+							},
+							data: resultData,
+							on: function(data) {
+								var arr = data.arr;
+								var filterData = arr.map(function(item, index, array){
+									return item.libcode;
+								});
+								$.cookie("showLibcode", filterData, {expires:expireTime, path:'/'});
+								console.log(filterData)
+								updateLocalData(filterData);
+							}
+						});
+					}
+
+					function updateLocalData(filterData) {
+						var localcode = [''];
+						var data = all_local.filter(function(item, index, array) {
+							var libcode = item.libcode;
+							if(localcode!="" && localcode != null) libcode=localcode
+							return filterData.includes(libcode);
+						})
+						localSelected.update({
+							data: data
+						})
+					}
+
+				</script>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			
+			<div id="cirTypeDiv" style="display:none;" class="booktypes">
+				
+			</div>
+			<div id="remember" style="margin-top: 15px;display:none;">
+		  <span><input type="checkbox" id="rememberMe" />
+					记住我的选择</span></div>
+			<!-- 检索提示框 -->
+			<div id="opacConfSetTable" style="display: none;">
+				OPAC参数设置<br/>
+				<a href="/opac/configLibName">分馆名显示自定义设置</a>
+			</div>
+			<!-- 外网资源统一配置  -->
+			<div id="opacConfouternet" style="display: none;">
+				<input type="checkbox" value="1" id="Conouternet" name="Conouternet" onclick="configouternet()"/>关闭外网资源通道
+			</div>
+			<div id="localConfig" style="display: none;">
+				<table width="100%">
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDnn" type="checkbox" name="curlocal"  value="ZHDnn" />
+									正定县南牛分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wjsg001" type="checkbox" name="curlocal"  value="wjsg001" />
+									网借书柜
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_gxq001" type="checkbox" name="curlocal"  value="gxq001" />
+									高新区图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-DY_001" type="checkbox" name="curlocal"  value="YHQ-DY_001" />
+									裕华区东苑分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xl004" type="checkbox" name="curlocal"  value="xl004" />
+									新乐地方文献
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXXTGS1" type="checkbox" name="curlocal"  value="JXXTGS1" />
+									捐赠图书室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDXPLFG" type="checkbox" name="curlocal"  value="ZHDXPLFG" />
+									正定县西平乐分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_KQHGYFG" type="checkbox" name="curlocal"  value="KQHGYFG" />
+									矿区皇冠苑分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQLC001" type="checkbox" name="curlocal"  value="LQLC001" />
+									鹿泉李村分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQLC002" type="checkbox" name="curlocal"  value="LQLC002" />
+									鹿泉李村新书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XZT001" type="checkbox" name="curlocal"  value="XZT001" />
+									长安区西兆通
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_gy001" type="checkbox" name="curlocal"  value="gy001" />
+									高邑分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJDHFXFG" type="checkbox" name="curlocal"  value="WJDHFXFG" />
+									无极县东侯坊乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_TG001" type="checkbox" name="curlocal"  value="TG001" />
+									长安区谈固
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_yuhuadama01" type="checkbox" name="curlocal"  value="yuhuadama01" />
+									裕华区大马书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL010" type="checkbox" name="curlocal"  value="XL010" />
+									新乐工具书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXZZZ01" type="checkbox" name="curlocal"  value="ZXZZZ01" />
+									赵县图书馆赵州镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx007" type="checkbox" name="curlocal"  value="jx007" />
+									三楼图书室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx006" type="checkbox" name="curlocal"  value="jx006" />
+									自然科学书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx009" type="checkbox" name="curlocal"  value="jx009" />
+									地方文献室
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx008" type="checkbox" name="curlocal"  value="jx008" />
+									阅览室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDnn01" type="checkbox" name="curlocal"  value="ZHDnn01" />
+									正定县南牛乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx003" type="checkbox" name="curlocal"  value="jx003" />
+									井陉县图书馆秀林分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx002" type="checkbox" name="curlocal"  value="jx002" />
+									井陉少儿图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx005" type="checkbox" name="curlocal"  value="jx005" />
+									井陉县图书馆南峪分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx004" type="checkbox" name="curlocal"  value="jx004" />
+									井陉县图书馆上安分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXNBSZ01" type="checkbox" name="curlocal"  value="ZXNBSZ01" />
+									赵县图书馆南柏舍镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh1" type="checkbox" name="curlocal"  value="jzh1" />
+									晋州市外借库室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDxcp02" type="checkbox" name="curlocal"  value="ZHDxcp02" />
+									正定县新城铺分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDxcp01" type="checkbox" name="curlocal"  value="ZHDxcp01" />
+									正定县新城铺镇
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx001" type="checkbox" name="curlocal"  value="jx001" />
+									井陉分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_yuhua01" type="checkbox" name="curlocal"  value="yuhua01" />
+									裕华区书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HP003" type="checkbox" name="curlocal"  value="HP003" />
+									新乐化皮村分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HP002" type="checkbox" name="curlocal"  value="HP002" />
+									化皮村分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JZSjzz01" type="checkbox" name="curlocal"  value="JZSjzz01" />
+									晋州市晋州镇分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_yuhua03" type="checkbox" name="curlocal"  value="yuhua03" />
+									裕华区大马社区图书馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HP001" type="checkbox" name="curlocal"  value="HP001" />
+									新乐化皮
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQQZ001" type="checkbox" name="curlocal"  value="LQQZ001" />
+									鹿泉曲寨分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_yuhua02" type="checkbox" name="curlocal"  value="yuhua02" />
+									裕华分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_znsj001" type="checkbox" name="curlocal"  value="znsj001" />
+									新馆书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQQZ002" type="checkbox" name="curlocal"  value="LQQZ002" />
+									鹿泉曲寨新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJZDGZFG" type="checkbox" name="curlocal"  value="WJZDGZFG" />
+									无极县张段固镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_NC001" type="checkbox" name="curlocal"  value="NC001" />
+									长安区南村
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL007" type="checkbox" name="curlocal"  value="XL007" />
+									新乐林曲分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL006" type="checkbox" name="curlocal"  value="XL006" />
+									新乐分馆东安家庄
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL005" type="checkbox" name="curlocal"  value="XL005" />
+									新乐少儿阅览室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wj003" type="checkbox" name="curlocal"  value="wj003" />
+									无极县图书馆新书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL009" type="checkbox" name="curlocal"  value="XL009" />
+									新乐馆方志分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XL008" type="checkbox" name="curlocal"  value="XL008" />
+									新乐特藏书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx018" type="checkbox" name="curlocal"  value="jx018" />
+									工具特藏书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx017" type="checkbox" name="curlocal"  value="jx017" />
+									国学书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx019" type="checkbox" name="curlocal"  value="jx019" />
+									诗词楹联书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx014" type="checkbox" name="curlocal"  value="jx014" />
+									报纸合订本库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx013" type="checkbox" name="curlocal"  value="jx013" />
+									期刊合订本库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLCR" type="checkbox" name="curlocal"  value="XLCR" />
+									新乐成人
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx016" type="checkbox" name="curlocal"  value="jx016" />
+									法律书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx015" type="checkbox" name="curlocal"  value="jx015" />
+									红色书房
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx010" type="checkbox" name="curlocal"  value="jx010" />
+									二楼图书室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQKFQ002" type="checkbox" name="curlocal"  value="LQKFQ002" />
+									鹿泉开发区新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQKFQ001" type="checkbox" name="curlocal"  value="LQKFQ001" />
+									鹿泉开发区分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G001-1" type="checkbox" name="curlocal"  value="G001-1" />
+									新馆社科库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLCS" type="checkbox" name="curlocal"  value="XLCS" />
+									新乐长寿
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx012" type="checkbox" name="curlocal"  value="jx012" />
+									国图书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jx011" type="checkbox" name="curlocal"  value="jx011" />
+									捐赠图书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PJZ001" type="checkbox" name="curlocal"  value="PJZ001" />
+									新乐彭家庄
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PJZ002" type="checkbox" name="curlocal"  value="PJZ002" />
+									新乐同义庄分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQYA001" type="checkbox" name="curlocal"  value="LQYA001" />
+									鹿泉宜安分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQYA002" type="checkbox" name="curlocal"  value="LQYA002" />
+									鹿泉宜安新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQJT_001" type="checkbox" name="curlocal"  value="YHQJT_001" />
+									裕华区建通分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XXGJSK" type="checkbox" name="curlocal"  value="XXGJSK" />
+									智能书屋想象国际书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXXZDZ01" type="checkbox" name="curlocal"  value="ZXXZDZ01" />
+									赵县图书馆新寨店镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_TRCSK" type="checkbox" name="curlocal"  value="TRCSK" />
+									天然城社区居委会
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXGCX01" type="checkbox" name="curlocal"  value="ZXGCX01" />
+									赵县图书馆高村乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSXBNJY" type="checkbox" name="curlocal"  value="PSXBNJY" />
+									平山县百鸟教育
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSYC001" type="checkbox" name="curlocal"  value="LQSYC001" />
+									鹿泉山尹村分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSYC002" type="checkbox" name="curlocal"  value="LQSYC002" />
+									鹿泉山尹村新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JZSzjzx01" type="checkbox" name="curlocal"  value="JZSzjzx01" />
+									晋州市周家庄乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_cs001" type="checkbox" name="curlocal"  value="cs001" />
+									长安区分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_cs002" type="checkbox" name="curlocal"  value="cs002" />
+									长安区书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_cs003" type="checkbox" name="curlocal"  value="cs003" />
+									新文体中心图书馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLSE" type="checkbox" name="curlocal"  value="XLSE" />
+									新乐少儿
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xl001" type="checkbox" name="curlocal"  value="xl001" />
+									新乐分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSYJ" type="checkbox" name="curlocal"  value="PSYJ" />
+									平山遇见城市书屋
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_rcsf" type="checkbox" name="curlocal"  value="rcsf" />
+									鹿泉人才公寓书房
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xl002" type="checkbox" name="curlocal"  value="xl002" />
+									新乐期刊
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xl003" type="checkbox" name="curlocal"  value="xl003" />
+									新乐书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQTY002" type="checkbox" name="curlocal"  value="LQTY002" />
+									鹿泉铜冶新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-ZMLD_001" type="checkbox" name="curlocal"  value="YHQ-ZMLD_001" />
+									裕华区众美绿都分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX012" type="checkbox" name="curlocal"  value="JX012" />
+									井陉县图书馆微水分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX011" type="checkbox" name="curlocal"  value="JX011" />
+									井陉县图书馆天长分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQTY001" type="checkbox" name="curlocal"  value="LQTY001" />
+									鹿泉铜冶分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YZ001" type="checkbox" name="curlocal"  value="YZ001" />
+									长安区跃进
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJWJZFG" type="checkbox" name="curlocal"  value="WJWJZFG" />
+									无极县无极镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQHLZ002" type="checkbox" name="curlocal"  value="LQHLZ002" />
+									鹿泉获鹿镇新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQHLZ001" type="checkbox" name="curlocal"  value="LQHLZ001" />
+									鹿泉获鹿镇分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G011" type="checkbox" name="curlocal"  value="G011" />
+									休闲书屋
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G010" type="checkbox" name="curlocal"  value="G010" />
+									盲文书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G013" type="checkbox" name="curlocal"  value="G013" />
+									综合周转库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G012" type="checkbox" name="curlocal"  value="G012" />
+									文学周转库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G015" type="checkbox" name="curlocal"  value="G015" />
+									休闲周转库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G002-1" type="checkbox" name="curlocal"  value="G002-1" />
+									新馆自科库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJGTXFG" type="checkbox" name="curlocal"  value="WJGTXFG" />
+									无极县高头乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G014" type="checkbox" name="curlocal"  value="G014" />
+									少儿周转库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G016" type="checkbox" name="curlocal"  value="G016" />
+									少儿期刊库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G019" type="checkbox" name="curlocal"  value="G019" />
+									石家庄图书馆电子图书
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LSH003" type="checkbox" name="curlocal"  value="LSH003" />
+									灵寿分馆少儿借阅室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G018" type="checkbox" name="curlocal"  value="G018" />
+									周转总库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LSH002" type="checkbox" name="curlocal"  value="LSH002" />
+									灵寿分馆成人借阅室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LSH001" type="checkbox" name="curlocal"  value="LSH001" />
+									灵寿借阅室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_BWG" type="checkbox" name="curlocal"  value="BWG" />
+									灵寿馆博物馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhd888" type="checkbox" name="curlocal"  value="zhd888" />
+									乡镇各分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LSH006" type="checkbox" name="curlocal"  value="LSH006" />
+									灵寿借阅室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_QTZ" type="checkbox" name="curlocal"  value="QTZ" />
+									灵寿馆青同镇
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDxpl01" type="checkbox" name="curlocal"  value="ZHDxpl01" />
+									正定县西平乐乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_FT001" type="checkbox" name="curlocal"  value="FT001" />
+									长安区方塘
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_CYZ" type="checkbox" name="curlocal"  value="CYZ" />
+									灵寿馆慈峪镇
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HXMCSK" type="checkbox" name="curlocal"  value="HXMCSK" />
+									筑业花园社区书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G002" type="checkbox" name="curlocal"  value="G002" />
+									自科书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJDCZFG" type="checkbox" name="curlocal"  value="WJDCZFG" />
+									无极县大陈镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G001" type="checkbox" name="curlocal"  value="G001" />
+									社科书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G004" type="checkbox" name="curlocal"  value="G004" />
+									基藏书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G003" type="checkbox" name="curlocal"  value="G003" />
+									文学书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLSZXYY" type="checkbox" name="curlocal"  value="XLSZXYY" />
+									新乐中心医院
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G006" type="checkbox" name="curlocal"  value="G006" />
+									少儿书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G005" type="checkbox" name="curlocal"  value="G005" />
+									报刊书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G008" type="checkbox" name="curlocal"  value="G008" />
+									正定分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G007" type="checkbox" name="curlocal"  value="G007" />
+									地方文献
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_FK001" type="checkbox" name="curlocal"  value="FK001" />
+									长安区阜康
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNX002" type="checkbox" name="curlocal"  value="JXNX002" />
+									井陉县图书馆康庄村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNX001" type="checkbox" name="curlocal"  value="JXNX001" />
+									井陉县图书馆北陉村农家书屋基层服务点
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLWJZD" type="checkbox" name="curlocal"  value="XLWJZD" />
+									新乐市武警中队
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G009" type="checkbox" name="curlocal"  value="G009" />
+									古籍书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHX001" type="checkbox" name="curlocal"  value="ZHX001" />
+									赵县分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQDH002" type="checkbox" name="curlocal"  value="LQDH002" />
+									鹿泉大河新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHX005" type="checkbox" name="curlocal"  value="ZHX005" />
+									赵县地方文献
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHX004" type="checkbox" name="curlocal"  value="ZHX004" />
+									赵县期刊
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQDH001" type="checkbox" name="curlocal"  value="LQDH001" />
+									鹿泉大河分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQJSZX001" type="checkbox" name="curlocal"  value="LQJSZX001" />
+									全民健身中心分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHX003" type="checkbox" name="curlocal"  value="ZHX003" />
+									赵县馆借阅处
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQJSZX002" type="checkbox" name="curlocal"  value="LQJSZX002" />
+									全民健身中心新书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wj002" type="checkbox" name="curlocal"  value="wj002" />
+									无极县图书馆少儿阅览室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wj001" type="checkbox" name="curlocal"  value="wj001" />
+									无极县图书馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ005" type="checkbox" name="curlocal"  value="LQ005" />
+									鹿泉地方文献
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ006" type="checkbox" name="curlocal"  value="LQ006" />
+									24小时自助借还机
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ007" type="checkbox" name="curlocal"  value="LQ007" />
+									厚德福城社区
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ008" type="checkbox" name="curlocal"  value="LQ008" />
+									监狱宿舍
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhx002" type="checkbox" name="curlocal"  value="zhx002" />
+									赵县图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXBZ003" type="checkbox" name="curlocal"  value="JXBZ003" />
+									井陉县图书馆青石岭村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXBZ002" type="checkbox" name="curlocal"  value="JXBZ002" />
+									井陉县图书馆东南正村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-JHN_001" type="checkbox" name="curlocal"  value="YHQ-JHN_001" />
+									裕华区建华南分馆-图书阅览中心
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNY003" type="checkbox" name="curlocal"  value="JXNY003" />
+									井陉县图书馆岸底村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNY002" type="checkbox" name="curlocal"  value="JXNY002" />
+									井陉县图书馆台头农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LSH100" type="checkbox" name="curlocal"  value="LSH100" />
+									灵寿分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G003-1" type="checkbox" name="curlocal"  value="G003-1" />
+									新馆文学库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNY001" type="checkbox" name="curlocal"  value="JXNY001" />
+									井陉县图书馆地都村农家书屋基层服务点
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XTXSZ001" type="checkbox" name="curlocal"  value="XTXSZ001" />
+									西市庄外借室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ001" type="checkbox" name="curlocal"  value="LQ001" />
+									鹿泉分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXCYS003" type="checkbox" name="curlocal"  value="JXCYS003" />
+									井陉县图书馆老牛峪村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ002" type="checkbox" name="curlocal"  value="LQ002" />
+									鹿泉新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ003" type="checkbox" name="curlocal"  value="LQ003" />
+									鹿泉旧书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQ004" type="checkbox" name="curlocal"  value="LQ004" />
+									鹿泉资料库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_lingshouzhongxue" type="checkbox" name="curlocal"  value="lingshouzhongxue" />
+									灵寿中学流动图书点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXCYS001" type="checkbox" name="curlocal"  value="JXCYS001" />
+									井陉县图书馆湖家滩村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXXTSG3" type="checkbox" name="curlocal"  value="JXXTSG3" />
+									三楼图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQKSSWJZD" type="checkbox" name="curlocal"  value="LQKSSWJZD" />
+									鹿泉看守所武警中队
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G020" type="checkbox" name="curlocal"  value="G020" />
+									京东
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_CAZ001" type="checkbox" name="curlocal"  value="CAZ001" />
+									新乐承安镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJLCDFG" type="checkbox" name="curlocal"  value="WJLCDFG" />
+									无极县里城道乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G022" type="checkbox" name="curlocal"  value="G022" />
+									民国文献库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G021" type="checkbox" name="curlocal"  value="G021" />
+									工具书
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G024" type="checkbox" name="curlocal"  value="G024" />
+									少儿基藏
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSY001" type="checkbox" name="curlocal"  value="LQSY001" />
+									鹿泉馆龙泉书院分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSY002" type="checkbox" name="curlocal"  value="LQSY002" />
+									鹿泉馆龙泉书院新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G023" type="checkbox" name="curlocal"  value="G023" />
+									少儿特藏
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G026" type="checkbox" name="curlocal"  value="G026" />
+									闭架书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_psh003" type="checkbox" name="curlocal"  value="psh003" />
+									平山期刊
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G025" type="checkbox" name="curlocal"  value="G025" />
+									冀图邮书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_psh002" type="checkbox" name="curlocal"  value="psh002" />
+									平山图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G028" type="checkbox" name="curlocal"  value="G028" />
+									新馆报刊库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw908" type="checkbox" name="curlocal"  value="Gw908" />
+									古栾水镇
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_psh001" type="checkbox" name="curlocal"  value="psh001" />
+									平山分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw907" type="checkbox" name="curlocal"  value="Gw907" />
+									冀工书房（河北工人报）
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G027" type="checkbox" name="curlocal"  value="G027" />
+									报纸库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw906" type="checkbox" name="curlocal"  value="Gw906" />
+									安吉书院
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw905" type="checkbox" name="curlocal"  value="Gw905" />
+									八度书屋
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G029" type="checkbox" name="curlocal"  value="G029" />
+									徐光耀文学馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw904" type="checkbox" name="curlocal"  value="Gw904" />
+									翰林甲第
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw903" type="checkbox" name="curlocal"  value="Gw903" />
+									解放纪念馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDXAFG" type="checkbox" name="curlocal"  value="ZHDXAFG" />
+									正定县新安镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw902" type="checkbox" name="curlocal"  value="Gw902" />
+									园博园
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw901" type="checkbox" name="curlocal"  value="Gw901" />
+									云歌朗樾
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZNSWSK" type="checkbox" name="curlocal"  value="ZNSWSK" />
+									智能书屋书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zdwjsg001" type="checkbox" name="curlocal"  value="zdwjsg001" />
+									正定网借书柜
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQLY_LY" type="checkbox" name="curlocal"  value="YHQLY_LY" />
+									绿园分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSZ2001" type="checkbox" name="curlocal"  value="LQSZ2001" />
+									鹿泉上寨分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YD" type="checkbox" name="curlocal"  value="YD" />
+									灵寿馆新型阅读空间
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQHBZ001" type="checkbox" name="curlocal"  value="LQHBZ001" />
+									鹿泉黄壁庄分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSZ2002" type="checkbox" name="curlocal"  value="LQSZ2002" />
+									鹿泉上寨新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQHBZ002" type="checkbox" name="curlocal"  value="LQHBZ002" />
+									鹿泉黄壁庄新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw919" type="checkbox" name="curlocal"  value="Gw919" />
+									绿城豫府
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw917" type="checkbox" name="curlocal"  value="Gw917" />
+									大者学社国山书院
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_DG001" type="checkbox" name="curlocal"  value="DG001" />
+									新乐杜固
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw916" type="checkbox" name="curlocal"  value="Gw916" />
+									北翟营城市书房
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GA001" type="checkbox" name="curlocal"  value="GA001" />
+									长安区广安
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw915" type="checkbox" name="curlocal"  value="Gw915" />
+									裕华区东环书屋
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw914" type="checkbox" name="curlocal"  value="Gw914" />
+									太行嘉苑
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh02" type="checkbox" name="curlocal"  value="jzh02" />
+									晋州市少儿室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw913" type="checkbox" name="curlocal"  value="Gw913" />
+									朴充书店
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh03" type="checkbox" name="curlocal"  value="jzh03" />
+									晋州地方文献
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw912" type="checkbox" name="curlocal"  value="Gw912" />
+									荣景园
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXFZZ01" type="checkbox" name="curlocal"  value="ZXFZZ01" />
+									赵县图书馆范庄镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-TYSC_001" type="checkbox" name="curlocal"  value="YHQ-TYSC_001" />
+									裕华区天友书城-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw911" type="checkbox" name="curlocal"  value="Gw911" />
+									共读书房西二环
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw910" type="checkbox" name="curlocal"  value="Gw910" />
+									冀蕴仓南
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXWXZX01" type="checkbox" name="curlocal"  value="ZXWXZX01" />
+									赵县图书馆王西章乡分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh" type="checkbox" name="curlocal"  value="jzh" />
+									晋州图书馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH010" type="checkbox" name="curlocal"  value="GCH010" />
+									藁城分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_kq002" type="checkbox" name="curlocal"  value="kq002" />
+									矿区书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LS000" type="checkbox" name="curlocal"  value="LS000" />
+									灵寿地方文献
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDslt01" type="checkbox" name="curlocal"  value="ZHDslt01" />
+									正定县三里屯
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LS001" type="checkbox" name="curlocal"  value="LS001" />
+									灵寿图书馆检索机
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZYCSK" type="checkbox" name="curlocal"  value="ZYCSK" />
+									智能书屋主语城书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_THJYSK" type="checkbox" name="curlocal"  value="THJYSK" />
+									太行嘉苑社区居委会
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XLYJ" type="checkbox" name="curlocal"  value="XLYJ" />
+									新乐市艺加教育新型阅读空间
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-YTX_001" type="checkbox" name="curlocal"  value="YHQ-YTX_001" />
+									裕华区誉天下分馆-图书阅览中心
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH005" type="checkbox" name="curlocal"  value="GCH005" />
+									藁城阅览室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhd0001" type="checkbox" name="curlocal"  value="zhd0001" />
+									正定图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH004" type="checkbox" name="curlocal"  value="GCH004" />
+									藁城地方文献
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_SB001" type="checkbox" name="curlocal"  value="SB001" />
+									长安区胜北
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDCSSF" type="checkbox" name="curlocal"  value="ZHDCSSF" />
+									正定县城市书房
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH006" type="checkbox" name="curlocal"  value="GCH006" />
+									藁城工具库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw923" type="checkbox" name="curlocal"  value="Gw923" />
+									正定荣鼎奥莱天泰意元
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw922" type="checkbox" name="curlocal"  value="Gw922" />
+									正定万合问道芳华园
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw921" type="checkbox" name="curlocal"  value="Gw921" />
+									正定新区政务服务中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_Gw920" type="checkbox" name="curlocal"  value="Gw920" />
+									湃斯文化（盛石体育）
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH001" type="checkbox" name="curlocal"  value="GCH001" />
+									藁城社科库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH003" type="checkbox" name="curlocal"  value="GCH003" />
+									藁城基藏库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_CF001" type="checkbox" name="curlocal"  value="CF001" />
+									长安区长丰
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCH002" type="checkbox" name="curlocal"  value="GCH002" />
+									藁城自科库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-HD_001" type="checkbox" name="curlocal"  value="YHQ-HD_001" />
+									裕华区槐底分馆-图书阅览中心
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0018" type="checkbox" name="curlocal"  value="JX0018" />
+									井陉县图书馆吴家窑分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0017" type="checkbox" name="curlocal"  value="JX0017" />
+									井陉县图书馆测鱼分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJGZZFG" type="checkbox" name="curlocal"  value="WJGZZFG" />
+									无极县郭庄镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZS001" type="checkbox" name="curlocal"  value="ZS001" />
+									长安区中山
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDxa01" type="checkbox" name="curlocal"  value="ZHDxa01" />
+									正定县新安镇
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0019" type="checkbox" name="curlocal"  value="JX0019" />
+									井陉县图书馆北正分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0014" type="checkbox" name="curlocal"  value="JX0014" />
+									井陉县图书馆小作分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0013" type="checkbox" name="curlocal"  value="JX0013" />
+									井陉县图书馆威州分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0016" type="checkbox" name="curlocal"  value="JX0016" />
+									井陉县图书馆苍岩山分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0015" type="checkbox" name="curlocal"  value="JX0015" />
+									井陉县图书馆南障城分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XT002" type="checkbox" name="curlocal"  value="XT002" />
+									行唐图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSZ001" type="checkbox" name="curlocal"  value="LQSZ001" />
+									鹿泉上庄分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XT003" type="checkbox" name="curlocal"  value="XT003" />
+									行唐少儿
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSZ002" type="checkbox" name="curlocal"  value="LQSZ002" />
+									鹿泉上庄新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XT001" type="checkbox" name="curlocal"  value="XT001" />
+									行唐分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GCZNJH" type="checkbox" name="curlocal"  value="GCZNJH" />
+									藁城智能借书柜
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_KQ001" type="checkbox" name="curlocal"  value="KQ001" />
+									矿区分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSJ002" type="checkbox" name="curlocal"  value="LQSJ002" />
+									鹿泉石井新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhdnn01" type="checkbox" name="curlocal"  value="zhdnn01" />
+									正定县南牛分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSJ001" type="checkbox" name="curlocal"  value="LQSJ001" />
+									鹿泉石井分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJNLXFG" type="checkbox" name="curlocal"  value="WJNLXFG" />
+									无极县南流乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LCH002" type="checkbox" name="curlocal"  value="LCH002" />
+									栾城书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_MSG" type="checkbox" name="curlocal"  value="MSG" />
+									美术馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LCH001" type="checkbox" name="curlocal"  value="LCH001" />
+									栾城分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_shz002" type="checkbox" name="curlocal"  value="shz002" />
+									深泽书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_shz001" type="checkbox" name="curlocal"  value="shz001" />
+									深泽分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LCH003" type="checkbox" name="curlocal"  value="LCH003" />
+									栾城馆阅览室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_qxq001" type="checkbox" name="curlocal"  value="qxq001" />
+									桥西区文广局分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZYY01" type="checkbox" name="curlocal"  value="ZYY01" />
+									灵寿县中医院
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDzft01" type="checkbox" name="curlocal"  value="ZHDzft01" />
+									正定县诸福屯
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_qxq004" type="checkbox" name="curlocal"  value="qxq004" />
+									桥西区少儿书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhd005" type="checkbox" name="curlocal"  value="zhd005" />
+									正定期刊
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_qxq005" type="checkbox" name="curlocal"  value="qxq005" />
+									桥西区特藏书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_qxq002" type="checkbox" name="curlocal"  value="qxq002" />
+									桥西区成人书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhd002" type="checkbox" name="curlocal"  value="zhd002" />
+									正定图书
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_qxq003" type="checkbox" name="curlocal"  value="qxq003" />
+									桥西区期刊书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zhd001" type="checkbox" name="curlocal"  value="zhd001" />
+									正定分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH014" type="checkbox" name="curlocal"  value="ZH014" />
+									赞皇省馆图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJHZXFG" type="checkbox" name="curlocal"  value="WJHZXFG" />
+									无极县郝庄乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH013" type="checkbox" name="curlocal"  value="ZH013" />
+									赞皇少儿阅览室
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH016" type="checkbox" name="curlocal"  value="ZH016" />
+									赞皇图书JZ
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH015" type="checkbox" name="curlocal"  value="ZH015" />
+									赞皇国图图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH010" type="checkbox" name="curlocal"  value="ZH010" />
+									赞皇图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_THJY02" type="checkbox" name="curlocal"  value="THJY02" />
+									太行嘉苑书柜
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH012" type="checkbox" name="curlocal"  value="ZH012" />
+									赞皇阅览室
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH011" type="checkbox" name="curlocal"  value="ZH011" />
+									赞皇分馆图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQDM_001" type="checkbox" name="curlocal"  value="YHQDM_001" />
+									裕华区大马社区-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXBWLZ01" type="checkbox" name="curlocal"  value="ZXBWLZ01" />
+									赵县图书馆北王里镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_gwh" type="checkbox" name="curlocal"  value="gwh" />
+									管委会北
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH018" type="checkbox" name="curlocal"  value="ZH018" />
+									赞皇馆藏库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH017" type="checkbox" name="curlocal"  value="ZH017" />
+									赞皇少儿阅览室JZ
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXQDZX01" type="checkbox" name="curlocal"  value="ZXQDZX01" />
+									赵县图书馆前大章乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH019" type="checkbox" name="curlocal"  value="ZH019" />
+									赞皇史料库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zdwjsk002" type="checkbox" name="curlocal"  value="zdwjsk002" />
+									正定网借书库2
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_zdwjsk001" type="checkbox" name="curlocal"  value="zdwjsk001" />
+									正定网借书库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXXZX01" type="checkbox" name="curlocal"  value="ZXXZX01" />
+									赵县图书馆谢庄乡分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wjsk002" type="checkbox" name="curlocal"  value="wjsk002" />
+									网借书库2
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_wjsk001" type="checkbox" name="curlocal"  value="wjsk001" />
+									网借书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSJY001" type="checkbox" name="curlocal"  value="PSJY001" />
+									敬业服务中心图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G006-1" type="checkbox" name="curlocal"  value="G006-1" />
+									新馆少儿库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDqyq02" type="checkbox" name="curlocal"  value="ZHDqyq02" />
+									正定县曲阳桥乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YSH001" type="checkbox" name="curlocal"  value="YSH001" />
+									元氏分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDqyq01" type="checkbox" name="curlocal"  value="ZHDqyq01" />
+									正定县曲阳桥乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ_YX_001" type="checkbox" name="curlocal"  value="YHQ_YX_001" />
+									裕华区裕翔分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZH020" type="checkbox" name="curlocal"  value="ZH020" />
+									赞皇市馆图书
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_G006-2" type="checkbox" name="curlocal"  value="G006-2" />
+									新馆少儿外文
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_QY001" type="checkbox" name="curlocal"  value="QY001" />
+									长安区青园
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDbzx01" type="checkbox" name="curlocal"  value="ZHDbzx01" />
+									正定县北早现乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDzdz01" type="checkbox" name="curlocal"  value="ZHDzdz01" />
+									正定县正定镇
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSJZ001" type="checkbox" name="curlocal"  value="LQSJZ001" />
+									鹿泉寺家庄分馆库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQSJZ002" type="checkbox" name="curlocal"  value="LQSJZ002" />
+									鹿泉寺家庄新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0025" type="checkbox" name="curlocal"  value="JX0025" />
+									井陉县图书馆第一小学分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0024" type="checkbox" name="curlocal"  value="JX0024" />
+									井陉县图书馆南王庄分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDNL01" type="checkbox" name="curlocal"  value="ZHDNL01" />
+									正定县南楼分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XGSE" type="checkbox" name="curlocal"  value="XGSE" />
+									新馆少儿
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDnl01" type="checkbox" name="curlocal"  value="ZHDnl01" />
+									正定县南楼乡
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JA001" type="checkbox" name="curlocal"  value="JA001" />
+									长安区建安
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXSHDZ01" type="checkbox" name="curlocal"  value="ZXSHDZ01" />
+									赵县图书馆沙河店镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZHDqsnzx01" type="checkbox" name="curlocal"  value="ZHDqsnzx01" />
+									正定县青少年活动中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSJY002" type="checkbox" name="curlocal"  value="PSJY002" />
+									敬业服务中心期刊
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ZXHCZ01" type="checkbox" name="curlocal"  value="ZXHCZ01" />
+									赵县图书馆韩村镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xhlxx" type="checkbox" name="curlocal"  value="xhlxx" />
+									新华路小学
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HT001" type="checkbox" name="curlocal"  value="HT001" />
+									新乐邯邰
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0021" type="checkbox" name="curlocal"  value="JX0021" />
+									井陉县图书馆孙庄分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0020" type="checkbox" name="curlocal"  value="JX0020" />
+									井陉县图书馆于家分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0023" type="checkbox" name="curlocal"  value="JX0023" />
+									井陉县图书馆辛庄分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HT002" type="checkbox" name="curlocal"  value="HT002" />
+									坚固村分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JX0022" type="checkbox" name="curlocal"  value="JX0022" />
+									井陉县图书馆南陉分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh902" type="checkbox" name="curlocal"  value="xh902" />
+									新华汇君社区书屋
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_lsh" type="checkbox" name="curlocal"  value="lsh" />
+									市馆综合
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNZC001" type="checkbox" name="curlocal"  value="JXNZC001" />
+									井陉县图书馆支沙口村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh901" type="checkbox" name="curlocal"  value="xh901" />
+									新华区书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YSTTFG" type="checkbox" name="curlocal"  value="YSTTFG" />
+									元氏县铁屯分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh906" type="checkbox" name="curlocal"  value="xh906" />
+									云歌朗樾
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh905" type="checkbox" name="curlocal"  value="xh905" />
+									翔翼路社区分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh904" type="checkbox" name="curlocal"  value="xh904" />
+									汇君社区分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_HDJD001" type="checkbox" name="curlocal"  value="HDJD001" />
+									长安区河东街道
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_xh903" type="checkbox" name="curlocal"  value="xh903" />
+									兴华小学分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JB001" type="checkbox" name="curlocal"  value="JB001" />
+									长安区建北
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LJCSK" type="checkbox" name="curlocal"  value="LJCSK" />
+									刘家村村委会
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-YHL_001" type="checkbox" name="curlocal"  value="YHQ-YHL_001" />
+									裕华区裕华路分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSXBPZ01" type="checkbox" name="curlocal"  value="PSXBPZ01" />
+									平山县西柏坡镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh001" type="checkbox" name="curlocal"  value="jzh001" />
+									晋州分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSLHXHC" type="checkbox" name="curlocal"  value="PSLHXHC" />
+									平山县两河乡胡村
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh004" type="checkbox" name="curlocal"  value="jzh004" />
+									资料室
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh005" type="checkbox" name="curlocal"  value="jzh005" />
+									图书点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh006" type="checkbox" name="curlocal"  value="jzh006" />
+									旧书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh007" type="checkbox" name="curlocal"  value="jzh007" />
+									全民健身中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXXTSG" type="checkbox" name="curlocal"  value="JXXTSG" />
+									井陉县图书馆三楼
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_CZZ01" type="checkbox" name="curlocal"  value="CZZ01" />
+									陈庄镇分馆图书
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_SZYY" type="checkbox" name="curlocal"  value="SZYY" />
+									新乐市直幼儿园分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YHQ-DJB_001" type="checkbox" name="curlocal"  value="YHQ-DJB_001" />
+									裕华区东京北社区分馆-图书阅览中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_YC001" type="checkbox" name="curlocal"  value="YC001" />
+									长安区育才
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_gy002" type="checkbox" name="curlocal"  value="gy002" />
+									高邑书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSNXYH" type="checkbox" name="curlocal"  value="PSNXYH" />
+									平山县农信银行
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNWZ001" type="checkbox" name="curlocal"  value="JXNWZ001" />
+									井陉县图书馆割子岭村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_PSTS" type="checkbox" name="curlocal"  value="PSTS" />
+									平山图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JXNWZ002" type="checkbox" name="curlocal"  value="JXNWZ002" />
+									井陉县图书馆河应村农家书屋基层服务点
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh008" type="checkbox" name="curlocal"  value="jzh008" />
+									仿唐街社区党群服务中心
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQBLQ001" type="checkbox" name="curlocal"  value="LQBLQ001" />
+									鹿泉白鹿泉分管库
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh009" type="checkbox" name="curlocal"  value="jzh009" />
+									百花园社区
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQXSLY001" type="checkbox" name="curlocal"  value="LQXSLY001" />
+									鹿泉馆西山林语分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XTYCNJN001" type="checkbox" name="curlocal"  value="XTYCNJN001" />
+									羊柴农家女外借室
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQXSLY002" type="checkbox" name="curlocal"  value="LQXSLY002" />
+									鹿泉馆西山林语新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_GY001" type="checkbox" name="curlocal"  value="GY001" />
+									长安区高营
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_XAZH01" type="checkbox" name="curlocal"  value="XAZH01" />
+									正定县新安分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJQJZFG" type="checkbox" name="curlocal"  value="WJQJZFG" />
+									无极县七汲镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQBLQ002" type="checkbox" name="curlocal"  value="LQBLQ002" />
+									鹿泉白鹿泉新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_WJBSZFG" type="checkbox" name="curlocal"  value="WJBSZFG" />
+									无极县北苏镇分馆
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ysh013" type="checkbox" name="curlocal"  value="ysh013" />
+									元氏期刊杂志
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_TYZ001" type="checkbox" name="curlocal"  value="TYZ001" />
+									长安区桃源镇
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ysh011" type="checkbox" name="curlocal"  value="ysh011" />
+									元氏儿童借阅库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQRCGY001" type="checkbox" name="curlocal"  value="LQRCGY001" />
+									鹿泉馆人才公寓分馆库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_ysh012" type="checkbox" name="curlocal"  value="ysh012" />
+									元氏图书
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_JZSkxcsyly01" type="checkbox" name="curlocal"  value="JZSkxcsyly01" />
+									晋州市开心长寿养老院分馆
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+						
+							<tr>
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_LQRCGY002" type="checkbox" name="curlocal"  value="LQRCGY002" />
+									鹿泉馆人才公寓新书库
+							</label>
+						</td>
+						
+					
+						
+						<td class="ellipsis" width="120">
+							<label>
+								<input id="cCurlocal_jzh010" type="checkbox" name="curlocal"  value="jzh010" />
+									时代社区
+							</label>
+						</td>
+						
+							</tr>
+						
+					
+				</table>
+			</div>
+			
+				
+				
+					<div id="searchTips" class="tips" style="padding:5px;width:650px;">
+						<!-- 				<h3 id="searchTitle"></h3> -->
+						<!-- 				<ol></ol> -->
+							<h3 id="searchTitle">书目查询提示</h3><ol><li>读者可以在此查询本馆的图书、期刊、古籍、多媒体等信息。检索 方式可以多个条件组配，并可实现区域图书馆群各分馆的书目联合检索。</li><li>字符中有<b>空格</b>系统自动分词，如需要检索包含空格的字符串，请前后加上<b>双引号</b>（半角），如： “Elements of Information Theory”。</li><li>点“详细信息”后若无馆藏信息时为已订购还未到馆的图书。</li></ol>
+					</div>
+				
+			
+			
+
+			
+		</form>
+	</div>
+
+
+	
+</div>
+
+<style>
+	.funDiv a:hover{
+		color:red;
+	}
+	.boxContent{
+		width: 175px; display: block; margin-right: 20px;float:left;
+	}
+	a.aHover:hover{
+		text-decoration: underline;color: rgb(196,85,0);
+	}
+</style>
+
+<script type="application/javascript">
+	
+	
+	
+	
+</script>
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		<div id="page_footer"  >
+			
+				
+				
+				
+					<div class="page_footer_bd">
+						
+							
+								<span>© 2005－<script>document.write(new Date().getFullYear());</script> www.interlib.com.cn, all rights reserved</span>
+							
+						
+						<span class="fcenter">
+					</span>
+						<span class="fright">
+		
+			<a target="_blank" href="http://www.interlib.com.cn/tcsoft/web/information.do?actionCmd=column&id=63">关于</a>
+		
+		
+			<a target="_blank" href="http://www.interlib.com.cn">联系我们</a>
+		
+		
+			<a target="_blank" href="http://www.interlib.com.cn/tcsoft/web/information.do?actionCmd=column&id=62">帮助</a>
+		
+		
+			<a href="#">隐私声明</a>
+		
+		
+		</span>
+					</div>
+					
+				
+			
+		</div>
+	
+
+
+<script>
+	$(document).ready(function(){
+		
+	})
+</script>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+		
+	</body>
+</html>

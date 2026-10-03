@@ -60,6 +60,11 @@
     带 Referer/XHR 头仍拦，揭阳实证）→ `captcha=True`（命中即抛 CaptchaError，不破解）。
   - 应用上下文非 `/opac` → `ctx="/lib2"` 或 `ctx=""`（先探 `/opac/*` 是否 404）。
   - 新版页 `li.libBookLi`／`a.bkTxtTit` → `pro2018=True`（绍兴另需 `pro2018_cite_author=True`）。
+  - **静态资源路径不可作模板判据**：检索页引用 `pro2018` 媒体目录（`/opac/media/pro2018/…`）、
+    但结果条目仍是默认 `div.bookmeta`（泰安实证）→ **不要**开 `pro2018`，判据只认结果条目容器。
+  - **域名停放前置排除**：`base_url` 域名解析到 `198.20.0.x` 域名停放段
+    （晋中 `lib.jzstsg.com`→198.20.0.174、莆田 `opac.ptslib.com`→198.20.0.177 实证）→
+    非馆方站点，直接判 ⛔ 不通，不必再探 `/opac/*`。
   - 应用为**更新的 jishen 模板**（页标题「书目检索」、`solrpagination.js`、表单 POST
     `booklist.jsp`，`/opac/search` 404）→ **非家族模板，不接入**，回报主线程归入新分支
     （清远 `qingyuan` 实证）。

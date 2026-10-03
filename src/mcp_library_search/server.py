@@ -103,7 +103,11 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     anqing（安庆市图书馆）、maoming（茂名市图书馆）、zhongshan（中山市图书馆，pro2018 模板）、
     jieyang（揭阳市图书馆，检索页「opac验证」且内嵌 Solr 被 bot 检测拦，未过码时抛
     CaptchaError 不破解，同乐山口径）、puning（普宁市图书馆，检索走内嵌 Solr）、
-    dongying（东营市图书馆）、yantai（烟台市图书馆）、weifang（潍坊市图书馆），
+    dongying（东营市图书馆）、yantai（烟台市图书馆）、weifang（潍坊市图书馆）、
+    第六批（图创 Interlib）：taian（泰安市图书馆）、rizhao（日照市图书馆）、
+    linyi（临沂市图书馆）、liaocheng（聊城市图书馆）、shijiazhuang（石家庄市图书馆）、
+    xinzhou（忻州市图书馆）、siping（四平市图书馆）、qiqihar（齐齐哈尔市图书馆）、
+    mudanjiang（牡丹江市图书馆）、sanming（三明市图书馆），
     以上馆藏到单册级、详情走 /api/book 接口。
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
