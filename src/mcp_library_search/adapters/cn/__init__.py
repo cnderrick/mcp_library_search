@@ -27,6 +27,8 @@ from . import enshi
 from . import ezhou
 from . import fujian_prov
 from . import fuzhou
+from . import gannan
+from . import gansu_prov
 from . import guangzhou
 from . import guilin
 from . import guiyang
@@ -63,6 +65,7 @@ from . import lincang
 from . import linyi
 from . import lishui
 from . import liupanshui
+from . import longnan
 from . import luan
 from . import maoming
 from . import mudanjiang
@@ -152,6 +155,8 @@ ADAPTERS = {
     "ezhou": ezhou,
     "fujian_prov": fujian_prov,
     "fuzhou": fuzhou,
+    "gannan": gannan,
+    "gansu_prov": gansu_prov,
     "guangzhou": guangzhou,
     "guilin": guilin,
     "guiyang": guiyang,
@@ -188,6 +193,7 @@ ADAPTERS = {
     "linyi": linyi,
     "lishui": lishui,
     "liupanshui": liupanshui,
+    "longnan": longnan,
     "luan": luan,
     "maoming": maoming,
     "mudanjiang": mudanjiang,

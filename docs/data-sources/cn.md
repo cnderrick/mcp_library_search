@@ -314,7 +314,7 @@
 |  | 榆林 | `yulin` | ✅ 接入 | — | https://www.yulinlib.org.cn/opac/#/index | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/yulin.py`（Referer 须 `/opac/`）；实抓「三体」16 条 |
 |  | 安康 | `ankang` | ✅ 接入 | — | http://219.145.206.134:8082/opac/index | 图创 Interlib（pro2018 模板） | `interlib/` 家族 + `adapters/cn/ankang.py`（`pro2018=True`、`api_detail=True`；详情页 HTML 被源站截断，改走 `/api/book/{}`）；实抓「三体」161 条 |
 |  | 商洛 | — | 📋 计划 | — | https://uilas.sxlib.org.cn/#/index （商洛市图书馆，入口与陕图同平台） | 新版 UILAS（同陕图） | 2026-10-03 用户提供入口，即陕图省馆平台（`shaanxi`）；商洛馆专有检索入口待确认。旧登记 shangluo.superlib.libsou.com 为超星发现页、无书目 OPAC |
-| 甘肃省 | 兰州 | — | 📋 计划 | — | http://search.gslib.com.cn/uhtbin/cgisirsi/ （甘肃省图书馆 iLink，仅查馆别＝省馆） | SirsiDynix iLink（同大连 ykt 家族） | 2026-10-03 入口 200 可达（页标题「iLink」；`ps=` token 会话地址、表单外链 `cgisirsi`）；JS 驱动，检索/详情/馆藏流程待侦察 |
+| 甘肃省 | 兰州 | `gansu_prov` | ✅ 接入 | — | http://search.gslib.com.cn/uhtbin/cgisirsi/x/x/0/49/ （甘肃省图书馆，仅查馆别＝省馆） | SirsiDynix iLink（甘肃省馆；与大连同产品线、页面同构） | `ilink/` 家族 + `adapters/cn/gansu_prov.py`（`library_code="甘肃馆"`）；实抓「三体」101 条，馆藏到索书号级 |
 |  |  | `lanzhou` | ✅ 接入 | — | http://36.137.50.135:8082/#/index （兰州市图书馆） | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/lanzhou.py`；实抓「三体」521 条 |
 |  | 嘉峪关 | — | 📋 计划 | — | http://jygslib.com.cn （嘉峪关市图书馆） | 自研 Vue SPA（页标题仅「门户网站」） | 2026-10-03 入口可达(200)但页面无馆名、弱证；static/config.js 404，身份与 OPAC 待另行确证 |
 |  | 金昌 | — | ⛔ 不通 | — | http://60.164.159.154:90/opac/ （金昌市图书馆） | — | 2026-10-03 用户述不通；旧登记 www.jctsg.com 为 198.20.2.53 停放段 |
@@ -326,9 +326,9 @@
 |  | 酒泉 | — | ❓ 缺失 | — | — | — | — |
 |  | 庆阳 | — | ❓ 缺失 | — | — | — | — |
 |  | 定西 | — | ❓ 缺失 | — | — | — | — |
-|  | 陇南 | — | 📋 计划 | — | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | SirsiDynix iLink | 2026-10-03 无独立入口；用甘肃省图书馆 iLink OPAC 按馆别过滤查询，与省馆共用同一系统，待侦察 |
+|  | 陇南 | `longnan` | ✅ 接入 | — | — （无独立入口，借甘肃省图 iLink 按馆别过滤） | SirsiDynix iLink（借甘肃省图实例，馆别＝陇南馆） | `ilink/` 家族 + `adapters/cn/longnan.py`（`library_code="陇南馆"`）；实抓「三体」4 条，馆藏到索书号级 |
 |  | 临夏 | — | ❓ 缺失 | — | — | — | — |
-|  | 甘南 | — | 📋 计划 | — | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | SirsiDynix iLink | 2026-10-03 无独立入口；用甘肃省图书馆 iLink OPAC 按馆别过滤查询，与省馆共用同一系统，待侦察 |
+|  | 甘南 | `gannan` | ✅ 接入 | — | — （无独立入口，借甘肃省图 iLink 按馆别过滤） | SirsiDynix iLink（借甘肃省图实例，馆别＝甘南馆） | `ilink/` 家族 + `adapters/cn/gannan.py`（`library_code="甘南馆"`）；实抓「三体」3 条，馆藏到索书号级 |
 | 青海省 | 西宁 | — | ⛔ 不通 | — | http://www.qhlib.org （青海省图书馆） | — | — |
 |  |  | — | 📋 计划 | — | http://220.167.179.43:8020/ifs/search （西宁市图书馆） | 疑图创 Interlib（`/ifs/search` 检索接口，待实抓） | 2026-10-03 用户提供入口；官网 www.xnlib.cn 门户页 HTTP 200（3.7KB），底层书目 OPAC 未侦察 |
 |  | 海东 | — | 📋 计划 | — | https://hdtsg.cn/index.aspx （海东市图书馆） | 自研 ASP.NET（含 BibliographySearch.aspx） | 2026-10-03 入口/查询页 200，站内 `/BibliographySearch.aspx`、`/ClassifySearch.aspx` 书目检索页待侦察 |
@@ -806,7 +806,7 @@ http://weixin.hengyanglib.org ，入口 `frontV2/SearchIndex!advanced.action`
 - 实抓「三体」题名检索 6 页、首条《三体》（`i_sgbiblios:19673`）；馆藏 2 册（1 入藏
   1 普通借出，due_date 2025-10-02）。侦察结论见 `tests/fixtures/hengyang/NOTES.md`。
 
-## SirsiDynix iLink（大连）
+## SirsiDynix iLink（大连、甘肃三城）
 
 `adapters/cn/dalian.py` 独立实现（新家族，全 HTML、无 JSON）。**会话制**：ps token 每响应都变，
 全程同一 CookieJar 串行（类重庆流程）；节流 ≥4 秒/host：
@@ -826,6 +826,29 @@ http://weixin.hengyanglib.org ，入口 `frontV2/SearchIndex!advanced.action`
   取第一个能把 catkey 带回命中列表的候选。命中多于首页时在候选内逐页翻找（≤5 页）；
   **`VIEW^N` 的 N 是命中集全局序号**（第 2 页第 1 位＝21），不是页内序号。
 - 会话失效（跳回入口页形态）重建一次再试，仍失败抛错；源站回 Error 页不算会话失效，换候选继续。
+
+### 甘肃三城（`gansu_prov`／`longnan`／`gannan`，`ilink/` 家族）
+
+甘肃省图书馆 OPAC（http://search.gslib.com.cn/uhtbin/cgisirsi/）与大连同一 iLink
+产品线、页面同构；陇南市图书馆、甘南州图书馆无独立入口，借这套省图实例、按检索表单
+`library` 馆别过滤。三站差别仅在馆别码，故上收为共享家族 `ilink/`
+（`client.py`/`parser.py`/`__init__.py` ＋ `IlinkConfig`），三城各以 Config 薄包装；
+大连接口同构但仍是独立实现，暂不并入。
+
+- `IlinkConfig` quirk 字段：`entry_path`（默认 `/uhtbin/cgisirsi/x/x/0/49/`）、
+  `library_code`（馆别过滤值：省馆 `甘肃馆`／陇南 `陇南馆`／甘南 `甘南馆`）、
+  `general_field`、`title_field`、`sort_by`、`page_size=20`、`throttle≥4.0`、
+  `detail_max_pages`。
+- 会话流与大连一致：ps token 逐步解析、同 CookieJar 串行、`JUMP^{n}` 翻页、
+  `VIEW^N` 取详情、题名候选梯度重检索定位；`book_id` 形如 `"{catkey}:{题名}"`。
+- **馆藏表结构差异（甘肃变体）**：馆藏表**无 `id="display_holdings_table"`**，家族改为
+  全页扫描 `td.holdingslist` 数据行、以单枚 `th.holdingsheader[align=left]` 分馆表头分组；
+  后续复本的索书号格是 `&nbsp;`，按分馆沿用上一行索书号。
+- 检索语义同大连：一律按 ASCII 双引号短语下发，0 命中或源站拒答时退回裸词。
+- 实抓「三体」：省馆 101 条、陇南 4 条、甘南 3 条；馆藏到**索书号级**，匿名视图无单册
+  条码与应还日期（`due_date` 恒空串），无明确「在架上」词时全部保守 `available=False`、
+  状态原值照登。
+- 字段侦察结论见 `tests/fixtures/gansu_prov/NOTES.md`（族内共用口径）及各城 NOTES。
 
 ## UILAS 家族（老版 ILAS HTML OPAC：金华、舟山、河南省图、芜湖、六安、通化、贵阳）
 

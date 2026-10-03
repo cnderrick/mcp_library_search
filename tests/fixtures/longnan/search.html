@@ -1,0 +1,2178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright (c) 2000 - 2014, SirsiDynix - Defines the head  body of each page. -->
+
+<!-- 环境: WEBSERVER, 工作站的环境参数: 8 -->
+<!-- 服务器版本: 3.5.2.0.GA -->
+
+<html  lang="en"  dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1;" />
+
+		
+		  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+
+		
+		
+<!-- sirsi-data session-state is 4 -->
+<!--  Copyright (c) 2008 - 2010, SirsiDynix - Catalog Keyword search summary for title; eLibrary -->
+
+
+
+
+
+
+
+
+
+
+  <title>目录检索结果 - 所有字段 '三体'</title>
+		
+
+		
+
+		<!-- Set the expiration date to the past so the page will always be reloaded -->
+		
+			<meta http-equiv="Expires" content="Sun, 1 Jan 1995 08:00:00 CST"/>
+		
+
+		  <!-- Not the login page -->
+			
+		
+
+		<script type="text/javascript" src="/Js/prototype-1.6.1.js"></script>
+		<script type="text/javascript" src="/Js/scriptaculous.js"></script>
+		<script type="text/javascript" src="/Js/sirsidynix.js"></script>
+		<script type="text/javascript" src="/Js/datetimepicker.js"></script>
+
+		
+			
+				<script type="text/javascript" src="/Js/all-js-4-enriched-content.js"></script>
+			
+		
+
+		
+
+		
+			<link rel="stylesheet" href="/Css/default/default.css" type="text/css" />
+		
+
+		
+
+		
+			
+		
+
+		
+
+	</head>
+	<!-- Start the body of the document.  WARNING:  No comments are allowed inside of the body element's definition. - assign CSS Class of 'body_style' to tag -  If this is a download search results state (14, 62), then load the results in a new browser window to facilitate printing. -  If this is an Archive image view state (911), then open a new window to display the image in new window. -  To help prevent premature selection of a toolbar button (i.e., before the new toolbar is loaded), clear it when the page is unloaded. -->
+	<body onLoad="">
+
+		
+
+		<noscript>
+		Your browser does not support JavaScript and this application utilizes JavaScript to build content and provide links to additional information. You should either enable JavaScript in your browser settings or use a browser that supports JavaScript in order to take full advantage of this application.
+		</noscript>
+
+
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Generic top-of-page for (almost?) all pages. -->
+<!--  Copyright (c) 1996 - 2010, SirsiDynix Form for starting a new session in a new window. -->
+
+<!-- By setting the "document.new_session.action" property to the URL for logging into a new session at the particular  page you want, a new window will be opened and a new WebCat session will be started automatically. Remember that many WebCat states are dependent on previous states, so only certain "cgi types" can be opened.
+
+Also, by setting the "document.new_session.new_gateway_db.value" property to a gateway database name, the new session will use that gateway instead of the user's default gateway. Note that the use of Javascript is required to submit this form. -->
+
+<form name="new_session" method="post" action="/uhtbin/cgisirsi/?ps=ergRjd953m/甘肃馆/0/57/49" target="new_session">
+	
+		<input type="hidden" name="user_id" value="WEBSERVER"/>
+		<input type="hidden" name="password" value=""/>
+	
+	<input type="hidden" name="new_gateway_db" value=""/>
+</form>
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Puts the top-of-page information common to all pages. -->
+<div id="header_container" class="header_container">
+      <a class="skipnav" href="#skipnav">跳过导航</a>  <a name="top"></a>
+  <div class="branding_container" >
+      <div class="branding">
+            <img border="0" src="/WebCat_Images/Chinese/Other/Miscil/LIBLOGO.gif" alt="馆藏查询系统" title="馆藏查询系统"/>
+      </div>
+      <div class="branding_subheading">
+         <!-- Print the gateway envn title if not blank -->
+          甘肃省图书馆
+          馆藏查询系统
+      </div>      
+	</div>
+  <div class="login_container">
+	   <!-- present language choices -->
+		  <div class="module_language_choices">
+<!-- Add the Language options -->
+  <!-- Suppress an option for the current language -->
+    <a href="/uhtbin/cgisirsi/?ps=6mzwJYojXd/甘肃馆/53751463/111/ENGLISH" title="英文" target="_top"><img src="/WebCat_Images/Chinese/Other/Miscil/ENGLISH.gif" border=0 class="langicon" alt="英文 Language" title="英文"/></a>
+  <!-- Suppress an option for the current language -->
+      </div>
+
+			
+				<form name="loginform" method="post" action="/uhtbin/cgisirsi/?ps=y8nDJb7UDP/甘肃馆/53751463/303">
+			
+<!--  Copyright (c) 2004 - 2010, SirsiDynix - myProfile login or view myFavorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+	  <!-- only user ID is used if both on -->
+		<div class="user_name">
+			<label for="user_id">借阅证号码:</label>
+			<input class="user_name_input" type="text" name="user_id" id="user_id"  maxlength="20" value=""/>
+		</div>
+	
+	 
+		<div class="password">
+			<label for="password">个人密码:</label>
+			<input class="password_input" type="password" name="password" id="password"  maxlength="25" value=""/>
+		</div>  
+	
+	 
+	<input type="submit" value="登入" style="margin-left:7px;margin-right:4px" class="login_button"/>
+
+	
+
+	 
+
+
+
+			</form>
+	  
+	<!-- login form-->
+	 
+  </div>
+</div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Root Bar. -->
+<div id="header_menu_container" class="header_menu_container">
+  <h2>Navigation Menu</h2>
+  <ul class="menu">
+    <!-- display text with CSS instead -->
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=2arJKqfgq6/甘肃馆/53751463/38/1/X/BLASTOFF" class="blastoff">
+       查询首页</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=0VauGX0CSt/甘肃馆/53751463/1/26/X/BLASTOFF" class="rootbar">
+       文献分类查询</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=G6rtqXNAON/甘肃馆/53751463/1/446/X/BLASTOFF" class="rootbar">
+       新书推荐</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=iDhBINzXX6/甘肃馆/53751463/1/452/X/BLASTOFF" class="rootbar">
+       知识网关</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=PnpzGCV0Ah/甘肃馆/53751463/36/485/X/BLASTOFF" class="rootbar">
+       指定参考书</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=i0fuJPaNRN/甘肃馆/53751463/1/488/X/BLASTOFF" class="rootbar">
+       我的账号</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=Lrc2QHXSDJ/甘肃馆/53751463/63/493/X/BLASTOFF" class="rootbar">
+       与我们联系</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=E4URSFQkXy/甘肃馆/53751463/60/502/X/BLASTOFF" class="rootbar">
+       快速检索</a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - e-Library Search Hitlist Page; State #4 -->
+
+<script language="JavaScript" type="text/javascript">
+  // Stores the catalog keys of each hit displayed on this page in
+  // the global Javascript variable 'keep_ckeys_array', so that they can
+  // be accessed later by the subroutines that make the "Keep All" button work.
+  var keep_ckeys_array = new Array();
+  setLocalizedValue("alttext_keep_all","Keep All on this Page");
+  setLocalizedValue("alttext_keep_all_perm","Save All on this Page");
+      keep_ckeys_array.push("939343");
+      keep_ckeys_array.push("1703145");
+      keep_ckeys_array.push("1551191");
+      keep_ckeys_array.push("1750854");
+  setLocalizedValue("CREATE_A_LIST","Create a list before attempting to keep an item");
+</script>
+<!--  Copyright (c)  2008 - 2010, SirsiDynix - Unicorn Hit Permanent Keep Button  -->
+
+<!-- Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Search Hitlist page  ; page #4 -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=VYHaQsIU5n/甘肃馆/53751463/2/7" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=ARjDzwNkcy/甘肃馆/53751463/2/7" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+
+<!-- Help button -->
+<li class="menu_link">
+<script language="javascript" type="text/javascript">
+  //<![CDATA[
+  put_help_button('Chinese','说明','search_results');
+  //]]> 
+</script>
+</li>
+	
+  <li class="menu_link"><a  href="#search_form" title="限制查询">限制查询</a></li>
+	
+	
+<li class="menu_link"><a  href="/uhtbin/cgisirsi/?ps=MIT0qTT67i/甘肃馆/53751463/49" title="新的检索">新的检索</a></li>
+
+<!-- Backward button -->
+
+<!-- Forward button -->
+	
+<!-- Cross Reference button -->
+
+
+  <!-- Kept Button -->
+  <li class="menu_link"><a  href="javascript:document.hitlist.form_type.value = 'CAPTURE'; document.hitlist.submit()">打印或者以电子邮件邮寄保存的记录</a></li>
+
+
+  <!-- gateway's custom buttons -->
+
+	
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=a0BeWubG5K/甘肃馆/53751463/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+  <div class="columns_container">
+    <div class="column pct75 left_column">
+      <div class="content_container">
+        <div class="content">
+          <form class="hit_list_form" id="hitlist" name="hitlist" method="post" action="/uhtbin/cgisirsi/?ps=nbifdkqdoR/甘肃馆/53751463/9">
+            <input type="hidden" name="first_hit" value="1"/>
+            <input type="hidden" name="last_hit" value="4"/>
+            <input type="hidden" name="form_type" value=""/>
+            <ul class="hit_list">
+                <li> 
+<div class="hitstop">
+        <h3>检索结果</h3>
+  <div class="searchsummary">
+    <!-- Print the message, if one exists -->
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - e-Library Catalog Keyword search summary -->
+<!-- Print the search summary -->
+<strong>
+  所有字段
+    "三体"
+
+
+
+
+
+
+
+</strong>
+      检索到
+      <em>4</em>
+      题名.<br/>
+
+  </div>
+  <div class="searchsummary_pagination">
+  </div>
+</div>
+                </li>
+                <li class="hit_list_buttons" >
+              </li>
+              <li>
+<!-- Dynamic content lookup -->
+ <!-- eLibrary configured with content -->
+<!-- end of dynamic content lookup -->
+
+	
+	
+	 
+		
+		
+		
+		
+	
+		
+			
+		
+		
+		
+		
+	
+		
+			
+		
+		
+		
+		
+	
+		
+			
+		
+		
+		
+		
+	
+	
+
+	<script language="javascript" type="text/javascript">
+		SdEcPageInterface.signalEvent( "top-of-hit-list", {'hit-list-isbn-list' : ['7536312202','9787536693968','9787229030933','9787536692930']} );
+	</script>
+
+<script language="javascript" type="text/javascript">
+  SdCommon.setPrefix('ptp');
+
+  SdEcValues.setParameter("cover-alt-text"      , '封面'       );
+  SdEcValues.setParameter("session"             , '53751463'             );
+  SdEcValues.setParameter("down-gif"            , '/WebCat_Images/Chinese/Other/Miscil/admin-icon-expand.png' );
+  SdEcValues.setParameter("up-gif"              , '/WebCat_Images/Chinese/Other/Miscil/admin-icon-collapse.png');
+  SdEcValues.setParameter('use-syndetic-enhanced-content','0');
+  SdEcValues.setParameter('syndetics-base-url'           ,'http://www.syndetics.com/index.aspx?'           );
+  SdEcValues.setParameter('syndetics-covers-base-url'    ,'http://www.syndetics.com/index.aspx?'           );
+  SdEcValues.setParameter('novelist-base-url'            ,'http://eit.ebscohost.com/'            );
+  SdEcValues.setParameter('syndetics-rel-path'           ,''                 );
+  SdEcValues.setParameter('novelist-rel-path'            ,''                 );
+  SdEcValues.setParameter('syndetics-client-code'        ,''        );
+  SdEcValues.setParameter('language-name'                ,'CHINESE'                );
+  SdEcValues.setParameter('chilifresh-languages'         ,''         );
+  SdEcValues.setParameter('use-chili-enhanced-content'   ,'0'   );
+  SdEcValues.setParameter("chilifresh-account"           , ''          );
+  SdEcValues.setParameter("chilifresh-profile"           ,'陇南馆 '                   );
+  SdEcValues.setParameter("chilifresh-js-url"            ,'/Js/sd-ec-elibrary.js'                  );
+  SdEcValues.setParameter("defer-chili-data-load"        , ''       );
+  SdEcValues.setParameter('use-novelist-enhanced-content','0');
+  SdEcValues.setParameter('use-novelist-authors', '0');
+  SdEcValues.setParameter('use-novelist-titles' , '1');
+  SdEcValues.setParameter("novelist-prof"       , ''    );
+  SdEcValues.setParameter("novelist-pwd"        , ''   );
+  SdEcValues.setParameter("show-content-regions", '');
+
+  SdEcValues.setParameter("contentcfg-cover-gif"   , ''  );
+  SdEcValues.setParameter("disp-content-cover-gif" , '0');
+
+  SdEcValues.setParameter("contentcfg-summary"  ,''  );
+  SdEcValues.setParameter("disp-content-summary",'0');
+
+  SdEcValues.setTranslation("Similar Authors","Similar Authors")
+  SdEcValues.setTranslation("Similar Titles" ,"Similar Titles");
+  SdEcValues.setTranslation("Similar Loading","Loading...");
+  SdEcValues.setTranslation("Similar Nothing Found","Nothing similar found");
+  SdEcValues.setTranslation("Collapse Icon"  ,"Collapse Icon");
+  SdEcValues.setTranslation("Expand Icon"    ,"Expand Icon");
+</script>
+
+
+	<script language="javascript" type="text/javascript">
+		SdEcValues.setVariable('ordinal'    ,'1');
+		SdEcValues.setVariable('isbns'      ,'7536312202');
+		SdEcValues.setVariable('upcs'       ,'');
+		SdEcValues.setVariable('oclcs'      ,'');
+		SdEcValues.setVariable('webcat-url' ,'/uhtbin/cgisirsi/?ps=h8ps8K1veV/甘肃馆');
+	</script>
+
+<!-- This evaulates the hitlist number (DC="WD") to be even or odd, and assigns alternating classes so that the hitlist alternates row colors -->
+	
+	
+	
+		
+	
+
+	
+	
+
+	
+	<!-- dynamic content lookup -->
+
+	<ul class="hit_list_row odd_row ">
+		<li><h4 title="Search Result #1">Search Result #1. 毛泽东诗词三体钢笔字帖 张平生书 by 张平生 书</h4></li>
+		<li class="hit_list_row_left">
+			<ul>
+				<!-- hitlist number -->
+				<li class="hit_list_number">1.</li>
+
+				
+
+				
+
+					<!-- keep/remove function -->
+					 
+					
+					
+						<li class="hit_list_keepremove">
+							<script language="javascript" type="text/javascript">
+								//<![CDATA[
+								put_keepremove_button('939343', '选取','/WebCat_Images/Chinese/Other/Miscil','选取','/uhtbin/cgisirsi/?ps=NL90XM4OPx/甘肃馆','53751463','删除');
+								//]]>
+							</script>
+						</li>
+					
+				
+
+				 <!-- hold link -->
+
+				 <!-- end of icon map stuff -->    
+
+				<li class="hit_list_list_cover" style="text-align: right;">
+					
+						
+							
+
+						
+					
+					&nbsp;
+				</li>
+
+				 <!-- BUYNOW -->
+
+				
+					<li id="rating-1" class='chili_review'></li>
+					<li>
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('rating-1','/Js/sd-hit-list-rating.xml',false);
+						</script>
+					</li>
+				
+			</ul>
+		</li>
+
+		<li class="hit_list_item_info">	
+			<dl>
+
+				<!-- bib information -->
+				<dt class="title_label">题名</dt>
+				<dd class="title">
+					<a href="#" onclick="$('VIEW1').click(); return false;" title="View Details for  毛泽东诗词三体钢笔字帖 张平生书">
+
+						
+							 <!-- title -->
+								
+									毛泽东诗词三体钢笔字帖 张平生书
+								
+							
+						
+
+						<!-- and/or display linked 880 data -->
+						
+						
+
+						
+							
+						
+					</a>
+				</dd>
+
+				<!-- and/or display linked 880 data -->
+				<dt class="author_label">著者</dt>
+				<dd class="author">
+					
+					
+						 <!-- author -->
+							
+								张平生 书
+							
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+
+				<dt class="call_number_label">索书号</dt>
+				<dd class="call_number">
+					
+					
+						    <!-- holdings allowed -->
+							
+								
+							
+						
+					
+				</dd>
+
+				<dt class="publisher_label">出版者</dt>
+				<dd class="publisher">
+					
+						
+					
+				</dd>
+
+				<dt class="edition_label">版本</dt>
+				<dd class="edition">
+					<!-- and/or display linked 880 data -->
+					
+					
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+				
+					<dt class="publishing_date_label">出版日期</dt>
+					<dd>1991</dd>
+					
+				<dt class="holdings_statement_label">馆藏</dt>
+				<dd class="holdings_statement">
+					<!-- summary holdings statements -->
+
+					
+						
+							
+								
+									
+										3 件馆藏在架上 陇南图书馆
+									
+								
+							
+						
+					
+
+					
+						
+					
+
+					
+				</dd>		
+			</dl>
+
+			 
+
+
+			<ul class="enriched_content">
+				
+					<li id="teaser-1">
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('teaser-1','/Js/sd-hit-list-teaser.xml',false);
+							SdEcPageInterface.populateContentRegion('teaser-1','',false); 
+						</script>
+					</li>
+				 
+				<li class="enrichment_container" id="links1">
+					<!-- ebook, enrichment images, URL, DMA images/links -->
+
+					
+
+					 <!-- only view enrichments when configured to do so -->
+						
+							
+						
+
+						
+
+					 <!-- eLibrary configured with content -->
+					
+
+					
+					    
+						
+							<span id="hit-list-links-1"></span>
+							<script language="javascript" type="text/javascript">
+								SdEcPageInterface.populateContentRegion('hit-list-links-1','/Js/sd-hit-list-links.xml');
+							</script>
+						
+					
+					
+						<ul class="hit_list_novelist_links">
+							<li id="ncdiv1" class="hidden">
+								<ul id="similar1" class="hidden"></ul>
+							</li>
+						</ul>
+					
+				</li>
+				
+				<li id="content-1">
+					<script language="javascript" type="text/javascript">
+						SdEcPageInterface.populateContentRegion('content-1','/Js/sd-hit-list-content.xml',false);
+					</script>
+				</li>
+				
+			</ul>
+
+		</li>
+		<!-- detail button at bottom for screen readers -->
+		
+			<!-- full details -->
+			<li>
+				<input type="submit" value="详细资料" name="VIEW^1" id="VIEW1" class="button hit_list_details_button" title="View Details for  毛泽东诗词三体钢笔字帖 张平生书"/>
+			</li>
+		
+
+
+	</ul>
+
+	<script language="javascript" type="text/javascript">
+		SdEcValues.setVariable('ordinal'    ,'2');
+		SdEcValues.setVariable('isbns'      ,'9787536693968');
+		SdEcValues.setVariable('upcs'       ,'');
+		SdEcValues.setVariable('oclcs'      ,'');
+		SdEcValues.setVariable('webcat-url' ,'/uhtbin/cgisirsi/?ps=hoqynv8hI8/甘肃馆');
+	</script>
+
+<!-- This evaulates the hitlist number (DC="WD") to be even or odd, and assigns alternating classes so that the hitlist alternates row colors -->
+	
+	
+	
+		
+	
+
+	
+	
+
+	
+	<!-- dynamic content lookup -->
+
+	<ul class="hit_list_row even_row ">
+		<li><h4 title="Search Result #2">Search Result #2. 三体 2 黑暗森林 专著 刘慈欣著 by 刘慈欣 (1963-) 著</h4></li>
+		<li class="hit_list_row_left">
+			<ul>
+				<!-- hitlist number -->
+				<li class="hit_list_number">2.</li>
+
+				
+
+				
+
+					<!-- keep/remove function -->
+					 
+					
+					
+						<li class="hit_list_keepremove">
+							<script language="javascript" type="text/javascript">
+								//<![CDATA[
+								put_keepremove_button('1703145', '选取','/WebCat_Images/Chinese/Other/Miscil','选取','/uhtbin/cgisirsi/?ps=zCWcHQkgUN/甘肃馆','53751463','删除');
+								//]]>
+							</script>
+						</li>
+					
+				
+
+				 <!-- hold link -->
+
+				 <!-- end of icon map stuff -->    
+
+				<li class="hit_list_list_cover" style="text-align: right;">
+					
+						
+							
+
+						
+					
+					&nbsp;
+				</li>
+
+				 <!-- BUYNOW -->
+
+				
+					<li id="rating-2" class='chili_review'></li>
+					<li>
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('rating-2','/Js/sd-hit-list-rating.xml',false);
+						</script>
+					</li>
+				
+			</ul>
+		</li>
+
+		<li class="hit_list_item_info">	
+			<dl>
+
+				<!-- bib information -->
+				<dt class="title_label">题名</dt>
+				<dd class="title">
+					<a href="#" onclick="$('VIEW2').click(); return false;" title="View Details for  三体 2 黑暗森林 专著 刘慈欣著">
+
+						
+							 <!-- title -->
+								
+									三体 2 黑暗森林 专著 刘慈欣著
+								
+							
+						
+
+						<!-- and/or display linked 880 data -->
+						
+						
+
+						
+							
+						
+					</a>
+				</dd>
+
+				<!-- and/or display linked 880 data -->
+				<dt class="author_label">著者</dt>
+				<dd class="author">
+					
+					
+						 <!-- author -->
+							
+								刘慈欣 (1963-) 著
+							
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+
+				<dt class="call_number_label">索书号</dt>
+				<dd class="call_number">
+					
+					
+						    <!-- holdings allowed -->
+							
+								
+							
+						
+					
+				</dd>
+
+				<dt class="publisher_label">出版者</dt>
+				<dd class="publisher">
+					
+						
+					
+				</dd>
+
+				<dt class="edition_label">版本</dt>
+				<dd class="edition">
+					<!-- and/or display linked 880 data -->
+					
+					
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+				
+					<dt class="publishing_date_label">出版日期</dt>
+					<dd>2008</dd>
+					
+				<dt class="holdings_statement_label">馆藏</dt>
+				<dd class="holdings_statement">
+					<!-- summary holdings statements -->
+
+					
+						
+							
+								
+									
+										3 件馆藏在架上 陇南图书馆
+									
+								
+							
+						
+					
+
+					
+						
+					
+
+					
+				</dd>		
+			</dl>
+
+			 
+
+
+			<ul class="enriched_content">
+				
+					<li id="teaser-2">
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('teaser-2','/Js/sd-hit-list-teaser.xml',false);
+							SdEcPageInterface.populateContentRegion('teaser-2','',false); 
+						</script>
+					</li>
+				 
+				<li class="enrichment_container" id="links2">
+					<!-- ebook, enrichment images, URL, DMA images/links -->
+
+					
+
+					 <!-- only view enrichments when configured to do so -->
+						
+							
+						
+
+						
+
+					 <!-- eLibrary configured with content -->
+					
+
+					
+					    
+						
+							<span id="hit-list-links-2"></span>
+							<script language="javascript" type="text/javascript">
+								SdEcPageInterface.populateContentRegion('hit-list-links-2','/Js/sd-hit-list-links.xml');
+							</script>
+						
+					
+					
+						<ul class="hit_list_novelist_links">
+							<li id="ncdiv2" class="hidden">
+								<ul id="similar2" class="hidden"></ul>
+							</li>
+						</ul>
+					
+				</li>
+				
+				<li id="content-2">
+					<script language="javascript" type="text/javascript">
+						SdEcPageInterface.populateContentRegion('content-2','/Js/sd-hit-list-content.xml',false);
+					</script>
+				</li>
+				
+			</ul>
+
+		</li>
+		<!-- detail button at bottom for screen readers -->
+		
+			<!-- full details -->
+			<li>
+				<input type="submit" value="详细资料" name="VIEW^2" id="VIEW2" class="button hit_list_details_button" title="View Details for  三体 2 黑暗森林 专著 刘慈欣著"/>
+			</li>
+		
+
+
+	</ul>
+
+	<script language="javascript" type="text/javascript">
+		SdEcValues.setVariable('ordinal'    ,'3');
+		SdEcValues.setVariable('isbns'      ,'9787229030933');
+		SdEcValues.setVariable('upcs'       ,'');
+		SdEcValues.setVariable('oclcs'      ,'');
+		SdEcValues.setVariable('webcat-url' ,'/uhtbin/cgisirsi/?ps=XGvVYzfHk4/甘肃馆');
+	</script>
+
+<!-- This evaulates the hitlist number (DC="WD") to be even or odd, and assigns alternating classes so that the hitlist alternates row colors -->
+	
+	
+	
+		
+	
+
+	
+	
+
+	
+	<!-- dynamic content lookup -->
+
+	<ul class="hit_list_row odd_row ">
+		<li><h4 title="Search Result #3">Search Result #3. 三体死神永生 3 刘慈欣著 by 刘慈欣 著</h4></li>
+		<li class="hit_list_row_left">
+			<ul>
+				<!-- hitlist number -->
+				<li class="hit_list_number">3.</li>
+
+				
+
+				
+
+					<!-- keep/remove function -->
+					 
+					
+					
+						<li class="hit_list_keepremove">
+							<script language="javascript" type="text/javascript">
+								//<![CDATA[
+								put_keepremove_button('1551191', '选取','/WebCat_Images/Chinese/Other/Miscil','选取','/uhtbin/cgisirsi/?ps=z7A7AGQ3xU/甘肃馆','53751463','删除');
+								//]]>
+							</script>
+						</li>
+					
+				
+
+				 <!-- hold link -->
+
+				 <!-- end of icon map stuff -->    
+
+				<li class="hit_list_list_cover" style="text-align: right;">
+					
+						
+							
+
+						
+					
+					&nbsp;
+				</li>
+
+				 <!-- BUYNOW -->
+
+				
+					<li id="rating-3" class='chili_review'></li>
+					<li>
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('rating-3','/Js/sd-hit-list-rating.xml',false);
+						</script>
+					</li>
+				
+			</ul>
+		</li>
+
+		<li class="hit_list_item_info">	
+			<dl>
+
+				<!-- bib information -->
+				<dt class="title_label">题名</dt>
+				<dd class="title">
+					<a href="#" onclick="$('VIEW3').click(); return false;" title="View Details for  三体死神永生 3 刘慈欣著">
+
+						
+							 <!-- title -->
+								
+									三体死神永生 3 刘慈欣著
+								
+							
+						
+
+						<!-- and/or display linked 880 data -->
+						
+						
+
+						
+							
+						
+					</a>
+				</dd>
+
+				<!-- and/or display linked 880 data -->
+				<dt class="author_label">著者</dt>
+				<dd class="author">
+					
+					
+						 <!-- author -->
+							
+								刘慈欣 著
+							
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+
+				<dt class="call_number_label">索书号</dt>
+				<dd class="call_number">
+					
+					
+						    <!-- holdings allowed -->
+							
+								
+							
+						
+					
+				</dd>
+
+				<dt class="publisher_label">出版者</dt>
+				<dd class="publisher">
+					
+						
+					
+				</dd>
+
+				<dt class="edition_label">版本</dt>
+				<dd class="edition">
+					<!-- and/or display linked 880 data -->
+					
+					
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+					
+				<dt class="holdings_statement_label">馆藏</dt>
+				<dd class="holdings_statement">
+					<!-- summary holdings statements -->
+
+					
+						
+							
+								
+									
+										3 件馆藏在架上 陇南图书馆
+									
+								
+							
+						
+					
+
+					
+						
+					
+
+					
+				</dd>		
+			</dl>
+
+			 
+
+
+			<ul class="enriched_content">
+				
+					<li id="teaser-3">
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('teaser-3','/Js/sd-hit-list-teaser.xml',false);
+							SdEcPageInterface.populateContentRegion('teaser-3','',false); 
+						</script>
+					</li>
+				 
+				<li class="enrichment_container" id="links3">
+					<!-- ebook, enrichment images, URL, DMA images/links -->
+
+					
+
+					 <!-- only view enrichments when configured to do so -->
+						
+							
+						
+
+						
+
+					 <!-- eLibrary configured with content -->
+					
+
+					
+					    
+						
+							<span id="hit-list-links-3"></span>
+							<script language="javascript" type="text/javascript">
+								SdEcPageInterface.populateContentRegion('hit-list-links-3','/Js/sd-hit-list-links.xml');
+							</script>
+						
+					
+					
+						<ul class="hit_list_novelist_links">
+							<li id="ncdiv3" class="hidden">
+								<ul id="similar3" class="hidden"></ul>
+							</li>
+						</ul>
+					
+				</li>
+				
+				<li id="content-3">
+					<script language="javascript" type="text/javascript">
+						SdEcPageInterface.populateContentRegion('content-3','/Js/sd-hit-list-content.xml',false);
+					</script>
+				</li>
+				
+			</ul>
+
+		</li>
+		<!-- detail button at bottom for screen readers -->
+		
+			<!-- full details -->
+			<li>
+				<input type="submit" value="详细资料" name="VIEW^3" id="VIEW3" class="button hit_list_details_button" title="View Details for  三体死神永生 3 刘慈欣著"/>
+			</li>
+		
+
+
+	</ul>
+
+	<script language="javascript" type="text/javascript">
+		SdEcValues.setVariable('ordinal'    ,'4');
+		SdEcValues.setVariable('isbns'      ,'9787536692930');
+		SdEcValues.setVariable('upcs'       ,'');
+		SdEcValues.setVariable('oclcs'      ,'');
+		SdEcValues.setVariable('webcat-url' ,'/uhtbin/cgisirsi/?ps=0V7BOVPkpk/甘肃馆');
+	</script>
+
+<!-- This evaulates the hitlist number (DC="WD") to be even or odd, and assigns alternating classes so that the hitlist alternates row colors -->
+	
+	
+	
+		
+	
+
+	
+	
+
+	
+	<!-- dynamic content lookup -->
+
+	<ul class="hit_list_row even_row ">
+		<li><h4 title="Search Result #4">Search Result #4. 三体 专著 刘慈欣著 by 刘慈欣 (1963-) 著</h4></li>
+		<li class="hit_list_row_left">
+			<ul>
+				<!-- hitlist number -->
+				<li class="hit_list_number">4.</li>
+
+				
+
+				
+
+					<!-- keep/remove function -->
+					 
+					
+					
+						<li class="hit_list_keepremove">
+							<script language="javascript" type="text/javascript">
+								//<![CDATA[
+								put_keepremove_button('1750854', '选取','/WebCat_Images/Chinese/Other/Miscil','选取','/uhtbin/cgisirsi/?ps=535Y4x7OhA/甘肃馆','53751463','删除');
+								//]]>
+							</script>
+						</li>
+					
+				
+
+				 <!-- hold link -->
+
+				 <!-- end of icon map stuff -->    
+
+				<li class="hit_list_list_cover" style="text-align: right;">
+					
+						
+							
+
+						
+					
+					&nbsp;
+				</li>
+
+				 <!-- BUYNOW -->
+
+				
+					<li id="rating-4" class='chili_review'></li>
+					<li>
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('rating-4','/Js/sd-hit-list-rating.xml',false);
+						</script>
+					</li>
+				
+			</ul>
+		</li>
+
+		<li class="hit_list_item_info">	
+			<dl>
+
+				<!-- bib information -->
+				<dt class="title_label">题名</dt>
+				<dd class="title">
+					<a href="#" onclick="$('VIEW4').click(); return false;" title="View Details for  三体 专著 刘慈欣著">
+
+						
+							 <!-- title -->
+								
+									三体 专著 刘慈欣著
+								
+							
+						
+
+						<!-- and/or display linked 880 data -->
+						
+						
+
+						
+							
+						
+					</a>
+				</dd>
+
+				<!-- and/or display linked 880 data -->
+				<dt class="author_label">著者</dt>
+				<dd class="author">
+					
+					
+						 <!-- author -->
+							
+								刘慈欣 (1963-) 著
+							
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+
+				<dt class="call_number_label">索书号</dt>
+				<dd class="call_number">
+					
+					
+						    <!-- holdings allowed -->
+							
+								
+							
+						
+					
+				</dd>
+
+				<dt class="publisher_label">出版者</dt>
+				<dd class="publisher">
+					
+						
+					
+				</dd>
+
+				<dt class="edition_label">版本</dt>
+				<dd class="edition">
+					<!-- and/or display linked 880 data -->
+					
+					
+						
+					
+					<!-- and/or display linked 880 data -->
+					
+				</dd>
+				
+					<dt class="publishing_date_label">出版日期</dt>
+					<dd>2008</dd>
+					
+				<dt class="holdings_statement_label">馆藏</dt>
+				<dd class="holdings_statement">
+					<!-- summary holdings statements -->
+
+					
+						
+							
+								
+									
+										3 件馆藏在架上 陇南图书馆
+									
+								
+							
+						
+					
+
+					
+						
+					
+
+					
+				</dd>		
+			</dl>
+
+			 
+
+
+			<ul class="enriched_content">
+				
+					<li id="teaser-4">
+						<script language="javascript" type="text/javascript">
+							SdEcPageInterface.populateContentRegion('teaser-4','/Js/sd-hit-list-teaser.xml',false);
+							SdEcPageInterface.populateContentRegion('teaser-4','',false); 
+						</script>
+					</li>
+				 
+				<li class="enrichment_container" id="links4">
+					<!-- ebook, enrichment images, URL, DMA images/links -->
+
+					
+
+					 <!-- only view enrichments when configured to do so -->
+						
+							
+						
+
+						
+
+					 <!-- eLibrary configured with content -->
+					
+
+					
+					    
+						
+							<span id="hit-list-links-4"></span>
+							<script language="javascript" type="text/javascript">
+								SdEcPageInterface.populateContentRegion('hit-list-links-4','/Js/sd-hit-list-links.xml');
+							</script>
+						
+					
+					
+						<ul class="hit_list_novelist_links">
+							<li id="ncdiv4" class="hidden">
+								<ul id="similar4" class="hidden"></ul>
+							</li>
+						</ul>
+					
+				</li>
+				
+				<li id="content-4">
+					<script language="javascript" type="text/javascript">
+						SdEcPageInterface.populateContentRegion('content-4','/Js/sd-hit-list-content.xml',false);
+					</script>
+				</li>
+				
+			</ul>
+
+		</li>
+		<!-- detail button at bottom for screen readers -->
+		
+			<!-- full details -->
+			<li>
+				<input type="submit" value="详细资料" name="VIEW^4" id="VIEW4" class="button hit_list_details_button" title="View Details for  三体 专著 刘慈欣著"/>
+			</li>
+		
+
+
+	</ul>
+
+	<!-- using configurable hit-list chilifresh links -->
+	<script language="javascript" type="text/javascript">
+		SdEcPageInterface.signalEvent( "end-of-hit-list", {'hit-list-isbn-list' : ['7536312202','9787536693968','9787229030933','9787536692930']} );
+	</script>
+
+
+              </li>
+            </ul>
+          	</form>
+        </div>
+      </div>
+
+<!-- Print the query form if this is the page immediately following the query. QUERY_TYPE is defined only for the page generated immediately after the search form is submitted. -->
+<div class="content_container">
+  <div class="content">
+          <a href="#" name="search_form"></a> 
+            <div class="searchservices">
+              <h3>再次检索</h3>
+              <form name="searchform" method="post" action="/uhtbin/cgisirsi/?ps=BGAkcH8Ip6/甘肃馆/53751463/123">
+<!--  Copyright (c) 2001 - 2013, SirsiDynix  "Single-label" search form (for state #3). -->
+
+  <!-- The search input field and library selection -->
+  <div class="searchcontent">
+   <div class="row">
+  <!-- If there was a previous search before this one, then use that search's terms and operators.  Match type of field using the entry num. -->
+   <label for="searchdata1">
+        <span style="display:none;">Search</span>
+        <input type="text" name="searchdata1" id="searchdata1" maxlength="255" size="30" style="width: 300px;"
+         value="三体"
+          />
+   </label>
+	
+   <label for="srchfield1">
+   <select name="srchfield1" id="srchfield1">
+	<option value="GENERAL^SUBJECT^GENERAL^^所有字段" selected="selected">所有字段</option>
+	<option value="AU^AUTHOR^AUTHORS^Author Processing^著者">著者</option>
+	<option value="TI^TITLE^SERIES^^题名">题名</option>
+	<option value="SU^SUBJECT^SUBJECTS^^主题">主题</option>
+	<option value="SER^SERIES^SERIES^Title Processing^丛书">丛书</option>
+	<option value="PER^PERTITLE^SERIES^Title Processing^期刊名">期刊名</option>
+   </select></label>
+     <input type="submit" value="确定" class="button"/>
+   </div>
+   <div class="row">
+      <!-- Define the policy type list based on whether to use the "library list" policies in addition to the singular library policies. -->
+      <label for="library">馆别:</label>
+
+        <select name="library" id="library" >
+<option value="ALL">ALL</option>
+<option>博文馆</option>
+<option value="秦州馆">天水市秦州区图书馆</option>
+<option value="麦积馆">天水市麦积区图书馆</option>
+<option value="宕昌馆">宕昌县图书馆</option>
+<option value="张掖馆">张掖市馆</option>
+<option value="成县馆">成县图书馆</option>
+<option>数据</option>
+<option value="武威馆">武威市图书馆</option>
+<option value="武山馆">武山县图书馆</option>
+<option value="民勤馆">民勤县图书馆</option>
+<option value="漳县馆">漳县图书馆</option>
+<option value="环县馆">环县图书馆</option>
+<option value="甘南馆">甘南图书馆</option>
+<option value="甘肃馆">甘肃省馆</option>
+<option value="白银馆">白银市图书馆</option>
+<option value="礼县馆">礼县图书馆</option>
+<option value="甘图管理">管理中心</option>
+<option value="红古馆">红古区图书馆</option>
+<option value="肃南图书馆">肃南县图书馆</option>
+<option selected value="陇南馆">陇南图书馆</option>
+<option value="陇西馆">陇西县图书馆</option>
+</select>
+   </div>
+  <!-- CFG_EBOOKS -->
+    <!-- Search History -->
+   <div class="row">
+      <label for="srch_history">检索历史:</label>
+      <select name="srch_history" onchange="do_history(document.searchform)">
+   	<option selected="selected">--选择先前的查询--</option>
+        <option value="三体^所有字段^甘肃馆">所有字段&nbsp; 三体</option>
+        <option value="三体^所有字段^陇南馆">所有字段&nbsp; 三体</option>
+      </select>
+   </div>
+     <!-- End Search History -->
+  </div>
+
+
+  <!-- Any default search options configured for use -->
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Search options (for state #3); eLibrary - This page file must be included within the search form. -->
+
+
+  <ul class="search_fields">
+
+       <li>
+        <label for="language">作品语文:</label>
+          <select name="language" id="language" >
+<option value="ANY">任何</option>
+<option value="ARABIC">Arabic</option>
+<option value="BULGARIAN">BULGARIAN</option>
+<option value="CZECH">CZECH</option>
+<option value="DANISH">DANISH</option>
+<option value="DUTCH">DUTCH</option>
+<option value="ENGLISH">English</option>
+<option value="FINNISH">FINNISH</option>
+<option value="FRENCH">FRENCH</option>
+<option value="GERMAN">GERMAN</option>
+<option value="GREEK">GREEK</option>
+<option value="HUNGARIAN">HUNGARIAN</option>
+<option value="ITALIAN">ITALIAN</option>
+<option value="NORWEGIAN">NORWEGIAN</option>
+<option value="POLISH">POLISH</option>
+<option value="PORTUGESE">PORTUGESE</option>
+<option value="ROMANIAN">ROMANIAN</option>
+<option value="RUSSIAN">RUSSIAN</option>
+<option value="SPANISH">SPANISH</option>
+<option value="SWEDISH">SWEDISH</option>
+<option value="CHINESE">中文</option>
+<option value="FRENCH-AF">法语</option>
+</select>
+      </li>
+
+      <li>
+       <label for="format">格式:</label>
+          <select name="format" id="format" >
+<option value="ANY">任何</option>
+<option>CNMARC</option>
+<option value="CNOLD">CNOLD</option>
+<option>CNSERIAL</option>
+<option value="CNS_ESS">CNSERIAL</option>
+<option value="CNSEROLD">CNSEROLD</option>
+<option value="DUBLINCORE">Dublin Core Format</option>
+<option value="EQUIP">EQUIP</option>
+<option value="MEMO">Library bulletins/messages</option>
+<option value="MANUSCRPT">MANUSCRPT</option>
+<option value="MAP">MAP</option>
+<option value="MRDF">MRDF</option>
+<option value="MUSIC">MUSIC</option>
+<option value="ROOM">ROOM</option>
+<option value="SELECT">SELECT</option>
+<option value="SERIAL">SERIAL</option>
+<option value="TECHRPT">TECHRPT</option>
+<option value="UNIMARC">UNIMARC</option>
+<option value="SUNIMARC">UNIMARC期刊</option>
+<option value="VM">VM</option>
+<option value="USMARC">usmarc format</option>
+<option value="CN_ESS">中文图书必备字段</option>
+</select>
+<br/>
+        </li>
+        <li>
+       <label for="item_type">类型:</label>
+
+          <select name="item_type" id="item_type" >
+<option value="ANY">任何</option>
+<option>中文刊</option>
+<option>中文报</option>
+<option value="中文书">中文普通书</option>
+<option>光盘</option>
+<option>再造善本</option>
+<option value="刘法书">刘法图书</option>
+<option value="刘法书">刘法图书</option>
+<option value="古籍文献">历史文献部古籍文献数据</option>
+<option>古旧籍</option>
+<option value="合订刊">合订期刊</option>
+<option>善本</option>
+<option value="图书馆刊">图书馆学刊</option>
+<option value="图情">图情文献</option>
+<option>地图</option>
+<option>地方文献</option>
+<option>基藏本</option>
+<option>外文刊</option>
+<option>外文报</option>
+<option value="外文普通">外文普通书</option>
+<option>少儿图书</option>
+<option>工具书</option>
+<option value="带盘图书">带盘图书（含光盘、</option>
+<option value="开架现刊">开架现刊（总馆西区三层）</option>
+<option value="张掖馆">张掖市图书馆</option>
+<option value="张掖儿童">张掖市图书馆儿童图书</option>
+<option value="张掖古籍">张掖市图书馆古籍</option>
+<option value="张掖文献">张掖市图书馆地方文献</option>
+<option value="张掖工具">张掖市图书馆工具书</option>
+<option value="张掖报">张掖市图书馆报纸</option>
+<option value="张掖刊">张掖市图书馆期刊</option>
+<option value="张掖画册">张掖市图书馆画册</option>
+<option value="张掖盲文书">张掖市图书馆盲文图书</option>
+<option value="张掖盲文">张掖市图书馆盲文图书</option>
+<option value="张掖视听">张掖市图书馆视听资料</option>
+<option value="张掖过刊">张掖市图书馆过刊</option>
+<option value="影印文献">影印古籍文献</option>
+<option>文学书</option>
+<option>新书</option>
+<option>未知</option>
+<option>标准汇编</option>
+<option value="汇编">标准汇编</option>
+<option value="特种书">特种图书</option>
+<option value="线装书">甘南藏族自治州图书馆古籍（线装书）</option>
+<option value="甘南地方">甘南藏族自治州图书馆地方图书</option>
+<option value="甘南文学">甘南藏族自治州图书馆文学图书</option>
+<option value="甘南现刊">甘南藏族自治州图书馆现刊</option>
+<option value="甘南社图">甘南藏族自治州图书馆社会科学图书</option>
+<option value="甘南科图">甘南藏族自治州图书馆自然科学图书</option>
+<option value="甘南藏研">甘南藏族自治州图书馆藏学研究图书</option>
+<option value="甘南藏文">甘南藏族自治州图书馆藏文图书</option>
+<option value="甘南藏刊">甘南藏族自治州图书馆藏文期刊</option>
+<option value="甘南过刊">甘南藏族自治州图书馆藏文过刊</option>
+<option value="甘南过刊">甘南藏族自治州图书馆过刊</option>
+<option value="甘肃北大">甘肃省图书馆北大</option>
+<option>白银古籍</option>
+<option value="白银地方">白银地方文献</option>
+<option>白银字画</option>
+<option value="白银图书">白银对外借阅的普通图书</option>
+<option value="白银少儿">白银少儿图书</option>
+<option value="白银工具">白银工具书（不外借）</option>
+<option value="白银合订">白银报纸（合订本）</option>
+<option value="白银特色">白银特色典藏</option>
+<option value="白银现刊">白银现刊（期刊）</option>
+<option value="白银电子">白银电子资源</option>
+<option>白银画册</option>
+<option value="白银西区">白银西区流通站图书</option>
+<option value="白银过刊">白银过刊（期刊）</option>
+<option>盲文图书</option>
+<option value="社科开">社科开架书</option>
+<option value="社科开流通">社科开架书，资产清查后可流通</option>
+<option>社科过刊</option>
+<option value="社科闭">社科闭架书</option>
+<option value="红古图书">红古区图书馆普通书</option>
+<option value="红色文献">红色文献（总馆西区6层特色文献主题馆）</option>
+<option>缩微胶片</option>
+<option value="缩微">缩微资料</option>
+<option>网络资源</option>
+<option value="自科开">自科开架书</option>
+<option>自科过刊</option>
+<option value="自科闭">自科闭架书</option>
+<option value="舆图片">舆图图片</option>
+<option value="艺术图书">艺术图书（总馆西区6层特色文献主题馆）</option>
+<option>西北文献</option>
+<option>设备</option>
+<option>设备</option>
+<option>采访数据</option>
+<option value="武都古籍">陇南市武都区图书馆古籍藏书</option>
+<option value="武都文献">陇南市武都区图书馆地方文献</option>
+<option value="武都少儿">陇南市武都区图书馆少儿图书</option>
+<option value="武都工具">陇南市武都区图书馆工具书</option>
+<option value="武都报纸">陇南市武都区图书馆报纸</option>
+<option value="武都文学">陇南市武都区图书馆文学图书</option>
+<option value="武都普通">陇南市武都区图书馆普通图书</option>
+<option value="武都现刊">陇南市武都区图书馆现刊</option>
+<option value="陇南社科">陇南市武都区图书馆社会科学图书</option>
+<option value="武都科书">陇南市武都区图书馆自然科学图书</option>
+<option value="武都过刊">陇南市武都区图书馆过刊</option>
+<option value="视听">音像制品（总馆西区6层特色文献主题馆）</option>
+<option>馆际互借</option>
+</select>
+<br/>
+        </li>
+
+<li>
+       <label for="location">馆藏位置:</label>
+
+          <select name="location" id="location" >
+<option value="ANY">任何</option>
+<option value="AVAIL_SOON">Available soon</option>
+<option>CHECKOUT</option>
+<option>INTRANSIT</option>
+<option value="中文书">中文图书库</option>
+<option value="中文书库1">中文图书库</option>
+<option value="中文书库">中文图书库</option>
+<option value="中文书库2">中文图书库</option>
+<option value="报刊室">中文报刊室</option>
+<option value="过期报刊">中文报纸库</option>
+<option value="中文现刊">中文现刊室</option>
+<option value="中文过刊">中文过刊库</option>
+<option value="临时库">临时试验库</option>
+<option>传阅中</option>
+<option value="保存本">保存本书库</option>
+<option value="共享工程">共享工程电子资源</option>
+<option value="馆内用">内部用书</option>
+<option value="刘法书库">刘法图书库</option>
+<option value="博文开架">博文图书</option>
+<option value="历史文献">历史文献室</option>
+<option value="古旧籍">古旧籍书库</option>
+<option>古籍书库</option>
+<option value="古籍书">古籍阅览室</option>
+<option>古籍阅览室</option>
+<option value="四库藏书">四库藏书馆</option>
+<option>四库馆</option>
+<option value="固定资产">固定资产库</option>
+<option value="馆学室">图书馆学室</option>
+<option value="图情资料">图情资料室</option>
+<option value="上架中">在上架中</option>
+<option value="修补中">在修补中</option>
+<option value="编目中">在编目中</option>
+<option value="装订中">在装订中</option>
+<option value="订购中">在订购中</option>
+<option>地图库</option>
+<option value="地方书">地方图书室</option>
+<option value="地方刊">地方报刊室</option>
+<option value="外文书刊">外文书刊室</option>
+<option value="外文书刊">外文书刊库</option>
+<option value="外文现刊">外文现刊室</option>
+<option value="外文过刊">外文过刊库</option>
+<option value="秦州七里墩街道办事处">天水市秦州区图书馆七里墩街道办事处分馆</option>
+<option value="秦州东关街道办事处">天水市秦州区图书馆东关街道办事处分馆</option>
+<option value="秦州中城街道办事处">天水市秦州区图书馆中城街道办事处分馆</option>
+<option value="秦州馆中梁乡分馆">天水市秦州区图书馆中梁乡分馆</option>
+<option value="秦州馆关子镇分馆">天水市秦州区图书馆关子镇分馆</option>
+<option value="秦州馆华岐乡分馆">天水市秦州区图书馆华岐乡分馆</option>
+<option value="秦州大城街道办事处">天水市秦州区图书馆大城街道办事处分馆</option>
+<option value="秦州馆大门镇分馆">天水市秦州区图书馆大门镇分馆</option>
+<option value="秦州天水郡街道办事处">天水市秦州区图书馆天水郡街道办事处分馆</option>
+<option value="秦州馆天水镇分馆">天水市秦州区图书馆天水镇分馆</option>
+<option value="秦州馆太京镇分馆">天水市秦州区图书馆太京镇分馆</option>
+<option value="秦州馆娘娘坝镇分馆">天水市秦州区图书馆娘娘坝镇分馆</option>
+<option value="秦州馆平南镇分馆">天水市秦州区图书馆平南镇分馆</option>
+<option value="秦州馆杨家寺镇分馆">天水市秦州区图书馆杨家寺镇分馆</option>
+<option value="秦州馆汪川镇分馆">天水市秦州区图书馆汪川镇分馆</option>
+<option value="秦州馆牡丹镇分馆">天水市秦州区图书馆牡丹镇分馆</option>
+<option value="秦州馆玉泉镇分馆">天水市秦州区图书馆玉泉镇分馆</option>
+<option value="秦州馆皂郊镇分馆">天水市秦州区图书馆皂郊镇分馆</option>
+<option value="秦州石马坪街道办事处">天水市秦州区图书馆石马坪街道办事处分馆</option>
+<option value="秦州馆秦岭乡分馆">天水市秦州区图书馆秦岭乡分馆</option>
+<option value="秦州馆藉口镇分馆">天水市秦州区图书馆藉口镇分馆</option>
+<option value="秦州西关街道办事处">天水市秦州区图书馆西关街道办事处分馆</option>
+<option value="秦州馆齐寿镇分馆">天水市秦州区图书馆齐寿镇分馆</option>
+<option value="麦积馆三岔镇分馆">天水市麦积区图书馆三岔镇分馆</option>
+<option value="麦积馆东岔镇分馆">天水市麦积区图书馆东岔镇分馆</option>
+<option value="麦积馆中滩镇分馆">天水市麦积区图书馆中滩镇分馆</option>
+<option value="麦积馆五龙镇分馆">天水市麦积区图书馆五龙镇分馆</option>
+<option value="麦积馆伯阳镇分馆">天水市麦积区图书馆伯阳镇分馆</option>
+<option value="麦积馆元龙镇分馆">天水市麦积区图书馆元龙镇分馆</option>
+<option value="麦积馆党川镇分馆">天水市麦积区图书馆党川镇分馆</option>
+<option value="麦积馆利桥镇分馆">天水市麦积区图书馆利桥镇分馆</option>
+<option value="麦积北道埠街道办事处">天水市麦积区图书馆北道埠街道办事处</option>
+<option value="麦积馆新阳镇分馆">天水市麦积区图书馆新阳镇分馆</option>
+<option value="麦积馆桥南街道办事处">天水市麦积区图书馆桥南街道办事处</option>
+<option value="麦积馆渭南镇分馆">天水市麦积区图书馆渭南镇分馆</option>
+<option value="麦积馆琥珀镇分馆">天水市麦积区图书馆琥珀镇分馆</option>
+<option value="麦积馆甘泉镇分馆">天水市麦积区图书馆甘泉镇分馆</option>
+<option value="麦积馆石佛镇分馆">天水市麦积区图书馆石佛镇分馆</option>
+<option value="麦积馆社棠镇分馆">天水市麦积区图书馆社棠镇分馆</option>
+<option value="麦积馆花牛镇分馆">天水市麦积区图书馆花牛镇分馆</option>
+<option value="麦积馆道北街道办事处">天水市麦积区图书馆道北街道办事处</option>
+<option value="麦积馆马跑泉镇分馆">天水市麦积区图书馆马跑泉镇分馆</option>
+<option value="麦积馆麦积镇分馆">天水市麦积区图书馆麦积镇分馆</option>
+<option value="少儿馆">少儿图书馆</option>
+<option>少儿阅览室</option>
+<option value="工具库">工具书库</option>
+<option>已借出</option>
+<option value="张掖儿童">张掖儿童室</option>
+<option value="张掖图书">张掖图书室</option>
+<option value="张掖盲文库">张掖市图书馆盲文室</option>
+<option value="张掖盲文">张掖市图书馆盲文室</option>
+<option value="张掖报刊">张掖报刊室</option>
+<option value="张掖特藏">张掖特藏室</option>
+<option value="张掖室">张掖电子室</option>
+<option>张掖馆藏</option>
+<option value="影印文献库">影印古籍文献库</option>
+<option value="西区2层报刊借阅区">总馆西区2层报刊借阅区</option>
+<option value="西区3层工具书书库">总馆西区3层工具书书库</option>
+<option value="西区3层文学图书区">总馆西区3层文学图书区</option>
+<option value="西区4层社科图书区">总馆西区4层社科图书区</option>
+<option value="西区5层自科图书区">总馆西区5层自科图书区</option>
+<option value="西区6层特色主题馆">总馆西区6层特色主题馆</option>
+<option value="西区7层参考咨询区">总馆西区7层参考咨询区</option>
+<option value="报纸室">报纸阅览室</option>
+<option value="教参台">教参借阅台</option>
+<option value="文学书5">文学书库</option>
+<option>文学书库</option>
+<option value="咨询">文献检索室</option>
+<option value="新书采编">新书采编室</option>
+<option value="新书室">新书陈列室</option>
+<option value="期刊复本">期刊复本库</option>
+<option value="漳县馆三岔镇分馆">漳县图书馆三岔镇分馆</option>
+<option value="漳县馆东泉乡分馆">漳县图书馆东泉乡分馆</option>
+<option value="漳县馆四族镇分馆">漳县图书馆四族镇分馆</option>
+<option value="漳县馆大草滩镇分馆">漳县图书馆大草滩镇分馆</option>
+<option value="漳县馆新寺镇分馆">漳县图书馆新寺镇分馆</option>
+<option value="漳县馆武当乡分馆">漳县图书馆武当乡分馆</option>
+<option value="漳县馆武阳镇分馆">漳县图书馆武阳镇分馆</option>
+<option value="漳县馆殪虎桥镇分馆">漳县图书馆殪虎桥镇分馆</option>
+<option value="漳县馆盐井镇分馆">漳县图书馆盐井镇分馆</option>
+<option value="漳县馆石川镇分馆">漳县图书馆石川镇分馆</option>
+<option value="漳县馆贵清山镇分馆">漳县图书馆贵清山镇分馆</option>
+<option value="漳县馆金钟镇分馆">漳县图书馆金钟镇分馆</option>
+<option value="漳县馆马泉乡分馆">漳县图书馆马泉乡分馆</option>
+<option value="善本库">特藏善本库</option>
+<option>特藏库</option>
+<option value="甘南地方">甘南地方库</option>
+<option value="甘南少儿">甘南少儿室</option>
+<option value="甘南文学">甘南文学库</option>
+<option value="甘南现刊">甘南现刊室</option>
+<option value="甘南社科">甘南社科库</option>
+<option value="甘南自科">甘南自科库</option>
+<option value="甘南藏室">甘南藏文室</option>
+<option value="甘南藏库">甘南藏文库</option>
+<option value="甘南过刊">甘南过刊库</option>
+<option value="甘图业务">甘图业务处</option>
+<option value="甘图报刊">甘图报刊部</option>
+<option value="甘图缩微">甘图缩微文献胶片</option>
+<option value="电子资源">电子资源库</option>
+<option value="电子阅览">电子阅览室</option>
+<option value="白银借1">白银外借1</option>
+<option value="白银借2">白银外借2</option>
+<option value="白银少儿">白银少儿室</option>
+<option value="白银工具">白银工具室</option>
+<option value="白银报纸">白银报纸室</option>
+<option value="白银文献">白银文献室</option>
+<option value="白银刊">白银期刊室</option>
+<option value="白银特藏">白银特藏室</option>
+<option value="白银电子">白银电子室</option>
+<option value="白银社科">白银社科库</option>
+<option value="白银自研">白银自研室</option>
+<option>白银西流</option>
+<option value="白银过刊">白银过刊室</option>
+<option value="盲人室">盲人阅览室</option>
+<option value="社科开架">社科开架库</option>
+<option value="社科过刊">社科过刊库</option>
+<option value="社科闭架">社科闭架库</option>
+<option value="红古书库">红古区图书库</option>
+<option>缩微胶片库</option>
+<option>缩微阅览室</option>
+<option value="自科开架">自科开架库</option>
+<option value="自科过刊">自科过刊库</option>
+<option value="自科闭架">自科闭架库</option>
+<option value="舆图片">舆图图片</option>
+<option value="西北文献">西北文献室</option>
+<option value="西北期刊">西北期刊库</option>
+<option>调拨中</option>
+<option value="采访数据">采访数据库</option>
+<option value="陇南古籍">陇南古籍库</option>
+<option value="陇南地方">陇南地方库</option>
+<option value="陇南孤本">陇南孤本库</option>
+<option value="陇南少儿">陇南少儿室</option>
+<option value="陇南报纸">陇南报纸库</option>
+<option value="陇南文学">陇南文学库</option>
+<option value="陇南现刊">陇南现刊室</option>
+<option value="陇南社科">陇南社科库</option>
+<option value="陇南自科">陇南自科库</option>
+<option value="陇南过刊">陇南过刊库</option>
+<option value="陇西馆云田镇分馆">陇西县图书馆云田镇分馆</option>
+<option value="陇西馆双泉镇分馆">陇西县图书馆双泉镇分馆</option>
+<option value="陇西馆和平乡分馆">陇西县图书馆和平乡分馆</option>
+<option value="陇西馆宏伟乡分馆">陇西县图书馆宏伟乡分馆</option>
+<option value="陇西馆巩昌镇分馆">陇西县图书馆巩昌镇分馆</option>
+<option value="陇西馆德兴乡分馆">陇西县图书馆德兴乡分馆</option>
+<option value="陇西馆文峰镇分馆">陇西县图书馆文峰镇分馆</option>
+<option value="陇西馆权家湾镇分馆">陇西县图书馆权家湾镇分馆</option>
+<option value="陇西馆柯寨镇分馆">陇西县图书馆柯寨镇分馆</option>
+<option value="陇西馆永吉乡分">陇西县图书馆永吉乡分馆</option>
+<option value="陇西馆渭阳乡分馆">陇西县图书馆渭阳乡分馆</option>
+<option value="陇西馆碧岩镇分馆">陇西县图书馆碧岩镇分馆</option>
+<option value="陇西馆福星镇分馆">陇西县图书馆福星镇分馆</option>
+<option value="陇西馆菜子镇分馆">陇西县图书馆菜子镇分馆</option>
+<option value="陇西馆通安驿镇分馆">陇西县图书馆通安驿镇分馆</option>
+<option value="陇西馆首阳镇分馆">陇西县图书馆首阳镇分馆</option>
+<option value="陇西馆马河镇分馆">陇西县图书馆马河镇分馆</option>
+<option value="有预约">预约</option>
+<option value="预约">预约书架</option>
+<option>馆际互借</option>
+<option value="馆际部">馆际互借部</option>
+<option value="借外馆">馆际外借中</option>
+</select>
+<br/>
+</li>
+
+<li>
+       <label for="item_1cat">文献类别1:</label>
+          <select name="item_1cat" id="item_1cat" >
+<option value="ANY">任何</option>
+<option value="TB">一般工业技术</option>
+<option value="U">交通运输</option>
+<option value="E">军事</option>
+<option value="S">农业科学</option>
+<option value="TF">冶金工业</option>
+<option value="LGJ">刘国钧分类法图书</option>
+<option value="TQ">化学工业</option>
+<option value="R">医药、卫生</option>
+<option value="K">历史、地理</option>
+<option value="TL">原子能技术</option>
+<option value="B">哲学、宗教</option>
+<option value="P">天文学、地球科学</option>
+<option value="T">工业技术</option>
+<option value="TU">建筑科学</option>
+<option value="D">政治、法律</option>
+<option value="O">数理科学总论</option>
+<option value="G">文化、科学、教育、体育</option>
+<option value="I">文学</option>
+<option value="TN">无线电电子学、电信技术</option>
+<option value="TH">机械、仪表工业</option>
+<option value="TJ">武器工业</option>
+<option value="TV">水利工程</option>
+<option value="X">环境科学、安全科学</option>
+<option value="Q">生物科学</option>
+<option value="TM">电工技术</option>
+<option value="TE">石油、天然气工业</option>
+<option value="TD">矿业工程</option>
+<option value="C">社会科学总论</option>
+<option value="F">经济</option>
+<option value="Z">综合性图书</option>
+<option value="TK">能源与动力工程</option>
+<option value="TP">自动化技术、计算机技术</option>
+<option value="N">自然科学总论</option>
+<option value="V">航空、航天</option>
+<option value="J">艺术</option>
+<option value="H">语言、文字</option>
+<option value="TS">轻工业、手工业</option>
+<option value="TG">金属学与金属工艺</option>
+<option value="A">马克思主义、列宁主义、毛泽东思想、邓小平理论</option>
+</select>
+</li>
+
+<li>
+      <label for="item_2cat">文献类别2:</label>
+
+          <select name="item_2cat" id="item_2cat" >
+<option value="ANY">任何</option>
+<option value="交换">与其他图书馆交换</option>
+<option value="书店购">书店购买</option>
+<option>交换刊</option>
+<option value="赠书">公私捐赠</option>
+<option value="其他">其他来源资金</option>
+<option value="内部">内部发行</option>
+<option value="专项拨款">国家专项拨款</option>
+<option value="财政拨款">国家财政拨款</option>
+<option value="自筹资金">本馆自筹资金</option>
+<option value="报废">甘肃省图书馆固定资产报废登记库</option>
+<option value="西资专题">西北地方文献专题库使用</option>
+<option>赠送刊</option>
+<option value="邮局">邮局发行</option>
+</select>
+<br/>
+</li>
+
+	<li>
+		<label for="item_3cat">馆藏类别 3:</label>
+
+		
+			<select name="item_3cat" id="item_3cat" >
+<option value="ANY">任何</option>
+<option value="UNKNOWN">UNKNOWN</option>
+<option value="信息咨询部">存放在信息咨询部的业务图书</option>
+<option value="共享工程">存放在共享工程的业务图书</option>
+<option value="历史文献部">存放在历史文献部的业务图书</option>
+<option value="古保中心">存放在古籍保护中心的图书</option>
+<option value="计财处">存放在计财处的业务图书</option>
+<option value="采编部">存放在采编部的业务图书</option>
+</select>
+<br/>
+		
+	</li>
+
+	<li>
+		<label for="item_4cat">馆藏类别 4:</label>
+
+		
+			<select name="item_4cat" id="item_4cat" >
+<option value="ANY">任何</option>
+<option>1-2合刊</option>
+<option>7-8合刊</option>
+<option value="UNKNOWN">UNKNOWN</option>
+<option>冬卷</option>
+<option value="合刊">增刊</option>
+<option>增刊</option>
+<option>夏卷</option>
+<option>春卷</option>
+<option>秋卷</option>
+<option value="10">第10期</option>
+<option value="11">第11期</option>
+<option value="12">第12期</option>
+<option value="13">第13期</option>
+<option value="14">第14期</option>
+<option value="15">第15期</option>
+<option value="16">第16期</option>
+<option value="17">第17期</option>
+<option value="18">第18期</option>
+<option value="19">第19期</option>
+<option value="1">第1期</option>
+<option value="20">第20期</option>
+<option value="21">第21期</option>
+<option value="22">第22期</option>
+<option value="23">第23期</option>
+<option value="24">第24期</option>
+<option value="25">第25期</option>
+<option value="26">第26期</option>
+<option value="27">第27期</option>
+<option value="28">第28期</option>
+<option value="29">第29期</option>
+<option value="2">第2期</option>
+<option value="30">第30期</option>
+<option value="31">第31期</option>
+<option value="32">第32期</option>
+<option value="33">第33期</option>
+<option value="34">第34期</option>
+<option value="35">第35期</option>
+<option value="36">第36期</option>
+<option value="37">第37期</option>
+<option value="38">第38期</option>
+<option value="39">第39期</option>
+<option value="3">第3期</option>
+<option value="40">第40期</option>
+<option value="41">第41期</option>
+<option value="42">第42期</option>
+<option value="43">第43期</option>
+<option value="44">第44期</option>
+<option value="45">第45期</option>
+<option value="46">第46期</option>
+<option value="47">第47期</option>
+<option value="48">第48期</option>
+<option value="49">第49期</option>
+<option value="4">第4期</option>
+<option value="50">第50期</option>
+<option value="51">第51期</option>
+<option value="52">第52期</option>
+<option value="5">第5期</option>
+<option value="6">第6期</option>
+<option value="7">第7期</option>
+<option value="8">第8期</option>
+<option value="9">第9期</option>
+</select>
+<br/>
+		
+	</li>
+
+	<li>
+		<label for="item_5cat">馆藏类别 5:</label>
+
+		
+			<select name="item_5cat" id="item_5cat" >
+<option value="ANY">任何</option>
+<option value="2025资产清查">2025年资产清查时盘点数据</option>
+<option value="UNKNOWN">UNKNOWN</option>
+</select>
+<br/>
+		
+	</li>
+
+     <!-- not power search -->
+       <!-- radio buttons not used -->
+           <li>
+             <label for="match_on">符合条件:</label>
+
+             <select name="match_on" id="match_on">
+              <option value="KEYWORD" selected="selected">关键词</option>
+      	<option value="PARTIAL">前方一致</option>
+      	<option value="EXACT">精确内容</option>
+             </select>
+</li>
+
+
+<li>
+       <label for="pubyear">出版年(公元):</label>
+
+	
+       <input type="text" name="pubyear" id="pubyear" size="20" maxlength="20" value=""/>
+</li>
+
+<li>
+       <label for="sort_by">排序:</label>
+	
+       <select name="sort_by" id="sort_by">
+          <option value="NONE"> 无</option>
+          <option value="AU"> 著者</option>
+          <option value="SU"> 主题</option>
+          <option value="TI" selected="selected"> 题名</option>
+          <option value="relevance"> 相关性</option>
+          <option value="PBYR"> 出版年（旧到新）</option>
+          <option value="-PBYR"> 出版年（新到旧）</option>
+        </select>
+</li>
+
+<li>
+      <input type="hidden" name="shadow" value=""/>
+  </li>
+</ul>
+
+              </form>
+            </div>
+  </div>
+</div>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - LC Category hidden search form for javascript to work. -->
+    <form name="lc_search_form" method="post" action="/uhtbin/cgisirsi/?ps=YSbygA50vC/甘肃馆/53751463/5/5/49/1">
+      <input type="hidden" name="searchdata1" value=""/>
+      <input type="hidden" name="search_disp_data1" value=""/>
+    </form>
+    <form name="lc_return_form" method="post" action="/uhtbin/cgisirsi/?ps=aTFh2IjljA/甘肃馆/53751463/5/0/49/0">
+      <input type="hidden" name="searchdata1" value=""/>
+      <input type="hidden" name="sort_by" value="TI"/>
+    </form>
+    </div>
+    <div class="column pct25 right_column">
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Unicorn Other Searches -->
+
+<!-- when search field is not blank, assign term to ENGINE_TERM -->
+
+  <div class="content_container">
+    <div class="content">
+        <h3>延伸查询</h3>
+        <ul class="info_desk">
+          <li><a class="itemservices_link" href="/uhtbin/cgisirsi/?ps=7s3PFEqv9j/甘肃馆/53751463/115/0/ZBROADCAST_GROUP">其它图书馆</a></li>
+            <li><a class="itemservices_link" href="/uhtbin/cgisirsi/?ps=zPIPBCefaJ/甘肃馆/53751463/88?searchdata1=%E4%B8%89%E4%BD%93&S_ICON^GENERAL^SUBJECT^GENERAL^^%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5.x=1&search_type=sitesource"></a></li>
+          <li><a class="itemservices_link" href="javascript:open_win('http://www.google.com/search?q=三体&safe=vss&vss=1&sa=Google+Search')">Google</a></li>
+      </ul>
+    </div>
+  </div>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - LC Categories list page. -->
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Cross Reference "quick-view" box. This page file is processed by a SIRSI_Command for an So response. -->
+ <!-- if xref list present -->
+        <div class="content_container">
+          <div class="content">
+            <h3>图书馆公告</h3>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Announcements/Activity - This page file is processed by a  SIRSI_Command for an Si response. -->
+
+
+  <ul class="info_desk">
+  
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=dpgNGmYzTB/甘肃馆/53751463/28/473/X?gateway_name=ILINK">新书入库</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=aUICiTd2vz/甘肃馆/53751463/28/242/X?gateway_name=ILINK">新书导读</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=2R3tMz0xAO/甘肃馆/53751463/28/32/X?gateway_name=ILINK">新书预告</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="javascript:open_win('http://www.gslib.com.cn/zddh/shijian.htm')">开馆时间</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+   
+     <li><a href="/uhtbin/cgisirsi/?ps=fCuQfz9m4g/甘肃馆/53751463/122/2004" style="color: #888888">更多信息</a></li>
+   
+   </ul>
+
+   
+          </div>
+        </div>
+    </div>
+</div>
+<div class="bottom_buttons">
+<!-- Copyright (c) 2000 - 2014, SirsiDynix - Buttons for Search Hitlist page  ; page #4 -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=eqmH2C1avn/甘肃馆/53751463/2/7" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=mpfFDeUvll/甘肃馆/53751463/2/7" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+
+<!-- Help button -->
+<li class="menu_link">
+<script language="javascript" type="text/javascript">
+  //<![CDATA[
+  put_help_button('Chinese','说明','search_results');
+  //]]> 
+</script>
+</li>
+	
+  <li class="menu_link"><a  href="#search_form" title="限制查询">限制查询</a></li>
+	
+	
+<li class="menu_link"><a  href="/uhtbin/cgisirsi/?ps=TQGrHVaaWa/甘肃馆/53751463/49" title="新的检索">新的检索</a></li>
+
+<!-- Backward button -->
+
+<!-- Forward button -->
+	
+<!-- Cross Reference button -->
+
+
+  <!-- Kept Button -->
+  <li class="menu_link"><a  href="javascript:document.hitlist.form_type.value = 'CAPTURE'; document.hitlist.submit()">打印或者以电子邮件邮寄保存的记录</a></li>
+
+
+  <!-- gateway's custom buttons -->
+
+	
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=PE9o3Ewdni/甘肃馆/53751463/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+</div>
+<div class="footer_container">
+  <!--  Copyright (c) 1996 - 2014, SirsiDynix - Copyright statement -->
+  <table border="0" cellpadding="3" cellspacing="0" width="100%" class="footer">
+   <tr>
+    <td align="left" valign="bottom" width="25%" class="footer">
+        <img src="/WebCat_Images/Chinese/Other/Miscil/sirsi_button.gif" alt="Powered by: SirsiDynix" border="0"/>
+    </td>
+      <td align="center" class="footer">
+        检索图书馆馆藏目录在：&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=UNKN">Facebook</a>&nbsp;或在你的&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=UNKN">智能手机</a>!
+      </td>
+    <td align="right" class="footer" width="25%" id="requiredCell"><!-- Display the description -->
+      <a name="bottom" href="#top">TOP</a>
+      <div id="feature">
+        <div id="required"></div>
+      </div>
+    </td>
+   </tr>
+  </table>
+</div>
+
+  <script language="JavaScript" type="text/javascript">
+    setLocalizedValue("PERMALINK","固定链接");
+    setLocalizedValue("TO_LINK","可从email,博客或其它网页中用以下的链接连接到当前的馆藏,列表,检索结果或页面.");
+    setLocalizedValue("CLOSE","关闭");
+    setLocalizedValue("PAGE_LINK","页面链接");
+    setLocalizedValue("NEW_TAB","在新选项卡中打开链接 ");
+  </script>
+
+</body>
+</html>
+
+

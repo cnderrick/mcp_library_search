@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright (c) 2000 - 2014, SirsiDynix - Defines the head  body of each page. -->
+
+<!-- 环境: WEBSERVER, 工作站的环境参数: 8 -->
+<!-- 服务器版本: 3.5.2.0.GA -->
+
+<html  lang="en"  dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1;" />
+
+		
+		  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		
+
+		
+		
+<!-- sirsi-data session-state is 6 -->
+  <title>目录检索结果</title>
+		
+
+		
+
+		<!-- Set the expiration date to the past so the page will always be reloaded -->
+		
+			<meta http-equiv="Expires" content="Sun, 1 Jan 1995 08:00:00 CST"/>
+		
+
+		  <!-- Not the login page -->
+			
+		
+
+		<script type="text/javascript" src="/Js/prototype-1.6.1.js"></script>
+		<script type="text/javascript" src="/Js/scriptaculous.js"></script>
+		<script type="text/javascript" src="/Js/sirsidynix.js"></script>
+		<script type="text/javascript" src="/Js/datetimepicker.js"></script>
+
+		
+			<script type="text/javascript" src="/Js/getcontent.js"></script>
+		
+
+		
+
+		
+			<link rel="stylesheet" href="/Css/default/default.css" type="text/css" />
+		
+
+		
+
+		
+			
+		
+
+		
+
+	</head>
+	<!-- Start the body of the document.  WARNING:  No comments are allowed inside of the body element's definition. - assign CSS Class of 'body_style' to tag -  If this is a download search results state (14, 62), then load the results in a new browser window to facilitate printing. -  If this is an Archive image view state (911), then open a new window to display the image in new window. -  To help prevent premature selection of a toolbar button (i.e., before the new toolbar is loaded), clear it when the page is unloaded. -->
+	<body onLoad="">
+
+		
+
+		<noscript>
+		Your browser does not support JavaScript and this application utilizes JavaScript to build content and provide links to additional information. You should either enable JavaScript in your browser settings or use a browser that supports JavaScript in order to take full advantage of this application.
+		</noscript>
+
+
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - e-Library Browse List & Term Search List Page; State #6 -->
+<!--  Copyright (c) 1996 - 2010, SirsiDynix Form for starting a new session in a new window. -->
+
+<!-- By setting the "document.new_session.action" property to the URL for logging into a new session at the particular  page you want, a new window will be opened and a new WebCat session will be started automatically. Remember that many WebCat states are dependent on previous states, so only certain "cgi types" can be opened.
+
+Also, by setting the "document.new_session.new_gateway_db.value" property to a gateway database name, the new session will use that gateway instead of the user's default gateway. Note that the use of Javascript is required to submit this form. -->
+
+<form name="new_session" method="post" action="/uhtbin/cgisirsi/?ps=66u4xc0WEA/甘肃馆/0/57/49" target="new_session">
+	
+		<input type="hidden" name="user_id" value="WEBSERVER"/>
+		<input type="hidden" name="password" value=""/>
+	
+	<input type="hidden" name="new_gateway_db" value=""/>
+</form>
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Puts the top-of-page information common to all pages. -->
+<div id="header_container" class="header_container">
+      <a class="skipnav" href="#skipnav">跳过导航</a>  <a name="top"></a>
+  <div class="branding_container" >
+      <div class="branding">
+            <img border="0" src="/WebCat_Images/Chinese/Other/Miscil/LIBLOGO.gif" alt="馆藏查询系统" title="馆藏查询系统"/>
+      </div>
+      <div class="branding_subheading">
+         <!-- Print the gateway envn title if not blank -->
+          甘肃省图书馆
+          馆藏查询系统
+      </div>      
+	</div>
+  <div class="login_container">
+	   <!-- present language choices -->
+		  <div class="module_language_choices">
+<!-- Add the Language options -->
+  <!-- Suppress an option for the current language -->
+    <a href="/uhtbin/cgisirsi/?ps=CkRRjoF3Dy/甘肃馆/65380325/111/ENGLISH" title="英文" target="_top"><img src="/WebCat_Images/Chinese/Other/Miscil/ENGLISH.gif" border=0 class="langicon" alt="英文 Language" title="英文"/></a>
+  <!-- Suppress an option for the current language -->
+      </div>
+
+			
+				<form name="loginform" method="post" action="/uhtbin/cgisirsi/?ps=m8d6MJwpma/甘肃馆/65380325/303">
+			
+<!--  Copyright (c) 2004 - 2010, SirsiDynix - myProfile login or view myFavorites -->
+<!--  Copyright (c) 1998 - 2010, SirsiDynix - Sets the default values for USER_ID, ALT_ID, and PIN prompts. - The USER_ID, ALT_ID, and PIN page variables will be returned. -->
+
+<!-- If the user has not logged in, first try to default to the ID based on the IP address - the $UO and $Uf will be set.  If that fails, then default to the IDs in the config file. If the user has already logged in, default to the logged in user's IDs, unless the user is a shared login. -->
+
+
+
+	  <!-- only user ID is used if both on -->
+		<div class="user_name">
+			<label for="user_id">借阅证号码:</label>
+			<input class="user_name_input" type="text" name="user_id" id="user_id"  maxlength="20" value=""/>
+		</div>
+	
+	 
+		<div class="password">
+			<label for="password">个人密码:</label>
+			<input class="password_input" type="password" name="password" id="password"  maxlength="25" value=""/>
+		</div>  
+	
+	 
+	<input type="submit" value="登入" style="margin-left:7px;margin-right:4px" class="login_button"/>
+
+	
+
+	 
+
+
+
+			</form>
+	  
+	<!-- login form-->
+	 
+  </div>
+</div>
+<!--  Copyright (c) 1996 - 2010, SirsiDynix - Gateway Root Bar. -->
+<div id="header_menu_container" class="header_menu_container">
+  <h2>Navigation Menu</h2>
+  <ul class="menu">
+    <!-- display text with CSS instead -->
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=xvGOrOERtO/甘肃馆/65380325/38/1/X/BLASTOFF" class="blastoff">
+       查询首页</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=97biT7kxVX/甘肃馆/65380325/1/26/X/BLASTOFF" class="rootbar">
+       文献分类查询</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=NaKTGo6HLq/甘肃馆/65380325/1/446/X/BLASTOFF" class="rootbar">
+       新书推荐</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=LjvBBezvT9/甘肃馆/65380325/1/452/X/BLASTOFF" class="rootbar">
+       知识网关</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=KmHtV7cRAB/甘肃馆/65380325/36/485/X/BLASTOFF" class="rootbar">
+       指定参考书</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=oa0y9MMbJE/甘肃馆/65380325/1/488/X/BLASTOFF" class="rootbar">
+       我的账号</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=LdUJVA5yWG/甘肃馆/65380325/63/493/X/BLASTOFF" class="rootbar">
+       与我们联系</a></li>
+          <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=Ikycs41vGv/甘肃馆/65380325/60/502/X/BLASTOFF" class="rootbar">
+       快速检索</a></li>
+
+
+
+
+
+  </ul>
+</div>
+
+
+
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Buttons for Browse List and Term Search page -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=gCadT847RE/甘肃馆/65380325/2/6" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=J1Cp1RzCl7/甘肃馆/65380325/2/6" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','browse_list');
+    //]]>
+  </script>
+</li>
+
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=khIp1xMmEc/甘肃馆/65380325/49" title="新的检索">新的检索</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=9cLogVFPkk/甘肃馆/65380325/7/B" title="后退">后退</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=bqNLvGkb2T/甘肃馆/65380325/7/F" title="向前">向前</a></li>
+
+  <!-- gateway's custom buttons -->
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=sGQfNqqScC/甘肃馆/65380325/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+<div class="columns_container">
+<form name="item_view" method="post" action="/uhtbin/cgisirsi/?ps=F5SKXX7Hh6/甘肃馆/65380325/13">
+  <div class="column pct75">
+    <div class="content_container browse_list left_column">
+      <div class="content">
+        <ul class="hit_list">
+          <li>
+<!-- when search field is not blank, assign term to ENGINE_TERM -->
+<div class="hitstop">
+  <h3>
+    <!-- If "term" exists, then this is a Term Search page; else a Browse List -->
+        目录检索结果: 
+	  &nbsp;&nbsp;
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - e-Library Catalog Keyword search summary -->
+<!-- Print the search summary -->
+<strong>
+  所有字段
+    "zzz不存在书名qqq9527xyz"
+
+
+
+
+
+
+
+</strong>
+  </h3>
+ </div>
+
+
+				  </li>
+            <li><strong>没找到所需文献--也许下面的清单对你有帮助</strong></li>
+					<li>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Generates the browse list from the "LB" list in the response. -->
+<!-- Loop through the hits, printing each -->
+<div class="searchsummary">
+&nbsp;
+</div>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #1">Browse Results #1</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				1.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=nra19KOHIO/甘肃馆/65380325/8/2698139/ZZ126.1">ZZ126.1</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #2">Browse Results #2</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				2.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=6SIM8T0JXx/甘肃馆/65380325/8/419412/Z%E5%8F%98%E6%8D%A2">Z变换</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				2
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #3">Browse Results #3</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				3.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=BsgyXBTv4G/甘肃馆/65380325/8/434587/%EF%BC%BA%E5%8F%98%E6%8D%A2">Ｚ变换</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #4">Browse Results #4</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				4.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=wl9zDENb08/甘肃馆/65380325/8/419635/Z%E5%8F%98%E6%8D%A2+%E8%A7%A3%E9%A2%98+%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1">Z变换 解题 高等学校</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #5">Browse Results #5</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				5.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=9jctpA9rF8/甘肃馆/65380325/8/2612363/z%E5%BD%93%E4%BB%A3+%E6%96%87%E5%AD%A6+%E4%BD%9C%E5%93%81%E9%9B%86+%E4%B8%AD%E5%9B%BD">z当代 文学 作品集 中国</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #6">Browse Results #6</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				6.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=2iD60q0iXa/甘肃馆/65380325/8/1619608/z%E5%8F%A4%E4%BB%8A+%E5%BB%B6%E5%AE%89%E5%B8%82+%E5%9C%B0%E6%96%B9%E5%BF%97">z古今 延安市 地方志</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #7">Browse Results #7</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				7.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=OnPmQsqfLG/甘肃馆/65380325/8/1563944/z%E5%8F%A4%E2%80%94%E2%80%94%E4%BB%8A+%E8%80%80%E5%8E%BF+%E5%9C%B0%E5%90%8D%E5%BF%97">z古——今 耀县 地名志</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #8">Browse Results #8</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				8.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=LS4HXkP7HD/甘肃馆/65380325/8/1567556/z%E5%8F%A4%E2%80%94%E6%B8%85+%E7%8E%8B%E5%BB%B7%E5%BC%BC+%E6%B8%85+%E5%9C%B0%E6%96%B9%E5%BF%97+%E9%99%95%E8%A5%BF">z古—清 王廷弼 清 地方志 陕西</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #9">Browse Results #9</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				9.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=2wVbhAUUQM/甘肃馆/65380325/8/1381314/z%E6%8A%80%E6%9C%AF%E6%95%99%E8%82%B2+%E6%95%99%E6%9D%90+%E5%B1%A5%E5%B8%A6%E5%BC%8F%E6%8B%96%E6%8B%89%E6%9C%BA">z技术教育 教材 履带式拖拉机</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #10">Browse Results #10</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				10.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=kpYhPzDyj0/甘肃馆/65380325/8/886923/Z%E7%90%86%E8%AE%BA">Z理论</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #11">Browse Results #11</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				11.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=yTWiHiPmQ3/甘肃馆/65380325/8/1564635/z%E6%B0%91%E5%9B%BD+%E7%94%98%E8%82%83+%E5%8E%86%E5%8F%B2%E4%BA%8B%E4%BB%B6">z民国 甘肃 历史事件</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row even_row">
+  <li>	<h4 title="Browse Result #12">Browse Results #12</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				12.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=qnQ6gr0bgm/甘肃馆/65380325/8/1608300/z%E6%B0%91%E5%9B%BD+%E6%BC%B3%E5%8E%BF+%E6%B0%B4%E5%88%A9%E5%B7%A5%E7%A8%8B%E8%AE%A1%E5%88%92%E4%B9%A6+%E7%94%98%E8%82%83">z民国 漳县 水利工程计划书 甘肃</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+	
+   <!-- num docs - browse hit -->
+ <ul class="hit_list_row odd_row">
+  <li>	<h4 title="Browse Result #13">Browse Results #13</h4></li>
+	<li class="hit_list_row_left">
+		<ul>
+			<li class="hit_list_number">
+				13.
+			</li>
+		</ul>
+	</li>
+	<li class="hit_list_item_info">
+		<dl>
+			<dt class="browse_result_link_label">Results for this Hit</dt>
+			<dd class="browse_result_link">
+				
+					<a href="/uhtbin/cgisirsi/?ps=jJAMLpEDJe/甘肃馆/65380325/8/1618489/z%E6%98%8E+%E6%BE%84%E5%9F%8E%E5%8E%BF+%E5%9C%B0%E6%96%B9%E5%BF%97">z明 澄城县 地方志</a>
+				
+			</dd>
+       <dt class="results_number_label">Number of Headings for this Hit</dt>
+			<dd class="results_number">
+				1
+			</dd>
+		</dl>
+	</li>
+</ul>
+
+<div class="searchsum_container_bottom">
+&nbsp;
+</div>
+
+
+					</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="column pct25 right_column">
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Unicorn Other Searches -->
+
+<!-- when search field is not blank, assign term to ENGINE_TERM -->
+
+  <div class="content_container">
+    <div class="content">
+        <h3>延伸查询</h3>
+        <ul class="info_desk">
+          <li><a class="itemservices_link" href="/uhtbin/cgisirsi/?ps=UVjGGM1fhR/甘肃馆/65380325/115/0/ZBROADCAST_GROUP">其它图书馆</a></li>
+            <li><a class="itemservices_link" href="/uhtbin/cgisirsi/?ps=S7Iqujmpjk/甘肃馆/65380325/88?searchdata1=zzz%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%B9%A6%E5%90%8Dqqq9527xyz&S_ICON^GENERAL^SUBJECT^GENERAL^^%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5.x=1&search_type=sitesource"></a></li>
+          <li><a class="itemservices_link" href="javascript:open_win('http://www.google.com/search?q=zzz不存在书名qqq9527xyz&safe=vss&vss=1&sa=Google+Search')">Google</a></li>
+      </ul>
+    </div>
+  </div>
+      <div class="content_container library_info">
+        <div class="content">
+          <h3>图书馆公告</h3>
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Announcements/Activity - This page file is processed by a  SIRSI_Command for an Si response. -->
+
+
+  <ul class="info_desk">
+  
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=NQGA7YTH8W/甘肃馆/65380325/28/473/X?gateway_name=ILINK">新书入库</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=4baGBePAjb/甘肃馆/65380325/28/242/X?gateway_name=ILINK">新书导读</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="/uhtbin/cgisirsi/?ps=k0lYUOg5c0/甘肃馆/65380325/28/32/X?gateway_name=ILINK">新书预告</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	
+        <li><a href="javascript:open_win('http://www.gslib.com.cn/zddh/shijian.htm')">开馆时间</a></li>
+      
+	  <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+    
+	  <!-- counter is more than 5 -->
+	  
+      <!-- counter test -->
+    
+   
+   
+     <li><a href="/uhtbin/cgisirsi/?ps=YelpvwPl0A/甘肃馆/65380325/122/2004" style="color: #888888">更多信息</a></li>
+   
+   </ul>
+
+   
+        </div>
+      </div>
+  </div>
+  </form>
+</div>
+<div class="bottom_buttons">  
+<!--  Copyright (c) 2000 - 2010, SirsiDynix - Buttons for Browse List and Term Search page -->
+<div class="secondary_header_menu_container">
+  <h2>Contextual Navigation Menu</h2>
+  <ul class="menu">
+    <li class="menu_link">
+      <!-- Go back button --><a href="/uhtbin/cgisirsi/?ps=b7pkHhKB8J/甘肃馆/65380325/2/6" title="返回">返回</a>
+    </li>
+    <!--
+    <li class="menu_link">
+      <a href="/uhtbin/cgisirsi/?ps=x60oWjGLpR/甘肃馆/65380325/2/6" title="返回" alt="返回">GO BACK</a>
+    </li>
+     -->
+<li class="menu_link">
+  <!-- Help button -->
+  <script language="javascript" type="text/javascript">
+    //<![CDATA[
+    put_help_button('Chinese','说明','browse_list');
+    //]]>
+  </script>
+</li>
+
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=xnyrQ1Xgtv/甘肃馆/65380325/49" title="新的检索">新的检索</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=c08iLA11EX/甘肃馆/65380325/7/B" title="后退">后退</a></li>
+	
+  <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=9fnwCd1ouK/甘肃馆/65380325/7/F" title="向前">向前</a></li>
+
+  <!-- gateway's custom buttons -->
+
+    <li class="menu_link"><a href="/uhtbin/cgisirsi/?ps=v27YTBJiDk/甘肃馆/65380325/163" title="退出登录" target="_top">退出登录</a></li>
+    <li class="menu_link"><a name="skipnav"></a></li>
+  </ul>
+</div>
+</div>
+
+
+<div class="footer_container">
+  <!--  Copyright (c) 1996 - 2014, SirsiDynix - Copyright statement -->
+  <table border="0" cellpadding="3" cellspacing="0" width="100%" class="footer">
+   <tr>
+    <td align="left" valign="bottom" width="25%" class="footer">
+        <img src="/WebCat_Images/Chinese/Other/Miscil/sirsi_button.gif" alt="Powered by: SirsiDynix" border="0"/>
+    </td>
+      <td align="center" class="footer">
+        检索图书馆馆藏目录在：&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=UNKN">Facebook</a>&nbsp;或在你的&nbsp;<a href="http://users.sirsidynix.com?client=eLib&sitecode=UNKN">智能手机</a>!
+      </td>
+    <td align="right" class="footer" width="25%" id="requiredCell"><!-- Display the description -->
+      <a name="bottom" href="#top">TOP</a>
+      <div id="feature">
+        <div id="required"></div>
+      </div>
+    </td>
+   </tr>
+  </table>
+</div>
+
+  <script language="JavaScript" type="text/javascript">
+    setLocalizedValue("PERMALINK","固定链接");
+    setLocalizedValue("TO_LINK","可从email,博客或其它网页中用以下的链接连接到当前的馆藏,列表,检索结果或页面.");
+    setLocalizedValue("CLOSE","关闭");
+    setLocalizedValue("PAGE_LINK","页面链接");
+    setLocalizedValue("NEW_TAB","在新选项卡中打开链接 ");
+  </script>
+
+</body>
+</html>
+
+

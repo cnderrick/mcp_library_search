@@ -194,6 +194,23 @@
 - 现有大连 `adapters/cn/dalian.py` 是**独立实现**（`/uhtbin/cgisirsi/`，ps token 会话，
   类重庆流程，节流 ≥4 秒/host），暂无 `ilink/` 共享家族。甘肃三城（省图/陇南/甘南）
   若实测同构，按家族先例抽 `ilink/` 模块，再让三城薄包装——**先侦察再决定是否抽象**。
+- **回填（2026-10-03 第十一批：甘肃省图 `gansu_prov`／陇南 `longnan`／甘南 `gannan`）**：
+  - **已抽 `ilink/` 家族**（`client.py`/`parser.py`/`__init__.py` ＋ `IlinkConfig`）。
+    三城共用甘肃省图同一实例 `search.gslib.com.cn`，检索/详情/馆藏页与大连同构，差别
+    只有检索表单 `library` 馆别码 → 用 `IlinkConfig.library_code` 承载（省馆 `甘肃馆`、
+    陇南 `陇南馆`、甘南 `甘南馆`）。大连保持独立实现不并入。
+  - **入口**：`GET /uhtbin/cgisirsi/x/x/0/49/` 返回「快速检索」首页（表列入口
+    `/uhtbin/cgisirsi/`；适配器统一打前者）。`searchform` action 形如
+    `?ps={token}/甘肃馆/{seq}/123`；`ps` token 每响应变，逐步解析、同 CookieJar。
+  - **馆藏表结构差异（甘肃变体）**：馆藏表**无 `id="display_holdings_table"`**，
+    不能照大连按表 id 锚定；家族改为全页扫描 `td.holdingslist` 数据行、以单枚
+    `th.holdingsheader[align=left]` 分馆表头分组（列头行有多枚 th）。后续复本索书号格
+    为 `&nbsp;`，需按分馆沿用上一行索书号（大连实现会据空值丢弃这些行）。
+  - **检索语义同大连**：一律按 ASCII 双引号短语下发；实抓 `"三体"` 省馆 101 条、
+    陇南 4 条、甘南 3 条，每页固定 20 条。
+  - 可借口径同大连：`copy_info` 含「在架上」才 True；「馆藏于」等保守 False、状态原值
+    照登；馆藏到索书号级，`item_id`/`due_date` 恒空串。
+  - 新增同族城市直接带已知 `library_code` 下发，parser 无需再动。
 
 ### 3.9 未知系统（待侦）
 
@@ -306,13 +323,13 @@
 | 铜川 | 铜川市图书馆 | `tongchuan` | 入口即陕图省馆平台 `https://uilas.sxlib.org.cn/#/index`；铜川专有检索入口待确认，若为租户则并入 `shaanxi` |
 | 商洛 | 商洛市图书馆 | `shangluo` | 同上；若为租户则并入 `shaanxi` |
 
-### 4.9 SirsiDynix iLink（3 城，先侦察再决定是否抽家族）
+### 4.9 SirsiDynix iLink（3 城，已抽 `ilink/` 家族）
 
-| 城市 | 馆名 | 标识 | 入口 |
-|---|---|---|---|
-| 甘肃省图 | 甘肃省图书馆 | `gansu_prov` | http://search.gslib.com.cn/uhtbin/cgisirsi/ （仅查馆别＝省馆） |
-| 陇南 | 陇南市图书馆 | `longnan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 |
-| 甘南 | 甘南州图书馆 | `gannan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 |
+| 城市 | 馆名 | 标识 | 入口 | 实抓／quirk 结论（2026-10-03 回填） |
+|---|---|---|---|---|
+| 甘肃省图 | 甘肃省图书馆 | `gansu_prov` | http://search.gslib.com.cn/uhtbin/cgisirsi/ （仅查馆别＝省馆） | ✅「三体」101 条；`ilink/` 家族，`library_code="甘肃馆"`，入口 `/uhtbin/cgisirsi/x/x/0/49/` |
+| 陇南 | 陇南市图书馆 | `longnan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 | ✅「三体」4 条；同家族，`library_code="陇南馆"` |
+| 甘南 | 甘南州图书馆 | `gannan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 | ✅「三体」3 条；同家族，`library_code="甘南馆"` |
 
 ### 4.10 MetaLSP 发现系统（1 城）
 

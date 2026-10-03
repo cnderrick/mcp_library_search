@@ -131,6 +131,11 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
      tcc-opac 纯 JSON 访客令牌，馆藏到单册级）、hengyang（衡阳市图书馆，InDigLib
      集群数字图书馆，馆藏到单册级；默认题名检索、源站无明确「可借」状态词，
      全部保守按不可借展示，状态原值照登）。
+     第十一批（SirsiDynix iLink 家族，抽出 ilink/ 共享模块）：gansu_prov
+     （甘肃省图书馆，仅查省馆馆别）、longnan（陇南市图书馆，借省图实例按馆别过滤）、
+     gannan（甘南州图书馆，借省图实例按馆别过滤）；三站馆藏到索书号级、匿名视图
+     无单册条码与应还日期（due_date 恒空串），无明确「在架」词时全部保守按不可借
+     展示、状态原值照登。
      其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
