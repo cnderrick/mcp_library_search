@@ -1,0 +1,3684 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/main.css;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></link>
+		
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery-1.6.2.min.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/highcharts.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/highcharts-2.1.6/themes/grid.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/common/common.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/common/bookcover.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/common/banned.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<!--[if IE 6]>
+		<script type="text/javascript" src="/opac/media/js/jquery/DD_belatedPNG.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript">
+			 DD_belatedPNG.fix('li');
+			 DD_belatedPNG.fix('#searchDiv .inputs .left');
+			 DD_belatedPNG.fix('.logoimg');
+		</script>
+		<![endif]-->
+		
+		
+			
+				<script type="text/javascript" src="/opac/media/js/i18n/message_zh.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+				<script type="text/javascript">
+				$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", "zh", {path:"/"});
+				</script>
+			
+			
+		
+		
+		<script type="text/javascript" src="/opac/media/js/common/charts.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<!-- 国际化支持 -->
+		<script type="text/javascript" src="/opac/media/js/common/i18nUtil.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<script type="text/javascript" src="/opac/media/js/common/space.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		
+		
+		<link rel="stylesheet" type="text/css" href="/opac/media/style/default/space.css;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" />
+		
+		<link rel="shortcut icon" href="/opac/media/images/favicon.ico;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" type="image/vnd.microsoft.icon" /> 
+		<link rel="icon" href="/opac/media/images/favicon.ico;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" type="image/vnd.microsoft.icon" /> 
+		<title>检索</title>
+		<!-- 使用jqueryui引用的js和css -->
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/opac/media/js/jquery-ui-1.8.16/css/smoothness/jquery-ui-1.8.16.custom.css;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></link>
+<script type="text/javascript" src="/opac/media/js/jquery-ui-1.8.16/js/jquery-ui-1.8.16.custom.min.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+		<!-- 书目浏览用到的tree的js和css -->
+		
+		<!-- meta keywords, etc -->
+		<meta name="referrer" content="same-origin" />
+		
+
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="opac, 图创, interlib, 图书检索, 借书, , 铜陵市图书馆" />
+
+	</head>
+	<body>
+		
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/opac/media/js/common/md5util.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688"></script>
+<style>
+<!--
+.selected {
+	font-weight: bold;
+}
+-->
+.n-model-wrapper{
+	width:100%;
+	height:100%;
+	background-color: black;
+	filter: alpha(Opacity=40);
+	-moz-opacity: 0.4;
+    opacity: 0.4;
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 999;
+	display: none;
+}
+.n-model-content{
+	width:800px;
+	height:600px;
+	background-color: white;
+	position: fixed;
+	left:40%;
+	top:150px;
+	margin-left:-250px;
+	z-index: 1000;
+	border-radius:10px;
+	font-size: 14px;
+	display: none;
+}
+.n-model-prompt{
+	height:560px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.n-model-prompt li{
+	line-height: 35px;
+	padding:0 30px;
+}
+.n-model-prompt h3 {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin: 0;
+    border-radius:10px;
+}
+.n-model-close{
+	height:40px;
+	text-align: center;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".navbar_menu_items ul li").hover(function(){
+			$(this).children("ul").slideDown(200);
+		},function(){
+			$(this).children("ul").slideUp(50);
+		});
+		
+		var lang = $.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", {path:"/"});
+		if(lang == 'en' || lang == 'ko' || lang == 'ja') {
+			$(".navbar_info_en").show();
+			$(".navbar_info_zh").css("display","none");
+			var maxLength = document.body.clientWidth;
+			var menuStr = 0;
+			
+				
+				 menuStr += "navigator.search.simpleSearch".length*4+24;
+				
+			
+				
+				 menuStr += "navigator.browse".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.space".length*4+24;
+				
+			
+				
+			
+				
+				 menuStr += "navigator.newpub".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.loanAnalysis".length*4+24;
+				
+			
+				
+			
+				
+			
+				
+				 menuStr += "navigator.recommend".length*4+24;
+				
+			
+				
+			
+			if(menuStr+320>maxLength){
+				$("#navbar").css("height","60px");
+				$("#navar_ul").css("float","none");
+			}
+		}
+		
+		
+		//发布转借
+	
+		//发布转借
+		
+		$("a#releaseUL").attr("href","javascript:void(0)").click(function(){
+			
+			var readerHomeUrl="";
+			var url="/opac/interface/readerHome/ReaderHomeLogin;jsessionid=3AD5944A92461AD8B51CBB53F84C9688";
+			$.ajax({
+				url:url,
+				async:false,
+				success:function(data){
+// 					alert(data);
+					if(data=="0"){
+						alert("请先登录");
+						window.location.href="/opac/reader/login;jsessionid=3AD5944A92461AD8B51CBB53F84C9688";
+						return ;
+					}
+					if(data=="500"){
+						alert("err500");
+						return;
+					}
+					readerHomeUrl=data;
+				}
+			});
+			if(readerHomeUrl!=""){
+				console.log("readerHomeUrl:"+readerHomeUrl);
+				$.ajax({
+			 	type : "GET",
+			 	url : readerHomeUrl,
+			 	dataType : 'jsonp',
+			 	jsonp : 'callback',
+			 	dataType : 'jsonp',
+			 	success : function(data) {
+			 		window.location.href=data;
+			 	}
+			});
+// 				window.open(readerHomeUrl,"_blank");	
+			}
+		});
+	});
+	
+	
+</script>
+<!-- 云南司法警官职业学院 -->
+
+
+
+
+
+<div id="navbar">
+	<div class="navbar_bd">
+		<div class="navbar_menu_items">
+			<div id="navar_ul" style="float: left;">
+			<ul>
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/index;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								检索
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/index/advance;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								高级检索
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/index/integration;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								集群检索
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/browse/cls;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								书目浏览
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/browse/cls;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								中图分类浏览
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/browse/sci;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								科图分类浏览
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/reader/space;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								我的图书馆
+							
+							
+							</a>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/newpub/cls;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								新书通报
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/newpub/cls;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								中图分类查看
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/newpub/sci;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								科图分类查看
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/ranking/bookLoanRank;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								借阅分析
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/ranking/bookLoanRank;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								图书借阅排行榜
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/ranking/bookHotRank;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								热门图书排行榜
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/ranking/readerLoanRank;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								读者借阅排行榜
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<li class="f">
+					
+						
+						
+						
+						
+						
+							<a href="/opac/recommend/getAllHistoryRecommendList;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+							
+							
+							
+							
+								图书荐购
+							
+							
+							</a>
+						
+						<ul>
+						
+						
+						<li>
+							<a href="/opac/recommend/getAllHistoryRecommendList;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								历史荐购
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/recommend/custom;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								读者荐购
+								
+								
+							</a>
+						</li>
+						
+						
+						
+						<li>
+							<a href="/opac/recommend/recommendBookList/list;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+								<!-- 这里处理下，当没有key时使用name（方便动态加载） -->
+								
+								征订书目
+								
+								
+							</a>
+						</li>
+						
+						
+						</ul>
+						
+					
+					
+					
+				</li>
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- 湖南大学图书馆需显示个人首页的菜单链接 -->
+				
+				
+				
+				
+				
+				<!-- 广州少儿图书馆增加一个图书预约链接跳转到云书馆并自动登入 -->
+				
+				
+				<!-- 开始是给广少图用的东西 -->
+				
+				
+				<!-- 广少图玩具 -->
+				
+			</ul>
+			</div>
+			<div class="navbar_info_en" style="display: none;">
+			<!-- 
+			<img src="/opac/media/images/lang.png;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="enlang" onchange="enchangeLang()">
+				
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+	</div>
+		<!-- zh -->
+		<div class="navbar_info_zh">
+			<!-- 
+			<img src="/opac/media/images/lang.png;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="lang"/>
+			 -->
+			
+			语言:
+			
+			<select name="lang" id="zhlang" onchange="zhchangeLang()">
+				
+				<option value="zh">中文</option>
+				
+				
+				
+				
+				
+				
+			</select>
+			
+			
+				<span id="readerLogin"><a  href="/opac/reader/login;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">登录</a></span>
+			
+			
+			
+			<!--a href="">帮助</a-->
+		</div>
+		</div>
+		
+</div>
+
+
+<div class="n-model-wrapper" onClick="toggleSearchHelp()"></div>
+<div class="n-model-content">
+	<div class="n-model-prompt">
+		
+			
+			
+				 
+			
+		
+	</div>
+	<div class="n-model-close">
+		<input class="ensubmit fbootstrap-button" type="button" value="知道了" onClick="toggleSearchHelp()"/>
+	</div>
+</div>
+
+		<!-- 
+		<div class="navbar_info">
+			
+			
+				
+					<a href="/opac/reader/login;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">登录</a>
+				
+				
+			
+			<a href="">帮助</a>
+		</div>
+	</div>
+	 -->
+<script type="text/javascript">
+$(function() {
+	var lang = $.cookie(
+		"org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", 
+		{path:"/"});
+	if(lang == null || lang == undefined || lang == '') {
+		lang = "zh";
+	}
+	$("#enlang").val(lang);
+	$("#zhlang").val(lang);
+});
+function enchangeLang() {
+	var lang = $("#enlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+function zhchangeLang() {
+	var lang = $("#zhlang").val();
+	/**
+	var currentURL = document.location.href;
+	var langParam = "&lang=" + lang;
+	if(currentURL.indexOf("?") < 0) {
+		langParam = "?lang=" + lang;
+	}
+	document.location.href = currentURL + langParam;
+	*/
+	$.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE", lang, {path:"/"});
+	document.location.reload();
+}
+
+
+function toggleSearchHelp(){
+	$(".n-model-wrapper").toggle();
+	$(".n-model-content").slideToggle();
+}
+</script>
+		<div id="wrapper">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_header">
+	<div id="page_nav">
+		<!-- 
+		<div class="logo">
+			<a href="/opac/index;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">
+				<img src="/opac/media/images/logo.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" />
+			</a>
+		</div>
+		 -->
+	</div>
+</div>
+			<div id="page_content">
+				
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+<script type="text/javascript">
+
+var cookieFlag = false;
+$(document).ready(function(){
+	document.onkeydown = dynamicAddRecnoSelectOption;
+	
+});
+
+function dynamicAddRecnoSelectOption(e){
+	e = e || window.event;
+	if(e.keyCode==188&&e.ctrlKey&&e.shiftKey){
+		$("#opacConfouternet").show();
+	}
+
+	if(e.keyCode==190&&e.ctrlKey&&e.shiftKey){ 
+		$("#localConfig").show();   
+	}
+	
+	if(e.keyCode==186&&e.ctrlKey){
+		$("#opacConfSetTable").show();
+	}
+}
+$(function(){
+	if($.cookie("libnameset") == "true"){
+		$("input:checkbox[name='curlibcode']").each(function(i){
+			//var tmpText = $.trim($(this).val());
+			if($(this).attr("value") == $.cookie("showLibcode")){
+				$(this).attr("checked", "checked");
+				cookieFlag = true;
+			}
+		});
+	}
+});
+
+
+
+<!--
+$(function(){
+	$("#q").focus();
+});
+
+$(function(){
+	if($.cookie("configouternet") == "false"){
+		$("#Conouternet").attr("checked", "checked");
+	}
+});
+function configouternet(){
+	var expireTime = 3650;
+	if($("#Conouternet").attr("checked") == "checked"){
+		$.cookie("configouternet", "false", {expires:expireTime, path:'/'});
+	}else{
+		$.cookie("configouternet", "true", {expires:expireTime, path:'/'});
+	}
+}
+
+//点击显示分馆等选择后重新设置高度
+function setHeight(){
+	$("#page_footer").height(20);
+	$("#page_footer").css("top",$("#searchDiv").height() + $("#navbar").height() + $("#searchTips").height());
+}
+
+function selectAllLibcodes(obj) {
+	if(obj.checked) {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", true);
+	} else {
+		$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+	}
+}
+function showMoreOptions() {
+	var searchDivHidden = $("#searchDivHidden");
+	if(searchDivHidden.css("display") == "none") {
+		searchDivHidden.show("slow");
+	} else {
+		searchDivHidden.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showLibraries() {
+	var libraries = $("#libraries");
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function showBookTypes() {
+	var libraries = $("#bookTypesHidden");
+	if(libraries.css("display") == "none") {
+		libraries.show("slow");
+	} else {
+		libraries.hide("slow");
+	}
+	displayRememberMe();
+	setTimeout(setHeight,1000);
+}
+function searchByHotKeyword(hotSearchKeyword) {
+	$("#q").val(hotSearchKeyword);
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}
+    
+	$("#searchForm").submit();
+}
+function search(view) {
+	$("#view").val(view);
+	var total = $('input:checkbox[name="curlibcode"]').size();
+	var checkNum = $('input:checkbox[name="curlibcode"]:checked').size();
+	if($("#rememberMe").attr("checked")=="checked"){
+		rememberMe();
+	}  
+	if(total == checkNum){
+		$("#libcodeTable input[name='curlibcode']").attr("checked", false);
+	}else{
+		if(checkNum>50){
+			alert("所选分馆不能超过50个");
+			return;
+		}
+	}
+	var qword = $("#q").val();
+	if(qword!=""&&bannedHashSet.contains(qword)){
+ 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+ 	   return;
+    }
+
+	
+	$("#searchForm").submit();
+}
+
+function gotoAdvancedSearch() {
+	document.location.href = '/opac/index/advance;jsessionid=3AD5944A92461AD8B51CBB53F84C9688';
+}
+
+
+function displayRememberMe(){
+	var searchDivHidden = $("#searchDivHidden");
+	var libraries = $("#libraries");
+	var bookTypes = $("#bookTypesHidden");
+	var rememberMe = $("#remember");
+	if(libraries.is(":hidden")&& bookTypes.is(":hidden")&& searchDivHidden.is(":hidden")) {
+		rememberMe.hide("slow");
+	}else{
+		rememberMe.show("slow");
+	}
+}
+
+function rememberMe(){
+     
+	var searchWay = $('select[name=searchWay]').val();
+	var booktype = $('input:radio[name="booktype"]:checked').val();
+	var marcformat = $('input:radio[name="marcformat"]:checked').val();
+	var scWay = $('input:radio[name="scWay"]:checked').val();
+	var sortWay = $('select[name=sortWay]').val();
+	var sortOrder = $('select[name=sortOrder]').val();
+	var startPubdate = $('select[name=startPubdate]').val();
+	var endPubdate = $('select[name=endPubdate]').val();
+	var rows = $('select[name=rows]').val();
+	var hasholding = $('input:checkbox[name="hasholding"]:checked').val();
+	var curlibcode = $('input:checkbox[name="curlibcode"]:checked');
+	var libCodeValue=";";
+
+    for(var i =0 ;i<curlibcode.length;i++){
+    	libCodeValue = libCodeValue+curlibcode[i].value+";";
+    }
+	setCookie("searchWay",searchWay);
+	setCookie("booktype",booktype);
+	setCookie("marcformat",marcformat);
+	setCookie("scWay",scWay);
+	setCookie("sortWay",sortWay);
+	setCookie("sortOrder",sortOrder);
+	setCookie("startPubdate",startPubdate);
+	setCookie("endPubdate",endPubdate);
+	setCookie("rows",rows);
+	setCookie("hasholding",hasholding);
+// 	setCookie("curlibcode",libCodeValue);
+	$.cookie("showLibcode", libCodeValue, {expires:7,path:'/'});
+}
+
+function setCookie(cookieName,cookieValue){
+	$.cookie(cookieName,cookieValue,{ expires: 7, path: '/' });
+}
+function localLimit(){
+	setCookie("localConfig",$('input:radio[name="curlocal"]:checked').val());
+}
+function readCookies(){
+	var searchWay =$.cookie("searchWay");
+	var booktype =$.cookie("booktype");
+	var marcformat =$.cookie("marcformat");
+	var scWay =$.cookie("scWay");
+	var sortWay =$.cookie("sortWay");
+	var sortOrder =$.cookie("sortOrder");
+	var startPubdate =$.cookie("startPubdate");
+	var endPubdate =$.cookie("endPubdate");
+	var rows =$.cookie("rows");
+	var hasholding =$.cookie("hasholding");
+	var curlibcode =$.cookie("showLibcode");
+	var curlocalconfig = $.cookie("localConfig");
+	var showlocalname = "";
+	var localcode = "";
+	var showLocal = $.cookie("showLocal");
+	if(localcode!=""){
+		showLocal = localcode;
+		$.cookie("localConfig", localcode, {expires:3650, path:'/'});
+		$.cookie("showLocal", localcode, {expires:3650, path:'/'});
+		//设置分馆名称
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibcode", localcode, {expires:3650, path:'/'});
+		if(showlocalname==""){
+			var libname = "";
+			if(""!=""){
+				libname = $('input:checkbox[name="curlibcode"][value=""]').parent().text();
+			}else{
+				libname = $("#content .libName").text();
+			}
+			showlocalname = libname+" - "+
+			$('input:checkbox[name="curlocal"][value="'+localcode+'"]').parent().text();
+		}
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	if(showlocalname!=""){
+		$.cookie("libnameset", "true", {expires:3650, path:'/'});
+		$.cookie("showLibname", showlocalname, {expires:3650, path:'/'});
+	}
+	if(showLocal!=null&&showLocal!=""||localcode!=""){ 
+		var checker = "";
+		if(localcode!=""||curlocalconfig != null && curlocalconfig != ""&&showLocal==$.cookie("localConfig")){
+			checker = 'checked="checked"';
+		}else{
+			selElement($('input:radio[name="curlocal"]'),"","radio");
+		}
+		$("#limitlocal").append(
+				'<input type="radio" name="curlocal" onchange="localLimit()" value="'+showLocal+'" '+checker+' />'
+				+$("#cCurlocal_"+showLocal).parent().text());
+		$("#localLimit").show();
+	} 
+	selElement($('select[name=searchWay] option'),searchWay,"select");
+	selElement($('input:radio[name="booktype"]'),booktype,"radio");
+	selElement($('input:radio[name="marcformat"]'),marcformat,"radio");
+	selElement($('input:radio[name="scWay"]'),scWay,"radio");
+	selElement($('select[name=sortWay] option'),sortWay,"select");
+	selElement($('select[name=sortOrder] option'),sortOrder,"select");
+	selElement($('select[name=startPubdate] option'),startPubdate,"select");
+	selElement($('select[name=endPubdate] option'),endPubdate,"select");
+	selElement($('select[name=rows] option'),rows,"select");
+	selElement($('input:checkbox[name="hasholding"]'),hasholding,"checkbox");
+	
+	var clc = $('input:checkbox[name="curlibcode"]');
+	if(curlibcode!=null&&curlibcode!=";"){
+		for(var i = 0 ; i<clc.length;i++){
+			if(curlibcode.indexOf(clc[i].value)> 0 ){
+				clc[i].checked=true;
+				cookieFlag = true;
+			}
+		}
+	}
+	
+	if(!cookieFlag){
+		var lib = "";
+		if(lib!=""){
+			var flag = true;
+			for(var i = 0 ; i<clc.length;i++){
+				if(lib.indexOf(clc[i].value)!=-1 ){
+					clc[i].checked=true;
+					cookieFlag = true;
+					if(flag){
+						$.cookie("libnameset", "true", {expires:3650, path:'/'});
+						$.cookie("showLibcode", clc[i].value, {expires:3650, path:'/'});
+						$.cookie("showLibname", clc[i].nextSibling.nodeValue, {expires:3650, path:'/'});
+						flag = false;
+					}
+				}
+			}
+		}else{
+			
+		}
+
+	}
+}
+
+function selElement(obj,value,type){
+	
+	for(var i = 0 ;i<obj.length;i++){
+		
+		if(obj[i].value==value){
+			if(type=="select"){
+				obj[i].selected =true;
+			}else{
+				obj[i].checked=true;
+			}
+			break;
+		}
+	}
+
+}
+
+$(function(){
+	
+	return;
+	
+	$("#q").autocomplete({
+		source: '/opac/hotsearch/suggest;jsessionid=3AD5944A92461AD8B51CBB53F84C9688',
+		focus: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			return false;
+		},
+		select: function(event, ui) {
+			$("#q").val(ui.item.searchKey);
+			search("");
+			return false;
+		}
+	}).data("autocomplete")._renderItem = function(ul, item) {
+		return $("<li style='position:relative;font-size:12px;'></li>").data("item.autocomplete", item)
+			.append("<a>" + 
+						"" + item.searchKey + "" + 
+						"<cite style='position:absolute;right:10px;top:2px;color:#888;'>" + "检索次数" + ": " + 
+							item.count + 
+						"</cite>" + 
+					"</a>")
+			.appendTo(ul);
+	};
+});
+$(function() {
+	$("#searchForm select[name='searchWay']").bind("change", function(e) {
+		if($(this).val() == "callno") {
+			$("#searchForm select[name='sortWay']").val("callno_sort");
+			$("#searchForm select[name='sortOrder']").val("asc");
+		}
+	});
+	
+	$("#localConfig input[name='curlocal']").bind("change", function(e) {
+		var expireTime = 3650;
+		if($(this).attr("checked") == 'checked'){
+			$("#tabs-4 input[type='checkbox']").attr("checked",false); 
+			$(this).attr("checked",true);              
+		}else{
+			$(this).attr("checked",false);   
+		}  
+		var curlocals = $('input:checkbox[name="curlocal"]:checked');
+		var value = "";   
+		if(curlocals.length < 1){
+			$.cookie("localConfig", "", {expires:expireTime, path:'/'});
+		}else{        
+			$(curlocals.each(function(i){
+				value += ","+$(this).val();           
+			}));             
+			value = value.substring(1, value.length);  
+		}           
+		$.cookie("localConfig", value, {expires:expireTime, path:'/'});
+	});
+});
+$(document).ready(function(){
+	$("select[name='sortWay']").val("score");
+});
+
+//-->
+</script>
+
+
+	
+		<script type="text/javascript" src="/opac/media/js/custominfo/search_zh.js;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" ></script>
+	
+	
+
+<script type="text/javascript">
+//从JS文件中直接取得检索提示信息
+$(document).ready(function(){
+// 	var tips = "";
+// 	for (var i = 0; i < searchTips.length; i ++) {
+// 		tips += searchTips[i];
+// 	}
+// 	$("#searchTips ol").append(tips);
+// 	$("#searchTitle").html(searchTitle);
+	if("1" == "1")
+	{
+		$("#searchForm select[name='searchWay']").val("title");
+	}
+	readCookies();
+});
+$(function() {
+	var libnameset = $.cookie("libnameset");
+	var showLibcode = $.cookie("showLibcode");
+	var showLibname = $.cookie("showLibname");
+	if(libnameset == "true" && showLibcode != "" && showLibname != "") {
+		$("#content .libName").html(showLibname);
+	}
+});
+
+function eBookSearch(){
+	var value = $("#q").val();
+	
+	//敏感词汇
+	if(bannedHashSet.contains(value)){
+	 	   alert("您的检索词中包含不当词汇，请更换或删除敏感词");
+	 	   return;
+	}
+	
+	if(""==value){
+		 alert("请输入检索词");
+	 	 return;
+	}
+	
+	var searchAddress = "" ;
+	
+	//http://sso.cdclib.org/ifs/search 测试
+	window.location.href=searchAddress+"?autoSubmit=true&resourceGroupName=全部资源&searchValue="+value;
+}
+
+	if ("0" == '1') {
+		$(function(){
+			var timer;	//定时切换显示第一条
+		    var scroll = function(){
+		    	timer = setInterval(function(){
+		    		if($("#marqueeContext li").length <= 1){	//数量太少不做循环
+		    			 return;
+		    		}
+		    		$("#marqueeContext li").css("display","none");
+		    		$("#marqueeContext").append($("#marqueeContext li:first"));
+		    		$("#marqueeContext li:first").fadeIn(100);
+		    		$("#marqueeContext li:first").css("display","block");
+		    	},2000);
+		    }
+			/* 
+			var url = "/opac/ranking/bookHotRank/json";
+			$.get(url,'',function(data){
+				var urlContent = "";
+				for (var i = 0; i < data.length; i++) {
+					var bookLink = "/opac/book/"+data[i].biblios.bookrecno;
+					urlContent = urlContent + "<li style='display:none'><a target='_blank' href='"+bookLink+"'>"+data[i].biblios.title+"</li></a>";
+					if(i >= 10){	//10条之内就算啦
+						break;
+					}
+				}
+				$("#marqueeContext").html(urlContent); 
+				*/
+
+			//第一条显示
+		    $("#marqueeContext li:first").css("display","block");
+		    scroll();
+		    
+		    $("#marqueeContext li").mouseover(function(){
+		    	clearInterval(timer);
+		    });
+		    $("#marqueeContext li").mouseout(function(){
+		    	scroll();
+		    });
+		});
+	}
+
+</script>
+
+<div id="content">
+	<div class="libName">
+		铜陵市图书馆
+	</div>
+	<div id="searchDiv">
+	<form name="searchForm" id="searchForm" action="search" method="get">
+		<div>
+			<!--检索途径:-->
+			<select name="searchWay" class="search_select search_width">
+				<option value="" selected="selected">任意词</option>
+				<option value="title">题名</option>
+				<option value="title200a">正题名</option>
+				<option value="isbn">ISBN/ISSN</option>
+				<option value="author">著者</option>
+				<option value="subject">主题词</option>
+				<option value="class">分类号</option>
+				<option value="ctrlno">控制号</option>
+				<option value="orderno">订购号</option>
+				<option value="publisher">出版社</option>
+				<option value="callno">索书号</option>
+			</select>
+			<!--检索词:-->
+			<div class="search_input search_input_width" ><input type="text" id="q" name="q" onkeydown="if(event.keyCode==13)search('');" placeholder=""/></div>
+
+			
+				<input type="button" class="search_button" name="searchButton" value="检索" onclick="search('')" />
+			
+			<!-- 如果显示集群检索菜单，则不显示高级检索按钮，而显示集群检索按钮 -->
+			
+				   
+					
+						
+						
+						
+						
+							
+								
+									
+									
+									
+										<input type="button" class="advance_search_button" name="searchButton2" value="集群检索" onclick="search('integration')" />
+									
+									<input type="hidden" id="view" name="view" value="" />
+								
+								
+							
+						
+						
+					
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+				   
+					
+				
+			
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+				
+			
+				   
+					
+						
+						
+						
+						
+						
+						
+						
+					
+				
+			
+				
+			
+					
+			<input type="hidden" name="searchSource" value="reader" />
+		</div>
+		
+		<div class="hot">
+			热门词:
+			
+				<a href="javascript:searchByHotKeyword('法医秦明')">
+				法医秦明
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('伪装学渣')">
+				伪装学渣
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('龙族')">
+				龙族
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('活着')">
+				活着
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('白夜行')">
+				白夜行
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('我不是戏神')">
+				我不是戏神
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('坦克')">
+				坦克
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('一句顶一万句')">
+				一句顶一万句
+				</a>|
+			
+				<a href="javascript:searchByHotKeyword('非人哉')">
+				非人哉
+				</a>|
+			
+			<a href="/opac/hotsearch;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">更多..</a>
+		</div>
+		
+
+		
+		
+		<div class="search_more">
+		<a href="javascript:showBookTypes()">显示文献类型</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="javascript:showMoreOptions()">显示更多选项</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="javascript:showLibraries()">
+		
+			
+			
+				限定分馆检索
+			
+		
+		</a>
+		</div>
+		<div class="booktypes" id="bookTypesHidden" style="display:none;">
+			<!--文献类型:-->
+			
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='1' />
+				<img src="/opac/booktypeicon/1;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/1.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" /-->
+				图书
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='2' />
+				<img src="/opac/booktypeicon/2;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/2.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" /-->
+				期刊
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='3' />
+				<img src="/opac/booktypeicon/3;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/3.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" /-->
+				非书资料
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='4' />
+				<img src="/opac/booktypeicon/4;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/4.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" /-->
+				古籍
+				</label>
+				
+			
+				
+				
+				<label>
+				<input type="radio" name="booktype" value='5' />
+				<img src="/opac/booktypeicon/5;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" class="booktypeIcon" />
+				<!--img src="/opac/media/dynamic/booktype/5.gif;jsessionid=3AD5944A92461AD8B51CBB53F84C9688" /-->
+				玩具
+				</label>
+				
+			
+			<label>
+				<input type="radio" name="booktype" value="" checked="checked"/>
+				所有
+			</label>
+		</div>
+		
+		<div id="searchDivHidden"  class="search_hidden" style="display:none;">
+			<div>
+				检索方式:
+				<label>
+					<input type="radio" name="scWay" value="prefixMatch" />
+					前方一致
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="dim"  checked="checked"/>
+					模糊检索
+				</label>
+				<label>
+					<input type="radio" name="scWay" value="full" />
+					精确检索
+				</label>
+			</div>
+			
+			<div>
+				语言种类:
+				<label>
+					<input type="radio" name="marcformat" value="CNMARC" />
+					中文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="USMARC" />
+					西文
+				</label>
+				<label>
+					<input type="radio" name="marcformat" value="" checked="checked" />
+					全部
+				</label>
+			</div>
+			
+			<div class="search_hidden">
+				排序选项:
+				<select name="sortWay">
+					<option value="score" selected="selected" >匹配度</option>
+					<option value="pubdate_sort" >出版日期</option>
+					<option value="subject_sort" >主题词</option>
+					<option value="title_sort" >题名</option>
+					<option value="author_sort" >著者</option>
+					<option value="callno_sort" >索书号</option>
+					<option value="pinyin_sort" >题名拼音</option>
+					<option value="loannum_sort" >借阅次数</option>
+					<option value="renewnum_sort" >续借次数</option>
+					<option value="title200Weight" >题名权重</option>
+					<option value="title200aWeight" >正题名权重</option>
+					<option value="title200h" >卷册号</option>
+				</select>
+				排序方式:
+				<select name="sortOrder">
+					<option value="desc">降序排列</option>
+					<option value="asc">升序排列</option>
+				</select>
+				出版时间:
+				<select name="startPubdate">
+					<option value="" selected="selected">出版年</option>
+					
+					<option value="2026">2026</option>
+					
+					<option value="2025">2025</option>
+					
+					<option value="2024">2024</option>
+					
+					<option value="2023">2023</option>
+					
+					<option value="2022">2022</option>
+					
+					<option value="2021">2021</option>
+					
+					<option value="2020">2020</option>
+					
+					<option value="2019">2019</option>
+					
+					<option value="2018">2018</option>
+					
+					<option value="2017">2017</option>
+					
+					<option value="2016">2016</option>
+					
+					<option value="2015">2015</option>
+					
+					<option value="2014">2014</option>
+					
+					<option value="2013">2013</option>
+					
+					<option value="2012">2012</option>
+					
+					<option value="2011">2011</option>
+					
+					<option value="2010">2010</option>
+					
+					<option value="2009">2009</option>
+					
+					<option value="2008">2008</option>
+					
+					<option value="2007">2007</option>
+					
+					<option value="2006">2006</option>
+					
+					<option value="2005">2005</option>
+					
+					<option value="2004">2004</option>
+					
+					<option value="2003">2003</option>
+					
+					<option value="2002">2002</option>
+					
+					<option value="2001">2001</option>
+					
+					<option value="2000">2000</option>
+					
+					<option value="1999">1999</option>
+					
+					<option value="1998">1998</option>
+					
+					<option value="1997">1997</option>
+					
+					<option value="1996">1996</option>
+					
+					<option value="1995">1995</option>
+					
+					<option value="1994">1994</option>
+					
+					<option value="1993">1993</option>
+					
+					<option value="1992">1992</option>
+					
+					<option value="1991">1991</option>
+					
+					<option value="1990">1990</option>
+					
+					<option value="1989">1989</option>
+					
+					<option value="1988">1988</option>
+					
+					<option value="1987">1987</option>
+					
+					<option value="1986">1986</option>
+					
+					<option value="1985">1985</option>
+					
+					<option value="1984">1984</option>
+					
+					<option value="1983">1983</option>
+					
+					<option value="1982">1982</option>
+					
+					<option value="1981">1981</option>
+					
+					<option value="1980">1980</option>
+					
+					<option value="1979">1979</option>
+					
+					<option value="1978">1978</option>
+					
+					<option value="1977">1977</option>
+					
+					<option value="1976">1976</option>
+					
+					<option value="1975">1975</option>
+					
+					<option value="1974">1974</option>
+					
+					<option value="1973">1973</option>
+					
+					<option value="1972">1972</option>
+					
+					<option value="1971">1971</option>
+					
+					<option value="1970">1970</option>
+					
+					<option value="1969">1969</option>
+					
+					<option value="1968">1968</option>
+					
+					<option value="1967">1967</option>
+					
+					<option value="1966">1966</option>
+					
+					<option value="1965">1965</option>
+					
+					<option value="1964">1964</option>
+					
+					<option value="1963">1963</option>
+					
+					<option value="1962">1962</option>
+					
+					<option value="1961">1961</option>
+					
+					<option value="1960">1960</option>
+					
+					<option value="1959">1959</option>
+					
+					<option value="1958">1958</option>
+					
+					<option value="1957">1957</option>
+					
+					<option value="1956">1956</option>
+					
+					<option value="1955">1955</option>
+					
+					<option value="1954">1954</option>
+					
+					<option value="1953">1953</option>
+					
+					<option value="1952">1952</option>
+					
+					<option value="1951">1951</option>
+					
+					<option value="1950">1950</option>
+					
+					<option value="1949">1949</option>
+					
+					<option value="1948">1948</option>
+					
+					<option value="1947">1947</option>
+					
+					<option value="1946">1946</option>
+					
+					<option value="1945">1945</option>
+					
+					<option value="1944">1944</option>
+					
+					<option value="1943">1943</option>
+					
+					<option value="1942">1942</option>
+					
+					<option value="1941">1941</option>
+					
+					<option value="1940">1940</option>
+					
+					<option value="1939">1939</option>
+					
+					<option value="1938">1938</option>
+					
+					<option value="1937">1937</option>
+					
+					<option value="1936">1936</option>
+					
+					<option value="1935">1935</option>
+					
+					<option value="1934">1934</option>
+					
+					<option value="1933">1933</option>
+					
+					<option value="1932">1932</option>
+					
+					<option value="1931">1931</option>
+					
+					<option value="1930">1930</option>
+					
+					<option value="1929">1929</option>
+					
+					<option value="1928">1928</option>
+					
+					<option value="1927">1927</option>
+					
+					<option value="1926">1926</option>
+					
+					<option value="1925">1925</option>
+					
+					<option value="1924">1924</option>
+					
+					<option value="1923">1923</option>
+					
+					<option value="1922">1922</option>
+					
+					<option value="1921">1921</option>
+					
+					<option value="1920">1920</option>
+					
+					<option value="1919">1919</option>
+					
+					<option value="1918">1918</option>
+					
+					<option value="1917">1917</option>
+					
+					<option value="1916">1916</option>
+					
+					<option value="1915">1915</option>
+					
+					<option value="1914">1914</option>
+					
+					<option value="1913">1913</option>
+					
+					<option value="1912">1912</option>
+					
+					<option value="1911">1911</option>
+					
+					<option value="1910">1910</option>
+					
+					<option value="1909">1909</option>
+					
+					<option value="1908">1908</option>
+					
+					<option value="1907">1907</option>
+					
+					<option value="1906">1906</option>
+					
+					<option value="1905">1905</option>
+					
+					<option value="1904">1904</option>
+					
+					<option value="1903">1903</option>
+					
+					<option value="1902">1902</option>
+					
+					<option value="1901">1901</option>
+					
+					<option value="1900">1900</option>
+					
+				</select>
+				至
+				<select name="endPubdate">
+					<option value="" selected="selected">出版年</option>
+					
+					<option value="2026">2026</option>
+					
+					<option value="2025">2025</option>
+					
+					<option value="2024">2024</option>
+					
+					<option value="2023">2023</option>
+					
+					<option value="2022">2022</option>
+					
+					<option value="2021">2021</option>
+					
+					<option value="2020">2020</option>
+					
+					<option value="2019">2019</option>
+					
+					<option value="2018">2018</option>
+					
+					<option value="2017">2017</option>
+					
+					<option value="2016">2016</option>
+					
+					<option value="2015">2015</option>
+					
+					<option value="2014">2014</option>
+					
+					<option value="2013">2013</option>
+					
+					<option value="2012">2012</option>
+					
+					<option value="2011">2011</option>
+					
+					<option value="2010">2010</option>
+					
+					<option value="2009">2009</option>
+					
+					<option value="2008">2008</option>
+					
+					<option value="2007">2007</option>
+					
+					<option value="2006">2006</option>
+					
+					<option value="2005">2005</option>
+					
+					<option value="2004">2004</option>
+					
+					<option value="2003">2003</option>
+					
+					<option value="2002">2002</option>
+					
+					<option value="2001">2001</option>
+					
+					<option value="2000">2000</option>
+					
+					<option value="1999">1999</option>
+					
+					<option value="1998">1998</option>
+					
+					<option value="1997">1997</option>
+					
+					<option value="1996">1996</option>
+					
+					<option value="1995">1995</option>
+					
+					<option value="1994">1994</option>
+					
+					<option value="1993">1993</option>
+					
+					<option value="1992">1992</option>
+					
+					<option value="1991">1991</option>
+					
+					<option value="1990">1990</option>
+					
+					<option value="1989">1989</option>
+					
+					<option value="1988">1988</option>
+					
+					<option value="1987">1987</option>
+					
+					<option value="1986">1986</option>
+					
+					<option value="1985">1985</option>
+					
+					<option value="1984">1984</option>
+					
+					<option value="1983">1983</option>
+					
+					<option value="1982">1982</option>
+					
+					<option value="1981">1981</option>
+					
+					<option value="1980">1980</option>
+					
+					<option value="1979">1979</option>
+					
+					<option value="1978">1978</option>
+					
+					<option value="1977">1977</option>
+					
+					<option value="1976">1976</option>
+					
+					<option value="1975">1975</option>
+					
+					<option value="1974">1974</option>
+					
+					<option value="1973">1973</option>
+					
+					<option value="1972">1972</option>
+					
+					<option value="1971">1971</option>
+					
+					<option value="1970">1970</option>
+					
+					<option value="1969">1969</option>
+					
+					<option value="1968">1968</option>
+					
+					<option value="1967">1967</option>
+					
+					<option value="1966">1966</option>
+					
+					<option value="1965">1965</option>
+					
+					<option value="1964">1964</option>
+					
+					<option value="1963">1963</option>
+					
+					<option value="1962">1962</option>
+					
+					<option value="1961">1961</option>
+					
+					<option value="1960">1960</option>
+					
+					<option value="1959">1959</option>
+					
+					<option value="1958">1958</option>
+					
+					<option value="1957">1957</option>
+					
+					<option value="1956">1956</option>
+					
+					<option value="1955">1955</option>
+					
+					<option value="1954">1954</option>
+					
+					<option value="1953">1953</option>
+					
+					<option value="1952">1952</option>
+					
+					<option value="1951">1951</option>
+					
+					<option value="1950">1950</option>
+					
+					<option value="1949">1949</option>
+					
+					<option value="1948">1948</option>
+					
+					<option value="1947">1947</option>
+					
+					<option value="1946">1946</option>
+					
+					<option value="1945">1945</option>
+					
+					<option value="1944">1944</option>
+					
+					<option value="1943">1943</option>
+					
+					<option value="1942">1942</option>
+					
+					<option value="1941">1941</option>
+					
+					<option value="1940">1940</option>
+					
+					<option value="1939">1939</option>
+					
+					<option value="1938">1938</option>
+					
+					<option value="1937">1937</option>
+					
+					<option value="1936">1936</option>
+					
+					<option value="1935">1935</option>
+					
+					<option value="1934">1934</option>
+					
+					<option value="1933">1933</option>
+					
+					<option value="1932">1932</option>
+					
+					<option value="1931">1931</option>
+					
+					<option value="1930">1930</option>
+					
+					<option value="1929">1929</option>
+					
+					<option value="1928">1928</option>
+					
+					<option value="1927">1927</option>
+					
+					<option value="1926">1926</option>
+					
+					<option value="1925">1925</option>
+					
+					<option value="1924">1924</option>
+					
+					<option value="1923">1923</option>
+					
+					<option value="1922">1922</option>
+					
+					<option value="1921">1921</option>
+					
+					<option value="1920">1920</option>
+					
+					<option value="1919">1919</option>
+					
+					<option value="1918">1918</option>
+					
+					<option value="1917">1917</option>
+					
+					<option value="1916">1916</option>
+					
+					<option value="1915">1915</option>
+					
+					<option value="1914">1914</option>
+					
+					<option value="1913">1913</option>
+					
+					<option value="1912">1912</option>
+					
+					<option value="1911">1911</option>
+					
+					<option value="1910">1910</option>
+					
+					<option value="1909">1909</option>
+					
+					<option value="1908">1908</option>
+					
+					<option value="1907">1907</option>
+					
+					<option value="1906">1906</option>
+					
+					<option value="1905">1905</option>
+					
+					<option value="1904">1904</option>
+					
+					<option value="1903">1903</option>
+					
+					<option value="1902">1902</option>
+					
+					<option value="1901">1901</option>
+					
+					<option value="1900">1900</option>
+					
+				</select>
+			</div>
+			<div class="search_hidden">
+				每页显示行数:
+				<select name="rows">
+					<option value="10" selected="selected">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+					<option value="30">30</option>
+					<option value="35">35</option>
+					<option value="40">40</option>
+					<option value="45">45</option>
+					<option value="50">50</option>
+				</select>
+				<span >
+					<label>
+					<input type="checkbox" name="hasholding" id="hasholding" value="1" 
+						
+							checked="checked"
+						
+					/>
+					只输出有馆藏的记录
+					</label>
+				</span>
+			</div>
+		</div>
+		<div id="libraries" style="display:none;" class="search_hidden">
+			
+					
+					
+						分馆选择:
+					
+			
+			<label>
+				<input type="checkbox" onclick="selectAllLibcodes(this)" />
+				全选
+			</label>
+			<table id="libcodeTable" width="100%">
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="GDYHFG" />
+								光大银行
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="NYYHFG" />
+								农业银行
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="TLLIB" />
+								铜陵市图书馆
+						</label>
+						</td>
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>
+								<input type="checkbox" name="curlibcode" value="999" />
+								中心馆
+						</label>
+						</td>
+					
+					</tr>
+					
+				
+			</table>
+		</div>
+		<div id="localLimit" style="margin-top: 15px;display:none;">
+			限定所在馆藏地点:
+			<label id="limitlocal">
+			</label>
+			<label>
+				<input type="radio" name="curlocal" onchange="localLimit()" checked="unchecked" value="" />
+				全部
+			</label>
+		</div>
+		<div id="remember" style="margin-top: 15px;display:none;">
+		  <span><input type="checkbox" id="rememberMe" />
+					记住我的选择</span></div>
+		<!-- 检索提示框 -->
+		<div id="opacConfSetTable" style="display: none;">
+			OPAC参数设置<br/>
+			<a href="/opac/configLibName;jsessionid=3AD5944A92461AD8B51CBB53F84C9688">分馆名显示自定义设置</a>
+		</div>
+		<!-- 外网资源统一配置  -->
+		<div id="opacConfouternet" style="display: none;">
+			<input type="checkbox" value="1" id="Conouternet" name="Conouternet" onclick="configouternet()"/>关闭外网资源通道
+		</div>
+		<div id="localConfig" style="display: none;">
+			<table width="100%">
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_032" type="checkbox" name="curlocal"  value="tl_032" />
+								铜霞社区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_033" type="checkbox" name="curlocal"  value="tl_033" />
+								惠泉社区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_034" type="checkbox" name="curlocal"  value="tl_034" />
+								铜陵驿站24H
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_035" type="checkbox" name="curlocal"  value="tl_035" />
+								博文阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_036" type="checkbox" name="curlocal"  value="tl_036" />
+								合百阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_037" type="checkbox" name="curlocal"  value="tl_037" />
+								老馆成人外借
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_038" type="checkbox" name="curlocal"  value="tl_038" />
+								老馆少儿外借
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_039" type="checkbox" name="curlocal"  value="tl_039" />
+								老馆综合书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_030" type="checkbox" name="curlocal"  value="tl_030" />
+								板栗山阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_031" type="checkbox" name="curlocal"  value="tl_031" />
+								瑶山社区阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl103" type="checkbox" name="curlocal"  value="tl103" />
+								湖滨社区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_045" type="checkbox" name="curlocal"  value="tl_045" />
+								老体育馆-24h无人值守图书馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_046" type="checkbox" name="curlocal"  value="tl_046" />
+								翠湖-24小时无人值守图书馆1（废用）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_043" type="checkbox" name="curlocal"  value="tl_043" />
+								翠湖_24小时无人值守图书馆
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_044" type="checkbox" name="curlocal"  value="tl_044" />
+								万达-24小时无人值守图书馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_049" type="checkbox" name="curlocal"  value="tl_049" />
+								32517部队
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_047" type="checkbox" name="curlocal"  value="tl_047" />
+								铜官区-24小时无人值守图书馆（老馆）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_048" type="checkbox" name="curlocal"  value="tl_048" />
+								配送中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_wt" type="checkbox" name="curlocal"  value="tl_wt" />
+								问题书勿配规则
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_041" type="checkbox" name="curlocal"  value="tl_041" />
+								绘本馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_042" type="checkbox" name="curlocal"  value="tl_042" />
+								线上书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_040" type="checkbox" name="curlocal"  value="tl_040" />
+								老馆文学书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_098" type="checkbox" name="curlocal"  value="tl_098" />
+								犁桥文创阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_099" type="checkbox" name="curlocal"  value="tl_099" />
+								铜陵市民政局阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_096" type="checkbox" name="curlocal"  value="tl_096" />
+								郊区税务局阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_097" type="checkbox" name="curlocal"  value="tl_097" />
+								鹞山公园阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_094" type="checkbox" name="curlocal"  value="tl_094" />
+								天门镇文体站阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_095" type="checkbox" name="curlocal"  value="tl_095" />
+								户外劳动者工会驿站阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_092" type="checkbox" name="curlocal"  value="tl_092" />
+								铜官乐云仓科技阅读点（淮河路）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_019" type="checkbox" name="curlocal"  value="tl_019" />
+								老馆期刊
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_093" type="checkbox" name="curlocal"  value="tl_093" />
+								永丰东联小学阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_018" type="checkbox" name="curlocal"  value="tl_018" />
+								新馆工具书
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_090" type="checkbox" name="curlocal"  value="tl_090" />
+								铜陵市人民小学阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_091" type="checkbox" name="curlocal"  value="tl_091" />
+								铜陵市天津路小学阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_014" type="checkbox" name="curlocal"  value="tl_014" />
+								少儿中转外借1
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_015" type="checkbox" name="curlocal"  value="tl_015" />
+								成人外借中转2
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_016" type="checkbox" name="curlocal"  value="tl_016" />
+								少儿外借中转2
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_017" type="checkbox" name="curlocal"  value="tl_017" />
+								西文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_010" type="checkbox" name="curlocal"  value="tl_010" />
+								少儿外借（新）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_011" type="checkbox" name="curlocal"  value="tl_011" />
+								成人中转站
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_012" type="checkbox" name="curlocal"  value="tl_012" />
+								少儿中转库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_013" type="checkbox" name="curlocal"  value="tl_013" />
+								成人中转外借1
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_029" type="checkbox" name="curlocal"  value="tl_029" />
+								博物馆阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_027" type="checkbox" name="curlocal"  value="tl_027" />
+								湖东路阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_028" type="checkbox" name="curlocal"  value="tl_028" />
+								城市展示馆阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_025" type="checkbox" name="curlocal"  value="tl_025" />
+								南湖阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_026" type="checkbox" name="curlocal"  value="tl_026" />
+								植物园阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_023" type="checkbox" name="curlocal"  value="tl_023" />
+								点读书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_024" type="checkbox" name="curlocal"  value="tl_024" />
+								滨江阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_999_ZWSK" type="checkbox" name="curlocal"  value="999_ZWSK" />
+								中文书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_021" type="checkbox" name="curlocal"  value="tl_021" />
+								采编
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_022" type="checkbox" name="curlocal"  value="tl_022" />
+								24小时自助
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_020" type="checkbox" name="curlocal"  value="tl_020" />
+								中文书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_TLYCJ" type="checkbox" name="curlocal"  value="TLYCJ" />
+								铜陵市烟草局
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_121" type="checkbox" name="curlocal"  value="tl_121" />
+								白柳镇公共文化空间
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_120" type="checkbox" name="curlocal"  value="tl_120" />
+								天井书院
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_123" type="checkbox" name="curlocal"  value="tl_123" />
+								黄梅会馆文化空间
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_122" type="checkbox" name="curlocal"  value="tl_122" />
+								县税务局书屋
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_071" type="checkbox" name="curlocal"  value="tl_071" />
+								铜官区新时代文明实践中心阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_070" type="checkbox" name="curlocal"  value="tl_070" />
+								如兰轩阅读点（市委统战部）
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_073" type="checkbox" name="curlocal"  value="tl_073" />
+								铜陵市城投房地产开发有限责任公司阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WJSG1" type="checkbox" name="curlocal"  value="WJSG1" />
+								网借中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_072" type="checkbox" name="curlocal"  value="tl_072" />
+								五松镇惠泉社区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_WJSG2" type="checkbox" name="curlocal"  value="WJSG2" />
+								网借书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_075" type="checkbox" name="curlocal"  value="tl_075" />
+								铜官区图书
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_074" type="checkbox" name="curlocal"  value="tl_074" />
+								铜陵怡和永年医养中心阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_999_ZWGJ" type="checkbox" name="curlocal"  value="999_ZWGJ" />
+								中文工具
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_077" type="checkbox" name="curlocal"  value="tl_077" />
+								中国光大银行股份有限公司铜陵分行阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_076" type="checkbox" name="curlocal"  value="tl_076" />
+								光大银行阅读空间
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_079" type="checkbox" name="curlocal"  value="tl_079" />
+								安徽回收郎物联科技有限公司阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_078" type="checkbox" name="curlocal"  value="tl_078" />
+								铜陵市安广网络阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DBZTGQYJG" type="checkbox" name="curlocal"  value="DBZTGQYJG" />
+								调拨至铜官区图书馆已加工
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_116" type="checkbox" name="curlocal"  value="tl_116" />
+								白云岩青鸟阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_115" type="checkbox" name="curlocal"  value="tl_115" />
+								配送中心剔除书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_114" type="checkbox" name="curlocal"  value="tl_114" />
+								点读书库-三联书店
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_113" type="checkbox" name="curlocal"  value="tl_113" />
+								铜陵有色金属集团阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_112" type="checkbox" name="curlocal"  value="tl_112" />
+								铜陵亨源人才发展有限公司
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_111" type="checkbox" name="curlocal"  value="tl_111" />
+								铜陵市残疾人联合会阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_110" type="checkbox" name="curlocal"  value="tl_110" />
+								铜陵高新产业园发展有限公司阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_082" type="checkbox" name="curlocal"  value="tl_082" />
+								中共铜陵市委办公室阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_081" type="checkbox" name="curlocal"  value="tl_081" />
+								铜陵市房地产市场管理处阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_080" type="checkbox" name="curlocal"  value="tl_080" />
+								铜陵市卫生健康委员会阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl-000" type="checkbox" name="curlocal"  value="tl-000" />
+								异常图书馆藏变更
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_119" type="checkbox" name="curlocal"  value="tl_119" />
+								徽茗缘公共文化空间
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_086" type="checkbox" name="curlocal"  value="tl_086" />
+								铜陵市科学技术协会阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_085" type="checkbox" name="curlocal"  value="tl_085" />
+								铜陵永泉农庄有限责任公司阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_117" type="checkbox" name="curlocal"  value="tl_117" />
+								铜陵市税务局稽查局
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_084" type="checkbox" name="curlocal"  value="tl_084" />
+								铜陵市公共资源交易监督管理局阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_083" type="checkbox" name="curlocal"  value="tl_083" />
+								铜陵横塘乡村生态园阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_118" type="checkbox" name="curlocal"  value="tl_118" />
+								福昱璟云分馆
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_089" type="checkbox" name="curlocal"  value="tl_089" />
+								义安区天馨花园小区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_088" type="checkbox" name="curlocal"  value="tl_088" />
+								徽商银行铜陵市分行
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_087" type="checkbox" name="curlocal"  value="tl_087" />
+								铜陵市人大阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_999_ZWQK" type="checkbox" name="curlocal"  value="999_ZWQK" />
+								期刊阅览室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_004" type="checkbox" name="curlocal"  value="tl_004" />
+								少儿外借
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_003" type="checkbox" name="curlocal"  value="tl_003" />
+								综合书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_006" type="checkbox" name="curlocal"  value="tl_006" />
+								新馆期刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_005" type="checkbox" name="curlocal"  value="tl_005" />
+								地方文献
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_002" type="checkbox" name="curlocal"  value="tl_002" />
+								成人外借
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_001" type="checkbox" name="curlocal"  value="tl_001" />
+								文学书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_101" type="checkbox" name="curlocal"  value="tl_101" />
+								大通镇大院村委会阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_100" type="checkbox" name="curlocal"  value="tl_100" />
+								国家税务总局铜陵市铜官区税务局阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_103" type="checkbox" name="curlocal"  value="tl_103" />
+								湖滨社区阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_102" type="checkbox" name="curlocal"  value="tl_102" />
+								铜陵市国有资本运营控股集团有限公司阅读点 
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_105" type="checkbox" name="curlocal"  value="tl_105" />
+								周潭大山风景区乡村会客厅
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_104" type="checkbox" name="curlocal"  value="tl_104" />
+								铜陵市翠湖小学
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_106" type="checkbox" name="curlocal"  value="tl_106" />
+								工业和信息化局机关书屋
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_051" type="checkbox" name="curlocal"  value="tl_051" />
+								天井湖游客中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_050" type="checkbox" name="curlocal"  value="tl_050" />
+								廉田书屋-廉政教育中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_107" type="checkbox" name="curlocal"  value="tl_107" />
+								公园道一号党群阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_053" type="checkbox" name="curlocal"  value="tl_053" />
+								市青少年宫阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_108" type="checkbox" name="curlocal"  value="tl_108" />
+								犁桥紫阳书院
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_052" type="checkbox" name="curlocal"  value="tl_052" />
+								武警铜陵支队(石城路）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_109" type="checkbox" name="curlocal"  value="tl_109" />
+								市政府夹层
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_059" type="checkbox" name="curlocal"  value="tl_059" />
+								32121部队
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_058" type="checkbox" name="curlocal"  value="tl_058" />
+								龙山湖苑幼儿园阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_055" type="checkbox" name="curlocal"  value="tl_055" />
+								财政局阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_007" type="checkbox" name="curlocal"  value="tl_007" />
+								新馆儿刊
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_TGQWJS" type="checkbox" name="curlocal"  value="TGQWJS" />
+								 铜官区外借室
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_008" type="checkbox" name="curlocal"  value="tl_008" />
+								机关书屋
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_054" type="checkbox" name="curlocal"  value="tl_054" />
+								铜矿1978
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_057" type="checkbox" name="curlocal"  value="tl_057" />
+								铜官区狮子山消防救援队阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_009" type="checkbox" name="curlocal"  value="tl_009" />
+								成人外借（新）
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_056" type="checkbox" name="curlocal"  value="tl_056" />
+								行政服务中心阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_999_XWSK" type="checkbox" name="curlocal"  value="999_XWSK" />
+								西文书库
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_DBZTGQWJG" type="checkbox" name="curlocal"  value="DBZTGQWJG" />
+								调拨至铜官区图书馆未加工
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_064" type="checkbox" name="curlocal"  value="tl_064" />
+								农业银行阅读空间
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_063" type="checkbox" name="curlocal"  value="tl_063" />
+								铜陵市郊区经济开发区企业孵化器阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_062" type="checkbox" name="curlocal"  value="tl_062" />
+								少儿剔除书库
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_061" type="checkbox" name="curlocal"  value="tl_061" />
+								铜陵市福利院
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_060" type="checkbox" name="curlocal"  value="tl_060" />
+								铜陵市优抚协理员活动中心
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_069" type="checkbox" name="curlocal"  value="tl_069" />
+								武警铜陵支队铜陵中队阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_068" type="checkbox" name="curlocal"  value="tl_068" />
+								铜陵市拘留所
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_067" type="checkbox" name="curlocal"  value="tl_067" />
+								铜陵市农业银行阅读点
+						</label>
+						</td>    
+					
+				
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_066" type="checkbox" name="curlocal"  value="tl_066" />
+								铜陵市社科联阅读点
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+					
+					<tr>
+					
+						<td class="ellipsis" width="120">
+						<label>          
+								<input id="cCurlocal_tl_065" type="checkbox" name="curlocal"  value="tl_065" />
+								铜陵市瑞龙小学图书室
+						</label>
+						</td>    
+					
+					</tr>
+					
+				
+			</table>
+		</div> 
+		
+			
+			
+				<div id="searchTips" class="tips" style="padding:5px;width:650px;">
+<!-- 				<h3 id="searchTitle"></h3> -->
+<!-- 				<ol></ol> -->
+					<h3 id="searchTitle">书目查询提示</h3><ol><li>读者可以在此查询本馆的图书、期刊、古籍、多媒体等信息。检索 方式可以多个条件组配，并可实现区域图书馆群各分馆的书目联合检索。</li><li>字符中有<b>空格</b>系统自动分词，如需要检索包含空格的字符串，请前后加上<b>双引号</b>（半角），如： “Elements of Information Theory”。</li><li>点“详细信息”后若无馆藏信息时为已订购还未到馆的图书。</li></ol>
+				</div>
+			
+		
+		
+		
+		
+	</form>
+	</div>
+	
+		
+</div>
+
+<style>
+	.funcSpan{
+		display: inline-block;margin:0px 10px;width:13%;height:100px;
+		border:1px solid rgb(229,229,229);
+		text-align: center;vertical-align: middle;line-height: 100px;
+	}
+	.funDiv{
+		margin:0px auto;padding:50px 0px;width:80%;
+	}
+	.funDiv a:hover{
+		color:red;
+	}
+	.swiper-wrapper {
+		margin-left: -530px;
+	}
+	.boxdiv{
+		clear: both;margin: 5px auto;padding-top:5px ;padding-bottom:10px;width: 98%;
+	} 
+	.boxdiv_title{
+		font-size: 25px;color:rgb(17,17,17) ;margin-left: 10px;
+	}
+	.boxTable{
+		margin: 10px 0px 30px 20px;
+	}
+	.boxContent{
+		width: 175px; display: block; margin-right: 20px;float:left;
+	}
+	a.aHover:hover{
+		text-decoration: underline;color: rgb(196,85,0);
+	}
+	.swiper-container {
+        width: 85%;
+        height: 220px;
+        margin: 20px auto;
+    }
+    .swiper-slide {
+    	height: 200px;
+        text-align: right;
+        font-size: 14px;
+        width: 170px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+</style>
+
+
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="page_footer">
+	<div class="page_footer_bd">
+		
+		<span>© 2005－2014 www.interlib.com.cn, all rights reserved</span>
+		
+		<span class="fcenter"></span>
+		<span class="fright">
+		
+		
+		
+		<a href="#">隐私声明</a>
+		
+		</span>
+	</div>
+	
+</div>
+		<div style="display:none;">
+		<script type="text/javascript">
+/**
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22724688-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+</script>
+		</div>
+		
+		
+		
+		
+	</body>
+</html>

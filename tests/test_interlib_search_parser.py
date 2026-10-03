@@ -54,3 +54,19 @@ def test_empty_search_yields_nothing():
     assert r["has_next"] is False
     # 无分页控件时 total_pages 保守取当前页
     assert r["total_pages"] == 1
+
+
+def test_text_label_fallback_without_link_classes():
+    """默认模板变体（铜陵实抓）：著者/出版社锚点无 author-link/publisher-link class。
+
+    家族 parser 用同层前置文本「著者:」「出版社:」兜底，值取紧随的无 class 锚点；
+    广州等带 class 的城市仍优先按 class 命中，不受影响。
+    """
+    t = open("tests/fixtures/tongling/search_p1.html", encoding="utf-8").read()
+    assert "author-link" not in t and "publisher-link" not in t
+    r = parse_search(t)
+    first = r["books"][0]
+    assert first["book_id"] == "334623"
+    assert first["title"] == "三体"
+    assert first["author"] == "刘慈欣著"
+    assert first["publisher"] == "重庆出版社"

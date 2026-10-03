@@ -1,0 +1,124 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<title>opac验证</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="/opac/media/layui/css/layui.css" />
+<link rel="stylesheet" href="/opac/media/swiper/swiper.min.css" />
+<link rel="stylesheet" type="text/css" href="/opac/media/captcha/css/verify.css">
+<script type="text/javascript" src="/opac/media/layui/layui.js"></script>
+<script type="text/javascript" src="/opac/media/swiper/swiper.jquery.js"></script>
+<script type="text/javascript" src="/opac/media/swiper/swiper.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/opac/media/js/jquery/jquery-3.7.1.min.js" type="text/javascript" ></script>
+<script src="/opac/media/js/jquery/jquery-migrate-3.5.0.min.js" type="text/javascript" ></script>
+<script type="text/javascript" src="/opac/media/js/jquery/jquery.cookie.js"></script>
+
+<script src="/opac/media/captcha/js/crypto-js.js"></script>
+<script src="/opac/media/captcha/js/ase.js"></script>
+<script src="/opac/media/captcha/js/verify.js" ></script>
+<script>
+    (function () {
+        if (!window.Promise) {
+            document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"><' + '/' + 'script>');
+        }
+    })();
+</script>
+<style type="text/css">
+    /*最外层容器*/
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    /*上下左右居中*/
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<div style="padding: 20px; background-color: #F2F2F2;" id="mpanel1">
+</div>
+
+<script type="text/javascript" >
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        form.on('submit(verificateForm)', function(data){
+            return true;
+        });
+    });
+    $('#mpanel1').slideVerify({
+
+        baseUrl:'/opac/'=='/'?'':'/opac/',
+        mode:'fixed',
+        imgSize : {       //图片的大小对象
+            width: '400px',
+            height: '200px',
+        },
+        barSize:{
+            width: '400px',
+            height: '40px',
+        },
+        ready : function() {  //加载完毕的回调
+        },
+        success : function(params) { //成功的回调
+            verification(params.captchaVerification);
+        },
+        error : function() {        //失败的回调
+        }
+    });
+
+    function verification(captchaVerification) {
+        $.ajax({
+            type:"post",
+            data:{
+                "captchaVerification":captchaVerification
+            },
+            url:"/opac/captcha/verification",
+            success:function(result){
+                if(result.code == 200){
+                    layer.alert('验证成功，等待页面跳转')
+                    if(window.location.pathname.indexOf("/captcha/")>-1){
+                        window.location.href="/opac/";
+                    }else{
+                        window.location.reload();
+                    }
+                }else{
+                    layer.alert(result.msg)
+                }
+            }
+        });
+    }
+</script>

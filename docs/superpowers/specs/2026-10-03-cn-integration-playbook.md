@@ -11,7 +11,7 @@
 
 | 角色 | 职责 |
 |---|---|
-| 主线程 | 从 [cn.md](../../data-sources/cn.md) 取「📋 计划 / 🔍 待核验」条目，按「技术组件」归类到家族，挑一批，把本文件第二节骨架＋第三节家族附注＋第四节城市数据行拼成子 agent 提示词 |
+| 主线程 | 从 [cn.md](../../data-sources/cn.md) 取「📋 计划」条目（当前 85 条），按「技术组件」归类到家族，挑一批，把本文件第二节骨架＋第三节家族附注＋第四节城市数据行拼成子 agent 提示词 |
 | 子 agent | 收到提示词后按第五节单城循环实网对接，交付代码＋fixture＋测试＋文档，按批 commit；每城一条回报 |
 
 ## 二、公共骨架（逐批原样贴给子 agent）
@@ -31,6 +31,7 @@
 6. 不确定数据不做预设判断：原值照登，不猜语义。
 7. 不改家族模块对外签名；城市差异只允许以 Config 带默认值的字段（quirk）新增。
 8. 真网冒烟克制：站点有限速（适配器内置节流）；遇 401/验证码立即停手上报，不硬闯。
+9. 只读 GET 侦察；不注册、不登录、不提交表单。
 
 工具：Read/Grep/Glob/Edit/Write/Bash。测试统一 `uv run pytest -q`，必须全绿。
 每批跑完 git commit（中文全角标点），不 push、不打 tag、不发 PyPI。
@@ -49,12 +50,22 @@
   `cn.md` 总览表状态改 ✅＋在「Interlib 家族」成员差异表加一行。
 - quirk 判据（先试默认，命中再开开关）：
   - HTML 检索页 `/opac/search` 直连可用 → 默认模板，`api_detail=True` 即可。
+    - **默认模板变体（铜陵实证）**：`bookmeta` 容器仍在，但著者/出版社锚点**无
+      `author-link`/`publisher-link` class**，只在前置文本留「著者:」「出版社:」→ 家族
+      `_SearchParser` 已加同层前置文本标签兜底（值取紧随的无 class 锚点，标签 div 闭合即
+      失效），带 class 的城市仍优先按 class 命中；无需新增 quirk。
   - 详情页 HTML 截断或模板异常 → `api_detail=True`（走 `/opac/api/book/{recno}` JSON）。
   - 检索页返回 ~3.3KB「opac验证」滑动验证码页 → `solr_search=True`（走 `/opac/api/search`）；
-    若该站无内嵌 Solr（`/opac/api/search` 404）→ `captcha=True`（命中即抛 CaptchaError，不破解）。
+    若该站内嵌 Solr 也不可用（`/opac/api/search` 404，或**回 403「bot detected」**，
+    带 Referer/XHR 头仍拦，揭阳实证）→ `captcha=True`（命中即抛 CaptchaError，不破解）。
   - 应用上下文非 `/opac` → `ctx="/lib2"` 或 `ctx=""`（先探 `/opac/*` 是否 404）。
   - 新版页 `li.libBookLi`／`a.bkTxtTit` → `pro2018=True`（绍兴另需 `pro2018_cite_author=True`）。
+  - 应用为**更新的 jishen 模板**（页标题「书目检索」、`solrpagination.js`、表单 POST
+    `booklist.jsp`，`/opac/search` 404）→ **非家族模板，不接入**，回报主线程归入新分支
+    （清远 `qingyuan` 实证）。
   - 多租户云托管详情需带馆码 → `curlibcode="XXX"`；联合目录按馆过滤 → `f_curlibcode="XX"`。
+  - 检索页验证码挡住但**详情/馆藏匿名可通**时仍作 ✅ 接入（`captcha=True` 或 `solr_search=True`），
+    同乐山/揭阳先例；recno 可自首页推荐位等匿名页取得。
 
 ### 3.2 UILAS 老版家族（ILAS HTML OPAC，`uilas/`）
 
@@ -104,61 +115,79 @@
   馆藏走**根路径** `POST InDigLib/GetAsset.action`（`frontV2/` 前缀版有登录拦截）。
 - 可借口径统一保守：无法确认在架的一律 `available=False`，原值照登。
 
-### 3.7 未知系统（待侦）
+### 3.7 超星系（智慧门户 wisweb／chaoxing）
+
+- 无共享家族（已有门户只登记未接入）。先侦察门户页里 `wisweb／chaoxing` 变量与
+  `/entry/page/…` 动态加载的书目检索入口；找到可编程 JSON 接口再评估独立实现
+  （照深圳/浙江图书馆「自研 JSON 独立实现」先例），**不照搬**现有家族。
+- 参考登记：`cn.md`「超星智慧门户（宿迁、连云港）」章。
+
+### 3.8 SirsiDynix iLink
+
+- 现有大连 `adapters/cn/dalian.py` 是**独立实现**（`/uhtbin/cgisirsi/`，ps token 会话，
+  类重庆流程，节流 ≥4 秒/host），暂无 `ilink/` 共享家族。甘肃三城（省图/陇南/甘南）
+  若实测同构，按家族先例抽 `ilink/` 模块，再让三城薄包装——**先侦察再决定是否抽象**。
+
+### 3.9 未知系统（待侦）
 
 先只做侦察、**不写 adapter**：抓首页＋找 `opac/search/检索` 入口，记录技术指纹
 （meta keywords、静态资源路径、JS 全局变量、接口形态），回报后由主线程归入家族再排期。
 
-## 四、城市数据行（62 条 📋 计划，按家族）
+## 四、城市数据行（当前 85 条 📋 计划，按家族）
 
 > `标识` 为拟用城市键（拼音，冲突时加后缀）；`quirk` 为待试探项，实抓后回填确认。
 > `实抓词` 统一「三体」，记录 `total_results` 与首条，写进该城 `NOTES.md`。
+> 入口列省去 `{base_url}` 前缀的公共路径。带 ⚠️ 的条目为「旧批次曾判异常、本批重新升计划」，
+> 实抓时优先复核。
 
-### 4.1 Interlib 默认模板＋`api_detail=True`（41 城）
+### 4.1 Interlib 默认模板（44 城，首批主力）
 
-| 城市 | 馆名 | 标识 | base_url |
-|---|---|---|---|
-| 铜陵 | 铜陵市图书馆 | `tongling` | http://60.173.22.63:7075 |
-| 安庆 | 安庆市图书馆 | `anqing` | http://39.145.39.67:8082 |
-| 茂名 | 茂名市图书馆 | `maoming` | http://14.18.69.185:8082 |
-| 清远 | 清远市图书馆 | `qingyuan` | https://elib.qylib.com |
-| 中山 | 中山市图书馆 | `zhongshan` | https://opac.zslib.cn |
-| 揭阳 | 揭阳市图书馆 | `jieyang` | http://61.146.124.30:8088 |
-| 普宁 | 普宁市图书馆 | `puning` | http://www.pnlib.com:8088 |
-| 东营 | 东营市图书馆 | `dongying` | http://60.214.234.201:81 |
-| 烟台 | 烟台市图书馆 | `yantai` | http://144.123.23.246:8082 |
-| 潍坊 | 潍坊市图书馆 | `weifang` | http://60.210.241.4:8080 |
-| 泰安 | 泰安市图书馆 | `taian` | http://112.245.16.82 |
-| 日照 | 日照市图书馆 | `rizhao` | http://58.59.43.7:38080 |
-| 临沂 | 临沂市图书馆 | `linyi` | http://111.16.49.57:8888 |
-| 聊城 | 聊城市图书馆 | `liaocheng` | http://218.57.211.26:8091 |
-| 石家庄 | 石家庄市图书馆 | `shijiazhuang` | http://120.211.62.194:8087 |
-| 忻州 | 忻州市图书馆 | `xinzhou` | http://124.163.188.204:9000 |
-| 晋中 | 晋中市图书馆 | `jinzhong` | http://lib.jzstsg.com:8082 |
-| 四平 | 四平市图书馆 | `siping` | http://111.26.111.223:8081 |
-| 齐齐哈尔 | 齐齐哈尔市图书馆 | `qiqihar` | http://www.qqhrlib.org.cn:8086 |
-| 牡丹江 | 牡丹江市图书馆 | `mudanjiang` | http://122.156.44.53:8088 |
-| 莆田 | 莆田市图书馆 | `putian` | https://opac.ptslib.com:8888 |
-| 三明 | 三明市图书馆 | `sanming` | http://opac.fjsmlib.cn:6999 |
-| 龙岩 | 龙岩市图书馆 | `longyan` | http://opac.lytsg.com:8082 |
-| 宁德 | 宁德市图书馆 | `ningde` | http://220.161.205.210:82 |
-| 开封 | 开封市图书馆 | `kaifeng` | http://221.176.156.243:8089 |
-| 湖北省图 | 湖北省图书馆 | `hubei_prov` | http://27.17.61.109:8088 |
-| 十堰 | 十堰市图书馆 | `shiyan` | http://library.sylib.org.cn:9080 |
-| 鄂州 | 鄂州市图书馆 | `ezhou` | http://58.19.204.93:8081 |
-| 荆州 | 荆州市图书馆 | `jingzhou` | http://interlib.jzlib.org.cn:8081 |
-| 黄冈 | 黄冈市图书馆 | `huanggang` | http://58.19.210.60:8081 |
-| 恩施 | 恩施州图书馆 | `enshi` | http://119.96.92.24:9999 |
-| 湘潭 | 湘潭市图书馆 | `xiangtan` | http://220.170.15.29:8099 |
-| 岳阳 | 岳阳市图书馆 | `yueyang` | http://183.214.211.146:18081 |
-| 张家界 | 张家界市图书馆 | `zhangjiajie` | http://110.53.52.47:8090 |
-| 三亚 | 三亚市图书馆 | `sanya` | https://opac.sanyalib.com:8888 |
-| 六盘水 | 六盘水市图书馆 | `liupanshui` | http://111.85.91.253:8088 |
-| 安顺 | 安顺市图书馆 | `anshun` | http://119.1.160.3:8082 |
-| 毕节 | 毕节市图书馆 | `bijie` | http://220.172.207.114:8001 |
-| 呼伦贝尔 | 呼伦贝尔市图书馆 | `hulunbuir` | https://interlib.hlbewl.cn |
-| 桂林 | 广西壮族自治区桂林图书馆 | `guilin` | https://opac.gxgllib.org.cn |
-| 梧州 | 梧州市图书馆 | `wuzhou` | http://www.wztsg.com:82 |
+| 城市 | 馆名 | 标识 | base_url | 入口 |
+|---|---|---|---|---|
+| 铜陵 | 铜陵市图书馆 | `tongling` | http://60.173.22.63:7075 | /opac/ |
+| 安庆 | 安庆市图书馆 | `anqing` | http://39.145.39.67:8082 | /opac/ |
+| 茂名 | 茂名市图书馆 | `maoming` | http://14.18.69.185:8082 | /opac/index |
+| 清远 | 清远市图书馆 | `qingyuan` | https://elib.qylib.com | /opac/ |
+| 中山 | 中山市图书馆 | `zhongshan` | https://opac.zslib.cn | /opac/index |
+| 揭阳 | 揭阳市图书馆 | `jieyang` | http://61.146.124.30:8088 | /opac/index |
+| 普宁 | 普宁市图书馆 | `puning` | http://www.pnlib.com:8088 | /opac/index |
+| 东营 | 东营市图书馆 | `dongying` | http://60.214.234.201:81 | /opac/index |
+| 烟台 | 烟台市图书馆 | `yantai` | http://144.123.23.246:8082 | /opac/ |
+| 潍坊 | 潍坊市图书馆 | `weifang` | http://60.210.241.4:8080 | /opac/index |
+| 泰安 | 泰安市图书馆 | `taian` | http://112.245.16.82 | /opac/ |
+| 日照 | 日照市图书馆 | `rizhao` | http://58.59.43.7:38080 | /opac/ |
+| 临沂 | 临沂市图书馆 | `linyi` | http://111.16.49.57:8888 | /opac/ |
+| 聊城 | 聊城市图书馆 | `liaocheng` | http://218.57.211.26:8091 | /opac/index |
+| 攀枝花 | 攀枝花市图书馆 | `panzhihua` | http://www.pzhlib.com.cn | 站内 interlibSSO／ifs/search；候选 host http://125.66.234.132:8180 |
+| 石家庄 | 石家庄市图书馆 | `shijiazhuang` | http://120.211.62.194:8087 | /opac/index |
+| 忻州 | 忻州市图书馆 | `xinzhou` | http://124.163.188.204:9000 | /opac/index |
+| 晋中 | 晋中市图书馆 | `jinzhong` | http://lib.jzstsg.com:8082 | /opac/index |
+| 四平 | 四平市图书馆 | `siping` | http://111.26.111.223:8081 | /opac/index |
+| 齐齐哈尔 | 齐齐哈尔市图书馆 | `qiqihar` | http://www.qqhrlib.org.cn:8086 | /opac/index |
+| 牡丹江 | 牡丹江市图书馆 | `mudanjiang` | http://122.156.44.53:8088 | /opac/ |
+| 福州 | 福州市图书馆 | `fuzhou` | https://opcs.fzlib.org:8082 | /opac/index ⚠️ 旧批 TLS 失败/停放段，需复核 |
+| 莆田 | 莆田市图书馆 | `putian` | https://opac.ptslib.com:8888 | /opac/ |
+| 三明 | 三明市图书馆 | `sanming` | http://opac.fjsmlib.cn:6999 | /opac/index |
+| 龙岩 | 龙岩市图书馆 | `longyan` | http://opac.lytsg.com:8082 | /opac/index |
+| 宁德 | 宁德市图书馆 | `ningde` | http://220.161.205.210:82 | /opac/index |
+| 开封 | 开封市图书馆 | `kaifeng` | http://221.176.156.243:8089 | /opac/index.jsp?page=index_jdjs.jsp&index=1 |
+| 湖北省图 | 湖北省图书馆 | `hubei_prov` | http://27.17.61.109:8088 | /opac/index（官网 www.library.hb.cn；与 `wuhan` 非同一馆） |
+| 十堰 | 十堰市图书馆 | `shiyan` | http://library.sylib.org.cn:9080 | /opac/index |
+| 鄂州 | 鄂州市图书馆 | `ezhou` | http://58.19.204.93:8081 | /opac/ |
+| 荆州 | 荆州市图书馆 | `jingzhou` | http://interlib.jzlib.org.cn:8081 | /opac/index |
+| 黄冈 | 黄冈市图书馆 | `huanggang` | http://58.19.210.60:8081 | /opac/index |
+| 恩施 | 恩施州图书馆 | `enshi` | http://119.96.92.24:9999 | /opac/ |
+| 长沙 | 长沙图书馆 | `changsha` | https://opac.changshalib.cn | /index ⚠️ 旧批整站 WAF 403，需复核 |
+| 湘潭 | 湘潭市图书馆 | `xiangtan` | http://220.170.15.29:8099 | /opac/index |
+| 岳阳 | 岳阳市图书馆 | `yueyang` | http://183.214.211.146:18081 | /opac/index |
+| 张家界 | 张家界市图书馆 | `zhangjiajie` | http://110.53.52.47:8090 | /opac/ |
+| 三亚 | 三亚市图书馆 | `sanya` | https://opac.sanyalib.com:8888 | /opac/SY |
+| 六盘水 | 六盘水市图书馆 | `liupanshui` | http://111.85.91.253:8088 | /opac/index |
+| 安顺 | 安顺市图书馆 | `anshun` | http://119.1.160.3:8082 | /opac/ |
+| 毕节 | 毕节市图书馆 | `bijie` | http://220.172.207.114:8001 | /opac/ |
+| 呼伦贝尔 | 呼伦贝尔市图书馆 | `hulunbuir` | https://interlib.hlbewl.cn | /opac/index |
+| 桂林 | 广西壮族自治区桂林图书馆 | `guilin` | https://opac.gxgllib.org.cn | /opac/index |
+| 梧州 | 梧州市图书馆 | `wuzhou` | http://www.wztsg.com:82 | /opac/ |
 
 ### 4.2 Interlib pro2018＋验证码（2 城，同乐山口径，需评估）
 
@@ -167,39 +196,75 @@
 | 绵阳 | 绵阳市图书馆 | `mianyang` | http://opac.sclib.cn:8088 | 借省图联合目录，`?tenant=MY`；`pro2018=True`＋`captcha=True`，tenant 参数可能需扩 Config 字段，先侦察再定 |
 | 雅安 | 雅安市图书馆 | `yaan` | http://opac.sclib.cn:8088 | 同上，`?tenant=YA` |
 
-### 4.3 UILAS 老版家族（5 城）
-
-| 城市 | 馆名 | 标识 | base_url | 入口 |
-|---|---|---|---|---|
-| 芜湖 | 芜湖市图书馆 | `wuhu` | https://ilas.whstsg.org.cn:18086 | `/ILASOPAC/` |
-| 六安 | 六安市图书馆 | `luan` | http://60.173.147.75:8081 | `/ILASOPAC/Index?target=0` |
-| 通化 | 通化市图书馆 | `tonghua` | https://m.thslib.cn:3888 | `/ILASOPAC/Index?target=0` |
-| 南昌 | 南昌市图书馆 | `nanchang` | http://uopac.nclib.net:8086 | `/Index?target=0` |
-| 贵阳 | 贵阳市图书馆 | `guiyang` | http://218.201.254.11 | `/Index?target=0` |
-
-### 4.4 图星 LibStar Find（2 城）
-
-| 城市 | 馆名 | 标识 | base_url | 备注 |
-|---|---|---|---|---|
-| 泰州 | 泰州市图书馆 | `taizhou_js` | https://findjstzlib.pub.chaoxing.com | **标识冲突**：`taizhou` 已被台州市（浙江）占用，泰州（江苏）用 `taizhou_js`；groupcode 待查 |
-| 海西 | 海西州图书馆 | `haixi` | https://findhxztsg.libsp.cn | 传需登录，接入前复核匿名接口 |
-
-### 4.5 单城家族（各 1 城）
-
-| 城市 | 馆名 | 标识 | base_url | 家族/备注 |
-|---|---|---|---|---|
-| 蚌埠 | 蚌埠市图书馆 | `bengbu` | http://58.242.164.105:8090 | 疑 tcc-opac（入口 `/999`），先实抓确认 |
-| 衡阳 | 衡阳市图书馆 | `hengyang` | http://weixin.hengyanglib.org | InDigLib，照重庆独立实现 |
-| 商洛 | 商洛市图书馆 | `shangluo` | https://uilas.sxlib.org.cn | 入口即陕图省馆平台（`shaanxi`），商洛专有入口待确认；若实为租户则并入 `shaanxi` |
-
-### 4.6 疑 Interlib `/ifs/search`（2 城，先侦察后接）
+### 4.3 疑 Interlib `/ifs/search`（2 城，先侦察后接）
 
 | 城市 | 馆名 | 标识 | base_url |
 |---|---|---|---|
 | 鞍山 | 鞍山市图书馆 | `anshan` | http://www.aslibrary.com:9200 |
 | 西宁 | 西宁市图书馆 | `xining` | http://220.167.179.43:8020 |
 
-### 4.7 未知系统·待侦（5 城，只侦察）
+### 4.4 UILAS 老版家族（5 城）
+
+| 城市 | 馆名 | 标识 | base_url | 入口 |
+|---|---|---|---|---|
+| 芜湖 | 芜湖市图书馆 | `wuhu` | https://ilas.whstsg.org.cn:18086 | /ILASOPAC/ |
+| 六安 | 六安市图书馆 | `luan` | http://60.173.147.75:8081 | /ILASOPAC/Index?target=0 |
+| 通化 | 通化市图书馆 | `tonghua` | https://m.thslib.cn:3888 | /ILASOPAC/Index?target=0 |
+| 南昌 | 南昌市图书馆 | `nanchang` | http://uopac.nclib.net:8086 | /Index?target=0 |
+| 贵阳 | 贵阳市图书馆 | `guiyang` | http://218.201.254.11 | /Index?target=0 |
+
+### 4.5 图星 LibStar Find（2 城）
+
+| 城市 | 馆名 | 标识 | base_url | 备注 |
+|---|---|---|---|---|
+| 泰州 | 泰州市图书馆 | `taizhou_js` | https://findjstzlib.pub.chaoxing.com | **标识冲突**：`taizhou` 已被台州市（浙江）占用，泰州（江苏）用 `taizhou_js`；groupcode 待查 |
+| 海西 | 海西州图书馆 | `haixi` | https://findhxztsg.libsp.cn | 传需登录，接入前复核匿名接口 |
+
+### 4.6 tcc-opac 疑（1 城）
+
+| 城市 | 馆名 | 标识 | base_url | 备注 |
+|---|---|---|---|---|
+| 蚌埠 | 蚌埠市图书馆 | `bengbu` | http://58.242.164.105:8090 | 入口 `/999`，同宁波/济南形态，先实抓确认 |
+
+### 4.7 InDigLib（1 城）
+
+| 城市 | 馆名 | 标识 | 入口 |
+|---|---|---|---|
+| 衡阳 | 衡阳市图书馆 | `hengyang` | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action |
+
+### 4.8 新版 UILAS REST／同陕图平台（2 城）
+
+| 城市 | 馆名 | 标识 | 备注 |
+|---|---|---|---|
+| 铜川 | 铜川市图书馆 | `tongchuan` | 入口即陕图省馆平台 `https://uilas.sxlib.org.cn/#/index`；铜川专有检索入口待确认，若为租户则并入 `shaanxi` |
+| 商洛 | 商洛市图书馆 | `shangluo` | 同上；若为租户则并入 `shaanxi` |
+
+### 4.9 SirsiDynix iLink（3 城，先侦察再决定是否抽家族）
+
+| 城市 | 馆名 | 标识 | 入口 |
+|---|---|---|---|
+| 甘肃省图 | 甘肃省图书馆 | `gansu_prov` | http://search.gslib.com.cn/uhtbin/cgisirsi/ （仅查馆别＝省馆） |
+| 陇南 | 陇南市图书馆 | `longnan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 |
+| 甘南 | 甘南州图书馆 | `gannan` | 无独立入口，借甘肃省图 iLink 按馆别过滤 |
+
+### 4.10 MetaLSP 发现系统（1 城）
+
+| 城市 | 馆名 | 标识 | 入口 | 备注 |
+|---|---|---|---|---|
+| 云南省图 | 云南省图书馆 | `yunnan_prov` | http://metalsp.ynlib.cn:3006/ | 底层书目接口未侦察，先侦 |
+
+### 4.11 超星系（6 城，先侦察书目接口）
+
+| 城市 | 馆名 | 标识 | 入口 | 指纹 |
+|---|---|---|---|---|
+| 连云港 | 连云港市图书馆 | `lianyungang` | https://4366ha.mh.chaoxing.com/entry/page/ck/peking_library | 超星智慧门户 |
+| 宿迁 | 宿迁市图书馆 | `suqian` | https://sqstsg.mh.chaoxing.com | 超星智慧门户 |
+| 德阳 | 德阳市图书馆 | `deyang` | http://www.deyanglib.cn | 超星智慧门户（wisweb） |
+| 广元 | 广元市图书馆 | `guangyuan` | http://www.gyslib.org.cn | 超星智慧门户（wisweb） |
+| 固原 | 固原市图书馆 | `guyuan` | http://www.gyslib.cn | 超星智慧门户；身份存疑（与广元/达州同 IP） |
+| 眉山 | 眉山市图书馆 | `meishan` | http://www.mslib.cn | 超星系（cxstar／sslibrary） |
+
+### 4.12 未知系统·待侦（13 城，只侦察，不写 adapter）
 
 | 城市 | 馆名 | 标识 | 入口 | 指纹 |
 |---|---|---|---|---|
@@ -208,13 +273,22 @@
 | 晋城 | 晋城市图书馆 | `jincheng` | https://opac.jclib.cn/index | 系统未识别 |
 | 双鸭山 | 双鸭山市图书馆 | `shuangyashan` | http://shuangyashan.libopac.cn/index | `libopac.cn` 云 OPAC |
 | 洛阳 | 洛阳市图书馆 | `luoyang` | http://111.7.82.191:8009/#/index | `#/index` SPA |
+| 宜宾 | 宜宾市图书馆 | `yibin` | http://ybslib.cn | 自研 Nuxt |
+| 达州 | 达州市图书馆 | `dazhou` | https://www.dzslib.cn | 自研 Vue SPA |
+| 嘉峪关 | 嘉峪关市图书馆 | `jiayuguan` | http://jygslib.com.cn | 自研 Vue SPA，身份弱证 |
+| 巴中 | 巴中市图书馆 | `bazhong` | https://www.bzslib.cn | 帝国CMS 门户，站内有 opac 字样 |
+| 海东 | 海东市图书馆 | `haidong` | https://hdtsg.cn/index.aspx | 自研 ASP.NET（BibliographySearch.aspx） |
+| 锡林郭勒盟 | 锡林郭勒盟图书馆 | `xilingol` | http://58.18.112.198:8100/ | ASP.NET「OPAC查询系统」 |
+| 广西省图 | 广西壮族自治区图书馆 | `guangxi_prov` | https://opac.gxlib.org.cn/#/home | 疑新版 UILAS；TLS 握手 EOF |
+| 南宁市图 | 南宁市图书馆 | `nanning` | https://book.nnlib.com.cn/dss-portal/ | 未知（dss-portal，Vue 壳） |
 
-### 4.8 实测阻断·不应排期（回退状态）
+### 4.13 无系统标注·待探（3 城）
 
-| 城市 | 馆名 | 标识 | 入口 | 处置 |
-|---|---|---|---|---|
-| 长沙 | 长沙图书馆 | — | https://opac.changshalib.cn/index | 整站 WAF 403（含内嵌 Solr），暂回退 ⛔ 不通 |
-| 福州 | 福州市图书馆 | — | https://opcs.fzlib.org:8082 | TLS 握手失败、域名停放段，暂回退 ⛔ 不通 |
+| 城市 | 馆名 | 标识 | 入口 |
+|---|---|---|---|
+| 太原省图 | 山西省图书馆 | `shanxi_prov` | https://lib.sx.cn |
+| 银川 | 宁夏图书馆 | `ningxia_prov` | http://www.nxlib.cn |
+| 乌鲁木齐 | 新疆维吾尔自治区图书馆 | `xinjiang_prov` | https://www.xjlib.org |
 
 ## 五、单城作业循环（子 agent 每城执行）
 

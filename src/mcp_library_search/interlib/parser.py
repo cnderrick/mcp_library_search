@@ -37,6 +37,10 @@ class _SearchParser(HTMLParser):
         self._depth = 0
         self._capture = None   # 正在按 class 抓取的字段名（title/author/publisher）
         self._a_text = None    # 正在抓取的 a 标签文本
+        # 文本标签兜底：部分默认模板变体（铜陵实抓）著者/出版社的 <a> 无
+        # author-link/publisher-link class，只在前置文本里留「著者:」「出版社:」。
+        # 记 (字段, 记录时的 div 深度)，仅当紧随的同层 <a> 无 class 时启用。
+        self._pending = None
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -56,6 +60,10 @@ class _SearchParser(HTMLParser):
                     self._capture = "author"
                 elif "publisher-link" in cls:
                     self._capture = "publisher"
+                elif self._pending and self._pending[1] == self._depth:
+                    # 无 class 的锚点：用同层前置文本标签兜底（铜陵默认模板变体）
+                    self._capture = self._pending[0]
+                self._pending = None
         elif self._cur is not None and tag == "div":
             self._depth += 1
 
@@ -71,6 +79,8 @@ class _SearchParser(HTMLParser):
             return
         if tag == "div" and self._cur is not None:
             self._depth -= 1
+            if self._pending is not None and self._depth < self._pending[1]:
+                self._pending = None  # 标签所在 div 已闭合，兜底失效
             if self._depth <= 0:
                 self._finish_book()
 
@@ -79,6 +89,11 @@ class _SearchParser(HTMLParser):
             self._a_text.append(data)
         if self._cur is not None:
             self._cur["parts"].append(data)
+            if self._a_text is None:
+                if re.search(r"著者\s*[:：]", data):
+                    self._pending = ("author", self._depth)
+                elif re.search(r"出版社\s*[:：]", data):
+                    self._pending = ("publisher", self._depth)
         m = _TOTAL_RE.search(data)
         if m:
             self.total_results = int(m.group(1).replace(",", ""))
@@ -87,6 +102,7 @@ class _SearchParser(HTMLParser):
             self.total_pages = int(m.group(1))
 
     def _finish_book(self):
+        self._pending = None
         if self._cur is None:
             return
         text = "".join(self._cur["parts"])

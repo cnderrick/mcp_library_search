@@ -99,6 +99,12 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
     jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、
     lijiang（丽江市图书馆，全市联合目录含古城区/玉龙/宁蒗/华坪等分馆），
+    第五批（图创 Interlib）：tongling（铜陵市图书馆，默认模板变体，详情走 /api/book 接口）、
+    anqing（安庆市图书馆）、maoming（茂名市图书馆）、zhongshan（中山市图书馆，pro2018 模板）、
+    jieyang（揭阳市图书馆，检索页「opac验证」且内嵌 Solr 被 bot 检测拦，未过码时抛
+    CaptchaError 不破解，同乐山口径）、puning（普宁市图书馆，检索走内嵌 Solr）、
+    dongying（东营市图书馆）、yantai（烟台市图书馆）、weifang（潍坊市图书馆），
+    以上馆藏到单册级、详情走 /api/book 接口。
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，

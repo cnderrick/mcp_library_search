@@ -33,23 +33,28 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 #   CaptchaError 不破解，同天津 ALEPH 口径）
 # ＋郑州（2026-10-03 用户提供可访问入口；SirsiDynix Enterprise/VSE，本仓库首见
 #   新家族，抽出 sirsi_ent/ 共享模块）
+# ＋第五批 9 城（2026-10-03 立项城市落地，均图创 Interlib＋api_detail）：铜陵
+#   （默认模板变体：检索页著者/出版社锚点无 link class，家族加文本标签兜底）、
+#   安庆、茂名、东营、烟台、潍坊、中山（pro2018）、普宁（solr_search）、
+#   揭阳（检索页「opac验证」＋内嵌 Solr 403 bot detected，captcha=True 抛 CaptchaError）
 _EXPECTED = [
-    "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
+    "ankang", "anqing", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
     "chongqing", "chuxiong", "dalian", "daqing", "dehong", "deqing", "dezhou",
-    "eerduosi", "fujian_prov", "guangzhou", "haikou", "hangzhou",
-    "hanzhong", "hefei", "heilongjiang", "henan_prov", "heyuan", "honghe",
-    "huaian", "huangshi", "huhehaote", "hunan_prov", "jiangmen", "jiangyin", "jinan",
-    "jingmen", "jinhua", "laibin", "lanzhou", "leshan", "lijiang", "lincang", "lishui",
-    "nanjing", "ningbo", "nujiang", "qiandongnan", "qiannan", "qingdao",
-    "quanzhou", "qujing", "shaanxi", "shanghai", "shaoxing", "shenzhen",
-    "suzhou", "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "wenzhou",
-    "wuhai", "wuhan", "wuxi", "xian", "xianyang", "xiaogan", "xishuangbanna",
-    "xuzhou", "yancheng", "yangjiang", "yangzhou", "yulin", "zaozhuang", "zhengzhou",
-    "zhoukou", "zhoushan", "zhuzhou", "zibo", "zunyi",
+    "dongying", "eerduosi", "fujian_prov", "guangzhou", "haikou", "hangzhou", "hanzhong",
+    "hefei", "heilongjiang", "henan_prov", "heyuan", "honghe", "huaian", "huangshi",
+    "huhehaote", "hunan_prov", "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen",
+    "jinhua", "laibin", "lanzhou", "leshan", "lijiang", "lincang", "lishui",
+    "maoming", "nanjing", "ningbo", "nujiang", "puning", "qiandongnan", "qiannan",
+    "qingdao", "quanzhou", "qujing", "shaanxi", "shanghai", "shaoxing", "shenzhen",
+    "suzhou", "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "tongling",
+    "weifang", "wenzhou", "wuhai", "wuhan", "wuxi", "xian", "xianyang",
+    "xiaogan", "xishuangbanna", "xuzhou", "yancheng", "yangjiang", "yangzhou", "yantai",
+    "yulin", "zaozhuang", "zhengzhou", "zhongshan", "zhoukou", "zhoushan", "zhuzhou",
+    "zibo", "zunyi",
 ]
 
 
-def test_registry_has_exactly_seventy_seven_identifiers():
+def test_registry_has_exactly_eighty_six_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

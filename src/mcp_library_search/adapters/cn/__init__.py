@@ -5,6 +5,7 @@ get_book_detail 三个原语（返回结构对齐 adapters/base.py 的 TypedDict
 测试强制），然后在本文件 ADAPTERS 里注册一行。地区名供上层错误提示展示。
 """
 from . import ankang
+from . import anqing
 from . import baoji
 from . import baotou
 from . import changchun
@@ -17,6 +18,7 @@ from . import daqing
 from . import dehong
 from . import deqing
 from . import dezhou
+from . import dongying
 from . import eerduosi
 from . import fujian_prov
 from . import guangzhou
@@ -34,6 +36,7 @@ from . import huhehaote
 from . import hunan_prov
 from . import jiangmen
 from . import jiangyin
+from . import jieyang
 from . import jinan
 from . import jingmen
 from . import jinhua
@@ -43,9 +46,11 @@ from . import leshan
 from . import lijiang
 from . import lincang
 from . import lishui
+from . import maoming
 from . import nanjing
 from . import ningbo
 from . import nujiang
+from . import puning
 from . import qiandongnan
 from . import qiannan
 from . import qingdao
@@ -61,6 +66,8 @@ from . import taizhou
 from . import tangshan
 from . import tianjin
 from . import tongliao
+from . import tongling
+from . import weifang
 from . import wenzhou
 from . import wuhai
 from . import wuhan
@@ -73,9 +80,11 @@ from . import xuzhou
 from . import yancheng
 from . import yangjiang
 from . import yangzhou
+from . import yantai
 from . import yulin
 from . import zaozhuang
 from . import zhengzhou
+from . import zhongshan
 from . import zhoukou
 from . import zhoushan
 from . import zhuzhou
@@ -86,6 +95,7 @@ NAME = "中国"
 
 ADAPTERS = {
     "ankang": ankang,
+    "anqing": anqing,
     "baoji": baoji,
     "baotou": baotou,
     "changchun": changchun,
@@ -98,6 +108,7 @@ ADAPTERS = {
     "dehong": dehong,
     "deqing": deqing,
     "dezhou": dezhou,
+    "dongying": dongying,
     "eerduosi": eerduosi,
     "fujian_prov": fujian_prov,
     "guangzhou": guangzhou,
@@ -115,6 +126,7 @@ ADAPTERS = {
     "hunan_prov": hunan_prov,
     "jiangmen": jiangmen,
     "jiangyin": jiangyin,
+    "jieyang": jieyang,
     "jinan": jinan,
     "jingmen": jingmen,
     "jinhua": jinhua,
@@ -124,9 +136,11 @@ ADAPTERS = {
     "lijiang": lijiang,
     "lincang": lincang,
     "lishui": lishui,
+    "maoming": maoming,
     "nanjing": nanjing,
     "ningbo": ningbo,
     "nujiang": nujiang,
+    "puning": puning,
     "qiandongnan": qiandongnan,
     "qiannan": qiannan,
     "qingdao": qingdao,
@@ -142,6 +156,8 @@ ADAPTERS = {
     "tangshan": tangshan,
     "tianjin": tianjin,
     "tongliao": tongliao,
+    "tongling": tongling,
+    "weifang": weifang,
     "wenzhou": wenzhou,
     "wuhai": wuhai,
     "wuhan": wuhan,
@@ -154,9 +170,11 @@ ADAPTERS = {
     "yancheng": yancheng,
     "yangjiang": yangjiang,
     "yangzhou": yangzhou,
+    "yantai": yantai,
     "yulin": yulin,
     "zaozhuang": zaozhuang,
     "zhengzhou": zhengzhou,
+    "zhongshan": zhongshan,
     "zhoukou": zhoukou,
     "zhoushan": zhoushan,
     "zhuzhou": zhuzhou,
