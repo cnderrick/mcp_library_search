@@ -20,6 +20,8 @@ from . import deqing
 from . import dezhou
 from . import dongying
 from . import eerduosi
+from . import enshi
+from . import ezhou
 from . import fujian_prov
 from . import guangzhou
 from . import haikou
@@ -31,7 +33,9 @@ from . import henan_prov
 from . import heyuan
 from . import honghe
 from . import huaian
+from . import huanggang
 from . import huangshi
+from . import hubei_prov
 from . import huhehaote
 from . import hunan_prov
 from . import jiangmen
@@ -39,6 +43,7 @@ from . import jiangyin
 from . import jieyang
 from . import jinan
 from . import jingmen
+from . import jingzhou
 from . import jinhua
 from . import laibin
 from . import lanzhou
@@ -52,6 +57,7 @@ from . import maoming
 from . import mudanjiang
 from . import nanjing
 from . import ningbo
+from . import ningde
 from . import nujiang
 from . import puning
 from . import qiandongnan
@@ -67,6 +73,7 @@ from . import shanghai
 from . import shaoxing
 from . import shenzhen
 from . import shijiazhuang
+from . import shiyan
 from . import siping
 from . import suzhou
 from . import taian
@@ -82,6 +89,7 @@ from . import wuhai
 from . import wuhan
 from . import wuxi
 from . import xian
+from . import xiangtan
 from . import xianyang
 from . import xiaogan
 from . import xinzhou
@@ -91,8 +99,10 @@ from . import yancheng
 from . import yangjiang
 from . import yangzhou
 from . import yantai
+from . import yueyang
 from . import yulin
 from . import zaozhuang
+from . import zhangjiajie
 from . import zhengzhou
 from . import zhongshan
 from . import zhoukou
@@ -120,6 +130,8 @@ ADAPTERS = {
     "dezhou": dezhou,
     "dongying": dongying,
     "eerduosi": eerduosi,
+    "enshi": enshi,
+    "ezhou": ezhou,
     "fujian_prov": fujian_prov,
     "guangzhou": guangzhou,
     "haikou": haikou,
@@ -131,7 +143,9 @@ ADAPTERS = {
     "heyuan": heyuan,
     "honghe": honghe,
     "huaian": huaian,
+    "huanggang": huanggang,
     "huangshi": huangshi,
+    "hubei_prov": hubei_prov,
     "huhehaote": huhehaote,
     "hunan_prov": hunan_prov,
     "jiangmen": jiangmen,
@@ -139,6 +153,7 @@ ADAPTERS = {
     "jieyang": jieyang,
     "jinan": jinan,
     "jingmen": jingmen,
+    "jingzhou": jingzhou,
     "jinhua": jinhua,
     "laibin": laibin,
     "lanzhou": lanzhou,
@@ -152,6 +167,7 @@ ADAPTERS = {
     "mudanjiang": mudanjiang,
     "nanjing": nanjing,
     "ningbo": ningbo,
+    "ningde": ningde,
     "nujiang": nujiang,
     "puning": puning,
     "qiandongnan": qiandongnan,
@@ -167,6 +183,7 @@ ADAPTERS = {
     "shaoxing": shaoxing,
     "shenzhen": shenzhen,
     "shijiazhuang": shijiazhuang,
+    "shiyan": shiyan,
     "siping": siping,
     "suzhou": suzhou,
     "taian": taian,
@@ -182,6 +199,7 @@ ADAPTERS = {
     "wuhan": wuhan,
     "wuxi": wuxi,
     "xian": xian,
+    "xiangtan": xiangtan,
     "xianyang": xianyang,
     "xiaogan": xiaogan,
     "xinzhou": xinzhou,
@@ -191,8 +209,10 @@ ADAPTERS = {
     "yangjiang": yangjiang,
     "yangzhou": yangzhou,
     "yantai": yantai,
+    "yueyang": yueyang,
     "yulin": yulin,
     "zaozhuang": zaozhuang,
+    "zhangjiajie": zhangjiajie,
     "zhengzhou": zhengzhou,
     "zhongshan": zhongshan,
     "zhoukou": zhoukou,

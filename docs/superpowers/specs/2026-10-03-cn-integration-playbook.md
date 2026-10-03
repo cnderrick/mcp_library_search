@@ -57,7 +57,8 @@
   - 详情页 HTML 截断或模板异常 → `api_detail=True`（走 `/opac/api/book/{recno}` JSON）。
   - 检索页返回 ~3.3KB「opac验证」滑动验证码页 → `solr_search=True`（走 `/opac/api/search`）；
     若该站内嵌 Solr 也不可用（`/opac/api/search` 404，或**回 403「bot detected」**，
-    带 Referer/XHR 头仍拦，揭阳实证）→ `captcha=True`（命中即抛 CaptchaError，不破解）。
+    带 Referer/XHR 头仍拦，揭阳实证；或**连接被重置 `RemoteDisconnected`**、多次重试
+    仍拦，湖北省图实证）→ `captcha=True`（命中即抛 CaptchaError，不破解）。
   - 应用上下文非 `/opac` → `ctx="/lib2"` 或 `ctx=""`（先探 `/opac/*` 是否 404）。
   - 新版页 `li.libBookLi`／`a.bkTxtTit` → `pro2018=True`（绍兴另需 `pro2018_cite_author=True`）。
   - **静态资源路径不可作模板判据**：检索页引用 `pro2018` 媒体目录（`/opac/media/pro2018/…`）、
@@ -68,6 +69,9 @@
   - 应用为**更新的 jishen 模板**（页标题「书目检索」、`solrpagination.js`、表单 POST
     `booklist.jsp`，`/opac/search` 404）→ **非家族模板，不接入**，回报主线程归入新分支
     （清远 `qingyuan` 实证）。
+  - 应用为**老版 GLIS 模板**（页标题「图书检索系统」、GB2312、入口 `index.jsp`＋检索走
+    GET `jdjsjg.jsp`、`/opac/search` 与 `/opac/api/*` 均 404）→ **非家族模板，不接入**，
+    回报主线程归入新分支（开封 `kaifeng` 实证）。
   - 多租户云托管详情需带馆码 → `curlibcode="XXX"`；联合目录按馆过滤 → `f_curlibcode="XX"`。
   - 检索页验证码挡住但**详情/馆藏匿名可通**时仍作 ✅ 接入（`captcha=True` 或 `solr_search=True`），
     同乐山/揭阳先例；recno 可自首页推荐位等匿名页取得。

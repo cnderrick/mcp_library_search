@@ -109,6 +109,13 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     xinzhou（忻州市图书馆）、siping（四平市图书馆）、qiqihar（齐齐哈尔市图书馆）、
     mudanjiang（牡丹江市图书馆）、sanming（三明市图书馆），
     以上馆藏到单册级、详情走 /api/book 接口。
+    第七批（图创 Interlib）：ningde（宁德市图书馆）、shiyan（十堰市图书馆）、
+    ezhou（鄂州市图书馆）、jingzhou（荆州市图书馆）、huanggang（黄冈市图书馆）、
+    enshi（恩施州图书馆）、xiangtan（湘潭市图书馆）、yueyang（岳阳市图书馆）、
+    zhangjiajie（张家界市图书馆）（HTML 检索页直连）、
+    hubei_prov（湖北省图书馆，检索页「opac验证」且内嵌 Solr 被 bot 检测拦，
+    未过码时抛 CaptchaError 不破解，详情/馆藏匿名可通，同乐山/揭阳口径），
+    以上馆藏到单册级、详情走 /api/book 接口。
     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，

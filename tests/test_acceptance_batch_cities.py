@@ -40,27 +40,36 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋第六批 10 城（2026-10-03 立项城市落地，均图创 Interlib 默认模板＋api_detail）：
 #   泰安/日照/临沂/聊城/石家庄/忻州/四平/齐齐哈尔/牡丹江/三明；同批晋中/莆田
 #   域名落 198.20.0.x 停放段，改判不通、不接入
+# ＋第七批 10 城（2026-10-03 立项城市落地，均图创 Interlib＋api_detail）：
+#   宁德/十堰/鄂州/荆州/黄冈/恩施/湘潭/岳阳/张家界（HTML 检索页直连）；
+#   湖北省图书馆 hubei_prov（检索页「opac验证」＋内嵌 Solr 被 bot 检测拦，
+#   captcha=True 抛 CaptchaError，详情/馆藏匿名可通，同乐山/揭阳口径）；
+#   同批龙岩（opac.lytsg.com→198.20.0.182 停放段）改判不通、开封为老版 GLIS
+#   （jdjsjg.jsp，无 /opac/search、无 /opac/api/*）非家族模板，均不接入
 _EXPECTED = [
     "ankang", "anqing", "baoji", "baotou", "changchun", "chaozhou",
     "chengdu", "chongqing", "chuxiong", "dalian", "daqing", "dehong",
-    "deqing", "dezhou", "dongying", "eerduosi", "fujian_prov", "guangzhou",
+    "deqing", "dezhou", "dongying", "eerduosi", "enshi", "ezhou",
+    "fujian_prov", "guangzhou",
     "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
-    "heyuan", "honghe", "huaian", "huangshi", "huhehaote", "hunan_prov",
-    "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen", "jinhua",
+    "heyuan", "honghe", "huaian", "huanggang", "huangshi", "hubei_prov",
+    "huhehaote", "hunan_prov",
+    "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen", "jingzhou", "jinhua",
     "laibin", "lanzhou", "leshan", "liaocheng", "lijiang", "lincang",
-    "linyi", "lishui", "maoming", "mudanjiang", "nanjing", "ningbo",
+    "linyi", "lishui", "maoming", "mudanjiang", "nanjing", "ningbo", "ningde",
     "nujiang", "puning", "qiandongnan", "qiannan", "qingdao", "qiqihar",
     "quanzhou", "qujing", "rizhao", "sanming", "shaanxi", "shanghai",
-    "shaoxing", "shenzhen", "shijiazhuang", "siping", "suzhou", "taian",
+    "shaoxing", "shenzhen", "shijiazhuang", "shiyan", "siping", "suzhou", "taian",
     "taiyuan", "taizhou", "tangshan", "tianjin", "tongliao", "tongling",
-    "weifang", "wenzhou", "wuhai", "wuhan", "wuxi", "xian",
+    "weifang", "wenzhou", "wuhai", "wuhan", "wuxi", "xian", "xiangtan",
     "xianyang", "xiaogan", "xinzhou", "xishuangbanna", "xuzhou", "yancheng",
-    "yangjiang", "yangzhou", "yantai", "yulin", "zaozhuang", "zhengzhou",
+    "yangjiang", "yangzhou", "yantai", "yueyang", "yulin", "zaozhuang",
+    "zhangjiajie", "zhengzhou",
     "zhongshan", "zhoukou", "zhoushan", "zhuzhou", "zibo", "zunyi",
 ]
 
 
-def test_registry_has_exactly_eighty_six_identifiers():
+def test_registry_has_exactly_expected_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED
