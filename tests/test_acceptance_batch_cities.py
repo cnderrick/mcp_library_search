@@ -53,13 +53,19 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋第九批 4 城（2026-10-03 立项城市落地，均老版 UILAS HTML OPAC，复用 uilas/ 家族）：
 #   芜湖/六安/通化/贵阳（贵阳应用上下文为根路径）；同批南昌（uopac.nclib.net→
 #   198.20.3.17 停放段、HTTP 零字节超时）改判不通、不接入
+# ＋第十批 4 城（2026-10-03 立项城市落地）：taizhou_js（泰州市图书馆，江苏，
+#   标识别于台州 taizhou；图星 LibStar Find，groupCode=100508）、
+#   haixi（海西州图书馆，图星 LibStar Find，groupCode=100216，旧批「需登录」
+#   经复核不成立、匿名可通）、bengbu（蚌埠市图书馆，实抓为图创 tcc-opac，
+#   复用 tccopac/ 家族）、hengyang（衡阳市图书馆，InDigLib 独立实现，照
+#   chongqing.py 复刻；题名检索 quirk、会话入口 advanced.action、GetAsset 根路径）
 _EXPECTED = [
-    "ankang", "anqing", "anshun", "baoji", "baotou", "bijie", "changchun", "chaozhou",
+    "ankang", "anqing", "anshun", "baoji", "baotou", "bengbu", "bijie", "changchun", "chaozhou",
     "chengdu", "chongqing", "chuxiong", "dalian", "daqing", "dehong",
     "deqing", "dezhou", "dongying", "eerduosi", "enshi", "ezhou",
     "fujian_prov", "fuzhou", "guangzhou", "guilin", "guiyang",
-    "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
-    "heyuan", "honghe", "huaian", "huanggang", "huangshi", "hubei_prov",
+    "haikou", "haixi", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
+    "hengyang", "heyuan", "honghe", "huaian", "huanggang", "huangshi", "hubei_prov",
     "huhehaote", "hulunbuir", "hunan_prov",
     "jiangmen", "jiangyin", "jieyang", "jinan", "jingmen", "jingzhou", "jinhua",
     "laibin", "lanzhou", "leshan", "liaocheng", "lijiang", "lincang",
@@ -67,7 +73,7 @@ _EXPECTED = [
     "nujiang", "puning", "qiandongnan", "qiannan", "qingdao", "qiqihar",
     "quanzhou", "qujing", "rizhao", "sanming", "sanya", "shaanxi", "shanghai",
     "shaoxing", "shenzhen", "shijiazhuang", "shiyan", "siping", "suzhou", "taian",
-    "taiyuan", "taizhou", "tangshan", "tianjin", "tonghua", "tongliao", "tongling",
+    "taiyuan", "taizhou", "taizhou_js", "tangshan", "tianjin", "tonghua", "tongliao", "tongling",
     "weifang", "wenzhou", "wuhai", "wuhan", "wuhu", "wuxi", "xian", "xiangtan",
     "xianyang", "xiaogan", "xinzhou", "xishuangbanna", "xuzhou", "yancheng",
     "yangjiang", "yangzhou", "yantai", "yueyang", "yulin", "zaozhuang",

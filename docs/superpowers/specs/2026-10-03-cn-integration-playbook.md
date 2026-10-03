@@ -128,13 +128,21 @@
 - 检索 `POST /find/unify/search`；详情必须 GET `…/getBookDetail?recordId=`；
   馆藏 `POST /find/physical/groupItemsByLibCode`。
 - `*.libsp.com` 是通配停放域，凭域名猜可达性会误判，须见真站特征或调通 API。
+  （`*.libsp.cn` 为真站域，海西 `findhxztsg.libsp.cn` 实证可达。）
 - 适配器照 `adapters/cn/hanzhong.py`（`groupCode=100121`）。
+- **回填（2026-10-03 第十批：泰州/海西）**：
+  - 泰州（江苏）`taizhou_js`：`https://findjstzlib.pub.chaoxing.com`，域名
+    `*.pub.chaoxing.com`（与淮安同），`groupCode=100508`；实抓「三体」179 条。
+    **标识冲突**：`taizhou` 已被浙江台州占用，江苏泰州必须用 `taizhou_js`。
+  - 海西 `haixi`：`https://findhxztsg.libsp.cn`，`groupCode=100216`；实抓「三体」
+    106 条。**旧批传「需登录」不成立**——本批匿名 `getGroupCode` 与三原语均 200。
+  - 两城与无锡/徐州/淮安/盐城/汉中同构，家族 parser 零改动、无 quirk。
 
 ### 3.5 tcc-opac（`tccopac/`）
 
 - 家族模块 `src/mcp_library_search/tccopac/`；配置 `TccOpacConfig`
   （`city`/`name_cn`/`base_url`/`referer` 四项，暂无其它 quirk）。
-- 成员已含：宁波/济南/鄂尔多斯，**2026-10-03 增三亚 `sanya`**。
+- 成员已含：宁波/济南/鄂尔多斯，**2026-10-03 增三亚 `sanya`、蚌埠 `bengbu`**。
 - 入口形如 `{host}/…/999`（宁波/济南/鄂尔多斯）；三亚是 `opac-remould` Vue SPA 挂
   `/opac/<SEG>`、真实 API 前缀 `/api/tcc-opac/<SEG>`，SEG 取自前端 JS 常量
   （三亚 `["SY","YCSTQG"]`，默认 `SY`）。**判据**：JS 出现 `/api/tcc-opac`、
@@ -147,15 +155,32 @@
 - 数据边界：检索条目 `availability_summary` 恒空串；`biblios.shelfno` 为 null 时
   `call_number` 空串（`classno` 分类号不冒充索书号）。**源站可偶发 TLS/读超时**
   （三亚实抓令牌、getbyid 均出现过，重试即通），家族 timeout 30 秒止损、业务请求不重试。
-- 适配器照 `adapters/cn/ningbo.py`／`jinan.py`／`sanya.py`。
+- 适配器照 `adapters/cn/ningbo.py`／`jinan.py`／`sanya.py`／`bengbu.py`。
+- **回填（2026-10-03 第十批：蚌埠）**：`bengbu` 入口 `http://58.242.164.105:8090/999`
+  实抓为 `opac-remould` Vue SPA（页标题「图书馆」），`app.*.js` 出现 `/api/tcc-opac`、
+  `getOpenApiAccessToken` → 图创 tcc-opac（非 Interlib）。API 前缀由前端 `getBaseUrl()`
+  反推 `{origin}/api/tcc-opac/{href 第 4 段}` → `/api/tcc-opac/999`，Referer 取入口页。
+  实抓「三体」32 条，详情 `shelfno` null → `call_number` 空串，馆藏 12 册含在馆/借出。
+  无需新 quirk。
 
-### 3.6 InDigLib（重庆，独立实现，无共享家族）
+### 3.6 InDigLib（重庆、衡阳，独立实现，无共享家族）
 
 - 无家族模块；照 `adapters/cn/chongqing.py` 复制独立实现（urllib＋CookieJar）。
-- 入口 `/InDigLib/frontV2/SearchIndex!simple.action?opacType=local`；会话流程先 GET 拿
-  JSESSIONID 再 POST `OpacMarcSearchSolr!simpleSearch.action`；翻页必须 GET 带 `pageNo`；
-  馆藏走**根路径** `POST InDigLib/GetAsset.action`（`frontV2/` 前缀版有登录拦截）。
+- 重庆入口 `/InDigLib/frontV2/SearchIndex!simple.action?opacType=local`；会话流程先 GET
+  拿 JSESSIONID 再 POST `OpacMarcSearchSolr!simpleSearch.action`；翻页必须 GET 带
+  `pageNo`；馆藏走**根路径** `POST InDigLib/GetAsset.action`（`frontV2/` 前缀版有登录
+  拦截）。检索走根路径（页内 `<base href="…/InDigLib/">`）。
 - 可借口径统一保守：无法确认在架的一律 `available=False`，原值照登。
+- **回填（2026-10-03 第十批：衡阳 `hengyang`）**：
+  - 站点 `http://weixin.hengyanglib.org`，入口是 `SearchIndex!advanced.action`
+    （旧版 `simple.action?opacType=local` 存在但偶发超时不稳）→ 复制时 `_ensure_session`
+    的会话入口改为 advanced。
+  - **题名检索 quirk**：advanced 表单默认检索字段是 `select1=title`，非重庆的「任意词
+    all」；`all` 把「三体」按字拆成 OR、首条无关（《三国志》，totalPage=16），`title`
+    才命中《三体》（totalPage=6）。复制时非 ISBN 关键词一律 `title`、ISBN 走 `isbn`。
+  - **源站偶发读超时**（检索/单册均出现过），复制时在 `_open` 内加 3 次有限重试；其余
+    会话流程、翻页 `pageNo`、详情 `BookDetail.action`、根路径 `GetAsset.action`、
+    保守口径与重庆一致。实抓「三体」题名检索 6 页、首条《三体》。
 
 ### 3.7 超星系（智慧门户 wisweb／chaoxing）
 
@@ -259,20 +284,20 @@
 
 | 城市 | 馆名 | 标识 | base_url | 备注 |
 |---|---|---|---|---|
-| 泰州 | 泰州市图书馆 | `taizhou_js` | https://findjstzlib.pub.chaoxing.com | **标识冲突**：`taizhou` 已被台州市（浙江）占用，泰州（江苏）用 `taizhou_js`；groupcode 待查 |
-| 海西 | 海西州图书馆 | `haixi` | https://findhxztsg.libsp.cn | 传需登录，接入前复核匿名接口 |
+| 泰州 | 泰州市图书馆 | `taizhou_js` | https://findjstzlib.pub.chaoxing.com | ✅「三体」179 条；**标识冲突**：`taizhou` 已被台州市（浙江）占用，泰州（江苏）用 `taizhou_js`；`groupCode=100508`（`getGroupCode` 查得）；quirk 无 |
+| 海西 | 海西州图书馆 | `haixi` | https://findhxztsg.libsp.cn | ✅「三体」106 条；**旧批「需登录」不成立**，匿名 `getGroupCode` 与三原语均 200；`groupCode=100216`；quirk 无 |
 
 ### 4.6 tcc-opac 疑（1 城）
 
 | 城市 | 馆名 | 标识 | base_url | 备注 |
 |---|---|---|---|---|
-| 蚌埠 | 蚌埠市图书馆 | `bengbu` | http://58.242.164.105:8090 | 入口 `/999`，同宁波/济南形态，先实抓确认 |
+| 蚌埠 | 蚌埠市图书馆 | `bengbu` | http://58.242.164.105:8090 | ✅「三体」32 条；实抓入口 `/999` 为 `opac-remould` SPA、API 前缀 `/api/tcc-opac/999` → 图创 **tcc-opac**（非 Interlib）；quirk 无 |
 
 ### 4.7 InDigLib（1 城）
 
-| 城市 | 馆名 | 标识 | 入口 |
-|---|---|---|---|
-| 衡阳 | 衡阳市图书馆 | `hengyang` | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action |
+| 城市 | 馆名 | 标识 | 入口 | 实抓／quirk 结论（2026-10-03 回填） |
+|---|---|---|---|---|
+| 衡阳 | 衡阳市图书馆 | `hengyang` | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action | ✅「三体」题名检索 6 页、首条《三体》；会话入口 advanced.action、字段默认 `select1=title`（`all` 按字 OR 返回无关首条）、馆藏根路径 GetAsset；源站偶发读超时（入口内重试） |
 
 ### 4.8 新版 UILAS REST／同陕图平台（2 城）
 

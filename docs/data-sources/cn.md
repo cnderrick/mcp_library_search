@@ -34,7 +34,7 @@
 | 安徽省 | 合肥 | `hefei` | ✅ 接入 | — | https://opac.ahlib.com/opac/index （安徽省图书馆） | 图创 Interlib（已确认，与穗杭完全同模板） | `interlib/` 家族 + `adapters/cn/hefei.py`（双源合并：皖图 `AH:` ＋ 市图 `HF:`，天津口径） |
 |  |  |  | ✅ 接入 | — | https://opac.hflib.org.cn/lib2/ （合肥市图书馆） | 图创 Interlib（已确认，同模板；应用上下文是 `/lib2` 非 `/opac`，`/opac/*` 返回 nginx 500） |  |
 |  | 芜湖 | `wuhu` | ✅ 接入 | — | https://ilas.whstsg.org.cn:18086/ILASOPAC/ （芜湖市图书馆） | UILAS 知识检索平台（老版 ILAS HTML OPAC） | `uilas/` 家族 + `adapters/cn/wuhu.py`；HTTPS 默认 TLS 可通（非舟山式静态 RSA 套件）；实抓「三体」143 条 |
-|  | 蚌埠 | — | 📋 计划 | — | http://58.242.164.105:8090/999 （蚌埠市图书馆） | 疑图创 tcc-opac（入口以 `/999` 结尾，同宁波/济南形态，待实抓） | 2026-10-03 用户提供入口；旧登记 www.bblib.net 未核实 |
+|  | 蚌埠 | `bengbu` | ✅ 接入 | — | http://58.242.164.105:8090/999 （蚌埠市图书馆） | 图创 tcc-opac（实抓确认：`opac-remould` Vue SPA＋`/api/tcc-opac/999/*` 纯 JSON 访客令牌，非 Interlib） | `tccopac/` 家族 + `adapters/cn/bengbu.py`；实抓「三体」32 条 |
 |  | 淮南 | — | ⛔ 不通 | — | http://www.hnlib.net （淮南市图书馆） | — | — |
 |  | 马鞍山 | — | ⛔ 不通 | — | https://www.maslib.com.cn/ （马鞍山市图书馆） | — | 2026-10-03 用户实测官网首页全白、看不到内容，无可匿名检索入口；旧登记 www.maslib.net 未核实 |
 |  | 淮北 | — | ⛔ 不通 | — | http://v1.chaoxing.com/wechatSet/mobileIndex?type=1&fidEnc=29593cac201c4605&pageId=3893&wxAppid=wxb6457add4c8545c8&menuType=v1page# （淮北市图书馆，超星微信小程序门户） | 超星微信小程序门户 | 2026-10-03 用户述仅小程序内可查、需登录，无匿名 OPAC；旧登记 www.hblib.net 未核实 |
@@ -85,7 +85,7 @@
 |  | 淮安 | `huaian` | ✅ 接入 | — | https://findhastsg.pub.chaoxing.com （淮安市图书馆，含少儿馆、清江浦区馆等） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `libstar/` 家族 + `adapters/cn/huaian.py`；`groupCode=100382`。检索须带 `Referer`＋`groupcode` 头；实抓「三体」3110 条 |
 |  | 盐城 | `yancheng` | ✅ 接入 | — | https://findyctsg.libsp.com （盐城市图书馆） | 图星 LibStar Find（与无锡新吴同款，JSON API） | `libstar/` 家族 + `adapters/cn/yancheng.py`；`groupCode=100026`。检索须带 `Referer`＋`groupcode` 头；实抓「三体」857 条 |
 |  | 镇江 | — | ⛔ 不通 | — | http://opac.zjlib.net/opac/ （镇江市图书馆） | — | 2026-10-03 用户述不通；旧登记 www.zjlib.net 未核实 |
-|  | 泰州 | — | 📋 计划 | — | https://findjstzlib.pub.chaoxing.com/#/home （泰州市图书馆） | 图星 LibStar Find（`*.pub.chaoxing.com` 域名，同图星系统） | 2026-10-03 用户提供入口；原登记 www.tzlib.com/tzlib.net/tzlib.cn 均为停放段或他市馆，非本市，不再作入口 |
+|  | 泰州 | `taizhou_js` | ✅ 接入 | — | https://findjstzlib.pub.chaoxing.com/#/home （泰州市图书馆，江苏省；标识加 js 以别于浙江台州 `taizhou`） | 图星 LibStar Find（`*.pub.chaoxing.com` 域名，同图星系统） | `libstar/` 家族 + `adapters/cn/taizhou_js.py`；`groupCode=100508`；实抓「三体」179 条。原登记 www.tzlib.com/tzlib.net/tzlib.cn 均为停放段或他市馆，非本市，不再作入口 |
 |  | 宿迁 | — | 📋 计划 | — | https://sqstsg.mh.chaoxing.com （宿迁市图书馆，超星智慧门户） | 超星智慧门户（wisweb／chaoxing 系） | 门户页 HTTP 200，底层书目检索入口未侦察 |
 | 辽宁省 | 大连 | `dalian` | ✅ 接入 | — | 超星入口 http://www.dl.superlib.net/ （搁置）；**在用入口** http://ykt.dl-library.net.cn/ （大连地区网上联合目录） | SirsiDynix iLink（`/uhtbin/cgisirsi/`，本仓库首见新家族，与成都不同家族不共享模块）；原超星入口 IP 白名单硬墙 | `adapters/cn/dalian.py`（独立实现；ps token＋会话 cookie 每请求变、全程同 cookie jar，类重庆会话流程；节流 ≥4 秒/host）。**检索语义**：裸词是逐字 AND 宽匹配、无相关度排序（所有字段「三体」实测 27944 条），**ASCII 双引号才是短语检索**（「"三体"」132 条）——适配器一律按短语下发，0 命中或源站拒答（含罗马数字等索引不收字符回 Error 页）时退回裸词；详情靠题名候选梯度重检索定位（短语截断题名起，命中多于首页时逐页翻找，VIEW 用全局序号）。2026-10-02 实网验收：检索、详情、馆藏全链路跑通 |
 |  | 沈阳 | — | ⛔ 不通 | — | http://www.lnlib.com （辽宁省图书馆） | — | — |
@@ -259,7 +259,7 @@
 |  |  | — | ⛔ 不通 | — | https://opac.changshalib.cn/index （长沙图书馆） | 图创 Interlib（整站 WAF 应用层拦截） | 2026-10-03 本批复核：`/index` 返回 200 但 `/opac/search`（任意参数）恒 HTTP 403「网站防护系统」；旧批即判整站 WAF 403，复核结论一致，无可用检索入口 |
 |  | 株洲 | `zhuzhou` | ✅ 接入 | — | http://218.75.211.12:8899/opac/index （株洲市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/zhuzhou.py`；实抓「三体」222 条 |
 |  | 湘潭 | `xiangtan` | ✅ 接入 | — | http://220.170.15.29:8099/opac/index （湘潭市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/xiangtan.py`（`api_detail=True`）；实抓「三体」88 条 |
-|  | 衡阳 | — | 📋 计划 | — | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action （衡阳市图书馆） | InDigLib 集群数字图书馆（同重庆家族） | 2026-10-03 用户提供入口；旧登记 www.hylib.net 未核实 |
+|  | 衡阳 | `hengyang` | ✅ 接入 | — | http://weixin.hengyanglib.org/InDigLib/frontV2/SearchIndex!advanced.action （衡阳市图书馆） | InDigLib 集群数字图书馆（同重庆，独立实现） | `adapters/cn/hengyang.py`；实抓「三体」题名检索 6 页（首条《三体》）。题名检索 quirk、会话入口 advanced.action、馆藏走根路径 GetAsset |
 |  | 邵阳 | — | ⛔ 不通 | — | http://www.sylib.net （邵阳市图书馆） | — | — |
 |  | 岳阳 | `yueyang` | ✅ 接入 | — | http://183.214.211.146:18081/opac/index （岳阳市图书馆） | 图创 Interlib（默认模板） | `interlib/` 家族 + `adapters/cn/yueyang.py`（`api_detail=True`）；实抓「三体」17 条 |
 |  | 常德 | — | 🕳️ 无入口 | — | https://www.hncdtsg.cn/ （常德市图书馆） | — | 2026-10-03 用户实测官网可达但未找到查询入口；旧登记 www.cdlib.net 未核实 |
@@ -337,7 +337,7 @@
 |  | 海南州 | — | ❓ 缺失 | — | — | — | — |
 |  | 果洛 | — | ⛔ 不通 | — | https://findguoluo.libsp.cn/#/searchListExternal/01/%E4%B8%8A%E7%98%BE/01 （果洛藏族自治州图书馆） | 图星 LibStar Find（`libsp.cn` 域名） | 2026-10-03 用户述需登录，无匿名检索接口；旧登记 guoluo.superlib.libsou.com 首页 200 但无书目检索入口 |
 |  | 玉树 | — | ❓ 缺失 | — | — | — | — |
-|  | 海西 | — | 📋 计划 | — | https://findhxztsg.libsp.cn/#/home （海西州图书馆） | 图星 LibStar Find（`libsp.cn` 域名，SPA） | 2026-10-03 用户提供入口，未标注异常，可计划接入（以本批最新数据为准） |
+|  | 海西 | `haixi` | ✅ 接入 | — | https://findhxztsg.libsp.cn/#/home （海西州图书馆） | 图星 LibStar Find（`libsp.cn` 域名，SPA） | `libstar/` 家族 + `adapters/cn/haixi.py`；`groupCode=100216`；实抓「三体」106 条。旧批传「需登录」经复核不成立，匿名接口可用 |
 | 西藏自治区 | 拉萨 | — | ❓ 缺失 | — | — | — | — |
 |  | 日喀则 | — | ❓ 缺失 | — | — | — | — |
 |  | 昌都 | — | ❓ 缺失 | — | — | — | — |
@@ -714,12 +714,13 @@ securitycam 墙。将来评估其他汇文站点必须逐站实测，不能按�
   location＝`local_name` 原值；status＝`state_name` 原值（缺失回退 state 码），
   词表（2=在馆/3=借出/9=锁定/16=馆内阅览/33=已通还…）外保守不可借。
 
-## tcc-opac 家族（宁波、济南、鄂尔多斯、三亚）
+## tcc-opac 家族（宁波、济南、鄂尔多斯、三亚、蚌埠）
 
 家族模块 `tccopac/`：`client.py`（HTTP 层＋4 秒/host 节流＋访客令牌缓存）、
 `parser.py`（检索/详情/馆藏 JSON 解析）、`__init__.py`（三原语与 `TccOpacConfig`）。
 成员：宁波市图书馆（`adapters/cn/ningbo.py`）、济南市图书馆（`adapters/cn/jinan.py`）、
-鄂尔多斯市图书馆（`adapters/cn/eerduosi.py`）、三亚市图书馆（`adapters/cn/sanya.py`）。
+鄂尔多斯市图书馆（`adapters/cn/eerduosi.py`）、三亚市图书馆（`adapters/cn/sanya.py`，
+段 `SY`）、蚌埠市图书馆（`adapters/cn/bengbu.py`，段 `999`）。
 tcc-opac 与 Interlib 是不同产品线，
 不可复用 `interlib/` 家族。城市差异只允许以带默认值的 `TccOpacConfig` 字段新增。
 base_url 形态 `{host}/api/tcc-opac/{首段路径}`（前端 `getBaseUrl()` 逆向）。
@@ -750,11 +751,18 @@ base_url 形态 `{host}/api/tcc-opac/{首段路径}`（前端 `getBaseUrl()` 逆
   宁波逐项同构，固定 `hasholding=1`；实抓「三体」49 条（首条《三体漫画．起源》）。源站
   偶发 TLS/读超时（令牌端点亦曾超时，重试即通），家族 30 秒 timeout 止损。侦察结论见
   `tests/fixtures/sanya/NOTES.md`。
+- **蚌埠 `bengbu` 差异（2026-10-03，无需新 quirk）**：入口为 `opac-remould` Vue SPA
+  `http://58.242.164.105:8090/999`，真实 API 前缀 `/api/tcc-opac/999`（段 `999` 取自
+  `location.href` 第 4 段，前端 `getBaseUrl()` 逆向）。判据：首页 `<noscript>` 含
+  `opac-remould`、`app.*.js` 出现 `/api/tcc-opac`、`/system/user/getOpenApiAccessToken`。
+  实抓「三体」32 条（首条《三体》）；详情 `shelfno` 为 null → `call_number` 空串；馆藏
+  12 册含在馆/借出（带应还日期）。侦察结论见 `tests/fixtures/bengbu/NOTES.md`。
 
-## InDigLib（重庆）
+## InDigLib（重庆、衡阳）
 
-`adapters/cn/chongqing.py` 独立实现（urllib + CookieJar 会话），API 基址
-http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr）。
+无共享家族，各城独立实现（urllib + CookieJar 会话）；`adapters/cn/chongqing.py`
+（API 基址 http://222.177.237.197:8080）与 `adapters/cn/hengyang.py`
+（API 基址 http://weixin.hengyanglib.org）。（InDigLib 集群数字图书馆，Struts2 + Solr）。
 使用者入口是总览表的 SearchIndex 地址；根路径 `/InDigLib/` 返回的是登录页
 （6455 字节，实测），别当入口登记。
 
@@ -780,6 +788,23 @@ http://222.177.237.197:8080 （InDigLib 集群数字图书馆，Struts2 + Solr�
 - **回退**：GetAsset 不可用（请求失败/响应非 JSON）时退回详情页「馆藏信息」注释块
   的 `class="first"` 馆名，只到分馆级（`status=""`、`available=False`）。
 - 字段侦察与端点真伪结论见 `tests/fixtures/chongqing/NOTES.md`。
+
+### 衡阳（`hengyang`，InDigLib 独立实现）
+
+`adapters/cn/hengyang.py` 照 `chongqing.py` 复刻。站点
+http://weixin.hengyanglib.org ，入口 `frontV2/SearchIndex!advanced.action`
+（页内 `<base>` 指向 `/InDigLib/`，故检索/馆藏均走**根路径**）。与重庆的差异：
+
+- **会话入口是 advanced.action**（旧版 `simple.action?opacType=local` 存在但偶发超时不稳）。
+- **题名检索 quirk**：advanced 表单默认检索字段为 **`select1=title`**（题名），
+  非重庆的「任意词 all」——实抓 `all` 把「三体」按字拆成 OR、首条为无关的《三国志》
+  （totalPage=16），`title` 才给出《三体》等正确命中（totalPage=6）。适配器非 ISBN
+  关键词一律 `title`、ISBN 走 `isbn`。
+- 会话流程、翻页 GET `pageNo`、详情 `BookDetail.action?metaid=&metatable=`、馆藏根路径
+  `GetAsset.action`、可借口径保守（全部 `available=False`、状态原值照登）与重庆一致。
+- **源站偶发读超时**（检索/单册均出现过），`_open` 内做 3 次有限重试止损。
+- 实抓「三体」题名检索 6 页、首条《三体》（`i_sgbiblios:19673`）；馆藏 2 册（1 入藏
+  1 普通借出，due_date 2025-10-02）。侦察结论见 `tests/fixtures/hengyang/NOTES.md`。
 
 ## SirsiDynix iLink（大连）
 
@@ -885,13 +910,15 @@ Tomcat/JSP），全链路匿名零 cookie。
   或 `"0"` 时 `due_date` 空串。
 - 字段侦察结论见 `tests/fixtures/shaanxi/NOTES.md`、`tests/fixtures/yulin/NOTES.md`。
 
-## 图星 LibStar Find（无锡、徐州、盐城、淮安、汉中）
+## 图星 LibStar Find（无锡、徐州、盐城、淮安、汉中、泰州、海西）
 
 家族模块 `libstar/`：`client.py`（HTTP 层＋`Referer`/`groupcode` 必需头＋节流）、
 `parser.py`（检索/详情/馆藏解析）、`__init__.py`（单实例三原语与 `LibStarConfig`）。
 成员：无锡市新吴区图书馆（`adapters/cn/wuxi.py`，单实例＋多源预留）、徐州
-（`adapters/cn/xuzhou.py`）、淮安（`adapters/cn/huaian.py`）、盐城
-（`adapters/cn/yancheng.py`）、汉中（`adapters/cn/hanzhong.py`，`groupCode=100121`）。
+（`adapters/cn/xuzhou.py`，`groupCode=3203001001`）、淮安（`adapters/cn/huaian.py`，
+`groupCode=100382`）、盐城（`adapters/cn/yancheng.py`，`groupCode=100026`）、汉中
+（`adapters/cn/hanzhong.py`，`groupCode=100121`）、泰州（`adapters/cn/taizhou_js.py`，
+`groupCode=100508`，江苏）、海西（`adapters/cn/haixi.py`，`groupCode=100216`）。
 城市差异只允许以 `LibStarConfig` 带默认值的字段新增。
 技术组件是图星 LibStar Find v3.2023.12（北京图星/超星集团），与图创 Interlib 是
 两家厂商，不共用代码；家族 client 节流 1 秒/host。
@@ -952,8 +979,16 @@ Tomcat/JSP），全链路匿名零 cookie。
 - **盐城（`yancheng`）差异（均无需新 quirk）**：单实例单馆（馆藏分组只有
   `盐城市图书馆`），无多源归并，`book_id` 即裸 `recordId`；其余（域名、状态词表、
   日期内嵌）与无锡/徐州/淮安一致。侦察结论见 `tests/fixtures/yancheng/NOTES.md`。
+- **泰州（`taizhou_js`）差异（无需新 quirk）**：标识加 `js` 以别于浙江台州 `taizhou`；
+  域名同淮安为 `*.chaoxing.com`（`findjstzlib.pub.chaoxing.com`），单实例，`book_id`
+  即裸 `recordId`；`groupCode=100508`；实抓「三体」179 条，首条《三体 : 图像小说》；
+  状态词表/日期内嵌同无锡。侦察结论见 `tests/fixtures/taizhou_js/NOTES.md`。
+- **海西（`haixi`）差异（无需新 quirk）**：域名 `*.libsp.cn`（`findhxztsg.libsp.cn`，
+  真站特征齐全，非停放域），单实例，`groupCode=100216`；实抓「三体」106 条，首条
+  《三体. Ⅱ, 黑暗森林》。**旧批「需登录」不成立**——本批匿名接口与三原语均 200。
+  侦察结论见 `tests/fixtures/haixi/NOTES.md`。
 - 字段侦察、状态词表样本与 fixture 清单见 `tests/fixtures/{wuxi,xuzhou,huaian,
-  yancheng}/NOTES.md`。
+  yancheng,hanzhong,taizhou_js,haixi}/NOTES.md`。
 
 ## SirsiDynix Enterprise/VSE（郑州）
 

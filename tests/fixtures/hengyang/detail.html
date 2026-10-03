@@ -1,0 +1,621 @@
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="http://weixin.hengyanglib.org:80/InDigLib/">
+    
+    <title>书目详细页面</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/home.css?ver=20261003152655">
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/opac.css?ver=20261003152655">
+	<link rel="stylesheet" type="text/css" href="opac/css/ui.all.css" />
+	<link rel="stylesheet" type="text/css" href="frontFace/css/smlogin.css" />
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery.switchable.min.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/js/common.js?ver=20261003152655" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/toolTip.js?ver=20261003152655" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/common.js?ver=20261003152655" ></script>
+	
+
+	<script type="text/javascript" src="js/common/map.js"></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/detailBiblios.js" ></script>
+	<script type="text/javascript" src='opac/js/ui.core.js'></script>
+	<script type="text/javascript" src="opac/js/ui.dialog.js"></script>
+	<script type="text/javascript" src="js/opacRandom/opacRandom.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery.cookie.js"></script>
+	<!--<script type="text/javascript" src=" http://192.168.129.11/bookcd/format/Release/aspx/schoolInterface/interface.js"></script> -->
+	
+	<style type="text/css">
+	 	.table_list{width:100%; margin:0px auto;}
+		.table_list table,.table_list table td,.table_list table,.table_list table th{border:1px solid #a8c9e3; border-collapse:collapse; height:20px;widows: 20px;}
+		.table_list table tr th{height:26px;line-height:26px; font-weight:normal;font-size:12px;  color:black; font-weight:bold; background:url(../image/thbac.jpg) repeat-x; background-position:left top; letter-spacing:2px;}
+		.table_list table {background-color:White;}
+	</style>
+	
+	<style type="text/css">
+		#tipbox:before,
+		#tipbox:after {
+			content: "";
+			position: absolute;
+			border-style: dashed dashed solid dashed;
+			line-height: 1;
+			display: inline-block;
+		}
+		
+		#tipbox:after {
+			left: 75px;
+			border-color: transparent transparent #D7DADB;
+			border-width: 11px;
+			top: -22px;
+			z-index: 1080;
+		}
+		
+		#tipbox:before {
+			left: 76px;
+			border-color: transparent transparent #FFF;
+			border-width: 10px;
+			top: -19px;
+			z-index: 1081;
+		}
+		.marc-div{
+			font-family: Courier, "Courier New";
+		    background-color: #efefef;
+		    border: 1px solid #ccc;
+		    font-size: 16px;
+		    padding-left: 1.2em;
+		    padding-top: 0.5em;
+		}
+		
+		.desc{
+			background:url('frontV2/opac/images/asc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+		.asc{
+			background:url('frontV2/opac/images/desc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+	</style>
+	<script type="text/javascript" language="javascript">
+		var basePath = "http://weixin.hengyanglib.org:80/InDigLib/";
+	
+		function display(obj) {
+			var top = $(obj).offset().top;
+			var left = $(obj).offset().left;
+			$("#tipbox").show().css({
+				'position': 'absolute',
+				'top': top+30,
+				'left': left-50,
+				'width': 150,
+				'background-color': '#FFF',
+				'border': '1px solid #D7DADB',
+				'display': 'block',
+				'padding': 5,
+				'text-align': 'center',
+				'border-radius': 5,
+				'word-wrap': 'break-word',
+				'break-word': 'break-all'
+			});
+		}
+
+		function disappear() {
+			document.getElementById("tipbox").style.display = "none";
+		}
+		function toTargat(url,value){
+			var url = url + encodeURI(value);
+			window.open(url,"_blank");
+		}
+		function searchaa(dom){
+			var str = $(dom).text();
+			
+			//window.location.href="/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=publisher&text1="+text1+"&select2=pubdate&text2="+text2;
+			// 搜索出版社时，再同时将年份也作为条件时，搜索不到结果。
+			window.open("/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=publisher&text1="+encodeURI(str),"_blank");
+		}
+		function searchBookInfo(obj){
+			var author = encodeURI($(obj).text().trim());
+			var url = encodeURI("/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=author&text1="+author);
+			url = url.replace("+","");
+			window.location.href = url;
+		}
+	</script>
+  </head>
+
+  <body>
+    
+
+<!-- 加载语言包文件 -->
+	<script src="frontV2/i18n/js/jquery.i18n.js"></script>
+	<script src="frontV2/i18n/js/session.js"></script>
+    <script>
+        $(document).ready(function() {
+            var defaultLang = $.session.get("language");
+            if(defaultLang == '' || defaultLang == undefined){
+            	/*默认语言*/
+            	defaultLang = 'cn';
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'en'){
+            	$("#language option:eq(1)").attr("selected",true);
+            }else if(defaultLang == 'cn'){
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'ko'){
+            	$("#language option:eq(2)").attr("selected",true);
+            }else if(defaultLang == 'ja'){
+            	$("#language option:eq(3)").attr("selected",true);
+            }else if(defaultLang == 'fr'){
+            	$("#language option:eq(4)").attr("selected",true);
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "frontV2/i18n/"
+            });
+            
+            /* 选择语言 */
+		    $("#language").bind('change', function() {
+		    	var language = $(this).children('option:selected').html();
+		    	if(language == 'Chinois' || language == '中文' || language == '중국어' || language == 'Chinese' || language == '中国語'){
+		    		language = 'cn';
+		    	}
+		    	if(language == 'Coréen' || language == '韩文' || language == '한국어' || language =='Korean' || language == '韓国語'){
+		    		language = 'ko';
+		    	}
+		    	if(language == 'Japonais' || language == '日文' || language == '일본어' || language =='Japanese' || language == '日本語'){
+		    		language = 'ja';
+		    	}
+		    	if(language == 'Français' || language == '法文' || language == '법무' || language =='French' || language == 'フランス語'){
+		    		language = 'fr';
+		    	}
+		    	if(language == 'English'){
+		    		language = 'en';
+		    	}
+				$("[i18n]").i18n({
+                    defaultLang: language,
+                    filePath: "frontV2/i18n/"
+                });
+                $.session.remove("language");
+                $.session.set("language",language);
+		    });
+
+        });
+    </script>
+<div class="top_wrap">
+	<div class="logo_box">
+		<span></span>
+	</div>
+
+	<div class="text_box">
+		
+			<span><a href="frontV2/MyLib.action" i18n="login.Login">登录我的图书馆</a></span>
+		
+		<span><a href="#" onclick="return false;" i18n="login.help">帮助中心</a>
+		</span>
+	</div>
+
+</div>
+
+<div class="top_nav">
+	<ul>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.index">网站首页</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/MyLib.action" ><span i18n="login.serve">读者服务</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/SearchIndex!simple.action"><span i18n="login.booklist">书目检索</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/SearchIndex!simple.action" i18n="login.booklist.simpleness">简单检索</a>
+				</li>
+				<li>
+					<a href="frontV2/SearchIndex!advanced.action" i18n="login.booklist.advanced">高级检索</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.borrow">借阅指引</span></a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/readGuidelines!expertsRecommend.action" i18n="login.borrow.recommend">馆长推荐</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!topComments.action" i18n="login.borrow.comment">热门评论</a>
+				</li>
+				<li>
+					<a href="frontV2/BookRanking!list.action" i18n="login.borrow.literature">文献借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/ReaderRanking!list.action" i18n="login.borrow.reader">读者借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!newBooks.action" i18n="login.borrow.newbook">新书通报</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="frontV2/CLCNavigation.action"><span i18n="login.classify">分类导航</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/CLCNavigation.action" i18n="login.classify.valuedriver">中图分类法</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li style="float:right;margin-right:20px;margin-top: 10px">
+			<span style="color:#ffffff;" i18n="login.language">语言：</span>
+			<select id="language">
+				<option value="cn" i18n="login.cn">中文</option>
+				<option value="en" i18n="login.en">English</option>
+				<option value="ko" i18n="login.ko">韩文</option>
+				<option value="ja" i18n="login.ja">日文</option>
+				<option value="fr" i18n="login.fr">法文</option>
+			</select>
+		</li>
+		
+		</li>
+		
+	</ul>
+
+
+
+</div>
+
+    	<div class="big_wrap">
+			<!--单条listitem开始-->
+			<div class="list_item w980">
+			
+				<!--新增保存至书单-->
+	             <div class="toolBar">
+	                <span>
+	                   	保存至书单:
+	                   <select id="bookList" class="select">
+	                   <option>创建新书单</option>
+	                   </select>
+	                  <input type="button" metatable="i_sgbiblios" metaid="19673" onclick="addToBookList('19673', 'i_sgbiblios');" value="保存" class="button">
+	                </span>
+	                
+	                <span><input type="button" onclick="addToTemporaryBookList('19673', 'i_sgbiblios')" class="button" value="添加临时书单"></span>
+	                <!--  
+	                <span><input type="button" class="button" value="加入书架"></span>
+	                <span><input type="button" class="button" value="添加标签"></span>
+	                -->
+	            </div>
+			
+				<div class="pic">
+					<a href="#" onclick="return false;">
+						<!-- <img src="http://book.bookday.cn/book/cover?isbn=9787536692930" width="220px"/>-->
+						<img name='imgName' src="frontFaceV2/opac/images/no_pic02.gif" width="220px"/>
+					</a>
+				</div>
+				
+				<div class="info" style="overflow:hidden">
+					<h4>三体</h4>
+					<p><span>著者:</span><a class="blue" onclick="searchBookInfo(this)" href="javascript:void(0)">刘慈欣著</a></p>
+					<p><span>出版地：</span><span>出版社:</span><a class="blue" href="javascript:;" onClick="searchaa(this)"></a>&emsp;出版日期：2008</p>
+					<p><span>页码:</span><em>302页 &ldquo;地球往事&rdquo;三部曲之一</em></p>
+					<p><span>定价:</span><b>CNY23.00</b></p>
+					<p><span>ISBN/ISSN:</span><em>9787536692930</em></p>
+					
+					<p>
+						<span>简介：</span>
+						<span>
+							<a class="blue" onmouseover="display(this);" onmouseout="disappear();"></a>
+							<div id="tipbox" style="display:none">
+								
+							</div>
+						</span>
+					</p>
+					
+					<p>
+						<div class="booklist" id="cdcontainer" style="display: none;">
+							<span style="font-weight:bold;float:left;">光盘数据库:</span>
+							<em id="cd"></em><br/>
+						</div>
+					</p>
+				
+					<p><span>相关资源：</span><a target='_blank' class="icon" href="http://www.google.com.hk/search?tbm=bks&tbo=1&hl=zh-CN&q=三体" ><img src="frontFaceV2/opac/images/google.gif" /></a>
+					<a  target='_blank' class="icon" href="https://www.baidu.com/s?wd=%E4%B8%89%E4%BD%93"><img src="frontFaceV2/opac/images/baidu.gif" /></a>
+					<a target='_blank' class="icon" href="http://www.douban.com/search?q=%E4%B8%89%E4%BD%93" ><img src="frontFaceV2/opac/images/douban.gif" /></a>
+					<a  target='_blank' class="icon" href="http://search.cnki.net/search.aspx?q=%E4%B8%89%E4%BD%93"><img src="frontFaceV2/opac/images/niki.gif" /></a></p>
+					<p><span>购买此书：</span><a target='_blank' class="icon" href="https://search.jd.com/Search?keyword=三体&enc=utf-8&wq=三体" ><img src="frontFaceV2/opac/images/jd_icon.gif" /></a>
+					<a target='_blank' class="icon" onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体')"><img src="frontFaceV2/opac/images/amazon_icon.gif" /></a>
+					<a target='_blank' class="icon" href="http://search.dangdang.com/search_pub.php?key=三体"><img src="frontFaceV2/opac/images/dang_icon.gif" /></a></p>
+					<p><span>分享此书：</span><a class="icon"  href="javascript:void(0);" onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(document.location.href));return false;" title="分享到QQ空间"><img src="frontFaceV2/opac/images/qzone.gif" /></a>
+					<!-- <a  class="icon" href="javascript:void(0)" onclick="postToWb();"  title="分享到腾讯微博"><img src="frontFaceV2/opac/images/qq_weibo.gif" /></a> -->
+					<a  class="icon" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://v.t.sina.com.cn/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"><img src="frontFaceV2/opac/images/sina_weibo.gif" /></a>
+					<!-- <a  class="icon" href="javascript:void((function(s,d,e){if(/renren\.com/.test(d.location))return;var f='http://share.renren.com/share/buttonshare?link=',u=d.location,l=d.title,p=[e(u),'&title=',e(l)].join('');function a(){if(!window.open([f,p].join(''),'xnshare',['toolbar=0,status=0,resizable=1,width=626,height=436,left=',(s.width-626)/2,',top=',(s.height-436)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();})(screen,document,encodeURIComponent));" title="分享到人人"><img src="frontFaceV2/opac/images/renren.gif" /></a> -->
+					<a  class="icon" href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src="frontFaceV2/opac/images/douban02.gif" /></a></p>
+					<p>&nbsp;</p>
+
+				</div>
+				
+				<div class="tabs_box" id="book_detail">
+					<ul>
+						
+							<li><a href="#tabs_con01" onclick="return false">馆藏信息</a></li>
+						
+						
+						<li><a href="#tabs_con05" onclick="return false">我要评论</a></li>
+						
+						
+						
+						
+					</ul>
+					
+					<div class="tabs_con" id="tabs_con01">
+						<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-0"  href="#sub_con-0" onclick="return false" metas="i_sgbiblios-19673">石鼓区图书馆</a></li>
+									  
+								</ul>			
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+					</div>
+					<!--记到信息开始-->
+					<div class="tabs_con" id="tabs_con07">
+						<div class="list_sub_tabs_check">
+								<ul>
+									
+										<li><a class="second" aId="sub_con_check-0"  href="#sub_con_check-0" onclick="return false" metas="i_sgbiblios-19673">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con_check-0"></div>
+									  
+								</div>
+							</div>
+						</div>
+					<!--记到信息结束-->
+					<div class="tabs_con" id="tabs_con05">
+					<div class="title">我要评论</div>
+							<div class="con">
+							<table width="100%" align="left" >
+							<tr>
+								<td id="strat_tj">评论内容: 
+												<label id=1 title="差" >
+													☆
+												</label>
+												<label id=2 title="较差">
+													☆
+												</label>
+												<label id=3 title="一般">
+													☆
+												</label>
+												<label id=4 title="推荐">
+													☆
+												</label>
+												<label  id=5 title="力荐">
+													☆
+												</label><input type="hidden" id="in_start" value="" /></td>
+								<td align="right"><p><a  href="javascript:void(0)" onclick="sub_pl('i_sgbiblios','19673')"><span class="y_btn">发表评论</span></a></p></td>
+								</tr>
+								<tr>
+											<td id="commentArea" colspan="2">
+											 <p><textarea id="textarea_ly" class="write_text" onfocus="javascript:this.style.border='2px solid #33CCFF';" onblur="javascript:this.style.border='1px solid #d8dbdc';"></textarea></p> 
+											</td>
+								</tr>
+								</table>
+							</div>
+					</div>
+					<!-- 评论信息开始 --> 
+					<div class="tabs_con" id="tabs_con06">
+					<div class="title">历史评论</div>
+							<div class="con" id="commoned">
+							</div>
+					</div>
+					<!--评论信息结束 -->
+					<div class="tabs_con" id="tabs_con02">
+						<div class="title">我要预约</div>
+						<div class="con">
+							<p>&nbsp;<a onclick="reserve();"><span class="y_btn">预约</span></a></p>
+							<p><span>通知方式：</span>
+							<select class="search_select" name="select" id="noteType">
+								<option value='p'>网上通知</option>
+							</select>
+							</p>
+							<p><span>取书馆：</span>
+							<select class="search_select" name="select" id="libMetas">
+									
+										<option value="SG:i_sgbiblios-19673">石鼓区图书馆</option>
+									  
+							</select></p>
+						</div>
+					</div>
+					<div class="tabs_con" id="tabs_con03">
+					<div class="title">目录</div>
+							目录内容
+					</div>
+					<div class="tabs_con" id="tabs_con04">
+					<div class="title">摘要</div>
+							摘要
+					</div>
+					<div class="tabs_con" id="tabs_con08">
+						
+					
+					</div>
+				</div>
+			</div>
+			<!--单条list_item结束-->
+
+	</div>
+	<div id="log_div"  class="blogin"  style="position:absolute;top:600px;left:600px;width:400px; height:200px; display:none;">
+				<h3>读者登录</h3>
+				
+				<ul>
+					<li>
+					 	 用户名：<input name="uname" id="readerName" type="text" class="smku"/>
+					</li>
+					<li>
+						密　码：<input name="upwd" id="password" type="password" class="smku"/>
+						<input type="hidden" name="sublibIndex" value="GXG"/>
+					</li>
+					<li>
+						验证码：<input name="authcode" style="width:50" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;<img title="双击换图片"  ondblclick="getCodeimg(this)"  
+						 src="/InDigLib/front/opac/bookSearch/authCode.jsp" style="cursor: pointer;"/>
+					</li>
+					<li>
+						&nbsp;&nbsp;&nbsp;<input type="reset" value="取消" class="submit2" onclick="hidelogin()" />&nbsp;&nbsp;
+						<input onclick="usrlogin()" type="submit" value="登录" class="submit2" />
+					</li>
+					
+				</ul>
+		</div>
+ 	<div id="toolTip"   style="display:none"> </div>
+ 	<input type="hidden" name="detailedPositionIsShow" value="0" id="positionIsShow"/>
+ 	<input type="hidden" name="detailedLocalNotesIsShow" value="" id="localNotesIsShow"/>
+ 	
+ 	
+ 	<script  type="text/javascript">
+ 		/*var aHref = "";
+		var xtruid = '222.177.237.215/bookcd';
+	    var website = '222.177.237.215/bookcd';
+		var pinst='18c4c1a6004ae50bd3';
+	   
+		var title = "三体";
+		var author = "刘慈欣著";
+		var publish = "";
+		var date="";
+		var isbn="9787536692930";
+		var metaid="19673";
+		var metatable="i_sgbiblios";
+		//alert(title+"&"+author+"&"+publish+"&"+date+"&"+isbn+"&"+cd);
+		
+		if (isbn.indexOf(" ") > 0) {//有两个isbn号的情况，取第一个
+		    arrISBN = isbn.split(" ");
+		    isbn = arrISBN[0];
+		}
+
+		var loginFlag=readerLoginOrNot();
+		var authr;
+		if(loginFlag){
+			var child;
+			var xingming;
+			var kahao;
+			var iframecode = '<iframe id=\'external\' name=\'external\' style=\'display:none;\' src=\'http://222.177.237.197:8080/InDigLib/frontV2/Login!search.action\'></iframe>';
+			document.write(iframecode);
+			debugger;
+			document.onreadystatechange = function subSomething() {
+			    if (document.readyState == "complete") {
+			        child = document.getElementById("external").contentWindow;
+			        var childhtmls = child.document.documentElement.innerHTML;
+			        childhtmls = childhtmls.replace(/\t/g, '').replace(/\r/g, '').replace(/\n/g, '').toUpperCase();
+			        var regExp = /证号：<\/SPAN>(.*?)<\/TD>/;
+			        regExp.exec(childhtmls);
+			        kahao = RegExp.$1;
+			        regExp = /姓名：<\/SPAN>(.*?)<\/TD>/;
+			        regExp.exec(childhtmls);
+			        xingming = RegExp.$1;
+			        xingming = escape(xingming);
+			        authr = kahao + '@' + xingming;
+			    }
+			}
+		}
+
+	    document.getElementById('cdcontainer').style.display = '';
+	    //$("#cd").html('<a style=\'float: left;line-height: 25px;\' class=\'cxcd\' target=\'_blank\' href=\'http://' + xtruid + '/format/release/aspx/SysCDResult.aspx?isbn=' + isbn + '&website=' + website + '&type=i&localflag=1&decode=UTF8&nohacd=1&authr='+authr+'&pinst='+pinst+'\'><img style=\'float: left; padding-right: 5px;\' src=\'http://' + xtruid + '/format/Release/aspx/GPyx/img/disc.gif\'>随书光盘下载</a>');
+	   $("#cd").html('<a style=\'float: left;line-height: 25px;\' class=\'cxcd\' target=\'_blank\' href=\'http://' + xtruid + '/format/release/aspx/SysCDResult.aspx?isbn=' + isbn + '&website=' + website + '&type=i&localflag=1&decode=UTF8&nohacd=1&pinst=' + pinst + '&authr=\'><img style=\'float: left; padding-right: 5px;\' src=\'http://' + xtruid + '/format/Release/aspx/GPyx/img/disc.gif\'>随书光盘下载</a>&nbsp;<font style="line-height: 25px;" color="red">注：下载随书光盘请先登录！</font>');
+		if (isbn) {
+	        $.getScript('http://' + xtruid + '/format/release/aspx/ServerMethodCaller.ashx?dll=extcom406.dll&m=CalOpacEbookDataface&srchType=i&word=' + isbn + '&dmcode=1987051001&charset=UTF-8&idcount=0&cdxsflag=0&pinst='+pinst+'&listflag=0&rootappruid='+pinst+'&imgwi=120&locf=0&tagsflag=0&auintroflag=2&centerurl=', onloadJs);
+	    }
+		
+	  //加载完js后执行的回调函数
+		function onloadJs() {
+			aHref = $('#cd a').attr("href");
+			$('#cd a').attr("href","");
+			$('#cd a').click(function(){
+				var f = readerLoanThisBookOrNot();
+				if (!f) {
+					return false;
+				}
+				$(this).attr("href", aHref+authr);
+
+			})
+		}
+		function readerLoginOrNot() {
+			var flag = false;
+			var readerid = "";
+			if(readerid == null || readerid == '') {
+				//alert("下载随书光盘请先登录！");
+				return flag;
+			}
+			else{
+				flag=true;
+				return flag;
+			}
+		}
+		function readerLoanThisBookOrNot() {
+			var flag = false;
+			var readerid = "";
+			if(readerid == null || readerid == '') {
+				//alert("下载随书光盘请先登录！");
+				return flag;
+			}
+			//下面是读者已经登录，这里要判断读者是否有在借该图书，有则可下载随书光盘；反之，不能下载。											
+			var conditions = "";
+			conditions = " readerno=" + readerid + " and metaid=" + metaid + " and metatable='"+metatable+"'";
+			
+			$.ajax({
+				url:'GetCurrentBorrow.action',
+				//url:'ReaderLoan!nowSearch.action',
+				data:{
+					readerid:readerid,
+					metaid:metaid,
+					metatable:metatable
+				},
+				dataType:'json',
+				type:'post',
+				async:false,
+				error:function() {
+					alert('获取读者借阅记录出错！');
+				},
+				success:function(data) {
+					if(data.flag) {
+						flag = true;
+					} else {
+						alert("您未借阅该图书，不允许下载随书光盘！");
+					}
+				}
+			})
+			return flag;
+		}*/
+ 	</script>
+ 	 
+
+<div class="footer">
+<p>copyright◎www.hengyanglib.org 衡阳市图书馆 版权所有 湘ICP备14007305号-1 公安部备案号：43040602000012 </p>
+</div>
+  </body>
+</html>

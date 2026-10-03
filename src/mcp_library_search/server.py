@@ -121,11 +121,17 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     guilin（广西壮族自治区桂林图书馆）、fuzhou（福州市图书馆，福州地区图书馆
     联合检索平台），以上馆藏到单册级、详情走 /api/book 接口；
     sanya（三亚市图书馆，图创 tcc-opac 纯 JSON 访客令牌，馆藏到单册级）。
-    第九批（老版 UILAS HTML OPAC，uilas 家族）：wuhu（芜湖市图书馆）、
-    luan（六安市图书馆）、tonghua（通化市图书馆）、guiyang（贵阳市图书馆，
-    应用上下文为根路径），以上馆藏到单册级；同批 nanchang（南昌市图书馆）实测
-    域名落停放段、HTTP 零字节超时，改判不通、不接入。
-    其他城市待接入。
+     第九批（老版 UILAS HTML OPAC，uilas 家族）：wuhu（芜湖市图书馆）、
+     luan（六安市图书馆）、tonghua（通化市图书馆）、guiyang（贵阳市图书馆，
+     应用上下文为根路径），以上馆藏到单册级；同批 nanchang（南昌市图书馆）实测
+     域名落停放段、HTTP 零字节超时，改判不通、不接入。
+     第十批：taizhou_js（泰州市图书馆，江苏；标识加 js 以别于台州 taizhou；
+     图星 LibStar Find，馆藏到单册级）、haixi（海西州图书馆，图星 LibStar Find，
+     旧批传「需登录」经复核不成立、匿名可通）、bengbu（蚌埠市图书馆，实抓为图创
+     tcc-opac 纯 JSON 访客令牌，馆藏到单册级）、hengyang（衡阳市图书馆，InDigLib
+     集群数字图书馆，馆藏到单册级；默认题名检索、源站无明确「可借」状态词，
+     全部保守按不可借展示，状态原值照登）。
+     其他城市待接入。
     keyword 可以是书名、ISBN、作者名等。每条结果带 book_id，是后续查询的凭据。
     total_results 为 null 表示数据源不提供总数：用 page 继续翻页，
     直到 has_next 为 false 或 books 为空。
@@ -149,8 +155,10 @@ def find_book_availability(book_id: str, region: str = "cn", city: str = "shangh
 
     已借出的馆藏可能带 due_date（预计归还时间，YYYY-MM-DD），仅在
     only_available=False 时出现；数据源查不到时为空串。
-    重庆源站无明确「可借」状态词：only_available=True 恒为空，请用 False
-    查看状态原值（入藏/借出等）与应还日期，自行判断。
+     重庆源站无明确「可借」状态词：only_available=True 恒为空，请用 False
+     查看状态原值（入藏/借出等）与应还日期，自行判断。
+     衡阳源（hengyang，InDigLib）同重庆口径：状态原值照登、全部保守按不可借
+     展示，only_available=True 恒为空，请用 False 查看全部原值。
     浙江图书馆源（hangzhou 双源之一）与金华源的借出馆藏拿不到应还日期
     （due_date 为空串属数据边界，非故障）；杭州图书馆源正常带应还日期。
     扬州源（yangzhou）同样拿不到：源站只给裸「借出」，不含应还日期
@@ -180,9 +188,11 @@ def get_book_detail(book_id: str, region: str = "cn", city: str = "shanghai") ->
     南京金陵源、宁波数据源详情页无索书号字段，call_number 为空串（单册索书号在
     馆藏明细里）；南京图书馆源（nanjing 双源之一）有索书号字段，正常返回。
     扬州源（yangzhou）详情页同金陵源无索书号字段，call_number 为空串。
-    宁波老书目出版项可能缺失，publisher/publish_year 为空串
-    属数据边界。绍兴数据源详情页无「内容提要」标签行，summary 恒为空串
-    （数据边界，非故障）。
+     宁波老书目出版项可能缺失，publisher/publish_year 为空串
+     属数据边界。绍兴数据源详情页无「内容提要」标签行，summary 恒为空串
+     （数据边界，非故障）。衡阳源（hengyang，InDigLib）详情页无索书号字段，
+     call_number 恒为空串（单册索书号在馆藏明细里）；出版社/出版年详情页不渲染，
+     相应为空串。
 
     参数：
         book_id：search_books 返回的图书 ID，需与 search_books 使用同一 region 与 city

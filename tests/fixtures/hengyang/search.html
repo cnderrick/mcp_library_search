@@ -1,0 +1,3541 @@
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="http://weixin.hengyanglib.org:80/InDigLib/">
+    <title>opac检索结果页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/home.css">
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/opac.css">
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery.switchable.min.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/js/common.js" ></script>
+	<script type="text/javascript" src="js/common/map.js"></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/common.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/searchList.js" ></script>
+	<script type="text/javascript" src="js/opacRandom/opacRandom.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		function toTargat(url,value){
+			var url = url + encodeURI(value);
+			window.open(url,"_blank");
+		}
+		
+		function searchBookInfo(obj){
+			var author = encodeURI($(obj).text().trim());
+			var url = encodeURI("/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=author&text1="+author);
+			url = url.replace("+","");
+			window.location.href = url;
+		}
+	</script>
+	<style type="text/css">
+		.desc{
+			background:url('frontV2/opac/images/asc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+		.asc{
+			background:url('frontV2/opac/images/desc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+	</style>
+  </head>
+  
+  <body>
+    
+
+<!-- 加载语言包文件 -->
+	<script src="frontV2/i18n/js/jquery.i18n.js"></script>
+	<script src="frontV2/i18n/js/session.js"></script>
+    <script>
+        $(document).ready(function() {
+            var defaultLang = $.session.get("language");
+            if(defaultLang == '' || defaultLang == undefined){
+            	/*默认语言*/
+            	defaultLang = 'cn';
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'en'){
+            	$("#language option:eq(1)").attr("selected",true);
+            }else if(defaultLang == 'cn'){
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'ko'){
+            	$("#language option:eq(2)").attr("selected",true);
+            }else if(defaultLang == 'ja'){
+            	$("#language option:eq(3)").attr("selected",true);
+            }else if(defaultLang == 'fr'){
+            	$("#language option:eq(4)").attr("selected",true);
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "frontV2/i18n/"
+            });
+            
+            /* 选择语言 */
+		    $("#language").bind('change', function() {
+		    	var language = $(this).children('option:selected').html();
+		    	if(language == 'Chinois' || language == '中文' || language == '중국어' || language == 'Chinese' || language == '中国語'){
+		    		language = 'cn';
+		    	}
+		    	if(language == 'Coréen' || language == '韩文' || language == '한국어' || language =='Korean' || language == '韓国語'){
+		    		language = 'ko';
+		    	}
+		    	if(language == 'Japonais' || language == '日文' || language == '일본어' || language =='Japanese' || language == '日本語'){
+		    		language = 'ja';
+		    	}
+		    	if(language == 'Français' || language == '法文' || language == '법무' || language =='French' || language == 'フランス語'){
+		    		language = 'fr';
+		    	}
+		    	if(language == 'English'){
+		    		language = 'en';
+		    	}
+				$("[i18n]").i18n({
+                    defaultLang: language,
+                    filePath: "frontV2/i18n/"
+                });
+                $.session.remove("language");
+                $.session.set("language",language);
+		    });
+
+        });
+    </script>
+<div class="top_wrap">
+	<div class="logo_box">
+		<span></span>
+	</div>
+
+	<div class="text_box">
+		
+			<span><a href="frontV2/MyLib.action" i18n="login.Login">登录我的图书馆</a></span>
+		
+		<span><a href="#" onclick="return false;" i18n="login.help">帮助中心</a>
+		</span>
+	</div>
+
+</div>
+
+<div class="top_nav">
+	<ul>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.index">网站首页</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/MyLib.action" ><span i18n="login.serve">读者服务</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/SearchIndex!simple.action"><span i18n="login.booklist">书目检索</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/SearchIndex!simple.action" i18n="login.booklist.simpleness">简单检索</a>
+				</li>
+				<li>
+					<a href="frontV2/SearchIndex!advanced.action" i18n="login.booklist.advanced">高级检索</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.borrow">借阅指引</span></a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/readGuidelines!expertsRecommend.action" i18n="login.borrow.recommend">馆长推荐</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!topComments.action" i18n="login.borrow.comment">热门评论</a>
+				</li>
+				<li>
+					<a href="frontV2/BookRanking!list.action" i18n="login.borrow.literature">文献借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/ReaderRanking!list.action" i18n="login.borrow.reader">读者借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!newBooks.action" i18n="login.borrow.newbook">新书通报</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="frontV2/CLCNavigation.action"><span i18n="login.classify">分类导航</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/CLCNavigation.action" i18n="login.classify.valuedriver">中图分类法</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li style="float:right;margin-right:20px;margin-top: 10px">
+			<span style="color:#ffffff;" i18n="login.language">语言：</span>
+			<select id="language">
+				<option value="cn" i18n="login.cn">中文</option>
+				<option value="en" i18n="login.en">English</option>
+				<option value="ko" i18n="login.ko">韩文</option>
+				<option value="ja" i18n="login.ja">日文</option>
+				<option value="fr" i18n="login.fr">法文</option>
+			</select>
+		</li>
+		
+		</li>
+		
+	</ul>
+
+
+
+</div>
+
+
+    <div class="big_wrap">
+
+		<div class="left_wrap">
+			<div class="head_title"></div>
+		
+			<div class="search_area">
+    			<form id="reSearchForm" name="reSearchForm" method="post">
+					<span>
+						<select name="select1" id="select1">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title" selected="selected">题名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="pubdate">出版年</option>
+    <option value="publisher">出版社</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+					</span>
+					<span>
+						<input id="text1" name="text1" type="text" class="search_input" onkeydown="if(event.keyCode==13) reSearch()"  />
+						<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+						<input type="hidden" name="dataType" value="" id="dataType"/>
+						<input type="hidden" name="sublib" value="" id="sublib"/>
+					</span>
+					<span class="y_btn" id="reSearch">重新搜索</span>
+					<span class="g_btn" id="seSearch">在结果中搜索</span>
+				</form>
+
+
+
+			</div>
+		
+			<div class="left_nav">
+				
+						<div class="title">所属馆</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','HT');return false;" >衡阳市图书馆</a><em>(71)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','SG');return false;" >石鼓区图书馆</a><em>(29)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','NY');return false;" >南岳区图书馆</a><em>(15)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','YF');return false;" >雁峰区图书馆</a><em>(2)</em></li>
+							
+							
+						
+						</ul>		
+				
+						<div class="title">文献类型</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('datatype','1');return false;" >图书</a><em>(117)</em></li>
+							
+							
+						
+						</ul>		
+				
+						<div class="title">著者</div>
+						<ul name="face">
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','刘慈欣著');return false;" >刘慈欣著</a><em>(22)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','刘慈欣原著');return false;" >刘慈欣原著</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','戈闻頔改编');return false;" >戈闻頔改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','草祭九日东绘');return false;" >草祭九日东绘</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','蔡劲改编');return false;" >蔡劲改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','薄暮改编');return false;" >薄暮改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','董志凯本卷编');return false;" >董志凯本卷编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','金冲及总主编');return false;" >金冲及总主编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','陈晋主编');return false;" >陈晋主编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','北京工业学院编');return false;" >北京工业学院编</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(英)加德纳著');return false;" >(英)加德纳著</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(韩)天才教育出版社编著');return false;" >(韩)天才教育出..</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','《速查速用世界最新三极管替换手册》编写组编');return false;" >《速查速用世界最..</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','李绵春编');return false;" >李绵春编</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','王晋瑞译');return false;" >王晋瑞译</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','黄恒著');return false;" >黄恒著</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(澳)卡斯威尔(Caswell,');return false;" >(澳)卡斯威尔(..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(澳)詹富安(Chiem,');return false;" >(澳)詹富安(C..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(苏)高尔基(Горький,');return false;" >(苏)高尔基(Г..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(英)莎士比亚(Shakespeare,');return false;" >(英)莎士比亚(..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Brian)著');return false;" >Brian)著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','David)著');return false;" >David)著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','William著');return false;" >William著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Горький著');return false;" >Горький著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Максим著');return false;" >Максим著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','《常用三极管替换手册》编写组编');return false;" >《常用三极管替换..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','三谷幸喜著');return false;" >三谷幸喜著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','三谷纯,编著');return false;" >三谷纯,编著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','上海市业余工业大学编');return false;" >上海市业余工业大..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','中国科学技术情报研究所重庆分所编辑');return false;" >中国科学技术情报..</a><em>(1)</em></li>
+							
+						
+						</ul>		
+				
+						<div class="title">出版日期</div>
+						<ul name="face">
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2024');return false;" >2024</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2023');return false;" >2023</a><em>(11)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2022');return false;" >2022</a><em>(17)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2021');return false;" >2021</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2020');return false;" >2020</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2019');return false;" >2019</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2018');return false;" >2018</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2017');return false;" >2017</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2016');return false;" >2016</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2013');return false;" >2013</a><em>(5)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2012');return false;" >2012</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2010');return false;" >2010</a><em>(5)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2009');return false;" >2009</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2008');return false;" >2008</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2005');return false;" >2005</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2002');return false;" >2002</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2001');return false;" >2001</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1990');return false;" >1990</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1987');return false;" >1987</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1986');return false;" >1986</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1985');return false;" >1985</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1982');return false;" >1982</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1981');return false;" >1981</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1980');return false;" >1980</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1978');return false;" >1978</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1977');return false;" >1977</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1975');return false;" >1975</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1973');return false;" >1973</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1958');return false;" >1958</a><em>(1)</em></li>
+							
+						
+						</ul>		
+				
+						<div class="title">分类</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','I');return false;" >I 文学</a><em>(34)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','D');return false;" >D 政治、法律</a><em>(17)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','T');return false;" >T 工业技术</a><em>(16)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','J');return false;" >J 艺术</a><em>(15)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','G');return false;" >G 文化、科学、..</a><em>(7)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','K');return false;" >K 历史、地理</a><em>(5)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','F');return false;" >F 经济</a><em>(3)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','Z');return false;" >Z 综合性图书</a><em>(3)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','B');return false;" >B 哲学、宗教</a><em>(2)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','A');return false;" >A 马列主义、毛..</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','C');return false;" >C 社会科学总论</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','E');return false;" >E 军事</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','H');return false;" >H 语言、文字</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','N');return false;" >N 自然科学总论</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','O');return false;" >O 数理科学和化学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','P');return false;" >P 天文学、地球..</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','Q');return false;" >Q 生物科学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','R');return false;" >R 医药、卫生</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','S');return false;" >S 农业科学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','X');return false;" >X 环境科学、安..</a><em>(1)</em></li>
+							
+							
+						
+						</ul>		
+				
+			</div>
+	
+			<div class="bottom_bg"></div>
+		</div>
+
+		<div class="main_wrap" style="position: relative;">
+			<div class="header_buttons">
+				<input class="button" onclick="allChecked()" type="button" value="全选" />
+				<input class="button" onclick="closeChecked()" type="button" value="取消全选" />
+				保存至书单:
+                <select class="select" id="bookList">
+                 <option>创建新书单</option>
+                </select>
+                <input type="button" class="button" value="保存" onclick="addToBookList();">
+                <input type="button" class="button" value="添加临时书单" onclick="addToTemporaryBookList();">
+                <input type="button" class="button" id="toTemporaryBookList" value="查看书单" onclick="toTemporaryBookList();">
+            </div>
+		
+			<div class="key_info">
+				 <div style="text-align: left;">
+					<div class="sort_box">
+						<span>排序方式：</span>
+						
+						 <select name="queryOrder" id="queryOrderSelect" style="width:auto">
+    <option value="1">匹配度      - 降序</option>
+    <option value="2">匹配度      - 升序</option>
+    <option value="3">出版时间 - 降序</option>
+    <option value="4">出版时间 - 升序</option>
+    <option value="5">馆藏总数 - 降序</option>
+    <option value="6">馆藏总数 - 升序</option>
+
+
+</select>
+
+
+					</div>
+					共有<b>117</b>条记录，检索时间：<em>0.013</em>秒
+				</div>
+			</div>
+			<form id="resform" name="form1" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post">
+				
+
+<script type="text/javascript">
+		function checkTurn(which){
+			var $which = $(which);
+			var $pageNo = $which.parent().parent().find("#pageNo");
+
+			var pageNo = $.trim($pageNo.val());
+			var totalPage = $.trim($('#totalPage').val());
+			   if(pageNo==""){
+			       alert("请输入需要跳转到的页号！！！");
+			       $pageNo.select();
+			       return false;
+			   }else if(!isNumber(pageNo)){
+				   alert('输入页码必须为正整数！！！');
+				   $pageNo.select();
+				   return false;
+			   }else if(Number(pageNo)>Number(totalPage)){
+				   alert("页号不能大于总页数！！！");
+			       $pageNo.select();
+			       return false;
+			   }
+			   return true;
+		}
+		function isNumber(str){
+			var   r   =   /^\+?[1-9][0-9]*$/;　
+			return r.test(str);
+		}
+</script>
+<div class="page_wrap">
+	<div class="page_bar" >
+		<input type="hidden" id="totalPage" value="6"/>
+		
+		
+			<span class="list_type02" disabled title="图表显示"></span>
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="list_type01" title="列表显示"></span></a>
+		
+		
+		   
+			<span class="pre_btn" disabled>首页</span>
+		
+		
+		
+			<span class="pre_btn" disabled>上一页</span>
+		
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=2&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">下一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=6&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">尾页</span></a>
+		
+		<span>转到：<input id="pageNo" name="pageNo" type="text" class="common_input w30" onkeydown="if(event.keyCode==13){return checkTurn() }"/></span>
+		<span  ><input name="go"  value="GO" type="submit" class="pageSubmit" onclick="return checkTurn(this)" /></span>
+	</div>
+	<!--<span>共<b>6</b>页</span>-->
+	<span><b>1/6</b>页 </span>
+</div>
+
+				<input type="hidden" name="select1" value="title" id="resform_select1"/>
+				<input type="hidden" name="select2" value="" id="resform_select2"/>
+				<input type="hidden" name="select3" value="" id="resform_select3"/>
+				<input type="hidden" name="text1" value="三体" id="resform_text1"/>
+				<input type="hidden" name="text2" value="" id="resform_text2"/>
+				<input type="hidden" name="text3" value="" id="resform_text3"/>
+				<input type="hidden" name="occur1" value="" id="resform_occur1"/>
+				<input type="hidden" name="occur2" value="" id="resform_occur2"/>
+				<input type="hidden" name="occur3" value="" id="resform_occur3"/>
+				<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="resform_lastSearchValue"/>
+				<input type="hidden" name="startPublishTime" value="" id="resform_startPublishTime"/>
+				<input type="hidden" name="endPublishTime" value="" id="resform_endPublishTime"/>
+				<input type="hidden" name="videoType" value="" id="resform_videoType"/>
+				<input type="hidden" name="listType" value="div" id="resform_listType"/>
+				<input type="hidden" name="queryOrder" value="0" id="resform_queryOrder"/>
+				<input type="hidden" name="hasAsset" value="false" id="resform_hasAsset"/>
+				<input type="hidden" name="format" value="" id="resform_format"/>
+				<input type="hidden" name="dataType" value="" id="resform_dataType"/>
+				<input type="hidden" name="sublib" value="" id="resform_sublib"/>
+				<input type="hidden" name="pageSize" value="20" id="resform_pageSize"/>
+			</form>
+
+
+
+			
+		
+			
+			
+				<!--单条list_item开始-->
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="19673" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=19673&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787536692930&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=19673&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787536692930" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=19673&metatable=i_sgbiblios&showAsset=true" target="_blank">三体&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2008&nbsp;</span>
+						<span>&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-0" metatable="i_sgbiblios" metaid="19673" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-0" metatable="i_sgbiblios" metaid="19673" onclick="">记到信息</a></li> -->
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="19673" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-0-0"  href="#sub_con-0-0" onclick="return false" metas="i_sgbiblios-19673">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-0-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-0">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="20486" metatable="i_nybiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=20486&metatable=i_nybiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787536692930&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=20486&metatable=i_nybiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787536692930" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=20486&metatable=i_nybiblios&showAsset=true" target="_blank">三体&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2008&nbsp;</span>
+						<span>I247.55/6&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-1" metatable="i_nybiblios" metaid="20486" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-1" metatable="i_nybiblios" metaid="20486" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_nybiblios" metaid="20486" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-1-0"  href="#sub_con-1-0" onclick="return false" metas="i_nybiblios-20486">南岳区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-1-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-1">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="205762" metatable="i_biblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=205762&metatable=i_biblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787536692930&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=205762&metatable=i_biblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787536692930" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=205762&metatable=i_biblios&showAsset=true" target="_blank">三体&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2008&nbsp;</span>
+						<span>I247.55/126:1&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-2" metatable="i_biblios" metaid="205762" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-2" metatable="i_biblios" metaid="205762" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_biblios" metaid="205762" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-2-0"  href="#sub_con-2-0" onclick="return false" metas="i_biblios-205762">衡阳市图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-2-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-2">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="100323" metatable="i_biblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=100323&metatable=i_biblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=100323&metatable=i_biblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=100323&metatable=i_biblios&showAsset=true" target="_blank">书字三体&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">欧伯达书</a></span>
+						<span>1990&nbsp;</span>
+						<span>J292.3/53&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=书字三体"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=书字三体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','书字三体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-3" metatable="i_biblios" metaid="100323" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-3" metatable="i_biblios" metaid="100323" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_biblios" metaid="100323" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-3-0"  href="#sub_con-3-0" onclick="return false" metas="i_biblios-100323">衡阳市图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-3-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-3">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="333278" metatable="i_biblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=333278&metatable=i_biblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787229166922&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=333278&metatable=i_biblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787229166922" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=333278&metatable=i_biblios&showAsset=true" target="_blank">三体 : 新版&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2022&nbsp;</span>
+						<span>I247.55/335:3&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 新版"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 新版&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 新版')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-4" metatable="i_biblios" metaid="333278" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-4" metatable="i_biblios" metaid="333278" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_biblios" metaid="333278" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-4-0"  href="#sub_con-4-0" onclick="return false" metas="i_biblios-333278">衡阳市图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-4-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-4">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="41348" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=41348&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787229166922&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=41348&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787229166922" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=41348&metatable=i_sgbiblios&showAsset=true" target="_blank">三体 : 新版&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2022&nbsp;</span>
+						<span>I247.55/21&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 新版"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 新版&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 新版')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-5" metatable="i_sgbiblios" metaid="41348" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-5" metatable="i_sgbiblios" metaid="41348" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="41348" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-5-0"  href="#sub_con-5-0" onclick="return false" metas="i_sgbiblios-41348">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-5-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-5">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38521" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38521&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38521&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38521&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :10&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:10&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :10"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :10&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :10')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-6" metatable="i_sgbiblios" metaid="38521" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-6" metatable="i_sgbiblios" metaid="38521" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38521" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-6-0"  href="#sub_con-6-0" onclick="return false" metas="i_sgbiblios-38521">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-6-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-6">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="44968" metatable="i_nybiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=44968&metatable=i_nybiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787547730393&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=44968&metatable=i_nybiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787547730393" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=44968&metatable=i_nybiblios&showAsset=true" target="_blank">我也是个三维体 : 体积&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">王珺玮绘画 小麒麟童书馆编</a></span>
+						<span>北京:北京日报出版社 , 2018&nbsp;</span>
+						<span>G613.4/14&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=我也是个三维体 : 体积"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=我也是个三维体 : 体积&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','我也是个三维体 : 体积')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-7" metatable="i_nybiblios" metaid="44968" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-7" metatable="i_nybiblios" metaid="44968" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_nybiblios" metaid="44968" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-7-0"  href="#sub_con-7-0" onclick="return false" metas="i_nybiblios-44968">南岳区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-7-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-7">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="267230" metatable="i_biblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=267230&metatable=i_biblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787229100605&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=267230&metatable=i_biblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787229100605" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=267230&metatable=i_biblios&showAsset=true" target="_blank">三体 : 典藏版&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2016&nbsp;</span>
+						<span>I247.55/250&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 典藏版"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 典藏版&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 典藏版')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-8" metatable="i_biblios" metaid="267230" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-8" metatable="i_biblios" metaid="267230" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_biblios" metaid="267230" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-8-0"  href="#sub_con-8-0" onclick="return false" metas="i_biblios-267230">衡阳市图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-8-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-8">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="40566" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=40566&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787229100605&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=40566&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787229100605" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=40566&metatable=i_sgbiblios&showAsset=true" target="_blank">三体 : 典藏版&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2016&nbsp;</span>
+						<span>I247.55/20&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 典藏版"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 典藏版&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 典藏版')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-9" metatable="i_sgbiblios" metaid="40566" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-9" metatable="i_sgbiblios" metaid="40566" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="40566" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-9-0"  href="#sub_con-9-0" onclick="return false" metas="i_sgbiblios-40566">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-9-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-9">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="40773" metatable="i_nybiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=40773&metatable=i_nybiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787229100605&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=40773&metatable=i_nybiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787229100605" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=40773&metatable=i_nybiblios&showAsset=true" target="_blank">三体 : 典藏版&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣著</a></span>
+						<span>重庆:重庆出版社 , 2016&nbsp;</span>
+						<span>I247.55/11&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 典藏版"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 典藏版&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 典藏版')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-10" metatable="i_nybiblios" metaid="40773" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-10" metatable="i_nybiblios" metaid="40773" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_nybiblios" metaid="40773" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-10-0"  href="#sub_con-10-0" onclick="return false" metas="i_nybiblios-40773">南岳区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-10-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-10">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38522" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38522&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38522&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38522&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :9&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:9&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :9"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :9&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :9')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-11" metatable="i_sgbiblios" metaid="38522" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-11" metatable="i_sgbiblios" metaid="38522" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38522" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-11-0"  href="#sub_con-11-0" onclick="return false" metas="i_sgbiblios-38522">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-11-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-11">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38523" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38523&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38523&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38523&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :1&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:1&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :1"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :1&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :1')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-12" metatable="i_sgbiblios" metaid="38523" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-12" metatable="i_sgbiblios" metaid="38523" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38523" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-12-0"  href="#sub_con-12-0" onclick="return false" metas="i_sgbiblios-38523">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-12-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-12">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38524" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38524&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38524&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38524&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :2&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:2&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :2"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :2&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :2')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-13" metatable="i_sgbiblios" metaid="38524" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-13" metatable="i_sgbiblios" metaid="38524" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38524" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-13-0"  href="#sub_con-13-0" onclick="return false" metas="i_sgbiblios-38524">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-13-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-13">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38525" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38525&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38525&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38525&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :3&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:3&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :3"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :3&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :3')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-14" metatable="i_sgbiblios" metaid="38525" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-14" metatable="i_sgbiblios" metaid="38525" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38525" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-14-0"  href="#sub_con-14-0" onclick="return false" metas="i_sgbiblios-38525">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-14-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-14">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38526" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38526&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38526&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38526&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :4&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:4&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :4"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :4&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :4')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-15" metatable="i_sgbiblios" metaid="38526" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-15" metatable="i_sgbiblios" metaid="38526" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38526" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-15-0"  href="#sub_con-15-0" onclick="return false" metas="i_sgbiblios-38526">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-15-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-15">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38527" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38527&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38527&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38527&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :5&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:5&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :5"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :5&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :5')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-16" metatable="i_sgbiblios" metaid="38527" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-16" metatable="i_sgbiblios" metaid="38527" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38527" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-16-0"  href="#sub_con-16-0" onclick="return false" metas="i_sgbiblios-38527">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-16-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-16">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38528" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38528&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38528&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38528&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :6&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:6&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :6"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :6&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :6')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-17" metatable="i_sgbiblios" metaid="38528" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-17" metatable="i_sgbiblios" metaid="38528" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38528" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-17-0"  href="#sub_con-17-0" onclick="return false" metas="i_sgbiblios-38528">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-17-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-17">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38529" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38529&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38529&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38529&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :7&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:7&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :7"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :7&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :7')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-18" metatable="i_sgbiblios" metaid="38529" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-18" metatable="i_sgbiblios" metaid="38529" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							 
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38529" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-18-0"  href="#sub_con-18-0" onclick="return false" metas="i_sgbiblios-38529">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-18-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-18">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				  
+				<div class="list_item" >
+				
+					<input type="checkbox" name="bookItem" metaid="38530" metatable="i_sgbiblios" style="margin-top: 50px;float: left;" />
+					
+					
+					<div class="pic">
+						<!-- 
+						<a href="frontV2/BookDetail.action?metaid=38530&metatable=i_sgbiblios" target="_blank">
+							<img src="http://book.bookday.cn/book/cover?isbn=9787533970369&h=122&w=94"/>
+						</a>
+						 -->
+						<a href="frontV2/BookDetail.action?metaid=38530&metatable=i_sgbiblios" target="_blank">
+							<img name='imgName' src="frontFaceV2/opac/images/opac_img/shu1.jpg" isbn="9787533970369" height="120" width="90" alt="" />
+						</a>
+					</div>
+					<div class="info">
+						<h4>
+						 <b><a href="frontV2/BookDetail.action?metaid=38530&metatable=i_sgbiblios&showAsset=true" target="_blank">三体漫画 . 第一部 :8&nbsp; </a> </b>
+						</h4>
+						<p>
+						<span><a href="javascript:void(0)" onclick="searchBookInfo(this)">刘慈欣原著 蔡劲改编 戈闻頔改编 薄暮改编 草祭九日东绘</a></span>
+						<span>杭州:浙江文艺出版社 , 2023&nbsp;</span>
+						<span>J228.2/100:8&nbsp;</span>
+						</p>
+						<div class="clear"></div>
+						<p>
+						
+						<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体漫画 . 第一部 :8"><span class="dang_icon" title="当当图书"></span></a>				
+						<a target='_blank' href="https://search.jd.com/Search?keyword=三体漫画 . 第一部 :8&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+						<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体漫画 . 第一部 :8')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+						</p>
+					</div>
+				
+					<div class="tabs_box">
+						<ul class="nav">
+							
+								<li><a href="#tabs_con01" id="getAsset" onclick="">馆藏信息</a></li>
+							
+							
+							<li><a href="#tabs_con02" id="getDetailed" index="detailed-19" metatable="i_sgbiblios" metaid="38530" onclick="">详细信息</a></li>
+							
+							<!-- <li><a href="#tabs_con03" id="getChecked" index="checked-19" metatable="i_sgbiblios" metaid="38530" onclick="">记到信息</a></li> -->
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+							 
+								
+									
+								
+							
+							
+							
+							<span class="book_mark" name="collect" id="" isLogin="false" metatable="i_sgbiblios" metaid="38530" title="收藏"></span>
+							
+						</ul>
+						
+						<div class="tabs_con" id="tabs_con01">
+							<!--馆藏信息开始-->
+							<div class="list_sub_tabs">
+								<ul>
+									
+										<li><a class="first" aId="sub_con-19-0"  href="#sub_con-19-0" onclick="return false" metas="i_sgbiblios-38530">石鼓区图书馆</a></li>
+									  
+								</ul>
+								
+								<div class="list_sub_con">
+									  
+										<div class="sub_con" id="sub_con-19-0"></div>
+									  
+								</div>
+							</div>
+							<!--馆藏信息结束-->
+						</div>
+						
+						<div class="tabs_con" id="tabs_con02">
+							<div class="title">详细信息</div>
+							<div class="con" id="detailed-19">
+							</div>
+						</div>
+						<!--记到信息开始-->
+						<!--记到信息结束-->
+					</div>
+				</div>
+				
+				<!--单条list_item结束-->
+			
+			
+				<form id="resform" name="form1" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post">
+					
+
+<script type="text/javascript">
+		function checkTurn(which){
+			var $which = $(which);
+			var $pageNo = $which.parent().parent().find("#pageNo");
+
+			var pageNo = $.trim($pageNo.val());
+			var totalPage = $.trim($('#totalPage').val());
+			   if(pageNo==""){
+			       alert("请输入需要跳转到的页号！！！");
+			       $pageNo.select();
+			       return false;
+			   }else if(!isNumber(pageNo)){
+				   alert('输入页码必须为正整数！！！');
+				   $pageNo.select();
+				   return false;
+			   }else if(Number(pageNo)>Number(totalPage)){
+				   alert("页号不能大于总页数！！！");
+			       $pageNo.select();
+			       return false;
+			   }
+			   return true;
+		}
+		function isNumber(str){
+			var   r   =   /^\+?[1-9][0-9]*$/;　
+			return r.test(str);
+		}
+</script>
+<div class="page_wrap">
+	<div class="page_bar" >
+		<input type="hidden" id="totalPage" value="6"/>
+		
+		
+			<span class="list_type02" disabled title="图表显示"></span>
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="list_type01" title="列表显示"></span></a>
+		
+		
+		   
+			<span class="pre_btn" disabled>首页</span>
+		
+		
+		
+			<span class="pre_btn" disabled>上一页</span>
+		
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=2&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">下一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=6&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=0&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">尾页</span></a>
+		
+		<span>转到：<input id="pageNo" name="pageNo" type="text" class="common_input w30" onkeydown="if(event.keyCode==13){return checkTurn() }"/></span>
+		<span  ><input name="go"  value="GO" type="submit" class="pageSubmit" onclick="return checkTurn(this)" /></span>
+	</div>
+	<!--<span>共<b>6</b>页</span>-->
+	<span><b>1/6</b>页 </span>
+</div>
+
+					<input type="hidden" name="select1" value="title" id="resform_select1"/>
+					<input type="hidden" name="select2" value="" id="resform_select2"/>
+					<input type="hidden" name="select3" value="" id="resform_select3"/>
+					<input type="hidden" name="text1" value="三体" id="resform_text1"/>
+					<input type="hidden" name="text2" value="" id="resform_text2"/>
+					<input type="hidden" name="text3" value="" id="resform_text3"/>
+					<input type="hidden" name="occur1" value="" id="resform_occur1"/>
+					<input type="hidden" name="occur2" value="" id="resform_occur2"/>
+					<input type="hidden" name="occur3" value="" id="resform_occur3"/>
+					<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="resform_lastSearchValue"/>
+					<input type="hidden" name="startPublishTime" value="" id="resform_startPublishTime"/>
+					<input type="hidden" name="endPublishTime" value="" id="resform_endPublishTime"/>
+					<input type="hidden" name="videoType" value="" id="resform_videoType"/>
+					<input type="hidden" name="listType" value="div" id="resform_listType"/>
+					<input type="hidden" name="queryOrder" value="0" id="resform_queryOrder"/>
+					<input type="hidden" name="hasAsset" value="false" id="resform_hasAsset"/>
+					<input type="hidden" name="showAsset" value="true" id="resform_showAsset"/>
+					<input type="hidden" name="format" value="" id="resform_format"/>
+					<input type="hidden" name="dataType" value="" id="resform_dataType"/>
+					<input type="hidden" name="sublib" value="" id="resform_sublib"/>
+					<input type="hidden" name="pageSize" value="20" id="resform_pageSize"/>
+				</form>
+
+
+
+			
+			
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	
+
+    <form id="seSearchForm" name="seSearchForm" action="OpacMarcSearch!simpleSearch.action" method="post">
+		<input type="hidden" name="select1" value="title" id="select1"/>
+		<input type="hidden" name="select2" value="" id="select2"/>
+		<input type="hidden" name="select3" value="" id="select3"/>
+		<input type="hidden" name="text1" value="三体" id="text1"/>
+		<input type="hidden" name="text2" value="" id="text2"/>
+		<input type="hidden" name="text3" value="" id="text3"/>
+		<input type="hidden" name="occur1" value="" id="occur1"/>
+		<input type="hidden" name="occur2" value="" id="occur2"/>
+		<input type="hidden" name="occur3" value="" id="occur3"/>
+		<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="lastSearchValue"/>
+		<input type="hidden" name="startPublishTime" value="" id="startPublishTime"/>
+		<input type="hidden" name="endPublishTime" value="" id="endPublishTime"/>
+		<input type="hidden" name="videoType" value="" id="videoType"/>
+		<input type="hidden" name="listType" value="div" id="listType"/>
+		<input type="hidden" name="queryOrder" value="0" id="queryOrder"/>
+		<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+		<input type="hidden" name="showAsset" value="true" id="showAsset"/>
+		<input type="hidden" name="format" value="" id="format"/>
+		<input type="hidden" name="dataType" value="" id="dataType"/>
+		<input type="hidden" name="sublib" value="" id="sublib"/>
+		<input type="hidden" name="pageSize" value="20" id="pageSize"/>
+		<input type="hidden" name="second" value="true" id="second"/>
+		<input type="hidden" name="fieldName" value="" id="fieldName"/>
+		<input type="hidden" name="fieldValue" value="" id="fieldValue"/>
+	</form>
+
+
+
+	<form id="faSearchForm" name="faSearchForm" action="OpacMarcSearch!simpleSearch.action" method="post">
+	</form>
+
+
+
+	<input type="hidden" name="positionIsShow" value="0" id="positionIsShow"/>
+	<input type="hidden" name="localNotesIsShow" value="" id="localNotesIsShow"/>
+    
+
+<div class="footer">
+<p>copyright◎www.hengyanglib.org 衡阳市图书馆 版权所有 湘ICP备14007305号-1 公安部备案号：43040602000012 </p>
+</div>
+  </body>
+</html>

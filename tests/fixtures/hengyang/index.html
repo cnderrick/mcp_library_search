@@ -1,0 +1,396 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<base href="http://weixin.hengyanglib.org:80/InDigLib/">
+
+		<title>opac查询</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/home.css">
+		<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery.switchable.min.js"></script>
+		<script type="text/javascript" src="frontV2/opac/js/common.js"></script>
+		<script type="text/javascript" src="frontV2/opac/bookSearch/js/search.js"></script>
+		<script type="text/javascript" src="frontV2/opac/js/all.js"></script>
+		<style type="text/css">
+			.hide {
+				background: url(frontV2/opac/images/arrow_close.gif) no-repeat !important;
+			}
+		</style>
+		<script language="javascript" type="text/javascript">
+			function get() {
+				var markerId = getUrlParam('dataType');
+				$("input[name=dataType]").each(function() {
+					if($(this).val() == markerId) {
+						$(this).click();
+					}
+				});
+			}
+
+			function getUrlParam(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+			$(function() {
+				$("input[name=dataType]").click(function() {
+					var hasAsset = $(this).attr("hasAsset");
+					var showAsset = $(this).attr("showAsset");
+					if(hasAsset == '0') {
+						$('#hasAsset').val(false);
+					} else {
+						$('#hasAsset').val(true);
+					}
+					if(showAsset == '0') {
+						$('#showAsset').val(false);
+					} else {
+						$('#showAsset').val(true);
+					}
+				})
+				get();
+			})
+		</script>
+
+	</head>
+
+	<body>
+		
+
+<!-- 加载语言包文件 -->
+	<script src="frontV2/i18n/js/jquery.i18n.js"></script>
+	<script src="frontV2/i18n/js/session.js"></script>
+    <script>
+        $(document).ready(function() {
+            var defaultLang = $.session.get("language");
+            if(defaultLang == '' || defaultLang == undefined){
+            	/*默认语言*/
+            	defaultLang = 'cn';
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'en'){
+            	$("#language option:eq(1)").attr("selected",true);
+            }else if(defaultLang == 'cn'){
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'ko'){
+            	$("#language option:eq(2)").attr("selected",true);
+            }else if(defaultLang == 'ja'){
+            	$("#language option:eq(3)").attr("selected",true);
+            }else if(defaultLang == 'fr'){
+            	$("#language option:eq(4)").attr("selected",true);
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "frontV2/i18n/"
+            });
+            
+            /* 选择语言 */
+		    $("#language").bind('change', function() {
+		    	var language = $(this).children('option:selected').html();
+		    	if(language == 'Chinois' || language == '中文' || language == '중국어' || language == 'Chinese' || language == '中国語'){
+		    		language = 'cn';
+		    	}
+		    	if(language == 'Coréen' || language == '韩文' || language == '한국어' || language =='Korean' || language == '韓国語'){
+		    		language = 'ko';
+		    	}
+		    	if(language == 'Japonais' || language == '日文' || language == '일본어' || language =='Japanese' || language == '日本語'){
+		    		language = 'ja';
+		    	}
+		    	if(language == 'Français' || language == '法文' || language == '법무' || language =='French' || language == 'フランス語'){
+		    		language = 'fr';
+		    	}
+		    	if(language == 'English'){
+		    		language = 'en';
+		    	}
+				$("[i18n]").i18n({
+                    defaultLang: language,
+                    filePath: "frontV2/i18n/"
+                });
+                $.session.remove("language");
+                $.session.set("language",language);
+		    });
+
+        });
+    </script>
+<div class="top_wrap">
+	<div class="logo_box">
+		<span></span>
+	</div>
+
+	<div class="text_box">
+		
+			<span><a href="frontV2/MyLib.action" i18n="login.Login">登录我的图书馆</a></span>
+		
+		<span><a href="#" onclick="return false;" i18n="login.help">帮助中心</a>
+		</span>
+	</div>
+
+</div>
+
+<div class="top_nav">
+	<ul>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.index">网站首页</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/MyLib.action" ><span i18n="login.serve">读者服务</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/SearchIndex!simple.action"><span i18n="login.booklist">书目检索</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/SearchIndex!simple.action" i18n="login.booklist.simpleness">简单检索</a>
+				</li>
+				<li>
+					<a href="frontV2/SearchIndex!advanced.action" i18n="login.booklist.advanced">高级检索</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.borrow">借阅指引</span></a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/readGuidelines!expertsRecommend.action" i18n="login.borrow.recommend">馆长推荐</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!topComments.action" i18n="login.borrow.comment">热门评论</a>
+				</li>
+				<li>
+					<a href="frontV2/BookRanking!list.action" i18n="login.borrow.literature">文献借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/ReaderRanking!list.action" i18n="login.borrow.reader">读者借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!newBooks.action" i18n="login.borrow.newbook">新书通报</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="frontV2/CLCNavigation.action"><span i18n="login.classify">分类导航</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/CLCNavigation.action" i18n="login.classify.valuedriver">中图分类法</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li style="float:right;margin-right:20px;margin-top: 10px">
+			<span style="color:#ffffff;" i18n="login.language">语言：</span>
+			<select id="language">
+				<option value="cn" i18n="login.cn">中文</option>
+				<option value="en" i18n="login.en">English</option>
+				<option value="ko" i18n="login.ko">韩文</option>
+				<option value="ja" i18n="login.ja">日文</option>
+				<option value="fr" i18n="login.fr">法文</option>
+			</select>
+		</li>
+		
+		</li>
+		
+	</ul>
+
+
+
+</div>
+
+		<div class="box">
+			<form id="ComplexSearch" name="ComplexSearch" action="http://weixin.hengyanglib.org/InDigLib/frontV2/;jsessionid=D729A7C8391DE1EDF6CA2937B8B0FDA9" method="post">
+				<div class="content">
+					<dl>
+						<dt>
+				<select name="select1" id="select1" class="search_select">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title" selected="selected">题名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="pubdate">出版年</option>
+    <option value="publisher">出版社</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+			</dt>
+						<dd>
+							<input id="text1" name="text1" type="text" class="search_input" onkeydown="if(event.keyCode==13){submitForm()}" /><span class="search_btn02" onclick="submitForm()" i18n="login.booklist.simpleness.explain.query"></span>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt>
+				<select name="select2" id="select2" class="search_select">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title">题名</option>
+    <option value="author" selected="selected">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="pubdate">出版年</option>
+    <option value="publisher">出版社</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+			</dt>
+						<dd>
+							<input id="text2" name="text2" type="text" class="search_input" onkeydown="if(event.keyCode==13){submitForm()}" />
+							<select class="search_select w80" name="occur2">
+								<option value="AND">AND</option>
+								<option value="OR">OR</option>
+								<option value="NOT">NOT</option>
+							</select>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt>
+				<select name="select3" id="select3" class="search_select">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn" selected="selected">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title">题名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="pubdate">出版年</option>
+    <option value="publisher">出版社</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+			</dt>
+						<dd>
+							<input id="text3" name="text3" type="text" class="search_input" onkeydown="if(event.keyCode==13){submitForm()}" />
+							<select class="search_select w80" name="occur3">
+								<option value="AND">AND</option>
+								<option value="OR">OR</option>
+								<option value="NOT">NOT</option>
+							</select>
+						</dd>
+					</dl>
+					
+					<div id="search_option" style="text-align: left;">
+						<div class="option_title" i18n="login.booklist.advanced.basic"><span></span>基本条件</div>
+						<div class="option_con">
+							<dl>
+								<dt i18n="login.booklist.advanced.kind">语言种类：</dt>
+								<dd>
+									<span><input type="radio" name="format" value="all" checked />全部</span>
+									<span><input type="radio" name="format" value="CNMARC" />中文</span>
+									<span><input type="radio" name="format" value="USMARC" />西文</span>
+								</dd>
+							</dl>
+							
+							<dl>
+								<dt i18n="login.booklist.advanced.literature">文献类型：</dt>
+								<dd>
+									<span><input type="radio" name="dataType" value="all" hasAsset="1" showAsset="1" checked/>&nbsp;全部</span>
+									
+										<span><input type="radio" name="dataType" value="1" hasAsset="" showAsset="" />&nbsp;图书</span>
+									
+										<span><input type="radio" name="dataType" value="2" hasAsset="" showAsset="" />&nbsp;期刊</span>
+									
+										<span><input type="radio" name="dataType" value="3" hasAsset="" showAsset="" />&nbsp;地方文献</span>
+									
+								</dd>
+							</dl>
+							
+							<dl>
+								<dt i18n="login.booklist.advanced.publish">出版年份：</dt>
+								<dd><input name="startPublishTime" type="text" class="common_input" /><span>-</span><input name="endPublishTime" type="text" class="common_input" /></dd>
+								<input type="hidden" name="hasAsset" value="true" id="hasAsset"/>
+								<input type="hidden" id="showAsset" name="showAsset" value="true" />
+								<!-- 显示馆藏 -->
+							</dl>
+							
+							<dl>
+								<dt i18n="login.booklist.advanced.line">每页显示行数：</dt>
+								<dd>
+									<select class="search_select" name="pageSize">
+										<option value="10" >10</option>
+										<option value="20" >20</option>
+										<option value="30" >30</option>
+									</select>
+								</dd>
+							</dl>
+							
+							<dl>
+								<dt i18n="login.booklist.advanced.showtab">列表显示方式：</dt>
+								<dd>
+									<span><input type="radio" name="videoType" checked/>&nbsp;图表显示</span>
+									<span><input type="radio" name="videoType" />&nbsp;列表显示</span>
+								</dd>
+							</dl>
+							
+							<div class="clear"></div>
+						</div>
+						
+						<div class="option_title" i18n="login.booklist.advanced.their"><span></span>检索所属馆</div>
+						<div class="option_con">
+							<dl>
+								<dt i18n="login.booklist.advanced.theirtab">检索所属馆列表：</dt>
+								<dd>
+									<span><input type="checkbox" name="checkAllSublib" id="checkAllSublib" />&nbsp;全选</span>
+								</dd>
+								<dd class="w460">
+									
+										<span><input type="checkbox" name="sublib" value="SG"   />&nbsp;石鼓区图书馆</span>
+									
+										<span><input type="checkbox" name="sublib" value="NY"   />&nbsp;南岳区图书馆</span>
+									
+										<span><input type="checkbox" name="sublib" value="HT"  checked />&nbsp;衡阳市图书馆</span>
+									
+										<span><input type="checkbox" name="sublib" value="YF"   />&nbsp;雁峰区图书馆</span>
+									
+										<span><input type="checkbox" name="sublib" value="ZX"   />&nbsp;蒸湘区图书馆</span>
+									
+										<span><input type="checkbox" name="sublib" value="ZH"   />&nbsp;珠晖区图书馆</span>
+									
+								</dd>
+							</dl>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+
+
+			<div class="bottom_bg"></div>
+		</div>
+		
+
+<div class="footer">
+<p>copyright◎www.hengyanglib.org 衡阳市图书馆 版权所有 湘ICP备14007305号-1 公安部备案号：43040602000012 </p>
+</div>
+	</body>
+
+</html>

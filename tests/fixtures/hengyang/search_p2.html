@@ -1,0 +1,1501 @@
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="http://weixin.hengyanglib.org:80/InDigLib/">
+    <title>opac检索结果页</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/home.css">
+	<link rel="stylesheet" type="text/css" href="frontFaceV2/opac/css/opac.css">
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="js/ajax/jquery1.8.3/jquery.switchable.min.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/js/common.js" ></script>
+	<script type="text/javascript" src="js/common/map.js"></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/common.js" ></script>
+	<script type="text/javascript" src="frontV2/opac/bookSearch/js/searchList.js" ></script>
+	<script type="text/javascript" src="js/opacRandom/opacRandom.js"></script>
+		<script type="text/javascript" src="js/ajax/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		function toTargat(url,value){
+			var url = url + encodeURI(value);
+			window.open(url,"_blank");
+		}
+		
+		function searchBookInfo(obj){
+			var author = encodeURI($(obj).text().trim());
+			var url = encodeURI("/InDigLib/OpacMarcSearchSolr!simpleSearch.action?select1=author&text1="+author);
+			url = url.replace("+","");
+			window.location.href = url;
+		}
+	</script>
+	<style type="text/css">
+		.desc{
+			background:url('frontV2/opac/images/asc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+		.asc{
+			background:url('frontV2/opac/images/desc.png')  no-repeat;
+			width: 21px;
+			height: 21px;
+			float: right;
+			margin-top: 15px;
+			margin-left: -15px;
+		}
+	</style>
+  </head>
+  
+  <body>
+    
+
+<!-- 加载语言包文件 -->
+	<script src="frontV2/i18n/js/jquery.i18n.js"></script>
+	<script src="frontV2/i18n/js/session.js"></script>
+    <script>
+        $(document).ready(function() {
+            var defaultLang = $.session.get("language");
+            if(defaultLang == '' || defaultLang == undefined){
+            	/*默认语言*/
+            	defaultLang = 'cn';
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'en'){
+            	$("#language option:eq(1)").attr("selected",true);
+            }else if(defaultLang == 'cn'){
+            	$("#language option:eq(0)").attr("selected",true);
+            }else if(defaultLang == 'ko'){
+            	$("#language option:eq(2)").attr("selected",true);
+            }else if(defaultLang == 'ja'){
+            	$("#language option:eq(3)").attr("selected",true);
+            }else if(defaultLang == 'fr'){
+            	$("#language option:eq(4)").attr("selected",true);
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "frontV2/i18n/"
+            });
+            
+            /* 选择语言 */
+		    $("#language").bind('change', function() {
+		    	var language = $(this).children('option:selected').html();
+		    	if(language == 'Chinois' || language == '中文' || language == '중국어' || language == 'Chinese' || language == '中国語'){
+		    		language = 'cn';
+		    	}
+		    	if(language == 'Coréen' || language == '韩文' || language == '한국어' || language =='Korean' || language == '韓国語'){
+		    		language = 'ko';
+		    	}
+		    	if(language == 'Japonais' || language == '日文' || language == '일본어' || language =='Japanese' || language == '日本語'){
+		    		language = 'ja';
+		    	}
+		    	if(language == 'Français' || language == '法文' || language == '법무' || language =='French' || language == 'フランス語'){
+		    		language = 'fr';
+		    	}
+		    	if(language == 'English'){
+		    		language = 'en';
+		    	}
+				$("[i18n]").i18n({
+                    defaultLang: language,
+                    filePath: "frontV2/i18n/"
+                });
+                $.session.remove("language");
+                $.session.set("language",language);
+		    });
+
+        });
+    </script>
+<div class="top_wrap">
+	<div class="logo_box">
+		<span></span>
+	</div>
+
+	<div class="text_box">
+		
+			<span><a href="frontV2/MyLib.action" i18n="login.Login">登录我的图书馆</a></span>
+		
+		<span><a href="#" onclick="return false;" i18n="login.help">帮助中心</a>
+		</span>
+	</div>
+
+</div>
+
+<div class="top_nav">
+	<ul>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.index">网站首页</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/MyLib.action" ><span i18n="login.serve">读者服务</span>
+			</a>
+		</li>
+		<li class="main">
+			<a href="frontV2/SearchIndex!simple.action"><span i18n="login.booklist">书目检索</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/SearchIndex!simple.action" i18n="login.booklist.simpleness">简单检索</a>
+				</li>
+				<li>
+					<a href="frontV2/SearchIndex!advanced.action" i18n="login.booklist.advanced">高级检索</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="#" onclick="return false;"><span i18n="login.borrow">借阅指引</span></a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/readGuidelines!expertsRecommend.action" i18n="login.borrow.recommend">馆长推荐</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!topComments.action" i18n="login.borrow.comment">热门评论</a>
+				</li>
+				<li>
+					<a href="frontV2/BookRanking!list.action" i18n="login.borrow.literature">文献借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/ReaderRanking!list.action" i18n="login.borrow.reader">读者借阅排行</a>
+				</li>
+				<li>
+					<a href="frontV2/readGuidelines!newBooks.action" i18n="login.borrow.newbook">新书通报</a>
+				</li>
+			</ul>
+		</li>
+		<li class="main">
+			<a href="frontV2/CLCNavigation.action"><span i18n="login.classify">分类导航</span>
+			</a>
+			<ul class="sub_nav">
+				<li>
+					<a href="frontV2/CLCNavigation.action" i18n="login.classify.valuedriver">中图分类法</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li style="float:right;margin-right:20px;margin-top: 10px">
+			<span style="color:#ffffff;" i18n="login.language">语言：</span>
+			<select id="language">
+				<option value="cn" i18n="login.cn">中文</option>
+				<option value="en" i18n="login.en">English</option>
+				<option value="ko" i18n="login.ko">韩文</option>
+				<option value="ja" i18n="login.ja">日文</option>
+				<option value="fr" i18n="login.fr">法文</option>
+			</select>
+		</li>
+		
+		</li>
+		
+	</ul>
+
+
+
+</div>
+
+
+    <div class="big_wrap">
+
+		<div class="left_wrap">
+			<div class="head_title"></div>
+		
+			<div class="search_area">
+    			<form id="reSearchForm" name="reSearchForm" method="post">
+					<span>
+						<select name="select1" id="select1">
+    <option value="all"
+    >任意词</option>
+    <option value="isbn">ISBN</option>
+    <option value="ctrlno">控制号</option>
+    <option value="title" selected="selected">题名</option>
+    <option value="author">作者</option>
+    <option value="subject">主题</option>
+    <option value="classno">分类号</option>
+    <option value="callno">索取号</option>
+    <option value="pubdate">出版年</option>
+    <option value="publisher">出版社</option>
+    <option value="lang">语种</option>
+
+
+</select>
+
+
+					</span>
+					<span>
+						<input id="text1" name="text1" type="text" class="search_input" onkeydown="if(event.keyCode==13) reSearch()"  />
+						<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+						<input type="hidden" name="dataType" value="" id="dataType"/>
+						<input type="hidden" name="sublib" value="" id="sublib"/>
+					</span>
+					<span class="y_btn" id="reSearch">重新搜索</span>
+					<span class="g_btn" id="seSearch">在结果中搜索</span>
+				</form>
+
+
+
+			</div>
+		
+			<div class="left_nav">
+				
+						<div class="title">所属馆</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','HT');return false;" >衡阳市图书馆</a><em>(71)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','SG');return false;" >石鼓区图书馆</a><em>(29)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','NY');return false;" >南岳区图书馆</a><em>(15)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('sublib','YF');return false;" >雁峰区图书馆</a><em>(2)</em></li>
+							
+							
+						
+						</ul>		
+				
+						<div class="title">文献类型</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('datatype','1');return false;" >图书</a><em>(117)</em></li>
+							
+							
+						
+						</ul>		
+				
+						<div class="title">著者</div>
+						<ul name="face">
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','刘慈欣著');return false;" >刘慈欣著</a><em>(22)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','刘慈欣原著');return false;" >刘慈欣原著</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','戈闻頔改编');return false;" >戈闻頔改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','草祭九日东绘');return false;" >草祭九日东绘</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','蔡劲改编');return false;" >蔡劲改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','薄暮改编');return false;" >薄暮改编</a><em>(10)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','董志凯本卷编');return false;" >董志凯本卷编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','金冲及总主编');return false;" >金冲及总主编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','陈晋主编');return false;" >陈晋主编</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','北京工业学院编');return false;" >北京工业学院编</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(英)加德纳著');return false;" >(英)加德纳著</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(韩)天才教育出版社编著');return false;" >(韩)天才教育出..</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','《速查速用世界最新三极管替换手册》编写组编');return false;" >《速查速用世界最..</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','李绵春编');return false;" >李绵春编</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','王晋瑞译');return false;" >王晋瑞译</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','黄恒著');return false;" >黄恒著</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(澳)卡斯威尔(Caswell,');return false;" >(澳)卡斯威尔(..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(澳)詹富安(Chiem,');return false;" >(澳)詹富安(C..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(苏)高尔基(Горький,');return false;" >(苏)高尔基(Г..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','(英)莎士比亚(Shakespeare,');return false;" >(英)莎士比亚(..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Brian)著');return false;" >Brian)著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','David)著');return false;" >David)著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','William著');return false;" >William著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Горький著');return false;" >Горький著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','Максим著');return false;" >Максим著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','《常用三极管替换手册》编写组编');return false;" >《常用三极管替换..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','三谷幸喜著');return false;" >三谷幸喜著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','三谷纯,编著');return false;" >三谷纯,编著</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','上海市业余工业大学编');return false;" >上海市业余工业大..</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('author','中国科学技术情报研究所重庆分所编辑');return false;" >中国科学技术情报..</a><em>(1)</em></li>
+							
+						
+						</ul>		
+				
+						<div class="title">出版日期</div>
+						<ul name="face">
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2024');return false;" >2024</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2023');return false;" >2023</a><em>(11)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2022');return false;" >2022</a><em>(17)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2021');return false;" >2021</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2020');return false;" >2020</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2019');return false;" >2019</a><em>(8)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2018');return false;" >2018</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2017');return false;" >2017</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2016');return false;" >2016</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2013');return false;" >2013</a><em>(5)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2012');return false;" >2012</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2010');return false;" >2010</a><em>(5)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2009');return false;" >2009</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2008');return false;" >2008</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2005');return false;" >2005</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2002');return false;" >2002</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','2001');return false;" >2001</a><em>(4)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1990');return false;" >1990</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1987');return false;" >1987</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1986');return false;" >1986</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1985');return false;" >1985</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1982');return false;" >1982</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1981');return false;" >1981</a><em>(3)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1980');return false;" >1980</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1978');return false;" >1978</a><em>(6)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1977');return false;" >1977</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1975');return false;" >1975</a><em>(2)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1973');return false;" >1973</a><em>(1)</em></li>
+							
+						
+							
+							
+								<li ><a href="#" onclick="facetSearch('publishtime','1958');return false;" >1958</a><em>(1)</em></li>
+							
+						
+						</ul>		
+				
+						<div class="title">分类</div>
+						<ul name="face">
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','I');return false;" >I 文学</a><em>(34)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','D');return false;" >D 政治、法律</a><em>(17)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','T');return false;" >T 工业技术</a><em>(16)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','J');return false;" >J 艺术</a><em>(15)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','G');return false;" >G 文化、科学、..</a><em>(7)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','K');return false;" >K 历史、地理</a><em>(5)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','F');return false;" >F 经济</a><em>(3)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','Z');return false;" >Z 综合性图书</a><em>(3)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','B');return false;" >B 哲学、宗教</a><em>(2)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','A');return false;" >A 马列主义、毛..</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','C');return false;" >C 社会科学总论</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','E');return false;" >E 军事</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','H');return false;" >H 语言、文字</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','N');return false;" >N 自然科学总论</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','O');return false;" >O 数理科学和化学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','P');return false;" >P 天文学、地球..</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','Q');return false;" >Q 生物科学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','R');return false;" >R 医药、卫生</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','S');return false;" >S 农业科学</a><em>(1)</em></li>
+							
+							
+						
+							
+								<li><a href="#" onclick="facetSearch('classnostatistic','X');return false;" >X 环境科学、安..</a><em>(1)</em></li>
+							
+							
+						
+						</ul>		
+				
+			</div>
+	
+			<div class="bottom_bg"></div>
+		</div>
+
+		<div class="main_wrap" style="position: relative;">
+			<div class="header_buttons">
+				<input class="button" onclick="allChecked()" type="button" value="全选" />
+				<input class="button" onclick="closeChecked()" type="button" value="取消全选" />
+				保存至书单:
+                <select class="select" id="bookList">
+                 <option>创建新书单</option>
+                </select>
+                <input type="button" class="button" value="保存" onclick="addToBookList();">
+                <input type="button" class="button" value="添加临时书单" onclick="addToTemporaryBookList();">
+                <input type="button" class="button" id="toTemporaryBookList" value="查看书单" onclick="toTemporaryBookList();">
+            </div>
+		
+			<div class="key_info">
+				 <div style="text-align: left;">
+					<div class="sort_box">
+						<span>排序方式：</span>
+						
+						 <select name="queryOrder" id="queryOrderSelect" style="width:auto">
+    <option value="1" selected="selected">匹配度      - 降序</option>
+    <option value="2">匹配度      - 升序</option>
+    <option value="3">出版时间 - 降序</option>
+    <option value="4">出版时间 - 升序</option>
+    <option value="5">馆藏总数 - 降序</option>
+    <option value="6">馆藏总数 - 升序</option>
+
+
+</select>
+
+
+					</div>
+					共有<b>117</b>条记录，检索时间：<em>0.018</em>秒
+				</div>
+			</div>
+			<form id="resform" name="form1" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post">
+				
+
+<script type="text/javascript">
+		function checkTurn(which){
+			var $which = $(which);
+			var $pageNo = $which.parent().parent().find("#pageNo");
+
+			var pageNo = $.trim($pageNo.val());
+			var totalPage = $.trim($('#totalPage').val());
+			   if(pageNo==""){
+			       alert("请输入需要跳转到的页号！！！");
+			       $pageNo.select();
+			       return false;
+			   }else if(!isNumber(pageNo)){
+				   alert('输入页码必须为正整数！！！');
+				   $pageNo.select();
+				   return false;
+			   }else if(Number(pageNo)>Number(totalPage)){
+				   alert("页号不能大于总页数！！！");
+			       $pageNo.select();
+			       return false;
+			   }
+			   return true;
+		}
+		function isNumber(str){
+			var   r   =   /^\+?[1-9][0-9]*$/;　
+			return r.test(str);
+		}
+</script>
+<div class="page_wrap">
+	<div class="page_bar" >
+		<input type="hidden" id="totalPage" value="6"/>
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=2&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="list_type02" title="图表显示"></span></a>
+			<span class="list_type01" disabled title="列表显示"></span>
+		
+		
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">首页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">上一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=3&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">下一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=6&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">尾页</span></a>
+		
+		<span>转到：<input id="pageNo" name="pageNo" type="text" class="common_input w30" onkeydown="if(event.keyCode==13){return checkTurn() }"/></span>
+		<span  ><input name="go"  value="GO" type="submit" class="pageSubmit" onclick="return checkTurn(this)" /></span>
+	</div>
+	<!--<span>共<b>6</b>页</span>-->
+	<span><b>2/6</b>页 </span>
+</div>
+
+				<input type="hidden" name="select1" value="title" id="resform_select1"/>
+				<input type="hidden" name="select2" value="" id="resform_select2"/>
+				<input type="hidden" name="select3" value="" id="resform_select3"/>
+				<input type="hidden" name="text1" value="三体" id="resform_text1"/>
+				<input type="hidden" name="text2" value="" id="resform_text2"/>
+				<input type="hidden" name="text3" value="" id="resform_text3"/>
+				<input type="hidden" name="occur1" value="" id="resform_occur1"/>
+				<input type="hidden" name="occur2" value="" id="resform_occur2"/>
+				<input type="hidden" name="occur3" value="" id="resform_occur3"/>
+				<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="resform_lastSearchValue"/>
+				<input type="hidden" name="startPublishTime" value="" id="resform_startPublishTime"/>
+				<input type="hidden" name="endPublishTime" value="" id="resform_endPublishTime"/>
+				<input type="hidden" name="videoType" value="" id="resform_videoType"/>
+				<input type="hidden" name="listType" value="list" id="resform_listType"/>
+				<input type="hidden" name="queryOrder" value="1" id="resform_queryOrder"/>
+				<input type="hidden" name="hasAsset" value="false" id="resform_hasAsset"/>
+				<input type="hidden" name="format" value="" id="resform_format"/>
+				<input type="hidden" name="dataType" value="" id="resform_dataType"/>
+				<input type="hidden" name="sublib" value="" id="resform_sublib"/>
+				<input type="hidden" name="pageSize" value="20" id="resform_pageSize"/>
+			</form>
+
+
+
+			
+		
+			
+				<!--单条list_item开始-->
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=216600&metatable=i_biblios&showAsset=true" target="_blank">地球往事 :三体&nbsp; </a> <span>I247.55/154&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2012 ,2013重印&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=地球往事 :三体"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=地球往事 :三体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','地球往事 :三体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=205763&metatable=i_biblios&showAsset=true" target="_blank">三体 . ⅱ :黑暗森林&nbsp; </a> <span>I247.55/126:2&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2008&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅱ :黑暗森林"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅱ :黑暗森林&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅱ :黑暗森林')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=29444&metatable=i_nybiblios&showAsset=true" target="_blank">看我们三兄弟 : 固体、液体和气体&nbsp; </a> <span>O481-49/1&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>李炳未译 (韩)天才教育出版社编著</b>&nbsp;</span>
+								<span>北京:电子工业出版社 , 2013&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=看我们三兄弟 : 固体、液体和气体"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=看我们三兄弟 : 固体、液体和气体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','看我们三兄弟 : 固体、液体和气体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=247965&metatable=i_biblios&showAsset=true" target="_blank">立体构成 : 三谷纯的孤线立体折纸之美&nbsp; </a> <span>J538.2/1&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>三谷纯,编著 宋安译</b>&nbsp;</span>
+								<span>北京:中国纺织出版社 , 2018.11&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=立体构成 : 三谷纯的孤线立体折纸之美"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=立体构成 : 三谷纯的孤线立体折纸之美&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','立体构成 : 三谷纯的孤线立体折纸之美')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=254400&metatable=i_biblios&showAsset=true" target="_blank">生命的深度 : 《三体》的哲学解读&nbsp; </a> <span>I207.425/17&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>吴飞著</b>&nbsp;</span>
+								<span>北京:生活&middot;读书&middot;新知三联书店 , 2019&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=生命的深度 : 《三体》的哲学解读"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=生命的深度 : 《三体》的哲学解读&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','生命的深度 : 《三体》的哲学解读')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=8078&metatable=i_nybiblios&showAsset=true" target="_blank">三维立体新概念&nbsp; </a> <span>G61/370&nbsp;</span></b>
+							</h4>
+							<p>
+								<span></b>&nbsp;</span>
+								<span>北京:中国电影出版社 , 2005&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三维立体新概念"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三维立体新概念&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三维立体新概念')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=205679&metatable=i_biblios&showAsset=true" target="_blank">住在身体里的第三者&nbsp; </a> <span>I267.1/869&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>廖传勇著</b>&nbsp;</span>
+								<span>杭州:浙江工商大学出版社 , 2013.6&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=住在身体里的第三者"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=住在身体里的第三者&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','住在身体里的第三者')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=40215&metatable=i_sgbiblios&showAsset=true" target="_blank">特种兵学校 . 23 :三体战舰&nbsp; </a> <span>I287.45/298:23&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>八路(军事学)著</b>&nbsp;</span>
+								<span>石家庄:河北少年儿童出版社 , 2020&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=特种兵学校 . 23 :三体战舰"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=特种兵学校 . 23 :三体战舰&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','特种兵学校 . 23 :三体战舰')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=19666&metatable=i_sgbiblios&showAsset=true" target="_blank">三体 . ⅱ :黑暗森林&nbsp; </a> <span>&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2019&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅱ :黑暗森林"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅱ :黑暗森林&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅱ :黑暗森林')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=20601&metatable=i_nybiblios&showAsset=true" target="_blank">三体 . ⅱ :黑暗森林&nbsp; </a> <span>I247.55/5&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2008&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅱ :黑暗森林"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅱ :黑暗森林&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅱ :黑暗森林')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=32603&metatable=i_sgbiblios&showAsset=true" target="_blank">三体 . ⅱ :黑暗森林&nbsp; </a> <span>&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2019&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅱ :黑暗森林"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅱ :黑暗森林&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅱ :黑暗森林')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=28041&metatable=i_nybiblios&showAsset=true" target="_blank">看我们三兄弟 固体液体气体 : 基因的改变&nbsp; </a> <span>Q785-49/1&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>李玉景译 (韩)天才教育出版社编著</b>&nbsp;</span>
+								<span>北京:电子工业出版社 , 2013&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=看我们三兄弟 固体液体气体 : 基因的改变"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=看我们三兄弟 固体液体气体 : 基因的改变&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','看我们三兄弟 固体液体气体 : 基因的改变')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=316472&metatable=i_biblios&showAsset=true" target="_blank">一体推进“三不腐”&nbsp; </a> <span>D261.3/81&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>罗星著</b>&nbsp;</span>
+								<span>北京:中国方正出版社 , 2023&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=一体推进&ldquo;三不腐&rdquo;"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=一体推进&ldquo;三不腐&rdquo;&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','一体推进&ldquo;三不腐&rdquo;')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=22427&metatable=i_biblios&showAsset=true" target="_blank">长江三峡高陡岩质岸坡与危岩体&nbsp; </a> <span>P642.22/1&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>陈立德编著</b>&nbsp;</span>
+								<span>武汉:中国地质大学出版社 , 2012.2&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=长江三峡高陡岩质岸坡与危岩体"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=长江三峡高陡岩质岸坡与危岩体&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','长江三峡高陡岩质岸坡与危岩体')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=164751&metatable=i_biblios&showAsset=true" target="_blank">论西方的三种和声体系&nbsp; </a> <span>J614.1/4&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>霍洛波夫著 罗秉康译</b>&nbsp;</span>
+								<span>北京:人民音乐出版社 , 1987.12&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=论西方的三种和声体系"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=论西方的三种和声体系&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','论西方的三种和声体系')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=333276&metatable=i_biblios&showAsset=true" target="_blank">三体 : 新版 :死神永生&nbsp; </a> <span>I247.55/335:1&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2022&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 新版 :死神永生"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 新版 :死神永生&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 新版 :死神永生')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=333277&metatable=i_biblios&showAsset=true" target="_blank">三体 : 新版 :黑暗森林&nbsp; </a> <span>I247.55/335:2&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2022&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 : 新版 :黑暗森林"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 : 新版 :黑暗森林&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 : 新版 :黑暗森林')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=19683&metatable=i_sgbiblios&showAsset=true" target="_blank">三体 . iii :死神永生 = three body . iii :dead end&nbsp; </a> <span>&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2010&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . iii :死神永生 = three body . iii :dead end"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . iii :死神永生 = three body . iii :dead end&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . iii :死神永生 = three body . iii :dead end')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=20420&metatable=i_nybiblios&showAsset=true" target="_blank">三体 . ⅲ :死神永生 = three body . ⅲ :dead end&nbsp; </a> <span>I247.55/4&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2010&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅲ :死神永生 = three body . ⅲ :dead end"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅲ :死神永生 = three body . ⅲ :dead end&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅲ :死神永生 = three body . ⅲ :dead end')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				  
+					<div class="list_item h70">
+						
+						<div class="info">
+							<h4>
+								<b><a href="frontV2/BookDetail.action?metaid=205389&metatable=i_biblios&showAsset=true" target="_blank">三体 . ⅲ :死神永生 = three body . ⅲ :dead end&nbsp; </a> <span>I247.55/126:3&nbsp;</span></b>
+							</h4>
+							<p>
+								<span>刘慈欣著</b>&nbsp;</span>
+								<span>重庆:重庆出版社 , 2010.11&nbsp;</span>
+								<a target='_blank' href="http://search.dangdang.com/search_pub.php?key=三体 . ⅲ :死神永生 = three body . ⅲ :dead end"><span class="dang_icon" title="当当图书"></span></a>				
+								<a target='_blank' href="https://search.jd.com/Search?keyword=三体 . ⅲ :死神永生 = three body . ⅲ :dead end&enc=utf-8"><span class="jd_icon" title="京东图书"></span></a>						
+								<a target='_blank' onclick="javascript:toTargat('http://www.amazon.cn/s/ref=nb_sb_noss_2?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&url=search-alias%3Daps&field-keywords=','三体 . ⅲ :死神永生 = three body . ⅲ :dead end')"><span class="amazon_icon" title="亚马逊图书"></span></a>	
+							</p>
+							
+						</div>
+					</div>
+				
+				<!--单条list_item结束-->
+			
+			
+			
+				<form id="resform" name="form1" action="/InDigLib/OpacMarcSearchSolr!simpleSearch.action" method="post">
+					
+
+<script type="text/javascript">
+		function checkTurn(which){
+			var $which = $(which);
+			var $pageNo = $which.parent().parent().find("#pageNo");
+
+			var pageNo = $.trim($pageNo.val());
+			var totalPage = $.trim($('#totalPage').val());
+			   if(pageNo==""){
+			       alert("请输入需要跳转到的页号！！！");
+			       $pageNo.select();
+			       return false;
+			   }else if(!isNumber(pageNo)){
+				   alert('输入页码必须为正整数！！！');
+				   $pageNo.select();
+				   return false;
+			   }else if(Number(pageNo)>Number(totalPage)){
+				   alert("页号不能大于总页数！！！");
+			       $pageNo.select();
+			       return false;
+			   }
+			   return true;
+		}
+		function isNumber(str){
+			var   r   =   /^\+?[1-9][0-9]*$/;　
+			return r.test(str);
+		}
+</script>
+<div class="page_wrap">
+	<div class="page_bar" >
+		<input type="hidden" id="totalPage" value="6"/>
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=2&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=div&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="list_type02" title="图表显示"></span></a>
+			<span class="list_type01" disabled title="列表显示"></span>
+		
+		
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">首页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=1&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">上一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=3&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">下一页</span></a>
+		
+		
+		
+			<a href="OpacMarcSearchSolr!simpleSearch.action?pageNo=6&select1=title&select2=&select3=&text1=%E4%B8%89%E4%BD%93&text2=&text3=&occur1=&occur2=&occur3=&second=&table_CN=&lastSearchValue=titleFIELD_SPLITVALUE_SPLIT%E4%B8%89%E4%BD%93&startPublishTime=&endPublishTime=&pageSize=20&condition=&table=&type=&videoType=&listType=list&queryOrder=1&hasAsset=false&showAsset=true&format=&dataType=&sublib=&localIsShow=1&detailedIsShow=1&collectionIsShow=1"><span class="pre_btn">尾页</span></a>
+		
+		<span>转到：<input id="pageNo" name="pageNo" type="text" class="common_input w30" onkeydown="if(event.keyCode==13){return checkTurn() }"/></span>
+		<span  ><input name="go"  value="GO" type="submit" class="pageSubmit" onclick="return checkTurn(this)" /></span>
+	</div>
+	<!--<span>共<b>6</b>页</span>-->
+	<span><b>2/6</b>页 </span>
+</div>
+
+					<input type="hidden" name="select1" value="title" id="resform_select1"/>
+					<input type="hidden" name="select2" value="" id="resform_select2"/>
+					<input type="hidden" name="select3" value="" id="resform_select3"/>
+					<input type="hidden" name="text1" value="三体" id="resform_text1"/>
+					<input type="hidden" name="text2" value="" id="resform_text2"/>
+					<input type="hidden" name="text3" value="" id="resform_text3"/>
+					<input type="hidden" name="occur1" value="" id="resform_occur1"/>
+					<input type="hidden" name="occur2" value="" id="resform_occur2"/>
+					<input type="hidden" name="occur3" value="" id="resform_occur3"/>
+					<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="resform_lastSearchValue"/>
+					<input type="hidden" name="startPublishTime" value="" id="resform_startPublishTime"/>
+					<input type="hidden" name="endPublishTime" value="" id="resform_endPublishTime"/>
+					<input type="hidden" name="videoType" value="" id="resform_videoType"/>
+					<input type="hidden" name="listType" value="list" id="resform_listType"/>
+					<input type="hidden" name="queryOrder" value="1" id="resform_queryOrder"/>
+					<input type="hidden" name="hasAsset" value="false" id="resform_hasAsset"/>
+					<input type="hidden" name="showAsset" value="true" id="resform_showAsset"/>
+					<input type="hidden" name="format" value="" id="resform_format"/>
+					<input type="hidden" name="dataType" value="" id="resform_dataType"/>
+					<input type="hidden" name="sublib" value="" id="resform_sublib"/>
+					<input type="hidden" name="pageSize" value="20" id="resform_pageSize"/>
+				</form>
+
+
+
+			
+			
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	
+
+    <form id="seSearchForm" name="seSearchForm" action="OpacMarcSearch!simpleSearch.action" method="post">
+		<input type="hidden" name="select1" value="title" id="select1"/>
+		<input type="hidden" name="select2" value="" id="select2"/>
+		<input type="hidden" name="select3" value="" id="select3"/>
+		<input type="hidden" name="text1" value="三体" id="text1"/>
+		<input type="hidden" name="text2" value="" id="text2"/>
+		<input type="hidden" name="text3" value="" id="text3"/>
+		<input type="hidden" name="occur1" value="" id="occur1"/>
+		<input type="hidden" name="occur2" value="" id="occur2"/>
+		<input type="hidden" name="occur3" value="" id="occur3"/>
+		<input type="hidden" name="lastSearchValue" value="titleFIELD_SPLITVALUE_SPLIT三体" id="lastSearchValue"/>
+		<input type="hidden" name="startPublishTime" value="" id="startPublishTime"/>
+		<input type="hidden" name="endPublishTime" value="" id="endPublishTime"/>
+		<input type="hidden" name="videoType" value="" id="videoType"/>
+		<input type="hidden" name="listType" value="list" id="listType"/>
+		<input type="hidden" name="queryOrder" value="1" id="queryOrder"/>
+		<input type="hidden" name="hasAsset" value="false" id="hasAsset"/>
+		<input type="hidden" name="showAsset" value="true" id="showAsset"/>
+		<input type="hidden" name="format" value="" id="format"/>
+		<input type="hidden" name="dataType" value="" id="dataType"/>
+		<input type="hidden" name="sublib" value="" id="sublib"/>
+		<input type="hidden" name="pageSize" value="20" id="pageSize"/>
+		<input type="hidden" name="second" value="true" id="second"/>
+		<input type="hidden" name="fieldName" value="" id="fieldName"/>
+		<input type="hidden" name="fieldValue" value="" id="fieldValue"/>
+	</form>
+
+
+
+	<form id="faSearchForm" name="faSearchForm" action="OpacMarcSearch!simpleSearch.action" method="post">
+	</form>
+
+
+
+	<input type="hidden" name="positionIsShow" value="0" id="positionIsShow"/>
+	<input type="hidden" name="localNotesIsShow" value="" id="localNotesIsShow"/>
+    
+
+<div class="footer">
+<p>copyright◎www.hengyanglib.org 衡阳市图书馆 版权所有 湘ICP备14007305号-1 公安部备案号：43040602000012 </p>
+</div>
+  </body>
+</html>

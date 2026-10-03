@@ -9,6 +9,7 @@ from . import anqing
 from . import anshun
 from . import baoji
 from . import baotou
+from . import bengbu
 from . import bijie
 from . import changchun
 from . import chaozhou
@@ -30,11 +31,13 @@ from . import guangzhou
 from . import guilin
 from . import guiyang
 from . import haikou
+from . import haixi
 from . import hangzhou
 from . import hanzhong
 from . import hefei
 from . import heilongjiang
 from . import henan_prov
+from . import hengyang
 from . import heyuan
 from . import honghe
 from . import huaian
@@ -88,6 +91,7 @@ from . import suzhou
 from . import taian
 from . import taiyuan
 from . import taizhou
+from . import taizhou_js
 from . import tangshan
 from . import tianjin
 from . import tonghua
@@ -130,6 +134,7 @@ ADAPTERS = {
     "anshun": anshun,
     "baoji": baoji,
     "baotou": baotou,
+    "bengbu": bengbu,
     "bijie": bijie,
     "changchun": changchun,
     "chaozhou": chaozhou,
@@ -151,11 +156,13 @@ ADAPTERS = {
     "guilin": guilin,
     "guiyang": guiyang,
     "haikou": haikou,
+    "haixi": haixi,
     "hangzhou": hangzhou,
     "hanzhong": hanzhong,
     "hefei": hefei,
     "heilongjiang": heilongjiang,
     "henan_prov": henan_prov,
+    "hengyang": hengyang,
     "heyuan": heyuan,
     "honghe": honghe,
     "huaian": huaian,
@@ -209,6 +216,7 @@ ADAPTERS = {
     "taian": taian,
     "taiyuan": taiyuan,
     "taizhou": taizhou,
+    "taizhou_js": taizhou_js,
     "tangshan": tangshan,
     "tianjin": tianjin,
     "tonghua": tonghua,
