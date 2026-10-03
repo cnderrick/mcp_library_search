@@ -199,7 +199,7 @@
 |  | 莆田 | — | ⛔ 不通 | http://www.ptlib.net （莆田市图书馆） | — | — |
 |  | 三明 | — | ⛔ 不通 | http://www.smlib.net （三明市图书馆） | — | — |
 |  | 泉州 | `quanzhou` | ✅ 接入 | http://218.66.169.78:85/opac/index （泉州市图书馆） | 图创 Interlib | `interlib/` 家族 + `adapters/cn/quanzhou.py`；实抓「三体」103 条 |
-|  | 漳州 | — | ⛔ 不通 | http://www.zzlib.net （漳州市图书馆） | — | 2026-10-03 有登记但实测为假站：原 `www.zzlib.net`→198.20.1.65、apex `zzlib.net`→198.20.2.61 均在域名停放段、TCP 空响应；用户所给 `www.fzlib.org`→198.20.0.209 亦停放段。故非「缺失」 |
+|  | 漳州 | — | ❓ 缺失 | — | — | 2026-10-03 旧登记 `www.zzlib.net`／`zzlib.net` 及 `fzlib.org` 均解析至 198.20.x.x 域名停放段，视同无有效入口 |
 |  | 南平 | — | ⛔ 不通 | http://www.nplib.net （南平市图书馆） | — | — |
 |  | 龙岩 | — | ⛔ 不通 | http://www.lylib.net （龙岩市图书馆） | — | — |
 |  | 宁德 | — | ⛔ 不通 | http://www.ndlib.net （宁德市图书馆） | — | — |
