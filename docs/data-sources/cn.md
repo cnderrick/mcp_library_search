@@ -361,7 +361,7 @@
 |  | 百色 | — | ⛔ 不通 | http://www.bslib.net （百色市图书馆） | — | — |
 |  | 贺州 | — | ❓ 缺失 | — | — | — |
 |  | 河池 | — | ❓ 缺失 | — | — | — |
-|  | 来宾 | — | 📋 计划 | http://180.141.168.199:8086/opac/index （来宾市图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」15 条 |
+|  | 来宾 | `laibin` | ✅ 接入 | http://180.141.168.199:8086/opac/index （来宾市图书馆） | 图创 Interlib（已确认，默认模板） | `interlib/` 家族 + `adapters/cn/laibin.py`（`api_detail=True`）；实抓「三体」15 条 |
 |  | 崇左 | — | ⛔ 不通 | https://opac.chzlib.org.cn:9002/opac/ （崇左市图书馆） | 未知（入口 `:9002/opac/`，疑图创 Interlib） | 2026-10-03 入口为真（馆方 www.chzlib.org.cn 首页直链此地址），但 `:9002` 全路径含静态 CSS 一律自定义 403「拒绝访问」（端口级 IP/地域白名单或 WAF；伪造 XFF／带 Referer/Cookie 均 403），本机不可程序化访问；馆网首页（超星门户，同 IP）200 |
 | 宁夏回族自治区 | 银川 | — | 🔍 待核验 | http://www.nxlib.cn （宁夏图书馆） | — | — |
 |  | 石嘴山 | — | ❓ 缺失 | — | — | — |
@@ -444,7 +444,8 @@ Solr 后端 `GET /api/search` 开放且不经验证码（与青岛同通道）�
 周口 `zhoukou`、泉州 `quanzhou`、通辽 `tongliao`、河源 `heyuan`（HTML 检索页直连）；
 黑龙江省图书馆 `heilongjiang`、长春 `changchun`、唐山 `tangshan`、包头 `baotou`、
 乌海 `wuhai`、呼和浩特 `huhehaote`、潮州 `chaozhou`（`solr_search=True`）。各城
-实抓总量与首条见对应 `tests/fixtures/<city>/NOTES.md`。
+实抓总量与首条见对应 `tests/fixtures/<city>/NOTES.md`。来宾 `laibin`（2026-10-03
+立项城市落地，默认模板＋`api_detail=True`，HTML 检索页直连；实抓「三体」15 条）同批。
 
 新接同族城市：`adapters/cn/<city>.py` 照广州/杭州同款 `_client` 形态 + 在 `adapters/cn/__init__.py` 注册 + 在本文件总览表登记 + 在上表加一行。
 

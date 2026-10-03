@@ -24,12 +24,13 @@ _DOCS = Path(__file__).resolve().parent.parent / "docs" / "data-sources" / "cn.m
 # ＋丽水（Interlib pro2018）、舟山（抽出 UILAS 家族，旧式 TLS quirk）
 # ＋陕西批量：西安/咸阳/宝鸡/安康（Interlib，新增 ctx/api_detail quirk）、
 #   汉中（LibStar 家族新增配置）、陕西省图书馆/榆林（抽出新版 UILAS REST 家族）
+# ＋来宾（2026-10-03 立项城市落地，图创 Interlib 默认模板＋api_detail）
 _EXPECTED = [
     "ankang", "baoji", "baotou", "changchun", "chaozhou", "chengdu",
     "chongqing", "dalian", "dezhou", "eerduosi", "fujian_prov", "guangzhou",
     "haikou", "hangzhou", "hanzhong", "hefei", "heilongjiang", "henan_prov",
     "heyuan", "huaian", "huhehaote", "hunan_prov", "jiangmen", "jiangyin",
-    "jinan", "jingmen", "jinhua", "lanzhou", "lijiang", "lishui", "nanjing",
+    "jinan", "jingmen", "jinhua", "laibin", "lanzhou", "lijiang", "lishui", "nanjing",
     "ningbo", "qingdao", "quanzhou", "shaanxi", "shanghai", "shaoxing",
     "shenzhen", "suzhou", "taizhou", "tangshan", "tianjin", "tongliao",
     "wenzhou", "wuhai", "wuxi", "xian", "xianyang", "xiaogan", "xuzhou",
@@ -38,7 +39,7 @@ _EXPECTED = [
 ]
 
 
-def test_registry_has_exactly_fifty_eight_identifiers():
+def test_registry_has_exactly_fifty_nine_identifiers():
     # 注册表两级：地区取域名后缀，现有城市全在默认地区 cn（中国）下
     assert sorted(adapters._ADAPTERS) == ["cn"]
     assert sorted(adapters._ADAPTERS["cn"]) == _EXPECTED

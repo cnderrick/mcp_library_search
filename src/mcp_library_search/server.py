@@ -79,7 +79,7 @@ def search_books(keyword: str, region: str = "cn", city: str = "shanghai", page:
     zibo（淄博）、dezhou（德州）、zhoukou（周口）、quanzhou（泉州）、
     tongliao（通辽）、heyuan（河源）、heilongjiang（黑龙江省图书馆）、
     changchun（长春）、tangshan（唐山）、baotou（包头）、wuhai（乌海）、
-    huhehaote（呼和浩特）、chaozhou（潮州）（以上图创 Interlib，馆藏到单册级）、
+    huhehaote（呼和浩特）、chaozhou（潮州）、laibin（来宾市图书馆）（以上图创 Interlib，馆藏到单册级）、
     lanzhou（兰州市图书馆）、jiangmen（江门市图书馆）（新版 UILAS REST 平台）、
     henan_prov（河南省图书馆，老版 UILAS HTML OPAC）、
     jinan（济南市图书馆）、eerduosi（鄂尔多斯市图书馆）（图创 tcc-opac 全市联合目录）、
