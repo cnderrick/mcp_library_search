@@ -279,21 +279,21 @@
 |  | 黔南 | — | 📋 计划 | http://114.135.66.82:8082/opac/index （黔南州图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」20 条 |
 | 云南省 | 昆明 | — | 🔍 待核验 | http://metalsp.ynlib.cn:3006/ （云南省图书馆 MetaLSP 发现系统） | MetaLSP 发现系统 | 2026-10-03 实测入口 HTTP 200「MetaLSP发现系统」；底层书目接口未侦察 |
 |  |  | — | ⛔ 不通 | http://ilasweb.kmlib.yn.cn/ （昆明市图书馆） | — | 2026-10-03 实测：域名无法解析（DNS 失败），入口待寻 |
-|  | 曲靖 | — | ❓ 缺失 | — | — | — |
+|  | 曲靖 | — | 📋 计划 | http://www.qjlib.com.cn:8088/opac/index （曲靖市图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」138 条 |
 |  | 玉溪 | — | ⛔ 不通 | http://www.yxstsg.cn （外源候选，域名不存在） | — | 2026-10-03 DNS 无解析（NXDOMAIN），非馆方站点 |
 |  | 保山 | — | ⛔ 不通 | https://bsstsg.superlib.libsou.com （保山市图书馆） | 超星 superlib 门户 | 2026-10-03 首页 200「保山市图书馆」，但站内无书目检索入口（用户亦述未找到） |
-|  | 昭通 | — | ❓ 缺失 | — | — | — |
+|  | 昭通 | — | ⛔ 不通 | http://www.csln.net/ztstsg/AjaxPanel.aspx （昭通市图书馆） | — | 2026-10-03 域名解析至 198.20.2.58（停放段）、TCP 空响应；用户述全白、仅小程序可查且需登录 |
 |  | 丽江 | `lijiang` | ✅ 接入 | https://www.ljstsg.cn/opac/index （丽江市图书馆） | 图创 Interlib（已确认，meta keywords 自报；默认模板） | `interlib/` 家族 + `adapters/cn/lijiang.py`（`api_detail=True`）；实抓「三体」80 条 |
 |  | 普洱 | — | ❓ 缺失 | — | — | — |
-|  | 临沧 | — | ❓ 缺失 | — | — | — |
-|  | 楚雄 | — | ❓ 缺失 | — | — | — |
-|  | 红河 | — | ❓ 缺失 | — | — | — |
-|  | 文山 | — | ❓ 缺失 | — | — | — |
-|  | 西双版纳 | — | ❓ 缺失 | — | — | — |
-|  | 大理 | — | ❓ 缺失 | — | — | — |
-|  | 德宏 | — | ❓ 缺失 | — | — | — |
-|  | 怒江 | — | ❓ 缺失 | — | — | — |
-|  | 迪庆 | — | ❓ 缺失 | — | — | — |
+|  | 临沧 | — | 📋 计划 | http://106.58.172.142:8081/opac/index （临沧市图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」31 条 |
+|  | 楚雄 | — | 📋 计划 | http://220.165.139.19:8082/opac/index （楚雄州图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」76 条 |
+|  | 红河 | — | 📋 计划 | http://182.246.32.25:83/opac/index （红河州图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」33 条 |
+|  | 文山 | — | ⛔ 不通 | http://opac.whlibrary.cn:8088/ （文山州图书馆） | — | 2026-10-03 实测 TCP 空响应（用户述页面全白），无可匿名检索入口 |
+|  | 西双版纳 | — | 📋 计划 | http://106.58.209.101:8080/opac/index （西双版纳州图书馆） | 图创 Interlib（已确认） | 2026-10-03 `/opac/api/search` 匿名返回「三体」，HTML 检索页未渲染总数字段 |
+|  | 大理 | — | ⛔ 不通 | https://dali.superlib.libsou.com/ （大理州图书馆） | 超星 superlib 门户 | 2026-10-03 官网 www.dalilib.cn（超星门户）与 superlib 门户均无书目检索入口，官网页面全白 |
+|  | 德宏 | — | 📋 计划 | http://36.140.104.72:8086/opac/index （德宏州图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」52 条 |
+|  | 怒江 | — | 📋 计划 | http://106.58.214.4:8082/opac/index （怒江州图书馆） | 图创 Interlib（已确认） | 2026-10-03 匿名检索「三体」9 条 |
+|  | 迪庆 | — | ⛔ 不通 | https://diqingzhou.superlib.libsou.com/ （迪庆州图书馆） | 超星 superlib 门户 | 2026-10-03 返回「暂停页面」（站点维护中），无检索入口 |
 | 陕西省 | 西安 | `shaanxi` | ✅ 接入 | https://uilas.sxlib.org.cn （陕西省图书馆，页标题「UILAS知识检索平台」） | 新版 UILAS（ILAS REST 平台，Vue 前端＋`/prod-api/*` JSON，与老版 UILAS 同宗不同代） | `uilas_rest/` 家族 + `adapters/cn/shaanxi.py`（省级馆，馆址西安） |
 |  |  | `xian` | ✅ 接入 | https://opac.xalib.org.cn/opac3/index （西安市图书馆，西安市公共图书馆集群信息化管理平台） | 图创 Interlib（pro2018 模板，应用上下文 `/opac3`） | `interlib/` 家族 + `adapters/cn/xian.py`（`ctx=/opac3`、`pro2018=True`、`api_detail=True`） |
 |  | 铜川 | — | 🔍 待核验 | https://uilas.sxlib.org.cn/#/index （铜川市图书馆，入口与陕图同平台） | 新版 UILAS（同陕图） | 用户所给入口即陕图省馆平台（`shaanxi`）；铜川馆专有检索入口待确认 |
@@ -305,21 +305,21 @@
 |  | 榆林 | `yulin` | ✅ 接入 | https://www.yulinlib.org.cn/opac/#/index | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/yulin.py`（Referer 须 `/opac/`）；实抓「三体」16 条 |
 |  | 安康 | `ankang` | ✅ 接入 | http://219.145.206.134:8082/opac/index | 图创 Interlib（pro2018 模板） | `interlib/` 家族 + `adapters/cn/ankang.py`（`pro2018=True`、`api_detail=True`；详情页 HTML 被源站截断，改走 `/api/book/{}`）；实抓「三体」161 条 |
 |  | 商洛 | — | ⛔ 不通 | https://shangluo.superlib.libsou.com/ | 超星（superlib/libsou） | 2026-10-03 实测：站点为超星发现页、无书目 OPAC 检索入口（用户亦述「没查询入口」） |
-| 甘肃省 | 兰州 | — | 🔍 待核验 | https://www.gslib.com.cn （甘肃省图书馆） | — | — |
+| 甘肃省 | 兰州 | — | 🔍 待核验 | http://search.gslib.com.cn/uhtbin/cgisirsi/ （甘肃省图书馆 iLink） | SirsiDynix iLink（同大连 ykt 家族） | 2026-10-03 用户提供：iLink OPAC（页标题「iLink」），限省馆口径；页面含登录表单、ps token 会话地址，检索流程待侦察 |
 |  |  | `lanzhou` | ✅ 接入 | http://36.137.50.135:8082/#/index （兰州市图书馆） | 新版 UILAS（ILAS REST 平台） | `uilas_rest/` 家族 + `adapters/cn/lanzhou.py`；实抓「三体」521 条 |
 |  | 嘉峪关 | — | 🔍 待核验 | http://jygslib.com.cn （嘉峪关市图书馆） | 自研 Vue SPA（页标题仅「门户网站」） | 2026-10-03 入口可达(200)但页面无馆名、弱证；static/config.js 404，身份与 OPAC 待另行确证 |
-|  | 金昌 | — | ❓ 缺失 | — | — | — |
-|  | 白银 | — | ❓ 缺失 | — | — | — |
+|  | 金昌 | — | ⛔ 不通 | http://www.jctsg.com/ （金昌市图书馆） | — | 2026-10-03 解析至 198.20.2.53（域名停放段）、TCP 空响应 |
+|  | 白银 | — | ⛔ 不通 | http://www.byslib.com/ （白银市图书馆） | — | 2026-10-03 解析至 198.20.2.54（域名停放段）、TCP 空响应 |
 |  | 天水 | — | ⛔ 不通 | http://www.gstslib.com.cn （外源候选） | — | 2026-10-03 用户实测打不开；本机探测 DNS→125.74.52.173、TCP 可达但 HTTP 空响应，无可匿名检索入口 |
-|  | 武威 | — | ❓ 缺失 | — | — | — |
+|  | 武威 | — | 🔍 待核验 | http://117.156.117.23:8083/CustCount/index （武威市图书馆） | 自研（CustCount） | 2026-10-03 入口 200 但页面全白（仅 JS 初始化），检索系统待侦察 |
 |  | 张掖 | — | ❓ 缺失 | — | — | — |
-|  | 平凉 | — | ❓ 缺失 | — | — | — |
+|  | 平凉 | — | ⛔ 不通 | http://www.plslib.com/ （平凉市图书馆） | — | 2026-10-03 解析至 198.20.2.56（域名停放段）、TCP 空响应 |
 |  | 酒泉 | — | ❓ 缺失 | — | — | — |
 |  | 庆阳 | — | ❓ 缺失 | — | — | — |
 |  | 定西 | — | ❓ 缺失 | — | — | — |
-|  | 陇南 | — | ❓ 缺失 | — | — | — |
+|  | 陇南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | 图创？/iLink | 2026-10-03 用户述用甘肃省图书馆 OPAC＋馆别过滤查询，待侦察 |
 |  | 临夏 | — | ❓ 缺失 | — | — | — |
-|  | 甘南 | — | ❓ 缺失 | — | — | — |
+|  | 甘南 | — | 🔍 待核验 | — （无独立入口，借甘肃省图 iLink＋馆别过滤） | 图创？/iLink | 2026-10-03 同上，待侦察 |
 | 青海省 | 西宁 | — | ⛔ 不通 | http://www.qhlib.org （青海省图书馆） | — | — |
 |  |  | — | 🔍 待核验 | https://www.xnlib.cn/ （西宁市图书馆） | 门户站 | 2026-10-03 实测门户页 HTTP 200（3.7KB），底层书目 OPAC 未侦察 |
 |  | 海东 | — | 🔍 待核验 | https://hdtsg.cn/index.aspx （海东市图书馆） | 自研 ASP.NET（含 BibliographySearch.aspx） | 2026-10-03 入口/查询页 200，站内 `/BibliographySearch.aspx`、`/ClassifySearch.aspx` 书目检索页待侦察 |
@@ -359,8 +359,8 @@
 |  | 贵港 | — | ⛔ 不通 | http://www.gglib.net （贵港市图书馆） | — | — |
 |  | 玉林 | — | ⛔ 不通 | http://www.yllib.net （玉林市图书馆） | — | — |
 |  | 百色 | — | ⛔ 不通 | http://www.bslib.net （百色市图书馆） | — | — |
-|  | 贺州 | — | ❓ 缺失 | — | — | — |
-|  | 河池 | — | ❓ 缺失 | — | — | — |
+|  | 贺州 | — | ⛔ 不通 | http://222.218.248.23:8080/opac/ （贺州市图书馆） | 未知 | 2026-10-03 全路径自定义 403；另 https://www.hztsg.com:8282 解析至 198.20.1.102（停放段）TLS 失败，均不可用 |
+|  | 河池 | — | ⛔ 不通 | http://222.218.124.59:8086/opac/ （河池市图书馆） | 未知 | 2026-10-03 自定义 403；原 www.hclib.org.cn 解析至私网 10.16.24.103、TCP 空响应 |
 |  | 来宾 | `laibin` | ✅ 接入 | http://180.141.168.199:8086/opac/index （来宾市图书馆） | 图创 Interlib（已确认，默认模板） | `interlib/` 家族 + `adapters/cn/laibin.py`（`api_detail=True`）；实抓「三体」15 条 |
 |  | 崇左 | — | ⛔ 不通 | https://opac.chzlib.org.cn:9002/opac/ （崇左市图书馆） | 未知（入口 `:9002/opac/`，疑图创 Interlib） | 2026-10-03 入口为真（馆方 www.chzlib.org.cn 首页直链此地址），但 `:9002` 全路径含静态 CSS 一律自定义 403「拒绝访问」（端口级 IP/地域白名单或 WAF；伪造 XFF／带 Referer/Cookie 均 403），本机不可程序化访问；馆网首页（超星门户，同 IP）200 |
 | 宁夏回族自治区 | 银川 | — | 🔍 待核验 | http://www.nxlib.cn （宁夏图书馆） | — | — |
